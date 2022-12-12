@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "method": "delete_patient"
+   },
+    "data": {
+        "nomor_rm": "123-45-67",
+        "coder_nik": "123123123123"
+   }
+}

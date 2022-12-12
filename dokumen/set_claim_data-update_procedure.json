@@ -1,0 +1,10 @@
+{
+    "metadata": {
+        "method": "set_claim_data",
+        "nomor_sep": "0001R0016120666662",
+    },
+    "data": {
+        "procedure": "36.06#88.09",
+        "coder_nik": "123123123123"
+    }
+}

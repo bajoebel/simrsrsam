@@ -1,0 +1,6 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-09-15 03:23:35 --> Severity: error --> Exception: Too few arguments to function search::waktu_pakai(), 0 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 1 expected D:\xampp\htdocs\simrs_open_source\application\farmasi\controllers\search.php 144
+ERROR - 2020-09-15 08:01:28 --> Severity: error --> Exception: Too few arguments to function search::waktu_pakai(), 0 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 1 expected D:\xampp\htdocs\simrs_open_source\application\farmasi\controllers\search.php 144
+ERROR - 2020-09-15 08:04:17 --> Severity: error --> Exception: Too few arguments to function search::waktu_pakai(), 0 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 1 expected D:\xampp\htdocs\simrs_open_source\application\farmasi\controllers\search.php 144
+ERROR - 2020-09-15 08:05:08 --> Severity: error --> Exception: Too few arguments to function search::waktu_pakai(), 0 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 1 expected D:\xampp\htdocs\simrs_open_source\application\farmasi\controllers\search.php 144

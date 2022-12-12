@@ -1,0 +1,591 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class trans_pembelian extends CI_Controller{
+    function __construct(){
+        parent::__construct();
+        $this->perPage = 10;
+        $this->offset = 0;
+        $this->uri_segment = 3;
+
+        $this->load->library('ajax_page');
+        $this->load->model('users_model');
+    }
+    function index(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            $x['header'] = $this->load->view('template/header','',true);
+            $z = setNav("nav_5");
+            $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
+
+            /**
+            * Note : Tambahkan Set Lokasi (Yang Akses Pembelian) 
+            * Kode Lokasi Manual 2. Gudang
+            */
+            $UID = $this->session->userdata('get_uid');
+            $SQL = "SELECT * FROM tbl04_lokasi WHERE KDLOKASI IN(SELECT ruang_akses 
+            FROM tbl01_users_farmasi WHERE NRP = '$UID')
+            AND KDGRLOKASI='2'";
+
+            $y['contentTitle'] = "Transaksi Barang Masuk (Pembelian)";        
+            $y['getRuang'] = $this->db->query("$SQL");
+            $x['content'] = $this->load->view('trans_pembelian/template_ruang',$y,true);
+            $this->load->view('template/theme',$x);
+        }else{
+            $url_login = base_url().'farmasi.php/login?sid='.getSessionID();
+            echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
+            window.location.href = '$url_login'
+            </script>";
+        }
+    }
+
+    function goForm(){
+        $ses_state = $this->users_model->cek_session_id();
+        $this->session->unset_userdata('sPage');
+        $this->session->unset_userdata('sLike');
+        if($ses_state){
+            if (isset($_GET['kLok'])) {
+                $y['kLok'] = $this->input->get('kLok',true);
+                if ($y['kLok']=="") {
+                    echo "<script>alert('Ops. Lokasi tidak ditemukan.');history.back();</script>";                        
+                }else{
+                    $x['header'] = $this->load->view('template/header','',true);
+                    $z = setNav("nav_5");
+                    $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
+
+                    $y['contentTitle'] = "Transaksi Barang Masuk (Pembelian)";
+                    $y['contentTitle'] .= "<br/>Lokasi : " . getLokasiById($y['kLok']);        
+                    $x['content'] = $this->load->view('trans_pembelian/template_table',$y,true);
+                    $this->load->view('template/theme',$x);
+                }
+            }else{
+                echo "<script>alert('Ops. Variable tidak ditemukan.');history.back();</script>";
+            }
+        }else{
+            $url_login = base_url().'farmasi.php/login?sid='.getSessionID();
+            echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
+            window.location.href = '$url_login';</script>";
+        }            
+    }
+    function cekRetur(){
+        $KDBL = (isset($_POST['KDBL'])) ? $this->input->post('KDBL',true) : "";
+        $this->db->where('KDBL',$KDBL);
+        $resQuery = $this->db->get('tbl04_pembelian_batal');
+        if($resQuery->num_rows() > 0){
+            $response['code'] = 200;
+        }else{
+            $response['code'] = 201;
+        }
+        echo json_encode($response);
+    }
+    function getView(){
+        if(isset($_POST['page'])):
+            $offset = $this->input->post('page');
+            $this->session->set_userdata('sPage',$offset);
+        else:
+            $offset = ($this->session->userdata('sPage')) ? $this->session->userdata('sPage') : 0;
+        endif;
+
+        $KDLOKASI = (isset($_POST['kLok'])) ? $this->input->post('kLok',true) : "";
+        $limit = $this->perPage;
+        $condition = "WHERE KDLOKASI='$KDLOKASI' ";
+        if(isset($_POST['sLike'])){
+            $offset = 0;
+            $sLike = $this->db->escape_str($this->input->post('sLike',true));
+            $condition .= "AND (KDBL LIKE '%$sLike%' OR NMSUPPLIER LIKE '%$sLike%' OR  NMLOKASI LIKE '%$sLike%')";
+            $this->session->set_userdata('sLike',$sLike);
+        }else{
+            if($this->session->userdata('sLike')){
+                $sLike = $this->session->userdata('sLike');
+                $condition .= "AND (KDBL LIKE '%$sLike%' OR NMSUPPLIER LIKE '%$sLike%' OR  NMLOKASI LIKE '%$sLike%')";
+            }
+        }
+
+        $SQL = "SELECT * FROM tbl04_pembelian $condition ORDER BY KDBL DESC";
+        $SQL_Count = $this->db->query("$SQL");
+        $totalRec = $SQL_Count->num_rows();
+        $config['target']      = 'tbody#getdata';
+        $config['kdlokasi']    = $KDLOKASI;
+        $config['uri_segment'] = $this->uri_segment;
+        $config['base_url']    = base_url().'farmasi.php/trans_pembelian/getView';
+        $config['total_rows']  = $totalRec;
+        $config['per_page']    = $limit;
+        $this->ajax_page->initialize($config);
+
+        $x['offset'] = $offset;
+        $x['SQL'] = $this->db->query("$SQL LIMIT $offset,$limit");
+        $this->load->view('trans_pembelian/get_data',$x);
+    }
+
+    function tambah(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            $x['header'] = $this->load->view('template/header','',true);
+            $z = setNav("nav_5");
+            $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
+            
+            $idx = (isset($_GET['idx'])) ? $this->input->get('idx',true) : "";
+            if ($idx=="") {
+                $y['KDBL'] = "";
+                $y['NMSUPPLIER'] = "";
+                $y['ALAMAT'] = "";
+                $y['KOTA'] = "";
+                $y['NPWP'] = "";
+                $y['CONTACTP'] = "";
+                $y['TELP'] = "";
+                $y['FAKS'] = "";
+                $y['EMAIL'] = "";
+            }else{
+                $queSQL = "SELECT * FROM tbl04_pembelian WHERE KDBL = '$IDX'";
+                $cekSQL = $this->db->query("$queSQL");
+                if($cekSQL->num_rows() > 0){
+                    $resSQL = $cekSQL->row_array();
+                    $y['KDBL'] = $resSQL['KDBL'];
+                    $y['NMSUPPLIER'] = $resSQL['NMSUPPLIER'];
+                    $y['ALAMAT'] = $resSQL['ALAMAT'];
+                    $y['KOTA'] = $resSQL['KOTA'];
+                    $y['NPWP'] = $resSQL['NPWP'];
+                    $y['CONTACTP'] = $resSQL['CONTACTP'];
+                    $y['TELP'] = $resSQL['TELP'];
+                    $y['FAKS'] = $resSQL['FAKS'];
+                    $y['EMAIL'] = $resSQL['EMAIL'];
+                }else{
+                    $y['KDBL'] = "";
+                    $y['NMSUPPLIER'] = "";
+                    $y['ALAMAT'] = "";
+                    $y['KOTA'] = "";
+                    $y['NPWP'] = "";
+                    $y['CONTACTP'] = "";
+                    $y['TELP'] = "";
+                    $y['FAKS'] = "";
+                    $y['EMAIL'] = "";
+                }                
+            }
+            $y['kLok'] = (isset($_GET['kLok'])) ? $this->input->get('kLok',true) : "";
+            $y['contentTitle'] = "Entry Transaksi Barang Masuk (Pembelian)";
+            $y['datsupplier'] = $this->db->get('tbl04_supplier');
+            $x['content'] = $this->load->view('trans_pembelian/template_entry',$y,true);
+            $this->load->view('template/theme',$x);
+        }else{
+            $url_login = base_url().'farmasi.php/login?sid='.$getSessionID();
+            echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
+            window.location.href = '$url_login'
+            </script>";
+        }            
+    }
+    function getTemp(){
+        $this->db->where('UEXEC',getUserID());
+        $this->db->where('SESSION_ID',getSessionID());
+        $x['SQL'] = $this->db->get('tbl04_temp_pembelian');
+        $this->load->view('trans_pembelian/get_temp',$x);        
+    }
+    function getTotalTemp(){
+        $UEXEC = getUserID();
+        $SQL = "SELECT IFNULL(SUM(HBELI * JMLBELI),0) AS TOTFAKTUR,
+        IFNULL(SUM(HDISKON),0) AS TOTDISKON_ITEM,
+        IFNULL(SUM(SUBTOTAL),0) AS TOTFAKTUR_NETTO
+        FROM tbl04_temp_pembelian WHERE UEXEC = '$UEXEC'";
+        $cek = $this->db->query("$SQL");
+        if($cek->num_rows() > 0){
+            $x = $cek->row_array();
+            $params = array(
+                'TOTFAKTUR' => $x['TOTFAKTUR'],
+                'TOTDISKON_ITEM' => $x['TOTDISKON_ITEM'],
+                'TOTFAKTUR_NETTO' => $x['TOTFAKTUR_NETTO']
+            );
+        }else{
+            $params = array(
+                'TOTFAKTUR' => 0,
+                'TOTDISKON_ITEM' => 0,
+                'TOTFAKTUR_NETTO' => 0
+            );
+        }
+        echo json_encode($params);
+    }
+    function getObat(){
+        $keyword = (isset($_POST['keyword'])) ? $this->input->post('keyword',true) : "";
+        $SQL = "SELECT * FROM tbl04_barang WHERE KDBRG LIKE '%$keyword%' OR NMBRG LIKE '%$keyword%' 
+        ORDER BY NMBRG LIMIT 20";
+        $x['SQL'] = $this->db->query("$SQL");
+        $this->load->view('trans_pembelian/getObat_cari',$x);
+    }
+    function simpanTemp(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(
+                    isset($_POST['KDBRG']) &&
+                    isset($_POST['NMBRG']) &&
+                    isset($_POST['EXPDATE']) &&
+                    isset($_POST['HBELI']) &&
+                    isset($_POST['JMLBELI']) &&
+                    isset($_POST['HDISKON']) &&
+                    isset($_POST['SUBTOTAL'])
+                ){
+                    $params = array(
+                        'KDBRG' => trim($this->input->post('KDBRG',true)),
+                        'NMBRG' => trim($this->input->post('NMBRG',true)),
+                        'EXPDATE' => setDateEng(trim($this->input->post('EXPDATE',true))),
+                        'HBELI' => str_replace(",","",trim($this->input->post('HBELI',true))),
+                        'JMLBELI' => str_replace(",","",trim($this->input->post('JMLBELI',true))),
+                        'HDISKON' => str_replace(",","",trim($this->input->post('HDISKON',true))),
+                        'SUBTOTAL' => str_replace(",","",trim($this->input->post('SUBTOTAL',true))),
+                        'UEXEC' => getUserID(),
+                        'SESSION_ID' => getSessionID()
+                    );
+
+                    if($params['KDBRG'] == ""){
+                        $response['code'] = 402;
+                        $response['message'] = "Ops. Obat/Alkes tidak boleh kosong.\nCoba ulangi kembali.";                
+                    }elseif($params['EXPDATE'] == ""){
+                        $response['code'] = 402;
+                        $response['message'] = "Ops. Tanggal Expire tidak boleh kosong.\nCoba ulangi kembali.";                
+                    }elseif($params['EXPDATE'] == ""){
+                        $response['code'] = 402;
+                        $response['message'] = "Ops. Tanggal Expire tidak boleh kosong.\nCoba ulangi kembali.";                
+                    }else{
+                        $this->db->where('KDBRG',$params['KDBRG']);
+                        $this->db->where('UEXEC',getUserID());
+                        $resData = $this->db->get('tbl04_temp_pembelian');
+                        if($resData->num_rows() > 0){
+                            $this->db->where('KDBRG',$params['KDBRG']);
+                            $this->db->where('UEXEC',getUserID());
+                            $this->db->update('tbl04_temp_pembelian',$params);
+                            $response = array(
+                                'code'    => 200,
+                                'message' => 'Update Sukses'
+                            );    
+                        }else{
+                            $this->db->insert('tbl04_temp_pembelian',$params);                
+                            $response = array(
+                                'code'    => 200,
+                                'message' => 'Simpan Sukses'
+                            );
+                        }
+                    }
+                }else{
+                    $response['code'] = 402;
+                    $response['message'] = "Ops. Variable tidak ditemukan.\nCoba ulangi kembali.";                
+                }
+            }else{
+                $response['code'] = 402;
+                $response['message'] = "Ops. Method tidak ditemukan.\nCoba ulangi kembali.";                
+            }
+        }else{
+            $response['code'] = 404;
+            $response['message'] = "Ops. Sesi anda telah berubah!\nSilahkan login kembali";
+        }
+        echo json_encode($response);
+    }
+
+    function simpan(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(
+                    isset($_POST['PEMBAYARAN']) &&
+                    isset($_POST['KDSUPPLIER']) &&
+                    isset($_POST['NMSUPPLIER']) &&
+                    isset($_POST['NOFAKTUR']) &&
+                    isset($_POST['TGLFAKTUR']) &&
+                    isset($_POST['TGLTERIMA']) &&
+                    isset($_POST['JTEMPO']) &&
+                    isset($_POST['KDLOKASI']) &&
+                    isset($_POST['NMLOKASI']) &&
+                    isset($_POST['JENIS_TRANS']) &&
+                    isset($_POST['TOTFAKTUR']) &&
+                    isset($_POST['TOTDISKON_ITEM']) &&
+                    isset($_POST['DISKON_GLOBAL']) &&
+                    isset($_POST['TOTPPN']) &&
+                    isset($_POST['ONGKIR']) &&
+                    isset($_POST['GRANDTOT']) &&
+                    isset($_POST['KETBL'])
+                ){
+                    $params = array(
+                        'KDBL'          => '',
+                        'PEMBAYARAN'    => trim($this->input->post('PEMBAYARAN',true)),
+                        'KDSUPPLIER'    => trim($this->input->post('KDSUPPLIER',true)),
+                        'NMSUPPLIER'    => trim($this->input->post('NMSUPPLIER',true)),
+                        'NOFAKTUR'      => trim($this->input->post('NOFAKTUR',true)),
+                        'TGLFAKTUR'     => setDateEng(trim($this->input->post('TGLFAKTUR',true))),
+                        'TGLTERIMA'     => setDateEng(trim($this->input->post('TGLTERIMA',true))),
+                        'JTEMPO'        => setDateEng(trim($this->input->post('JTEMPO',true))),
+                        'KDLOKASI'      => trim($this->input->post('KDLOKASI',true)),
+                        'NMLOKASI'      => trim($this->input->post('NMLOKASI',true)),
+                        'JENIS_TRANS'   => trim($this->input->post('JENIS_TRANS',true)),
+                        'TOTFAKTUR'     => str_replace(",","",trim($this->input->post('TOTFAKTUR',true))),
+                        'TOTDISKON_ITEM'=> str_replace(",","",trim($this->input->post('TOTDISKON_ITEM',true))),
+                        'DISKON_GLOBAL' => str_replace(",","",trim($this->input->post('DISKON_GLOBAL',true))),
+                        'TOTPPN'        => str_replace(",","",trim($this->input->post('TOTPPN',true))),
+                        'ONGKIR'        => str_replace(",","",trim($this->input->post('ONGKIR',true))),
+                        'GRANDTOT'      => str_replace(",","",trim($this->input->post('GRANDTOT',true))),
+                        'KETBL'         => trim($this->input->post('KETBL',true)),
+                        'UEXEC'         => getUserID()
+                    );
+
+                    if(
+                        $params['PEMBAYARAN']=="" ||
+                        $params['KDSUPPLIER']=="" ||
+                        $params['NMSUPPLIER']=="" ||
+                        $params['NOFAKTUR']=="" ||
+                        $params['TGLFAKTUR']=="" ||
+                        $params['TGLTERIMA']=="" ||
+                        $params['JTEMPO']=="" ||
+                        $params['KDLOKASI']=="" ||
+                        $params['NMLOKASI']=="" ||
+                        $params['JENIS_TRANS']=="" ||
+                        $params['TOTFAKTUR']=="" ||
+                        $params['TOTDISKON_ITEM']=="" ||
+                        $params['DISKON_GLOBAL']=="" ||
+                        $params['TOTPPN']=="" ||
+                        $params['ONGKIR']=="" ||
+                        $params['GRANDTOT']==""
+                    ){
+                        $response['code'] = 401;
+                        $response['message'] = "Ops. Masih ada data yang kosong. Silahkan lengkapi data.";                        
+                    }else{
+                        $this->db->where('UEXEC',getUserID());
+                        $cek = $this->db->get('tbl04_temp_pembelian');
+                        if($cek->num_rows() > 0){
+                            $cekData = "SELECT * FROM tbl04_pembelian WHERE NOFAKTUR = '$params[NOFAKTUR]' 
+                            AND KDSUPPLIER = '$params[KDSUPPLIER]' 
+                            AND KDBL NOT IN(SELECT KDBL FROM tbl04_pembelian_batal)";
+
+                            $cekFaktur = $this->db->query("$cekData");
+                            if($cekFaktur->num_rows() > 0){
+                                $response['code'] = 402;
+                                $response['message'] = "Data faktur untuk supplier ini telah ada".chr(10)."Cek kembali No Faktur Anda!";
+                            }else{
+                                $cekCommand = $this->db->insert('tbl04_pembelian',$params); 
+                                if($cekCommand){
+                                    // Update Piutang Supplier Where Metode Pembayaran Kredit
+                                    if($params['PEMBAYARAN'] == 'CREDIT'){
+                                        $sqlUpdateSaldoSupplier = "UPDATE tbl04_supplier SET SALDO = SALDO + $params[GRANDTOT] 
+                                        WHERE KDSUPPLIER = '$params[KDSUPPLIER]'";
+                                        $this->db->query("$sqlUpdateSaldoSupplier");
+                                    }
+                                    // Get Kode Pembelian
+                                    $this->db->where('UEXEC',getUserID());
+                                    $this->db->where('NOFAKTUR',$params['NOFAKTUR']);
+                                    $this->db->where('KDSUPPLIER',$params['KDSUPPLIER']);
+                                    $this->db->order_by('KDBL','DESC');
+                                    $this->db->limit(1);
+                                    $rsBeli = $this->db->get('tbl04_pembelian')->row_array();
+                                    $KDBL = $rsBeli['KDBL'];
+                                    $nPPN = ($params['TOTPPN'] > 0) ? 0.1 : 0;
+
+                                    $sqlItemBeli = "SELECT * FROM tbl04_temp_pembelian WHERE UEXEC='".getUserID()."'";
+                                    $resItem = $this->db->query("$sqlItemBeli")->result_array();
+                                    foreach($resItem as $item){
+                                        /*$SUBTOTAL = $item['SUBTOTAL'] + $item['HDISKON'];
+                                        $JMLBELI = $item['JMLBELI'];
+                                        $nDiskonGlobalItem = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['DISKON_GLOBAL'];
+                                        $nOngkir = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['ONGKIR'];
+                                        $nPPN_Item = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['TOTPPN'];
+                                        $HMODAL = ($SUBTOTAL - $item['HDISKON'] - $nDiskonGlobalItem + $nOngkir + $nPPN_Item) / $JMLBELI;*/
+
+                                        $SUBTOTAL = $item['SUBTOTAL'];
+                                        $JMLBELI = $item['JMLBELI'];
+                                        $nDiskonGlobalItem = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['DISKON_GLOBAL'];
+                                        $nOngkir = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['ONGKIR'];
+                                        $nPPN_Item = ($SUBTOTAL/$params['TOTFAKTUR']) * $params['TOTPPN'];
+                                        $HMODAL = ($SUBTOTAL - $nDiskonGlobalItem + $nOngkir + $nPPN_Item) / $JMLBELI;
+
+                                        $dataItem = array(
+                                            'KDBL' => $KDBL,
+                                            'KDBRG' => $item['KDBRG'],
+                                            'NMBRG' => $item['NMBRG'],
+                                            'EXPDATE' => $item['EXPDATE'],
+                                            'HBELI' => $item['HBELI'],
+                                            'JMLBELI' => $JMLBELI,
+                                            'HDISKON' => $item['HDISKON'],
+                                            'SUBTOTAL' => $SUBTOTAL,
+                                            'HMODAL' => $HMODAL,
+                                            'TGLBELI' => $params['TGLFAKTUR']
+                                        );
+                                        $this->db->insert('tbl04_pembelian_detail',$dataItem);
+                                    } 
+
+                                    $this->db->query("DELETE FROM tbl04_temp_pembelian WHERE UEXEC='".getUserID()."'");
+
+                                    $response['code'] = 200;
+                                    $response['message'] = "Simpan data sukses.";                                            
+                                }else{
+                                    $response['code'] = 403;
+                                    $response['message'] = "Ops. Query error! Silahkan hubungi farmasi.";     
+                                }
+                            }                        
+                        }else{
+                            $response['code'] = 404;
+                            $response['message'] = "Ops. Item barang masih kosong.";
+                        }
+                    }
+                }else{
+                    $response['code'] = 405;
+                    $response['message'] = "Ops. Variable tidak ditemukan.\nCoba ulangi kembali.";
+                }
+            }else{
+                $response['code'] = 406;
+                $response['message'] = "Ops. Method tidak ditemukan.\nCoba ulangi kembali.";
+            }
+        }else{
+            $response['code'] = 407;
+            $response['message'] = "Ops. Sesi anda telah berubah!\nSilahkan login kembali";
+        }
+        echo json_encode($response);
+    }
+
+    function cetak(){
+        if($_SERVER['REQUEST_METHOD'] == "GET"){
+            if(isset($_GET['kode'])){
+                if($_GET['kode'] == ""){
+                    echo "<script>alert('Ops. Data tidak boleh kosong. Silahkan coba kembali');
+                    window.history.back();
+                    </script>";
+                }else{
+                    $queCommand = "SELECT * FROM tbl04_pembelian WHERE KDBL = '$_GET[kode]'";
+                    $cekCommand = $this->db->query("$queCommand"); 
+                    if($cekCommand->num_rows() > 0){
+                        $x = $cekCommand->row_array();
+                        $this->db->where('KDBL',$_GET['kode']);
+                        $x['dataPreview'] = $this->db->get('tbl04_pembelian_detail');
+                        $this->load->view('trans_pembelian/print_preview',$x);
+                    }else{
+                        echo "<script>alert('Ops. Data tidak ditemukan. Silahkan coba kembali');
+                        window.history.back();</script>";
+                    }
+                }
+            }else{
+                echo "<script>alert('Ops. Kode request tidak ditemukan. Silahkan coba kembali');
+                window.history.back();
+                </script>";
+            }
+        }else{
+            echo "<script>alert('Ops. Ada kesalahan request. Silahkan coba kembali');
+            window.history.back();
+            </script>";
+        }
+    }
+    function hapusTemp(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                if(isset($_POST['IDX'])){
+                    $IDX = $this->input->post('IDX',true);
+                    if($IDX==""){
+                        $response['code'] = 402;
+                        $response['message'] = "Ops. Data tidak boleh kosong.";
+                    }else{
+                        $this->db->where('IDX',$IDX);
+                        $cekCommand = $this->db->delete('tbl04_temp_pembelian');
+                        if($cekCommand){
+                            $response['code'] = 200;
+                            $response['message'] = "Delete Sukses";                                            
+                        }else{
+                            $response['code'] = 401;
+                            $response['message'] = "Ops. Query error! Silahkan hubungi administrator.";      
+                        }
+                    }
+
+                }else{
+                    $response['code'] = 403;
+                    $response['message'] = "Ops. Variable tidak ditemukan.\nCoba ulangi kembali.";
+                }
+            }else{
+                $response['code'] = 404;
+                $response['message'] = "Ops. Method tidak ditemukan.\nCoba ulangi kembali.";
+            }
+        }else{
+            $response['code'] = 405;
+            $response['message'] = "Ops. Sesi anda telah berubah!\nSilahkan login kembali";
+        }
+        echo json_encode($response);   
+    }
+    function emptyTemp(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state){
+            $this->db->where('UEXEC',getUserID());
+            $cekCommand = $this->db->delete('tbl04_temp_pembelian');
+            if($cekCommand){
+                $response['code'] = 200;
+                $response['message'] = "Pengosongan Temporary Pembelian Sukses";                                            
+            }else{
+                $response['code'] = 401;
+                $response['message'] = "Ops. Query error! Silahkan hubungi administrator.";      
+            }            
+        }else{
+            $response['code'] = 402;
+            $response['message'] = "Ops. Sesi anda telah berubah!\nSilahkan login kembali";
+        }
+        echo json_encode($response);
+    }
+
+
+    /**
+    * Batal
+    */
+    function batalRecord(){
+        $ses_state = $this->users_model->cek_session_id();
+        if($ses_state):
+            $validStok = TRUE;
+            $UEXEC = getUserID();
+            $KDBL = $_POST['KDBL'];
+            $this->db->where('KDBL',$_POST['KDBL']);
+            $resBL = $this->db->get('tbl04_pembelian')->row_array();
+            $resItem = $this->db->query("SELECT * FROM tbl04_pembelian_detail WHERE KDBL='$KDBL'")->result_array();
+
+            foreach($resItem as $item){
+                $cek = $this->db->query("SELECT * FROM stok_barang_fifo 
+                WHERE KDLOKASI='$resBL[KDLOKASI]' AND TGLBELI='$resBL[TGLTERIMA]'
+                AND KDBRG='$item[KDBRG]' AND HMODAL=$item[HMODAL] AND JSTOK>=$item[JMLBELI]");
+                if(!($cek->num_rows() > 0)){
+                    $validStok = FALSE; 
+                    $NMBRG = $item['NMBRG'];
+                    break;
+                } 
+            }
+
+            if($validStok){
+                // Update Saldo Utang Suppliyer Jika Kredit
+                if($resBL['PEMBAYARAN'] == 'CREDIT'){
+                    $sqlUpdateSupplier = "UPDATE tbl04_supplier SET SALDO=SALDO-$resBL[GRANDTOT] 
+                    WHERE KDSUPPLIER=$resBL[KDSUPPLIER]";
+                    $this->db->query("$sqlUpdateSupplier");
+                }
+                
+                $dataItem = array(
+                    'KDBL' => $KDBL,
+                    'ALASAN' => $_POST['ALASAN'],
+                    'UEXEC' => $UEXEC
+                );
+                $this->db->insert('tbl04_pembelian_batal',$dataItem);
+                
+                $this->db->where('UEXEC',$UEXEC);
+                $this->db->where('KDBL',$KDBL);
+                $res_Batal_Beli = $this->db->get('tbl04_pembelian_batal')->row_array();
+                $KDBL_RET = $res_Batal_Beli['KDBL_RET'];
+
+                foreach($resItem as $itemOP){
+                    $params_batal = array(
+                        'KDBL_RET' => $KDBL_RET,
+                        'KDBRG' => $itemOP['KDBRG'],
+                        'KDBRG' => $itemOP['KDBRG'],
+                        'HMODAL' => $itemOP['HMODAL'],
+                        'TGLBELI' => $itemOP['TGLBELI'],
+                        'JMLRET' => $itemOP['JMLBELI']
+                    );
+                    $this->db->insert('tbl04_pembelian_batal_detail',$params_batal);
+                }
+                $response['code'] = 200;
+                $response['message'] = "Retur Transaksi Pembelian Success";
+            }else{
+                $response['code'] = 401;
+                $response['message'] = 'Obat '.$NMBRG.' tidak bisa diretur.'.chr(10).'Jumlah obat telah berkurang';
+            }
+        else:
+            $response['code'] = 402;
+            $response['message'] = 'Sesi Anda Telah Berakhir. Silahkan Login Kembali';
+        endif;
+        echo json_encode($response); 
+    }
+}
+?>

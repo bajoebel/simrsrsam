@@ -1,0 +1,13 @@
+{
+    "metadata": {
+        "method": "update_patient",
+      	"nomor_rm": "123-45-68"
+    },
+    "data": {
+        "nomor_kartu": "0001266093461",
+        "nomor_rm": "432275",
+        "nama_pasien": "DENDI FERDINAL",
+        "tgl_lahir": "1984-01-13 01:00:00",
+        "gender": "1"
+   }
+}

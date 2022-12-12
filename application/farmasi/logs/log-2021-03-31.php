@@ -1,0 +1,4 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-03-31 04:10:27 --> Query error: Column count doesn't match value count at row 1 - Invalid query: INSERT INTO `tbl04_koreksi_stok` (`KDLOKASI`, `NMLOKASI`, `KDBRG`, `NMBRG`, `JMLSTOK_DIKOREKSI`, `JMLKOREKSI`, `JMLREAL`, `NOBUKTI`, `ALASAN`, `UEXEC`, `TGLBELI`, `HMODAL`, `EXPDATE`) VALUES ('1', 'DEPO UTAMA', '000007', 'acyclovir 200 tab', '830', '20', '850', '00121', 'Koreksi Stok', 'NRP1910460', '2021-02-11', '565.3942', '2023-04-30')
+ERROR - 2021-03-31 04:10:36 --> Query error: Column count doesn't match value count at row 1 - Invalid query: INSERT INTO `tbl04_koreksi_stok` (`KDLOKASI`, `NMLOKASI`, `KDBRG`, `NMBRG`, `JMLSTOK_DIKOREKSI`, `JMLKOREKSI`, `JMLREAL`, `NOBUKTI`, `ALASAN`, `UEXEC`, `TGLBELI`, `HMODAL`, `EXPDATE`) VALUES ('1', 'DEPO UTAMA', '000007', 'acyclovir 200 tab', '830', '20', '850', '00121', 'Koreksi Stok', 'NRP1910460', '2021-02-11', '565.3942', '2023-04-30')

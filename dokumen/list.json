@@ -1,0 +1,211 @@
+{
+    "metaData": {
+        "code": "200",
+        "message": "OK"
+    },
+    "response": {
+        "rujukan": [
+            {
+                "diagnosa": {
+                    "kode": "I20",
+                    "nama": "Angina pectoris"
+                },
+                "keluhan": null,
+                "noKunjungan": "031302020819P000196",
+                "pelayanan": {
+                    "kode": "2",
+                    "nama": "Rawat Jalan"
+                },
+                "peserta": {
+                    "cob": {
+                        "nmAsuransi": null,
+                        "noAsuransi": null,
+                        "tglTAT": null,
+                        "tglTMT": null
+                    },
+                    "hakKelas": {
+                        "keterangan": "KELAS I",
+                        "kode": "1"
+                    },
+                    "informasi": {
+                        "dinsos": null,
+                        "noSKTM": null,
+                        "prolanisPRB": null
+                    },
+                    "jenisPeserta": {
+                        "keterangan": "PEKERJA MANDIRI",
+                        "kode": "14"
+                    },
+                    "mr": {
+                        "noMR": "072913",
+                        "noTelepon": "085274734234"
+                    },
+                    "nama": "OYONG FADILLAH",
+                    "nik": "1307022807600001",
+                    "noKartu": "0001898176781",
+                    "pisa": "1",
+                    "provUmum": {
+                        "kdProvider": "03130202",
+                        "nmProvider": "PADANG KANDIS"
+                    },
+                    "sex": "L",
+                    "statusPeserta": {
+                        "keterangan": "AKTIF",
+                        "kode": "0"
+                    },
+                    "tglCetakKartu": "2015-11-11",
+                    "tglLahir": "1960-07-28",
+                    "tglTAT": "2050-01-01",
+                    "tglTMT": "2015-11-09",
+                    "umur": {
+                        "umurSaatPelayanan": "59 tahun ,1 bulan ,13 hari",
+                        "umurSekarang": "59 tahun ,1 bulan ,3 hari"
+                    }
+                },
+                "poliRujukan": {
+                    "kode": "JAN",
+                    "nama": "JANTUNG DAN PEMBULUH DARAH"
+                },
+                "provPerujuk": {
+                    "kode": "03130202",
+                    "nama": "PADANG KANDIS"
+                },
+                "tglKunjungan": "2019-08-15"
+            },
+            {
+                "diagnosa": {
+                    "kode": "H11.0",
+                    "nama": "Pterygium"
+                },
+                "keluhan": null,
+                "noKunjungan": "031302020519P000361",
+                "pelayanan": {
+                    "kode": "2",
+                    "nama": "Rawat Jalan"
+                },
+                "peserta": {
+                    "cob": {
+                        "nmAsuransi": null,
+                        "noAsuransi": null,
+                        "tglTAT": null,
+                        "tglTMT": null
+                    },
+                    "hakKelas": {
+                        "keterangan": "KELAS I",
+                        "kode": "1"
+                    },
+                    "informasi": {
+                        "dinsos": null,
+                        "noSKTM": null,
+                        "prolanisPRB": null
+                    },
+                    "jenisPeserta": {
+                        "keterangan": "PEKERJA MANDIRI",
+                        "kode": "14"
+                    },
+                    "mr": {
+                        "noMR": "072913",
+                        "noTelepon": "085274734234"
+                    },
+                    "nama": "OYONG FADILLAH",
+                    "nik": "1307022807600001",
+                    "noKartu": "0001898176781",
+                    "pisa": "1",
+                    "provUmum": {
+                        "kdProvider": "03130202",
+                        "nmProvider": "PADANG KANDIS"
+                    },
+                    "sex": "L",
+                    "statusPeserta": {
+                        "keterangan": "AKTIF",
+                        "kode": "0"
+                    },
+                    "tglCetakKartu": "2015-11-11",
+                    "tglLahir": "1960-07-28",
+                    "tglTAT": "2050-01-01",
+                    "tglTMT": "2015-11-09",
+                    "umur": {
+                        "umurSaatPelayanan": "58 tahun ,10 bulan ,1 hari",
+                        "umurSekarang": "59 tahun ,1 bulan ,3 hari"
+                    }
+                },
+                "poliRujukan": {
+                    "kode": "MAT",
+                    "nama": "MATA"
+                },
+                "provPerujuk": {
+                    "kode": "03130202",
+                    "nama": "PADANG KANDIS"
+                },
+                "tglKunjungan": "2019-05-29"
+            },
+            {
+                "diagnosa": {
+                    "kode": "I50.9",
+                    "nama": "Heart failure, unspecified"
+                },
+                "keluhan": "",
+                "noKunjungan": "008/14-8-18",
+                "pelayanan": {
+                    "kode": "2",
+                    "nama": "Rawat Jalan"
+                },
+                "peserta": {
+                    "cob": {
+                        "nmAsuransi": null,
+                        "noAsuransi": null,
+                        "tglTAT": null,
+                        "tglTMT": null
+                    },
+                    "hakKelas": {
+                        "keterangan": "KELAS I",
+                        "kode": "1"
+                    },
+                    "informasi": {
+                        "dinsos": null,
+                        "noSKTM": null,
+                        "prolanisPRB": null
+                    },
+                    "jenisPeserta": {
+                        "keterangan": "PEKERJA MANDIRI",
+                        "kode": "14"
+                    },
+                    "mr": {
+                        "noMR": "072913",
+                        "noTelepon": "085274734234"
+                    },
+                    "nama": "OYONG FADILLAH",
+                    "nik": "1307022807600001",
+                    "noKartu": "0001898176781",
+                    "pisa": "1",
+                    "provUmum": {
+                        "kdProvider": "03130202",
+                        "nmProvider": "PADANG KANDIS"
+                    },
+                    "sex": "L",
+                    "statusPeserta": {
+                        "keterangan": "AKTIF",
+                        "kode": "0"
+                    },
+                    "tglCetakKartu": "2015-11-11",
+                    "tglLahir": "1960-07-28",
+                    "tglTAT": "2050-01-01",
+                    "tglTMT": "2015-11-09",
+                    "umur": {
+                        "umurSaatPelayanan": "58 tahun ,1 bulan ,14 hari",
+                        "umurSekarang": "59 tahun ,1 bulan ,3 hari"
+                    }
+                },
+                "poliRujukan": {
+                    "kode": "JAN",
+                    "nama": "JANTUNG DAN PEMBULUH DARAH"
+                },
+                "provPerujuk": {
+                    "kode": "03130202",
+                    "nama": "PADANG KANDIS"
+                },
+                "tglKunjungan": "2018-08-14"
+            }
+        ]
+    }
+}

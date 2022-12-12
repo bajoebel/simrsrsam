@@ -1,0 +1,24 @@
+HALAMAN LOGIN : http://localhost/display/login
+
+USERNAME DAN PASSWORD LOGIN
++----+---------------+------------------------------------+-----------+
+| id | username      | user_namalengkap                   | user_pass |
++----+---------------+------------------------------------+-----------+
+| 1  | admin         | Administrator                      | admin     |
+| 2  | anak          | Ruang Rawat Anak                   | admin     |
+| 3  | perinatologi  | Perinatologi                       | 12345     |
+| 4  | vipc          | VIP C                              | 12345     |
+| 5  | neurologi     | Neurologi                          | 12345     |
+| 6  | icu           | ICU                                | 12345     |
+| 7  | jantung       | Ruang Jantung                      | 12345     |
+| 8  | vip           | VIP                                | 12345     |
+| 9  | kebidanan     | Ruang Perawatan Kebidanan          | 12345     |
+| 10 | paru          | Ruang Perawatan Paru               | 12345     |
+| 11 | interne_pria  | Ruang Perawatan Interne pria       | 12345     |
+| 12 | interne_wanita| Ruang Perawatan Interne wanita     | 12345     |
+| 13 | bedah         | Ruang Perawatan Mata / THT/ Bedah  | 12345     |
++----+---------------+------------------------------------+-----------+
+
+
+Aplikasi Survey Kepuasan
+Acount Dokter Untuk Cek jumlah pasien secara realtime

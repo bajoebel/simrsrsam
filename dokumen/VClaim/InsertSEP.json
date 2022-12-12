@@ -1,0 +1,53 @@
+{
+   "request": {
+      "t_sep": {
+         "noKartu": "0001681590442",
+         "tglSep": "2019-08-27",
+         "ppkPelayanan": "0304R001",
+         "jnsPelayanan": "2",
+         "klsRawat": "",
+         "noMR": "432275",
+         "rujukan": {
+            "asalRujukan": "1",
+            "tglRujukan": "2019-06-11",
+            "noRujukan": "-",
+            "ppkRujukan": "03050201"
+         },
+         "catatan": "test",
+         "diagAwal": "A01.1",
+         "poli": {
+            "tujuan": "INT",
+            "eksekutif": "0"
+         },
+         "cob": {
+            "cob": "0"
+         },
+         "katarak": {
+            "katarak": "0"
+         },
+         "jaminan": {
+            "lakaLantas": "0",
+            "penjamin": {
+                "penjamin": "",
+                "tglKejadian": "",
+                "keterangan": "",
+                "suplesi": {
+                    "suplesi": "0",
+                    "noSepSuplesi": "",
+                    "lokasiLaka": {
+                        "kdPropinsi": "",
+                        "kdKabupaten": "",
+                        "kdKecamatan": ""
+                    }
+                }
+            }
+         },
+         "skdp": {
+            "noSurat": "123456",
+            "kodeDPJP": "18743"
+         },
+         "noTelp": "123456789",
+         "user": "Coba Ws"
+      }
+   }
+}

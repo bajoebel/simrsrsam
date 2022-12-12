@@ -1,0 +1,10 @@
+{
+   "metadata": {
+      "method":"pull_claim"
+   },
+   "data": {
+      "start_dt":"2019-07-10",
+      "stop_dt":"2019-07-18",
+      "jenis_rawat":"1"
+   }
+}

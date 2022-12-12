@@ -1,0 +1,9 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-12-16 09:35:04 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '0'  ORDER BY idx DESC
+ERROR - 2021-12-16 09:35:44 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '59' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-12-16 09:35:47 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '59' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-12-16 09:37:10 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '7' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-12-16 09:37:23 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '59' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-12-16 09:41:08 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '59' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-12-16 09:41:13 --> Query error: Table 'db_simrs_v2.tbl02_pasien_pulang1' doesn't exist - Invalid query: SELECT * FROM tbl02_pasien_pulang1 WHERE id_ruang = '59' AND (nomr = '' OR id_daftar LIKE '%%' OR nama_pasien LIKE '%%') ORDER BY idx DESC

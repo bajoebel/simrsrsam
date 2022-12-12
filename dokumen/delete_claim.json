@@ -1,0 +1,9 @@
+{
+   "metadata": {
+      "method":"delete_claim"
+   },
+   "data": {
+      "nomor_sep":"0901R001TEST0001",
+      "coder_nik":"37234567890121"
+   }
+}

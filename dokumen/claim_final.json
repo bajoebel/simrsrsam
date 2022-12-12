@@ -1,0 +1,9 @@
+{
+   "metadata": {
+      "method":"claim_final"
+   },
+   "data": {
+      "nomor_sep":"0901R001TEST0001",
+      "coder_nik": "123123123123"
+   }
+}

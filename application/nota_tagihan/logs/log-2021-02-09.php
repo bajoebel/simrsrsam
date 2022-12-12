@@ -1,0 +1,5 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-02-09 02:55:40 --> Query error: Column 'id_daftar' in where clause is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '61' AND (nomr = '' OR id_daftar LIKE '%%' OR reg_unit LIKE '%%') ORDER BY idx DESC
+ERROR - 2021-02-09 02:59:29 --> Query error: Column 'id_daftar' in where clause is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '61' AND (nomr = '303002' OR id_daftar LIKE '%303002%' OR reg_unit LIKE '%303002%') ORDER BY idx DESC
+ERROR - 2021-02-09 02:59:40 --> Query error: Column 'id_daftar' in where clause is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '61' AND (nomr = '303002' OR id_daftar LIKE '%303002%' OR reg_unit LIKE '%303002%') ORDER BY idx DESC

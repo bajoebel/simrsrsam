@@ -1,0 +1,9 @@
+https://new-api.bpjs-kesehatan.go.id:8080/new-vclaim-rest/monitoring/HistoriPelayanan/NoKartu/0001282154027/tglMulai/2019-0101/tglAkhir/2019-0411
+
+https://new-api.bpjs-kesehatan.go.id:8080/new-vclaim-rest/Monitoring/Kunjungan/Tanggal/2019-08-01/JnsPelayanan/2
+https://new-api.bpjs-kesehatan.go.id:8080/new-vclaim-rest/referensi/diagnosa/A04
+
+referensi/diagnosa
+
+
+Monitoring/Kunjungan/Tanggal/{Parameter 1}/JnsPelayanan/{Parameter 2}

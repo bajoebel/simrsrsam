@@ -1,0 +1,2 @@
+INSERT INTO tbl02_pendaftaran 
+VALUES(NULL,NULL,NULL,'000048','NO KTP','WIWIT','BKT','1977-04-01',0,'RJ',NOW(),1,'Poli Interne',NULL,1,'PUSKESMAS',NULL,NULL,NULL,'NRP1909006','dr. Vera Roza, Sp. PD',3,'Jamkesmas','','',NULL,NULL,'','',NULL,'','','','','','','','',NULL,'Admin','SID')

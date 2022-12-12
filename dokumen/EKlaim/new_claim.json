@@ -1,0 +1,13 @@
+{
+    "metadata": {
+        "method": "new_claim"
+    },
+    "data": {
+        "nomor_kartu": "0000668870001",
+        "nomor_sep": "0001R0016120507422",
+        "nomor_rm": "123-45-67",
+        "nama_pasien": "NAMA TEST PASIEN",
+        "tgl_lahir": "1940-01-01 02:00:00",
+        "gender": "2"
+   }
+}

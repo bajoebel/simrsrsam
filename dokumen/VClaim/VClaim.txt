@@ -1,0 +1,7 @@
+VClaim ID
+User	: Laseana
+Pass 	: Laseana_2#
+
+0313R001
+Cons ID		: 21782
+SecretKey 	: 5jUA34FBC8

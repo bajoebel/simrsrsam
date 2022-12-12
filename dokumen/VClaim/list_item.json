@@ -1,0 +1,75 @@
+{
+    "metaData": {
+        "code": "200",
+        "message": "OK"
+    },
+    "response": {
+        "rujukan": {
+            "diagnosa": {
+                "kode": "I50.0",
+                "nama": "Congestive heart failure"
+            },
+            "keluhan": null,
+            "noKunjungan": "030501030419P000242",
+            "pelayanan": {
+                "kode": "2",
+                "nama": "Rawat Jalan"
+            },
+            "peserta": {
+                "cob": {
+                    "nmAsuransi": null,
+                    "noAsuransi": null,
+                    "tglTAT": null,
+                    "tglTMT": null
+                },
+                "hakKelas": {
+                    "keterangan": "KELAS III",
+                    "kode": "3"
+                },
+                "informasi": {
+                    "dinsos": null,
+                    "noSKTM": null,
+                    "prolanisPRB": null
+                },
+                "jenisPeserta": {
+                    "keterangan": "PBI (APBD)",
+                    "kode": "22"
+                },
+                "mr": {
+                    "noMR": "439407",
+                    "noTelepon": "082386108775"
+                },
+                "nama": "GUSMAWATI",
+                "nik": "1306095308660002",
+                "noKartu": "0001330654318",
+                "pisa": "1",
+                "provUmum": {
+                    "kdProvider": "03050103",
+                    "nmProvider": "KAPAU"
+                },
+                "sex": "P",
+                "statusPeserta": {
+                    "keterangan": "AKTIF",
+                    "kode": "0"
+                },
+                "tglCetakKartu": "2017-11-10",
+                "tglLahir": "1966-08-13",
+                "tglTAT": "2050-01-01",
+                "tglTMT": "2014-01-01",
+                "umur": {
+                    "umurSaatPelayanan": "52 tahun ,8 bulan ,2 hari",
+                    "umurSekarang": "53 tahun ,0 bulan ,12 hari"
+                }
+            },
+            "poliRujukan": {
+                "kode": "JAN",
+                "nama": "JANTUNG DAN PEMBULUH DARAH"
+            },
+            "provPerujuk": {
+                "kode": "03050103",
+                "nama": "KAPAU"
+            },
+            "tglKunjungan": "2019-04-11"
+        }
+    }
+}

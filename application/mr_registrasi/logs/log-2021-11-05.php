@@ -1,0 +1,113 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-11-05 10:53:14 --> Severity: Notice --> Trying to get property 'pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 118
+ERROR - 2021-11-05 10:53:14 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 119
+ERROR - 2021-11-05 10:53:14 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_data_pendaftaran_online.php 3
+ERROR - 2021-11-05 10:53:14 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 125
+ERROR - 2021-11-05 15:09:43 --> Severity: Notice --> Trying to get property 'pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 118
+ERROR - 2021-11-05 15:09:43 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 119
+ERROR - 2021-11-05 15:09:43 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_data_pendaftaran_online.php 3
+ERROR - 2021-11-05 15:09:43 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 125
+ERROR - 2021-11-05 15:45:32 --> Severity: Notice --> Trying to get property 'pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 118
+ERROR - 2021-11-05 15:45:32 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 119
+ERROR - 2021-11-05 15:45:32 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_data_pendaftaran_online.php 3
+ERROR - 2021-11-05 15:45:32 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 125
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'code' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 256
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nomr' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 265
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'jns_kelamin' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 127
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'jns_kelamin' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 127
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 131
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'tempat_lahir' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 132
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'tgl_lahir' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 132
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_ktp' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 133
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nomr' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 140
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'rujukan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 146
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'cara_bayar' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 152
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'namaDokterJaga' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 159
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'antrian_loket' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 166
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'log_antrianpoly' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 173
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'alamat' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 181
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kelurahan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 182
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kecamatan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 183
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kab_kota' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 184
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_provinsi' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 185
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 209
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nomr' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 210
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 211
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_ktp' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 212
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'tempat_lahir' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 213
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'tgl_lahir' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 214
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'jns_kelamin' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 215
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'status_kawin' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 216
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'pekerjaan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 217
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'agama' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 218
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_telpon' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 219
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'kewarganegaraan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 220
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_negara' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 221
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_provinsi' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 222
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kab_kota' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 223
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kecamatan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 224
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'nama_kelurahan' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 225
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'suku' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 226
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'bahasa' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 227
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'alamat' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 228
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'penanggung_jawab' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 229
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_penanggung_jawab' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 230
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'daftar_id' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 235
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'tgl_masuk' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 237
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_rujuk' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 242
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_dokter' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 245
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'namaDokterJaga' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 246
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'log_antrianpoly' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 248
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'penanggung_jawab' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 254
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_penanggung_jawab' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 261
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_cara_bayar' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 333
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_bpjs' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 361
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_rujuk' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 393
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'no_rujuk' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 420
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 462
+ERROR - 2021-11-05 15:49:50 --> Severity: Notice --> Trying to get property 'id_ruang' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_formpendaftaranonline.php 473
+ERROR - 2021-11-05 15:49:53 --> Severity: Notice --> Trying to get property 'pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 118
+ERROR - 2021-11-05 15:49:53 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 119
+ERROR - 2021-11-05 15:49:53 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_data_pendaftaran_online.php 3
+ERROR - 2021-11-05 15:49:53 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 125
+ERROR - 2021-11-05 18:44:41 --> Severity: Notice --> Trying to get property 'response' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Dashboard.php 26
+ERROR - 2021-11-05 18:44:42 --> Severity: Notice --> Trying to get property 'token' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Dashboard.php 26
+ERROR - 2021-11-05 18:45:05 --> Severity: Notice --> Trying to get property 'response' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Dashboard.php 26
+ERROR - 2021-11-05 18:45:05 --> Severity: Notice --> Trying to get property 'token' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Dashboard.php 26
+ERROR - 2021-11-05 18:48:21 --> Severity: Notice --> Undefined variable: token C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Dashboard.php 43
+ERROR - 2021-11-05 18:48:43 --> Severity: Notice --> Trying to get property 'pasien' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 118
+ERROR - 2021-11-05 18:48:43 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 119
+ERROR - 2021-11-05 18:48:43 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\simrs\application\mr_registrasi\views\registrasi\v_data_pendaftaran_online.php 3
+ERROR - 2021-11-05 18:48:43 --> Severity: Notice --> Trying to get property 'jmldata' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Online.php 125
+ERROR - 2021-11-05 18:49:04 --> Severity: Notice --> Trying to get property 'response' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Smart.php 22
+ERROR - 2021-11-05 18:49:04 --> Severity: Notice --> Trying to get property 'token' of non-object C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Smart.php 22
+ERROR - 2021-11-05 18:55:35 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2664
+ERROR - 2021-11-05 18:55:59 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2664
