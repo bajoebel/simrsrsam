@@ -4882,3 +4882,69 @@ function pilihKdPenunjang(){
 	$('#asesmenFalgProsedure').modal('hide');
 	createSEP();
 }
+
+function updateDpo(nomr){
+	$.ajax({
+		url: base_url+"registrasi/datadpo/"+nomr,
+		type: "GET",
+		dataType: "json",
+		data: {
+			get_param: 'value'
+		},
+		beforeSend: function () {
+			// setting a timeout
+			// $('#cariKontrol').prop("disabled", true);
+			// $('#iconCariKontrol').removeClass('fa fa-check')
+			// $('#iconCariKontrol').addClass('fa fa-spinner spin')
+		},
+		success: function (data) {
+			if(data.status==true){
+				$('#popupdpo').modal('show');
+				$('#dponomr').val(data.data.nomr)
+				$('#dponama').val(data.data.nama)
+				$('#dpoketerangan').val(data.data.keterangan)
+			}
+		},
+		error: function (xhr) { // if error occured
+			$('#error').modal('show');
+			$('#xhr').html(xhr.responseText)
+			
+		},
+		complete: function () {
+			// $('#cariKontrol').prop("disabled", false);
+			// $('#iconCariKontrol').removeClass('fa fa-spinner spin')
+			// $('#iconCariKontrol').addClass('fa fa-check')
+		},
+	});
+}
+function updateStatusDpo(){
+	var statusdpo=$('#dpostatus').prop('checked');
+	// alert(statusdpo)
+    if(statusdpo==true) statusdpo=1; else statusdpo=0;
+    var formData={
+        'nomr':$('#dponomr').val(),
+        'keterangan':$('#dpoketerangan').val(),
+        'status_dpo':statusdpo
+    }
+
+	$.ajax({
+        url: url_call_back + "/registrasi/updatestatusdpo",
+        type: "POST",
+        data: formData,
+        dataType: "JSON",
+        success: function (data) {
+            // console.clear();
+            console.log(data);
+            if (data.status == true) {
+                tampilkanPesan('success', data.message);
+                location.reload();
+            } else {
+                //alert(data.metaData.message);
+                tampilkanPesan('warning', data.message);
+            }
+        },
+        error: function (jqXHR, ajaxOption, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
+}
