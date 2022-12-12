@@ -35,16 +35,18 @@
                             subject: 'SEP'
                         });
                         if(data.local==1){
+                            if(data.seponline.peserta.kelamin=='L') jnskelamin='Laki-Laki';
+                            else jnskelamin='Perempuan';
                             potensiprb = data.response.prolanisPRB;
-                            nosep = data.response.noSep;
-                            tglsep = data.response.tglSep;
-                            nokartu = data.response.noKartu;
-                            nmpst = data.response.nama;
-                            tgllahir = data.response.tglLahir;
-                            jnskelamin = data.response.kelamin;
+                            nosep = data.seponline.noSep;
+                            tglsep = data.seponline.tglSep;
+                            nokartu = data.seponline.peserta.noKartu;
+                            nmpst = data.seponline.peserta.nama;
+                            tgllahir = data.seponline.peserta.tglLahir;
+                            jnskelamin = jnskelamin;
                             notelp = data.response.noTelp;
-                            poli = data.response.poli;
-                            eksekutif = data.response.eksekutif;
+                            poli = data.seponline.poli;
+                            eksekutif = data.seponline.poliEksekutif;
                             dokter = data.response.namaDpjpLayan;
                             faskesperujuk = data.response.namaPpkRujukan;
                             dxawal = data.response.diagnosa;
@@ -59,7 +61,8 @@
                             poliPerujuk = '';
                             hakKelas=data.response.hakKelas;
                             klsrawat = data.response.kelasRawat;
-                            penjamin = data.response.penjamin;
+                            penjamin = data.seponline.penjamin;
+                            // alert(penjamin);
                             cetakan = parseInt(data.response.cetakke) + 1;
                             noMr = data.response.noMr;
                             statuskll=data.seponline.nmstatusKecelakaan;
@@ -198,7 +201,7 @@
                         if (penjamin != null) {
                             if (penjamin != '-') {
                                 var _penjamin = penjamin.split(';');
-                                var col = 75;
+                                var col = 80;
                                 var _infoJKK = '';
                                 for (var i = 0; i < _penjamin.length; i++) {
                                     // var nama = nmPenjaminan(_penjamin[i]);
@@ -215,8 +218,8 @@
                                 }
                                 if (_penjamin.length > 0) {
                                     doc.setFontSize(6);
-                                    doc.text(17, 90, statuskll);
-                                    doc.text(17, 92, ' dgn ' + _infoJKK + ' terlebih dahulu.');
+                                    doc.text(17, 90, "Peserta Mengalami "+statuskll );
+                                    doc.text(17, 92, 'Penjaminan akan di koordinasikan RS dgn ' + _infoJKK + ' terlebih dahulu.');
                                 }
 
                             }
@@ -234,11 +237,11 @@
                         doc.text(17, 85, '*Saya menyetujui BPJS Kesehatan menggunakan infomasi medis pasien jika diperlukan.');
                         doc.text(17, 88, '*SEP Bukan sebagai bukti penjaminan peserta.');
 
-                        if (jnsrawat.toLowerCase().includes("r.inap")) {
-                            doc.text(17, 90, '** Dengan diterbitkannya SEP ini, Peserta rawat inap telah mendapatkan informasi dan menempati');
-                            doc.text(17, 93, 'kelas rawat sesuai hak kelasnya (terkecuali kelas penuh atau naik kelas sesuai aturan yang berlaku)');
-                        }
-
+                        // if (jnsrawat.toLowerCase().includes("r.inap")) {
+                        //     doc.text(17, 90, '** Dengan diterbitkannya SEP ini, Peserta rawat inap telah mendapatkan informasi dan menempati');
+                        //     doc.text(17, 93, 'kelas rawat sesuai hak kelasnya (terkecuali kelas penuh atau naik kelas sesuai aturan yang berlaku)');
+                        // }
+                        doc.setFontSize(7);
                         doc.text(17, 95, 'Cetakan ke ' + cetakan +' '+data.tgl);
 
                         var string = doc.output('datauristring');

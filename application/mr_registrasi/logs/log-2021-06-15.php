@@ -1,6 +1,0 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-ERROR - 2021-06-15 10:58:57 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2611
-ERROR - 2021-06-15 11:00:30 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2611
-ERROR - 2021-06-15 11:01:07 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2611
-ERROR - 2021-06-15 11:17:29 --> Severity: error --> Exception: Too few arguments to function registrasi::carabayar(), 0 passed in C:\xampp\htdocs\simrs\system\core\CodeIgniter.php on line 532 and exactly 1 expected C:\xampp\htdocs\simrs\application\mr_registrasi\controllers\Registrasi.php 2611
