@@ -1,0 +1,5 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-09-10 05:33:35 --> Severity: error --> Exception: Too few arguments to function nota_tagihan::data_tagihan(), 1 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 2 expected D:\xampp\htdocs\simrs_open_source\application\nota_tagihan\controllers\nota_tagihan.php 2888
+ERROR - 2020-09-10 05:34:07 --> Severity: error --> Exception: Too few arguments to function nota_tagihan::data_tagihan(), 1 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 2 expected D:\xampp\htdocs\simrs_open_source\application\nota_tagihan\controllers\nota_tagihan.php 2888
+ERROR - 2020-09-10 05:34:30 --> Severity: error --> Exception: Too few arguments to function nota_tagihan::data_tagihan(), 1 passed in D:\xampp\htdocs\simrs_open_source\system\core\CodeIgniter.php on line 532 and exactly 2 expected D:\xampp\htdocs\simrs_open_source\application\nota_tagihan\controllers\nota_tagihan.php 2888

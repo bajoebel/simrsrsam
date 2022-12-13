@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo getAppName() ?></title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="robots" content="none" />
     <link rel="shortcut icon" href="<?php echo base_url().'favicon.png' ?>">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/font-awesome/css/font-awesome.css">
@@ -13,10 +14,9 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/AdminLTE.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/iCheck/square/blue.css">
     <!--[if lt IE 9]>
-    <script src="<?php echo base_url() ?>assets/js/html5shiv.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/respond.min.js"></script>
-    <![endif]-->
-    <link href="<?php echo base_url() ?>assets/bower_components/fonts.googleapis/fonts.css" type="text/css" rel="stylesheet" >
+    <script src="<?php echo base_url().'assets/js/'; ?>html5shiv.min.js"></script>
+    <script src="<?php echo base_url().'assets/js/'; ?>/respond.min.js"></script>
+    <![endif]-->    
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -30,7 +30,7 @@
         </div>
         <p class="login-box-msg">Aplikasi ini menggunakan cookies. Pastikan cookies browser anda dalam keadaan aktif. Setiap Cookies browser anda berubah, anda harus login ulang.</p>
 
-        <form id="form1" method="post" onSubmit="return false">
+        <form id="form1" action="<?php echo base_url().'nota_tagihan.php/login/cek' ?>" method="post" onSubmit="return false">
             <div class="form-group has-feedback">
                 <input name="userID" type="text" class="form-control" placeholder="Enter User ID"/>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -64,14 +64,15 @@ function toBeranda(){
 function toLogin(){
     $.ajax({
         type    : "POST",
-        url     : "<?php echo base_url().'mr_registrasi.php/login/cek' ?>",
+        url     : "<?php echo base_url().'nota_tagihan.php/login/cek' ?>",
         data    : $('#form1').serialize(), 
         dataType: "JSON",
         success : function(data){
+            console.log(data)
             if(data.error){
                 location.href=data.message;
             }else{
-                alert(data.message);                  
+                alert(data.message);
             }
         }
     });

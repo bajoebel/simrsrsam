@@ -134,3 +134,12 @@ defined('PASW_SISRUTE') 		or define('PASW_SISRUTE', '');
 Nilai R Farmasi
 */
 define('NILAI_R',		'300');
+defined('SMART_STATUS')   	or define('SMART_STATUS', '0');
+defined('SMART_ID')   		or define('SMART_ID', '00001');
+		defined('SMART_KEY')   		or define('SMART_KEY', 'RF3XS15QY15TPK91');
+		defined('SMART_CALL_BACK')  or define('SMART_CALL_BACK', 'http://localhost/webservice/');
+
+		defined('ONLINE_ID')   		or define('ONLINE_ID', '00001');
+		defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
+		defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
+		defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://192.168.12.254/');

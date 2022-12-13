@@ -1,0 +1,5 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-07-29 04:05:15 --> Query error: Column 'reg_unit' in IN/ALL/ANY subquery is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '66' AND reg_unit NOT IN (SELECT reg_unit FROM tbl02_pindah_ranap_response) AND b.idx IS NULL ORDER BY idx DESC
+ERROR - 2021-07-29 04:05:20 --> Query error: Column 'reg_unit' in IN/ALL/ANY subquery is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '66' AND reg_unit NOT IN (SELECT reg_unit FROM tbl02_pindah_ranap_response) AND b.idx IS NULL ORDER BY idx DESC
+ERROR - 2021-07-29 04:05:22 --> Query error: Column 'reg_unit' in IN/ALL/ANY subquery is ambiguous - Invalid query: SELECT a.*,b.idx as idx_batal FROM tbl02_pindah_ranap a LEFT JOIN tbl02_pindah_ranap_batal b ON a.idx=b.id_pindah_ranap  WHERE id_ruang = '66' AND reg_unit NOT IN (SELECT reg_unit FROM tbl02_pindah_ranap_response) AND b.idx IS NULL ORDER BY idx DESC

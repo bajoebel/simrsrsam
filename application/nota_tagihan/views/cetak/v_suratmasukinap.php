@@ -16,7 +16,7 @@
 		$result = $tgl . "-" . $bulan . "-". $tahun;
 		return($result);
     }
-    if($data['nama_negara']==''){
+    if($data['id_negara']==0){
         $neg = "INDONESIA";
     }else{
         $neg = $data['nama_negara'];
@@ -103,16 +103,16 @@ table tr td{
             <div class="wrap">
                 <div class="header">
                     <div class="logo">
-                        <img src="<?php echo LOGO ?>"/>
+                        <img src="<?php echo base_url() ?>assets/images/rsam/logo_RSAM.JPG"/>
                     </div>
                     <div class="info">
-                        <?php echo COMPANY_NAME ?>
+                        RSUD Dr. Achmad Mochtar Bukittinggi
                         <br />
-                        <?php echo REPORT_ADDRESS_1 ?>
+                        Jl. Dr. A. Rivai Bukittinggi - 26114
                         <br />
-                        <?php echo REPORT_ADDRESS_2 ?>
+                        Telp. (0752) 21720-21492-21831-21322
                         <br />
-                        <?php echo FAX ?>
+                        Fax. (0752) 21321
                     </div>
                 </div>
                 <div class="kode">
@@ -125,7 +125,7 @@ table tr td{
 					<tr>
                         <td width="70">RUANGAN</td>
                         <td width="12">:</td>
-                        <td width="203"><?php echo $data['nama_ruang'] ?></td>
+                        <td width="203"><?php echo $data['grNama'] ?></td>
 						<td width="35">SMF</td>
                         <td width="10">:</td>
                         <td width="125"></td>
@@ -161,7 +161,7 @@ table tr td{
                         <td>Jenis Kelamin</td>
                         <td>:</td>
                         <td>
-                        <?php if($data['jns_kelamin']=="1") echo "Laki-Laki"; else if($data['jns_kelamin']=="2") echo "Perempuan"; else if($data['jns_kelamin']=="3") echo "Tidak Dapat Ditentukan"; else echo "Tidak Mengisi"?>
+                        <?php if($data['jns_kelamin']=="P") echo "Perempuan"; else echo "Laki-Laki"; ?>
                         </td>
                     </tr>
                     
@@ -220,7 +220,7 @@ table tr td{
                         <td>Tanggal Masuk</td>
                         <td>:</td>
                         <td>
-                        <?php echo DateFormatIndo($data['tgl_masuk']); ?>
+                        <?php echo DateFormatIndo($data['MASUK']); ?>
                         </td>
                     </tr>
                     <tr>
@@ -233,9 +233,7 @@ table tr td{
 					<tr>
                         <td>Jenis Pelayanan</td>
                         <td>:</td>
-                        <td>
-                            <?php echo $data['jns_layanan']; ?>
-                        </td>
+                        <td></td>
                     </tr>
 					<tr>
                         <td>No Kartu Jaminan Kesehatan</td>
@@ -251,63 +249,63 @@ table tr td{
                         <td>Nama</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienNama'] ?>
+                        <?php echo $data['penanggung_jawab'] ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Umur</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienUmur'] ?>
+                        <?php ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Pekerjaan</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienPekerjaan'] ?>
+                        <?php ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Alamat</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienAlamat'] ?>
+                        <?php ?>
                         </td>
                     </tr>
                     <tr>
                         <td>No.Telp/HP</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienTelp'] ?>
+                        <?php echo $data['no_penanggung_jawab'] ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Hub Keluarga</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienHubKel'] ?>
+                        <?php  ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Dikirim Oleh</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienDikirimOleh'] ?>
+                        <?php ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Alamat Pengirim</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['pjPasienAlmtPengirim'] ?>
+                        <?php ?>
                         </td>
                     </tr>
                     <tr>
-                        <td>Dokter</td>
+                        <td>Dokter Jaga</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['nama_dokter_pengirim'] ?>
+                        
                         </td>
                     </tr>
             
@@ -316,7 +314,7 @@ table tr td{
             <div class="sign_in">
                 <table>
                     <tr>
-                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo(date('Y-m-d')) ?></td>
+                        <td>Bukittinggi, <?php echo DateToIndo(date('Y-m-d')) ?></td>
                     </tr>
                     <tr>
                         <td>Petugas Rekam Medis</td>

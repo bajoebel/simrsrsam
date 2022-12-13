@@ -10,7 +10,6 @@ class Smart_model extends CI_Model
     //Async Data
     function http_request($data, $url,$token="")
     {
-        //echo $token; exit;
         //$data = array("name" => "Hagrid", "age" => "36");                                                                    
         $data_string = json_encode($data);
         $ch = curl_init($url);
@@ -33,7 +32,6 @@ class Smart_model extends CI_Model
         $result = curl_exec($ch);
         return $result;
     }
-    
 
     function getCaraBayar(){
         return $this->db->get('tbl01_cara_bayar')->result_array();

@@ -141,6 +141,18 @@ function getNmLengkap(){
         return "";
     }
 }
+function getNamaDokter($nrp=""){
+    $CI =& get_instance();
+    $CI->db->where('NRP',$nrp);
+    $cekQuery = $CI->db->get('tbl01_pegawai');
+    if($cekQuery->num_rows() > 0){
+        $res = $cekQuery->row_array();
+        return $res['pgwNama'];
+    }else{
+        return "";
+    }
+}
+
 function getUserLogin(){
     $CI =& get_instance();
     $uid = $CI->session->userdata('get_uid');
@@ -403,3 +415,19 @@ function getDataPindahRanapById($idx){
         return "";
     } 
 }
+function longDate($tanggal)
+    {
+        $exp1 = explode(" ", $tanggal);
+        $date = explode('-', $exp1[0]);
+
+        //return $exp1[0];exit;
+        if (count($date) < 3) {
+            return "Invalid date";
+        } else {
+            $thn = $date[0];
+            $bln = intval($date[1]);
+            $tgl = $date[2];
+            $bulan = array('', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+            return $tgl . " " . $bulan[$bln] . " " . $thn;
+        }
+    }

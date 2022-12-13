@@ -583,7 +583,7 @@ function pilih(a) {
 
 function pilihPasien(a) {
     //alert(a + b);
-    var url = base_url + 'nota_tagihan/entry_nota?idx=' + a;
+    var url = base_url + 'erm/detail?idx=' + a;
     window.location.href = url;
 }
 
@@ -993,7 +993,7 @@ function daftarkanPasien() {
 function getKamar() {
     var idruang = $('#id_ruang').val();
     var kelasid = $('#id_kelas').val();
-    var url = base_url + "nota_tagihan/kamar/" + idruang + "/" + kelasid;
+    var url = base_url + "erm/kamar/" + idruang + "/" + kelasid;
     console.log(url);
     $.ajax({
         url: url,
@@ -1041,7 +1041,7 @@ function panggil(){
     // var nomorantri=$('#nomorantri').val();
     // var panggil=parseInt(nomorantri)+1;
     // $('#nomorantri').val(panggil);
-    var url = base_url + "nota_tagihan/panggilantrean";
+    var url = base_url + "erm/panggilantrean";
     console.log(url);
     $.ajax({
         url: url,
