@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='lokasi-pilihan'>Pilih Lokasi </a>
                     <ul class="dropdown-menu" role="menu" id='mode-lokasi'>
-                       
+
                     </ul>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu" id="list-notifikasi">
-                                
+
                             </ul>
                         </li>
                         <li class="footer"><a href="#">View all</a></li>
@@ -60,10 +60,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<?php echo base_url() . 'nota_tagihan.php/users' ?>" class="btn btn-default btn-flat">Ubah Password</a>
+                                <a href="<?php echo base_url() . 'erm.php/users' ?>" class="btn btn-default btn-flat">Ubah Password</a>
                             </div>
                             <div class="pull-right">
-                                <a href="<?php echo base_url() . 'nota_tagihan.php/login/logout' ?>" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?php echo base_url() . 'erm.php/login/logout' ?>" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

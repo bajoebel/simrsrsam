@@ -30,54 +30,68 @@
         pointer-events: none;
         cursor: default;
     }
-    .kotak{
-        padding:10px;
-        width:100%;
-        border:1px #ccc solid;
-        border-collapse:collapse;
-        
-    }
-    .text-center{
-        text-align:center;
-    }
-    .font60{
-        font-size : 120pt;
-    }
-    .font10{
-        font-size:10pt;
-    }
-    .font11{
-        font-size:11pt;
-    }
-    .font12{
-        font-size:12pt;
-    }
-    .font13{
-        font-size:13pt;
+
+    .kotak {
+        padding: 10px;
+        width: 100%;
+        border: 1px #ccc solid;
+        border-collapse: collapse;
+
     }
 
-    .font14{
-        font-size:14pt;
+    .text-center {
+        text-align: center;
     }
-    .font20{
-        font-size:20pt;
+
+    .font60 {
+        font-size: 120pt;
     }
-    .top10{
-        margin-top:10px;
+
+    .font10 {
+        font-size: 10pt;
     }
-    .top20{
-        margin-top:20px;
+
+    .font11 {
+        font-size: 11pt;
     }
-    .panel{
-        border-radius:0px;
+
+    .font12 {
+        font-size: 12pt;
     }
-    .panel-success{
-        border-color:#1ABC9C;
+
+    .font13 {
+        font-size: 13pt;
     }
+
+    .font14 {
+        font-size: 14pt;
+    }
+
+    .font20 {
+        font-size: 20pt;
+    }
+
+    .top10 {
+        margin-top: 10px;
+    }
+
+    .top20 {
+        margin-top: 20px;
+    }
+
+    .panel {
+        border-radius: 0px;
+    }
+
+    .panel-success {
+        border-color: #1ABC9C;
+    }
+
     .panel-success .panel-heading {
         background-color: #1ABC9C;
         color: #fff;
     }
+
     .back {
         border: 2px solid;
         border-collapse: collapse;
@@ -91,10 +105,11 @@
         text-align: center;
         color: #fff;
         box-shadow: 2px 2px #000;
-        float:left;
+        float: left;
     }
+
     .kembali {
-    color: #fff;
+        color: #fff;
     }
 </style>
 <section class="content-header">
@@ -119,26 +134,27 @@
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <div class="back">
-                            <a href="<?= base_url() ."nota_tagihan.php/nota_tagihan/entry_nota?idx=".$detail->idx?>">
-                            <span class="fa fa-arrow-left"></span>
+                            <a href="<?= base_url() . "nota_tagihan.php/nota_tagihan/entry_nota?idx=" . $detail->idx ?>">
+                                <span class="fa fa-arrow-left"></span>
                             </a>
                         </div>
                         <div style="float:left;padding:10px 10px; font-size:18pt;">
-                        Data Sosial Pasien
-                        </div> 
+                            Data Sosial Pasien
+                        </div>
                     </div>
                     <div class="box-body box-profile">
                         <div class="row">
                             <div class="col-md-2">
-                                <img class="profile-user-img img-responsive img-circle" src="<?php if($detail->jns_kelamin=='0') echo base_url()."assets/images/female.png"; else echo base_url()."assets/images/male.png"; ?>" alt="User profile picture">
-                                <h3 class="profile-username text-center"><?= $detail->nama_pasien ."(".$detail->nomr .")"?></h3>
+                                <img class="profile-user-img img-responsive img-circle" src="<?php if ($detail->jns_kelamin == '0') echo base_url() . "assets/images/female.png";
+                                                                                                else echo base_url() . "assets/images/male.png"; ?>" alt="User profile picture">
+                                <h3 class="profile-username text-center"><?= $detail->nama_pasien . "(" . $detail->nomr . ")" ?></h3>
                                 <p class="text-muted text-center"><?= $detail->no_ktp ?></p>
                             </div>
                             <div class="col-md-10">
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <td colspan="5"><b>ALAMAT / TELPON</b><br><?= $pasien->alamat ."/" .$pasien->no_telpon; ?></td>
+                                            <td colspan="5"><b>ALAMAT / TELPON</b><br><?= $pasien->alamat . "/" . $pasien->no_telpon; ?></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tempat & Tgl Lahir</b></td>
@@ -148,13 +164,13 @@
                                             <td><b>Pekerjaan</b></td>
                                         </tr>
                                         <tr>
-                                            <td><?= $detail->tempat_lahir ." / " .longDate($detail->tgl_lahir) ?></td>
-                                            <td><?= getUmur($detail->tgl_lahir,$detail->tgl_masuk)?></td>
+                                            <td><?= $detail->tempat_lahir . " / " . longDate($detail->tgl_lahir) ?></td>
+                                            <td><?= getUmur($detail->tgl_lahir, $detail->tgl_masuk) ?></td>
                                             <td><?= $detail->jns_kelamin ?></td>
                                             <td><?= $pasien->agama ?></td>
                                             <td><?= $pasien->pekerjaan ?></td>
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -163,7 +179,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                
+
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
@@ -182,7 +198,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="email">Tgl Dan Jam Mulai:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="tglmulai" placeholder="Enter email" name="tglmulai" value="<?= date('Y-m-d H:i:s')?>" readonly>
+                                        <input type="text" class="form-control" id="tglmulai" placeholder="Enter email" name="tglmulai" value="<?= date('Y-m-d H:i:s') ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -225,7 +241,7 @@
                                         <textarea name="instruksi" id="instruksi" class="form-control"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">        
+                                <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="button" class="btn btn-primary" onclick="simpanSoap()">Simpan</button>
                                     </div>
@@ -235,9 +251,9 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_2">
                             <div class="callout callout-warning">Diisi Oleh Perawat</div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <!-- /.tab-content -->
                 </div>
@@ -246,7 +262,7 @@
 
     </section>
 
-    <?php 
+<?php
 } else { ?>
     <section class="content container-fluid">
         <div class="alert alert-danger alert-dismissible">

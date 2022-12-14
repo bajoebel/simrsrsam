@@ -6,7 +6,7 @@
 | Site URL
 |--------------------------------------------------------------------------
 */
-$_index = str_replace("/simrs_reg_v4/", "", $_SERVER['SCRIPT_NAME']);
+$_index = str_replace("/simrs_vclaim/", "", $_SERVER['SCRIPT_NAME']);
 if ((((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443))) $ssl = "s";
 else $ssl = "";
 $http = "http" . $ssl . '://';
@@ -57,7 +57,7 @@ switch (ENVIRONMENT) {
 		// defined('SECREET_ID_VC')   	or define('SECREET_ID_VC', '5iO913C770');
 		// defined('KEY_VC')   		or define('KEY_VC', '56d8b4f7ac72b41102ac5800d73fe0fd');
 		// defined('STATUS_VC')   		or define('STATUS_VC', '1');
-		
+
 		// API BPJS Vclam 2.0 Production
 		defined('HOST_VC')     		or define('HOST_VC', 'https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/');
 		defined('CONS_ID_VC')   	or define('CONS_ID_VC', '20419');
@@ -70,7 +70,7 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_dev');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3');
 		break;
 	case 'production':
 		// API BPJS Vclam 2.0 DEVELOPMENT
@@ -136,10 +136,10 @@ Nilai R Farmasi
 define('NILAI_R',		'300');
 defined('SMART_STATUS')   	or define('SMART_STATUS', '0');
 defined('SMART_ID')   		or define('SMART_ID', '00001');
-		defined('SMART_KEY')   		or define('SMART_KEY', 'RF3XS15QY15TPK91');
-		defined('SMART_CALL_BACK')  or define('SMART_CALL_BACK', 'http://localhost/webservice/');
+defined('SMART_KEY')   		or define('SMART_KEY', 'RF3XS15QY15TPK91');
+defined('SMART_CALL_BACK')  or define('SMART_CALL_BACK', 'http://localhost/webservice/');
 
-		defined('ONLINE_ID')   		or define('ONLINE_ID', '00001');
-		defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
-		defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
-		defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://192.168.12.254/');
+defined('ONLINE_ID')   		or define('ONLINE_ID', '00001');
+defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
+defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
+defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://192.168.12.254/');

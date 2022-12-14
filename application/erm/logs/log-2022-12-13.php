@@ -38,3 +38,11 @@ AND   (
 OR `jadwal_dokter_id1` = 0
  )
 AND `jadwal_hari` = 'Selasa'
+ERROR - 2022-12-13 07:46:50 --> Severity: Warning --> mysqli::real_connect(): (HY000/1049): Unknown database 'rsam_dev' C:\laragon\www\simrs_vclaim\system\database\drivers\mysqli\mysqli_driver.php 203
+ERROR - 2022-12-13 07:46:50 --> Unable to connect to the database
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$NRP C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$pgwNama C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$NRP C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$pgwNama C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$NRP C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406
+ERROR - 2022-12-13 07:52:35 --> Severity: Notice --> Undefined property: stdClass::$pgwNama C:\laragon\www\simrs_vclaim\application\erm\views\layanan\layanan_index.php 1406

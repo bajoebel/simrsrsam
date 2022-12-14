@@ -54,7 +54,7 @@ class nota_tagihan extends CI_Controller
                             $dokter = $this->Layanan_model->getDokter($kondisi);
                             $notif = $this->nota_model->getNotif('penunjang', $this->session->userdata('kdlokasi'));
                             $param = array('jns_layanan' => 'jns_layanan', 'dari' => 'tglAwal', 'sampai' => 'tglAkhir');
-                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', 'jns_kelamin', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar','=action[{{status_pasien}}]');
+                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', 'jns_kelamin', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar', '=action[{{status_pasien}}]');
                         } else $notif = 0;
 
                         $action = "<div class='btn-group'><button onclick='pilihPasien({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
@@ -131,20 +131,21 @@ class nota_tagihan extends CI_Controller
                             'load'          => false,
                             'action_button' => $btnbatal,
                         );
-                        $antreandokter=$this->Layanan_model->getAntreanDokter($this->session->userdata('kdlokasi'));
-                        if(!empty($antreandokter)) $dj= $antreandokter[0]->dokterJaga; else $dj=0;
-                        $jadwal=$this->Layanan_model->getJadwal($this->session->userdata('kdlokasi'),$dj);
-                        $lastantrean=$this->Layanan_model->getLastAntrean($this->session->userdata('kdlokasi'),$dj);
+                        $antreandokter = $this->Layanan_model->getAntreanDokter($this->session->userdata('kdlokasi'));
+                        if (!empty($antreandokter)) $dj = $antreandokter[0]->dokterJaga;
+                        else $dj = 0;
+                        $jadwal = $this->Layanan_model->getJadwal($this->session->userdata('kdlokasi'), $dj);
+                        $lastantrean = $this->Layanan_model->getLastAntrean($this->session->userdata('kdlokasi'), $dj);
                         $data = array(
                             'contentTitle' => 'Cari Pasien',
                             'ruangID' => $this->session->userdata('kdlokasi'),
                             'ruang' => $ruang,
                             'notif' => $notif,
                             'getDokter' => $dokter,
-                            'antreandokter'=>$antreandokter,
-                            'jadwal'=>$jadwal,
-                            'lastantrean'=>$lastantrean,
-                            'kelas'=>$this->db->get('tbl01_kelas_layanan')->result()
+                            'antreandokter' => $antreandokter,
+                            'jadwal' => $jadwal,
+                            'lastantrean' => $lastantrean,
+                            'kelas' => $this->db->get('tbl01_kelas_layanan')->result()
                         );
                         //echo "<script>".getData($config2)."</script>";exit;
 
@@ -158,7 +159,7 @@ class nota_tagihan extends CI_Controller
                                             var response = {'0':'<span class=\"btn btn-danger btn-xs\" >Belum Diresponse</span>','1':'<span class=\"btn btn-success btn-xs\">Sudah Diresponse</span>'}; 
                                             var action = {'1':'<span class=\"pull-right badge bg-green\">Aktif</span>','2':'<span class=\"pull-right badge bg-yellow\">Dirawat</span>','3':'<span class=\"pull-right badge bg-yellow\">Menunggu Response <br>Pindah</span>','4':'<span class=\"pull-right badge bg-yellow\">Sudah Pindah</span>','5':'<span class=\"pull-right badge bg-yellow\">Sudah Pulang</span>','6':'<span class=\"pull-right badge bg-yellow\">Batal Berobat</span>'}; 
                                             var dis=['','disabled']" . getData($config) . getData($config1) . getData($config2) . getData($config3),
-                            'lib' => array('js/layanan.js','js/daftarlayanan.js')
+                            'lib' => array('js/layanan.js', 'js/daftarlayanan.js')
                         );
                         //<button onclick='pilihPasien({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-search'></span> Pilih</button>
                         $this->load->view('template/theme', $theme);
@@ -180,18 +181,19 @@ class nota_tagihan extends CI_Controller
         }
     }
 
-    function lastantrean($dj,$jns=1,$curent=""){
+    function lastantrean($dj, $jns = 1, $curent = "")
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $lastantrean=$this->Layanan_model->getLastAntrean($this->session->userdata('kdlokasi'),$dj,$jns,$curent);
-            $response=array(
+            $lastantrean = $this->Layanan_model->getLastAntrean($this->session->userdata('kdlokasi'), $dj, $jns, $curent);
+            $response = array(
                 'status'    => true,
                 'data'      => $lastantrean,
                 'sekarang'  => date('Y-m-d H:i:s'),
                 'message'   => "OK"
             );
-        }else{
-            $response=array(
+        } else {
+            $response = array(
                 'status'    => false,
                 'message'   => "Session Expired"
             );
@@ -200,18 +202,19 @@ class nota_tagihan extends CI_Controller
         echo json_encode($response);
     }
 
-    function listantrean($dj,$jns=1){
+    function listantrean($dj, $jns = 1)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $lastantrean=$this->Layanan_model->getListAntrean($this->session->userdata('kdlokasi'),$dj,$jns);
-            $response=array(
+            $lastantrean = $this->Layanan_model->getListAntrean($this->session->userdata('kdlokasi'), $dj, $jns);
+            $response = array(
                 'status'    => true,
                 'data'      => $lastantrean,
                 'sekarang'  => date('Y-m-d H:i:s'),
                 'message'   => "OK"
             );
-        }else{
-            $response=array(
+        } else {
+            $response = array(
                 'status'    => false,
                 'message'   => "Session Expired"
             );
@@ -576,7 +579,7 @@ class nota_tagihan extends CI_Controller
 
                         $y['contentTitle'] = "Cari dan Registrasikan Pasien ke ";
                         $y['ruangID'] = $this->session->userdata('kdlokasi');
-                        $y['kelas']=$this->db->get('tbl01_kelas_layanan')->result();
+                        $y['kelas'] = $this->db->get('tbl01_kelas_layanan')->result();
                         $x['content'] = $this->load->view('nota_tagihan/template_pindah_kamar', $y, true);
                         $this->load->view('template/theme', $x);
                     }
@@ -619,15 +622,15 @@ class nota_tagihan extends CI_Controller
 
         $condition = "WHERE id_ruang = '$id_ruang' ";
 
-        if(!empty($dari)&&!empty($sampai)){
-            if($dari==$sampai) $condition.= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') = '$dari' ";
-            else $condition.= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') BETWEEN '$dari' AND '$sampai' ";
+        if (!empty($dari) && !empty($sampai)) {
+            if ($dari == $sampai) $condition .= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') = '$dari' ";
+            else $condition .= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') BETWEEN '$dari' AND '$sampai' ";
             $this->session->set_userdata('dari', $dari);
             $this->session->set_userdata('sampai', $sampai);
-        }else{
+        } else {
             $dari = ($this->session->userdata('dari')) ? $this->session->userdata('dari') : '';
             $sampai = ($this->session->userdata('sampai')) ? $this->session->userdata('sampai') : '';
-            if(!empty($dari)&&!empty($sampai)){
+            if (!empty($dari) && !empty($sampai)) {
                 if ($dari == $sampai) $condition .= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') = '$dari' ";
                 else $condition .= "AND DATE_FORMAT(tgl_masuk,'%Y-%m-%d') BETWEEN '$dari' AND '$sampai' ";
             }
@@ -847,7 +850,7 @@ class nota_tagihan extends CI_Controller
                         $this->db->where_not_in('idx', $this->session->userdata('kdlokasi'));
                         $y['getRuangRujukan'] = $this->db->get('tbl01_ruang');
                         $y['getKelasTarif'] = $this->db->get('tbl01_kelas_layanan');
-                        $y['antrean']=$this->nota_model->getAntrean($y["id_daftar"]);
+                        $y['antrean'] = $this->nota_model->getAntrean($y["id_daftar"]);
                         // print_r($y["antrean"]); exit;
                         $y['modul']   = $this->load->view('nota_tagihan/template_notatagihan', $y, true);
                         $x['content'] = $this->load->view('nota_tagihan/template_entry', $y, true);
@@ -1193,7 +1196,7 @@ class nota_tagihan extends CI_Controller
                         else $kodemenu = "";
                         $idlevel = $this->session->userdata('level');
                         $idmodul = MODUL_ID;
-                        $x['lib']=array('js/eresep.js');
+                        $x['lib'] = array('js/eresep.js');
                         $y["hakakses"] = $this->nota_model->getAkses($idlevel, $idmodul, $kodemenu);
                         //$y['depo'] = $this->nota_model->getDepo();
                         $y['modul']   = $this->load->view('nota_tagihan/template_resep', $y, true);
@@ -1296,9 +1299,9 @@ class nota_tagihan extends CI_Controller
                                     }
                                 }
                             } else {
-                                $ranap = $this->nota_model->cekRanap($y["detail"]->id_daftar,'RI');
+                                $ranap = $this->nota_model->cekRanap($y["detail"]->id_daftar, 'RI');
                                 $y["getDokter"] = $this->nota_model->getDokter($this->session->userdata('kdlokasi'));
-                                if(empty($ranap)){
+                                if (empty($ranap)) {
                                     //Pasien tidak di rawat inap
                                     $pulang = $this->nota_model->getPulang($y["detail"]->id_daftar);
                                     if (!empty($pulang)) {
@@ -1326,13 +1329,11 @@ class nota_tagihan extends CI_Controller
                                             $y["priv_surat"] = $this->load->view('nota_tagihan/template_surat_rujukan', $surat, true);
                                         }
                                     }
-                                    
-                                }else{
-                                    $pulang=array();
-                                    $y['ranap']=1;
+                                } else {
+                                    $pulang = array();
+                                    $y['ranap'] = 1;
                                 }
                             }
-                            
                         } else {
                             $pulang = array();
                             $nomr = "";
@@ -1355,7 +1356,7 @@ class nota_tagihan extends CI_Controller
                         elseif ($y["detail"]->jns_layanan == "PJ") $kodemenu = 47;
                         elseif ($y["detail"]->jns_layanan == "GD") $kodemenu = 48;
                         else $kodemenu = "";
-                        $y['antrean']=$this->nota_model->getAntrean($y["detail"]->id_daftar);
+                        $y['antrean'] = $this->nota_model->getAntrean($y["detail"]->id_daftar);
                         // print_r($y["antrean"]); exit;
                         $y['pindah']    = $this->nota_model->getPindah($y["detail"]->reg_unit, $x['ruangID']);
                         $y["hakakses"]  = $this->nota_model->getAkses($idlevel, $idmodul, $kodemenu);
@@ -1422,13 +1423,13 @@ class nota_tagihan extends CI_Controller
                             // print_r($pulang); exit;
                             $pindah = $this->nota_model->getPindah($y["detail"]->reg_unit, $x['ruangID']);
                             if (!empty($pulang)) $y["pulang"] = 1;
-                            if(!empty($y["detail"]->reg_unitibu) && $y['detail']->rawatgabung==1){
+                            if (!empty($y["detail"]->reg_unitibu) && $y['detail']->rawatgabung == 1) {
                                 //Pasien Merupakan Bayi Rawat Gabung
-                                $y['regibu']=$this->nota_model->getDatapendaftaran(array('reg_unit'=> $y["detail"]->reg_unitibu));
-                                $y['regnanak']=array();
-                            }else{
-                                $y['regibu']=array();
-                                $y['reganak'] = $this->nota_model->getDatapendaftaran(array('reg_unitibu'=>$y['detail']->reg_unit),'result');
+                                $y['regibu'] = $this->nota_model->getDatapendaftaran(array('reg_unit' => $y["detail"]->reg_unitibu));
+                                $y['regnanak'] = array();
+                            } else {
+                                $y['regibu'] = array();
+                                $y['reganak'] = $this->nota_model->getDatapendaftaran(array('reg_unitibu' => $y['detail']->reg_unit), 'result');
                             }
                         } else {
                             $pulang = array();
@@ -1502,20 +1503,19 @@ class nota_tagihan extends CI_Controller
         if ($ses_state) {
             $this->db->select('a.*,b.idx as idx_response');
             $this->db->where('a.idx', $idx);
-            $this->db->join('tbl02_pindah_ranap_response b','a.idx = b.id_pindah_ranap','LEFT');
+            $this->db->join('tbl02_pindah_ranap_response b', 'a.idx = b.id_pindah_ranap', 'LEFT');
             $row = $this->db->get('tbl02_pindah_ranap a')->row();
-            if(empty($row)){
+            if (empty($row)) {
                 $response = array('status' => false, 'message' => 'Data Tidak Ditemukan');
-            }else{
-                if(!empty($row->id_response)){
+            } else {
+                if (!empty($row->id_response)) {
                     //Sudah Diresponse maka tidak bisa dibatalkan
-                    $response = array('status' => false, 'message' => 'Permintaan Pindah Ruang tidak bisa dibatalkan karena pasien sudah terdaftar di ' .$row->nama_ruang ." Kamar " .$row->nama_kamar);
-                }else{
+                    $response = array('status' => false, 'message' => 'Permintaan Pindah Ruang tidak bisa dibatalkan karena pasien sudah terdaftar di ' . $row->nama_ruang . " Kamar " . $row->nama_kamar);
+                } else {
                     //$this->db->where('')
                     $response = array('status' => true, 'message' => 'OK', 'data' => $row);
                 }
             }
-            
         } else {
             $response = array('status' => false, 'message' => 'Session Expired');
         }
@@ -1523,18 +1523,19 @@ class nota_tagihan extends CI_Controller
         echo json_encode($response);
     }
 
-    function batalpindah(){
+    function batalpindah()
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $batal=array(
-                'id_pindah_ranap'=>$this->input->post('id_pindah_ranap'),
+            $batal = array(
+                'id_pindah_ranap' => $this->input->post('id_pindah_ranap'),
                 'id_daftar' => $this->input->post('id_daftar'),
                 'reg_unit' => $this->input->post('reg_unit'),
                 'alasan' => $this->input->post('alasan')
             );
             $this->db->insert('tbl02_pindah_ranap_batal', $batal);
             $insert = $this->db->insert_id();
-            if($insert) $response = array('status' => true, 'message' => 'Permintaan Pindah Ruang Berhasil Dibatalkan');
+            if ($insert) $response = array('status' => true, 'message' => 'Permintaan Pindah Ruang Berhasil Dibatalkan');
             else $response = array('status' => false, 'message' => 'Gagal Membatalkan permintaan pindah ruang');
         } else {
             $response = array('status' => false, 'message' => 'Session Expired');
@@ -1542,13 +1543,14 @@ class nota_tagihan extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-    function surat_rekomendasi_pindah_ruang($idx=""){
+    function surat_rekomendasi_pindah_ruang($idx = "")
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $row=$this->nota_model->getSuratRekomendasiPindah($idx);
+            $row = $this->nota_model->getSuratRekomendasiPindah($idx);
             $data = array(
-                'judul'=>'Surat Pindah Ruangan',
-                'surat'=> $row
+                'judul' => 'Surat Pindah Ruangan',
+                'surat' => $row
             );
             $this->load->view('nota_tagihan/template_suratpindah', $data);
         } else {
@@ -1670,10 +1672,10 @@ class nota_tagihan extends CI_Controller
                             $response['code'] = 200;
                             $response['message'] = "Data tidak terdaftar sebagai pasien rawat inap.";
                             $cekCommand = $this->db->insert('tbl02_pasien_pulang', $params);
-                            $kondisi = array('reg_unit'=> $params['reg_unit']);
+                            $kondisi = array('reg_unit' => $params['reg_unit']);
                             $status = array('status_pasien' => 5);
                             $this->nota_model->updatePendaftaran($status, $kondisi);
-                            
+
                             if ($cekCommand) {
                                 $response['code'] = 200;
                                 $response['message'] = "Data pasien keluar sukses disimpan.";
@@ -2112,7 +2114,7 @@ class nota_tagihan extends CI_Controller
                          * Jenis Pemeriksaan
                          */
                         $y["jenispemeriksaan"] = $this->nota_model->getPermintaanJenisPemeriksaan($y["idx_pendaftaran"]);
-                        
+
                         $idlevel = $this->session->userdata('level');
                         // echo $idlevel; exit;
                         $idmodul = MODUL_ID;
@@ -2121,7 +2123,7 @@ class nota_tagihan extends CI_Controller
                         elseif ($y["detail"]->jns_layanan == "PJ") $kodemenu = 47;
                         elseif ($y["detail"]->jns_layanan == "GD") $kodemenu = 48;
                         else $kodemenu = "";
-                        $x['lib']=array('js/hasilpemeriksaan.js');
+                        $x['lib'] = array('js/hasilpemeriksaan.js');
                         $y["hakakses"] = $this->nota_model->getAkses($idlevel, $idmodul, $kodemenu);
                         $y['modul']   = $this->load->view('nota_tagihan/template_hasil_pemeriksaan', $y, true);
                         $x['content'] = $this->load->view('nota_tagihan/template_entry', $y, true);
@@ -2348,26 +2350,26 @@ class nota_tagihan extends CI_Controller
                         $response['message'] = "Ops. No Registrasi Unit tidak boleh kosong! Silahkan coba kembali.";
                     } else {
                         $cekCommand = $this->db->insert('tbl03_nota_detail', $params);
-                        $insert_id=$this->db->insert_id();
+                        $insert_id = $this->db->insert_id();
                         if ($cekCommand) {
                             $data = array(
-                                'noref'=>$insert_id,
+                                'noref' => $insert_id,
                                 'id_daftar' => $params['id_daftar'],
                                 'reg_unit' => $params['reg_unit'],
                                 'nomr' => $params['nomr'],
-                                'kode_unit'=>"2.".$this->session->userdata('kdlokasi'),
-                                'nama_unit'=>getPoliByID($this->session->userdata('kdlokasi')),
+                                'kode_unit' => "2." . $this->session->userdata('kdlokasi'),
+                                'nama_unit' => getPoliByID($this->session->userdata('kdlokasi')),
                                 'kode_item_detail' => $params['id_tarif'],
                                 'deskripsi' => $params["layanan"],
                                 'item_sarana' => $params["jasa_sarana"],
                                 'item_pelayanan' => $params["jasa_pelayanan"],
                                 'nilai_item' => $params["tarif_layanan"],
-                                'jml_item'=>$params["jml"],
-                                'sub_total_item'=>$params["sub_total_tarif"],
+                                'jml_item' => $params["jml"],
+                                'sub_total_item' => $params["sub_total_tarif"],
                                 'kategori_id' => $params["kategori_id"],
                                 'kelas_id' => $params["kelas_id"],
                                 'id_dokter' => $params['id_dokter'],
-                                'jenis_item'=>2,
+                                'jenis_item' => 2,
                                 'userinput' => $params['user_exec']
                             );
                             $this->db->insert('tbl05_logtagihan', $data);
@@ -2409,10 +2411,10 @@ class nota_tagihan extends CI_Controller
                         $this->db->where('idx', $idx);
                         $cekCommand = $this->db->delete('tbl03_nota_detail');
                         if ($cekCommand) {
-                            $this->db->where('noref',$idx);
-                            $this->db->where('jenis_item',2);
-                            $log=array('hapus'=>1,'userhapus'=>$this->session->userdata('get_uid'));
-                            $this->db->update('tbl05_logtagihan',$log);
+                            $this->db->where('noref', $idx);
+                            $this->db->where('jenis_item', 2);
+                            $log = array('hapus' => 1, 'userhapus' => $this->session->userdata('get_uid'));
+                            $this->db->update('tbl05_logtagihan', $log);
                             $response['code'] = 200;
                             $response['message'] = "Delete data sukses.";
                         } else {
@@ -2589,65 +2591,66 @@ class nota_tagihan extends CI_Controller
         }
         echo json_encode($response);
     }
-    function buatpermintaan($ruang){
+    function buatpermintaan($ruang)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $diagnosa=$this->input->post('diagnosa'.$ruang, TRUE);
-            $keterangan=$this->input->post('keterangan'.$ruang, TRUE);
-            $asal_jaringan="";
-            $bahan_fiksasi="";
-            $haid_terakhir="";
-            $lokasi_jaringan="";
-            $adaerror=false;
-            $err['asal_jaringan']="";
-            $err["bahan_fiksasi"]="";
-            $err["lokasi_jaringan"]="";
-            $err["id_jenis_pemeriksaan"]="";
-            $err['diagnosa']="";
-            $err["keterangan"]="";
-            $err["alasanpemeriksaan"]="";
-            $err["bulanke"]="";
-            $err["haid_terakhir"]="";
-            $err["id_pemeriksaan"]="";
-            if($diagnosa=="") {
-                $adaerror=true;
-                $err['diagnosa']="Diagnosa tidak boleh kosong";
+            $diagnosa = $this->input->post('diagnosa' . $ruang, TRUE);
+            $keterangan = $this->input->post('keterangan' . $ruang, TRUE);
+            $asal_jaringan = "";
+            $bahan_fiksasi = "";
+            $haid_terakhir = "";
+            $lokasi_jaringan = "";
+            $adaerror = false;
+            $err['asal_jaringan'] = "";
+            $err["bahan_fiksasi"] = "";
+            $err["lokasi_jaringan"] = "";
+            $err["id_jenis_pemeriksaan"] = "";
+            $err['diagnosa'] = "";
+            $err["keterangan"] = "";
+            $err["alasanpemeriksaan"] = "";
+            $err["bulanke"] = "";
+            $err["haid_terakhir"] = "";
+            $err["id_pemeriksaan"] = "";
+            if ($diagnosa == "") {
+                $adaerror = true;
+                $err['diagnosa'] = "Diagnosa tidak boleh kosong";
             }
-            if($keterangan=="") {
-                $adaerror=true;
-                $err["keterangan"]="Keterangan tidak boleh kosong";
+            if ($keterangan == "") {
+                $adaerror = true;
+                $err["keterangan"] = "Keterangan tidak boleh kosong";
             }
-            if($ruang==51){
-                $asal_jaringan     = $this->input->post('asal_jaringan'.$ruang, TRUE);
-                $bahan_fiksasi     = $this->input->post('bahan_fiksasi'.$ruang, TRUE);
-                $haid_terakhir     = $this->input->post('haid_terakhir'.$ruang, TRUE);
-                $lokasi_jaringan   = $this->input->post('lokasi_jaringan'.$ruang, TRUE);
-                
-                if($asal_jaringan=="") {
-                    $adaerror=true;
-                    $err['asal_jaringan']="Asal jaringan tidak boleh kosong";
+            if ($ruang == 51) {
+                $asal_jaringan     = $this->input->post('asal_jaringan' . $ruang, TRUE);
+                $bahan_fiksasi     = $this->input->post('bahan_fiksasi' . $ruang, TRUE);
+                $haid_terakhir     = $this->input->post('haid_terakhir' . $ruang, TRUE);
+                $lokasi_jaringan   = $this->input->post('lokasi_jaringan' . $ruang, TRUE);
+
+                if ($asal_jaringan == "") {
+                    $adaerror = true;
+                    $err['asal_jaringan'] = "Asal jaringan tidak boleh kosong";
                 }
-                if($bahan_fiksasi=="") {
-                    $adaerror=true;
-                    $err["bahan_fiksasi"]="Bahan Fiksasi tidak boleh kosong";
+                if ($bahan_fiksasi == "") {
+                    $adaerror = true;
+                    $err["bahan_fiksasi"] = "Bahan Fiksasi tidak boleh kosong";
                 }
-                if($lokasi_jaringan=="") {
-                    $adaerror=true;
-                    $err["lokasi_jaringan"]="Lokasi jaringan tidak boleh kosong";
+                if ($lokasi_jaringan == "") {
+                    $adaerror = true;
+                    $err["lokasi_jaringan"] = "Lokasi jaringan tidak boleh kosong";
                 }
             }
-            $id_jenis_pemeriksaan=$this->input->post('id_jenis_pemeriksaan'.$ruang);
+            $id_jenis_pemeriksaan = $this->input->post('id_jenis_pemeriksaan' . $ruang);
             $permintaan = array(
-                'id_daftar'         => $this->input->post('pp_id_daftar'.$ruang, TRUE),
-                'reg_unit'          => $this->input->post('pp_reg_unit'.$ruang, TRUE),
-                'nomr'              => $this->input->post('pp_nomr'.$ruang, TRUE),
-                'nama_pasien'       => $this->input->post('pp_nama'.$ruang, TRUE),
-                'ruang_pengirim'    => $this->input->post('pp_ruang_pengirim'.$ruang, TRUE),
-                'nama_ruang_pengirim' => $this->input->post('pp_nama_ruang_pengirim'.$ruang, TRUE),
-                'id_penunjang'      => $this->input->post('id_penunjang'.$ruang, TRUE),
-                'nama_penunjang'    => $this->input->post('nama_penunjang'.$ruang, TRUE),
-                'dokter_pengirim'   => $this->input->post('dokter_pengirim'.$ruang, TRUE),
-                'nama_dokter_pengirim' => getNamaDokter($this->input->post('dokter_pengirim'.$ruang, TRUE)),
+                'id_daftar'         => $this->input->post('pp_id_daftar' . $ruang, TRUE),
+                'reg_unit'          => $this->input->post('pp_reg_unit' . $ruang, TRUE),
+                'nomr'              => $this->input->post('pp_nomr' . $ruang, TRUE),
+                'nama_pasien'       => $this->input->post('pp_nama' . $ruang, TRUE),
+                'ruang_pengirim'    => $this->input->post('pp_ruang_pengirim' . $ruang, TRUE),
+                'nama_ruang_pengirim' => $this->input->post('pp_nama_ruang_pengirim' . $ruang, TRUE),
+                'id_penunjang'      => $this->input->post('id_penunjang' . $ruang, TRUE),
+                'nama_penunjang'    => $this->input->post('nama_penunjang' . $ruang, TRUE),
+                'dokter_pengirim'   => $this->input->post('dokter_pengirim' . $ruang, TRUE),
+                'nama_dokter_pengirim' => getNamaDokter($this->input->post('dokter_pengirim' . $ruang, TRUE)),
                 'diagnosa'          => $diagnosa,
                 'keterangan'        => $keterangan,
                 'asal_jaringan'     => $asal_jaringan,
@@ -2657,122 +2660,120 @@ class nota_tagihan extends CI_Controller
                 'user_exec'         => $this->session->userdata('get_uid')
             );
             // validasi inputan per jenis pemeriksaan
-            if(empty($id_jenis_pemeriksaan)) {
-                $adaerror=true;
-                $err["id_jenis_pemeriksaan"]="Jenis Pemeriksaan Belum dipilih";
-            }
-            else{
-                foreach ($id_jenis_pemeriksaan as $i ) {
-                    $template=$this->input->post('template'.$i);
-                    $alasanpemeriksaan="";
-                    $bulanke="";
-                    $idsubjenispemeriksaan=$this->input->post('idsubjenispemeriksaan'.$i);
-                    $haid_terakhir="";
-                    $semuavariable=$this->input->post('semua_variabel'.$i);
-                    if($template=="DahakTB"){
-                        $alasanpemeriksaan=$this->input->post('alasanpemeriksaan'.$i);
-                        $bulanke=$this->input->post('bulanke'.$i);
-                        if($alasanpemeriksaan=="") {
-                            $adaerror=true;
-                            $err["alasanpemeriksaan"]="Alasan pemeriksaan tidak boleh kosong";
+            if (empty($id_jenis_pemeriksaan)) {
+                $adaerror = true;
+                $err["id_jenis_pemeriksaan"] = "Jenis Pemeriksaan Belum dipilih";
+            } else {
+                foreach ($id_jenis_pemeriksaan as $i) {
+                    $template = $this->input->post('template' . $i);
+                    $alasanpemeriksaan = "";
+                    $bulanke = "";
+                    $idsubjenispemeriksaan = $this->input->post('idsubjenispemeriksaan' . $i);
+                    $haid_terakhir = "";
+                    $semuavariable = $this->input->post('semua_variabel' . $i);
+                    if ($template == "DahakTB") {
+                        $alasanpemeriksaan = $this->input->post('alasanpemeriksaan' . $i);
+                        $bulanke = $this->input->post('bulanke' . $i);
+                        if ($alasanpemeriksaan == "") {
+                            $adaerror = true;
+                            $err["alasanpemeriksaan"] = "Alasan pemeriksaan tidak boleh kosong";
                         }
-                        if($bulanke=="") {
-                            $adaerror=true;
-                            $err["bulanke"]="Periode Bulan Pemeriksaan tidak boleh kosong";
+                        if ($bulanke == "") {
+                            $adaerror = true;
+                            $err["bulanke"] = "Periode Bulan Pemeriksaan tidak boleh kosong";
                         }
-                    }elseif ($template=="Patologi") {
-                        if($idsubjenispemeriksaan==5){
-                            $haid_terakhir=$this->input->post('haid_terakhir'.$i);
-                            if($haid_terakhir=="") {
-                                $adaerror=true;
-                                $err["haid_terakhir"]="Haid Terakhir tidak boleh kosong";
+                    } elseif ($template == "Patologi") {
+                        if ($idsubjenispemeriksaan == 5) {
+                            $haid_terakhir = $this->input->post('haid_terakhir' . $i);
+                            if ($haid_terakhir == "") {
+                                $adaerror = true;
+                                $err["haid_terakhir"] = "Haid Terakhir tidak boleh kosong";
                             }
                         }
                     }
-                    $id_pemeriksaan=array();
-                    if($semuavariable==0){
-                        $id_pemeriksaan=$this->input->post('id_pemeriksaan'.$i);
-                        if(empty($id_pemeriksaan)) {
-                            $adaerror=true;
-                            $err["id_pemeriksaan"]="Variabel pemeriksaan Tidak Boleh Kosong";
+                    $id_pemeriksaan = array();
+                    if ($semuavariable == 0) {
+                        $id_pemeriksaan = $this->input->post('id_pemeriksaan' . $i);
+                        if (empty($id_pemeriksaan)) {
+                            $adaerror = true;
+                            $err["id_pemeriksaan"] = "Variabel pemeriksaan Tidak Boleh Kosong";
                         }
                     }
                 }
             }
-            
-            if($adaerror){
+
+            if ($adaerror) {
                 $response['code'] = 201;
                 $response['message'] = "Data isian belum lengkap";
-                $response['error']=$err;
-            }else{
-                $insertid=$this->Layanan_model->insertPermintaanPenunjang($permintaan);
-                if($insertid){
-                    foreach ($id_jenis_pemeriksaan as $i ) {
-                        $template=$this->input->post('template'.$i);
-                        $alasanpemeriksaan="";
-                        $bulanke="";
-                        $idsubjenispemeriksaan=$this->input->post('idsubjenispemeriksaan'.$i);
-                        $haid_terakhir="";
-                        $semuavariable=$this->input->post('semua_variabel'.$i);
-                        if($template=="DahakTB"){
-                            $alasanpemeriksaan=$this->input->post('alasanpemeriksaan'.$i);
-                            $bulanke=$this->input->post('bulanke'.$i);
-                            if($alasanpemeriksaan=="") {
-                                $adaerror=true;
-                                $err["alasanpemeriksaan"]="Alasan pemeriksaan tidak boleh kosong";
+                $response['error'] = $err;
+            } else {
+                $insertid = $this->Layanan_model->insertPermintaanPenunjang($permintaan);
+                if ($insertid) {
+                    foreach ($id_jenis_pemeriksaan as $i) {
+                        $template = $this->input->post('template' . $i);
+                        $alasanpemeriksaan = "";
+                        $bulanke = "";
+                        $idsubjenispemeriksaan = $this->input->post('idsubjenispemeriksaan' . $i);
+                        $haid_terakhir = "";
+                        $semuavariable = $this->input->post('semua_variabel' . $i);
+                        if ($template == "DahakTB") {
+                            $alasanpemeriksaan = $this->input->post('alasanpemeriksaan' . $i);
+                            $bulanke = $this->input->post('bulanke' . $i);
+                            if ($alasanpemeriksaan == "") {
+                                $adaerror = true;
+                                $err["alasanpemeriksaan"] = "Alasan pemeriksaan tidak boleh kosong";
                             }
-                            if($bulanke=="") {
-                                $adaerror=true;
-                                $err["bulanke"]="Periode Bulan Pemeriksaan tidak boleh kosong";
+                            if ($bulanke == "") {
+                                $adaerror = true;
+                                $err["bulanke"] = "Periode Bulan Pemeriksaan tidak boleh kosong";
                             }
-                        }elseif ($template=="Patologi") {
-                            if($idsubjenispemeriksaan==5){
-                                $haid_terakhir=$this->input->post('haid_terakhir'.$i);
-                                if($haid_terakhir=="") {
-                                    $adaerror=true;
-                                    $err["haid_terakhir"]="Haid Terakhir tidak boleh kosong";
+                        } elseif ($template == "Patologi") {
+                            if ($idsubjenispemeriksaan == 5) {
+                                $haid_terakhir = $this->input->post('haid_terakhir' . $i);
+                                if ($haid_terakhir == "") {
+                                    $adaerror = true;
+                                    $err["haid_terakhir"] = "Haid Terakhir tidak boleh kosong";
                                 }
                             }
                         }
-                        $id_pemeriksaan=array();
-                        if($semuavariable==0){
-                            $id_pemeriksaan=$this->input->post('id_pemeriksaan'.$i);
-                            if(empty($id_pemeriksaan)) {
-                                $adaerror=true;
-                                $err["id_pemeriksaan"]="Variabel pemeriksaan Tidak Boleh Kosong";
-                            }else{
+                        $id_pemeriksaan = array();
+                        if ($semuavariable == 0) {
+                            $id_pemeriksaan = $this->input->post('id_pemeriksaan' . $i);
+                            if (empty($id_pemeriksaan)) {
+                                $adaerror = true;
+                                $err["id_pemeriksaan"] = "Variabel pemeriksaan Tidak Boleh Kosong";
+                            } else {
                                 // generate detail
-                                foreach ($id_pemeriksaan as $idp ) {
+                                foreach ($id_pemeriksaan as $idp) {
                                     // Get variabe pemeriksaan By Id
-                                    $variabel=$this->nota_model->getVariabelPemeriksaan($idp);
-                                    foreach ($variabel as $v ) {
-                                        $detail[]=array(
+                                    $variabel = $this->nota_model->getVariabelPemeriksaan($idp);
+                                    foreach ($variabel as $v) {
+                                        $detail[] = array(
                                             'id_permintaan'     => $insertid,
                                             'idjenispemeriksaan' => $i,
-                                            'jenispemeriksaan'  => $this->input->post('jenis_pemeriksaan'.$i),
+                                            'jenispemeriksaan'  => $this->input->post('jenis_pemeriksaan' . $i),
                                             'idsubjenispemeriksaan' => $v->variabelid,
                                             'subjenispemeriksaan'  => $v->variabel_pemeriksaan,
                                             'id_pemeriksaan'    => $idp,
-                                            'nama_pemeriksaan'  => $this->input->post('nama_pemeriksaan'.$idp),
-                                            'alasan_pemeriksaan'=> $alasanpemeriksaan,
-                                            'bulan_ke'=>$bulanke,
-                                            'haid_terakhir'=>$haid_terakhir,
+                                            'nama_pemeriksaan'  => $this->input->post('nama_pemeriksaan' . $idp),
+                                            'alasan_pemeriksaan' => $alasanpemeriksaan,
+                                            'bulan_ke' => $bulanke,
+                                            'haid_terakhir' => $haid_terakhir,
                                             'status_dilayani'   => 0,
                                             'user_exec'         => $this->session->userdata('get_uid')
                                         );
                                     }
-                                    
                                 }
                             }
-                        }else{
-                            $listpemeriksaan=$this->nota_model->getListPemeriksaan($i);
-                            foreach ($listpemeriksaan as $l ) {
-                                $variabel=$this->nota_model->getVariabelPemeriksaan($l->id_pemeriksaan);
-                                foreach ($variabel as $v ) {
-                                    $detail[]=array(
+                        } else {
+                            $listpemeriksaan = $this->nota_model->getListPemeriksaan($i);
+                            foreach ($listpemeriksaan as $l) {
+                                $variabel = $this->nota_model->getVariabelPemeriksaan($l->id_pemeriksaan);
+                                foreach ($variabel as $v) {
+                                    $detail[] = array(
                                         'id_permintaan'         => $insertid,
                                         'idjenispemeriksaan'    => $i,
-                                        'jenispemeriksaan'      => $this->input->post('jenis_pemeriksaan'.$i),
+                                        'jenispemeriksaan'      => $this->input->post('jenis_pemeriksaan' . $i),
                                         'idsubjenispemeriksaan' => $v->variabelid,
                                         'subjenispemeriksaan'   => $v->variabel_pemeriksaan,
                                         'id_pemeriksaan'        => $l->id_pemeriksaan,
@@ -2784,30 +2785,26 @@ class nota_tagihan extends CI_Controller
                                         'user_exec'             => $this->session->userdata('get_uid')
                                     );
                                 }
-                                
                             }
-                            $response['pemeriksaan']=$listpemeriksaan;
+                            $response['pemeriksaan'] = $listpemeriksaan;
                         }
                     }
-                    if(!empty($detail)){
+                    if (!empty($detail)) {
                         $this->Layanan_model->insertDetailPermintaanPenunjang($detail);
                     }
                     $response['code'] = 200;
                     $response['message'] = "Permintaan pemeriksaan labor berhasil dibuat";
-                }else{
+                } else {
                     $response['code'] = 202;
                     $response['message'] = "Error Saat Penyimpanan Data";
                 }
-                
             }
-            
-        }else {
+        } else {
             $response['code'] = 411;
             $response['message'] = "Ops. Sesi anda telah berubah! Silahkan login kembali";
         }
         header('Content-Type: application/json');
         echo json_encode($response);
-
     }
     function simpanRujukInternal()
     {
@@ -3036,7 +3033,7 @@ class nota_tagihan extends CI_Controller
             $this->db->or_where('a.kelas_id', '0');
             $this->db->group_end();
             if (!empty($idkamar)) $this->db->where_not_in('a.id_kamar', array($idkamar));
-            $this->db->join('view_bedterisi b', 'a.`id_kamar`=b.`id_kamar`','LEFT');
+            $this->db->join('view_bedterisi b', 'a.`id_kamar`=b.`id_kamar`', 'LEFT');
             $data = $this->db->get('tbl01_kamar a')->result();
             $response = array('status' => true, 'message' => 'OK', 'data' => $data);
         } else {
@@ -3125,8 +3122,8 @@ class nota_tagihan extends CI_Controller
                                 'rawatgabung'   => 0
                             );
                             $this->nota_model->updateKunjungan($kamar, $id_daftar, $reg_unit);
-                            
-                            
+
+
                             $cekCommand = $this->db->insert('tbl02_pindah_ranap', $params);
                             $no_permintaan = $this->db->insert_id();
                             $paramsResponse = array(
@@ -3138,15 +3135,15 @@ class nota_tagihan extends CI_Controller
                             $cekCmdPenunjang = $this->db->insert('tbl02_pindah_ranap_response', $paramsResponse);
 
                             //Cek apakah pasien memiliki anak yang dirawat gabung
-                            $cekanak = $this->nota_model->getDatapendaftaran(array('reg_unitibu' => $reg_unit),'result');
+                            $cekanak = $this->nota_model->getDatapendaftaran(array('reg_unitibu' => $reg_unit), 'result');
                             //print_r($cekanak); exit;
-                            if($cekanak){
+                            if ($cekanak) {
                                 //Pindahkan juga anak
-                                foreach ($cekanak as $a ) {
+                                foreach ($cekanak as $a) {
                                     //print_r($a);
                                     //echo "<br>";
                                     $kamaranak[] = array(
-                                        'idx'=>$a->idx,
+                                        'idx' => $a->idx,
                                         'id_kelas'      => $this->input->post('id_kelas'),
                                         'kelas_layanan' => $this->input->post('kelas_layanan'),
                                         'id_kamar'      => $this->input->post('id_kamar', TRUE),
@@ -3157,7 +3154,7 @@ class nota_tagihan extends CI_Controller
                                 //exit;
                                 $this->db->update_batch('tbl02_pendaftaran', $kamaranak, 'idx');
                             }
-                            
+
                             //
                             if ($cekCommand) {
                                 $response['code'] = 200;
@@ -3176,10 +3173,10 @@ class nota_tagihan extends CI_Controller
 
                             //Cek apakah pasien mempunyai anak yang dirawat gabung jika ada maka pindahkan juga anaknya
                             $reg_unit = $this->input->post('reg_unit', TRUE);
-                            $cekanak = $this->nota_model->getDatapendaftaran(array('reg_unitibu' => $reg_unit),'result');
-                            if($cekanak){
+                            $cekanak = $this->nota_model->getDatapendaftaran(array('reg_unitibu' => $reg_unit), 'result');
+                            if ($cekanak) {
                                 //Pindahkan juga anak
-                                foreach ($cekanak as $a ) {
+                                foreach ($cekanak as $a) {
                                     $params_anak[] = array(
                                         'id_daftar' => $a->id_daftar,
                                         'reg_unit' => $a->reg_unit,
@@ -3198,8 +3195,8 @@ class nota_tagihan extends CI_Controller
                                         'dokter_pengirim' => $this->input->post('dokter_pengirim', TRUE),
                                         'nama_dokter_pengirim' => $this->input->post('nama_dokter_pengirim', TRUE),
                                         'keterangan' => $this->input->post('keterangan', TRUE),
-                                        'rawatgabung'=>1,
-                                        'reg_unitibu'=>$reg_unit,
+                                        'rawatgabung' => 1,
+                                        'reg_unitibu' => $reg_unit,
                                         'user_exec' => $this->session->userdata('get_uid')
                                     );
                                     /*$status_pasien[]=array(
@@ -3238,14 +3235,14 @@ class nota_tagihan extends CI_Controller
     {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            
+
             //get Token
-            $token=$this->session->userdata('token');
+            $token = $this->session->userdata('token');
 
             $this->db->select('id_pendaftaranonline');
             $this->db->where('reg_unit', $reg_unit);
-            $row=$this->db->get('tbl02_pendaftaran')->row();
-            if(!empty($row)){
+            $row = $this->db->get('tbl02_pendaftaran')->row();
+            if (!empty($row)) {
                 $status = array(
                     'status_transaksi' => 1,
                     'ada_resep'      => $ada_resep
@@ -3253,26 +3250,25 @@ class nota_tagihan extends CI_Controller
                 $this->db->where('reg_unit', $reg_unit);
                 $this->db->update('tbl02_pendaftaran', $status);
                 $this->nota_model->pushNotification($reg_unit);
-                if(!empty($row->id_pendaftaranonline)){
-                    $request=array(
-                        'param'=>array(
+                if (!empty($row->id_pendaftaranonline)) {
+                    $request = array(
+                        'param' => array(
                             'idx' => $row->id_pendaftaranonline,
                         ),
-                        'data'=>array(
-                            'status_berobat'=>'Selesai Berobat',
+                        'data' => array(
+                            'status_berobat' => 'Selesai Berobat',
                         )
                     );
-                    $res = $this->Smart_model->http_request($request,SMART_CALL_BACK ."sim/pendaftaran/update",$token);
+                    $res = $this->Smart_model->http_request($request, SMART_CALL_BACK . "sim/pendaftaran/update", $token);
                 }
-                
-    
+
+
                 $response['code'] = 200;
                 $response['message'] = "Terima Kasih, Semua Transaksi Sudah Diinput";
-            }else{
+            } else {
                 $response['code'] = 201;
                 $response['message'] = "Data Pendaftaran Tidak DItemukan";
             }
-            
         } else {
             $response['code'] = 411;
             $response['message'] = "Ops. Sesi anda telah berubah! Silahkan login kembali";
@@ -3364,16 +3360,16 @@ class nota_tagihan extends CI_Controller
     function simpanjadwaloperasi()
     {
         $ses_state = $this->users_model->cek_session_id();
-        $kodebooking=$this->input->post('kodebooking');
-        if(empty($kodebooking)) $kodebooking = $this->nota_model->getBookingID();
+        $kodebooking = $this->input->post('kodebooking');
+        if (empty($kodebooking)) $kodebooking = $this->nota_model->getBookingID();
         if ($ses_state) {
             $status_kirim = 0;
-            $token="";
-            $jkn_antrian=array();
-            $res=array();
+            $token = "";
+            $jkn_antrian = array();
+            $res = array();
             // $token = $this->nota_model->ws_token();
-            $sekarang=date('Y-m-d H:i:s');
-            $waktums=strtotime($sekarang)*1000;
+            $sekarang = date('Y-m-d H:i:s');
+            $waktums = strtotime($sekarang) * 1000;
             $jkn_antrian = array(
                 'nopeserta'     => $this->input->post('nopeserta'),
                 'kodebooking'   => $kodebooking,
@@ -3384,7 +3380,7 @@ class nota_tagihan extends CI_Controller
                 'terlaksana'    => 0,
                 'lastupdate'   => $waktums
             );
-            $status_kirim=0;
+            $status_kirim = 0;
             $res = $this->nota_model->ws_antrean($jkn_antrian, "jkn/rsud/simpanantreanoperasi");
             // echo $res; exit;
             $arr_res = json_decode($res);
@@ -3436,7 +3432,8 @@ class nota_tagihan extends CI_Controller
         header('Content-Type:application/json');
         echo json_encode($response);
     }
-    function ujiws(){
+    function ujiws()
+    {
         $token = $this->nota_model->ws_token();
         echo $token;
     }
@@ -3445,25 +3442,25 @@ class nota_tagihan extends CI_Controller
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $idx = $this->input->post('idx');
-            
+
             $terlaksana = array('terlaksana' => $this->input->post('terlaksana'));
             $this->nota_model->updateJadwal($terlaksana, $idx);
 
             // Update jawal terlaksana
             $jadwal = $this->nota_model->getJadwalbyId($idx);
-            if(!empty($jadwal)){
-                $sekarang=date('Y-m-d H:i:s');
-                $waktums=strtotime($sekarang)*1000;
+            if (!empty($jadwal)) {
+                $sekarang = date('Y-m-d H:i:s');
+                $waktums = strtotime($sekarang) * 1000;
                 $jkn_antrian = array(
                     'nopeserta'     => $jadwal->nopeserta,
                     'kodebooking'   => $jadwal->kodebooking,
                     'terlaksana'    => $this->input->post('terlaksana'),
                     'lastupdate'   => $waktums
                 );
-                $status_kirim=0;
+                $status_kirim = 0;
                 $res = $this->nota_model->ws_antrean($jkn_antrian, "jkn/rsud/simpanantreanoperasi");
             }
-            
+
 
             $nota = array(
                 'id_daftar' => $jadwal->id_daftar,
@@ -3482,7 +3479,7 @@ class nota_tagihan extends CI_Controller
                 'user_exec' => $this->session->userdata('get_uid')
             );
             $id = $this->nota_model->insertNota($nota);
-            $response = array('status' => true, 'message' => "Tindakan Operasi Berhasil diinput",'jadwal'=>$jadwal);
+            $response = array('status' => true, 'message' => "Tindakan Operasi Berhasil diinput", 'jadwal' => $jadwal);
         } else {
             $response = array('status' => false, 'message' => "Ops. Sesi anda telah berubah! Silahkan login kembali");
         }
@@ -3574,144 +3571,145 @@ class nota_tagihan extends CI_Controller
         echo json_encode($response);
     }
 
-    function simpanhasilpemeriksaanpenunjang($idx){
+    function simpanhasilpemeriksaanpenunjang($idx)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $tglperiksa=$this->input->post('tgl_pemeriksaan'.$idx);
-            $petugas=$this->input->post('petugaspemeriksa'.$idx);
-            $index=$this->input->post('idx');
-            $template=$this->input->post('template'.$idx);
-            $adaerror=false;
+            $tglperiksa = $this->input->post('tgl_pemeriksaan' . $idx);
+            $petugas = $this->input->post('petugaspemeriksa' . $idx);
+            $index = $this->input->post('idx');
+            $template = $this->input->post('template' . $idx);
+            $adaerror = false;
             // validasi Inputan
-            
-            $err['tglperiksa']="";
-            $err['petugas']="";
-            $err['pemeriksaan']="";
-            if(empty($tglperiksa)){
-                $adaerror=true;
-                $err['tglperiksa']="Tgl Periksa tidak boleh kosong";
-            }
-            if(empty($petugas)){
-                $adaerror=true;
-                $err['petugas']="Petugas Pemeriksa tidak boleh kosong";
-            }
-            if(empty($index)){
-                $adaerror=true;
-                $err['pemeriksaan']="Tidak ada Pemeriksaan";
-                $err['idx']=$idx;
-            }else{
-                // echo json_encode(array('idx'=>$index));exit;
-                foreach ($index as $idp ) {
-                    // $id_subpemeriksaan=$this->input->post('id_subpemeriksaan'.$idp);
-                    $hasil=$this->input->post('hasil'.$idp);
-                    // echo "Hasil : ".$hasil; exit;
-                        $hasilpost='hasil'.$hasil;
-                        $subpemeriksaan=$this->input->post('subpemeriksaan'.$idp);
-                        if($subpemeriksaan=="" || $subpemeriksaan=="-") $subpemeriksaan= $this->input->post('nama_pemeriksaan'.$idp);
-                        if($template=="DahakTB"){
-                            $tingkatpositif=$this->input->post('tingkatpositif'.$idp);
-                            if(empty($hasil)){
-                                $adaerror=true;
-                                $err['hasil'][]="Hasil Pemeriksaan $subpemeriksaan masih kosong";
-                            }else $err["hasil"][]="";
-                            
-                            if(empty($tingkatpositif) && $hasil=="Pos"){
-                                $adaerror=true;
-                                $err['tingkatpositif'][]="Tingkat Positif $subpemeriksaan masih kosong";
-                            }else $err["tingkatpositif"][]="";
-                        }else if($template=="Radiologi"){
-                            // $proyeksi=$this->input->post('proyeksi'.$idp.$idsp);
-                            if(empty($hasil)){
-                                $adaerror=true;
-                                $err['hasil'][]="Hasil Pemeriksaan $subpemeriksaan masih kosong";
-                            }else $err["hasil"][]="";
 
-                            // if(empty($proyeksi)){
-                            //     $adaerror=true;
-                            //     $err['proyeksi'][]="Proyeksi Pemeriksaan $subpemeriksaan masih kosong";
-                            // }else $err["proyeksi"][]="";
-                        }else{
-                            
-                            if(empty($hasil)){
-                                $adaerror=true;
-                                $err['hasil'][]="$subpemeriksaan masih kosong";
-                            }else $err["hasil"][]="";
-                        }
+            $err['tglperiksa'] = "";
+            $err['petugas'] = "";
+            $err['pemeriksaan'] = "";
+            if (empty($tglperiksa)) {
+                $adaerror = true;
+                $err['tglperiksa'] = "Tgl Periksa tidak boleh kosong";
+            }
+            if (empty($petugas)) {
+                $adaerror = true;
+                $err['petugas'] = "Petugas Pemeriksa tidak boleh kosong";
+            }
+            if (empty($index)) {
+                $adaerror = true;
+                $err['pemeriksaan'] = "Tidak ada Pemeriksaan";
+                $err['idx'] = $idx;
+            } else {
+                // echo json_encode(array('idx'=>$index));exit;
+                foreach ($index as $idp) {
+                    // $id_subpemeriksaan=$this->input->post('id_subpemeriksaan'.$idp);
+                    $hasil = $this->input->post('hasil' . $idp);
+                    // echo "Hasil : ".$hasil; exit;
+                    $hasilpost = 'hasil' . $hasil;
+                    $subpemeriksaan = $this->input->post('subpemeriksaan' . $idp);
+                    if ($subpemeriksaan == "" || $subpemeriksaan == "-") $subpemeriksaan = $this->input->post('nama_pemeriksaan' . $idp);
+                    if ($template == "DahakTB") {
+                        $tingkatpositif = $this->input->post('tingkatpositif' . $idp);
+                        if (empty($hasil)) {
+                            $adaerror = true;
+                            $err['hasil'][] = "Hasil Pemeriksaan $subpemeriksaan masih kosong";
+                        } else $err["hasil"][] = "";
+
+                        if (empty($tingkatpositif) && $hasil == "Pos") {
+                            $adaerror = true;
+                            $err['tingkatpositif'][] = "Tingkat Positif $subpemeriksaan masih kosong";
+                        } else $err["tingkatpositif"][] = "";
+                    } else if ($template == "Radiologi") {
+                        // $proyeksi=$this->input->post('proyeksi'.$idp.$idsp);
+                        if (empty($hasil)) {
+                            $adaerror = true;
+                            $err['hasil'][] = "Hasil Pemeriksaan $subpemeriksaan masih kosong";
+                        } else $err["hasil"][] = "";
+
+                        // if(empty($proyeksi)){
+                        //     $adaerror=true;
+                        //     $err['proyeksi'][]="Proyeksi Pemeriksaan $subpemeriksaan masih kosong";
+                        // }else $err["proyeksi"][]="";
+                    } else {
+
+                        if (empty($hasil)) {
+                            $adaerror = true;
+                            $err['hasil'][] = "$subpemeriksaan masih kosong";
+                        } else $err["hasil"][] = "";
+                    }
                 }
             }
-            if($adaerror){
+            if ($adaerror) {
                 // Jika Semua isian belum dimasukkan
-                $response = array('status' => false, 'message' => "Data Belum Lengkap","error"=>$err);
-            }else{
+                $response = array('status' => false, 'message' => "Data Belum Lengkap", "error" => $err);
+            } else {
                 // Jika Semua Inputan Sudah Valid
-                $data=array(
-                    'tanggal_periksa'=>$tglperiksa,
-                    'id_daftar'=>$this->input->post('id_daftar'.$idx),
-                    'reg_unit'=>$this->input->post('reg_unit'.$idx),
-                    'nomr'=>$this->input->post('nomr'.$idx),
-                    'nama_pasien'=>$this->input->post('nama_pasien'.$idx),
-                    'umur'=>$this->input->post('umur'.$idx),
-                    'idruangpengirim'=>$this->input->post('idruangpengirim'.$idx),
-                    'ruangpengirim'=>$this->input->post('ruangpengirim'.$idx),
-                    'diagnosa'=>$this->input->post('diagnosa'.$idx),
-                    'idjenispemeriksaan'=>$this->input->post('idjenis'.$idx),
-                    'jenispemeriksaan'=>$this->input->post('jenis_pemeriksaan'.$idx),
-                    'idsubjenispemeriksaan'=>$this->input->post('idsubjenis'.$idx),
-                    'subjenispemeriksaan'=>$this->input->post('subjenis'.$idx),
-                    'kesan'=>$this->input->post('kesan'.$idx),
-                    'petugaspemeriksa'=>$petugas,
-                    'nama_petugas'=>getNamaDokter($petugas),
-                    'datecreate'=>date('Y-m-d H:i:s'),
-                    'userinput'=>$this->session->userdata('get_uid'),
-                    'userupdate'=>''
+                $data = array(
+                    'tanggal_periksa' => $tglperiksa,
+                    'id_daftar' => $this->input->post('id_daftar' . $idx),
+                    'reg_unit' => $this->input->post('reg_unit' . $idx),
+                    'nomr' => $this->input->post('nomr' . $idx),
+                    'nama_pasien' => $this->input->post('nama_pasien' . $idx),
+                    'umur' => $this->input->post('umur' . $idx),
+                    'idruangpengirim' => $this->input->post('idruangpengirim' . $idx),
+                    'ruangpengirim' => $this->input->post('ruangpengirim' . $idx),
+                    'diagnosa' => $this->input->post('diagnosa' . $idx),
+                    'idjenispemeriksaan' => $this->input->post('idjenis' . $idx),
+                    'jenispemeriksaan' => $this->input->post('jenis_pemeriksaan' . $idx),
+                    'idsubjenispemeriksaan' => $this->input->post('idsubjenis' . $idx),
+                    'subjenispemeriksaan' => $this->input->post('subjenis' . $idx),
+                    'kesan' => $this->input->post('kesan' . $idx),
+                    'petugaspemeriksa' => $petugas,
+                    'nama_petugas' => getNamaDokter($petugas),
+                    'datecreate' => date('Y-m-d H:i:s'),
+                    'userinput' => $this->session->userdata('get_uid'),
+                    'userupdate' => ''
                 );
-                $insert_id=$this->nota_model->insertHasilPemeriksaan($data);
+                $insert_id = $this->nota_model->insertHasilPemeriksaan($data);
                 // foreach ($index as $idp) {
                 //     $pengirim[]=array('idx'=>$idp,'id_pemeriksaan'=>$this->input->post('id_pemeriksaan'.$idp));
                 // }
                 // echo json_encode($pengirim); exit;
                 // $insert_id=1;
-                if($insert_id){
-                    foreach ($index as $idp ) {
+                if ($insert_id) {
+                    foreach ($index as $idp) {
                         // $id_subpemeriksaan=$this->input->post('id_subpemeriksaan'.$idp);
-                        $hasil=$this->input->post('hasil'.$idp);
-                        $hasilpost='hasil'.$hasil;
-                        $subpemeriksaan=$this->input->post('subpemeriksaan'.$idp);
-                        $proyeksi="";
-                        $tingkatpositif="";
-                        $nanah_lendir=0;
-                        $bercak_darah=0;
-                        $air_liur=0;
-                        if($subpemeriksaan=="" || $subpemeriksaan=="-") $subpemeriksaan= $this->input->post('nama_pemeriksaan'.$idp);
-                        if($template=="DahakTB"){
-                            $tingkatpositif=$this->input->post('tingkatpositif'.$idp);
-                            $nanah_lendir=$this->input->post('nanah_lendir'.$idp);
-                            $bercak_darah=$this->input->post('bercak_darah'.$idp);
-                            $air_liur=$this->input->post('air_liur'.$idp);
-                            if(empty($nanah_lendir)) $nanah_lendir=0;
-                            if(empty($bercak_darah)) $bercak_darah=0;
-                            if(empty($air_liur)) $air_liur=0;
-                        }else if($template=="Radiologi"){
-                            $proyeksi=$this->input->post('proyeksi'.$idp);
+                        $hasil = $this->input->post('hasil' . $idp);
+                        $hasilpost = 'hasil' . $hasil;
+                        $subpemeriksaan = $this->input->post('subpemeriksaan' . $idp);
+                        $proyeksi = "";
+                        $tingkatpositif = "";
+                        $nanah_lendir = 0;
+                        $bercak_darah = 0;
+                        $air_liur = 0;
+                        if ($subpemeriksaan == "" || $subpemeriksaan == "-") $subpemeriksaan = $this->input->post('nama_pemeriksaan' . $idp);
+                        if ($template == "DahakTB") {
+                            $tingkatpositif = $this->input->post('tingkatpositif' . $idp);
+                            $nanah_lendir = $this->input->post('nanah_lendir' . $idp);
+                            $bercak_darah = $this->input->post('bercak_darah' . $idp);
+                            $air_liur = $this->input->post('air_liur' . $idp);
+                            if (empty($nanah_lendir)) $nanah_lendir = 0;
+                            if (empty($bercak_darah)) $bercak_darah = 0;
+                            if (empty($air_liur)) $air_liur = 0;
+                        } else if ($template == "Radiologi") {
+                            $proyeksi = $this->input->post('proyeksi' . $idp);
                         }
-                        $idpemeriksaan = $this->input->post('id_pemeriksaan'.$idp);
-                        $detailhasil[]=array(
-                            'idhasil'=>$insert_id,
-                            'idpemeriksaan'=>$idpemeriksaan,
-                            'namapemeriksaan'=>$this->input->post('nama_pemeriksaan'.$idp),
-                            'proyeksi'=>$proyeksi,
-                            'idsubpemeriksaan'=>$this->input->post('id_subpemeriksaan'.$idp),
-                            'subpemeriksaan'=>$this->input->post('subpemeriksaan'.$idp),
-                            'hasil'=>$hasil,
-                            'tingkatpositif'=>$tingkatpositif,
-                            'nanah_lendir'=>$nanah_lendir,
-                            'bercak_darah'=>$bercak_darah,
-                            'air_liur'=>$air_liur,
-                            'satuan'=>$this->input->post('satuan'.$idp),
-                            'rujukan_lk'=>$this->input->post('nilai_rujukan_lk'.$idp),
-                            'rujukan_pr'=>$this->input->post('nilai_rujukan_pr'.$idp),
-                            'lampiran'=>'',
-                            'validator'=>'',
+                        $idpemeriksaan = $this->input->post('id_pemeriksaan' . $idp);
+                        $detailhasil[] = array(
+                            'idhasil' => $insert_id,
+                            'idpemeriksaan' => $idpemeriksaan,
+                            'namapemeriksaan' => $this->input->post('nama_pemeriksaan' . $idp),
+                            'proyeksi' => $proyeksi,
+                            'idsubpemeriksaan' => $this->input->post('id_subpemeriksaan' . $idp),
+                            'subpemeriksaan' => $this->input->post('subpemeriksaan' . $idp),
+                            'hasil' => $hasil,
+                            'tingkatpositif' => $tingkatpositif,
+                            'nanah_lendir' => $nanah_lendir,
+                            'bercak_darah' => $bercak_darah,
+                            'air_liur' => $air_liur,
+                            'satuan' => $this->input->post('satuan' . $idp),
+                            'rujukan_lk' => $this->input->post('nilai_rujukan_lk' . $idp),
+                            'rujukan_pr' => $this->input->post('nilai_rujukan_pr' . $idp),
+                            'lampiran' => '',
+                            'validator' => '',
                         );
 
                         /*id_pemeriksaan
@@ -3758,50 +3756,51 @@ class nota_tagihan extends CI_Controller
                         */
                     }
                     // echo json_encode($detailhasil); exit;
-                    $data["detail"]=$detailhasil;
-                    $this->db->insert_batch('tbl03_hasil_pemeriksaan_penunjang_detail',$detailhasil);
-                    $response = array('status' => true, 'message' => "hasil Pemeriksaan Berhasil Diinput","data"=>array('master'=>$data,'detail'=>$detailhasil),'idhasil'=>$insert_id);
-                }else{
+                    $data["detail"] = $detailhasil;
+                    $this->db->insert_batch('tbl03_hasil_pemeriksaan_penunjang_detail', $detailhasil);
+                    $response = array('status' => true, 'message' => "hasil Pemeriksaan Berhasil Diinput", "data" => array('master' => $data, 'detail' => $detailhasil), 'idhasil' => $insert_id);
+                } else {
                     $response = array('status' => false, 'message' => "Ops. Gagal menginput hasil pemeriksaan silahkan hubungi administrator");
                 }
             }
-        }else {
+        } else {
             $response = array('status' => false, 'message' => "Ops. Sesi anda telah berubah! Silahkan login kembali");
         }
         header('Content-Type:application/json');
         echo json_encode($response);
     }
-    function updatehasilpemeriksaanpenunjang($idx){
+    function updatehasilpemeriksaanpenunjang($idx)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $tglperiksa=$this->input->post('tgl_pemeriksaan'.$idx);
-            $petugas=$this->input->post('petugaspemeriksa'.$idx);
-            $indexhasil=$this->input->post('indexhasil'.$idx);
-            $template=$this->input->post('template'.$idx);
-            $adaerror=false;
+            $tglperiksa = $this->input->post('tgl_pemeriksaan' . $idx);
+            $petugas = $this->input->post('petugaspemeriksa' . $idx);
+            $indexhasil = $this->input->post('indexhasil' . $idx);
+            $template = $this->input->post('template' . $idx);
+            $adaerror = false;
             // validasi Inputan
-            $err['tglperiksa']="";
-            $err['petugas']="";
-            $err['pemeriksaan']="";
-            if(empty($tglperiksa)){
-                $adaerror=true;
-                $err['tglperiksa']="Tgl Periksa tidak boleh kosong";
+            $err['tglperiksa'] = "";
+            $err['petugas'] = "";
+            $err['pemeriksaan'] = "";
+            if (empty($tglperiksa)) {
+                $adaerror = true;
+                $err['tglperiksa'] = "Tgl Periksa tidak boleh kosong";
             }
-            if(empty($petugas)){
-                $adaerror=true;
-                $err['petugas']="Petugas Pemeriksa tidak boleh kosong";
+            if (empty($petugas)) {
+                $adaerror = true;
+                $err['petugas'] = "Petugas Pemeriksa tidak boleh kosong";
             }
-            if(empty($indexhasil)){
-                $adaerror=true;
-                $err['pemeriksaan']="Tidak ada Pemeriksaan";
-            }else{
-                foreach ($indexhasil as $idp ) {
-                    $subpemeriksaan=$this->input->post('subpemeriksaan');
-                    $hasil=$this->input->post('hasil'.$idp);
-                    if(empty($hasil)){
-                        $adaerror=true;
-                        $err['hasil'][]="Hasil Pemeriksaan $subpemeriksaan masih kosong";
-                    }else $err["hasil"][]="";
+            if (empty($indexhasil)) {
+                $adaerror = true;
+                $err['pemeriksaan'] = "Tidak ada Pemeriksaan";
+            } else {
+                foreach ($indexhasil as $idp) {
+                    $subpemeriksaan = $this->input->post('subpemeriksaan');
+                    $hasil = $this->input->post('hasil' . $idp);
+                    if (empty($hasil)) {
+                        $adaerror = true;
+                        $err['hasil'][] = "Hasil Pemeriksaan $subpemeriksaan masih kosong";
+                    } else $err["hasil"][] = "";
                     // $id_subpemeriksaan=$this->input->post('id_subpemeriksaan'.$idp);
                     // foreach ($id_subpemeriksaan as $idsp ) {
                     //     $hasil=$this->input->post('hasil'.$idp.$idsp);
@@ -3814,7 +3813,7 @@ class nota_tagihan extends CI_Controller
                     //             $adaerror=true;
                     //             $err['hasil'][]="Hasil Pemeriksaan $subpemeriksaan masih kosong";
                     //         }else $err["hasil"][]="";
-                            
+
                     //         if(empty($tingkatpositif) && $hasil=="Pos"){
                     //             $adaerror=true;
                     //             $err['tingkatpositif'][]="Tingkat Positif $subpemeriksaan masih kosong";
@@ -3831,7 +3830,7 @@ class nota_tagihan extends CI_Controller
                     //         //     $err['proyeksi'][]="Proyeksi Pemeriksaan $subpemeriksaan masih kosong";
                     //         // }else $err["proyeksi"][]="";
                     //     }else{
-                            
+
                     //         if(empty($hasil)){
                     //             $adaerror=true;
                     //             $err['hasil'][]="$subpemeriksaan masih kosong";
@@ -3840,60 +3839,60 @@ class nota_tagihan extends CI_Controller
                     // }
                 }
             }
-            if($adaerror){
+            if ($adaerror) {
                 // Jika Semua isian belum dimasukkan
-                $response = array('status' => false, 'message' => "Data Belum Lengkap","error"=>$err);
-            }else{
+                $response = array('status' => false, 'message' => "Data Belum Lengkap", "error" => $err);
+            } else {
                 // Jika Semua Inputan Sudah Valid
-                $data=array(
-                    'tanggal_periksa'=>$tglperiksa,
-                    'petugaspemeriksa'=>$petugas,
-                    'nama_petugas'=>getNamaDokter($petugas),
-                    'userupdate'=>date('Y-m-d H:i:s')
+                $data = array(
+                    'tanggal_periksa' => $tglperiksa,
+                    'petugaspemeriksa' => $petugas,
+                    'nama_petugas' => getNamaDokter($petugas),
+                    'userupdate' => date('Y-m-d H:i:s')
                 );
-                
-                $insert_id=$this->input->post('idx_hasil'.$idx);
-                $this->nota_model->updateHasilPemeriksaan($data,$insert_id);
-                if($insert_id){
-                    foreach ($indexhasil as $idp ) {
+
+                $insert_id = $this->input->post('idx_hasil' . $idx);
+                $this->nota_model->updateHasilPemeriksaan($data, $insert_id);
+                if ($insert_id) {
+                    foreach ($indexhasil as $idp) {
                         // foreach ($id_subpemeriksaan as $idsp ) {
-                            $hasil=$this->input->post('hasil'.$idp);
-                            // $hasilpost='hasil'.$hasil;
-                            $subpemeriksaan=$this->input->post('subpemeriksaan'.$idp);
-                            $proyeksi="";
-                            $tingkatpositif="";
-                            $nanah_lendir=0;
-                            $bercak_darah=0;
-                            $air_liur=0;
-                            if($subpemeriksaan=="" || $subpemeriksaan=="-") $subpemeriksaan= $this->input->post('nama_pemeriksaan'.$idp);
-                            if($template=="DahakTB"){
-                                $tingkatpositif=$this->input->post('tingkatpositif'.$idp);
-                                $nanah_lendir=$this->input->post('nanah_lendir'.$idp);
-                                $bercak_darah=$this->input->post('bercak_darah'.$idp);
-                                $air_liur=$this->input->post('air_liur'.$idp);
-                                if(empty($nanah_lendir)) $nanah_lendir=0;
-                                if(empty($bercak_darah)) $bercak_darah=0;
-                                if(empty($air_liur)) $air_liur=0;
-                            }else if($template=="Radiologi"){
-                                $proyeksi='';
-                            }
-                            $detailhasil[]=array(
-                                'idx'=>$idp,
-                                'hasil'=>$this->input->post('hasil'.$idp),
-                                'tingkatpositif'=>$tingkatpositif,
-                                'nanah_lendir'=>$nanah_lendir,
-                                'bercak_darah'=>$bercak_darah,
-                                'air_liur'=>$air_liur,
-                            );
+                        $hasil = $this->input->post('hasil' . $idp);
+                        // $hasilpost='hasil'.$hasil;
+                        $subpemeriksaan = $this->input->post('subpemeriksaan' . $idp);
+                        $proyeksi = "";
+                        $tingkatpositif = "";
+                        $nanah_lendir = 0;
+                        $bercak_darah = 0;
+                        $air_liur = 0;
+                        if ($subpemeriksaan == "" || $subpemeriksaan == "-") $subpemeriksaan = $this->input->post('nama_pemeriksaan' . $idp);
+                        if ($template == "DahakTB") {
+                            $tingkatpositif = $this->input->post('tingkatpositif' . $idp);
+                            $nanah_lendir = $this->input->post('nanah_lendir' . $idp);
+                            $bercak_darah = $this->input->post('bercak_darah' . $idp);
+                            $air_liur = $this->input->post('air_liur' . $idp);
+                            if (empty($nanah_lendir)) $nanah_lendir = 0;
+                            if (empty($bercak_darah)) $bercak_darah = 0;
+                            if (empty($air_liur)) $air_liur = 0;
+                        } else if ($template == "Radiologi") {
+                            $proyeksi = '';
+                        }
+                        $detailhasil[] = array(
+                            'idx' => $idp,
+                            'hasil' => $this->input->post('hasil' . $idp),
+                            'tingkatpositif' => $tingkatpositif,
+                            'nanah_lendir' => $nanah_lendir,
+                            'bercak_darah' => $bercak_darah,
+                            'air_liur' => $air_liur,
+                        );
                         // }
                     }
-                    $this->db->update_batch('tbl03_hasil_pemeriksaan_penunjang_detail',$detailhasil,'idx');
-                    $response = array('status' => true, 'message' => "Hasil Pemeriksaan Berhasil Diupdate","data"=>array('master'=>$data,'detail'=>$detailhasil),'idhasil'=>$insert_id);
-                }else{
+                    $this->db->update_batch('tbl03_hasil_pemeriksaan_penunjang_detail', $detailhasil, 'idx');
+                    $response = array('status' => true, 'message' => "Hasil Pemeriksaan Berhasil Diupdate", "data" => array('master' => $data, 'detail' => $detailhasil), 'idhasil' => $insert_id);
+                } else {
                     $response = array('status' => false, 'message' => "Ops. Gagal menginput hasil pemeriksaan silahkan hubungi administrator");
                 }
             }
-        }else {
+        } else {
             $response = array('status' => false, 'message' => "Ops. Sesi anda telah berubah! Silahkan login kembali");
         }
         header('Content-Type:application/json');
@@ -3965,8 +3964,8 @@ class nota_tagihan extends CI_Controller
             } else {
                 $data = $this->nota_model->getPemeriksaanByid($idperiksa);
                 $response = array(
-                    'status' => false, 
-                    'message' => "Data Pemeriksaan Belum Ada", 
+                    'status' => false,
+                    'message' => "Data Pemeriksaan Belum Ada",
                     'data' => $data
                 );
             }
@@ -4294,11 +4293,11 @@ class nota_tagihan extends CI_Controller
                             }
                             $pulang = $this->nota_model->getPulang($y["detail"]->reg_unit);
                             //getPindah($y["detail"]->reg_unit, $x['ruangID'])
-                            
+
                             if (!empty($pulang)) $y["pulang"] = 1;
                         } else {
                             $pulang = array();
-                           
+
                             $nomr = "";
                             $y["poliklinik"] = array();
                         }
@@ -4321,7 +4320,7 @@ class nota_tagihan extends CI_Controller
 
                         $y['modul']             = $this->load->view('nota_tagihan/template_penunjang', $y, true);
                         $x['content']           = $this->load->view('nota_tagihan/template_entry', $y, true);
-                        $x['lib']=array('js/signature.js','js/signaturepad.js','js/permintaanpenunjang.js');
+                        $x['lib'] = array('js/signature.js', 'js/signaturepad.js', 'js/permintaanpenunjang.js');
                         $this->load->view('template/theme', $x);
                     }
                 } else {
@@ -4544,161 +4543,162 @@ class nota_tagihan extends CI_Controller
         echo json_encode($response);
     }
 
-    function panggilantrean(){
-        $dokter=$this->input->get('dokter');
-        $jns=$this->input->get('jns');
-        $nomor=$this->input->get('nomor');
+    function panggilantrean()
+    {
+        $dokter = $this->input->get('dokter');
+        $jns = $this->input->get('jns');
+        $nomor = $this->input->get('nomor');
         // if($jns==1){
-            
+
         // }
         $this->db->select("a.*,b.dokterjkn,c.kodejkn");
-        $this->db->join("tbl01_pegawai b","a.antriandokter = b.NRP");
-        $this->db->join("tbl01_ruang c","a.antrianruang=c.idx");
-        $this->db->where('aktiftaskid <=',4);
-        $this->db->where('tanggal',date('Y-m-d'));
-        $this->db->where('antriandokter',$dokter);
-        $this->db->where('jnsantrean',$jns);
-        if(!empty($nomor)) $this->db->where('no_antrian_poly',$nomor);
-        $this->db->where('antrianruang',$this->session->userdata('kdlokasi'));
+        $this->db->join("tbl01_pegawai b", "a.antriandokter = b.NRP");
+        $this->db->join("tbl01_ruang c", "a.antrianruang=c.idx");
+        $this->db->where('aktiftaskid <=', 4);
+        $this->db->where('tanggal', date('Y-m-d'));
+        $this->db->where('antriandokter', $dokter);
+        $this->db->where('jnsantrean', $jns);
+        if (!empty($nomor)) $this->db->where('no_antrian_poly', $nomor);
+        $this->db->where('antrianruang', $this->session->userdata('kdlokasi'));
         $this->db->order_by('no_antrian_poly');
-        $data=$this->db->get('tbl02_antrian a')->row();
-        if(empty($data)){
-            $response=array('status'=>false,'message'=>'Antrian Habis');
-        }else{
-            $update=array('status_panggil'=>1);
-            $this->db->where('idx',$data->idx);
-            $this->db->update('tbl02_antrian',$update);
-            $request=array(
-                'kodepoli'=>$data->kodejkn,
-                'kodedokter'=>$data->dokterjkn,
-                'tanggalperiksa'=>date('Y-m-d'),
-                'jampraktek'=>'08:00-16:00',
-                'nomorantrean'=>$data->no_antrian_poly,
-                'angkaantrean'=>$data->no_antrian_poly
+        $data = $this->db->get('tbl02_antrian a')->row();
+        if (empty($data)) {
+            $response = array('status' => false, 'message' => 'Antrian Habis');
+        } else {
+            $update = array('status_panggil' => 1);
+            $this->db->where('idx', $data->idx);
+            $this->db->update('tbl02_antrian', $update);
+            $request = array(
+                'kodepoli' => $data->kodejkn,
+                'kodedokter' => $data->dokterjkn,
+                'tanggalperiksa' => date('Y-m-d'),
+                'jampraktek' => '08:00-16:00',
+                'nomorantrean' => $data->no_antrian_poly,
+                'angkaantrean' => $data->no_antrian_poly
             );
-            $kirim = $this->Smart_model->jkn_request($request,ONLINE_CALL_BACK ."jkn/rsud/antrianpanggil","",array('username'=>'simrs','password'=>'@simrs2022'));
+            $kirim = $this->Smart_model->jkn_request($request, ONLINE_CALL_BACK . "jkn/rsud/antrianpanggil", "", array('username' => 'simrs', 'password' => '@simrs2022'));
             // echo $kirim; exit;
-            $response=array('status'=>true,'message'=>'Memanggil...','no_antrian_poly'=>$data->no_antrian_poly,'update'=>$kirim);
+            $response = array('status' => true, 'message' => 'Memanggil...', 'no_antrian_poly' => $data->no_antrian_poly, 'update' => $kirim);
         }
         header('Content-Type: application/json');
         echo json_encode($response);
-
     }
-    function skipantrian(){
-        $data=array('jnsantrean'=>3);
-        $this->db->where('kodebooking',$this->input->post('kodebooking'));
-        $this->db->update('tbl02_antrian',$data);
-        $response=array('status'=>true,'message'=>'OK');
+    function skipantrian()
+    {
+        $data = array('jnsantrean' => 3);
+        $this->db->where('kodebooking', $this->input->post('kodebooking'));
+        $this->db->update('tbl02_antrian', $data);
+        $response = array('status' => true, 'message' => 'OK');
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-    function batalkanantrean(){
+    function batalkanantrean()
+    {
         // Create TimeStamps
         date_default_timezone_set('UTC');
-        $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'));
+        $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
         // Create Signature
-        $signature = hash_hmac('sha256', CONS_ID_JKN."&".$tStamp, SECREET_ID_JKN, true);
+        $signature = hash_hmac('sha256', CONS_ID_JKN . "&" . $tStamp, SECREET_ID_JKN, true);
         $encodedSignature = base64_encode($signature);
         // Generate Header
         $header = "";
         $header .= "X-cons-id: " . CONS_ID_JKN . "\r\n";
         $header .= "X-timestamp: " . $tStamp . "\r\n";
-        $header .= "X-signature: " . $encodedSignature ."\r\n";
-        $header .= "user_key: ".KEY_JKN;
+        $header .= "X-signature: " . $encodedSignature . "\r\n";
+        $header .= "user_key: " . KEY_JKN;
         // $hari=$this->input->post('hari');
-        $sekarang=strtotime(date('Y-m-d H:i:s')) *1000;
-        $req=array(
-            'kodebooking'=>$this->input->post('kodebooking'),
-            'taskid'=>99,
-            'waktu'=>$sekarang
+        $sekarang = strtotime(date('Y-m-d H:i:s')) * 1000;
+        $req = array(
+            'kodebooking' => $this->input->post('kodebooking'),
+            'taskid' => 99,
+            'waktu' => $sekarang
         );
-        
-        $res = $this->Layanan_model->postData("antrean/updatewaktu",$header,json_encode($req));
-        // echo $res; exit;
-        $arr_res=json_decode($res);
-        if($arr_res->metadata->code==200){
-            $id_daftar=$this->input->post('id_daftar');
-            $localtask=array(
-                'id_daftar'=>$id_daftar,
-                'kodebooking'=>$this->input->post('kodebooking'),
-                'taskid'=>99,
-                'waktu'=>$sekarang
-            );
-            $this->db->insert('tbl02_task',$localtask);
 
-            $aktiftask=array('aktiftaskid'=>99,'alasanbatal'=>$this->input->post('keterangan'));
-            $this->db->where('kodebooking',$this->input->post('kodebooking'));
-            $this->db->update('tbl02_antrian',$aktiftask);
+        $res = $this->Layanan_model->postData("antrean/updatewaktu", $header, json_encode($req));
+        // echo $res; exit;
+        $arr_res = json_decode($res);
+        if ($arr_res->metadata->code == 200) {
+            $id_daftar = $this->input->post('id_daftar');
+            $localtask = array(
+                'id_daftar' => $id_daftar,
+                'kodebooking' => $this->input->post('kodebooking'),
+                'taskid' => 99,
+                'waktu' => $sekarang
+            );
+            $this->db->insert('tbl02_task', $localtask);
+
+            $aktiftask = array('aktiftaskid' => 99, 'alasanbatal' => $this->input->post('keterangan'));
+            $this->db->where('kodebooking', $this->input->post('kodebooking'));
+            $this->db->update('tbl02_antrian', $aktiftask);
 
             // Batalkan Kunjungan
-            $bk=array(
-                'id_daftar'=>$this->input->post('id_daftar'),
-                'reg_unit'=>$this->input->post('reg_unit'),
-                'tgl_created'=>date('Y-m-d H:i:s'),
-                'alasan'=>$this->input->post('keterangan')
+            $bk = array(
+                'id_daftar' => $this->input->post('id_daftar'),
+                'reg_unit' => $this->input->post('reg_unit'),
+                'tgl_created' => date('Y-m-d H:i:s'),
+                'alasan' => $this->input->post('keterangan')
             );
-            $this->db->insert('tbl02_pendaftaran_batal',$bk);
-            
-        }else{
-            if($arr_res->metadata->code=208){
-                $aktiftask=array('aktiftaskid'=>99,'alasanbatal'=>$this->input->post('keterangan'));
-                $this->db->where('kodebooking',$this->input->post('kodebooking'));
-                $this->db->update('tbl02_antrian',$aktiftask);
+            $this->db->insert('tbl02_pendaftaran_batal', $bk);
+        } else {
+            if ($arr_res->metadata->code = 208) {
+                $aktiftask = array('aktiftaskid' => 99, 'alasanbatal' => $this->input->post('keterangan'));
+                $this->db->where('kodebooking', $this->input->post('kodebooking'));
+                $this->db->update('tbl02_antrian', $aktiftask);
             }
         }
         header('Content-Type: application/json');
         echo $res;
     }
 
-    function ttd(){
-        $pin='bb82f6b8d99318596f785ce980b33d97'; //Berbeda Masing Masing Orang
-        $publickey="bf049b1460c309236133cfac83dec529"; //Di Konfig Di dalam SIMRS
-        $data=array(
-            'profile'=>array(
-                'nik'=>'1304060908860002',
-                'nama'=>'Wanhar Azri S.Kom',
-                'email'=>'bajoebel@gmail.com',
-                'nohp' =>'0813-1046-0892',
+    function ttd()
+    {
+        $pin = 'bb82f6b8d99318596f785ce980b33d97'; //Berbeda Masing Masing Orang
+        $publickey = "bf049b1460c309236133cfac83dec529"; //Di Konfig Di dalam SIMRS
+        $data = array(
+            'profile' => array(
+                'nik' => '1304060908860002',
+                'nama' => 'Wanhar Azri S.Kom',
+                'email' => 'bajoebel@gmail.com',
+                'nohp' => '0813-1046-0892',
             ),
-            'dokumen'=>'Verifikasi Hasil Pemeriksaan Imunologi Pasien An RIZALDI(921112)',
-            'timestamps'=>date('Y-m-d H:i:s')
+            'dokumen' => 'Verifikasi Hasil Pemeriksaan Imunologi Pasien An RIZALDI(921112)',
+            'timestamps' => date('Y-m-d H:i:s')
         );
         $hashed_string = Sign::createSign(
-			$data,
-			$pin,
-			$publickey
-		);
+            $data,
+            $pin,
+            $publickey
+        );
         echo $hashed_string;
     }
-    function cetakhasil($idhasil){
+    function cetakhasil($idhasil)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $hasil=$this->nota_model->getHasil($idhasil);
+            $hasil = $this->nota_model->getHasil($idhasil);
             // print_r($hasil); exit;
-            $token=json_decode($this->encryption->decrypt($hasil->token));
+            $token = json_decode($this->encryption->decrypt($hasil->token));
             // print_r($token->pin); exit;
-            if(!empty($hasil)){
-                $hasilpemeriksaan=Sign::validateSign($hasil->hashsign, $token->pin, SIGN_KEY);
+            if (!empty($hasil)) {
+                $hasilpemeriksaan = Sign::validateSign($hasil->hashsign, $token->pin, SIGN_KEY);
                 // print_r($hasilpemeriksaan); exit;
-                $token="";
-                $t=$this->db->where('idx',$idhasil)->get('tbl03_hasil_pemeriksaan_penunjang')->row();
-                if(!empty($t)) $token=$t->token;
-                $data=array(
-                    'hasil'=>$hasilpemeriksaan["dokumen"]["result"],
-                    'verifikator'=>$hasil->verifikator,
-                    'token'=>$token
+                $token = "";
+                $t = $this->db->where('idx', $idhasil)->get('tbl03_hasil_pemeriksaan_penunjang')->row();
+                if (!empty($t)) $token = $t->token;
+                $data = array(
+                    'hasil' => $hasilpemeriksaan["dokumen"]["result"],
+                    'verifikator' => $hasil->verifikator,
+                    'token' => $token
                 );
-                $html=$this->load->view('digisign/lihathasilpdf',$data, true);
-                $pdfFilePath = $hasilpemeriksaan["dokumen"]["judul"].".pdf";
+                $html = $this->load->view('digisign/lihathasilpdf', $data, true);
+                $pdfFilePath = $hasilpemeriksaan["dokumen"]["judul"] . ".pdf";
                 // echo $html; exit;
                 $this->load->library('m_pdf');
                 $pdf = $this->m_pdf->load();
                 $pdf->WriteHTML($html);
-                $pdf->Output($pdfFilePath,"I");
+                $pdf->Output($pdfFilePath, "I");
             }
-            
-            
-        }else {
+        } else {
             $response = array(
                 'status'    => false,
                 'message'   => "Session Expire"
@@ -4707,64 +4707,64 @@ class nota_tagihan extends CI_Controller
         // header('Content-Type: application/json');
         // echo json_encode($response);
     }
-    function lihathasil($idhasil){
+    function lihathasil($idhasil)
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $hasil=$this->nota_model->getHasil($idhasil);
-            if(empty($hasil)){
+            $hasil = $this->nota_model->getHasil($idhasil);
+            if (empty($hasil)) {
                 // echo "Hasil Pemeriksaan belum diverifikasi Dokter";
-                $hasil=$this->nota_model->getHasilPemeriksaanById($idhasil);
-                $data=array(
-                    'hasil'=>$hasil,
-                    'verifikator'=>'',
-                    'token'=>''
+                $hasil = $this->nota_model->getHasilPemeriksaanById($idhasil);
+                $data = array(
+                    'hasil' => $hasil,
+                    'verifikator' => '',
+                    'token' => ''
                 );
-                $this->load->view('digisign/lihathasilpopup',$data);
-            }
-            else{
-                $token=json_decode($this->encryption->decrypt($hasil->token));
+                $this->load->view('digisign/lihathasilpopup', $data);
+            } else {
+                $token = json_decode($this->encryption->decrypt($hasil->token));
                 // print_r($token->pin); exit;
-                if(!empty($hasil)){
-                    $hasilpemeriksaan=Sign::validateSign($hasil->hashsign, $token->pin, SIGN_KEY);
+                if (!empty($hasil)) {
+                    $hasilpemeriksaan = Sign::validateSign($hasil->hashsign, $token->pin, SIGN_KEY);
                     // print_r($hasilpemeriksaan); exit;
-                    $token="";
-                    $t=$this->db->where('idx',$idhasil)->get('tbl03_hasil_pemeriksaan_penunjang')->row();
-                    if(!empty($t)) $token=$t->token;
-                    $data=array(
-                        'hasil'=>$hasilpemeriksaan["dokumen"]["result"],
-                        'verifikator'=>$hasil->verifikator,
-                        'token'=>$token
+                    $token = "";
+                    $t = $this->db->where('idx', $idhasil)->get('tbl03_hasil_pemeriksaan_penunjang')->row();
+                    if (!empty($t)) $token = $t->token;
+                    $data = array(
+                        'hasil' => $hasilpemeriksaan["dokumen"]["result"],
+                        'verifikator' => $hasil->verifikator,
+                        'token' => $token
                     );
-                    $this->load->view('digisign/lihathasilpopup',$data);
-                    
+                    $this->load->view('digisign/lihathasilpopup', $data);
                 }
             }
-        }else {
+        } else {
             echo "Session Expired";
         }
     }
-    function verifyttd($pin){
-        $hashed_string="IHt8GBdVSkkiSxcXCFFjVlJVA08NUkRoCllOaFI4Sh4geHgeFlhISyRQGUwWExMTDlp4V0w6A2hzUVEueQg5LGo2MQg5TWMCWTwVPktOUlBYDlEMTXkzNQFSSDJYfQZMWTB2S1UMOj8OCFgEVgMrCRwkSB0YSXl6Uh0TflFIO2gcZixXURQFeFo8Iz48RmNQUlUCS14BaQ59Y0wyOGZ-WFU2MVNZAHkBDGNWEVRQXVZTVTc6TAsyKwoQJDQ4aGJFMRAMMQ5YSkQdSxtFCA0TW1VZfF1feTY2DxIdaEpGSx0ddAEVFlc4RB1UGlAgFCEJaQ";
+    function verifyttd($pin)
+    {
+        $hashed_string = "IHt8GBdVSkkiSxcXCFFjVlJVA08NUkRoCllOaFI4Sh4geHgeFlhISyRQGUwWExMTDlp4V0w6A2hzUVEueQg5LGo2MQg5TWMCWTwVPktOUlBYDlEMTXkzNQFSSDJYfQZMWTB2S1UMOj8OCFgEVgMrCRwkSB0YSXl6Uh0TflFIO2gcZixXURQFeFo8Iz48RmNQUlUCS14BaQ59Y0wyOGZ-WFU2MVNZAHkBDGNWEVRQXVZTVTc6TAsyKwoQJDQ4aGJFMRAMMQ5YSkQdSxtFCA0TW1VZfF1feTY2DxIdaEpGSx0ddAEVFlc4RB1UGlAgFCEJaQ";
         // $pin='bb82f6b8d99318596f785ce980b33d97'; //Berbeda Masing Masing Orang
-        $publickey="bf049b1460c309236133cfac83dec529"; //Di Konfig Di dalam SIMRS
+        $publickey = "bf049b1460c309236133cfac83dec529"; //Di Konfig Di dalam SIMRS
         $hasil = Sign::validateSign($hashed_string, $pin, $publickey);
         print_r($hasil);
     }
-    function validasi(){
+    function validasi()
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $data=array(
-                'validator'=>$this->session->userdata('get_uid'),
-                'validasipetugas'=>$this->input->post('validasipetugas')
+            $data = array(
+                'validator' => $this->session->userdata('get_uid'),
+                'validasipetugas' => $this->input->post('validasipetugas')
             );
-            $idx=$this->input->post('idx');
-            if(!empty($idx)) $this->db->where('idx',$idx);
+            $idx = $this->input->post('idx');
+            if (!empty($idx)) $this->db->where('idx', $idx);
             $this->db->where('idhasil', $this->input->post('idhasil'));
-            $this->db->update('tbl03_hasil_pemeriksaan_penunjang_detail',$data);
-            $response=array('status'=>true,'message'=>'OK');
-        }
-        else{
-            $response=array('status'=>false,'message'=>'Session Expired');
+            $this->db->update('tbl03_hasil_pemeriksaan_penunjang_detail', $data);
+            $response = array('status' => true, 'message' => 'OK');
+        } else {
+            $response = array('status' => false, 'message' => 'Session Expired');
         }
         header('Content-Type: application/json');
         echo json_encode($response);

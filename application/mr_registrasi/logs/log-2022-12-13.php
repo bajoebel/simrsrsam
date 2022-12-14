@@ -90,3 +90,7 @@ OR  `a`.`nama_ruang` LIKE '%%' ESCAPE '!'
 OR  `a`.`namaDokterJaga` LIKE '%%' ESCAPE '!'
  )
  LIMIT 10
+ERROR - 2022-12-13 07:46:21 --> Severity: Warning --> mysqli::real_connect(): (HY000/1049): Unknown database 'rsam_dev' C:\laragon\www\simrs_vclaim\system\database\drivers\mysqli\mysqli_driver.php 203
+ERROR - 2022-12-13 07:46:21 --> Unable to connect to the database
+ERROR - 2022-12-13 07:46:27 --> Severity: Warning --> mysqli::real_connect(): (HY000/1049): Unknown database 'rsam_dev' C:\laragon\www\simrs_vclaim\system\database\drivers\mysqli\mysqli_driver.php 203
+ERROR - 2022-12-13 07:46:27 --> Unable to connect to the database
