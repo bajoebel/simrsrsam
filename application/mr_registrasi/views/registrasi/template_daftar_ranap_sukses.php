@@ -219,8 +219,8 @@
                                         <tr>
                                             <th style="width: 150px">No Registrasi RS</th>
                                             <th style="font-size: 20px">
-                                                <div class="col-md-10" id="id_daftar">
-                                                    <?php echo $id_daftar ?>
+                                                <div class="col-md-10" >
+                                                <div id="sepiddaftar"><?php echo $id_daftar ?></div>
                                                 </div>
                                                 <div class="col-md-2 text-right">
                                                     <a href="#" onclick="editKunjungan(<?= $idx ?>)"><span class="fa fa-pencil"></span></a>

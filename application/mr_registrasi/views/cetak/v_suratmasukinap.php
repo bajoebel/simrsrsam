@@ -161,7 +161,7 @@ table tr td{
                         <td>Jenis Kelamin</td>
                         <td>:</td>
                         <td>
-                        <?php if($data['jns_kelamin']=="P") echo "Perempuan"; else echo "Laki-Laki"; ?>
+                        <?php if($data['jns_kelamin']=="1") echo "Laki-Laki"; else if($data['jns_kelamin']=="2") echo "Perempuan";else if($data['jns_kelamin']=="3") echo "Tidak dapat ditentukan"; else "Tidak Mengisi" ?>
                         </td>
                     </tr>
                     
