@@ -123,7 +123,14 @@
             });
         }
         getmenu();
+        <?php if (!empty($ajaxdata)) echo $ajaxdata ?>
     </script>
+    <?php if (!empty($lib)) {
+        foreach ($lib as $lib) {
+            echo '<script src="' . base_url() . $lib . '" type="text/javascript"></script>';
+        }
+    }
+    ?>
 </body>
 
 </html>

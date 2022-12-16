@@ -1,4 +1,5 @@
 <?php
+
 function getData(
     $config = array(
         'function'      => 'getData',
@@ -80,7 +81,6 @@ function getData(
             var no = (parseInt(start)*parseInt(limit))-parseInt(limit);
             var dari = no+1;
             var sampai = no+parseInt(limit);
-            alert('\" +data[\"row_count\"]+\"')
             var desc = \"<button class='btn btn-default btn-sm' type='button'>Showing \"+ dari + \" To \" + sampai + \" of \" +data[\"row_count\"]+\"</button>\";
             for(var i=0; i<jmlData;i++){
                 no++;
@@ -209,4 +209,3 @@ function getData(
     //Buat Body
 
 }
-

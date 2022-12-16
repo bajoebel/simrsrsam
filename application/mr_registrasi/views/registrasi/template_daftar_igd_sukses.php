@@ -139,7 +139,14 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th style="width: 150px">No Registrasi RS</th>
-                                    <th style="font-size: 20px" id="id_daftar"><?php echo $id_daftar ?></th>
+                                    <th style="font-size: 20px">
+                                        <div class="col-md-10" id="id_daftar">
+                                            <?php echo $id_daftar ?>
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <a href="#" onclick="editKunjungan(<?= $idx ?>)"><span class="fa fa-pencil"></span></a>
+                                        </div>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th>Jenis Layanan</th>
@@ -183,7 +190,6 @@
                                                     <button class="btn btn-danger btn-block" type="button" onclick="formSEPIGD('<?= $no_bpjs ?>','<?= date('Y-m-d'); ?>')"><i class="fa fa-plus"></i> Create SEP</button>
                                                     <!-- <button class="btn btn-danger btn-block" type="button" onclick="formSEP()"><i class="fa fa-plus"></i> Create SEP</button> -->
                                                 </div>
-
                                             </div>
                                         <?php
                                         } else{
@@ -363,7 +369,7 @@
                             ?>
                                 <!-- <a href="<?php //echo base_url() . "mr_registrasi.php/registrasi/sep/" . $no_jaminan ."/".$tgl_jaminan ?>" target="_blank" class="btn btn-warning btn-block">
                                     <i class="fa fa-print"></i> <b>Cetak SEP</b></a> -->
-                                <button class="btn btn-warning btn-block" type="button" onclick="cetaksep('<?= $no_jaminan ?>','<?= $tgl_jaminan ?>')"><i class="fa fa-print"></i> <b> Cetak SEP</button>
+                                <button class="btn btn-warning btn-block" type="button" onclick="cetaksep('<?= $no_jaminan ?>','<?= $tgl_jaminan ?>','<?= $reg_unit ?>')"><i class="fa fa-print"></i> <b> Cetak SEP</button>
                                 
                                 
                             <?php
@@ -1047,6 +1053,93 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="form-update-layanan" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
+    <div class="modal-dialog" style="overflow-y: initial !important">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 class="modal-title" id="headRujukan">Update Informasi Layanan</h3>
+            </div>
+            <div class="modal-body">
+                <div id="loading"></div>
+                <div id="layanan">
+                    <form class="form-horizontal" name="upddatelayanan" id="updatelayanan">
+                        <input type="hidden" name="id_ruang_asal" id="id_ruang_asal" value="<?= $id_ruang ?>">
+                        <input type="hidden" name="uidx" id="uidx" value="<?= $idx ?>">
+                        <input type="hidden" name="uid_daftar" id="uid_daftar" value="<?= $id_daftar ?>">
+                        <input type="hidden" name="ureg_unit" id="ureg_unit" value="<?= $reg_unit ?>">
+                        <input type="hidden" name="utgl_masuk_lama" id="utgl_masuk_lama" value="<?= $tgl_masuk ?>">
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">Tanggal Masuk</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    
+                                    <input type="text" name="utgl_masuk" id="utgl_masuk" class="form-control datepicker" value="<?= $tgl_masuk ?>">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">Tujuan Layanan</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    <select name="uid_ruang" id="uid_ruang" class="form-control" style="width: 100%;" onchange="getDokter2()">
+                                    <option value=""></option>
+                                    <?php 
+                                    foreach ($poli as $p) {
+                                        ?>
+                                        <option value="<?= $p->idx ?>" <?php if($p->idx==$id_ruang) echo "selected" ?> ><?= $p->ruang ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">Dokter</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                
+                                <div class="input-group">
+                                    <select name="udokterJaga" id="udokterJaga" class="form-control" style="width: 100%;">
+                                    <option value=""></option>
+                                    <?php 
+                                    foreach ($dokter as $d ) {
+                                        ?>
+                                        <option value="<?= $d->NRP ?>" <?php if($d->NRP==$dokterJaga) echo "selected"; ?>><?= $d->pgwNama ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">No Sep</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    <input type="text" name="uno_jaminan" id="uno_jaminan" class="form-control" value="<?= $no_jaminan ?>">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">&nbsp;</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    <button class="btn btn-primary" type="button" onclick="updateLayanan()">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -1414,6 +1507,55 @@ $("#r-ppkDirujuk").autocomplete({
                     });
                 }
             });
+    }
+    function editKunjungan(id){
+        $.ajax({
+            url: "<?php echo base_url() . 'mr_registrasi.php/registrasi/editkunjungan/' ?>"+id,
+            dataType: "JSON",
+            method: "GET",
+            data: {},
+            success: function(data) {
+                $('#form-update-layanan').modal('show');
+                $('#uidx').val(data.data.idx);
+                $('#uid_daftar').val(data.data.id_daftar);
+                $('#uid_ruang').val(data.data.id_ruang);
+                $('#udokterJaga').val(data.data.dokterJaga);
+            },
+            error: function(jqXHR, ajaxOption, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+    function updateLayanan() {
+        var formdata = {
+            idx: $('#uidx').val(),
+            id_daftar: $('#uid_daftar').val(),
+            reg_unit: $('#ureg_unit').val(),
+            utgl_masuk_lama: $('#utgl_masuk_lama').val(),
+            id_ruang_asal: $('#id_ruang_asal').val(),
+            tgl_masuk: $('#utgl_masuk').val(),
+            id_ruang: $('#uid_ruang').val(),
+            nama_ruang: $('#uid_ruang :selected').html(),
+            dokterJaga: $('#udokterJaga').val(),
+            namaDokterJaga: $('#udokterJaga :selected').html(),
+            no_jaminan: $('#uno_jaminan').val()
+        }
+        $.ajax({
+            url: "<?php echo base_url() . 'mr_registrasi.php/registrasi/updatelayanan' ?>",
+            type: "POST",
+            data: formdata,
+            dataType: "JSON",
+            success: function(data) {
+                alert(data.message);
+                if (data.status == true) {
+                    var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/reg_success_igd?uid=' ?>' + data.unikID;
+                    window.location.href = url;
+                }
+            },
+            error: function(jqXHR, ajaxOption, errorThrown) {
+                console.log(jqXHR.responseText);
+            }
+        });
     }
     var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
     var url_call_back = "<?php echo base_url() . "api.php/"; ?>";

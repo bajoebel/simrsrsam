@@ -29,7 +29,7 @@ class list_nota_tagihan extends CI_Controller {
             //$jmlruang=2;
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('list_nota_tagihan/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);
@@ -94,7 +94,7 @@ class list_nota_tagihan extends CI_Controller {
             $jmlruang=$y['getRuang']->num_rows();
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('list_nota_tagihan/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);
@@ -159,7 +159,7 @@ class list_nota_tagihan extends CI_Controller {
             $jmlruang=$y['getRuang']->num_rows();
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/list_nota_tagihan/list_nota_tagihan_by_ruang?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('list_nota_tagihan/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);

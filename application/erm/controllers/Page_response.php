@@ -17,7 +17,7 @@
                 $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
                 $this->load->view('dashboard/template_form',$x);
             }else{
-                $url_login = base_url().'nota_tagihan.php/login?sid='.session_id();
+                $url_login = base_url().'erm.php/login?sid='.session_id();
                 echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
                 window.location.href = '$url_login'
                 </script>";
@@ -36,7 +36,7 @@
                 $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
                 $this->load->view('dashboard/template_form',$x);
             }else{
-                $url_login = base_url().'nota_tagihan.php/login?sid='.session_id();
+                $url_login = base_url().'erm.php/login?sid='.session_id();
                 echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
                 window.location.href = '$url_login'
                 </script>";

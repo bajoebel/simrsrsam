@@ -78,9 +78,9 @@ class Patch_model extends CI_Model
             return $nomr;
         }
     }
-    function getdokter($idruang)
+    function getdokter($idruang,$tgl="")
     {
-        $tgl=date('Y-m-d');
+        if(empty($tgl)) $tgl=date('Y-m-d');
         $timestamp = strtotime($tgl);
         $day = date('D', $timestamp);
         $hari=array(

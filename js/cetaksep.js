@@ -64,7 +64,7 @@
                             penjamin = data.seponline.penjamin;
                             // alert(penjamin);
                             cetakan = parseInt(data.response.cetakke) + 1;
-                            noMr = data.response.noMr;
+                            noMr = data.seponline.peserta.noMr;
                             statuskll=data.seponline.nmstatusKecelakaan;
                         }else{
                             potensiprb = '';
@@ -228,11 +228,21 @@
                         }
                         
                         doc.setFontSize(9);
-                        doc.text(125, 85, 'Pasien/Keluarga Pasien');
-                        doc.text(125, 95, '________________');
+                        doc.text(110, 85, 'Pasien/Keluarga Pasien');
+                        doc.text(110, 95, '________________');
 
-                        doc.text(175, 85, 'Petugas');
-                        doc.text(175, 95, '________________');
+                        doc.text(160, 85, 'Petugas');
+                        if(data.dataregis !=null) {
+                            console.clear();
+                            console.log(data.dataregis)
+                            doc.setFontSize(7);
+                            doc.text(160, 95, "("+data.dataregis.pgwNama+")");
+                        }
+                        else {
+                            console.clear();
+                            console.log(data.response.dataregis)
+                            doc.text(160, 95, '________________');
+                        }
                         doc.setFontSize(6);
                         doc.text(17, 85, '*Saya menyetujui BPJS Kesehatan menggunakan infomasi medis pasien jika diperlukan.');
                         doc.text(17, 88, '*SEP Bukan sebagai bukti penjaminan peserta.');

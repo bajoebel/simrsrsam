@@ -28,14 +28,14 @@ class permintaan_penunjang extends CI_Controller {
             $jmlruang=$y['getRuang']->num_rows();
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/permintaan_penunjang/tambah?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/permintaan_penunjang/tambah?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('permintaan_penunjang/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);
             }
         }else{
             $sid = getSessionID();
-            $url_login = base_url().'nota_tagihan.php/login?sid='.$sid;
+            $url_login = base_url().'erm.php/login?sid='.$sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -77,7 +77,7 @@ class permintaan_penunjang extends CI_Controller {
             }            
         }else{
             $sid = getSessionID();
-            $url_login = base_url().'nota_tagihan.php/login?sid='.$sid;
+            $url_login = base_url().'erm.php/login?sid='.$sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -121,7 +121,7 @@ class permintaan_penunjang extends CI_Controller {
             }            
         }else{
             $sid = getSessionID();
-            $url_login = base_url().'nota_tagihan.php/login?sid='.$sid;
+            $url_login = base_url().'erm.php/login?sid='.$sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -163,7 +163,7 @@ class permintaan_penunjang extends CI_Controller {
         $totalRec = $SQL_Count->num_rows();
         $config['target']      = 'tbody#getdata';
         $config['uri_segment']  = $this->uri_segment;
-        $config['base_url']    = base_url().'nota_tagihan.php/permintaan_penunjang/getView';
+        $config['base_url']    = base_url().'erm.php/permintaan_penunjang/getView';
         $config['total_rows']  = $totalRec;
         $config['per_page']    = $limit;
         $this->ajax_page->initialize($config);
@@ -430,7 +430,7 @@ class permintaan_penunjang extends CI_Controller {
             $this->load->view('template/theme',$x);
         }else{
             $sid = getSessionID();
-            $url_login = base_url().'nota_tagihan.php/login?sid='.$sid;
+            $url_login = base_url().'erm.php/login?sid='.$sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";

@@ -408,4 +408,22 @@ class Pendaftaran_model extends CI_Model
         ->limit(10)
         ->get('tbl02_pendaftaran')->result();
     }
+
+    function getRegUnit($tgl_masuk,$idruang){
+        // $tgl=explode(" ",$tgl_masuk);
+        $sep=$this->db->query("SELECT CONCAT('RJ-',DATE_FORMAT('$tgl_masuk','%y%m%d'),'-',LPAD($idruang,3,'0'),'-') AS sep")->row();
+        $data=$this->db->select('reg_unit,no_urut_unit,jns_layanan')
+        ->like('reg_unit',$sep->sep)
+        ->order_by('idx','DESC')
+        ->limit(1)
+        ->get('tbl02_pendaftaran')->row();
+        if(!empty($data)){
+            $urut=intval($data->no_urut_unit);
+            $newurut=$urut++;
+            $reg=$sep->sep .STR_PAD($newurut,4,'0',STR_PAD_LEFT);
+        }else {
+            $reg=$sep->sep ."0001";
+        }
+        return $reg;
+    }
 }

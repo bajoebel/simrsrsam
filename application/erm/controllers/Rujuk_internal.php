@@ -27,7 +27,7 @@ class rujuk_internal extends CI_Controller {
             $jmlruang=$y['getRuang']->num_rows();
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/rujuk_internal/tambah?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/rujuk_internal/tambah?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('rujuk_internal/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);         
@@ -123,7 +123,7 @@ class rujuk_internal extends CI_Controller {
         $totalRec = $SQL_Count->num_rows();
         $config['target']      = 'tbody#getdata';
         $config['uri_segment']  = $this->uri_segment;
-        $config['base_url']    = base_url().'nota_tagihan.php/rujuk_internal/getView';
+        $config['base_url']    = base_url().'erm.php/rujuk_internal/getView';
         $config['total_rows']  = $totalRec;
         $config['per_page']    = $limit;
         $this->ajax_page->initialize($config);

@@ -1025,6 +1025,40 @@ function getDokter(id_ruang = "") {
 		}
 	});
 }
+function getDokter2(id_ruang = "") {
+	if (id_ruang == "") id_ruang = $('#uid_ruang').val();
+	var url = base_url + "/patch/getdokter/" + id_ruang;
+	console.log(url);
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		data: {
+			get_param: 'value'
+		},
+		success: function (data) {
+			//menghitung jumlah data
+			//// console.clear();
+			console.log(url);
+			if (data["status"] == true) {
+				var dokter = data["data"];
+				var jmlData = dokter.length;
+				var limit = data["limit"]
+				var option = "<option value=''>Pilih Dokter</option>";
+				//Create Tabel
+				var jns_layanan = $('#jns_layanan').val();
+				// alert(jns_layanan);
+				for (var i = 0; i < jmlData; i++) {
+					// if(dokter[i]['did'] == null && jns_layanan=='RJ') var dis='disabled'; else dis='';
+					// option+="<option value='"+dokter[i]["NRP"]+"' "+dis+">"+dokter[i]["pgwNama"]+"</option>";
+					// if(dokter[i]['did'] == null && jns_layanan=='RJ') var dis='disabled'; else dis='';
+					option += "<option value='" + dokter[i]["NRP"] + "'>" + dokter[i]["pgwNama"] + "</option>";
+				}
+				$('#udokterJaga').html(option);
+			}
+		}
+	});
+}
 
 function getdpjp(param1 = "", param2 = "", param3 = "", dpjppilih = "") {
 	// var jl=$('#jns_layanan').val();

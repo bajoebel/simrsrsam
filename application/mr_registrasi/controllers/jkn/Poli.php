@@ -66,7 +66,7 @@ class Poli extends CI_Controller{
             'header'=>$this->load->view('template/header', '', true),
             'nav_sidebar'=>$this->load->view('template/nav_sidebar', $z, true),
             'content'=>$this->load->view('jkn/poli', $data, true),
-            'index_menu'=>7,
+            'index_menu'=>5,
             'libjs'=>array(
                 'js/jkn.js'
             )
