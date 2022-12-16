@@ -14,12 +14,9 @@
                     <i class="ion ion-person"></i>
                 </div>
                 <a class="small-box-footer">
-                    <h4>Selamat datang di Nota Tagihan / Billing App Room</h4>
+                    <h4>Selamat Datang di Aplikasi Rekam Medis</h4>
                 </a>
             </div>
         </div>
-        
-        <!--button onclick="playAudio()" type="button">Play Audio</button>
-        <button onclick="pauseAudio()" type="button">Pause Audio</button-->
     </div>
 </section>

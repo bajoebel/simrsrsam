@@ -31,38 +31,33 @@ class Layanan extends CI_Controller
                         $ruang = $this->nota_model->getRuang($this->session->userdata('kdlokasi'));
                         $param = array('jns_layanan' => 'jns_layanan');
                         $jns_layanan = 'RJ';
-                        if($ruang->grid==1||$ruang->grid==4) {
-                            $jns_layanan='RJ';
+                        if ($ruang->grid == 1 || $ruang->grid == 4) {
+                            $jns_layanan = 'RJ';
                             //Ambil data dokter per ruangan
-                            $kondisi=array('idruang'=>$this->session->userdata('kdlokasi'), 'dokter' => 1);
-                            $dokter=$this->Layanan_model->getDokter($kondisi);
+                            $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
+                            $dokter = $this->Layanan_model->getDokter($kondisi);
                             $notif = $this->nota_model->getNotif('internal', $this->session->userdata('kdlokasi'));
-                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}}','cara_bayar','=action[{{status_pasien}}]');
+                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar', '=action[{{status_pasien}}]');
                             $param = array('jns_layanan' => 'jns_layanan', 'dari' => 'tglAwal', 'sampai' => 'tglAkhir');
-                        }
-                        elseif($ruang->grid==2) {
+                        } elseif ($ruang->grid == 2) {
                             $jns_layanan = 'RI';
-                            $kondisi = array('idruang'=>$this->session->userdata('kdlokasi'),'dokter'=>1);
+                            $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
                             $dokter = $this->Layanan_model->getDokter($kondisi);
                             $notif = $this->nota_model->getNotif('kamar', $this->session->userdata('kdlokasi'));
                             //Config Tampil Data Rawat Inap
-                            $field= array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}} / {{nama_kamar}}', 'kelas_layanan', 'cara_bayar','=action[{{status_pasien}}]');
-                            
-                        }
-                        elseif($ruang->grid==3) {
+                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}} / {{nama_kamar}}', 'kelas_layanan', 'cara_bayar', '=action[{{status_pasien}}]');
+                        } elseif ($ruang->grid == 3) {
                             $jns_layanan = 'PJ';
-                            $kondisi = array('idruang'=> $this->session->userdata('kdlokasi'), 'dokter' => 1);
+                            $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
                             $dokter = $this->Layanan_model->getDokter($kondisi);
                             $notif = $this->nota_model->getNotif('penunjang', $this->session->userdata('kdlokasi'));
                             $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', 'jns_kelamin', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar');
-                            
-                        }
-                        else $notif=0;
+                        } else $notif = 0;
 
                         $action = "<div class='btn-group'><button onclick='pilih({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
                         $config = array(
                             'url'           => 'nota_tagihan.php/layanan/getdata',
-                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar','jns_kelamin'=>'jns_kelamin','status_pasien' => 'status_pasien'),
+                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien'),
                             'field'         => $field,
                             'function'      => 'getPasienSaatini',
                             'keyword_id'    => 'q',
@@ -75,20 +70,20 @@ class Layanan extends CI_Controller
                             'load'          => true,
                             'action_button' => $action,
                         );
-                        if($jns_layanan=="RI"){
+                        if ($jns_layanan == "RI") {
                             $action = "<div class='btn-group'><button onclick='registrasiPasien({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-check'></span> Terima</button></div>";
                             $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} / {{nama_kamar_pengirim}}', 'nama_dokter_pengirim');
                         } elseif ($jns_layanan == "RJ") {
                             $action = "<div class='btn-group'><button onclick='registrasiPasienRujukInternal({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-check'></span> Terima</button></div>";
-                            $field =array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} ', 'nama_dokter_pengirim');
-                        }else{
+                            $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} ', 'nama_dokter_pengirim');
+                        } else {
                             $action = "<div class='btn-group'><button onclick='persetujuanRegistrasi({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-check'></span> Terima</button></div>";
                             $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} ', 'nama_dokter_pengirim');
                         }
-                        
+
                         $config1 = array(
                             'url'           => 'nota_tagihan.php/layanan/datapermintaanpindah',
-                            'variable'      => array('idx' => 'idx', 'nama_ruang_pengirim' => 'nama_ruang_pengirim', 'nama_kamar_pengirim' => 'nama_kamar_pengirim', 'jns_kelamin' => 'jns_kelamin','status_pasien' => 'status_pasien'),
+                            'variable'      => array('idx' => 'idx', 'nama_ruang_pengirim' => 'nama_ruang_pengirim', 'nama_kamar_pengirim' => 'nama_kamar_pengirim', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien'),
                             'field'         => $field,
                             'function'      => 'getPermintaan',
                             'keyword_id'    => 'q1',
@@ -104,8 +99,8 @@ class Layanan extends CI_Controller
                         $btnbatal = "<div class=\'btn-group\'><button onclick=\'batal({{idx}})\' \"+dis[[[status_pindah]]]+\" class=\'btn btn-danger btn-sm\'><span class=\'fa fa-remove\'></span> Batal Pindah</button></div>";
                         $config2 = array(
                             'url'           => 'nota_tagihan.php/layanan/riwayatpindah',
-                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' =>'nama_kamar', 'jns_kelamin' =>'jns_kelamin', 'status_pindah' => 'status_pindah','disabled'=>'disabled'),
-                            'field'         =>  array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang}} / {{nama_kamar}}', 'nama_dokter_pengirim','=response[{{status_pindah}}]'),
+                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pindah' => 'status_pindah', 'disabled' => 'disabled'),
+                            'field'         =>  array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang}} / {{nama_kamar}}', 'nama_dokter_pengirim', '=response[{{status_pindah}}]'),
                             'function'      => 'riwayatPindah',
                             'keyword_id'    => 'q2',
                             'param_id'      => $param,
@@ -121,7 +116,7 @@ class Layanan extends CI_Controller
                         $config3 = array(
                             'url'           => 'nota_tagihan.php/layanan/riwayatpulang',
                             'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'los' => 'los', 'jns_kelamin' => 'jns_kelamin', 'status_pindah' => 'status_pindah', 'disabled' => 'disabled'),
-                            'field'         =>  array('id_daftar', 'reg_unit', 'tgl_keluar', '{{los}} Hari','nomr', 'nama_pasien', 'nama_ruang', 'cara_keluar', 'keadaan_keluar'),
+                            'field'         =>  array('id_daftar', 'reg_unit', 'tgl_keluar', '{{los}} Hari', 'nomr', 'nama_pasien', 'nama_ruang', 'cara_keluar', 'keadaan_keluar'),
                             'function'      => 'riwayatPulang',
                             'keyword_id'    => 'q3',
                             'param_id'      => $param,
@@ -133,27 +128,27 @@ class Layanan extends CI_Controller
                             'load'          => false,
                             'action_button' => $btnbatal,
                         );
-                        $data=array(
-                            'contentTitle'=>'Cari Pasien',
-                            'ruangID'=> $this->session->userdata('kdlokasi'),
-                            'ruang'=> $ruang,
-                            'notif'=>$notif,
-                            'getDokter'=>$dokter
+                        $data = array(
+                            'contentTitle' => 'Cari Pasien',
+                            'ruangID' => $this->session->userdata('kdlokasi'),
+                            'ruang' => $ruang,
+                            'notif' => $notif,
+                            'getDokter' => $dokter
                         );
                         //echo "<script>".getData($config2)."</script>";exit;
 
                         //$actionbatal= "var batal = {'$btnbatal','Sudah Diresponse'}";
-                        $theme=array(
-                            'header'=> $this->load->view('template/header', '', true),
-                            'index_menu'=>2,
-                            'nav_sidebar'=> $this->load->view('template/nav_sidebar', $z, true),
-                            'content'=> $this->load->view('layanan/layanan_index', $data, true),
+                        $theme = array(
+                            'header' => $this->load->view('template/header', '', true),
+                            'index_menu' => 2,
+                            'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
+                            'content' => $this->load->view('layanan/layanan_index', $data, true),
                             'ajaxdata' =>  "var jekel = {'0':'Perempuan','1':'Laki-Laki','P':'Perempuan','L':'Laki-Laki'};
                             var response = {'0':'<span class=\"btn btn-danger btn-xs\" >Belum Diresponse</span>','1':'<span class=\"btn btn-success btn-xs\">Sudah Diresponse</span>'}; 
                             var action = {'1':'<span class=\"pull-right badge bg-green\">Aktif</span>','2':'<span class=\"pull-right badge bg-yellow\">Dirawat</span>','3':'<span class=\"pull-right badge bg-yellow\">Menunggu Response <br>Pindah</span>','4':'<span class=\"pull-right badge bg-yellow\">Sudah Pindah</span>','5':'<span class=\"pull-right badge bg-yellow\">Sudah Pulang</span>','6':'<span class=\"pull-right badge bg-yellow\">Batal Berobat</span>'}; 
                             var dis=['','disabled']"
-                            . getData($config) . getData($config1) . getData($config2) . getData($config3),
-                            'lib'=>array('js/layanan.js')
+                                . getData($config) . getData($config1) . getData($config2) . getData($config3),
+                            'lib' => array('js/layanan.js')
                         );
                         $this->load->view('template/theme', $theme);
                     }
@@ -182,35 +177,35 @@ class Layanan extends CI_Controller
             $limit = intval($this->input->get('limit'));
             $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
             //echo $jenis_layanan;exit;
-            if($jenis_layanan=='RJ'||$jenis_layanan=='GD' || $jenis_layanan=="PJ"){
-                $kondisi=array('status_pasien != '=> 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
-            }else $kondisi= " (status_pasien=1 OR status_pasien=3) ";
+            if ($jenis_layanan == 'RJ' || $jenis_layanan == 'GD' || $jenis_layanan == "PJ") {
+                $kondisi = array('status_pasien != ' => 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
+            } else $kondisi = " (status_pasien=1 OR status_pasien=3) ";
             $mulai = ($start * $limit) - $limit;
-            $ruangid=$this->session->userdata('kdlokasi');
-            
+            $ruangid = $this->session->userdata('kdlokasi');
+
             $response = array(
                 'status'    => true,
                 'message'   => "OK",
                 'start'     => $mulai,
-                'row_count' => $this->Layanan_model->countData($q, $ruangid,$jenis_layanan,$kondisi),
+                'row_count' => $this->Layanan_model->countData($q, $ruangid, $jenis_layanan, $kondisi),
                 'limit'     => $limit,
-                'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan,$kondisi),
+                'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan, $kondisi),
             );
-            
         } else {
             $response = array('status' => false, 'message' => 'Session Expired');
         }
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-    function datapermintaanpindah(){
+    function datapermintaanpindah()
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $q = urldecode($this->input->get('keyword', TRUE));
             $start = intval($this->input->get('start'));
             $limit = intval($this->input->get('limit'));
             $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
-            
+
             $kondisi = array();
             $mulai = ($start * $limit) - $limit;
             $ruangid = $this->session->userdata('kdlokasi');
@@ -534,7 +529,7 @@ class Layanan extends CI_Controller
                 } else {
                     $no_permintaan = $this->input->post('no_permintaan', TRUE);
                     $id_ruang = $this->input->post('id_ruang', TRUE);
-                    $response['variabel']=array('no_permintaan'=>$no_permintaan,'id_ruang'=>$id_ruang);
+                    $response['variabel'] = array('no_permintaan' => $no_permintaan, 'id_ruang' => $id_ruang);
                     $response['code'] = 401;
                     $response['message'] = "Ops. Variabel Tidak Lengkap. Coba ulangi kembali.";
                 }
@@ -577,12 +572,12 @@ class Layanan extends CI_Controller
                         }
                     } else {
                         $this->db->select('jml_tt,(terisi_pr+terisi_lk) as terisi');
-                        $this->db->where('id_kamar',$this->input->post('id_kamar'));
-                        $row=$this->db->get('tbl01_kamar')->row();
-                        if($row->terisi>=$row->jml_tt){
+                        $this->db->where('id_kamar', $this->input->post('id_kamar'));
+                        $row = $this->db->get('tbl01_kamar')->row();
+                        if ($row->terisi >= $row->jml_tt) {
                             $response['code'] = 401;
                             $response['message'] = "Ops. Kamar Penuh";
-                        }else{
+                        } else {
                             $no_permintaan = $this->input->post('no_permintaan', TRUE);
                             $id_ruang = $this->input->post('id_ruang', TRUE);
                             $datPindahKamar = getDataPindahRanapById($no_permintaan);
@@ -640,7 +635,7 @@ class Layanan extends CI_Controller
                                     'user_daftar' => $this->session->userdata('get_uid'),
                                     'session_id' => session_id()
                                 );
-    
+
                                 if ($no_permintaan == "") {
                                     $response['code'] = 401;
                                     $response['message'] = "Ops. ID rujukan internal tidak boleh kosong!";
@@ -688,7 +683,6 @@ class Layanan extends CI_Controller
                                 $response['message'] = "Ops. Data Permintaan Pindah Kamar Belum Ada!";
                             }
                         }
-                        
                     }
                 } else {
                     $response['code'] = 401;
@@ -765,7 +759,7 @@ class Layanan extends CI_Controller
             window.location.href = '$url_login'
             </script>";
         }
-    }    
+    }
     function cetakReg()
     {
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -888,7 +882,7 @@ class Layanan extends CI_Controller
                         $this->db->join('tbl01_pegawai', 'tbl01_pegawai.NRP=tbl01_dokter.NRP');
                         $y['getDokter'] = $this->db->get('tbl01_dokter');
 
-                        
+
                         //Cek Kwitansi Pembayaran
                         $cekKw = $this->db->query("SELECT * FROM tbl05_kwitansi WHERE tbl05_kwitansi.no_kwitansi NOT IN (SELECT no_kwitansi FROM tbl05_kwitansi_retur) AND id_daftar='" . $y['id_daftar'] . "'")->row();
 
@@ -928,10 +922,10 @@ class Layanan extends CI_Controller
                         $nota = array(
                             'url'           => 'nota_tagihan.php/layanan/datanota',
                             'variable'      => array('idx' => 'idx', 'subtotal' => 'subtotal'),
-                            'field'         => array('pgwNama','layanan','tarif_layanan','jml','Rp. {{subtotal}}'),
+                            'field'         => array('pgwNama', 'layanan', 'tarif_layanan', 'jml', 'Rp. {{subtotal}}'),
                             'function'      => 'getNota',
                             'keyword_id'    => 'q',
-                            'param_id'      => array('reg_unit'=>'reg_unit'),
+                            'param_id'      => array('reg_unit' => 'reg_unit'),
                             'limit_id'      => 'limit',
                             'data_id'       => 'getNotaItem',
                             'page_id'       => 'pagination',
@@ -940,8 +934,8 @@ class Layanan extends CI_Controller
                             'load'          => true,
                             'action_button' => $action,
                         );
-                        $x['ajaxdata']=getData($nota);
-                        $x['lib']=array('js/entry_nota.js');
+                        $x['ajaxdata'] = getData($nota);
+                        $x['lib'] = array('js/entry_nota.js');
                         $this->load->view('template/theme', $x);
                     }
                 } else {
@@ -985,11 +979,12 @@ class Layanan extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
-    function hapusnota(){
+    function hapusnota()
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $idx=intval($this->input->get('idx'));
-            $this->db->where('idx',$idx);
+            $idx = intval($this->input->get('idx'));
+            $this->db->where('idx', $idx);
             $this->db->delete('tbl03_nota_detail');
             $response = array('status' => true, 'message' => 'Tindakan berhasil dihapus dari nota tagihan');
         } else {
@@ -1010,16 +1005,16 @@ class Layanan extends CI_Controller
                         </script>";
                     } else {
                         $z = setNav("nav_2");
-                        $idx= $this->input->get('idx');
+                        $idx = $this->input->get('idx');
                         $detail = $this->nota_model->getPendaftaran($idx);
-                        if($detail){
-                            
-                            if($detail->jns_layanan=="RI") $getDokter=$this->Layanan_model->getDokter()->result_array();
+                        if ($detail) {
+
+                            if ($detail->jns_layanan == "RI") $getDokter = $this->Layanan_model->getDokter()->result_array();
                             else $getDokter = $this->Layanan_model->getDokter($detail->id_ruang)->result_array();
-                            $getRuang= $this->Layanan_model->getRuang(array('grid' => 3))->result();
+                            $getRuang = $this->Layanan_model->getRuang(array('grid' => 3))->result();
                             $carabayar = $this->nota_model->getCaraBayar($detail->id_cara_bayar);
                             $jkn = $carabayar->jkn;
-                            $var=array(
+                            $var = array(
                                 'detail'    => $detail,
                                 'getRuang'  => $getRuang,
                                 'jkn'       => $jkn
@@ -1031,8 +1026,8 @@ class Layanan extends CI_Controller
                             elseif ($detail->jns_layanan == "PJ") $kodemenu = 47;
                             elseif ($detail->jns_layanan == "GD") $kodemenu = 48;
                             else $kodemenu = "";
-                            
-                            $data=array(
+
+                            $data = array(
                                 'ruangID'   => $this->session->userdata('kdlokasi'),
                                 'idx'       => $idx,
                                 'mod'       => 'histori',
@@ -1043,20 +1038,19 @@ class Layanan extends CI_Controller
                                 'modul'         => $this->load->view('layanan/template_histori', $var, true),
                                 'hakakses'      => $this->nota_model->getAkses($idlevel, $idmodul, $kodemenu)
                             );
-                            
-                            $theme=array(
+
+                            $theme = array(
                                 'idx'           => $idx,
                                 'index_menu'    => 2,
                                 'ruangID'       => $this->session->userdata('kdlokasi'),
                                 'nav_sidebar'   => $this->load->view('template/nav_sidebar', $z, true),
                                 'content'       => $this->load->view('layanan/template_entry', $data, true)
                             );
-                            
+
                             $this->load->view('template/theme', $theme);
-                        }else{
+                        } else {
                             echo "Data Pasien Belum Ditemukan";
                         }
-                        
                     }
                 } else {
                     echo "<script>alert('Ops. Permintaan halaman tidak di sesuai. {I.idx#kLok-NA}');
@@ -1293,7 +1287,7 @@ class Layanan extends CI_Controller
                         if ($detail) {
                             //$nomr = $detail->nomr;
                             //$ranap = $this->nota_model->cekRanap($detail->id_daftar, 'RI');
-                            $statusranap=0;
+                            $statusranap = 0;
                             if ($detail->jns_layanan == "RI") {
                                 $getDokter = $this->Layanan_model->getDokter(array('dokter' => 1));
                                 $pulang = $this->nota_model->getPulang($detail->reg_unit);
@@ -1321,16 +1315,16 @@ class Layanan extends CI_Controller
                                         );
                                         $y["priv_surat"] = $this->load->view('layanan/template_surat_rujukan', $surat, true);
                                     }
-                                }else{
-                                    $status_pulang=0;
+                                } else {
+                                    $status_pulang = 0;
                                 }
                             } else {
                                 //Jika Jenis Layanan Bukan Rawat Inap/ cek apakah pasien terdaftar di ruang rawat inap
                                 $ranap = $this->nota_model->cekRanap($detail->id_daftar, 'RI');
-                                $getDokter = $this->Layanan_model->getDokter(array('dokter'=>1,'idruang'=> $this->session->userdata('kdlokasi')));
+                                $getDokter = $this->Layanan_model->getDokter(array('dokter' => 1, 'idruang' => $this->session->userdata('kdlokasi')));
                                 if (empty($ranap)) {
                                     //Pasien tidak di rawat inap
-                                    $statusranap=0;
+                                    $statusranap = 0;
                                     $pulang = $this->nota_model->getPulang($detail->id_daftar);
                                     if (!empty($pulang)) {
                                         $status_pulang = 1;
@@ -1356,8 +1350,8 @@ class Layanan extends CI_Controller
                                             );
                                             $y["priv_surat"] = $this->load->view('layanan/template_surat_rujukan', $surat, true);
                                         }
-                                    }else{
-                                        $status_pulang=0;
+                                    } else {
+                                        $status_pulang = 0;
                                     }
                                 } else {
                                     $pulang = array();
@@ -1366,35 +1360,36 @@ class Layanan extends CI_Controller
                             }
                             $idlevel = $this->session->userdata('level');
                             $idmodul = MODUL_ID;
-                            if ($detail->jns_layanan == "RJ"
+                            if (
+                                $detail->jns_layanan == "RJ"
                             ) $kodemenu = 45;
                             elseif ($detail->jns_layanan == "RI") $kodemenu = 46;
                             elseif ($detail->jns_layanan == "PJ") $kodemenu = 47;
                             elseif ($detail->jns_layanan == "GD") $kodemenu = 48;
                             else $kodemenu = "";
                             //$pulang = $this->Layanan_model->cekKepulangan($detail->id_daftar, 'RI');
-                            $var=array(
-                                'pulang'=>$status_pulang,
-                                'ranap'=>$statusranap,
-                                'detail'=>$detail,
+                            $var = array(
+                                'pulang' => $status_pulang,
+                                'ranap' => $statusranap,
+                                'detail' => $detail,
                                 'tgl_daftar' => $this->nota_model->getTgldaftar($detail->nomr),
-                                'getCaraBayar'=> $this->db->get('tbl01_cara_bayar'),
-                                'getJenisPelayanan'=> $this->db->get('tbl01_jenis_pelayanan'),
-                                'getCaraKeluar'=> $this->db->get('tbl01_cara_keluar'),
-                                'getKeadaanKeluar'=> $this->db->get('tbl01_keadaan_keluar'),
-                                'getDokter'=> $getDokter
+                                'getCaraBayar' => $this->db->get('tbl01_cara_bayar'),
+                                'getJenisPelayanan' => $this->db->get('tbl01_jenis_pelayanan'),
+                                'getCaraKeluar' => $this->db->get('tbl01_cara_keluar'),
+                                'getKeadaanKeluar' => $this->db->get('tbl01_keadaan_keluar'),
+                                'getDokter' => $getDokter
                             );
-                            $data=array(
-                                'ruangID'=> $this->session->userdata('kdlokasi'),
+                            $data = array(
+                                'ruangID' => $this->session->userdata('kdlokasi'),
                                 'idx'   => $idx,
-                                'mod'=>'pasien-pulang',
-                                'header'=> $this->load->view('template/header', '', true),
-                                'contentTitle'=>"Pasien Pulang",
+                                'mod' => 'pasien-pulang',
+                                'header' => $this->load->view('template/header', '', true),
+                                'contentTitle' => "Pasien Pulang",
                                 'detail'    => $detail,
                                 'hakakses'      => $this->nota_model->getAkses($idlevel, $idmodul, $kodemenu),
-                                'modul'=> $this->load->view('layanan/template_pulang', $var, true)
+                                'modul' => $this->load->view('layanan/template_pulang', $var, true)
                             );
-                            $theme=array(
+                            $theme = array(
                                 'index_menu'    => 2,
                                 'ruangID'       => $this->session->userdata('kdlokasi'),
                                 'idx'           => $idx,
@@ -1402,10 +1397,9 @@ class Layanan extends CI_Controller
                                 'content'       => $this->load->view('layanan/template_entry', $data, true)
                             );
                             $this->load->view('template/theme', $theme);
-                        }else{
+                        } else {
                             echo "Pasien Tidak ditemukan";
                         }
-                        
                     }
                 } else {
                     echo "<script>alert('Ops. Permintaan halaman tidak di sesuai. {I.idx#kLok-NA}');
@@ -1425,17 +1419,18 @@ class Layanan extends CI_Controller
             </script>";
         }
     }
-    function caritindakan(){
+    function caritindakan()
+    {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $param=$this->input->get('param1');
+            $param = $this->input->get('param1');
             $kelas_id   = $this->input->get('kelas_id');
             $jns_layanan = $this->input->get('jns_layanan');
             $id_ruang   = $this->input->get('id_ruang');
             $all          = $this->input->get('all');
-            $tindakan=$this->Layanan_model->getTarif($param, $jns_layanan, $id_ruang, $kelas_id, $all);
-        }else{
-            $tindakan=array();
+            $tindakan = $this->Layanan_model->getTarif($param, $jns_layanan, $id_ruang, $kelas_id, $all);
+        } else {
+            $tindakan = array();
         }
         header('Content-Type: application/json');
         echo json_encode($tindakan);
@@ -1507,26 +1502,26 @@ class Layanan extends CI_Controller
                         $response['message'] = "Ops. No Registrasi Unit tidak boleh kosong! Silahkan coba kembali.";
                     } else {
                         $cekCommand = $this->db->insert('tbl03_nota_detail', $params);
-                        $insert_id=$this->db->insert_id();
+                        $insert_id = $this->db->insert_id();
                         if ($cekCommand) {
                             $data = array(
-                                'noref'=>$insert_id,
+                                'noref' => $insert_id,
                                 'id_daftar' => $params['id_daftar'],
                                 'reg_unit' => $params['reg_unit'],
                                 'nomr' => $params['nomr'],
-                                'kode_unit'=>$this->session->userdata('kdlokasi'),
-                                'nama_unit'=>getPoliByID($this->session->userdata('kdlokasi')),
+                                'kode_unit' => $this->session->userdata('kdlokasi'),
+                                'nama_unit' => getPoliByID($this->session->userdata('kdlokasi')),
                                 'kode_item_detail' => $params['id_tarif'],
                                 'deskripsi' => $params["layanan"],
                                 'item_sarana' => $params["jasa_sarana"],
                                 'item_pelayanan' => $params["jasa_pelayanan"],
                                 'nilai_item' => $params["tarif_layanan"],
-                                'jml_item'=>$params["jml"],
-                                'sub_total_item'=>$params["sub_total_tarif"],
+                                'jml_item' => $params["jml"],
+                                'sub_total_item' => $params["sub_total_tarif"],
                                 'kategori_id' => $params["kategori_id"],
                                 'kelas_id' => $params["kelas_id"],
                                 'id_dokter' => $params['id_dokter'],
-                                'jenis_item'=>1,
+                                'jenis_item' => 1,
                                 'userinput' => $params['user_exec']
                             );
                             $this->db->insert('tbl05_logtagihan', $data);
@@ -1625,7 +1620,7 @@ class Layanan extends CI_Controller
 
                         $y['modul']             = $this->load->view('layanan/template_penunjang', $y, true);
                         $x['content']           = $this->load->view('layanan/template_entry', $y, true);
-                        $x['lib']=array('js/entry_nota.js');
+                        $x['lib'] = array('js/entry_nota.js');
                         $this->load->view('template/theme', $x);
                     }
                 } else {
@@ -1645,8 +1640,6 @@ class Layanan extends CI_Controller
             window.location.href = '$url_login'
             </script>";
         }
-
-        
     }
 
     function pemeriksaan($idjenis, $reg_unit)
@@ -1774,7 +1767,7 @@ class Layanan extends CI_Controller
 
                         $y['modul']             = $this->load->view('nota_tagihan/template_rujukan', $y, true);
                         $x['content']           = $this->load->view('layanan/template_entry', $y, true);
-                        $x['lib']=array('js/layanan.js');
+                        $x['lib'] = array('js/layanan.js');
                         $this->load->view('template/theme', $x);
                     }
                 } else {
@@ -2078,17 +2071,18 @@ class Layanan extends CI_Controller
         echo json_encode($response);
     }
     // Registrasi Pasien Penunjang
-    function registrasiPasienpp(){
+    function registrasiPasienpp()
+    {
         $ses_state = $this->users_model->cek_session_id();
-        if($ses_state){
-            if($_SERVER['REQUEST_METHOD'] == "POST"){
-                if(
+        if ($ses_state) {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (
                     isset($_POST['no_permintaan']) &&
                     isset($_POST['id_ruang']) &&
                     isset($_POST['dokterJaga'])
-                ){
-                    $no_permintaan = $this->input->post('no_permintaan',TRUE);
-                    $id_ruang = $this->input->post('id_ruang',TRUE);
+                ) {
+                    $no_permintaan = $this->input->post('no_permintaan', TRUE);
+                    $id_ruang = $this->input->post('id_ruang', TRUE);
                     $datPermintaanPenunjang = getDataPermintaanPenunjangById($no_permintaan);
                     $datPendaftaran = getDataPendaftaranByRegUnit($datPermintaanPenunjang['reg_unit']);
                     $params = array(
@@ -2104,7 +2098,7 @@ class Layanan extends CI_Controller
                         'nama_kecamatan' => $datPendaftaran['nama_kecamatan'],
                         'nama_kelurahan' => $datPendaftaran['nama_kelurahan'],
                         'jns_layanan' => "PJ",
-                        'tgl_daftar'=>$datPendaftaran['tgl_daftar'],
+                        'tgl_daftar' => $datPendaftaran['tgl_daftar'],
                         'id_ruang' => $id_ruang,
                         'nama_ruang' => getRuangByID($id_ruang),
                         'id_rujuk' => '7',
@@ -2112,12 +2106,12 @@ class Layanan extends CI_Controller
                         'no_rujuk' => $datPermintaanPenunjang['reg_unit'],
                         'asal_ruang' => $datPermintaanPenunjang['ruang_pengirim'],
                         'nama_asal_ruang' => $datPermintaanPenunjang['nama_ruang_pengirim'],
-                        'dokter_pengirim' =>$datPermintaanPenunjang['dokter_pengirim'],
+                        'dokter_pengirim' => $datPermintaanPenunjang['dokter_pengirim'],
                         'nama_dokter_pengirim' => $datPermintaanPenunjang['nama_dokter_pengirim'],
                         'id_cara_bayar' => $datPendaftaran['id_cara_bayar'],
                         'cara_bayar' => $datPendaftaran['cara_bayar'],
-                        'id_jenis_peserta'=>$datPendaftaran['id_jenis_peserta'],
-                        'jenis_peserta'=>$datPendaftaran['jenis_peserta'],
+                        'id_jenis_peserta' => $datPendaftaran['id_jenis_peserta'],
+                        'jenis_peserta' => $datPendaftaran['jenis_peserta'],
                         'no_bpjs' => $datPendaftaran['no_bpjs'],
                         'no_jaminan' => $datPendaftaran['no_jaminan'],
                         'tgl_jaminan' => $datPendaftaran['tgl_jaminan'],
@@ -2139,24 +2133,24 @@ class Layanan extends CI_Controller
                     );
 
 
-                    if($no_permintaan == ""){
+                    if ($no_permintaan == "") {
                         $response['code'] = 401;
                         $response['message'] = "Ops. ID Permintaan penunjang tidak boleh kosong!";
-                    }elseif($id_ruang == ""){
+                    } elseif ($id_ruang == "") {
                         $response['code'] = 401;
                         $response['message'] = "Ops. ID tujuan pelayanan tidak boleh kosong!";
-                    }else{
+                    } else {
                         //Insert Ke tabel pendaftaran
                         $this->db->trans_start();
-                        $cekCommand = $this->db->insert('tbl02_pendaftaran',$params); 
-                        $insertID=$this->db->insert_id();
-                        if($cekCommand){
-                            $this->db->from('tbl02_pendaftaran'); 
+                        $cekCommand = $this->db->insert('tbl02_pendaftaran', $params);
+                        $insertID = $this->db->insert_id();
+                        if ($cekCommand) {
+                            $this->db->from('tbl02_pendaftaran');
                             $this->db->where('session_id', session_id());
                             $this->db->order_by('idx', 'desc');
                             $this->db->limit(1);
-                            $cekQuery = $this->db->get(); 
-                            if($cekQuery->num_rows() > 0){
+                            $cekQuery = $this->db->get();
+                            if ($cekQuery->num_rows() > 0) {
                                 $resData = $cekQuery->row_array();
                                 $paramsResponse = array(
                                     'id_permintaan_penunjang' => $no_permintaan,
@@ -2208,15 +2202,15 @@ class Layanan extends CI_Controller
                                 //if(!empty($tindakan)) $this->db->insert_batch('tbl03_nota_detail', $tindakan);
                                 //if(!empty($jadwal)) $this->db->insert_batch('tbl02_jadwal_tindakan_penunjang', $jadwal);
 
-                                
-                                $cekCmdPenunjang = $this->db->insert('tbl02_permintaan_penunjang_response',$paramsResponse);
+
+                                $cekCmdPenunjang = $this->db->insert('tbl02_permintaan_penunjang_response', $paramsResponse);
                                 if ($cekCmdPenunjang) {
                                     /**
                                      * Ambil data pemeriksaan penunjang
                                      */
-                                    $permintaan=$this->nota_model->getPermintaan($no_permintaan);
-                                    foreach ($permintaan as $p ) {
-                                        $insert_permintaan[]=array(
+                                    $permintaan = $this->nota_model->getPermintaan($no_permintaan);
+                                    foreach ($permintaan as $p) {
+                                        $insert_permintaan[] = array(
                                             'idx_pendaftaran'       => $insertID,
                                             'id_jenis_pemeriksaan'  => $p->idjenispemeriksaan,
                                             'jenis_pemeriksaan'     => $p->jenispemeriksaan,
@@ -2229,42 +2223,41 @@ class Layanan extends CI_Controller
                                             'user_exec'             => $this->session->userdata('get_uid')
                                         );
                                     }
-                                    $this->db->insert_batch('tbl02_pemeriksaan_penunjang',$insert_permintaan);
-                                    
+                                    $this->db->insert_batch('tbl02_pemeriksaan_penunjang', $insert_permintaan);
+
 
                                     $response['code'] = 200;
                                     $response['message'] = "Simpan data sukses.";
                                     $response['idx'] = $insertID;
                                     $response['klok'] = $id_ruang;
-                                    $response['url'] = encrypt_decrypt('encrypt',$resData['reg_unit'],true);
-                                    $response['permintaan']= $permintaan;
-                                }else{
+                                    $response['url'] = encrypt_decrypt('encrypt', $resData['reg_unit'], true);
+                                    $response['permintaan'] = $permintaan;
+                                } else {
                                     $response['code'] = 202;
                                     $response['message'] = "Simpan data sukses. Update response penunjang gagal. Silahkan hubungi administrator";
-                                    $response['url'] = null;                                            
+                                    $response['url'] = null;
                                 }
-                            }else{
+                            } else {
                                 $response['code'] = 202;
                                 $response['message'] = "Simpan data sukses namun cookies telah dihapus.";
-                                $response['url'] = null;                                            
+                                $response['url'] = null;
                             }
-
-                        }else{
+                        } else {
                             $response['code'] = 501;
                             $response['message'] = "Ops. Query error! Silahkan hubungi administrator.";
-                        } 
+                        }
                         $this->db->trans_complete();
                     }
-                }else{
+                } else {
                     $response['code'] = 401;
                     $response['message'] = "Ops. Ada kesalahan permintaan. Coba ulangi kembali.";
-                    $response['request']=array('no_permintaan'=>$this->input->post('no_permintaan',TRUE));
+                    $response['request'] = array('no_permintaan' => $this->input->post('no_permintaan', TRUE));
                 }
-            }else{ 
+            } else {
                 $response['code'] = 402;
                 $response['message'] = "Ops. Ada kesalahan permintaan. Coba ulangi kembali.";
             }
-        }else{
+        } else {
             $response['code'] = 404;
             $response['message'] = "Ops. Sesi anda telah berubah! Silahkan login kembali";
         }
@@ -2275,7 +2268,7 @@ class Layanan extends CI_Controller
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $this->db->select('*');
-            $this->db->join('tbl01_jenis_pemeriksaan b','b.idx=a.idjenispemeriksaan');
+            $this->db->join('tbl01_jenis_pemeriksaan b', 'b.idx=a.idjenispemeriksaan');
             $this->db->where('id_permintaan', $id_permintaan);
             $this->db->order_by('idjenispemeriksaan');
             $tindakan = $this->db->get('tbl02_permintaan_tindakan_penunjang a');
@@ -2367,5 +2360,5 @@ class Layanan extends CI_Controller
         echo json_encode($response);
     }
     //Yang Lama
-    
+
 }

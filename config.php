@@ -25,7 +25,7 @@ defined('LOGO')					or define('LOGO', $site_url . '/assets/images/logo.png');
 defined('REPORT_ADDRESS_1')     or define('REPORT_ADDRESS_1', 'Jl. Dr. A.Rivai No.1 Bukittinggi');
 defined('REPORT_ADDRESS_2')     or define('REPORT_ADDRESS_2', 'Telp : 0752-21720');
 defined('FAX')     				or define('FAX', 'Telp : 0752-21321');
-defined('FOOTER_APP')     		or define('FOOTER_APP', 'IT Developer &copy; 2018');
+defined('FOOTER_APP')     		or define('FOOTER_APP', 'IT Developer &copy;' . date('Y'));
 defined('FOOTER_RS')     		or define('FOOTER_RS', 'RSUD Dr. Achmad Mochtar');
 defined('VERSION_APP')     		or define('VERSION_APP', 'Version 1.0.1');
 defined('ALMT_SURAT')     		or define('ALMT_SURAT', 'Bukittinggi');
@@ -143,3 +143,12 @@ defined('ONLINE_ID')   		or define('ONLINE_ID', '00001');
 defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
 defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
 defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://192.168.12.254/');
+
+/*
+Database Elektronik Rekam Medis
+*/
+defined('DB_HOST_ERM')   		or define('DB_HOST_ERM', 'localhost');
+defined('PORT_HOST_ERM')   		or define('PORT_HOST_ERM', 3306);
+defined('DB_USER_ERM')   		or define('DB_USER_ERM', 'root');
+defined('DB_PASS_ERM')   		or define('DB_PASS_ERM', '');
+defined('DB_NAME_ERM')   		or define('DB_NAME_ERM', 'simrs_erm');

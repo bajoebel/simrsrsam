@@ -51,7 +51,7 @@ function getLokasi(){
             console.log(lokasi_aktif);
             if(lokasi_aktif!=null){
                 $('#lokasi-pilihan').html(lokasi_aktif.NMLOKASI);
-                console.clear();
+                //console.clear();
                 
                 //alert(lokasi_aktif);
                 //location.reload();

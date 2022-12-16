@@ -76,7 +76,6 @@ $(document).ready(function () {
         }
     });
     $('#cmbKelasTarif').change(function (ev) {
-
         getData(0);
     });
     $('#txtQty').keypress(function (ev) {

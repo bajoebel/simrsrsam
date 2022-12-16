@@ -118,23 +118,12 @@
 <?php if (!empty($detail)) { ?>
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $detail->jns_layanan ?>">
     <section class="content container-fluid">
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-info"></i> Informasi</h4>
-            Silahkan cari pasien yang melakukan tindakan / layanan di <?php echo getPoliByID($detail->id_ruang) ?>.
-            Pasien yang tampil secara default adalah pasien yang terdaftar pada hari ini.
-            <br />
-            Untuk mencari pasien yang terdaftar pada hari lainnya,
-            silahkan masukan No Registrasi RS / No Registrasi Unit <?php echo getPoliByID($detail->id_ruang) ?> / No MR Pasien
-            <br />
-            kemudian tekan enter atau klik tombol Cari Pasien
-        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <div class="back">
-                            <a href="<?= base_url() . "nota_tagihan.php/nota_tagihan/entry_nota?idx=" . $detail->idx ?>">
+                            <a href="<?= base_url() . "erm.php/erm" ?>">
                                 <span class="fa fa-arrow-left"></span>
                             </a>
                         </div>
