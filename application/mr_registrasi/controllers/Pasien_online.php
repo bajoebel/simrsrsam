@@ -9,9 +9,10 @@ class Pasien_online extends CI_Controller{
         $ses_state = $this->users_model->cek_session_id();
         if($ses_state){
             $z = setNav("nav_7");
+            $y['index_menu'] = 11;
             $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
             $y['contentTitle'] = "Pendaftaran Pasien Online Baru";
-            $x['header']="";
+            $x['header']= $this->load->view('template/header','',true);
             $y['poly']=array();
             $x['content'] = $this->load->view('registrasi/v_pendaftaranonline_baru',$y,true);
             $this->load->view('template/theme',$x);  
