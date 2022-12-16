@@ -1,4 +1,5 @@
 <?php
+
 function getData(
     $config = array(
         'function'      => 'getData',
@@ -80,7 +81,6 @@ function getData(
             var no = (parseInt(start)*parseInt(limit))-parseInt(limit);
             var dari = no+1;
             var sampai = no+parseInt(limit);
-            alert('\" +data[\"row_count\"]+\"')
             var desc = \"<button class='btn btn-default btn-sm' type='button'>Showing \"+ dari + \" To \" + sampai + \" of \" +data[\"row_count\"]+\"</button>\";
             for(var i=0; i<jmlData;i++){
                 no++;
@@ -126,11 +126,11 @@ function getData(
             $ab = $config["action_button"];
             foreach ($config["variable"] as $var => $val) {
                 $no++;
-                $ab = str_replace('{{' . $var . '}}', '"+res[i]["' . $val . '"]+"', $ab);
-                $ab = str_replace('[[' . $var . ']]', 'res[i]["'.$val.'"]' , $ab);
-                $ab = str_replace('<<' . $var . '>>', $val, $ab);//statik variabel
+                $ab = $ab = str_replace('{{' . $var . '}}', '"+res[i]["' . $val . '"]+"', $ab);
             }
             //echo $ab;
+        }else{
+            $ab = $config["action_button"];
         }
         $html .= "
         tabel+=\"<td style='text-align:right;'>" . $ab . "</td>\";";
@@ -184,13 +184,13 @@ function getData(
                         var idx_end=5;
                     }
                     for (var j = idx_start; j<=idx_end; j++) {
-                        if(curIdx==j)  btn=\"btn-success\"; else btn= \"btn-default\";
+                        if(curIdx==j)  btn=\"btn-primary\"; else btn= \"btn-default\";
                         btnIdx+=\"<button class='btn \" +btn +\" btn-sm' onclick='" . $config['function'] . "(\"+ j +\")'>\" + j +\"</button>\";
                     }
                 }else{
     
                     for (var j = 1; j<=jmlPage; j++) {
-                        if(curIdx==j)  btn=\"btn-success\"; else btn= \"btn-default\";
+                        if(curIdx==j)  btn=\"btn-primary\"; else btn= \"btn-default\";
                         btnIdx+=\"<button class='btn \" +btn +\" btn-sm' onclick='" . $config['function'] . "(\"+ j +\")'>\" + j +\"</button>\";
                     }
                 }

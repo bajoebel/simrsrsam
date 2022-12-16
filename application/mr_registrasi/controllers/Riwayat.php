@@ -11,7 +11,7 @@ class riwayat extends CI_Controller
     {
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
-            $y['index_menu'] = 8;
+            $y['index_menu'] = 7;
             $x['header'] = $this->load->view('template/header', '', true);
             $z = setNav("nav_5");
             $x['nav_sidebar'] = $this->load->view('template/nav_sidebar', $z, true);

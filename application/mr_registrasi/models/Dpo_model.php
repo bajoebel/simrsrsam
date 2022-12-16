@@ -12,7 +12,6 @@ class Dpo_model extends CI_Model{
         ->or_like('nama',$q)
         ->or_like('keterangan',$q)
         ->limit($limit,$start)
-        ->order_by('Id','DESC')
         ->get('tbl01_dpo_rs')->result_array();
     }
     function editDpo($id){

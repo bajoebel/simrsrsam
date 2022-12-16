@@ -189,9 +189,7 @@ class Sep extends CI_Controller{
                 )
             )
         );
-        // header('Content-Type: application/json');
-        // echo json_encode($req);
-        // exit;
+        // headhuwtul;znnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
         date_default_timezone_set('UTC');
         $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'))-SELISIH_WAKTU;
         // Create Signature

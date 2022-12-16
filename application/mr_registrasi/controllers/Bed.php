@@ -19,7 +19,7 @@ class Bed extends CI_Controller{
             $start = 0;
             $jmlData = $this->patch_model->jmlData();
             $z = setNav("nav_8");
-            $x['index_menu'] = 7;
+            $x['index_menu'] = 6;
             $data = array(
                 'jmlData'       => $jmlData,
                 'limit'         => $limit,

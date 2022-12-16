@@ -15,7 +15,7 @@ class laporan_kunjungan extends CI_Controller {
     }
     public function kunjungan_rs(){      
         $ses_state = $this->users_model->cek_session_id();
-        $y['index_menu'] = 9;
+        $y['index_menu'] = 8;
         if($ses_state){
             $x['header'] = $this->load->view('template/header','',true);
             $z = setNav("nav_6");
@@ -48,7 +48,7 @@ class laporan_kunjungan extends CI_Controller {
             $x['header'] = $this->load->view('template/header','',true);
             $z = setNav("nav_6");
             $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
-            $y['index_menu'] = 9;
+            $y['index_menu'] = 8;
             $y['contentTitle'] = "Laporan Kunjungan Pasien di Unit Pelayanan";        
 
             $this->db->order_by('ruang','asc');  

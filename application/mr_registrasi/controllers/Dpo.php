@@ -9,7 +9,7 @@ class Dpo extends CI_Controller{
     function index(){
         $ses_state = $this->users_model->cek_session_id();
         if($ses_state){  
-            $y['index_menu'] = 12; 
+            $y['index_menu'] = 5; 
             $x['header'] = $this->load->view('template/header','',true);
             $action = "<div class=\'btn-group\'><button onclick=\'editDpo({{Id}})\' class=\'btn btn-warning btn-sm\'><span class=\'fa fa-pencil\'></span> Edit</button><button onclick=\'hapusDpo({{Id}})\' class=\'btn btn-danger btn-sm\'><span class=\'fa fa-remove\'></span> Hapus</button></div>";
             $config = array(
@@ -115,9 +115,7 @@ class Dpo extends CI_Controller{
         $ses_state = $this->users_model->cek_session_id();
         if($ses_state){  
             $nomr=$this->input->get('nomr');
-            $param=$this->input->get('param');
-            if($param=='nomr') $response = $this->db->like('nomr',$nomr)->order_by('nomr')->limit(20)->get('tbl01_pasien')->result();
-            else $response = $this->db->like('nama',$nomr)->order_by('nomr')->limit(20)->get('tbl01_pasien')->result();
+            $response = $this->db->like('nomr',$nomr)->order_by('nomr')->limit(20)->get('tbl01_pasien')->result();
             // print_r($response);
         }
         else{
