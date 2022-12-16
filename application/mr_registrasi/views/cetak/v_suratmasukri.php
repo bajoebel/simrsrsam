@@ -12,10 +12,17 @@ text-transform:uppercase;
 $tgl = date('Y-m-d', strtotime($data['tgl_lahir']));
 $umur = floor(time() - strtotime($tgl))/(60*60*24*365);
 $umurbulat=floor($umur);
-    if($data['jns_kelamin']=='L'){
+    if($data['jns_kelamin']=='1'){
         $data['jns_kelamin']='Laki-laki';
-    }else{
+    }
+    else if($data['jns_kelamin']=='2'){
         $data['jns_kelamin']='Perempuan';
+    }
+    else if($data['jns_kelamin']=='3'){
+        $data['jns_kelamin']='Tidak Dapat Ditentukan';
+    }
+    else{
+        $data['jns_kelamin']='Tidak Mengisi';
     }
 
 ?>
