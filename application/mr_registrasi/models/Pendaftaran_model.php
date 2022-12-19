@@ -408,4 +408,7 @@ class Pendaftaran_model extends CI_Model
         ->limit(10)
         ->get('tbl02_pendaftaran')->result();
     }
+    function getRegUnit($tglmasuk,$idruang){
+
+    }
 }
