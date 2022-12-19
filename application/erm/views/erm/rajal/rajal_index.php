@@ -259,7 +259,9 @@
                 },
                 success: function(response) {
                     $(":submit").attr("disabled", false);
-                    console.log(response);
+                    $('#form-data-persetujuan')[0].reset();
+                    getRiwayat(2, <?= $detail->idx ?>);
+                    // console.log(response);
                 },
                 error: function(e) {
                     console.log(e)
@@ -277,6 +279,8 @@
                 $("[name='lainnya']").prop("readonly", true)
             }
         })
+
+
     });
 
 
@@ -333,5 +337,22 @@
                 y++;
             }
         }
+    }
+
+    function hapusSetujuUmum(idx, id) {
+        $.ajax({
+            type: "GET",
+            url: base_url + `rajal/delete_setuju_umum/${idx}/${id}`,
+            data: "data",
+            dataType: "json",
+            success: function(response) {
+                if (response.status) {
+                    getRiwayat(2, idx);
+                }
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
     }
 </script>

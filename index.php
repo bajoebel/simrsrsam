@@ -1,81 +1,82 @@
-<?php 
-	include("config.php"); 
+<?php
+include("config.php");
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>SIMRS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="robots" content="none" />
-    <link rel="shortcut icon" href="<?php echo $site_url.'favicon.png' ?>">
-    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/font-awesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/Ionicons/css/ionicons.min.css"/>
+    <link rel="shortcut icon" href="<?php echo $site_url . 'favicon.png' ?>">
+    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/Ionicons/css/ionicons.min.css" />
     <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="<?php echo $site_url ?>assets/bower_components/select2/dist/css/select2.css">
-    <link rel="stylesheet" href="<?php echo $site_url ?>assets/dist/css/AdminLTE_Login.css"/>
-    <link rel="stylesheet" href="<?php echo $site_url ?>assets/dist/css/skins/skin-blue.css"/>
+    <link rel="stylesheet" href="<?php echo $site_url ?>assets/dist/css/AdminLTE_Login.css" />
+    <link rel="stylesheet" href="<?php echo $site_url ?>assets/dist/css/skins/skin-blue.css" />
     <!--[if lt IE 9]>
     <script src="<?php echo $site_url ?>assets/js/html5shiv.min.js"></script>
     <script src="<?php echo $site_url ?>assets/js/respond.min.js"></script>
     <![endif]-->
-    <link href="<?php echo $site_url ?>assets/bower_components/fonts.googleapis/fonts.css" type="text/css" rel="stylesheet" >
+    <link href="<?php echo $site_url ?>assets/bower_components/fonts.googleapis/fonts.css" type="text/css" rel="stylesheet">
 </head>
+
 <body class="hold-transition login-page">
-<div id="slideshow" style="margin-top:20px;opacity: 0.85;filter: alpha(opacity=85);border: none" class="form-control">
-    <marquee class="text-red">Aplikasi ini menggunakan cookies. Pastikan cookies browser anda dalam keadaan aktif. Setiap Cookies browser anda berubah, anda harus login ulang.</marquee>    
-</div>
+    <div id="slideshow" style="margin-top:20px;opacity: 0.85;filter: alpha(opacity=85);border: none" class="form-control">
+        <marquee class="text-red">Aplikasi ini menggunakan cookies. Pastikan cookies browser anda dalam keadaan aktif. Setiap Cookies browser anda berubah, anda harus login ulang.</marquee>
+    </div>
 
-<div id="divButton" style="margin-top:20px; width:100%;text-align: center;display: none;">
-    <button type="button" class="btn btn-danger" id="btnShow">Untuk Pilih Aplikasi Silahkan Klik Disini</button>
-</div>
+    <div id="divButton" style="margin-top:20px; width:100%;text-align: center;display: none;">
+        <button type="button" class="btn btn-danger" id="btnShow">Untuk Pilih Aplikasi Silahkan Klik Disini</button>
+    </div>
 
-<div class="login-box">  
-    <div class="login-box-body">
-        <button type="button" id="btnClose" class="close" aria-hidden="true">×</button>
-        <div class="login-logo">
-            <img src="<?php echo LOGO ?>" alt="" width="70px">
-            <br/>
-            <span style="font-size: 20px;font-weight: bolder"><?php echo COMPANY_NAME; ?></span>
-            <br/>
-            <a href="#"><b>SIMRS</b>Application</a>
-        </div>
-        <p class="login-box-msg">Pilih aplikasi yang akan digunakan</p>
-        <div class="box">
-            <div class="box-body">
-                <div style="text-align:center">
-                    <a href="administrator.php" class="btn btn-app"><i class="glyphicon glyphicon-home"></i> Administrator App</a>
-                    <a href="mr_registrasi.php" class="btn btn-app"><i class="glyphicon glyphicon-user"></i> MR Registrasi App</a>
-                    <!-- <a href="nota_tagihan.php" class="btn btn-app"><i class="glyphicon glyphicon-list-alt"></i> Nota Tagihan App</a>
+    <div class="login-box">
+        <div class="login-box-body">
+            <button type="button" id="btnClose" class="close" aria-hidden="true">×</button>
+            <div class="login-logo">
+                <img src="<?php echo LOGO ?>" alt="" width="70px">
+                <br />
+                <span style="font-size: 20px;font-weight: bolder"><?php echo COMPANY_NAME; ?></span>
+                <br />
+                <a href="#"><b>SIMRS</b>Application</a>
+            </div>
+            <p class="login-box-msg">Pilih aplikasi yang akan digunakan</p>
+            <div class="box">
+                <div class="box-body">
+                    <div style="text-align:center">
+                        <a href="administrator.php" class="btn btn-app"><i class="glyphicon glyphicon-home"></i> Administrator App</a>
+                        <a href="mr_registrasi.php" class="btn btn-app"><i class="glyphicon glyphicon-user"></i> MR Registrasi App</a>
+                        <a href="erm.php" class="btn btn-app"><i class="glyphicon glyphicon-copy"></i> Rekam Medis Elektronik</a>
+                        <!-- <a href="nota_tagihan.php" class="btn btn-app"><i class="glyphicon glyphicon-list-alt"></i> Nota Tagihan App</a>
                     <a href="farmasi.php" class="btn btn-app"><i class="glyphicon glyphicon-plus"></i> Farmasi App</a>
                     <a href="kasir.php" class="btn btn-app"><i class="glyphicon glyphicon-credit-card"></i> Kasir App</a> -->
-                    <a href="mr_dokumen.php" class="btn btn-app"><i class="glyphicon glyphicon-folder-open"></i> Dokumen & Laporan SIRS</a>
-                    <!-- <a href="display.php" class="btn btn-app"><i class="glyphicon glyphicon-bed"></i> Bed Monitoring</a> -->
+                        <a href="mr_dokumen.php" class="btn btn-app"><i class="glyphicon glyphicon-folder-open"></i> Dokumen & Laporan SIRS</a>
+                        <!-- <a href="display.php" class="btn btn-app"><i class="glyphicon glyphicon-bed"></i> Bed Monitoring</a> -->
+                    </div>
                 </div>
             </div>
+
         </div>
-        
-  </div>
-</div>
+    </div>
 
-<script src="<?php echo $site_url ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo $site_url ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $('#btnShow').click(function() {
-        $('div#divButton').slideUp('slow',function(){
-            $('div.login-box').slideDown('slow');
+    <script src="<?php echo $site_url ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo $site_url ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#btnShow').click(function() {
+            $('div#divButton').slideUp('slow', function() {
+                $('div.login-box').slideDown('slow');
+            });
         });
-    });
-    $('#btnClose').click(function() {
-        $('div.login-box').slideUp('slow',function(){
-            $('div#divButton').slideDown('slow');
+        $('#btnClose').click(function() {
+            $('div.login-box').slideUp('slow', function() {
+                $('div#divButton').slideDown('slow');
+            });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>
-
-
-

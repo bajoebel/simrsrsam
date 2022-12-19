@@ -16,11 +16,20 @@ class Rajal_model extends CI_Model
             ->get("setuju_umum");
     }
 
-    function getSetujuUmumById($id)
+    function getSetujuUmumById($idx, $id)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->where('id', $id)
+        return $db2->where(['id' => $id, "idx" => $idx])
             ->order_by("id desc")
             ->get("setuju_umum")->row();
+    }
+
+    function deleteSetujuUmum($idx, $id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2
+            ->where(["idx" => $idx, "id" => $id])
+            ->delete("setuju_umum");
+        return $this->db->affected_rows();
     }
 }

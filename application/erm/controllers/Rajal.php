@@ -102,8 +102,24 @@ class Rajal extends CI_Controller
             12 => "", // terbatas list
         ];
         if ($idx != "" && $id != "") {
+
             // data table setuju umum
-            $s = $this->rajal->getSetujuUmumById($id);
+            $s = $this->rajal->getSetujuUmumById($idx, $id);
+            if ($s->selaku == "lainnya") {
+                $s->selaku = $s->selaku_lainnya;
+            }
+            // $arr_privasi = explode(";", $s->privasi_list);
+            // $privasi = "";
+            // for ($ap = 1; $ap < count($arr_privasi); $ap++) {
+            //     $privasi .= "<span>&nbsp;&nbsp;&nbsp;" . $ap . ". " . $arr_privasi[$ap] . " </span><br/>";
+            // }
+            $privasi_list = arr_to_list($s->privasi_list);
+            if ($s->terbatas == 1) {
+                $terbatas = "&#9745;";
+            } else {
+                $terbatas = "&#9744;";
+            }
+            $terbatas_list = arr_to_list($s->terbatas_list);
             $c[1] = $p->nomr;
             $c[2] = $p->nama;
             $c[3] = date("d-m-Y", strtotime($p->tgl_lahir));
@@ -113,6 +129,13 @@ class Rajal extends CI_Controller
             $c[7] = $s->alamat;
             $c[8] = $s->phone;
             $c[9] = $s->selaku;
+            $c[10] = $privasi_list;
+            $c[11] = $terbatas;
+            $c[12] = $terbatas_list;
+            $c[13] = $s->selaku;
+            $c[14] = strtoupper($s->nama);
+            $c[15] = getNamaDokter($d->user_daftar);
+
 
             $data = [
                 "status" => true,
@@ -133,11 +156,15 @@ class Rajal extends CI_Controller
         $tempat_lahir = $this->input->post('tempat_lahir_ttd');
         $tanggal_lahir = $this->input->post('tgl_lahir_ttd');
         $jk = $this->input->post('jk_ttd');
+        $phone = $this->input->post('phone_ttd');
         $idx = $this->input->post('idx');
         $nomr = $this->input->post('nomr');
         $privasi_list = implode(';', removeChar($this->input->post('privasi')));
         $terbatas = $this->input->post('terbatas');
         $terbatas_list = implode(';', removeChar($this->input->post('terbatas_list')));
+        $alamat = $this->input->post('alamat');
+        $selaku = $this->input->post('selaku');
+        $lainnya = $this->input->post('lainnya');
         $data = [
             "idx" => $idx,
             "nomr" => $nomr,
@@ -148,6 +175,10 @@ class Rajal extends CI_Controller
             "privasi_list" => $privasi_list,
             "terbatas" => $terbatas,
             "terbatas_list" => $terbatas_list,
+            "alamat" => $alamat,
+            "selaku" => $selaku,
+            "selaku_lainnya" => $lainnya,
+            "phone" => $phone,
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ];
@@ -156,6 +187,16 @@ class Rajal extends CI_Controller
             echo json_encode(["status" => true]);
         } else {
             echo json_encode(["status" => false]);
+        }
+    }
+
+    public function delete_setuju_umum($idx, $id)
+    {
+        $delete = $this->rajal->deleteSetujuUmum($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
         }
     }
     public function hak_wajib()

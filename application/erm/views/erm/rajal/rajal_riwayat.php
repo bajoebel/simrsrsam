@@ -56,8 +56,10 @@
                             ?>
                         </td>
                         <td>
-                            <a href="<?= base_url() . 'erm.php/rajal/setuju_umum/' . $r->idx . "/" . $r->id ?>" class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" target="_blank"> <i class='fa fa-print'></i>
+                            <a href="<?= base_url() . 'erm.php/rajal/setuju_umum/' . $r->idx . "/" . $r->id ?>" class='btn btn-xs btn-default' data-toggle="tooltip" data-placement="top" title="Preview" target="_blank"> <i class='fa fa-print'></i>
                             </a>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-xs btn-danger' onclick="hapusSetujuUmum(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

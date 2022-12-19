@@ -291,6 +291,20 @@ function removeChar($arr)
     ), ' ', $arr);
     return $str;
 }
+function arr_to_list($arr, $start = "<span>&nbsp;&nbsp;&nbsp;", $end = "</span><br/>")
+{
+    $arr_list = explode(";", $arr);
+    $list = "";
+    if (count($arr_list)) {
+        for ($al = 0; $al < count($arr_list); $al++) {
+            $list .=  $start . ($al + 1) . ". " . $arr_list[$al] . $end;
+        }
+    } else {
+        $list .= "-<br/>";
+    }
+    return $list;
+}
+
 
 
 

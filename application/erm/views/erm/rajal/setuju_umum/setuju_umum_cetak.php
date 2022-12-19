@@ -1,6 +1,6 @@
 <?php
 $date = date("Y-m-d");
-print_r($c);
+// print_r($c);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -163,26 +163,26 @@ print_r($c);
                                 <table style="margin-top:0">
                                     <tr>
                                         <td>Yang Bertanda Tangan Di Bawah Ini</td>
-                                        <td>: </td>
+                                        <td>: <?= $c[5] ?></td>
                                     </tr>
                                     <tr>
                                         <td>Tempat Tanggal Lahir / Jenis Kelamin</td>
-                                        <td>:</td>
+                                        <td>: <?= $c[6] ?></td>
                                     </tr>
                                     <tr>
                                         <td>Alamat</td>
-                                        <td>:</td>
+                                        <td>: <?= $c[7] ?></td>
                                     </tr>
                                     <tr>
                                         <td>No. Telp</td>
-                                        <td>:</td>
+                                        <td>: <?= $c[8] ?></td>
                                     </tr>
                                 </table>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan='3'>Selaku (Pasien/Wali/Orang tua/Keluarga/ <?= str_pad(" ", 20, ".") ?>) dengan ini menyatakan persetujuan : </td>
+                            <td colspan='3'>Selaku (<?= $c[9] ?>) dengan ini menyatakan persetujuan : </td>
                         </tr>
                         <tr>
                             <td colspan='3'>
@@ -200,10 +200,11 @@ print_r($c);
                                 <br />
                                 <span>&nbsp;&nbsp;&nbsp;Saya menginginkan privasi khusus berupa:</span>
                                 <br>
-                                <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
+                                <!-- <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
                                 <br>
-                                <span>&nbsp;&nbsp;&nbsp;2 <?= str_pad(" ", 30, ".") ?></span>
-                                <br>
+                                <span>&nbsp;&nbsp;&nbsp;2 <?= str_pad(" ", 30, ".") ?></span> -->
+                                <?= $c[10] ?>
+                                <!-- <br> -->
                                 <b>3. PERSETUJUAN PELEPASAN INFORMASI</b>
                                 <br />
                                 <span>&nbsp;&nbsp;&nbsp;• Saya memahami informasi yang ada di dalam diri saya termasuk diagnosis, hasil laboratorium dan hasil tes diagnosis yang akan digunakan untuk perawatan medis, RSUD Dr Achmad Mochtar Bukittinggi akan menjamin kerahasiannya. </span>
@@ -212,12 +213,13 @@ print_r($c);
                                 <br />
                                 <span>&nbsp;&nbsp;&nbsp;• Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan (informasi / tidak)* tentang diagnosis, hasil pelayanan dan pengobatan saya kepada</span>
                                 <br />
-                                <span>&nbsp;&nbsp;&#9744;Terbatas Pada (sebutkan nama):</span>
+                                <span>&nbsp;&nbsp;<?= $c[11] ?>Terbatas Pada (sebutkan nama):</span>
                                 <br>
-                                <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
+                                <!-- <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
                                 <br>
                                 <span>&nbsp;&nbsp;&nbsp;2 <?= str_pad(" ", 30, ".") ?></span>
-                                <br>
+                                <br> -->
+                                <?= $c[12] ?>
                                 <b>4. INFORMASI TATA TERTIB BAGI PASIEN,PENGUNJUNG DAN PENUNGGU PASIEN</b>
                                 <br />
                                 <span>&nbsp;&nbsp;&nbsp;Saya telah menerima informasi tentang peraturan yang diberlakukan oleh Rumah Sakit dan saya beserta keluarga bersedia untuk mematuhinya, termasuk akan mematuhi jam berkunjung pasien sesuai dengan aturan di Rumah Sakit.</span>
@@ -244,13 +246,13 @@ print_r($c);
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>Pasien/Keluarga/Penanggung Jawab</td>
+                                <td><?= ($c[13] == "") ? str_pad("dfsd", 40, ".") : $c[13] ?> dari Pasien</td>
                             </tr>
                             <tr>
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= str_pad(" ", 40, ".") ?> )</td>
+                                <td>( <?= $c[14] ?> )</td>
                             </tr>
                         </table>
                     </div>
@@ -266,7 +268,7 @@ print_r($c);
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= str_pad(" ", 40, ".") ?> )</td>
+                                <td>( <?= ($c[15] == "") ? str_pad("dfsd", 40, ".") : $c[15]  ?> )</td>
                             </tr>
                         </table>
                     </div>

@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="alamat">Alamat</label>
-                                    <textarea name="" id="" name='alamat_ttd' class="form-control"></textarea>
+                                    <textarea name="alamat" id="" name='alamat_ttd' class="form-control"></textarea>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="alamat">Selaku</label>
@@ -74,8 +74,14 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="">&nbsp;</label>
+                                    <label for="">Lainnya....</label>
                                     <input type="text" name="lainnya" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="">No Telp/HP</label>
+                                    <input type="text" class="form-control" name="phone_ttd" id="phone_ttd" placeholder="Enter phone/telp">
                                 </div>
                             </div>
                         </div>
@@ -101,7 +107,7 @@
                             <div class="row">
                                 <div class="col-md-6 fieldAdd2">
                                     <div class="input-group">
-                                        <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" name="terbatas"> </span>
+                                        <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" value="1" name="terbatas"> </span>
                                         <input type="text" class="form-control" name='terbatas_list[]' placeholder="Enter text.....">
                                         <span class="input-group-btn">
                                             <button class="btn btn-success" type="button" onclick="addmore(2)"><i class="fa fa-plus"></i></button>
