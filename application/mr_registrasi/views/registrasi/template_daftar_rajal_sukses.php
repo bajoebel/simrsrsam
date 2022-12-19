@@ -2199,7 +2199,7 @@
             idx: $('#uidx').val(),
             id_daftar: $('#uid_daftar').val(),
             reg_unit: $('#ureg_unit').val(),
-            utgl_masuk_lama: $('#utgl_masuk_lama').val(),
+            tgl_masuk_lama: $('#utgl_masuk_lama').val(),
             id_ruang_asal: $('#id_ruang_asal').val(),
             tgl_masuk: $('#utgl_masuk').val(),
             id_ruang: $('#uid_ruang').val(),

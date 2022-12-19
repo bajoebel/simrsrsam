@@ -2756,6 +2756,12 @@ class registrasi extends CI_Controller
             $tb=explode(' ',$data['tgl_masuk']);
             $data['id_ruang']=$this->input->post('id_ruang');
             $data['reg_unit']=$this->input->post('reg_unit');
+            // echo "LAMA ".$id_ruang_asal; 
+            // echo "<br>BARU ".$data['id_ruang']; 
+            // echo "<br>TL ".$tl[0]; 
+            // echo "<br>TB ".$tb[0]; 
+            
+            // exit;
             if($id_ruang_asal!=$data['id_ruang'] || $tl[0]!=$tb[0]){
                 // generate Regunit baru
                 $data['reg_unit']=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang']);
