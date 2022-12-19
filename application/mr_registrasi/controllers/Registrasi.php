@@ -441,8 +441,6 @@ class registrasi extends CI_Controller
                                             $this->onlineDB->where('kode_booking', $kode);
                                             $update = $this->onlineDB->update('t_online', $data);
                                         }
-                                        
-
                                         $response['code'] = 200;
                                         $response['message'] = "Simpan data sukses.";
                                         $response['unikID'] = encrypt_decrypt('encrypt', $resData['reg_unit'], true);
