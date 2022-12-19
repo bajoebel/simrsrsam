@@ -56,7 +56,7 @@ class Layanan extends CI_Controller
 
                         $action = "<div class='btn-group'><button onclick='pilih({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
                         $config = array(
-                            'url'           => 'nota_tagihan.php/layanan/getdata',
+                            'url'           => 'erm.php/layanan/getdata',
                             'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien'),
                             'field'         => $field,
                             'function'      => 'getPasienSaatini',
@@ -82,7 +82,7 @@ class Layanan extends CI_Controller
                         }
 
                         $config1 = array(
-                            'url'           => 'nota_tagihan.php/layanan/datapermintaanpindah',
+                            'url'           => 'erm.php/layanan/datapermintaanpindah',
                             'variable'      => array('idx' => 'idx', 'nama_ruang_pengirim' => 'nama_ruang_pengirim', 'nama_kamar_pengirim' => 'nama_kamar_pengirim', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien'),
                             'field'         => $field,
                             'function'      => 'getPermintaan',
@@ -98,7 +98,7 @@ class Layanan extends CI_Controller
                         );
                         $btnbatal = "<div class=\'btn-group\'><button onclick=\'batal({{idx}})\' \"+dis[[[status_pindah]]]+\" class=\'btn btn-danger btn-sm\'><span class=\'fa fa-remove\'></span> Batal Pindah</button></div>";
                         $config2 = array(
-                            'url'           => 'nota_tagihan.php/layanan/riwayatpindah',
+                            'url'           => 'erm.php/layanan/riwayatpindah',
                             'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pindah' => 'status_pindah', 'disabled' => 'disabled'),
                             'field'         =>  array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang}} / {{nama_kamar}}', 'nama_dokter_pengirim', '=response[{{status_pindah}}]'),
                             'function'      => 'riwayatPindah',
@@ -114,7 +114,7 @@ class Layanan extends CI_Controller
                         );
                         $btnbatal = "<div class=\'btn-group\'><button onclick=\'batalPulang({{idx}})\' class=\'btn btn-danger btn-sm\'><span class=\'fa fa-remove\'></span> Batal Pulang</button></div>";
                         $config3 = array(
-                            'url'           => 'nota_tagihan.php/layanan/riwayatpulang',
+                            'url'           => 'erm.php/layanan/riwayatpulang',
                             'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'los' => 'los', 'jns_kelamin' => 'jns_kelamin', 'status_pindah' => 'status_pindah', 'disabled' => 'disabled'),
                             'field'         =>  array('id_daftar', 'reg_unit', 'tgl_keluar', '{{los}} Hari', 'nomr', 'nama_pasien', 'nama_ruang', 'cara_keluar', 'keadaan_keluar'),
                             'function'      => 'riwayatPulang',
@@ -162,7 +162,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -754,7 +754,7 @@ class Layanan extends CI_Controller
             $this->load->view('template/theme', $x);
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -806,7 +806,7 @@ class Layanan extends CI_Controller
                         history.back();
                         </script>";
                     } else {
-                        //header('location:' . base_url() . "nota_tagihan.php/layanan/histori?idx=" . $this->input->get('idx'));
+                        //header('location:' . base_url() . "erm.php/layanan/histori?idx=" . $this->input->get('idx'));
                         $this->session->unset_userdata('sPage');
                         $this->session->unset_userdata('sLike');
                         $this->session->unset_userdata('sKelas');
@@ -920,7 +920,7 @@ class Layanan extends CI_Controller
                         $x['content'] = $this->load->view('layanan/template_entry', $y, true);
                         $action = "<div class='btn-group'><button onclick='hapusNota({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-remove'></span> Hapus</button></div>";
                         $nota = array(
-                            'url'           => 'nota_tagihan.php/layanan/datanota',
+                            'url'           => 'erm.php/layanan/datanota',
                             'variable'      => array('idx' => 'idx', 'subtotal' => 'subtotal'),
                             'field'         => array('pgwNama', 'layanan', 'tarif_layanan', 'jml', 'Rp. {{subtotal}}'),
                             'function'      => 'getNota',
@@ -950,7 +950,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1064,7 +1064,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1148,7 +1148,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1263,7 +1263,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1413,7 +1413,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1635,7 +1635,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1782,7 +1782,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";
@@ -1940,7 +1940,7 @@ class Layanan extends CI_Controller
             }
         } else {
             $sid = getSessionID();
-            $url_login = base_url() . 'nota_tagihan.php/login?sid=' . $sid;
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login'
             </script>";

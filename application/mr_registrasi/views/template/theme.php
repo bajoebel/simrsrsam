@@ -237,9 +237,12 @@
             echo '<script src="' . base_url() . $libjs . '"></script>';
         }
     }
+    // echo "TEST";
     ?>
     <script type="text/javascript">
     <?php if(!empty($getData)) echo $getData .";"; ?>
+
+    
     </script>
     <div id="error" class="modal fade" role="dialog">
         <div class="modal-dialog">

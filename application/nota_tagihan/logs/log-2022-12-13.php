@@ -60,7 +60,12 @@ ERROR - 2022-12-13 07:14:53 --> Severity: Notice --> Trying to get property 'res
 ERROR - 2022-12-13 07:14:53 --> Severity: Notice --> Trying to get property 'token' of non-object C:\laragon\www\simrs_reg_v4\application\nota_tagihan\controllers\Dashboard.php 24
 ERROR - 2022-12-13 07:15:30 --> Severity: Notice --> Trying to get property 'response' of non-object C:\laragon\www\simrs_reg_v4\application\nota_tagihan\controllers\Dashboard.php 24
 ERROR - 2022-12-13 07:15:30 --> Severity: Notice --> Trying to get property 'token' of non-object C:\laragon\www\simrs_reg_v4\application\nota_tagihan\controllers\Dashboard.php 24
+<<<<<<< HEAD
 ERROR - 2022-12-13 08:34:05 --> Severity: Notice --> Trying to get property 'response' of non-object C:\laragon\www\simrs_vclaim\application\nota_tagihan\controllers\Dashboard.php 24
 ERROR - 2022-12-13 08:34:05 --> Severity: Notice --> Trying to get property 'token' of non-object C:\laragon\www\simrs_vclaim\application\nota_tagihan\controllers\Dashboard.php 24
 ERROR - 2022-12-13 08:34:08 --> Severity: Notice --> Trying to get property 'response' of non-object C:\laragon\www\simrs_vclaim\application\nota_tagihan\controllers\Dashboard.php 24
 ERROR - 2022-12-13 08:34:08 --> Severity: Notice --> Trying to get property 'token' of non-object C:\laragon\www\simrs_vclaim\application\nota_tagihan\controllers\Dashboard.php 24
+=======
+ERROR - 2022-12-13 07:35:29 --> Severity: Notice --> Trying to get property 'response' of non-object C:\laragon\www\simrs_reg_v4\application\nota_tagihan\controllers\Dashboard.php 24
+ERROR - 2022-12-13 07:35:29 --> Severity: Notice --> Trying to get property 'token' of non-object C:\laragon\www\simrs_reg_v4\application\nota_tagihan\controllers\Dashboard.php 24
+>>>>>>> cefe06b9c6f11d4ea3f07fad47a8b0a8c5eadc08

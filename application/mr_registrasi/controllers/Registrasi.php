@@ -203,6 +203,7 @@ class registrasi extends CI_Controller
                 $this->db->where("LENGTH(kode)",13);
                 $query = $this->db->get('tbl01_wilayah');
                 $y['keldom'] = $query->result();
+                $y['dpo'] = $this->db->where('nomr',$nomr)->where('status_dpo',0)->get('tbl01_dpo_rs')->row();
                 // $this->db->where('nomr', $nomr);
                 // $this->db->order_by('idx', 'desc');
                 // $this->db->limit(1);
@@ -440,8 +441,6 @@ class registrasi extends CI_Controller
                                             $this->onlineDB->where('kode_booking', $kode);
                                             $update = $this->onlineDB->update('t_online', $data);
                                         }
-                                        
-
                                         $response['code'] = 200;
                                         $response['message'] = "Simpan data sukses.";
                                         $response['unikID'] = encrypt_decrypt('encrypt', $resData['reg_unit'], true);
@@ -572,7 +571,10 @@ class registrasi extends CI_Controller
                 $x['nav_sidebar'] = $this->load->view('template/nav_sidebar', $z, true);
 
                 
-                $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,`no_ktp`,`nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,`id_ruang`,`nama_ruang`,`id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,jns_layanan,tgl_jaminan');
+                $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,`no_ktp`,
+                `nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,`id_ruang`,`nama_ruang`,
+                `id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,
+                jns_layanan,tgl_jaminan,tgl_masuk,dokterJaga');
                 $this->db->from('tbl02_pendaftaran');
                 // $this->db->join('tbl02_antrian', 'tbl02_pendaftaran.id_daftar=tbl02_antrian.id_daftar', 'LEFT');
                 $this->db->where('reg_unit', $reg_unit);
@@ -584,6 +586,27 @@ class registrasi extends CI_Controller
                     $cb = $this->db->get('tbl01_cara_bayar')->row();
                     if (empty($cb)) $y["jkn"] = 0;
                     else $y["jkn"] = $cb->jkn;
+
+                    $this->db->where_in('grid', array('1','3'));
+                    $this->db->where('status_ruang', 1);
+                    $y['poli'] = $this->db->get('tbl01_ruang')->result();
+                    $tgl=explode(' ',$y['tgl_masuk']);
+                    $timestamp = strtotime($tgl[0]);
+                    $day = date('D', $timestamp);
+                    $hari=array(
+                        'Sun'=>'Minggu',
+                        'Mon'=>'Senin',
+                        'Tue'=>'Selasa',
+                        'Wed'=>'Rabu',
+                        'Thu'=>'Kamis',
+                        'Fri'=>'Jumat',
+                        'Sat'=>'Sabtu'
+                    );
+                    
+                    $y['dokter'] = $this->db->select("jadwal_dokter_id as NRP, jadwal_dokter_nama as pgwNama")
+                    ->where('jadwal_hari',$hari[$day])
+                    ->where('jadwal_poly_id',$y['id_ruang'])
+                    ->get('tbl02_jadwal_dokter')->result();
                     $y['antrian']=$this->db->where('id_daftar',$y['id_daftar'])->get('tbl02_antrian')->row_array();
                     $x['libjs']=array(
                         'js/pendaftaran.js',
@@ -786,6 +809,8 @@ class registrasi extends CI_Controller
         $sekarang=date('d-m-Y H:i:s');
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
+            
+            
             date_default_timezone_set('UTC');
             $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'))-SELISIH_WAKTU;
             // Create Signature
@@ -801,39 +826,126 @@ class registrasi extends CI_Controller
             $header .= "user_key: ".KEY_VC;
             $this->load->model('vclaim_model');
             $res = $this->vclaim_model->getData("SEP/$nojaminan",$header);
+            // echo $res; exit;
             $res_arr=json_decode($res);
             if ($res_arr->metaData->code == 200) {
                 $res = $this->pendaftaran_model->cariSEPLokal($nojaminan,$tgl);
+                // print_r($res);exit;
+                $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$res_arr->response);
+                $regunit=$this->input->get('regunit');
+                // echo $regunit;exit;
+                if(!empty($regunit)){
+                    $dataregis=$this->db->where('reg_unit',$regunit)
+                    ->select("reg_unit,`id_ruanglama` AS poliTujuan, nomr AS noMr,id_daftar,jns_layanan,pgwNama")
+                    ->join('tbl01_pegawai','NRP=user_daftar')
+                    ->get('tbl02_pendaftaran')->row();
+                    if(!empty($dataregis)){
+                        if($dataregis->jns_layanan=="RI") $jnsLayanan=1; else $jnsLayanan=2;
+                        $sep=json_decode(hasil($data));
+                        // print_r($res);exit;
+                        if(!empty($res)){
+                            $t_sep=array(
+                                'NO_SEP'=>$sep->noSep,
+                                'noKartu'=>$sep->peserta->noKartu,
+                                'tglSep'=>$sep->tglSep,
+                                'tglRujukan'=>$res->tglRujukan,
+                                'noRujukan'=>$sep->noRujukan,
+                                'ppkRujukan'=>$res->ppkRujukan,
+                                'faskes'=> '',
+                                'ppkPelayanan'=>$res->ppkPelayanan,
+                                'jnsPelayanan'=>$res->jnsPelayanan,
+                                'catatan'=>$sep->catatan,
+                                'diagAwal'=>$res->diagnosa,
+                                'poliTujuan'=>$dataregis->poliTujuan,
+                                'klsRawat'=>$res->kelasRawat,
+                                'lakaLantas'=>$res->lakaLantas,
+                                'lokasiLaka'=>'',
+                                'user'=>$res->user,
+                                'noMr'=>$dataregis->noMr,
+                                'id_daftar'=>$dataregis->id_daftar,
+                                'jnsPeserta'=>$sep->peserta->jnsPeserta,
+                                'user_edit'=>'',
+                            );
+                        }else{
+                            $t_sep=array(
+                                'NO_SEP'=>$sep->noSep,
+                                'noKartu'=>$sep->peserta->noKartu,
+                                'tglSep'=>$sep->tglSep,
+                                'tglRujukan'=>'',
+                                'noRujukan'=>$sep->noRujukan,
+                                'ppkRujukan'=>'',
+                                'faskes'=> '',
+                                'ppkPelayanan'=>'',
+                                'jnsPelayanan'=>$jnsLayanan,
+                                'catatan'=>$sep->catatan,
+                                'diagAwal'=>'',
+                                'poliTujuan'=>$dataregis->poliTujuan,
+                                'klsRawat'=>'',
+                                'lakaLantas'=>'',
+                                'lokasiLaka'=>'',
+                                'user'=>'',
+                                'noMr'=>$dataregis->noMr,
+                                'id_daftar'=>$dataregis->id_daftar,
+                                'jnsPeserta'=>$sep->peserta->jnsPeserta,
+                                'user_edit'=>'',
+                            );
+                        }
+                        $this->rsam = $this->load->database('rsam2', true);
+                        if(!empty($t_sep)) {
+                            $y = $this->rsam->where('NO_SEP',$nojaminan)
+                            ->where('id_daftar',$dataregis->id_daftar)
+                            ->get('t_sep')->num_rows();
+                            if($y <= 0){
+                                $this->rsam->insert('t_sep',$t_sep);
+                            }else{
+                                // $this->rsam->where('NO_SEP',$nojaminan);
+                                // $this->rsam->update('t_sep',$t_sep);
+                                // echo "SEP SUDAH ADA";exit;
+                            }
+                        }
+                    }
+                    
+
+                    // header('Content-Type: application/json');
+                    // echo json_encode($res);
+                    // exit;
+                }
+
+
                 if(!empty($res)){
                     $this->load->helper('lz');
-                    $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$res_arr->response);
+                    
                     $response = array(
                         'status'    => true,
                         'local'     => 1, 
                         'response'  => $res,
                         'seponline' => json_decode(hasil($data)),
-                        'tgl'       => $sekarang
+                        'tgl'       => $sekarang,
+                        'dataregis' => $dataregis
                     );
                     $this->db->query("UPDATE tbl02_sep_response SET cetakke=cetakke+1 WHERE noSep='$nojaminan'");
                 }else{
                     $this->load->helper('lz');
-                    $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$res_arr->response);
+                    // $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$res_arr->response);
                     $response = array(
                         'status'=>true,
                         'local' => 0, 
                         'seponline' => json_decode(hasil($data)), 
                         'rujukan' => array(),
-                        'tgl'=>$sekarang
+                        'tgl'=>$sekarang,
+                        'dataregis' => $dataregis
                     );
                 }
             } else {
+                
                 $res = $this->pendaftaran_model->cariSEPLokal($nojaminan,$tgl);
                 $response = array(
                     'status'    => true,
                     'local'     => 1, 
                     'response'  => $res,
                     'seponline' => array(),
-                    'tgl'       => $sekarang
+                    'tgl'       => $sekarang,
+                    'dataregis' => array()
                 );
             }
         } else {
@@ -1741,7 +1853,7 @@ class registrasi extends CI_Controller
                 $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,
                 `no_ktp`,`nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,
                 `id_ruang`,`nama_ruang`,`id_cara_bayar`,`cara_bayar`,`no_bpjs`,tgl_masuk,
-                `no_jaminan`,`id_rujuk`,`rujukan`,jns_layanan,tgl_jaminan,kelas_layanan');
+                `no_jaminan`,`id_rujuk`,`rujukan`,jns_layanan,tgl_jaminan,kelas_layanan,dokterJaga');
                 $this->db->where('reg_unit', $reg_unit);
                 $cekPendaftaran = $this->db->get('tbl02_pendaftaran');
                 if (!$cekPendaftaran->num_rows() > 0) {
@@ -1757,7 +1869,16 @@ class registrasi extends CI_Controller
                     $cb = $this->db->get('tbl01_cara_bayar')->row();
                     if (empty($cb)) $y["jkn"] = 0;
                     else $y["jkn"] = $cb->jkn;
-    
+                    
+                    $y['dokter']= $this->db->select("jadwal_dokter_id as NRP, jadwal_dokter_nama as pgwNama")
+                    ->group_by('jadwal_dokter_id')
+                    ->get('tbl02_jadwal_dokter')->result();
+
+                    $this->db->where('grid', '2');
+                    $this->db->where('status_ruang', 1);
+                    $this->db->order_by('ruang', 'ASC');
+                    $y['poli'] = $this->db->get('tbl01_ruang')->result();
+                    
                     $x['header'] = $this->load->view('template/header', '', true);
                     $z = setNav("nav_4");
                     $x['nav_sidebar'] = $this->load->view('template/nav_sidebar', $z, true);
@@ -1923,6 +2044,7 @@ class registrasi extends CI_Controller
                     $reg_unit = trim($this->input->post('reg_unit', TRUE));
                     $status = array('status_pasien' => 6);
                     $this->pendaftaran_model->updatePendaftaran($status, $reg_unit);
+
                     if ($params['id_daftar'] == "") {
                         $response['code'] = 401;
                         $response['message'] = "Ops. No Registrasi RS tidak boleh kosong";
@@ -1945,8 +2067,11 @@ class registrasi extends CI_Controller
                                 $response['message'] = "Ops. Registrasi ini telah dibatalkan";
                             } else {
                                 $cekCommand = $this->db->insert('tbl02_pendaftaran_batal', $params);
-                                if ($cekCommand) {
-                                    //$batal = array('')
+                                if ($cekCommand) {  
+                                    // Hapus DI Dalam Tabel TSEP
+                                    $this->rsam = $this->load->database('rsam2', true);
+                                    $this->rsam->where('id_daftar',$params['id_daftar'])
+                                        ->delete('t_sep');
                                     $response['code'] = 200;
                                     $response['message'] = "Registrasi telah dibatalkan.";
                                 } else {
@@ -2094,6 +2219,8 @@ class registrasi extends CI_Controller
                 $this->db->where("LENGTH(kode)",13);
                 $query = $this->db->get('tbl01_wilayah');
                 $y['keldom'] = $query->result();
+
+                $y['dpo'] = $this->db->where('nomr',$nomr)->where('status_dpo',0)->get('tbl01_dpo_rs')->row();
                 
                 $y['ranap'] = 0;
                 $y["ruangranap"]='';
@@ -2307,7 +2434,8 @@ class registrasi extends CI_Controller
                 $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`tgl_masuk`,
                 `nomr`,`no_ktp`,`nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,
                 `id_ruang`,`nama_ruang`,`id_cara_bayar`,`cara_bayar`,`no_bpjs`,
-                `no_jaminan`,`id_rujuk`,`rujukan`,jns_layanan,tgl_jaminan,dokterJaga as kodeDokter,namaDokterJaga as namaDokter');
+                `no_jaminan`,`id_rujuk`,`rujukan`,jns_layanan,tgl_jaminan,dokterJaga,
+                dokterJaga as kodeDokter,namaDokterJaga as namaDokter');
                 $this->db->where('reg_unit', $reg_unit);
                 $cekPendaftaran = $this->db->get('tbl02_pendaftaran');
                 if (!$cekPendaftaran->num_rows() > 0) {
@@ -2325,6 +2453,28 @@ class registrasi extends CI_Controller
                     $y['rujukanonline']=$this->pendaftaran_model->getRujukanOnline($y['no_jaminan']);
                     if (empty($cb)) $y["jkn"] = 0;
                     else $y["jkn"] = $cb->jkn;
+
+                    $this->db->where_in('grid', array('4'));
+                    $this->db->where('status_ruang', 1);
+                    $y['poli'] = $this->db->get('tbl01_ruang')->result();
+                    $tgl=explode(' ',$y['tgl_masuk']);
+                    $timestamp = strtotime($tgl[0]);
+                    $day = date('D', $timestamp);
+                    $hari=array(
+                        'Sun'=>'Minggu',
+                        'Mon'=>'Senin',
+                        'Tue'=>'Selasa',
+                        'Wed'=>'Rabu',
+                        'Thu'=>'Kamis',
+                        'Fri'=>'Jumat',
+                        'Sat'=>'Sabtu'
+                    );
+                    
+                    $y['dokter'] = $this->db->select("jadwal_dokter_id as NRP, jadwal_dokter_nama as pgwNama")
+                    ->where('jadwal_hari',$hari[$day])
+                    ->where('jadwal_poly_id',$y['id_ruang'])
+                    ->get('tbl02_jadwal_dokter')->result();
+
                     $y['contentTitle'] = "Pendaftaran Pasien IGD";
     
                     $x['libjs']=array(
@@ -2342,6 +2492,25 @@ class registrasi extends CI_Controller
             echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
             window.location.href = '$url_login';</script>";
         }
+    }
+    function editkunjungan($idx){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $data=$this->db->select('idx,id_daftar,id_ruang,nama_ruang,dokterJaga,namaDokterJaga,no_jaminan')->where('idx',$idx)->get('tbl02_pendaftaran')->row();
+            $response = array(
+                'status'    => true,
+                'message'   => "OK",
+                'data'=>$data
+            );
+        }else{
+            $response = array(
+                'status'    => false,
+                'message'   => "Session Expired "
+            );
+        }  
+        
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
     function cetakRegIGD()
     {
@@ -2570,6 +2739,61 @@ class registrasi extends CI_Controller
             // $nomr=$this->input->get('nomr');
             $data=$this->pendaftaran_model->getRiwayat($nomr,'RJ');
             $response = array('status' => true, 'message' => 'OK', 'data' => $data);
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    function updatelayanan(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $idx=$this->input->post('idx');
+            $id_ruang_asal=$this->input->post('id_ruang_asal');
+            $data['tgl_masuk']=$this->input->post('tgl_masuk');
+            $tgl_masuk_lama=$this->input->post('tgl_masuk_lama');
+            $tl=explode(' ',$tgl_masuk_lama);
+            $tb=explode(' ',$data['tgl_masuk']);
+            $data['id_ruang']=$this->input->post('id_ruang');
+            $data['reg_unit']=$this->input->post('reg_unit');
+            // echo "LAMA ".$id_ruang_asal; 
+            // echo "<br>BARU ".$data['id_ruang']; 
+            // echo "<br>TL ".$tl[0]; 
+            // echo "<br>TB ".$tb[0]; 
+            
+            // exit;
+            if($id_ruang_asal!=$data['id_ruang'] || $tl[0]!=$tb[0]){
+                // generate Regunit baru
+                $data['reg_unit']=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang']);
+                $data['id_ruanglama']=getField('koderuanglama',array('idx'=>$data["id_ruang"]),'tbl01_ruang'); 
+                $t_daftar['grId']=$data['id_ruanglama'];
+            }
+            $data['nama_ruang']=$this->input->post('nama_ruang');
+            $data['dokterJaga']=$this->input->post('dokterJaga');
+            $data['namaDokterJaga']=$this->input->post('namaDokterJaga');
+            $data['no_jaminan']=$this->input->post('no_jaminan');
+            if(!empty($this->input->post('no_jaminan'))) {
+                $data['id_cara_bayar']=2;
+                $t_daftar['id_cara_bayar']=2;
+                $t_daftar['nosep']=$data['no_jaminan'];
+            }
+            $this->db->where('idx',$idx);
+            $this->db->update('tbl02_pendaftaran',$data);
+
+            // Update r_pendaftaran rsamv2
+            $t_daftar['tgl_reg']=$data['tgl_masuk'];
+            
+            $id_daftar=$this->input->post('id_daftar');
+            
+            $this->rsam = $this->load->database('rsam2', true);
+            $this->rsam->where('id_daftar', $id_daftar);
+            $this->rsam->update('t_pendaftaran', $t_daftar);
+            // $response['unikID'] = encrypt_decrypt('encrypt', $resData['reg_unit'], true);
+            $response = array(
+                'status' => true, 
+                'message' => 'Berhasil Update Layanan',
+                'unikID'=>encrypt_decrypt('encrypt', $data['reg_unit'], true)
+            );
         }else {
             $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
         }

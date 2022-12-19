@@ -181,17 +181,21 @@
                             <div class="box">
                                 <form id="form1" class="form-horizontal" action="<?php echo base_url() . 'mr_registrasi.php/registrasi/daftar_igd' ?>" method="POST">
                                     <div class="box-body">
-                                        <?php
-                                        if ($ranap == 1) {
-                                        ?>
-                                            <div class="col-md-12">
-                                                <div class="alert alert-danger alert-dismissible">
-                                                    <p>Maaf pasien belum bisa didaftarkan karena masih terdaftar sebagai pasien rawat inap di <b><?= $ruangranap ?></b>, silahkan hubungi kembali bagian ruangan untuk mengkonfirmasi kepulangan pasien</p>
-                                                </div>
-                                            </div>
-                                        <?php
-                                        }
-                                        ?>
+                                    <?php
+                                                    //echo "Ranap : " .$ranap;
+                                                    if (!empty($dpo)) {
+                                                    ?>
+                                                        <div class="col-md-12">
+                                                            <div class="alert alert-warning alert-dismissible">
+                                                                <p>Maaf pasien belum bisa didaftarkan karena masih terdaftar sebagai pasien DPO Karena <br>
+                                                                <b><?= $dpo->keterangan  ?></b><br>
+                                                                jika permasalahan pasien sudah selesai silahkan klik <a href="#" onclick="editDpo(<?= $dpo->Id ?>)">Disini</a> untuk m,engubah status dpo
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                         <div class="col-md-6">
                                             <fieldset>
                                                 <legend>Data Pasien</legend>
@@ -548,7 +552,7 @@
                                                         <div class="input-group">
                                                             <button type="button" id="batal" class="btn btn-danger">
                                                                 <i class="fa fa-rotate-left"></i> Batal</button>
-                                                            <button type="button" id="daftar" class="btn btn-primary" <?php if ($ranap == 1) echo "disabled" ?>>
+                                                            <button type="button" id="daftar" class="btn btn-primary"  <?php if (!empty($dpo)) echo "disabled" ?>>
                                                                 Daftar <i class="fa fa-arrow-right"></i></button>
                                                         </div>
                                                     </div>
@@ -1679,6 +1683,62 @@
                             </table>
                         </div>
                     </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="formdpo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Form Aprove</h4>
+            </div>
+            <div class="modal-body">
+
+                <!--form id="form1" class="form-horizontal" onsubmit="return false"-->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-3 col-md-3 col-xs-12 control-label">Nomr</label>
+                                    <div class="col-md-9 col-md-9 col-xs-12">
+                                        <input type="hidden" name="Id" id="Id">
+                                        <input name="dponomr" id="dponomr" type="text" class="form-control" value="" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-md-3 col-xs-12 control-label">Nama</label>
+                                    <div class="col-md-9 col-md-9 col-xs-12">
+                                        <input name="dponama" id="dponama" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-md-3 col-xs-12 control-label">Keterangan</label>
+                                    <div class="col-md-9 col-md-9 col-xs-12">
+                                        <textarea name="dpoketerangan" id="dpoketerangan" cols="5" rows="5" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 col-md-3 col-xs-12 control-label">&nbsp;</label>
+                                    <div class="col-md-9 col-md-9 col-xs-12">
+                                        <input type="checkbox" name="status_dpo" id="status_dpo" value="1"> Selesai
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <!--/form-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCariRujukanPasien" onclick="simpanDpo()" class="btn btn-success">Simpan</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -3396,6 +3456,56 @@
         } else {
             alert(b);
         }
+    }
+    function editDpo(id){
+        var url = base_url + "dpo/edit/" + id;
+        console.log(url);
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            data: {},
+            success: function (data) {
+                if(data.status==true){
+                    $('#formdpo').modal('show');
+                    $('#Id').val(data.data.Id)
+                    $('#dponomr').val(data.data.nomr)
+                    $('#dponama').val(data.data.nama)
+                    $('#dpoketerangan').val(data.data.keterangan)
+                    if(data.data.status_dpo==1)  $('#status_dpo').prop('checked',true);
+                    else $('#status_dpo').prop('checked',false);
+                    $('#dponomr').prop('readonly',true);
+                    $('#dponama').prop('readonly',true);
+                }else{
+                    tampilkanPesan('error',data.message);
+                }
+            }
+        });
+    }
+    function simpanDpo(){
+        var url = base_url + "dpo/simpan";
+        console.log(url);
+        var st=$('#status_dpo').prop('checked');
+        if(st==true) var status_dpo=1; else var status_dpo=0;
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                'Id':$('#Id').val(),
+                'nomr':$('#dponomr').val(),
+                'nama':$('#dponama').val(),
+                'keterangan':$('#dpoketerangan').val(),
+                'status_dpo':status_dpo,
+            },
+            success: function (data) {
+                if(data.status==true){
+                    location.reload()
+                }else{
+                    tampilkanPesan('error',data.message);
+                }
+            }
+        });
     }
 </script>
 <script type="text/javascript">

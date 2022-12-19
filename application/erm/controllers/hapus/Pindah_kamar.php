@@ -116,7 +116,7 @@ class pindah_kamar extends CI_Controller {
         $totalRec = $SQL_Count->num_rows();
         $config['target']      = 'tbody#getdata';
         $config['uri_segment']  = $this->uri_segment;
-        $config['base_url']    = base_url().'nota_tagihan.php/pindah_kamar/getView';
+        $config['base_url']    = base_url().'erm.php/pindah_kamar/getView';
         $config['total_rows']  = $totalRec;
         $config['per_page']    = $limit;
         $this->ajax_page->initialize($config);

@@ -28,7 +28,7 @@ class pasien_pulang extends CI_Controller {
             $jmlruang=$y['getRuang']->num_rows();
             if($jmlruang==1) {
                 $kdlok=$y['getRuang']->row()->idx;
-                header('location:'.base_url() ."nota_tagihan.php/pasien_pulang/data_pasien_pulang?kLok=" .$kdlok);
+                header('location:'.base_url() ."erm.php/pasien_pulang/data_pasien_pulang?kLok=" .$kdlok);
             }else{
                 $x['content'] = $this->load->view('pasien_pulang/template_ruang',$y,true);
                 $this->load->view('template/theme',$x);
@@ -149,7 +149,7 @@ class pasien_pulang extends CI_Controller {
         $totalRec = $SQL_Count->num_rows();
         $config['target']      = 'tbody#getdata';
         $config['uri_segment']  = $this->uri_segment;
-        $config['base_url']    = base_url().'nota_tagihan.php/pasien_pulang/getView';
+        $config['base_url']    = base_url().'erm.php/pasien_pulang/getView';
         $config['total_rows']  = $totalRec;
         $config['per_page']    = $limit;
         $this->ajax_page->initialize($config);
