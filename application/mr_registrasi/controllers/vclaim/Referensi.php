@@ -119,6 +119,8 @@ class Referensi extends CI_Controller{
             if($arr->metaData->code==200){
                 $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$arr->response);
                 $res=json_encode(array('metaData'=>$arr->metaData,'response'=>json_decode(hasil($data))));
+                
+                // print_r($hasil->list);exit;
             }
             header('Content-Type: application/json');
             echo $res;
@@ -355,6 +357,7 @@ class Referensi extends CI_Controller{
             if($arr->metaData->code==200){
                 $data=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$arr->response);
                 $res=json_encode(array('metaData'=>$arr->metaData,'response'=>json_decode(hasil($data))));
+                
             }
             header('Content-Type: application/json');
             echo $res;
