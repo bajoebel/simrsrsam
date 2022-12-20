@@ -370,7 +370,7 @@ $date = date("Y-m-d");
                                                                 Legs
                                                                 (Ekstermitas)
                                                             </td>
-                                                            <td>Posisi normal atau santi</td>
+                                                            <td>Posisi normal atau santai</td>
                                                             <td>0</td>
                                                             <td></td>
                                                         </tr>

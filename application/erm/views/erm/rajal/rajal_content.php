@@ -46,7 +46,7 @@
                     </button>
                 </div>
             </div>
-            <div class="box-body" style="max-height: 800px; overflow-y: scroll; ">
+            <div class="box-body">
                 <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
             </div>
         </div>
