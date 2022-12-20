@@ -252,7 +252,7 @@ $date = date("Y-m-d");
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= $c[14] ?> )</td>
+                                <td>( <?= ($c[14] == "") ? str_pad(" ", 40, ".") : $c[14]  ?> )</td>
                             </tr>
                         </table>
                     </div>
@@ -268,7 +268,7 @@ $date = date("Y-m-d");
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= ($c[15] == "") ? str_pad("dfsd", 40, ".") : $c[15]  ?> )</td>
+                                <td>( <?= ($c[15] == "") ? str_pad(" ", 40, ".") : $c[15]  ?> )</td>
                             </tr>
                         </table>
                     </div>

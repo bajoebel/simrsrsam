@@ -146,7 +146,7 @@
                             Data Sosial Pasien
                         </div>
                     </div>
-                    <div class="box-body box-profile">
+                    <div class="box-body box-profile" style="max-height: 300px; overflow-y: scroll; ">
                         <div class="row">
                             <h1 class="text-center"></h1>
                             <div class="col-md-2">
@@ -228,8 +228,18 @@
 
 <?php } ?>
 <script>
+
+</script>
+<script>
     $(document).ready(function() {
-        getRiwayat(2, <?= $detail->idx ?>);
+        // default ketika di load pertama kali
+        getRiwayat(3, <?= $detail->idx ?>);
+        $(".select2").select2();
+    });
+</script>
+<!-- script persetujuan umum -->
+<script>
+    $(document).ready(function() {
         $("[name='terbatas']").change(function() {
             if ($(this).is(":checked")) {
                 $("#terbatas_list").removeAttr("readonly")
@@ -237,7 +247,6 @@
                 $("#terbatas_list").attr('readonly', true);
             }
         });
-
         $(".fieldAdd").on('click', '.removeMore', function(e) {
             $(this).parent().parent('div').remove();
         })
@@ -279,10 +288,7 @@
                 $("[name='lainnya']").prop("readonly", true)
             }
         })
-
-
     });
-
 
     function getRiwayat(pil, idx) {
         $.ajax({
@@ -355,4 +361,8 @@
             }
         });
     }
+</script>
+<!--  -->
+<script>
+
 </script>

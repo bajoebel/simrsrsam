@@ -67,6 +67,22 @@
             </tbody>
         </table>
     </div>
+<?php } else if ($pil == 3) { ?>
+    <!-- Persetujuan umum -->
+    <div class="" style="max-height: 450px; overflow-y: scroll; ">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Poliklinik</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
 <?php } else { ?>
     <div class="alert alert-danget">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -582,7 +582,7 @@ function pilih(a) {
 
 function pilihPasien(a) {
     //alert(a + b);
-    var url = base_url + 'nota_tagihan/entry_nota?idx=' + a;
+    var url = base_url + 'erm/detail?idx=' + a;
     window.location.href = url;
 }
 

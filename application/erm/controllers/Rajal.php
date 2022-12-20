@@ -98,8 +98,11 @@ class Rajal extends CI_Controller
             8 => "", // no telp
             9 => "", // selaku
             10 => "", // privasi list
-            11 => "", // terbatas
-            12 => "", // terbatas list
+            11 => "", // 
+            12 => "", // 
+            13 => "", // 
+            14 => "", // 
+            15 => "", // 
         ];
         if ($idx != "" && $id != "") {
 
