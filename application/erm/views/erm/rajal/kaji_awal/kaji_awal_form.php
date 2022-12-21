@@ -11,6 +11,10 @@
         border: 1px solid #555 !important;
     }
 
+    .w-50 {
+        width: 50px;
+    }
+
     .w-100 {
         width: 100px;
     }
@@ -28,7 +32,7 @@
         margin: 5px 0;
     }
 </style>
-<form role="form" id='form-data-persetujuan' method="post">
+<form role="form" id='form-data-kaji-awal' method="post">
     <div class="box-body">
         <input type="hidden" name="idx" value="<?= $detail->idx ?>">
         <input type="hidden" name="nomr" value="<?= $detail->nomr ?>">
@@ -367,7 +371,7 @@
         </div>
         <div class="col-md-8">
             <label for="">Metode VAS</label>
-            <img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" width="100%" alt="">
+            <img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="100%" alt="">
         </div>
     </div>
     <div class="form-group row">
@@ -441,7 +445,7 @@
     </div>
     <div class="form-group row">
         <div class="col-md-12">
-            <label for="nama_ttd" class="text-blue">g. Skrining Gizi Awal </label>
+            <label for="" class="text-blue">g. Skrining Gizi Awal </label>
         </div>
     </div>
     <div class="row">
@@ -487,4 +491,237 @@
             </p>
         </div>
     </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="" class="text-blue">i. Status fungsional </label><br>
+            <p class="text-muted">&nbsp;&nbsp;&nbsp;Aktivitas dan Mobilisasi : (lampirkan formulir pengkajian status fungsional Bartel Index)</p>
+        </div>
+        <div class="col-md-12">
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="jalan">Mandiri
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="kursi roda">Perlu Bantuan,sebutkan <input type="text" name="" id="" class="custom-input">
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="brankar"> Ketergantungan penuh
+            </label>
+        </div>
+        <div class="col-md-12">
+            <p class="text-muted">&nbsp;&nbsp;&nbsp;(Bila ketergantungan penuh kolaborasi ke DPJP untuk konsul ke rehabilitasi)</p>
+            <label for="">&nbsp;&nbsp;&nbsp;Diberitahukan ke dokter</label>
+            <label class="radio-inline">
+
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="kursi roda">Ya, Jam <input type="text" name="" id="" class="custom-input">
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="brankar"> Tidak
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="" class="text-blue">j. Risiko Cidera / Jatuh </label><br>
+            <p class="text-muted">&nbsp;&nbsp;&nbsp;Aktivitas dan Mobilisasi : (lampirkan formulir pengkajian status fungsional Bartel Index)</p>
+        </div>
+        <div class="col-md-12">
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="jalan">Tidak
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="jalan">Bila Ya, Risiko jatuh
+            </label>
+            <label for="">
+                <select name="" id="" class="form-control">
+                    <option value="">Rendah</option>
+                    <option value="">Sedang</option>
+                    <option value="">Tinggi</option>
+                </select>
+            </label><br />
+            <label class="radio">
+                Jika resiko jatuh sedang atau tinggi dipasang gelang risiko jatuh warna kuning
+                <label class="radio-inline">
+                    <input type="radio" name="tiba_ka[]" value="jalan">Ya
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="tiba_ka[]" value="jalan">Tidak
+                </label>
+            </label>
+            <label class="radio">
+                Diberitahukan ke dokter
+                <label class="radio-inline">
+                    <input type="radio" name="tiba_ka[]" value="jalan">Ya jam <input type="text" name="" id="" class="custom-input">
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="tiba_ka[]" value="jalan">Tidak
+                </label>
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="" class="text-blue">k. Pemeriksaan Umum / Fisik </label><br>
+        </div>
+        <div class="col-md-3">
+            <label for="">Keadaan Umum</label>
+            <select name="" id="" class="form-control form-control-sm">
+                <option value="">== Pilih ==</option>
+                <option value="ya">Tampak Tidak Sehat</option>
+                <option value="tidak">Tampak Sakit Ringan</option>
+                <option value="tidak">Tampak Sakit Sedang</option>
+                <option value="tidak">Tampak Sakit Berat</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="">Kesadaran</label>
+            <select name="" id="" class="form-control form-control-sm">
+                <option value="">== Pilih ==</option>
+                <option value="ya">Kompos Mentis</option>
+                <option value="tidak">Apatis</option>
+                <option value="tidak">Somnolen</option>
+                <option value="tidak">Soporo</option>
+                <option value="tidak">Koma</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="">GCS</label>
+            <div>
+                E : <input type="number" name="" id="" class="custom-input w-50">
+                M : <input type="text" name="" id="" class="custom-input w-50">
+                V : <input type="text" name="" id="" class="custom-input w-50">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label for="">TTV</label>
+            <div>
+                Sh : <input type="number" name="" id="" class="custom-input w-50">
+                Nd : <input type="number" name="" id="" class="custom-input w-50">
+                Rr : <input type="number" name="" id="" class="custom-input w-50">
+                Sp02 : <input type="number" name="" id="" class="custom-input w-50">
+                TD : <input type="number" name="" id="" class="custom-input w-50">
+                Down Score : <input type="number" name="" id="" class="custom-input w-50">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label for="">Pemeriksaan : Status generalis & status lokalis ( </label>
+            <input type="text" name="" id="" class="form-control">
+        </div>
+        <div class="col-md-12">
+            <label class="radio">
+                Pemeriksaan penunjang sebelum rawat inap :
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="tiba_ka[]" value="jalan">Radiologi<input type="text" name="" id="" class="custom-input">
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="tiba_ka[]" value="jalan">Lab<input type="text" name="" id="" class="custom-input">
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="tiba_ka[]" value="jalan">Lain-lain<input type="text" name="" id="" class="custom-input">
+                </label>
+            </label>
+            <label class="radio">
+                Pemeriksaan penunjang (Laboratorium, Radiologi, dll) dilampirkan
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="" class="text-blue">l. Kebutuhan Komunikasi dan Edukasi </label><br>
+        </div>
+        <div class="col-md-4">
+            <label for="">Terdapat hambatan dalam pembelajaran</label>
+            <select name="" id="" class="form-control">
+                <option value="">Tidak</option>
+                <option value="">Ya</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="">Jika Ya</label>
+            <select name="" id="" class="form-control">
+                <option value="">Pendengaran</option>
+                <option value="">Budaya</option>
+                <option value="">Penglihatan</option>
+                <option value="">Emosi</option>
+                <option value="">Kognitif</option>
+                <option value="">Bahasa</option>
+                <option value="">Fisik</option>
+                <option value="">Lainnya</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="">Jika Ya Sebutkan</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="">Dibutuhkan Penerjemah</label>
+            <select name="" id="" class="form-control">
+                <option value="">==Pilih==</option>
+                <option value="">Ya</option>
+                <option value="">Tidak</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="">Jika Ya Sebutkan</label>
+            <input type="text" name="" id="" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="">Bahasa Isyarat</label>
+            <select name="" id="" class="form-control">
+                <option value="">==Pilih==</option>
+                <option value="">Ya</option>
+                <option value="">Tidak</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="">Kebutuhan Edukasi (Pilih topik edukasi pada kotak yang tersedia)</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Diagnosa dan manajemen penyakit
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Obat-obatan / Terapi
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Diet dan nutrisi
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Tindakan keperawatan sebutkan<input type="text" name="" id="" class="custom-input w-200">
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Rehabilitasi
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Manajemen nyeri
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" name="tiba_ka[]" value="jalan">Lain-lain sebutkan <input type="text" name="" id="" class="custom-input w-200">
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="">Diagnosa Keperawatan</label>
+            <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="">Tindakan Keperawatan</label>
+            <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <label for="">Telah di jelaskan kepada</label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="jalan">Pasien
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="tiba_ka[]" value="jalan">Keluarga, Hubungan <input type="text" name="" id="" class="custom-input w-200">
+            </label>
+        </div>
+    </div>
+
 </form>
