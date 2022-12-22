@@ -25,6 +25,11 @@ class Json extends CI_Controller{
         header('Content-Type: application/json');
         echo json_encode($res);
     }
+    function rekap(){
+        $res=$this->json_model->getRekap();
+        header('Content-Type: application/json');
+        echo json_encode($res);
+    }
     function getaplicare(){
         $res=$this->json_model->getbedaplicare();
         header('Content-Type: application/json');

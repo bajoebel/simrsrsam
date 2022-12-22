@@ -130,7 +130,8 @@ class Json_model extends CI_Model
         return $result;
     }
     function getMapKemkes(){
-        return $this->db->query("SELECT id_tt,ruang,jumlah_ruang,jumlah,IFNULL(terpakai,0) AS terpakai,0 AS antrian, 0 AS prepare, 0 AS prepare_plan,0 AS covid FROM
+        return $this->db->query("SELECT id_tt,ruang,jumlah_ruang,jumlah,IFNULL(terpakai,0) AS terpakai,0 as terpakai_suspek, 0 AS terpakai_konfirmasi,
+        0 AS antrian, 0 AS prepare, 0 AS prepare_plan,0 AS covid FROM
         (SELECT id_tt_kemkes AS id_tt,kelas_jkn,kelas_layanan,ruang_kemkes AS ruang,COUNT(id_ruang) AS jumlah_ruang,SUM(jml_tt) AS jumlah FROM `tbl01_kamar` 
         WHERE id_tt_kemkes IS NOT NULL AND status_publish=1 GROUP BY id_tt_kemkes) AS tabel1
         LEFT JOIN
@@ -140,5 +141,33 @@ class Json_model extends CI_Model
         AND a.reg_unit NOT IN (SELECT e.reg_unit FROM `tbl02_pindah_ranap`e WHERE e.`ruang_pengirim` <> e.`id_ruang` AND e.idx IN (SELECT f.`id_pindah_ranap` FROM `tbl02_pindah_ranap_response` f))
         GROUP BY id_tt_kemkes) AS tabel2 
         ON tabel1.id_tt=tabel2.id_tt_kemkes")->result();
+    }
+    function getRekap(){
+        $sekarang=date('Y-m-d');
+        // $sekarang='2022-02-05';
+        return $this->db->query("SELECT
+        DATE_FORMAT(`a`.`tgl_masuk`,'%Y-%m-%d') AS `tgl_kunjungan`,
+        `a`.`id_ruang`       AS `ruangid`,
+        `a`.`nama_ruang`     AS `nama_ruang`,
+        `a`.`id_jenis_peserta`  AS `id_cara_bayar`,
+        `a`.`jenis_peserta`     AS `cara_bayar`,
+        '' AS wilayahid,
+        `a`.`nama_provinsi`  AS `provinsi`,
+        `a`.`nama_kab_kota`  AS `kabupaten`,
+        `a`.`nama_kecamatan` AS `kecamatan`,
+        `a`.`nama_kelurahan` AS `kelurahan`,
+        `a`.`jns_layanan` AS `jns_layanan`,
+        COUNT(`a`.`idx`)     AS `jumlah_kunjungan`,
+        SUM((CASE WHEN (DATE_FORMAT(`a`.`tgl_masuk`,'%Y-%m-%d') = DATE_FORMAT(`a`.`tgl_daftar`,'%Y-%m-%d')) THEN 1 ELSE 0 END)) AS `pasien_baru`,
+        SUM((CASE WHEN (DATE_FORMAT(`a`.`tgl_masuk`,'%Y-%m-%d') <> DATE_FORMAT(`a`.`tgl_daftar`,'%Y-%m-%d')) THEN 1 ELSE 0 END)) AS `pasien_lama`,
+        SUM((CASE WHEN (`a`.`nama_kab_kota` = 'Kota Padang Panjang') THEN 1 ELSE 0 END)) AS `dalam_kota`,
+        SUM((CASE WHEN (`a`.`nama_kab_kota` <> 'Kota Padang Panjang') THEN 1 ELSE 0 END)) AS `luar_kota`,
+        SUM((CASE WHEN ((`a`.`jns_kelamin` = '1') OR (`a`.`jns_kelamin` = 'L')) THEN 1 ELSE 0 END)) AS `laki_laki`,
+        SUM((CASE WHEN ((`a`.`jns_kelamin` = '0') OR (`a`.`jns_kelamin` = 'P')) THEN 1 ELSE 0 END)) AS `perempuan`
+      FROM `tbl02_pendaftaran` `a`
+      WHERE (NOT(`a`.`reg_unit` IN(SELECT
+      `tbl02_pendaftaran_batal`.`reg_unit`
+      FROM `tbl02_pendaftaran_batal`))) AND DATE_FORMAT(`a`.`tgl_masuk`,'%Y-%m-%d')='$sekarang'
+      GROUP BY DATE_FORMAT(`a`.`tgl_masuk`,'%Y-%m-%d'),`a`.`id_ruang`,`a`.`id_jenis_peserta`,`a`.`nama_provinsi`,`a`.`nama_kab_kota`,`a`.`nama_kecamatan`,`a`.`nama_kelurahan`")->result();
     }
 }

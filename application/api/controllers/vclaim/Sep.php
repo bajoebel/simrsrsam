@@ -16,7 +16,7 @@ class Sep extends CI_Controller
     function insertSEP()
     {
         $response = null;
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {sep
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST['noKartu']) && isset($_POST['tglSep'])) {
                 $noKartu = $this->input->post('noKartu', true); // nokartu BPJS
                 $tglSep = $this->input->post('tglSep', true); // tanggal penerbitan sep format yyyy-mm-dd
