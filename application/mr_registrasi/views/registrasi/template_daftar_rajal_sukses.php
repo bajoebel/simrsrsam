@@ -1723,6 +1723,7 @@
                 <div id="layanan">
                     <form class="form-horizontal" name="upddatelayanan" id="updatelayanan">
                         <input type="hidden" name="id_ruang_asal" id="id_ruang_asal" value="<?= $id_ruang ?>">
+                        <input type="hidden" name="ujns_layanan" id="ujns_layanan" value="<?= $jns_layanan ?>">
                         <input type="hidden" name="uidx" id="uidx" value="<?= $idx ?>">
                         <input type="hidden" name="uid_daftar" id="uid_daftar" value="<?= $id_daftar ?>">
                         <input type="hidden" name="ureg_unit" id="ureg_unit" value="<?= $reg_unit ?>">
@@ -2199,6 +2200,7 @@
             idx: $('#uidx').val(),
             id_daftar: $('#uid_daftar').val(),
             reg_unit: $('#ureg_unit').val(),
+            jns_layanan: $('#ujns_layanan').val(),
             tgl_masuk_lama: $('#utgl_masuk_lama').val(),
             id_ruang_asal: $('#id_ruang_asal').val(),
             tgl_masuk: $('#utgl_masuk').val(),
