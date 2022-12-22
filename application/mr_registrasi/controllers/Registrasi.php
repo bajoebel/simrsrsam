@@ -2749,6 +2749,7 @@ class registrasi extends CI_Controller
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $idx=$this->input->post('idx');
+            $jns_layanan=$this->input->post('jns_layanan');
             $id_ruang_asal=$this->input->post('id_ruang_asal');
             $data['tgl_masuk']=$this->input->post('tgl_masuk');
             $tgl_masuk_lama=$this->input->post('tgl_masuk_lama');
@@ -2756,15 +2757,9 @@ class registrasi extends CI_Controller
             $tb=explode(' ',$data['tgl_masuk']);
             $data['id_ruang']=$this->input->post('id_ruang');
             $data['reg_unit']=$this->input->post('reg_unit');
-            // echo "LAMA ".$id_ruang_asal; 
-            // echo "<br>BARU ".$data['id_ruang']; 
-            // echo "<br>TL ".$tl[0]; 
-            // echo "<br>TB ".$tb[0]; 
-            
-            // exit;
             if($id_ruang_asal!=$data['id_ruang'] || $tl[0]!=$tb[0]){
                 // generate Regunit baru
-                $data['reg_unit']=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang']);
+                $data['reg_unit']=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang'],$jns_layanan);
                 $data['id_ruanglama']=getField('koderuanglama',array('idx'=>$data["id_ruang"]),'tbl01_ruang'); 
                 $t_daftar['grId']=$data['id_ruanglama'];
             }

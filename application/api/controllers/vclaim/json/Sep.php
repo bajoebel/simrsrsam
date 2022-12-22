@@ -86,7 +86,7 @@ class Sep extends CI_Controller {
             if(isset($_POST['param1']) && isset($_POST['param2'])){
                 $nosep = $this->input->post('param1',true); // Nomor SEP
                 $user = $this->input->post('param2',true); // user pembuat SEP
-                
+
                 if($param1 !== ""){
                     $x['request']['t_sep']['noKartu'] = $nosep;
                     $x['request']['t_sep']['user'] = $user;
