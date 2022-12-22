@@ -45,14 +45,23 @@ if (!function_exists('agama')) {
                 return "budha";
                 break;
             case '6':
-                return "penghayat";
+                return "konghocu";
                 break;
             case '7':
                 return "penghayat";
+                break;
+            case '8':
+                return "Lain-lain";
                 break;
             default:
                 return "-";
                 break;
         }
+    }
+}
+
+if (!function_exists('agama')) {
+    function agama($param)
+    {
     }
 }

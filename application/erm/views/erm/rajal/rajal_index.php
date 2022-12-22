@@ -234,7 +234,9 @@
     $(document).ready(function() {
         // default ketika di load pertama kali
         getRiwayat(4, <?= $detail->idx ?>);
-        $(".select2").select2();
+        $(".select2").select2({
+            tags: true
+        });
     });
 </script>
 <!-- script persetujuan umum -->
