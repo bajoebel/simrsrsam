@@ -146,7 +146,7 @@
                             Data Sosial Pasien
                         </div>
                     </div>
-                    <div class="box-body box-profile" style="max-height: 300px; overflow-y: scroll; ">
+                    <div class="box-body box-profile">
                         <div class="row">
                             <h1 class="text-center"></h1>
                             <div class="col-md-2">
@@ -233,7 +233,7 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(3, <?= $detail->idx ?>);
+        getRiwayat(4, <?= $detail->idx ?>);
         $(".select2").select2();
     });
 </script>
