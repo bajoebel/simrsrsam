@@ -1,5 +1,5 @@
 <?php
-	// error_reporting(0);
+	error_reporting(0);
 	$idx = $this->uri->segment(3);
 	
     function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
