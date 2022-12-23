@@ -89,3 +89,62 @@
         <button type="form" class="btn btn-primary">Simpan</button>
     </div>
 </form>
+<script>
+    $(document).ready(function() {
+        $("[name='terbatas']").change(function() {
+            if ($(this).is(":checked")) {
+                $("#terbatas_list").removeAttr("readonly")
+            } else {
+                $("#terbatas_list").attr('readonly', true);
+            }
+        });
+        $(".fieldAdd").on('click', '.removeMore', function(e) {
+            $(this).parent().parent('div').remove();
+        })
+        $(".fieldAdd2").on('click', '.removeMore2', function(e) {
+            $(this).parent().parent('div').remove();
+        })
+        // select option lainnya
+        $("[name='selaku']").on("change", function() {
+            let p = $(this).val();
+            if (p == 'lainnya') {
+                $("[name='lainnya']").prop("readonly", false).focus();
+
+            } else {
+                $("[name='lainnya']").prop("readonly", true)
+            }
+        })
+    });
+
+    function addmore(pil) {
+        var maxField = 10;
+
+        if (pil == 1) {
+            var x = 1;
+            var fieldHtml = `<div class="input-group" style="margin-top:2px">
+                            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger removeMore" type="button"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </div>`;
+            if (x < maxField) {
+                x++;
+                $(".fieldAdd").append(fieldHtml);
+            }
+        }
+
+        if (pil == 2) {
+            var y = 1;
+            var fieldHtml2 = `<div class="input-group" style="margin-top:2px">
+            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+            <span class="input-group-btn">
+            <button class="btn btn-danger removeMore2" type="button"><i class="fa fa-trash"></i></button>
+            </span>
+            </div>`;
+            if (y < maxField) {
+                $(".fieldAdd2").append(fieldHtml2);
+                y++;
+            }
+        }
+    }
+</script>

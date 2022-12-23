@@ -5,7 +5,7 @@ class Rajal_model extends CI_Model
     function insertSetujuUmum($data)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->insert("setuju_umum", $data);
+        return $db2->insert("rj_setuju_umum", $data);
     }
 
     function getSetujuUmum($nomr)
@@ -13,7 +13,7 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where('nomr', $nomr)
             ->order_by("id desc")
-            ->get("setuju_umum");
+            ->get("rj_setuju_umum");
     }
 
     function getSetujuUmumById($idx, $id)
@@ -21,7 +21,7 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['id' => $id, "idx" => $idx])
             ->order_by("id desc")
-            ->get("setuju_umum")->row();
+            ->get("rj_setuju_umum")->row();
     }
 
     function deleteSetujuUmum($idx, $id)
@@ -29,7 +29,7 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         $db2
             ->where(["idx" => $idx, "id" => $id])
-            ->delete("setuju_umum");
+            ->delete("rj_setuju_umum");
         return $this->db->affected_rows();
     }
 }

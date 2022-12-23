@@ -109,3 +109,16 @@ if (!function_exists('edukasi')) {
         }
     }
 }
+
+if (!function_exists('status_erm')) {
+    function status_erm($param)
+    {
+        $result = "";
+        if ($param == 0) {
+            $result = "<span class='badge bg-green'>Proses</span>";
+        } else if ($param == 1) {
+            $result = "<span class='badge bg-red'>Final</span>";
+        }
+        return $result;
+    }
+}

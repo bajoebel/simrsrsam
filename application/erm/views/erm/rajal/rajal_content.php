@@ -1,5 +1,5 @@
 <div class="tab-content">
-    <div class="tab-pane" id="tab_1">
+    <div class="tab-pane <?= $ta[1] ?>" id="tab_1">
         <!-- surat masuk rawat jalan -->
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane" id="tab_2">
+    <div class="tab-pane <?= $ta[2] ?>" id="tab_2">
         <!-- persetujuan umum -->
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane" id="tab_3">
+    <div class="tab-pane <?= $ta[3] ?>" id="tab_3">
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
@@ -49,25 +49,34 @@
             <div class="box-body">
                 <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
             </div>
+            <div class="box-footer">
+                <button type="form" class="btn btn-primary">Simpan</button>
+            </div>
         </div>
     </div>
-    <div class="tab-pane" id="tab_4">
-        <div class="box box-success">
-            <div class="box-header ui-sortable-handle" style="cursor: move;">
-                <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Form Input Kajian Awal Medis</h3>
-                <div class="box-tools pull-right">
-                    <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
-                        <i class='fa fa-print'></i>
-                    </button>
+    <div class="tab-pane <?= $ta[4] ?>" id="tab_4">
+        <form role="form" id='form-data-kaji-awal-medis' method="post">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Form Input Kajian Awal Medis</h3>
+                    <div class="box-tools pull-right">
+                        <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
+                            <i class='fa fa-print'></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <?php $this->load->view("erm/rajal/kaji_awal_medis/kaji_awal_medis_form") ?>
+                </div>
+                <div class="box-footer">
+                    <button type="form" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
-            <div class="box-body">
-                <?php $this->load->view("erm/rajal/kaji_awal_medis/kaji_awal_medis_form") ?>
-            </div>
-        </div>
+        </form>
     </div>
-    <div class="tab-pane" id="tab_5">
+    <div class="tab-pane <?= $ta[5] ?>" id="tab_5">
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
@@ -83,7 +92,7 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane active" id="tab_6">
+    <div class="tab-pane <?= $ta[6] ?>" id="tab_6">
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>

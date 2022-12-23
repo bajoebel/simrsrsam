@@ -394,7 +394,7 @@
                 </select>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group rowgi">
             <div class="col-md-4">
                 <label for="">Media Edukasi</label>
                 <select name="" id="" class="form-control">

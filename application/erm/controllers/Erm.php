@@ -131,15 +131,27 @@ class Erm extends CI_Controller
             }
 
             $z = setNav("nav_2");
+            $ta = [
+                "1" => "", //surat masuk rawat jalan
+                "2" => "", //persetujuan umum
+                "3" => "", //kajian awal keperawatan 
+                "4" => "", //kajian awal medis
+                "5" => "", //cppt
+                "6" => "", //edukasi pasien
+            ];
+            $ta["4"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,
-                'pasien' => $pasien
+                'pasien' => $pasien,
+                "ta" => $ta,
+                "ruang" => get_list_ruang("RJ")
             );
+
             $view = array(
                 'header' => $this->load->view('template/header', '', true),
                 'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
-                'content' => $this->load->view('erm/' . $folder . '/' . $folder . '_index', $data, true)
+                'content' => $this->load->view('erm/' . $folder . '/' . $folder . '_index', $data, true),
             );
             $this->load->view('template/theme', $view);
         } else {

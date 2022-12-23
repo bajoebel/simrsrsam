@@ -128,13 +128,14 @@
     }
 </style>
 <section class="content-header">
-    <h1><?php echo $contentTitle ?> <?php echo getPoliByID($detail->id_ruang) ?></h1>
+    <h1><?php echo $contentTitle ?></h1>
 </section>
 <?php if (!empty($detail)) { ?>
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $detail->jns_layanan ?>">
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <!-- <?php print_r($detail) ?> -->
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <div class="back">
@@ -183,7 +184,42 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <td colspan="5"><b>Detail Kunjungan</b></td>
+                                            <td colspan="5">
+                                                <b>Sedang Dilayani di</b><br />
+                                                <?php echo getPoliByID($detail->id_ruang) ?>
+                                            </td>
+                                            <td>
+                                                <b>Dokter Penanggung Jawab</b><br />
+                                                <?php echo $detail->namaDokterJaga; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5">
+                                                <b>
+                                                    Status Rekam Medis<br>
+                                                    <?php echo status_erm($detail->status_erm) ?><br /><br />
+                                                    <button class="btn btn-sm btn-primary"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis"></i></button>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
+                                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Resume Medis</a></li>
+                                                            <li><a href="#">List Instrumen</a></li>
+                                                            <li><a href="#">Kajian Awal Rawat</a></li>
+                                                            <li><a href="#">Kajian Awal Medis</a></li>
+                                                            <li><a href="#">CPPT</a></li>
+                                                            <li><a href="#">Edukasi Pasien</a></li>
+                                                        </ul>
+                                                    </div>
+                                            </td>
+                                            <td>
+                                                <b>Hari/Tanggal Masuk</b><br />
+                                                <?php echo DateToIndoDayTime($detail->tgl_masuk) ?>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -242,20 +278,6 @@
 <!-- script persetujuan umum -->
 <script>
     $(document).ready(function() {
-        $("[name='terbatas']").change(function() {
-            if ($(this).is(":checked")) {
-                $("#terbatas_list").removeAttr("readonly")
-            } else {
-                $("#terbatas_list").attr('readonly', true);
-            }
-        });
-        $(".fieldAdd").on('click', '.removeMore', function(e) {
-            $(this).parent().parent('div').remove();
-        })
-        $(".fieldAdd2").on('click', '.removeMore2', function(e) {
-            $(this).parent().parent('div').remove();
-        })
-
         // insert data persetujuan umum
         $("#form-data-persetujuan").on("submit", function(e) {
             e.preventDefault();
@@ -280,16 +302,32 @@
             });
         })
 
-        // select option lainnya
-        $("[name='selaku']").on("change", function() {
-            let p = $(this).val();
-            if (p == 'lainnya') {
-                $("[name='lainnya']").prop("readonly", false).focus();
-
-            } else {
-                $("[name='lainnya']").prop("readonly", true)
-            }
+        $("#form-data-kaji-awal-medis").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serialize();
+            console.log(data_form);
+            return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_setuju_umum",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $(":submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    $(":submit").attr("disabled", false);
+                    $('#form-data-persetujuan')[0].reset();
+                    getRiwayat(2, <?= $detail->idx ?>);
+                    // console.log(response);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
         })
+
+        // Kaji awal medis
     });
 
     function getRiwayat(pil, idx) {
@@ -315,38 +353,6 @@
         });
     }
 
-    function addmore(pil) {
-        var maxField = 10;
-
-        if (pil == 1) {
-            var x = 1;
-            var fieldHtml = `<div class="input-group" style="margin-top:2px">
-                            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger removeMore" type="button"><i class="fa fa-trash"></i></button>
-                            </span>
-                        </div>`;
-            if (x < maxField) {
-                x++;
-                $(".fieldAdd").append(fieldHtml);
-            }
-        }
-
-        if (pil == 2) {
-            var y = 1;
-            var fieldHtml2 = `<div class="input-group" style="margin-top:2px">
-            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
-            <span class="input-group-btn">
-            <button class="btn btn-danger removeMore2" type="button"><i class="fa fa-trash"></i></button>
-            </span>
-            </div>`;
-            if (y < maxField) {
-                $(".fieldAdd2").append(fieldHtml2);
-                y++;
-            }
-        }
-    }
-
     function hapusSetujuUmum(idx, id) {
         $.ajax({
             type: "GET",
@@ -365,6 +371,3 @@
     }
 </script>
 <!--  -->
-<script>
-
-</script>

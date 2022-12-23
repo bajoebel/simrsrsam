@@ -1,0 +1,2 @@
+#20221223
+tabel : tabel02pendaftaran - menambakan field status_erm int 1 default 0

@@ -274,6 +274,44 @@ function DateToIndo($date)
     return ($result);
 }
 
+function DateToIndoDayTime($date)
+{
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+    $tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+    $bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+    $tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+    $time = substr($date, 11, 8);
+
+    $day = date('D', strtotime($date));
+    $dayList = array(
+        'Sun' => 'Minggu',
+        'Mon' => 'Senin',
+        'Tue' => 'Selasa',
+        'Wed' => 'Rabu',
+        'Thu' => 'Kamis',
+        'Fri' => 'Jumat',
+        'Sat' => 'Sabtu'
+    );
+
+    $result =  $dayList[$day] . " / " . $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun . " " . $time;
+    return ($result);
+}
+
+function getDay($date)
+{
+    $day = date('D', strtotime($date));
+    $dayList = array(
+        'Sun' => 'Minggu',
+        'Mon' => 'Senin',
+        'Tue' => 'Selasa',
+        'Wed' => 'Rabu',
+        'Thu' => 'Kamis',
+        'Fri' => 'Jumat',
+        'Sat' => 'Sabtu'
+    );
+    return $dayList[$day];
+}
+
 function DateFormatIndo($date)
 { // fungsi atau method untuk mengubah tanggal ke format indonesia
     $tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
@@ -303,6 +341,24 @@ function arr_to_list($arr, $start = "<span>&nbsp;&nbsp;&nbsp;", $end = "</span><
         $list .= "-<br/>";
     }
     return $list;
+}
+
+function get_list_ruang($tipe)
+{
+    if ($tipe == "RJ") {
+        $tipe = "RAWAT JALAN";
+    }
+
+    if ($tipe == "RI") {
+        $tipe = "RAWAT INAP";
+    }
+
+    $CI = &get_instance();
+    $result = $CI->db
+        ->where("grNama", $tipe)
+        ->get("tbl01_ruang")
+        ->result();
+    return $result;
 }
 
 

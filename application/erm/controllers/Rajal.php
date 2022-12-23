@@ -211,6 +211,8 @@ class Rajal extends CI_Controller
         $this->load->view($this->folder . "/" . $this->subfolder . "/hak_wajib/hak_wajib_cetak", compact('data'));
     }
 
+
+
     public function kaji_awal()
     {
         // form rm 0200 rev.01 surat masuk rawat jalan
@@ -223,11 +225,69 @@ class Rajal extends CI_Controller
     public function kaji_awal_medis()
     {
         // form rm 0203 rev.01 surat masuk rawat jalan
+        $c = [
+            1 => "", // hari
+            2 => "", // tanggal
+            3 => "", // jam
+            4 => "", // auto
+            5 => "", // auto_detail
+            6 => "", // allo
+            7 => "", // allo_detail
+            8 => "", // TD
+            9 => "", // Nadi
+            10 => "", // Pernapasan
+            11 => "", // Suhu
+            12 => "", // Keterangan Pemeriksaan fisik
+            13 => "", // diagnosis kerja
+            14 => "", // diagnosis banding
+            15 => "", // pemeriksaan penunjang
+            16 => "", // therapi/tindakan
+            17 => "", // kontrol
+            18 => "", // kontrol tanggal
+            19 => "", // kontrol jam
+            20 => "", // kontrol tujuan
+            21 => "", // penjelasan,
+            22 => "" // lainnya...
+        ];
         $data = [
             "data" => []
         ];
         $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal_medis/kaji_awal_medis_cetak", compact('data'));
     }
+
+    public function insert_kaji_awal_medis()
+    {
+
+        $data_post = [
+            "idx" => $this->input->post("idx_m"),
+            "nomr" => $this->input->post("nomr_m"),
+            "hari" => $this->input->post("hari_m"),
+            "tgl" => $this->input->post("tgl_m"),
+            "jam" => $this->input->post("jam_m"),
+            "auto" => $this->input->post("auto_m"),
+            "auto_detail" => $this->input->post("auto_detail_m"),
+            "allo" => $this->input->post("allo_m"),
+            "allo_detail" => $this->input->post("allo_detail_m"),
+            "td" => $this->input->post("td_m"),
+            "nadi" => $this->input->post("nadi_m"),
+            "napas" => $this->input->post("napas_m"),
+            "suhu" => $this->input->post("suhu_m"),
+            "fisik_detail_m" => $this->input->post("fisik_detail_m_m"),
+            "dignosis_kerja" => $this->input->post("dignosis_kerja_m"),
+            "diagnosis_banding" => $this->input->post("diagnosis_banding_m"),
+            "penunjang" => $this->input->post("penunjang_m"),
+            "terapi" => $this->input->post("terapi_m"),
+            "kontrol" => $this->input->post("kontrol_m"),
+            "kontrol_tanggal" => $this->input->post("kontrol_tanggal_m"),
+            "kontrol_jam" => $this->input->post("kontrol_jam_m"),
+            "kontrol_tujuan" => $this->input->post("kontrol_tujuan_m"),
+            "pj" => $this->input->post("pj_m"),
+        ];
+        header("Content-Type:text/html");
+        echo json_encode(["data" => $data_post]);
+    }
+
+
 
     public function kembang_pasien()
     {
