@@ -410,7 +410,7 @@ class Pendaftaran_model extends CI_Model
     }
     function getRegUnit($tglmasuk,$idruang,$jns_layanan){
         $ruang=STR_PAD($idruang,3,"0",STR_PAD_LEFT);
-        $sep=$this->db->query("SELECT CONCAT($jns_layanan.'-',DATE_FORMAT($tglmasuk,'%y%m%d'),'-',$ruang.'-') AS sep")->row();
+        $sep=$this->db->query("SELECT CONCAT('$jns_layanan','-',DATE_FORMAT('$tglmasuk','%y%m%d'),'-','$ruang','-') AS sep")->row();
         $separator=$sep->sep;
 
         $reg=$this->db->select("reg_unit,no_urut_unit")

@@ -288,7 +288,7 @@ table tr td{
             <div class="sign_in">
                 <table>
                     <tr>
-                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo(date('Y-m-d')) ?></td>
+                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo($data['tgl_masuk']) ?></td>
                     </tr>
                     <tr>
                         <td>Petugas Rekam Medis</td>
