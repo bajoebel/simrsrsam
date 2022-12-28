@@ -214,6 +214,10 @@ $date = date("Y-m-d");
                                         <td>Pernafasan </td>
                                         <td>: </td>
                                     </tr>
+                                    <tr>
+                                        <td>Suhu </td>
+                                        <td>: </td>
+                                    </tr>
                                 </table>
                                 <div style="height:20mm"></div>
                             </td>

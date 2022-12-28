@@ -11,6 +11,7 @@ class Erm extends CI_Controller
         $this->load->model('Layanan_model');
         $this->load->model('Rekammedis_model');
         $this->load->model('Rajal_model', 'rajal');
+        date_default_timezone_set("Asia/Bangkok");
     }
     function index()
     {
@@ -139,7 +140,7 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
             ];
-            $ta["4"] = "active";
+            $ta["6"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,
@@ -176,7 +177,13 @@ class Erm extends CI_Controller
         if ($pil == 1) {
             $data['list'] = $this->erm_model->getPendaftaranList($d->nomr);
         } else if ($pil == 2) {
-            $data['list'] = $this->rajal->getSetujuUmum($d->nomr)->result();
+            $data['list'] = $this->rajal->getSetujuUmum($d->nomr, $d->idx)->result();
+        } else if ($pil == 4) {
+            $data['list'] = $this->rajal->getAwalMedis($d->nomr, $d->idx)->result();
+        } else if ($pil == 5) {
+            $data['list'] = $this->rajal->getKembangPasien($d->nomr, $d->idx)->result();
+        } else if ($pil == 6) {
+            $data['list'] = $this->rajal->getEdukasiPasien($d->nomr, $d->idx)->result();
         }
 
         $this->load->view("erm/rajal/rajal_riwayat", $data);

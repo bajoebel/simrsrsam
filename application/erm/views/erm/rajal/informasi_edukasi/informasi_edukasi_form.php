@@ -44,8 +44,42 @@
         margin: 5px 0;
     }
 </style>
-<form role="form" id='form-data-kaji-awal' method="post">
+<form role="form" id='form-data-edukasi-pasien' method="post">
     <div class="box-body">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#pilk_1" data-toggle="tab" aria-expanded="true">Data Awal</a></li>
+                <li class="active"><a href="#pilk_2" data-toggle="tab" aria-expanded="true">Pilihan Edukasi</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="#pilk_1">
+                    <b>How to use:</b>
+
+                    <p>Exactly like the original bootstrap tabs except you should use
+                        the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
+                    A wonderful serenity has taken possession of my entire soul,
+                    like these sweet mornings of spring which I enjoy with my whole heart.
+                    I am alone, and feel the charm of existence in this spot,
+                    which was created for the bliss of souls like mine. I am so happy,
+                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                    that I neglect my talents. I should be incapable of drawing a single stroke
+                    at the present moment; and yet I feel that I never was a greater artist than now.
+                </div>
+                <div class="tab-pane active" id="#pilk_2">
+                    <b>How to use:</b>
+
+                    <p>Exactly like the original bootstrap tabs except you should use
+                        the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
+                    A wonderful serenity has taken possession of my entire soul,
+                    like these sweet mornings of spring which I enjoy with my whole heart.
+                    I am alone, and feel the charm of existence in this spot,
+                    which was created for the bliss of souls like mine. I am so happy,
+                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                    that I neglect my talents. I should be incapable of drawing a single stroke
+                    at the present moment; and yet I feel that I never was a greater artist than now.
+                </div>
+            </div>
+        </div>
         <input type="hidden" name="idx" value="<?= $detail->idx ?>">
         <input type="hidden" name="nomr" value="<?= $detail->nomr ?>">
         <b>Asesmen Kemampuan, Kemauan Belajar</b>
@@ -53,18 +87,18 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <label for="">Bahasa</label>
-                        <select class="form-control select2-tag">
-                            <option>Indonesia</option>
-                            <option>Daerah</option>
-                            <option>Isyarat</option>
-                            <option>Lainnya...</option>
+                        <select class="form-control select2" name="bahasa_k[]" id="bahasa_k" multiple="multiple">
+                            <option value="">Indonesia</option>
+                            <option value="">Daerah</option>
+                            <option value="">Isyarat</option>
+                            <option value="">Lainnya...</option>
                         </select>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <label for="">Bahasa daerah / lain-lain sebutkan</label>
-                        <input type="text" class="form-control" readonly>
+                        <input type="text" class="form-control" name="bahasa_lainnya_k" id="bahasa_lainnya_k" readonly>
                     </div>
                 </div>
             </div>
@@ -72,16 +106,16 @@
                 <label for="">Kebutuhan Penerjemah</label>
                 <div class="radio">
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Ya
+                        <input type="radio" name="penerjemah_k">Ya
                     </label>
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Tidak
+                        <input type="radio" name="penerjemah_k">Tidak
                     </label>
                 </div>
             </div>
             <div class="col-md-3">
                 <label for="">Agama</label>
-                <select name="" id="" class="form-control">
+                <select name="agama_k" id="agama_k" class="form-control">
                     <option value="1">Islam</option>
                     <option value="2">Kristen (Protestan)</option>
                     <option value="3">Katholik</option>
@@ -92,30 +126,30 @@
                     <option value="8">Lain-lain</option>
                 </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <label for="">Pendidikan Pasien</label>
-                <select name="" id="" class="form-control">
-                    <option value="1">Islam</option>
-                    <option value="2">Kristen (Protestan)</option>
-                    <option value="3">Katholik</option>
-                    <option value="4">Hindu</option>
-                    <option value="5">Budha</option>
-                    <option value="6">Konghocu</option>
-                    <option value="7">Penghayat</option>
-                    <option value="8">Lain-lain</option>
+                <select name="pendidikan_k" id="pendidikan_k" class="form-control">
+                    <option value="0">Tidak sekolah</option>
+                    <option value="1">SD</option>
+                    <option value="2">SLTP sederajat</option>
+                    <option value="3">SLTA sederajat</option>
+                    <option value="4">D4</option>
+                    <option value="5">S1</option>
+                    <option value="6">S2</option>
+                    <option value="7">S3</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="">Kesediaan Menerima Informasi</label>
                 <div class="radio">
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Bersedia
+                        <input type="radio" name="kesediaan_k" value="1">Bersedia
                     </label>
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Tidak Bersedia (alasan)
+                        <input type="radio" name="kesediaan_k" value="0">Tidak Bersedia (alasan)
                     </label>
                     <label for="" class="radio-inline">
-                        <input type="text" class="custom-input w-100">
+                        <input type="text" class="custom-input w-100" name="kesediaan_alasan_k" id="kesediaan_alasan_k" readonly>
                     </label>
                 </div>
             </div>
@@ -123,10 +157,10 @@
                 <label for="">Kemampuan Membaca</label>
                 <div class="radio">
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Ya
+                        <input type="radio" name="baca_k" id="" value="1">Baik
                     </label>
                     <label for="" class="radio-inline">
-                        <input type="radio" name="">Tidak
+                        <input type="radio" name="baca_k" id="" value="0">Kurang
                     </label>
                 </div>
             </div>
@@ -134,40 +168,40 @@
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="">Keyakinan dan Nilai-nilai</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="keyakinan_k" id="keyakinan_k" value="-">
             </div>
             <div class="col-md-4">
                 <label for="">Keterbatasan Fisik dan Kognitif</label>
                 <div class="row">
-                    <div class="col-md-6">
-                        <select name="" id="" class="form-control">
+                    <div class="col-md-12">
+                        <select name="terbatas_fisik_k[]" id="terbatas_fisik_k" class="form-control select2" multiple="multiple">
                             <option value="1">Tidak ada</option>
                             <option value="2">Penglihatan terganggu</option>
                             <option value="3">Pendengaran terganggu</option>
-                            <option value="3">Gangguan bicara</option>
-                            <option value="3">Fisik lemah</option>
-                            <option value="3">Kognitif terbatas</option>
-                            <option value="3">Lain-lain....</option>
+                            <option value="4">Gangguan bicara</option>
+                            <option value="5">Fisik lemah</option>
+                            <option value="6">Kognitif terbatas</option>
+                            <option value="7">Lain-lain....</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <input type="text" class='form-control' placeholder="lainnya...">
+                    <div class="col-md-12" style="margin-top:5px">
+                        <input type="text" class='form-control' placeholder="lainnya..." name="terbatas_fisik_lain_k" id="terbatas_fisik_lain_k" readonly>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <label for="">Hambatan Emosional dan Motivasi</label>
                 <div class="row">
-                    <div class="col-md-6">
-                        <select name="" id="" class="form-control">
+                    <div class="col-md-12">
+                        <select name="hambatan_k[]" id="hambatan_k" class="form-control select2" multiple="multiple">
                             <option value="1">Tidak ada</option>
-                            <option value="2">Motivasi Kurang</option>
+                            <option value="2">Penglihatan Terganggu</option>
                             <option value="3">Emosional Terganggu</option>
-                            <option value="3">Lain-lain...</option>
+                            <option value="4">Lain-lain...</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <input type="text" class='custom-input' placeholder="lainnya...">
+                    <div class="col-md-12 mt-1">
+                        <input type="text" class='form-control' name="hambatan_lain_k" id="hambatan_lain_k" placeholder="lainnya..." readonly>
                     </div>
                 </div>
             </div>
@@ -177,22 +211,23 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-8">
-                        <select name="" id="" name="satu[]" class="form-control select2" multiple="multiple">
-                            <option value="">Asuhan Medis</option>
-                            <option value="">Asuhan Keperawatan</option>
-                            <option value="">Pengobatan</option>
-                            <option value="">Asuhan Gizi</option>
-                            <option value="">Manajemen nyeri</option>
-                            <option value="">Rehabilitasi</option>
-                            <option value="">Penggunaan alat-alat medis</option>
-                            <option value="">Hand Hygiene</option>
-                            <option value="">Rohani</option>
-                            <option value="">Pendaftaran dan Admisi</option>
-                            <option value="">Prosedur dan Perawatan</option>
+                        <select name="kebutuhan_edukasi_k[]" id="kebutuhan_edukasi_k" class="form-control select2" multiple="multiple">
+                            <option value="1">Asuhan Medis</option>
+                            <option value="2">Asuhan Keperawatan</option>
+                            <option value="3">Pengobatan</option>
+                            <option value="4">Asuhan Gizi</option>
+                            <option value="5">Manajemen nyeri</option>
+                            <option value="6">Rehabilitasi</option>
+                            <option value="7">Penggunaan alat-alat medis</option>
+                            <option value="8">Hand Hygiene</option>
+                            <option value="9">Rohani</option>
+                            <option value="10">Pendaftaran dan Admisi</option>
+                            <option value="11">Prosedur dan Perawatan</option>
+                            <option value="12">Lain-lain</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="" id="" class="form-control" placeholder="Lainnya...">
+                        <input type="text" name="kebutuhan_edukasi_lain_k" id="kebutuhan_edukasi_lain_k" class="form-control" placeholder="Lainnya..." readonly>
                     </div>
                 </div>
             </div>
@@ -201,237 +236,132 @@
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="">Metode</label>
-                <select name="" id="" class="form-control select2" multiple="multiple">
-                    <option value="">Diskusi</option>
-                    <option value="">Ceramah</option>
-                    <option value="">Demonstrasi</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="">Media</label>
-                <select name="" id="" class="form-control select2" multiple="multiple">
-                    <option value="">Diskusi</option>
-                    <option value="">Ceramah</option>
-                    <option value="">Demonstrasi</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="">Media</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        <select name="" id="" class="form-control select2" multiple="multiple">
-                            <option value="">Pasien</option>
-                            <option value="">Keluarga</option>
-                            <option value="">Lainnya</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Lainnya.....">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-3">
-                <label for="">Tanggal</label>
-                <input type="date" name="" id="" class="form-control">
-            </div>
-            <div class="col-md-2">
-                <label for="">Jam</label>
-                <input type="time" name="" id="" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="">Topik Edukasi</label>
-                <select name="" id="" class="form-control">
-                    <option value="1">Pendaftaran dan Admisi</option>
-                    <option value="2">DPJP/PPJA</option>
-                    <option value="3">Apoteker</option>
-                    <option value="4">Penggunaan Alat Medis</option>
-                    <option value="5">Nyeri</option>
-                    <option value="6">Teknik - Teknik Rehabilitasi</option>
-                    <option value="7">Diet Dan Nutrisi Yang Memadai</option>
-                    <option value="8">Prosedur dan Perawatan</option>
-                    <option value="9">Rohaniawan</option>
-                    <option value="10">Pemulangan Pasien dan Asuhan Lanjutan di Rumah</option>
-                </select>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <?php $t = 8;
-            if ($t == 1) { ?>
-                <div class="col-md-4">
-                    <label for="">Pendaftaran Dan Admisi</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Hak-hak pasien</option>
-                        <option value="">Aturan Umum RS</option>
-                        <option value="">Perkiraan Biaya Rawatan</option>
-                        <option value="">Alasan Penundaan Pelayanan</option>
-                        <option value="">Alasan Keterlambatan Pelayanan</option>
-                        <option value="">Informasi Rujukan</option>
-                        <option value="">lain-lain</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 2) { ?>
-                <div class="col-md-4">
-                    <label for="">DPJP/PPJA</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Hak-hak pasien</option>
-                        <option value="">Aturan Umum RS</option>
-                        <option value="">Perkiraan Biaya Rawatan</option>
-                        <option value="">Alasan Penundaan Pelayanan</option>
-                        <option value="">Alasan Keterlambatan Pelayanan</option>
-                        <option value="">Informasi Rujukan</option>
-                        <option value="">lain-lain</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 3) { ?>
-                <div class="col-md-4">
-                    <label for="">Apoteker</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">
-                            Penggunaan Obat Efektif dan aman <br />
-                            Dosis <br />
-                            Cara Makan <br />
-                            Efek Samping Obat <br />
-                            Interaksi Obat <br />
-                            Penyimpanan <br />
-                        </option>
-                        <option value="">Lainnya...</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 4) { ?>
-                <div class="col-md-4">
-                    <label for="">Penggunaan Alat Medis</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Keamanan Alat</option>
-                        <option value="">Efektivitas Alat</option>
-                        <option value="">Lainnya...</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 5) { ?>
-                <div class="col-md-4">
-                    <label for="">Nyeri</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Manajemen Nyeri</option>
-                        <option value="">Obat Nyeri</option>
-                        <option value="">Lainnya...</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 6) { ?>
-                <div class="col-md-4">
-                    <label for="">Teknik-teknik Rehabilitasi (sebutkan)</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 7) { ?>
-                <div class="col-md-4">
-                    <label for="">Diet Dan Nutrisi Yang Memadai</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 8) { ?>
-                <div class="col-md-4">
-                    <label for="">Prosedur Perawatan</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Cuci Tangan yang Benar</option>
-                        <option value="">Penggunaan APD (masker, sarung tangan, dll)</option>
-                        <option value="">Mobilisasi/ROM</option>
-                        <option value="">Batuk Efektif</option>
-                        <option value="">Perawatan Metode Kangguru</option>
-                        <option value="">Perawatan Bayi Baru Lahir</option>
-                        <option value="">Pemberian makan melalui NGT</option>
-                        <option value="">Perawatan luka</option>
-                        <option value="">Inisiasi menyusui dini</option>
-                        <option value="">Asi Eklusif</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 9) { ?>
-                <div class="col-md-4">
-                    <label for="">Rohaniawan</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } else if ($t == 10) { ?>
-                <div class="col-md-4">
-                    <label for="">Pemulangan Pasien dan Asuhan Lanjutan Di Rumah</label>
-                    <select name="" id="" class="form-control select2" multiple="multiple">
-                        <option value="">Jadwal Kontrol ke Dokter</option>
-                        <option value="">Dokumen yang di bawa pulang</option>
-                        <option value="">Hasil pemeriksaan penunjang : Lab/RO</option>
-                        <option value="">Rencana pemeriksaan penunjang : Lab/RO</option>
-                        <option value="">Obat-obatan yang dibawa pulang</option>
-                        <option value="">Penatalaksanaan Kesehatan di Rumah</option>
-                        <option value="">Edukasi Lanjutan (Puskesmas)</option>
-                        <option value="">Edukasi Lanjutan (Dokter Keluarga)</option>
-                        <option value="">Edukasi Lanjutan (Home Care)</option>
-                        <option value="">Edukasi Lanjutan (Klinik Terdekat/Prakter Dokter Mandiri)</option>
-                    </select>
-                    <input type="text" class="form-control mt-1" placeholder="lainnya...">
-                </div>
-            <?php } ?>
-
-        </div>
-        <div class="form-group">
-            <div class="col-md-4">
-                <label for="">Metode</label>
-                <select name="" id="" class="form-control">
+                <select name="metode_k" id="metode_k" class="form-control select2" multiple="multiple">
                     <option value="1">Diskusi</option>
                     <option value="2">Ceramah</option>
                     <option value="3">Demonstrasi</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group rowgi">
-            <div class="col-md-4">
-                <label for="">Media Edukasi</label>
-                <select name="" id="" class="form-control">
-                    <option value="1">Diet</option>
+            <div class="col-md-3">
+                <label for="">Media</label>
+                <select name="media_k" id="media_k" class="form-control select2" multiple="multiple">
+                    <option value="1">Liflet</option>
                     <option value="2">Lembar Balik</option>
                     <option value="3">Audio Visual</option>
                     <option value="4">Lain-lain</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="">Sasaran Edukasi</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="">Evaluasi Awal</label>
-                <select name="" id="" class="form-control">
-                    <option value="">Sudah Mengerti</option>
-                    <option value="">Re-edukasi</option>
-                    <option value="">Re-Demonstrasi</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-4">
-                <label for="">Pemberi Edukasi</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="">Evaluasi Lanjutan</label>
-                <select name="" id="" class="form-control">
-                    <option value="">Sudah Mengerti</option>
-                    <option value="">Re-edukasi</option>
-                    <option value="">Re-Demonstrasi</option>
-                </select>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="sasaran_edukasi_k" value="1" checked>Pasien
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sasaran_edukasi_k" value="2">Keluarga
+                        </label>
+                    </div>
+                    <div class="col-md-12 mt-1">
+                        <input type="text" name="hubungan_keluarga_k" id="hubungan_keluarga_k" class="form-control" placeholder="Hubungan keluarga ...." readonly>
+                    </div>
+                </div>
             </div>
         </div>
+        <hr>
     </div>
 </form>
+<?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_detail") ?>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        // Use above variables to manipulate the DOM
+
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // $(".select2-tag").select2()
+        $(".select2").select2({
+            placeholder: 'Silahkan Pilih'
+        });
+        $(".select2-tag").select2({
+            placeholder: 'Silahkan Pilih'
+        });
+
+        $('#bahasa_k').on('select2:select', function(e) {
+            let value = e.params.data;
+            if (value.text == "Lainnya...") {
+                $("#bahasa_lainnya_k").removeAttr("readonly").focus();
+            }
+        });
+        $('#bahasa_k').on('select2:unselect', function(e) {
+            let value = e.params.data;
+            if (value.text == "Lainnya...") {
+                $("#bahasa_lainnya_k").attr("readonly", true).val("");
+            }
+        });
+        $('input[type=radio][name=kesediaan_k]').change(function() {
+            // console.log($(this).val() == 0)
+            if ($(this).val() == 0) {
+                $("[name='kesediaan_alasan_k']").removeAttr("readonly").focus();
+            } else {
+                $("[name='kesediaan_alasan_k']").attr("readonly", true).val("");
+            }
+        });
+        $('#terbatas_fisik_k').on('select2:select', function(e) {
+            let value = e.params.data;
+            //console.log(value.id)
+            if (value.id == 7) {
+                $("#terbatas_fisik_lain_k").removeAttr("readonly").focus();
+            }
+        });
+        $('#terbatas_fisik_k').on('select2:unselect', function(e) {
+            let value = e.params.data;
+            if (value.id == 7) {
+                $("#terbatas_fisik_lain_k").attr("readonly", true).val("");
+            }
+        });
+
+        $('#hambatan_k').on('select2:select', function(e) {
+            let value = e.params.data;
+            console.log(value.text)
+            //console.log(value.id)
+            if (value.text == "Lain-lain...") {
+                $("#hambatan_lain_k").removeAttr("readonly").focus();
+            }
+        });
+        $('#hambatan_k').on('select2:unselect', function(e) {
+            let value = e.params.data;
+            if (value.text == "Lain-lain...") {
+                $("#hambatan_lain_k").attr("readonly", true).val("");
+            }
+        });
+
+        $('#kebutuhan_edukasi_k').on('select2:select', function(e) {
+            let value = e.params.data;
+            console.log(value.id)
+            //console.log(value.id)
+            if (value.id == "12") {
+                $("#kebutuhan_edukasi_lain_k").removeAttr("readonly").focus();
+            }
+        });
+        $('#kebutuhan_edukasi_k').on('select2:unselect', function(e) {
+            let value = e.params.data;
+            if (value.id == "12") {
+                $("#kebutuhan_edukasi_lain_k").attr("readonly", true).val("");
+            }
+        });
+
+        $("[name='sasaran_edukasi_k']").on("click", function() {
+            let value = $(this).val();
+            if (value == 2) {
+                $("#hubungan_keluarga_k").removeAttr("readonly").focus();
+            } else {
+                $("#hubungan_keluarga_k").attr("readonly", true).val("");
+            }
+        })
+    });
+</script>

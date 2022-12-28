@@ -56,6 +56,8 @@
 <div class="box-body">
     <input type="hidden" name="idx_m" value="<?= $detail->idx ?>">
     <input type="hidden" name="nomr_m" value="<?= $detail->nomr ?>">
+    <input type="hidden" name="nama_m" value="<?= $detail->nama_pasien ?>">
+    <input type="hidden" name="user_daftar_m" value="<?= $detail->user_daftar ?>">
     <div class="form-group row">
         <div class="col-md-2">
             <label for="">Hari</label>
@@ -108,17 +110,17 @@
                 </tr>
                 <tr>
                     <td>Nadi</td>
-                    <td><input type="text" name="nadi_m" id="nadi_m" class="custom-input w-50"></td>
+                    <td><input type="text" name="nadi_m" id="nadi_m" class="custom-input w-50" value="10"></td>
                     <td>x/i</td>
                 </tr>
                 <tr>
                     <td>Pernapasan</td>
-                    <td><input type="text" name="napas_m" id="napas_m" class="custom-input w-50"></td>
+                    <td><input type="text" name="napas_m" id="napas_m" class="custom-input w-50" value="40"></td>
                     <td>x/i</td>
                 </tr>
                 <tr>
                     <td>Suhu</td>
-                    <td><input type="text" name="suhu_m" id="suhu_m" class="custom-input w-50"></td>
+                    <td><input type="text" name="suhu_m" id="suhu_m" class="custom-input w-50" value="30"></td>
                     <td>&deg;C</td>
                 </tr>
             </table>
@@ -130,25 +132,26 @@
     <b>Diagnosis Kerja</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control"></textarea>
+            <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
         </div>
     </div>
     <b>Diagnosis Banding</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control"></textarea>
+            <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
         </div>
     </div>
     <b>Pemeriksaan Penunjang</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control"></textarea>
+            <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            </textarea>
         </div>
     </div>
     <b>THERAPI/TINDAKAN</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control"></textarea>
+            <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
         </div>
     </div>
     <div class="form-group row">
@@ -240,5 +243,6 @@
         $("#nadi_m,#napas_m,#suhu_m").inputmask({
             "mask": "99"
         });
+
     });
 </script>
