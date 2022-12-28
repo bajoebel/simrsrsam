@@ -269,8 +269,12 @@ function DateToIndo($date)
     $tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
     $bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
     $tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
-
-    $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    // $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    if (checkdate($bulan, $tgl, $tahun)) {
+        $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    } else {
+        $result = "not valid date";
+    }
     return ($result);
 }
 

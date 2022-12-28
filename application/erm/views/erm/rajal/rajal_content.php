@@ -77,20 +77,25 @@
         </form>
     </div>
     <div class="tab-pane <?= $ta[5] ?>" id="tab_5">
-        <div class="box box-success">
-            <div class="box-header ui-sortable-handle" style="cursor: move;">
-                <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Form Input Perkembangan Pasien Terintegrasi</h3>
-                <div class="box-tools pull-right">
-                    <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
-                        <i class='fa fa-print'></i>
-                    </button>
+        <form role="form" id='form-data-kembang-pasien' method="post">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Form Input Perkembangan Pasien Terintegrasi</h3>
+                    <div class="box-tools pull-right">
+                        <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
+                            <i class='fa fa-print'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <?php $this->load->view("erm/rajal/kembang_pasien/kembang_pasien_form") ?>
+                </div>
+                <div class="box-footer">
+                    <button type="form" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
-            <div class="box-body">
-                <?php $this->load->view("erm/rajal/kembang_pasien/kembang_pasien_form") ?>
-            </div>
-        </div>
+        </form>
     </div>
     <div class="tab-pane <?= $ta[6] ?>" id="tab_6">
         <div class="box box-success">

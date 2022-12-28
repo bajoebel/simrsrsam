@@ -68,7 +68,7 @@
         </table>
     </div>
 <?php } else if ($pil == 3) { ?>
-    <!-- Persetujuan umum -->
+    <!-- Kajian awal keperawatan -->
     <div class="" style="max-height: 450px; overflow-y: scroll; ">
         <table class="table table-striped">
             <tbody>
@@ -84,20 +84,85 @@
         </table>
     </div>
 <?php } else if ($pil == 4) { ?>
-    <!-- Persetujuan umum -->
-    <div class="" style="max-height: 450px; overflow-y: scroll; ">
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Poliklinik</th>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-            </tbody>
-        </table>
+    <!-- <p><?php print_r($list) ?></p> -->
+    <!-- Kajian awal medis -->
+    <div class="" style="max-height: 600px; overflow-y: auto; ">
+        <?php $no = 1;
+        foreach ($list as $r) : ?>
+            <div class="panel box box-success">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                            <?= strtoupper($r->hari) . " - " . DateToIndo($r->tgl) . " - " . $r->jam ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                        <strong>Anamnesis</strong><br />
+                        <p>Auto - <?= $r->auto_detail ?></p>
+                        <p>Allo - <?= $r->allo_detail ?></p>
+                        <strong>Pemeriksaan Fisik</strong><br />
+                        <p>TD: <?= $r->td ?>mmHg - Nadi: <?= $r->nadi ?> x/i - Pernapasan : <?= $r->napas ?> x/i - Suhu: <?= $r->suhu ?>C</p>
+                        <strong>Diagnosisi Kerja</strong><br />
+                        <p><?= $r->diagnosis_kerja ?></p>
+                        <strong>Diagnosisi Banding</strong><br />
+                        <p><?= $r->diagnosis_banding ?></p>
+                        <strong>Pemeriksaan Penunjang</strong><br />
+                        <p><?= $r->penunjang ?></p>
+                        <strong>Therapi / Tindakan</strong><br />
+                        <p><?= $r->terapi ?></p>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                            <i class="fa fa-print"></i>
+                        </button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php } else if ($pil == 5) { ?>
+    <!-- <p><?php print_r($list) ?></p> -->
+    <!-- Perkembangan Pasien Terintegrasi -->
+    <div class="" style="max-height: 600px; overflow-y: auto; ">
+        <?php $no = 1;
+        foreach ($list as $r) : ?>
+            <div class="panel box box-success">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->tgl) . " - " . $r->jam . " - " . $r->jenis_tenaga_medis . " - " . $r->nama_tenaga_medis ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                        <strong>Subyektif</strong><br />
+                        <p><?= $r->subyektif ?></p>
+                        <strong>Subyektif</strong><br />
+                        <p><?= $r->obyektif ?></p>
+                        <strong>Assessment</strong><br />
+                        <p><?= $r->assesment ?></p>
+                        <strong>Planning</strong><br />
+                        <p><?= $r->assesment ?></p>
+                        <strong>Instruksi</strong><br />
+                        <p><?= $r->assesment ?></p>
+                        <strong>Review</strong><br />
+                        <p><?= $r->review ?></p>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                            <i class="fa fa-print"></i>
+                        </button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 <?php } else { ?>
     <div class="alert alert-danget">

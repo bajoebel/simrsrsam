@@ -43,43 +43,49 @@
     .checkbox {
         margin: 5px 0;
     }
+
+    ul.wysihtml5-toolbar li a[title="Insert image"] {
+        display: none;
+    }
 </style>
 <form role="form" id='form-data-kaji-awal' method="post">
     <div class="box-body">
-        <input type="hidden" name="idx" value="<?= $detail->idx ?>">
-        <input type="hidden" name="nomr" value="<?= $detail->nomr ?>">
+        <input type="hidden" name="idx_k" value="<?= $detail->idx ?>">
+        <input type="hidden" name="nomr_k" value="<?= $detail->nomr ?>">
+        <input type="hidden" name="nama_k" value="<?= $detail->nama_pasien ?>">
+        <input type="hidden" name="user_daftar_k" value="<?= $detail->user_daftar ?>">
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="">Tanggal</label>
-                <input type="date" name="" id="" class="form-control">
+                <input type="date" name="tgl_k" id="tgl_k" class="form-control" value="<?= date("Y-m-d") ?>">
             </div>
             <div class="col-md-2">
                 <label for="">Jam</label>
-                <input type="time" name="" id="" class="form-control">
+                <input type="time" name="jam_k" id="jam_k" class="form-control" value="<?= date("h:i") ?>">
             </div>
             <div class="col-md-3">
                 <label for="">Profesional</label>
-                <select name="" id="" class="form-control">
-                    <option value="">Dokter</option>
-                    <option value="">Anastesi</option>
-                    <option value="">Paramedis</option>
-                    <option value="">Apoteker</option>
-                    <option value="">Bidan</option>
-                    <option value="">Analis</option>
-                    <option value="">Penata Anastesi</option>
-                    <option value="">Nutrisionist</option>
+                <select name="jenis_tenaga_medis_id_k" id="jenis_tenaga_medis_id_k" class="form-control">
+                    <option value="1">Dokter</option>
+                    <option value="2">Anastesi</option>
+                    <option value="3">Paramedis</option>
+                    <option value="4">Apoteker</option>
+                    <option value="5">Bidan</option>
+                    <option value="6">Analis</option>
+                    <option value="7">Penata Anastesi</option>
+                    <option value="8">Nutrisionist</option>
                 </select>
             </div>
             <div class="col-md-5">
-                <label for="">Profesional</label>
-                <input type="text" class="form-control">
+                <label for="">Nama Profesional</label>
+                <input type="text" name="nama_tenaga_medis_k" id="nama_tenaga_medis_k" class="form-control">
             </div>
         </div>
         <div class="form-group row">
             <b>Subyektif</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="subyektif_k" id="subyektif_k" id="" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
@@ -87,7 +93,7 @@
             <b>Obyektif</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="obyektif_k" id="obyektif_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
@@ -95,7 +101,7 @@
             <b>Assessment</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="assesment_k" id="assesment_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
@@ -103,7 +109,7 @@
             <b>Planning</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="planning_k" id="planning_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
@@ -111,7 +117,7 @@
             <b>Intruksi</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="intruksi_k" id="intruksi_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
@@ -119,9 +125,15 @@
             <b>Review</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="review_k" id="review_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function() {
+        $('#subyektif_k,#obyektif_k,#assesment_k,#planning_k,#instruksi_k,#review_k').wysihtml5()
+    });
+</script>
+</script>

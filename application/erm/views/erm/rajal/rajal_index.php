@@ -112,7 +112,7 @@
         color: #fff;
     }
 
-    ul.wysihtml5-toolbar li a[title="Insert image"],
+    /* ul.wysihtml5-toolbar li a[title="Insert image"],
     ul.wysihtml5-toolbar li a[title="CTRL+B"],
     ul.wysihtml5-toolbar li a[title="CTRL+I"],
     ul.wysihtml5-toolbar li a[title="CTRL+U"],
@@ -125,7 +125,7 @@
     ul.wysihtml5-toolbar li a[data-wysihtml5-command="formatBlock"],
     ul.wysihtml5-toolbar li.dropdown {
         display: none;
-    }
+    } */
 </style>
 <section class="content-header">
     <h1><?php echo $contentTitle ?></h1>
@@ -134,6 +134,7 @@
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $detail->jns_layanan ?>">
     <section class="content container-fluid">
         <div class="row">
+            <!-- <?php print_r($detail) ?> -->
             <div class="col-md-12">
                 <!-- <?php print_r($detail) ?> -->
                 <div class="box box-success">
@@ -269,10 +270,8 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(4, <?= $detail->idx ?>);
-        $(".select2").select2({
-            tags: true
-        });
+        getRiwayat(6, <?= $detail->idx ?>);
+
     });
 </script>
 <!-- script persetujuan umum -->
@@ -302,24 +301,26 @@
             });
         })
 
+        // insert data kaji awal medis
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
-            var data_form = $(this).serialize();
-            console.log(data_form);
-            return false;
+            var data_form = $(this).serializeArray();
+            // console.log(data_form);
             $.ajax({
                 type: "POST",
-                url: base_url + "/rajal/insert_setuju_umum",
+                url: base_url + "/rajal/insert_kaji_awal_medis",
                 data: data_form,
                 dataType: "json",
                 beforeSend: function() {
                     $(":submit").attr("disabled", true);
                 },
                 success: function(response) {
-                    $(":submit").attr("disabled", false);
-                    $('#form-data-persetujuan')[0].reset();
-                    getRiwayat(2, <?= $detail->idx ?>);
+                    swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
+                    $('#form-data-kaji-awal-medis')[0].reset();
+                    // console.log(response);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(4, <?= $detail->idx ?>);
                 },
                 error: function(e) {
                     console.log(e)
@@ -327,7 +328,34 @@
             });
         })
 
-        // Kaji awal medis
+        // insert perkembangan pasien terintegrasi
+        $("#form-data-kembang-pasien").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serializeArray();
+            // console.log(data_form);
+            // return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_kembang_pasien",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $(":submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    swal("Success", "Data Berhasil Di Simpan", "success");
+                    // console.log(response);
+                    $('#form-data-kembang-pasien')[0].reset();
+                    // console.log(response);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(5, <?= $detail->idx ?>);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        })
+
     });
 
     function getRiwayat(pil, idx) {
@@ -362,6 +390,46 @@
             success: function(response) {
                 if (response.status) {
                     getRiwayat(2, idx);
+                }
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function hapusAwalMedis(idx, id) {
+        $.ajax({
+            type: "GET",
+            url: base_url + `rajal/delete_kaji_awal_medis/${idx}/${id}`,
+            data: "data",
+            dataType: "json",
+            success: function(response) {
+                if (response.status) {
+                    getRiwayat(4, idx);
+                    swal("Success", "Data Berhasil Di Hapus", "success");
+                } else {
+                    swal("Failed", "Something Wrong", "error");
+                }
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function hapusKembangPasien(idx, id) {
+        $.ajax({
+            type: "GET",
+            url: base_url + `rajal/delete_kembang_pasien/${idx}/${id}`,
+            data: "data",
+            dataType: "json",
+            success: function(response) {
+                if (response.status) {
+                    getRiwayat(5, idx);
+                    swal("Success", "Data Berhasil Di Hapus", "success");
+                } else {
+                    swal("Failed", "Something Wrong", "error");
                 }
             },
             error: function(e) {

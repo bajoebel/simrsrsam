@@ -8,6 +8,7 @@ class Rajal extends CI_Controller
         parent::__construct();
         $this->load->model("Erm_model", "erm");
         $this->load->model("Rajal_model", "rajal");
+        date_default_timezone_set("Asia/Bangkok");
     }
 
     public function masuk_rajal($idx = "")
@@ -211,8 +212,6 @@ class Rajal extends CI_Controller
         $this->load->view($this->folder . "/" . $this->subfolder . "/hak_wajib/hak_wajib_cetak", compact('data'));
     }
 
-
-
     public function kaji_awal()
     {
         // form rm 0200 rev.01 surat masuk rawat jalan
@@ -257,10 +256,10 @@ class Rajal extends CI_Controller
 
     public function insert_kaji_awal_medis()
     {
-
         $data_post = [
             "idx" => $this->input->post("idx_m"),
             "nomr" => $this->input->post("nomr_m"),
+            "nama" => $this->input->post("nama_m"),
             "hari" => $this->input->post("hari_m"),
             "tgl" => $this->input->post("tgl_m"),
             "jam" => $this->input->post("jam_m"),
@@ -272,20 +271,41 @@ class Rajal extends CI_Controller
             "nadi" => $this->input->post("nadi_m"),
             "napas" => $this->input->post("napas_m"),
             "suhu" => $this->input->post("suhu_m"),
-            "fisik_detail_m" => $this->input->post("fisik_detail_m_m"),
-            "dignosis_kerja" => $this->input->post("dignosis_kerja_m"),
+            "fisik_detail_m" => $this->input->post("fisik_detail_m"),
+            "diagnosis_kerja" => $this->input->post("diagnosis_kerja_m"),
             "diagnosis_banding" => $this->input->post("diagnosis_banding_m"),
             "penunjang" => $this->input->post("penunjang_m"),
             "terapi" => $this->input->post("terapi_m"),
             "kontrol" => $this->input->post("kontrol_m"),
-            "kontrol_tanggal" => $this->input->post("kontrol_tanggal_m"),
+            "kontrol_tgl" => $this->input->post("kontrol_tanggal_m"),
             "kontrol_jam" => $this->input->post("kontrol_jam_m"),
             "kontrol_tujuan" => $this->input->post("kontrol_tujuan_m"),
             "pj" => $this->input->post("pj_m"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+            "user_daftar" => $this->input->post("user_daftar_m")
         ];
-        header("Content-Type:text/html");
-        echo json_encode(["data" => $data_post]);
+        // header("Content-Type:text/html");
+        // echo json_encode(["data" => $data_post]);
+        // exit();
+        $insert = $this->rajal->insertAwalMedis($data_post);
+        if ($insert) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
     }
+
+    public function delete_kaji_awal_medis($idx, $id)
+    {
+        $delete = $this->rajal->deleteAwalMedis($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
+        }
+    }
+
 
 
 
@@ -296,6 +316,49 @@ class Rajal extends CI_Controller
             "data" => []
         ];
         $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak", compact('data'));
+    }
+
+    public function insert_kembang_pasien()
+    {
+
+        $data_post = [
+            "idx" => $this->input->post("idx_k"),
+            "nomr" => $this->input->post("nomr_k"),
+            "nama" => $this->input->post("nama_k"),
+            "tgl" => $this->input->post("tgl_k"),
+            "jam" => $this->input->post("jam_k"),
+            "jenis_tenaga_medis_id" => $this->input->post("jenis_tenaga_medis_id_k"),
+            "jenis_tenaga_medis" => jenis_tenaga_medis($this->input->post("jenis_tenaga_medis_id_k")),
+            "nama_tenaga_medis" => $this->input->post("nama_tenaga_medis_k"),
+            "subyektif" => $this->input->post("subyektif_k"),
+            "obyektif" => $this->input->post("obyektif_k"),
+            "assesment" => $this->input->post("assesment_k"),
+            "planning" => $this->input->post("planning_k"),
+            "intruksi" => $this->input->post("intruksi_k"),
+            "review" => $this->input->post("review_k"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+            "user_daftar" => $this->input->post("user_daftar_k")
+        ];
+        // header("Content-Type:text/html");
+        // echo json_encode(["data" => $data_post]);
+        // exit();
+        $insert = $this->rajal->insertKembangPasien($data_post);
+        if ($insert) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
+    }
+
+    public function delete_kembang_pasien($idx, $id)
+    {
+        $delete = $this->rajal->deleteKembangPasien($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
+        }
     }
 
     public function informasi_edukasi()
