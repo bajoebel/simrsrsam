@@ -1128,8 +1128,6 @@
                                                     <label><input type="checkbox" id="e-suplesi" name="suplesi" value="1" onclick="e_cekSuplesi()"></label>
                                                 </span>
                                                 <input type="text" class="form-control" id="e-noSepSuplesi" name="noSepSuplesi" readonly placeholder="ketik nomor SEP Suplesi">
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -1262,11 +1260,17 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
 </div>
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
+    var url_call_back = "<?php echo base_url() . "api.php/"; ?>";
+    var user = "<?= $this->session->userdata('get_uid') ?>";
+</script>
+<script src="<?php echo base_url() ?>js/pendaftaran.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.select2').select2({
@@ -1534,6 +1538,9 @@
                 .appendTo(table);
         };
         // getdpjp(1,'<?= date('Y-m-d')?>')
+        <?php if(!empty($no_bpjs)){?>
+        cekPeserta('<?= $no_bpjs ?>','<?= date('Y-m-d') ?>')
+        <?php } ?>
     });
 
     function form_batal() {
@@ -1696,11 +1703,9 @@
             }
         });
     }
-    var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
-    var url_call_back = "<?php echo base_url() . "api.php/"; ?>";
-    var user = "<?= $this->session->userdata('get_uid') ?>";
+    cekPeserta()
 </script>
-<script src="<?php echo base_url() ?>js/pendaftaran.js"></script>
+
 </body>
 
 </html>

@@ -355,10 +355,8 @@ class registrasi extends CI_Controller
                     $params['pjPasienHubKel'] = trim($this->input->post('pjPasienHubKel', TRUE));
                     $params['pjPasienDikirimOleh'] = trim($this->input->post('pjPasienDikirimOleh', TRUE)); //PPK Pengirim
                     $params['pjPasienAlmtPengirim'] = trim($this->input->post('pjPasienAlmtPengirim', TRUE)); // Alamat PPK pengirim
-
                     $params['dokterJaga'] = trim($this->input->post('dokterJaga', TRUE));
                     $params['namaDokterJaga'] = trim($this->input->post('namaDokterJaga', TRUE));
-
                     $params['provinsi_id'] = trim($this->input->post('id_provinsi', TRUE));
                     $params['kabkota_id'] = trim($this->input->post('id_kab_kota', TRUE));
                     $params['kecamatan_id'] = trim($this->input->post('id_kecamatan', TRUE));
@@ -367,6 +365,7 @@ class registrasi extends CI_Controller
                     $params['nama_kab_kota'] = trim($this->input->post('nama_kab_kota', TRUE));
                     $params['nama_kecamatan'] = trim($this->input->post('nama_kecamatan', TRUE));
                     $params['nama_kelurahan'] = trim($this->input->post('nama_kelurahan', TRUE));
+                    
                     $params['rt'] = trim($this->input->post('rt', TRUE));
                     $params['alamat'] = trim($this->input->post('alamat', TRUE));
                     $params['rw'] = trim($this->input->post('rw', TRUE));
@@ -837,10 +836,12 @@ class registrasi extends CI_Controller
                 if(!empty($regunit)){
                     $dataregis=$this->db->where('reg_unit',$regunit)
                     ->select("reg_unit,`id_ruanglama` AS poliTujuan, nomr AS noMr,id_daftar,jns_layanan,pgwNama")
-                    ->join('tbl01_pegawai','NRP=user_daftar')
+                    ->join('tbl01_pegawai','NRP=user_daftar','LEFT')
                     ->get('tbl02_pendaftaran')->row();
                     if(!empty($dataregis)){
-                        if($dataregis->jns_layanan=="RI") $jnsLayanan=1; else $jnsLayanan=2;
+                        // if($dataregis->jns_layanan=="RI") $jnsLayanan=1; else $jnsLayanan=2;
+                        $jnsLayanan = ($dataregis->jns_layanan=="RI") ? 1 : 2;
+
                         $sep=json_decode(hasil($data));
                         // print_r($res);exit;
                         if(!empty($res)){
@@ -853,7 +854,7 @@ class registrasi extends CI_Controller
                                 'ppkRujukan'=>$res->ppkRujukan,
                                 'faskes'=> '',
                                 'ppkPelayanan'=>$res->ppkPelayanan,
-                                'jnsPelayanan'=>$res->jnsPelayanan,
+                                'jnsPelayanan'=>$jnsLayanan,
                                 'catatan'=>$sep->catatan,
                                 'diagAwal'=>$res->diagnosa,
                                 'poliTujuan'=>$dataregis->poliTujuan,

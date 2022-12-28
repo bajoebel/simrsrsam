@@ -1144,265 +1144,272 @@
 </div>
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+    var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
+    var url_call_back = "<?php echo base_url() . "api.php/"; ?>";
+</script>
+<script src="<?php echo base_url() ?>js/pendaftaran.js"></script>
+<script type="text/javascript">
     $(document).ready(function() {
 
-$('input,textarea').focus(function() {
-    return this.select();
-});
-$('.datepicker').datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true
-});
-$('#batal').click(function() {
-    var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/rawat_jalan' ?>';
-    window.location.href = url;
-});
-$("#txtnmpoli").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "<?php echo base_url() . 'vclaim/referensi/poli' ?>",
-            dataType: "JSON",
-            method: "POST",
-            data: {
-                param1: request.term
-            },
-            success: function(data) {
-                //console.log(data);
-                var poli = data.response.poli;
-                console.log(poli);
-                response(poli.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#tujuan").val(ui.item['kode']);
-        $("#txtnmpoli").val(ui.item['nama']);
-        $("#txtnmpoli").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#tujuan").val(ui.item['kode']);
-        $("#txtnmpoli").val(ui.item['nama']);
-        $("#txtnmpoli").removeClass("ui-autocomplete-loading");
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
+    $('input,textarea').focus(function() {
+        return this.select();
+    });
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true
+    });
+    $('#batal').click(function() {
+        var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/rawat_jalan' ?>';
+        window.location.href = url;
+    });
+    $("#txtnmpoli").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url() . 'vclaim/referensi/poli' ?>",
+                dataType: "JSON",
+                method: "POST",
+                data: {
+                    param1: request.term
+                },
+                success: function(data) {
+                    //console.log(data);
+                    var poli = data.response.poli;
+                    console.log(poli);
+                    response(poli.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#tujuan").val(ui.item['kode']);
+            $("#txtnmpoli").val(ui.item['nama']);
+            $("#txtnmpoli").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#tujuan").val(ui.item['kode']);
+            $("#txtnmpoli").val(ui.item['nama']);
+            $("#txtnmpoli").removeClass("ui-autocomplete-loading");
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
 
-$("#e-txtnmpoli").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/poli' ?>",
-            dataType: "JSON",
-            method: "GET",
-            data: {
-                param: request.term
-            },
-            success: function(data) {
-                //console.log(data);
-                var poli = data.response.poli;
-                console.log(poli);
-                response(poli.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#e-tujuan").val(ui.item['kode']);
-        $("#e-txtnmpoli").val(ui.item['nama']);
-        $("#e-txtnmpoli").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#e-tujuan").val(ui.item['kode']);
-        $("#e-txtnmpoli").val(ui.item['nama']);
-        $("#e-txtnmpoli").removeClass("ui-autocomplete-loading");
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
+    $("#e-txtnmpoli").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/poli' ?>",
+                dataType: "JSON",
+                method: "GET",
+                data: {
+                    param: request.term
+                },
+                success: function(data) {
+                    //console.log(data);
+                    var poli = data.response.poli;
+                    console.log(poli);
+                    response(poli.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#e-tujuan").val(ui.item['kode']);
+            $("#e-txtnmpoli").val(ui.item['nama']);
+            $("#e-txtnmpoli").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#e-tujuan").val(ui.item['kode']);
+            $("#e-txtnmpoli").val(ui.item['nama']);
+            $("#e-txtnmpoli").removeClass("ui-autocomplete-loading");
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
 
-$("#txtnmdiagnosa").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
-            dataType: "JSON",
-            method: "GET",
-            data: {
-                param: request.term
-            },
-            success: function(data) {
-                console.clear();
-                console.log(data);
-                var diagnosa = data.response.diagnosa;
-                console.log(diagnosa);
-                response(diagnosa.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#diagAwal").val(ui.item['kode']);
-        $("#txtnmdiagnosa").val(ui.item['nama']);
-        $("#txtnmdiagnosa").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#diagAwal").val(ui.item['kode']);
-        $("#txtnmdiagnosa").val(ui.item['nama']);
-        $("#txtnmdiagnosa").removeClass("ui-autocomplete-loading");
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
+    $("#txtnmdiagnosa").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
+                dataType: "JSON",
+                method: "GET",
+                data: {
+                    param: request.term
+                },
+                success: function(data) {
+                    console.clear();
+                    console.log(data);
+                    var diagnosa = data.response.diagnosa;
+                    console.log(diagnosa);
+                    response(diagnosa.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#diagAwal").val(ui.item['kode']);
+            $("#txtnmdiagnosa").val(ui.item['nama']);
+            $("#txtnmdiagnosa").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#diagAwal").val(ui.item['kode']);
+            $("#txtnmdiagnosa").val(ui.item['nama']);
+            $("#txtnmdiagnosa").removeClass("ui-autocomplete-loading");
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
 
-$("#e-txtnmdiagnosa").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
-            dataType: "JSON",
-            method: "GET",
-            data: {
-                param: request.term
-            },
-            success: function(data) {
-                console.clear();
-                console.log(data);
-                var diagnosa = data.response.diagnosa;
-                console.log(diagnosa);
-                response(diagnosa.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#e-diagAwal").val(ui.item['kode']);
-        $("#e-txtnmdiagnosa").val(ui.item['nama']);
-        $("#e-txtnmdiagnosa").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#e-diagAwal").val(ui.item['kode']);
-        $("#e-txtnmdiagnosa").val(ui.item['nama']);
-        $("#e-txtnmdiagnosa").removeClass("ui-autocomplete-loading");
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
+    $("#e-txtnmdiagnosa").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
+                dataType: "JSON",
+                method: "GET",
+                data: {
+                    param: request.term
+                },
+                success: function(data) {
+                    console.clear();
+                    console.log(data);
+                    var diagnosa = data.response.diagnosa;
+                    console.log(diagnosa);
+                    response(diagnosa.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#e-diagAwal").val(ui.item['kode']);
+            $("#e-txtnmdiagnosa").val(ui.item['nama']);
+            $("#e-txtnmdiagnosa").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#e-diagAwal").val(ui.item['kode']);
+            $("#e-txtnmdiagnosa").val(ui.item['nama']);
+            $("#e-txtnmdiagnosa").removeClass("ui-autocomplete-loading");
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
 
-$("#r-diagRujukan").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
-            dataType: "JSON",
-            method: "GET",
-            data: {
-                param: request.term
-            },
-            success: function(data) {
-                console.clear();
-                console.log(data);
-                var diagnosa = data.response.diagnosa;
-                console.log(diagnosa);
-                response(diagnosa.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#diagRujukan").val(ui.item['kode']);
-        $("#r-diagRujukan").val(ui.item['nama']);
-        $("#r-diagRujukan").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#diagRujukan").val(ui.item['kode']);
-        $("#r-diagRujukan").val(ui.item['nama']);
-        $("#r-diagRujukan").removeClass("ui-autocomplete-loading");
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
+    $("#r-diagRujukan").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/diagnosa' ?>",
+                dataType: "JSON",
+                method: "GET",
+                data: {
+                    param: request.term
+                },
+                success: function(data) {
+                    console.clear();
+                    console.log(data);
+                    var diagnosa = data.response.diagnosa;
+                    console.log(diagnosa);
+                    response(diagnosa.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#diagRujukan").val(ui.item['kode']);
+            $("#r-diagRujukan").val(ui.item['nama']);
+            $("#r-diagRujukan").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#diagRujukan").val(ui.item['kode']);
+            $("#r-diagRujukan").val(ui.item['nama']);
+            $("#r-diagRujukan").removeClass("ui-autocomplete-loading");
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
 
-$("#r-ppkDirujuk").autocomplete({
-    source: function(request, response) {
-        var faskes=$('#r-faskes').val();
-        $.ajax({
-            url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/faskes/' ?>"+faskes,
-            dataType: "JSON",
-            method: "GET",
-            data: {
-                param: request.term
-            },
-            success: function(data) {
-                console.clear();
-                console.log(data);
-                var fk = data.response.faskes;
-                // console.log(diagnosa);
-                response(fk.slice(0, 15));
-            },
-            error: function(jqXHR, ajaxOption, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    },
-    minLength: 2,
-    focus: function(event, ui) {
-        $("#ppkDirujuk").val(ui.item['kode']);
-        $("#r-ppkDirujuk").val(ui.item['nama']);
-        $("#r-ppkDirujuk").removeClass("ui-autocomplete-loading");
-        return false;
-    },
-    select: function(event, ui) {
-        $("#ppkDirujuk").val(ui.item['kode']);
-        $("#r-ppkDirujuk").val(ui.item['nama']);
-        $("#r-ppkDirujuk").removeClass("ui-autocomplete-loading");
-        spesialistiRujukan()
-        return false;
-    }
-})
-.autocomplete("instance")._renderItem = function(table, item) {
-    return $("<tr class='autocomplete'>")
-        .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
-        .appendTo(table);
-};
-
+    $("#r-ppkDirujuk").autocomplete({
+        source: function(request, response) {
+            var faskes=$('#r-faskes').val();
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/vclaim/referensi/faskes/' ?>"+faskes,
+                dataType: "JSON",
+                method: "GET",
+                data: {
+                    param: request.term
+                },
+                success: function(data) {
+                    console.clear();
+                    console.log(data);
+                    var fk = data.response.faskes;
+                    // console.log(diagnosa);
+                    response(fk.slice(0, 15));
+                },
+                error: function(jqXHR, ajaxOption, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        minLength: 2,
+        focus: function(event, ui) {
+            $("#ppkDirujuk").val(ui.item['kode']);
+            $("#r-ppkDirujuk").val(ui.item['nama']);
+            $("#r-ppkDirujuk").removeClass("ui-autocomplete-loading");
+            return false;
+        },
+        select: function(event, ui) {
+            $("#ppkDirujuk").val(ui.item['kode']);
+            $("#r-ppkDirujuk").val(ui.item['nama']);
+            $("#r-ppkDirujuk").removeClass("ui-autocomplete-loading");
+            spesialistiRujukan()
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function(table, item) {
+        return $("<tr class='autocomplete'>")
+            .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
+            .appendTo(table);
+    };
+    <?php if(!empty($no_bpjs)){?>
+        cekPeserta('<?= $no_bpjs ?>','<?= date('Y-m-d') ?>')
+    <?php } ?>
 });
 
     function form_batal() {
@@ -1560,7 +1567,5 @@ $("#r-ppkDirujuk").autocomplete({
             }
         });
     }
-    var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
-    var url_call_back = "<?php echo base_url() . "api.php/"; ?>";
+    
 </script>
-<script src="<?php echo base_url() ?>js/pendaftaran.js"></script>
