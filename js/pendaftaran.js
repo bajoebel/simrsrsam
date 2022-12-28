@@ -684,12 +684,12 @@ function enter_nobpjs(evt) {
 	return true;
 }
 
-function cekPeserta() {
+function cekPeserta(nobpjs="",tgllayanan="") {
 	var status_peserta = $('#status_peserta').val();
 	// alert(status_peserta);
 	if (status_peserta == "") {
-		var nobpjs = $("#no_bpjs").val();
-		var tgllayanan = $('#sekarang').val();
+		if(nobpjs=="") nobpjs = $("#no_bpjs").val();
+		if(tgllayanan=="") tgllayanan = $('#sekarang').val();
 		var url = url_call_back + "/vclaim/peserta/nokartu/" + nobpjs + "/" + tgllayanan;
 		$.ajax({
 			url: url,
@@ -831,7 +831,7 @@ function cekPeserta() {
 					$('#txtkdstatuspst').val(x['peserta']['statusPeserta']['kode']);
 
 					$('#lblnik').html(x['peserta']['nik']);
-					$('#lblnokartubapel').html('');
+					$('#lblnokartubapel').html(x['peserta']['noKartu']);
 					$('#lbltgllahir').html(x['peserta']['tglLahir']);
 					$('#lblpisa').html(x['peserta']['pisa']);
 					$('#lblfktp').html(x['peserta']['provUmum']['kdProvider'] + '-' + x['peserta']['provUmum']['nmProvider']);
