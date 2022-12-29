@@ -306,9 +306,6 @@ class Rajal extends CI_Controller
         }
     }
 
-
-
-
     public function kembang_pasien()
     {
         // form rm 0.2.03 rev.02 catatan perkembangan pasien terintegrasi rawat jalan
@@ -361,6 +358,7 @@ class Rajal extends CI_Controller
         }
     }
 
+    // edukasi pasien
     public function informasi_edukasi()
     {
         // form rm 0.2.03 rev.02 catatan perkembangan pasien terintegrasi rawat jalan
@@ -368,5 +366,130 @@ class Rajal extends CI_Controller
             "data" => []
         ];
         $this->load->view($this->folder . "/" . $this->subfolder . "/informasi_edukasi/informasi_edukasi_cetak", compact('data'));
+    }
+
+    public function insert_edukasi_pasien()
+    {
+        $data_post = [
+            "idx" => $this->input->post("idx_e"),
+            "nomr" => $this->input->post("nomr_e"),
+            "nama" => $this->input->post("nama_e"),
+            "bahasa" => $this->input->post("bahasa_e"),
+            "bahasa_lain" => $this->input->post("bahasa_lainnya_e"),
+            "penerjemah" => $this->input->post("penerjemah_e"),
+            "agama" => $this->input->post("agama_e"),
+            "pendidikan" => $this->input->post("pendidikan_e"),
+            "kesediaan" => $this->input->post("kesediaan_e"),
+            "baca" => $this->input->post("baca_e"),
+            "keyakinan" => $this->input->post("keyakinan_e"),
+            "terbatas_fisik" => $this->input->post("terbatas_fisik_e"),
+            "terbatas_fisik_lain" => $this->input->post("terbatas_fisik_lain_e"),
+            "hambatan" => $this->input->post("hambatan_e"),
+            "kebutuhan_edukasi" => $this->input->post("kebutuhan_edukasi_e"),
+            "kebutuhan_edukasi_lain" => $this->input->post("kebutuhan_edukasi_lain_e"),
+            "metode" => $this->input->post("metode_e"),
+            "media" => $this->input->post("media_e"),
+            "sasaran_edukasi" => $this->input->post("sasaran_edukasi_e"),
+            "hubungan_keluarga" => $this->input->post("hubungan_keluarga_e"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+            "user_daftar" => $this->input->post("user_daftar_e")
+        ];
+        if (is_array($this->input->post("bahasa_e"))) {
+            $data_post['bahasa'] = implode(";", removeChar($this->input->post("bahasa_e")));
+        }
+        if (is_array($this->input->post("terbatas_fisik_e"))) {
+            $data_post['terbatas_fisik'] = implode(";", removeChar($this->input->post("terbatas_fisik_e")));
+        }
+        if (is_array($this->input->post("hambatan_e"))) {
+            $data_post['hambatan'] = implode(";", removeChar($this->input->post("hambatan_e")));
+        }
+        if (is_array($this->input->post("kebutuhan_edukasi_e"))) {
+            $data_post['kebutuhan_edukasi'] = implode(";", removeChar($this->input->post("kebutuhan_edukasi_e")));
+        }
+        if (is_array($this->input->post("metode_e"))) {
+            $data_post['metode'] = implode(";", removeChar($this->input->post("metode_e")));
+        }
+        if (is_array($this->input->post("media_e"))) {
+            $data_post['media'] = implode(";", removeChar($this->input->post("media_e")));
+        }
+        // header("Content-Type:text/html");
+        // echo json_encode(["data" => $data_post]);
+        // exit();
+        $insert = $this->rajal->insertEdukasiPasien($data_post);
+        if ($insert) {
+            echo json_encode(["status" => true, "id" => $insert]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
+    }
+
+    public function insert_edukasi_pasien_detail()
+    {
+        $data_post = [
+            "id_rj_iep" => $this->input->post("id_rj_iep"),
+            "tgl" => $this->input->post("tgl"),
+            "jam" => $this->input->post("jam"),
+            "topik_id" => $this->input->post("topik_id"),
+            "topik_list" => $this->input->post("topik_list"),
+            "metode" => $this->input->post("metode"),
+            "media" => $this->input->post("media"),
+            "sasaran" => $this->input->post("sasaran"),
+            "evaluasi_awal" => $this->input->post("evaluasi_awal"),
+            "pemberi_edukasi" => $this->input->post("pemberi_edukasi"),
+            "verifikasi" => $this->input->post("verifikasi"),
+            "evaluasi_lanjut" => $this->input->post("evaluasi_lanjut"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+            "user_daftar" => $this->input->post("user_daftar")
+        ];
+        if (is_array($this->input->post("topik_list"))) {
+            $data_post['topik_list'] = implode(";", removeChar($this->input->post("topik_list")));
+        }
+
+        $insert = $this->rajal->insertEdukasiPasienDetail($data_post);
+
+        if ($insert) {
+            echo json_encode(["status" => true, "data" => $data_post]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
+    }
+
+    function get_edukasi_pasien_detail($id)
+    {
+        $data = [
+            "data" => $this->rajal->getEdukasiPasienDetail($id)
+        ];
+        $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_table", $data);
+    }
+
+    function get_topik_list()
+    {
+        $id = $this->input->get("id");
+        $data = [
+            "pil" => $id
+        ];
+        $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_detail", $data);
+    }
+
+    public function delete_edukasi_pasien($idx, $id)
+    {
+        $delete = $this->rajal->deleteEdukasiPasien($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
+        }
+    }
+
+    public function delete_edukasi_pasien_detail($id)
+    {
+        $delete = $this->rajal->deleteEdukasiPasienDetail($id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
+        }
     }
 }

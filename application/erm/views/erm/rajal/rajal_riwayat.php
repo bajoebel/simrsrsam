@@ -164,6 +164,44 @@
             </div>
         <?php endforeach; ?>
     </div>
+<?php } else if ($pil == 6) { ?>
+    <div class="" style="max-height: 600px; overflow-y: auto; ">
+        <?php $no = 1;
+        foreach ($list as $r) : ?>
+            <div class="panel box box-success">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->created_at) ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                        <strong>Bahasa Yang Digunakan</strong>
+                        <p><?= arr_to_list($r->bahasa, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Kembutuhan Penerjemah</strong>
+                        <p><?= trueOrFalse($r->penerjemah) ?></p>
+                        <strong>Agama</strong>
+                        <p><?= agama($r->agama) ?></p>
+                        <strong>Pendidikan Pasien</strong>
+                        <p><?= pendidikan($r->pendidikan) ?></p>
+                        <strong>Keterbatasn Fisik</strong>
+                        <p><?= arr_to_list($r->terbatas_fisik, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Hambatan</strong>
+                        <p><?= arr_to_list($r->hambatan, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                            <i class="fa fa-print"></i>
+                        </button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusEdukasiPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 <?php } else { ?>
     <div class="alert alert-danget">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

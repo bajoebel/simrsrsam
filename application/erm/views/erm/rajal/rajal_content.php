@@ -111,6 +111,9 @@
             <div class="box-body">
                 <?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_form") ?>
             </div>
+            <!-- <div class="box-footer"> -->
+            <!-- <button type="form" class="btn btn-primary pull-right">Selanjutnya</button> -->
+            <!-- </div> -->
         </div>
     </div>
 </div>

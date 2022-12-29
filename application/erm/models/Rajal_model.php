@@ -90,4 +90,45 @@ class Rajal_model extends CI_Model
             ->order_by("id desc")
             ->get("rj_iep");
     }
+
+    function insertEdukasiPasien($data)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->insert("rj_iep", $data);
+        return $db2->insert_id();
+    }
+
+    function insertEdukasiPasienDetail($data)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->insert("rj_iep_detail", $data);
+    }
+
+    function deleteEdukasiPasien($idx, $id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2
+            ->where(["idx" => $idx, "id" => $id])
+            ->delete("rj_iep");
+        $db2
+            ->where(["id_rj_iep" => $id])
+            ->delete("rj_iep_detail");
+        return $this->db->affected_rows();
+    }
+
+    function getEdukasiPasienDetail($id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->where(["id_rj_iep" => $id])
+            ->get("rj_iep_detail");
+    }
+    function deleteEdukasiPasienDetail($id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2
+            ->where(["id" => $id])
+            ->delete("rj_iep_detail");
+        return $this->db->affected_rows();
+    }
 }

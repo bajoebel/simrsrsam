@@ -365,6 +365,22 @@ function get_list_ruang($tipe)
     return $result;
 }
 
+function trueOrFalse($param)
+{
+    switch ($param) {
+        case '1':
+            return "Ya";
+            break;
+        case '0':
+            return "Tidak";
+            break;
+        default:
+            return "-";
+            break;
+    }
+}
+
+
 
 
 

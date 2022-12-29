@@ -45,323 +45,553 @@
     }
 </style>
 <form role="form" id='form-data-edukasi-pasien' method="post">
-    <div class="box-body">
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#pilk_1" data-toggle="tab" aria-expanded="true">Data Awal</a></li>
-                <li class="active"><a href="#pilk_2" data-toggle="tab" aria-expanded="true">Pilihan Edukasi</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="#pilk_1">
-                    <b>How to use:</b>
-
-                    <p>Exactly like the original bootstrap tabs except you should use
-                        the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
-                    A wonderful serenity has taken possession of my entire soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.
-                    I am alone, and feel the charm of existence in this spot,
-                    which was created for the bliss of souls like mine. I am so happy,
-                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                    that I neglect my talents. I should be incapable of drawing a single stroke
-                    at the present moment; and yet I feel that I never was a greater artist than now.
-                </div>
-                <div class="tab-pane active" id="#pilk_2">
-                    <b>How to use:</b>
-
-                    <p>Exactly like the original bootstrap tabs except you should use
-                        the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
-                    A wonderful serenity has taken possession of my entire soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.
-                    I am alone, and feel the charm of existence in this spot,
-                    which was created for the bliss of souls like mine. I am so happy,
-                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                    that I neglect my talents. I should be incapable of drawing a single stroke
-                    at the present moment; and yet I feel that I never was a greater artist than now.
-                </div>
-            </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Data Awal</h3>
         </div>
-        <input type="hidden" name="idx" value="<?= $detail->idx ?>">
-        <input type="hidden" name="nomr" value="<?= $detail->nomr ?>">
-        <b>Asesmen Kemampuan, Kemauan Belajar</b>
-        <p class="text-blue">Pengkajiaan umum</p>
-        <div class="form-group row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="">Bahasa</label>
-                        <select class="form-control select2" name="bahasa_k[]" id="bahasa_k" multiple="multiple">
-                            <option value="">Indonesia</option>
-                            <option value="">Daerah</option>
-                            <option value="">Isyarat</option>
-                            <option value="">Lainnya...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="">Bahasa daerah / lain-lain sebutkan</label>
-                        <input type="text" class="form-control" name="bahasa_lainnya_k" id="bahasa_lainnya_k" readonly>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label for="">Kebutuhan Penerjemah</label>
-                <div class="radio">
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="penerjemah_k">Ya
-                    </label>
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="penerjemah_k">Tidak
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <label for="">Agama</label>
-                <select name="agama_k" id="agama_k" class="form-control">
-                    <option value="1">Islam</option>
-                    <option value="2">Kristen (Protestan)</option>
-                    <option value="3">Katholik</option>
-                    <option value="4">Hindu</option>
-                    <option value="5">Budha</option>
-                    <option value="6">Konghocu</option>
-                    <option value="7">Penghayat</option>
-                    <option value="8">Lain-lain</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="">Pendidikan Pasien</label>
-                <select name="pendidikan_k" id="pendidikan_k" class="form-control">
-                    <option value="0">Tidak sekolah</option>
-                    <option value="1">SD</option>
-                    <option value="2">SLTP sederajat</option>
-                    <option value="3">SLTA sederajat</option>
-                    <option value="4">D4</option>
-                    <option value="5">S1</option>
-                    <option value="6">S2</option>
-                    <option value="7">S3</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="">Kesediaan Menerima Informasi</label>
-                <div class="radio">
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="kesediaan_k" value="1">Bersedia
-                    </label>
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="kesediaan_k" value="0">Tidak Bersedia (alasan)
-                    </label>
-                    <label for="" class="radio-inline">
-                        <input type="text" class="custom-input w-100" name="kesediaan_alasan_k" id="kesediaan_alasan_k" readonly>
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="">Kemampuan Membaca</label>
-                <div class="radio">
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="baca_k" id="" value="1">Baik
-                    </label>
-                    <label for="" class="radio-inline">
-                        <input type="radio" name="baca_k" id="" value="0">Kurang
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-3">
-                <label for="">Keyakinan dan Nilai-nilai</label>
-                <input type="text" class="form-control" name="keyakinan_k" id="keyakinan_k" value="-">
-            </div>
-            <div class="col-md-4">
-                <label for="">Keterbatasan Fisik dan Kognitif</label>
-                <div class="row">
-                    <div class="col-md-12">
-                        <select name="terbatas_fisik_k[]" id="terbatas_fisik_k" class="form-control select2" multiple="multiple">
-                            <option value="1">Tidak ada</option>
-                            <option value="2">Penglihatan terganggu</option>
-                            <option value="3">Pendengaran terganggu</option>
-                            <option value="4">Gangguan bicara</option>
-                            <option value="5">Fisik lemah</option>
-                            <option value="6">Kognitif terbatas</option>
-                            <option value="7">Lain-lain....</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12" style="margin-top:5px">
-                        <input type="text" class='form-control' placeholder="lainnya..." name="terbatas_fisik_lain_k" id="terbatas_fisik_lain_k" readonly>
+        <div class="panel-body">
+            <input type="hidden" name="idx_e" value="<?= $detail->idx ?>">
+            <input type="hidden" name="nomr_e" value="<?= $detail->nomr ?>">
+            <input type="hidden" name="nama_e" value="<?= $detail->nama_pasien ?>">
+            <input type="hidden" name="user_daftar_e" value="<?= $detail->user_daftar ?>">
+            <b>Asesmen Kemampuan, Kemauan Belajar</b>
+            <p class="text-blue">Pengkajiaan umum</p>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Bahasa</label>
+                            <select class="form-control select2" name="bahasa_e[]" id="bahasa_e" multiple="multiple">
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Daerah">Daerah</option>
+                                <option value="Isyarat">Isyarat</option>
+                                <option value="Lainnya...">Lainnya...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Bahasa daerah / lain-lain sebutkan</label>
+                            <input type="text" class="form-control" name="bahasa_lainnya_e" id="bahasa_lainnya_e" readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <label for="">Hambatan Emosional dan Motivasi</label>
-                <div class="row">
-                    <div class="col-md-12">
-                        <select name="hambatan_k[]" id="hambatan_k" class="form-control select2" multiple="multiple">
-                            <option value="1">Tidak ada</option>
-                            <option value="2">Penglihatan Terganggu</option>
-                            <option value="3">Emosional Terganggu</option>
-                            <option value="4">Lain-lain...</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 mt-1">
-                        <input type="text" class='form-control' name="hambatan_lain_k" id="hambatan_lain_k" placeholder="lainnya..." readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="text-blue">Assesment Kebutuhan Edukasi</p>
-        <div class="form-group row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-8">
-                        <select name="kebutuhan_edukasi_k[]" id="kebutuhan_edukasi_k" class="form-control select2" multiple="multiple">
-                            <option value="1">Asuhan Medis</option>
-                            <option value="2">Asuhan Keperawatan</option>
-                            <option value="3">Pengobatan</option>
-                            <option value="4">Asuhan Gizi</option>
-                            <option value="5">Manajemen nyeri</option>
-                            <option value="6">Rehabilitasi</option>
-                            <option value="7">Penggunaan alat-alat medis</option>
-                            <option value="8">Hand Hygiene</option>
-                            <option value="9">Rohani</option>
-                            <option value="10">Pendaftaran dan Admisi</option>
-                            <option value="11">Prosedur dan Perawatan</option>
-                            <option value="12">Lain-lain</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" name="kebutuhan_edukasi_lain_k" id="kebutuhan_edukasi_lain_k" class="form-control" placeholder="Lainnya..." readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="text-blue">Perencanaan Edukasi</p>
-        <div class="form-group row">
-            <div class="col-md-3">
-                <label for="">Metode</label>
-                <select name="metode_k" id="metode_k" class="form-control select2" multiple="multiple">
-                    <option value="1">Diskusi</option>
-                    <option value="2">Ceramah</option>
-                    <option value="3">Demonstrasi</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="">Media</label>
-                <select name="media_k" id="media_k" class="form-control select2" multiple="multiple">
-                    <option value="1">Liflet</option>
-                    <option value="2">Lembar Balik</option>
-                    <option value="3">Audio Visual</option>
-                    <option value="4">Lain-lain</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="">Sasaran Edukasi</label>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="radio-inline">
-                            <input type="radio" name="sasaran_edukasi_k" value="1" checked>Pasien
+                <div class="col-md-3">
+                    <label for="">Kebutuhan Penerjemah</label>
+                    <div class="radio">
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="penerjemah_e" value="1">Ya
                         </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="sasaran_edukasi_k" value="2">Keluarga
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="penerjemah_e" value="0" checked>Tidak
                         </label>
                     </div>
-                    <div class="col-md-12 mt-1">
-                        <input type="text" name="hubungan_keluarga_k" id="hubungan_keluarga_k" class="form-control" placeholder="Hubungan keluarga ...." readonly>
+                </div>
+                <div class="col-md-3">
+                    <label for="">Agama</label>
+                    <select name="agama_e" id="agama_e" class="form-control">
+                        <option value="1">Islam</option>
+                        <option value="2">Kristen (Protestan)</option>
+                        <option value="3">Katholik</option>
+                        <option value="4">Hindu</option>
+                        <option value="5">Budha</option>
+                        <option value="6">Konghocu</option>
+                        <option value="7">Penghayat</option>
+                        <option value="8">Lain-lain</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="">Pendidikan Pasien</label>
+                    <select name="pendidikan_e" id="pendidikan_e" class="form-control">
+                        <option value="0">Tidak sekolah</option>
+                        <option value="1">SD</option>
+                        <option value="2">SLTP sederajat</option>
+                        <option value="3">SLTA sederajat</option>
+                        <option value="4">D4</option>
+                        <option value="5">S1</option>
+                        <option value="6">S2</option>
+                        <option value="7">S3</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="">Kesediaan Menerima Informasi</label>
+                    <div class="radio">
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="kesediaan_e" value="1" checked>Bersedia
+                        </label>
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="kesediaan_e" value="0">Tidak Bersedia (alasan)
+                        </label>
+                        <label for="" class="radio-inline">
+                            <input type="text" class="custom-input w-100" name="kesediaan_alasan_e" id="kesediaan_alasan_e" readonly>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Kemampuan Membaca</label>
+                    <div class="radio">
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="baca_e" id="" value="1" checked>Baik
+                        </label>
+                        <label for="" class="radio-inline">
+                            <input type="radio" name="baca_e" id="" value="0">Kurang
+                        </label>
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="">Keyakinan dan Nilai-nilai</label>
+                    <input type="text" class="form-control" name="keyakinan_e" id="keyakinan_e" value="-">
+                </div>
+                <div class="col-md-4">
+                    <label for="">Keterbatasan Fisik dan Kognitif</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <select name="terbatas_fisik_e[]" id="terbatas_fisik_e" class="form-control select2" multiple="multiple">
+                                <option value="Tidak ada">Tidak ada</option>
+                                <option value="Penglihatan terganggu">Penglihatan terganggu</option>
+                                <option value="Pendengaran terganggu">Pendengaran terganggu</option>
+                                <option value="Gangguan bicara">Gangguan bicara</option>
+                                <option value="Fisik lemah">Fisik lemah</option>
+                                <option value="Kognitif terbatas">Kognitif terbatas</option>
+                                <option value="Lain-lain....">Lain-lain....</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12" style="margin-top:5px">
+                            <input type="text" class='form-control' placeholder="lainnya..." name="terbatas_fisik_lain_e" id="terbatas_fisik_lain_e" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="">Hambatan Emosional dan Motivasi</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <select name="hambatan_e[]" id="hambatan_e" class="form-control select2" multiple="multiple">
+                                <option value="Tidak ada">Tidak ada</option>
+                                <option value="Penglihatan Terganggu">Penglihatan Terganggu</option>
+                                <option value="Emosional Terganggu">Emosional Terganggu</option>
+                                <option value="Lain-lain...">Lain-lain...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mt-1">
+                            <input type="text" class='form-control' name="hambatan_lain_e" id="hambatan_lain_e" placeholder="lainnya..." readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-blue">Assesment Kebutuhan Edukasi</p>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <select name="kebutuhan_edukasi_e[]" id="kebutuhan_edukasi_e" class="form-control select2" multiple="multiple">
+                                <option value="Asuhan Medis">Asuhan Medis</option>
+                                <option value="Asuhan Keperawatan">Asuhan Keperawatan</option>
+                                <option value="Pengobatan">Pengobatan</option>
+                                <option value="Pengobatan">Asuhan Gizi</option>
+                                <option value="Manajemen nyeri">Manajemen nyeri</option>
+                                <option value="Rehabilitasi">Rehabilitasi</option>
+                                <option value="Penggunaan alat-alat medis">Penggunaan alat-alat medis</option>
+                                <option value="Hand Hygiene">Hand Hygiene</option>
+                                <option value="Rohani">Rohani</option>
+                                <option value="Pendaftaran dan Admisi">Pendaftaran dan Admisi</option>
+                                <option value="Prosedur dan Perawatan">Prosedur dan Perawatan</option>
+                                <option value="Lain-lain">Lain-lain</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="kebutuhan_edukasi_lain_e" id="kebutuhan_edukasi_lain_e" class="form-control" placeholder="Lainnya..." readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-blue">Perencanaan Edukasi</p>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="">Metode</label>
+                    <select name="metode_e[]" id="metode_e" class="form-control select2" multiple="multiple">
+                        <option value="1-Diskusi">Diskusi</option>
+                        <option value="2-Ceramah">Ceramah</option>
+                        <option value="3-Demonstrasi">Demonstrasi</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="">Media</label>
+                    <select name="media_e[]" id="media_e" class="form-control select2" multiple="multiple">
+                        <option value="1-Liflet">Liflet</option>
+                        <option value="2-Lembar Balik">Lembar Balik</option>
+                        <option value="3-Audio Visual">Audio Visual</option>
+                        <option value="4-Lain-lain">Lain-lain</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="">Sasaran Edukasi</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="sasaran_edukasi_e" value="1" checked>Pasien
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sasaran_edukasi_e" value="2">Keluarga
+                            </label>
+                        </div>
+                        <div class="col-md-12 mt-1">
+                            <input type="text" name="hubungan_keluarga_e" id="hubungan_keluarga_e" class="form-control" placeholder="Hubungan keluarga ...." readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="form" class="btn btn-primary pull-right">Simpan</button>
+            </div>
+            <!-- <button class="btn btn-primary nextBtn pull-right" type="button">Next</button> -->
         </div>
-        <hr>
     </div>
 </form>
-<?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_detail") ?>
+<form role="form" id='form-data-edukasi-pasien-detail' method="post" class="hide">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Topik Edukasi</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success" data-toggle="modal" href='#modal-edukasi-pasien'><i class="fa fa-plus-circle" aria-hidden="true"></i>Tambah</button>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="filter_e" id="filter_e" class="form-control">
+                            <option value="">==filter==</option>
 
-<script>
-    $('#exampleModal').on('show.bs.modal', event => {
-        var button = $(event.relatedTarget);
-        var modal = $(this);
-        // Use above variables to manipulate the DOM
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover" id="table-detail-edukasi-pasien">
+                <thead>
+                    <tr>
+                        <th>Tanggal/Jam</th>
+                        <th>Topik Edukasi</th>
+                        <th>Metode</th>
+                        <th>Sasaran</th>
+                        <th>Evaluasi Awal</th>
+                        <th>Pemberi Edukasi</th>
+                        <th>Verifikasi</th>
+                        <th>Evaluasi Lanjutan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary nextBtn pull-left" onclick="batal()">Cancel</button>
+                        <button type="form" class="btn btn-primary pull-right">Selesai</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-    });
-</script>
+<div class="modal fade" id="modal-edukasi-pasien">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Tambah Data</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="hidden" name="id_rj_iep" id="id_rj_iep">
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label for="">Tanggal</label>
+                        <input type="date" name="tgl_e" id="tgl_e" class="form-control" value="<?= date('Y-m-d') ?>">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Jam</label>
+                        <input type="time" name="jam_e" id="jam_e" class="form-control" value="<?= date('h:i') ?>">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Topik Edukasi</label>
+                        <select name="topik_e" id="topik_e" class="form-control">
+
+                            <option value="">=Pilih Topik=</option>
+                            <option value="1">Pendaftaran Admisi</option>
+                            <option value="2">DPJP/PPJA</option>
+                            <option value="3">Apoteker</option>
+                            <option value="4">Penggunaan Alat Medis</option>
+                            <option value="5">Nyeri</option>
+                            <option value="6">Teknik-Teknik Rehabilitasi</option>
+                            <option value="7">Diet dan Nutrisi Yang Memadai</option>
+                            <option value="8">Prosedur dan Perawatan</option>
+                            <option value="9">Rohaniawan</option>
+                            <option value="10">Pemulangan Pasien dan Asuhan Lanjutan di Rumah</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="pil">
+                        <div class="col-md-4 item">
+                            <label for="" class="topik-item topik-title">Judul Topik</label>
+                            <select name="topik_list_e[]" id="topik_list_e" class="form-control select2-tag" style="width:100%" multiple="multiple">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="metode_topik_e">Metode</label>
+                                <select name="metode_topik_e" id="metode_topik_e" class="form-control">
+                                    <option value="1">Diskusi</option>
+                                    <option value="2">Ceramah</option>
+                                    <option value="3">Demonstrasi</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Media</label>
+                                <select name="media_topik_e" id="media_topik_e" class="form-control">
+                                    <option value="1">Liflet</option>
+                                    <option value="2">Lembar Balik</option>
+                                    <option value="3">Audio Visual</option>
+                                    <option value="4">Lain-lain</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Sasaran (nama)</label>
+                                <input type="text" name="sasaran_topik_e" id="sasaran_topik_e" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="">Evaluasi Awal</label>
+                                <select name="evaluasi_awal_e" id="evaluasi_awal_e" class="form-control">
+                                    <option value="1">Sudah Mengerti</option>
+                                    <option value="2">Re-Edukasi</option>
+                                    <option value="3">Redemonstrasi</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Pemberi Edukasi (nama)</label>
+                                <input type="text" name="pemberi_edukasi_e" id="pemberi_edukasi_e" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Verifikasi</label>
+                                <input type="text" name="verifikasi_e" id="verifikasi_e" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="">Evaluasi Lanjutan</label>
+                                <select name="evaluasi_lanjut_e" id="evaluasi_lanjut_e" class="form-control">
+                                    <option value="1">Sudah Mengerti</option>
+                                    <option value="2">Re-Edukasi</option>
+                                    <option value="3">Redemonstrasi</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="simpan_detail()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         // $(".select2-tag").select2()
-        $(".select2").select2({
-            placeholder: 'Silahkan Pilih'
-        });
+        $(".select2").select2({});
         $(".select2-tag").select2({
-            placeholder: 'Silahkan Pilih'
+            tags: true
         });
 
-        $('#bahasa_k').on('select2:select', function(e) {
+        $('#bahasa_e').on('select2:select', function(e) {
             let value = e.params.data;
             if (value.text == "Lainnya...") {
-                $("#bahasa_lainnya_k").removeAttr("readonly").focus();
+                $("#bahasa_lainnya_e").removeAttr("readonly").focus();
             }
         });
-        $('#bahasa_k').on('select2:unselect', function(e) {
+        $('#bahasa_e').on('select2:unselect', function(e) {
             let value = e.params.data;
             if (value.text == "Lainnya...") {
-                $("#bahasa_lainnya_k").attr("readonly", true).val("");
+                $("#bahasa_lainnya_e").attr("readonly", true).val("");
             }
         });
-        $('input[type=radio][name=kesediaan_k]').change(function() {
+        $('input[type=radio][name=kesediaan_e]').change(function() {
             // console.log($(this).val() == 0)
             if ($(this).val() == 0) {
-                $("[name='kesediaan_alasan_k']").removeAttr("readonly").focus();
+                $("[name='kesediaan_alasan_e']").removeAttr("readonly").focus();
             } else {
-                $("[name='kesediaan_alasan_k']").attr("readonly", true).val("");
+                $("[name='kesediaan_alasan_e']").attr("readonly", true).val("");
             }
         });
-        $('#terbatas_fisik_k').on('select2:select', function(e) {
+        $('#terbatas_fisik_e').on('select2:select', function(e) {
             let value = e.params.data;
             //console.log(value.id)
             if (value.id == 7) {
-                $("#terbatas_fisik_lain_k").removeAttr("readonly").focus();
+                $("#terbatas_fisik_lain_e").removeAttr("readonly").focus();
             }
         });
-        $('#terbatas_fisik_k').on('select2:unselect', function(e) {
+        $('#terbatas_fisik_e').on('select2:unselect', function(e) {
             let value = e.params.data;
             if (value.id == 7) {
-                $("#terbatas_fisik_lain_k").attr("readonly", true).val("");
+                $("#terbatas_fisik_lain_e").attr("readonly", true).val("");
             }
         });
 
-        $('#hambatan_k').on('select2:select', function(e) {
+        $('#hambatan_e').on('select2:select', function(e) {
             let value = e.params.data;
             console.log(value.text)
             //console.log(value.id)
             if (value.text == "Lain-lain...") {
-                $("#hambatan_lain_k").removeAttr("readonly").focus();
+                $("#hambatan_lain_e").removeAttr("readonly").focus();
             }
         });
-        $('#hambatan_k').on('select2:unselect', function(e) {
+        $('#hambatan_e').on('select2:unselect', function(e) {
             let value = e.params.data;
             if (value.text == "Lain-lain...") {
-                $("#hambatan_lain_k").attr("readonly", true).val("");
+                $("#hambatan_lain_e").attr("readonly", true).val("");
             }
         });
 
-        $('#kebutuhan_edukasi_k').on('select2:select', function(e) {
+        $('#kebutuhan_edukasi_e').on('select2:select', function(e) {
             let value = e.params.data;
-            console.log(value.id)
+            // console.log(value.id)
             //console.log(value.id)
             if (value.id == "12") {
-                $("#kebutuhan_edukasi_lain_k").removeAttr("readonly").focus();
+                $("#kebutuhan_edukasi_lain_e").removeAttr("readonly").focus();
             }
         });
-        $('#kebutuhan_edukasi_k').on('select2:unselect', function(e) {
+        $('#kebutuhan_edukasi_e').on('select2:unselect', function(e) {
             let value = e.params.data;
             if (value.id == "12") {
-                $("#kebutuhan_edukasi_lain_k").attr("readonly", true).val("");
+                $("#kebutuhan_edukasi_lain_e").attr("readonly", true).val("");
             }
         });
 
-        $("[name='sasaran_edukasi_k']").on("click", function() {
+        $("[name='sasaran_edukasi_e']").on("click", function() {
             let value = $(this).val();
             if (value == 2) {
-                $("#hubungan_keluarga_k").removeAttr("readonly").focus();
+                $("#hubungan_keluarga_e").removeAttr("readonly").focus();
             } else {
-                $("#hubungan_keluarga_k").attr("readonly", true).val("");
+                $("#hubungan_keluarga_e").attr("readonly", true).val("");
             }
         })
+
+        // dinamis topik edukasi
+        $("#topik_e").on("change", function() {
+            let val = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: base_url + "rajal/get_topik_list",
+                data: {
+                    "id": val
+                },
+                dataType: "html",
+                success: function(response) {
+                    // console.log(response)
+                    $("#topik_list_e").html(response)
+                    var text = $("#topik_e option:selected").text();
+                    $(".topik-title").html(text)
+
+                },
+                error: function(e) {
+                    console.log(e.responseText)
+                }
+            });
+        });
+
+        tampil_awal();
+        tampil_tabel();
+
     });
+
+    function tampil_awal() {
+        let id = localStorage.getItem("id_rj_iep")
+        if (id != null) {
+            $("#form-data-edukasi-pasien:submit").attr("disabled", true);
+            $("#id_rj_iep").val(localStorage.getItem("id_rj_iep"));
+            $("#form-data-edukasi-pasien").addClass("hide");
+            $("#form-data-edukasi-pasien-detail").removeClass("hide");
+        }
+
+    }
+
+    function tampil_tabel() {
+        let id = localStorage.getItem("id_rj_iep");
+        $.ajax({
+            type: "GET",
+            url: base_url + "rajal/get_edukasi_pasien_detail/" + id,
+            data: "data",
+            dataType: "html",
+            success: function(response) {
+                $("#table-detail-edukasi-pasien tbody").html(response);
+            }
+        });
+    }
+
+    function batal() {
+        let id = localStorage.getItem("id_rj_iep");
+        let idx = <?= $detail->idx ?>;
+
+        localStorage.removeItem("id_rj_iep")
+        $("#form-data-edukasi-pasien-detail").addClass("hide");
+        $("#form-data-edukasi-pasien").removeClass("hide");
+        $("#form-data-edukasi-pasien:submit").attr("disabled", false);
+
+        hapusEdukasiPasien(idx, id)
+    }
+
+    function simpan_detail() {
+        let tgl = $("[name='tgl_e']").val();
+        let jam = $("[name='jam_e']").val();
+        let topik_id = $("[name='topik_e']").val();
+        let topik_list = $("#topik_list_e").val();
+        let metode = $("[name='metode_topik_e']").val();
+        let media = $("[name='media_topik_e']").val();
+        let sasaran = $("[name='sasaran_topik_e']").val();
+        let evaluasi_awal = $("[name='evaluasi_awal_e']").val();
+        let pemberi_edukasi = $("[name='pemberi_edukasi_e']").val();
+        let verifikasi = $("[name='verifikasi_e']").val();
+        let evaluasi_lanjut = $("[name='evaluasi_lanjut_e']").val();
+        let user_daftar = "<?= $detail->user_daftar ?>";
+        let id_rj_iep = $("[name='id_rj_iep']").val();
+        // console.log(media);
+        // return false;
+        $.ajax({
+            type: "POST",
+            url: base_url + "rajal/insert_edukasi_pasien_detail",
+            data: {
+                tgl: tgl,
+                jam: jam,
+                topik_id: topik_id,
+                topik_list: topik_list,
+                metode: metode,
+                media: media,
+                sasaran: sasaran,
+                evaluasi_awal: evaluasi_awal,
+                pemberi_edukasi: pemberi_edukasi,
+                verifikasi: verifikasi,
+                evaluasi_lanjut: evaluasi_lanjut,
+                user_daftar: user_daftar,
+                id_rj_iep: id_rj_iep
+            },
+            dataType: "json",
+            success: function(response) {
+                $("#modal-edukasi-pasien").modal("hide")
+                tampil_tabel();
+            },
+            error: function(e) {
+                // console.log(e.responseText)
+            }
+        });
+    }
 </script>

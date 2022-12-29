@@ -356,6 +356,39 @@
             });
         })
 
+        // insert perkembangan pasien terintegrasi
+        $("#form-data-edukasi-pasien").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serializeArray();
+            // console.log(data_form);
+            // return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_edukasi_pasien",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $("#form-data-edukasi-pasien:submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    localStorage.setItem("id_rj_iep", response.id);
+                    console.log()
+                    $("#id_rj_iep").val(localStorage.getItem("id_rj_iep"));
+                    $("#form-data-edukasi-pasien").addClass("hide");
+                    $("#form-data-edukasi-pasien-detail").removeClass("hide");
+                    // swal("Success", "Data Berhasil Di Simpan", "success");
+                    // console.log(response);
+                    // $('#form-data-edukasi-pasien')[0].reset();
+                    // console.log(response);
+                    // $(":submit").attr("disabled", false);
+                    // getRiwayat(6, <?= $detail->idx ?>);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        })
+
     });
 
     function getRiwayat(pil, idx) {
@@ -436,6 +469,53 @@
                 console.log(e.responseText);
             }
         });
+    }
+
+    function hapusEdukasiPasien(idx, id) {
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_edukasi_pasien/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(6, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
+    }
+
+    function hapusEdukasiPasienDetail(id) {
+        var x = confirm("Yakin Ingin Hapus Data Detail");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_edukasi_pasien_detail/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        // getRiwayat(6, idx);
+                        tampil_tabel();
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
     }
 </script>
 <!--  -->
