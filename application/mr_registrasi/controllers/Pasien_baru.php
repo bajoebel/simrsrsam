@@ -585,7 +585,7 @@ class pasien_baru extends CI_Controller {
                         $params['user_created'] = $this->session->userdata('get_uid');
                         $params['session_id'] = getSessionID();
                         if($_POST['idx'] == ""){
-                        
+                            // Insert Pasien Baru
                             $params['nomr'] = $this->patch_model->get_nomr(); 
                             $cekCommand = $this->db->insert('tbl01_pasien',$params);
                             
@@ -642,11 +642,21 @@ class pasien_baru extends CI_Controller {
                             }
     
                             $params['nomr'] = $nomr;
-    
+                            // update Pasien BAru
                             $this->db->where('idx',  $this->input->post('idx',TRUE));
                             $cekCommand = $this->db->update('tbl01_pasien',$params); 
-    
+                            
                             if($cekCommand){
+                                
+                                $updateregistrasi=array(
+                                    'no_ktp'=>$params['no_ktp'],
+                                    'nama_pasien'=>$params['nama'],
+                                    'tempat_lahir'=>$params['tempat_lahir'],
+                                    'tgl_lahir'=>$params['tgl_lahir'],
+                                    'jns_kelamin'=>$params['jns_kelamin'],
+                                );
+                                $this->db->where('nomr',$params['nomr']);
+                                $this->db->update('tbl02_pendaftaran',$updateregistrasi);
                                 $response['code'] = 201;
                                 $response['message'] = "Update data sukses.";     
                                 $response['nomr'] = $nomr;                                            
