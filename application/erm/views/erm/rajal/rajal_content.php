@@ -36,23 +36,25 @@
         </div>
     </div>
     <div class="tab-pane <?= $ta[3] ?>" id="tab_3">
-        <div class="box box-success">
-            <div class="box-header ui-sortable-handle" style="cursor: move;">
-                <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Form Input Kajian Awal Keperawatan</h3>
-                <div class="box-tools pull-right">
-                    <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
-                        <i class='fa fa-print'></i>
-                    </button>
+        <form role="form" id='form-data-kaji-awal' method="post">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Form Input Kajian Awal Keperawatan</h3>
+                    <div class="box-tools pull-right">
+                        <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
+                            <i class='fa fa-print'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
+                </div>
+                <div class="box-footer">
+                    <button type="form" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
-            <div class="box-body">
-                <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
-            </div>
-            <div class="box-footer">
-                <button type="form" class="btn btn-primary">Simpan</button>
-            </div>
-        </div>
+        </form>
     </div>
     <div class="tab-pane <?= $ta[4] ?>" id="tab_4">
         <form role="form" id='form-data-kaji-awal-medis' method="post">

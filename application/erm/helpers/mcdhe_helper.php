@@ -365,6 +365,16 @@ function get_list_ruang($tipe)
     return $result;
 }
 
+function get_list_dpjp()
+{
+
+    $CI = &get_instance();
+    $result = $CI->db
+        ->get("tbl01_pegawai")
+        ->result();
+    return $result;
+}
+
 function trueOrFalse($param)
 {
     switch ($param) {
@@ -379,11 +389,19 @@ function trueOrFalse($param)
             break;
     }
 }
-
-
-
-
-
-
+function badOrGood($param)
+{
+    switch ($param) {
+        case '1':
+            return "Baik";
+            break;
+        case '0':
+            return "Tidak Baik";
+            break;
+        default:
+            return "-";
+            break;
+    }
+}
 
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

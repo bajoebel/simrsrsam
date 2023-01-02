@@ -221,6 +221,147 @@ class Rajal extends CI_Controller
         $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal/kaji_awal_cetak", compact('data'));
     }
 
+    public function insert_kaji_awal()
+    {
+        $data_post = [
+            "idx" => $this->input->post("idx_ka"),
+            "nomr" => $this->input->post("nomr_ka"),
+            "nama" => $this->input->post("nama_ka"),
+            "tgl" => $this->input->post("tgl_ka"),
+            "jam" => $this->input->post("jam_ka"),
+            "poli" => $this->input->post("poli_ka"),
+            "poli_text" => $this->input->post("poli_text_ka"),
+            "dpjp" => $this->input->post("dpjp_ka"),
+            "dpjp_text" => $this->input->post("dpjp_text_ka"),
+            "tgl" => $this->input->post("tgl_ka"),
+            "jam" => $this->input->post("jam_ka"),
+            "tiba" => $this->input->post("tiba_ka"),
+            "rujukan" => $this->input->post("rujukan_ka"),
+            "rujukan_lain" => $this->input->post("rujukan_lain_ka"),
+            "keluhan" => $this->input->post("keluhan_ka"),
+            "dirawat" => $this->input->post("dirawat_ka"),
+            "kapan_dirawat" => $this->input->post("kapan_dirawat_ka"),
+            "dimana_dirawat" => $this->input->post("dimana_dirawat_ka"),
+            "diagnosis" => $this->input->post("diagnosis_ka"),
+            "implant" => $this->input->post("implan_ka"),
+            "implant_detail" => $this->input->post("implan_detail_ka"),
+            "riwayat_operasi" => $this->input->post("riwayat_operasi_ka"),
+            "riwayat_operasi_tahun" => $this->input->post("riwayat_operasi_tahun_ka"),
+            "riwayat_sakit" => $this->input->post("riwayat_sakit_ka"),
+            "riwayat_sakit_operasi" => $this->input->post("riwayat_sakit_operasi_ka"),
+            "riwayat_sakit_tahun" => $this->input->post("riwayat_sakit_tahun_ka"),
+            "riwayat_sakit_keluarga" => $this->input->post("riwayat_sakit_keluarga_ka"),
+            "riwayat_psikologis" => $this->input->post("riwayat_psikologis_ka"),
+            "status_mental_sadar" => $this->input->post("status_mental_sadar_ka"),
+            "status_mental_prilaku" => $this->input->post("status_mental_prilaku_ka"),
+            "status_mental_prilaku_detail" => $this->input->post("status_mental_prilaku_detail_ka"),
+            "status_mental_keras" => $this->input->post("status_mental_keras_ka"),
+            "status_mental_keras_detail" => $this->input->post("status_mental_keras_detail_ka"),
+            "kultural" => $this->input->post("kultural_ka"),
+            "kultural_nama" => $this->input->post("kultural_nama_ka"),
+            "kultural_hubungan" => $this->input->post("kultural_hubungan_ka"),
+            "kultural_phone" => $this->input->post("kultural_phone_ka"),
+            "kultural_kepercayaan" => $this->input->post("kultural_kepercayaan_ka"),
+            "status_ekonoomi" => $this->input->post("status_ekonoomi_ka"),
+            "spiritual_biasa" => $this->input->post("spiritual_biasa_ka"),
+            "spiritual_butuh" => $this->input->post("spiritual_butuh_ka"),
+            "budaya" => $this->input->post("budaya_ka"),
+            "obat" => $this->input->post("obat_ka"),
+            "makanan" => $this->input->post("makanan_ka"),
+            "obat_detail" => $this->input->post("obat_detail_ka"),
+            "makan_detail" => $this->input->post("makan_detail_ka"),
+            "riwayat_lain" => $this->input->post("riwayat_lain_ka"),
+            "nyeri" => $this->input->post("nyeri_ka"),
+            "profokatif" => $this->input->post("profokatif_ka"),
+            "quality" => $this->input->post("quality_ka"),
+            "region" => $this->input->post("region_ka"),
+            "skala" => $this->input->post("skala_ka"),
+            "timing" => $this->input->post("timing_ka"),
+            "tidur_malam" => $this->input->post("tidur_malam_ka"),
+            "halangan_aktivitas" => $this->input->post("halangan_aktivitas_ka"),
+            "nyeri_sakit" => $this->input->post("nyeri_sakit_ka"),
+            "metode" => $this->input->post("metode_ka"),
+            "skala_vas" => $this->input->post("skala_vas_ka"),
+            "skala_wbfs" => $this->input->post("skala_wbfs_ka"),
+            "face_wajah" => $this->input->post("face_wajah_ka"),
+            "leg" => $this->input->post("leg_ka"),
+            "gerakan" => $this->input->post("gerakan_ka"),
+            "tangis" => $this->input->post("tangis_ka"),
+            "kemampuan" => $this->input->post("kemampuan_ka"),
+            "skor_flacc" => $this->input->post("skor_flacc_ka"),
+            "gizi" => $this->input->post("gizi_ka"),
+            "gizi_makan" => $this->input->post("gizi_makan_ka"),
+            "skor_gizi" => $this->input->post("skor_gizi_ka"),
+            "strong_kids" => $this->input->post("strong_kids_ka"),
+            "aktivitas" => $this->input->post("aktivitas_ka"),
+            "aktivitas_info" => $this->input->post("aktivitas_info_ka"),
+            "aktivitas_info_detail" => $this->input->post("aktivitas_info_detail_ka"),
+            "jatuh" => $this->input->post("jatuh_ka"),
+            "jatuh_detail" => $this->input->post("jatuh_detail_ka"),
+            "gelang_risiko" => $this->input->post("gelang_risiko_ka"),
+            "risiko_info" => $this->input->post("risiko_info_ka"),
+            "risiko_info_detail" => $this->input->post("risiko_info_detail_ka"),
+            "keadaan_umum" => $this->input->post("keadaan_umum_ka"),
+            "kesadaran_umum" => $this->input->post("kesadaran_umum_ka"),
+            "gcs_e" => $this->input->post("gcs_e_ka"),
+            "gcs_m" => $this->input->post("gcs_m_ka"),
+            "gcs_v" => $this->input->post("gcs_v_ka"),
+            "ttv_sh" => $this->input->post("ttv_sh_ka"),
+            "ttv_nd" => $this->input->post("ttv_nd_ka"),
+            "ttv_rr" => $this->input->post("ttv_rr_ka"),
+            "ttv_td" => $this->input->post("ttv_td_ka"),
+            "ttv_ds" => $this->input->post("ttv_ds_ka"),
+            "status_generalis" => $this->input->post("status_generalis_ka"),
+            "penunjang_rad" => $this->input->post("penunjang_rad_ka"),
+            "penunjang_rad_detail" => $this->input->post("penunjang_rad_detail_ka"),
+            "penunjang_lab" => $this->input->post("penunjang_lab_ka"),
+            "penunjang_lab_detail" => $this->input->post("penunjang_lab_detail_ka"),
+            "penunjang_lain" => $this->input->post("penunjang_lain_ka"),
+            "penunjang_lain_detail" => $this->input->post("penunjang_lain_detail_ka"),
+            "komunikasi" => $this->input->post("komunikasi_ka"),
+            "komunikasi_detail" => $this->input->post("komunikasi_detail_ka"),
+            "komunikasi_lain" => $this->input->post("komunikasi_lain_ka"),
+            "komunikasi_penerjemah" => $this->input->post("komunikasi_penerjemah_ka"),
+            "komunikasi_penerjemah_detail" => $this->input->post("komunikasi_penerjemah_detail_ka"),
+            "komunikasi_isyarat" => $this->input->post("komunikasi_isyarat_ka"),
+            "komunikasi_edukasi" => $this->input->post("komunikasi_edukasi_ka"),
+            "diagnosa_keperawatan" => $this->input->post("diagnosa_keperawatan_ka"),
+            "tindakan_keperawatan" => $this->input->post("tindakan_keperawatan_ka"),
+            "dijelaskan" => $this->input->post("dijelaskan_ka"),
+            "dijelaskan_hubungan" => $this->input->post("dijelaskan_hubungan_ka"),
+            "status" => 0,
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+            "user_daftar" => $this->input->post("user_daftar_ka")
+        ];
+        // riwayat_sakit_ka
+        if (is_array($this->input->post("riwayat_sakit_ka"))) {
+            $data_post['riwayat_sakit'] = implode(";", removeChar($this->input->post("riwayat_sakit_ka")));
+        }
+        // riwayat_sakit_keluarga_ka[]
+        if (is_array($this->input->post("riwayat_sakit_keluarga_ka"))) {
+            $data_post['riwayat_sakit_keluarga'] = implode(";", removeChar($this->input->post("riwayat_sakit_keluarga_ka")));
+        }
+        // riwayat_psikologis_ka
+        if (is_array($this->input->post("riwayat_psikologis_ka"))) {
+            $data_post['riwayat_psikologis'] = implode(";", removeChar($this->input->post("riwayat_psikologis_ka")));
+        }
+        // status_ekonomi_ka[]
+        if (is_array($this->input->post("status_ekonomi_ka"))) {
+            $data_post['status_ekonomi'] = implode(";", removeChar($this->input->post("status_ekonomi_ka")));
+        }
+
+        // header("Content-Type:text/html");
+        // echo json_encode(["data" => $data_post]);
+        // exit();
+        $insert = $this->rajal->insertAwal($data_post);
+        if ($insert) {
+            echo json_encode(["status" => true, "data" => $data_post]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
+    }
+
     public function kaji_awal_medis()
     {
         // form rm 0203 rev.01 surat masuk rawat jalan

@@ -270,7 +270,7 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(6, <?= $detail->idx ?>);
+        getRiwayat(3, <?= $detail->idx ?>);
 
     });
 </script>
@@ -294,6 +294,43 @@
                     $('#form-data-persetujuan')[0].reset();
                     getRiwayat(2, <?= $detail->idx ?>);
                     // console.log(response);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        })
+
+        // insert data kaji awal keperawatan
+        $("#form-data-kaji-awal").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serializeArray();
+            var data_push = [{
+                "name": "dpjp_text_ka",
+                "value": $("#dpjp_ka").select2("data")[0].text
+            }, {
+                "name": "poli_text_ka",
+                "value": $("#poli_ka").select2("data")[0].text
+            }, ];
+            data_form = $.merge(data_form, data_push)
+            // console.log(data_push)
+            // console.log(data_form);
+            // return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_kaji_awal",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $(":submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    swal("Success", "Data Berhasil Di Simpan", "success");
+                    console.log(response);
+                    $('#form-data-kaji-awal')[0].reset();
+                    // console.log(response);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(4, <?= $detail->idx ?>);
                 },
                 error: function(e) {
                     console.log(e)

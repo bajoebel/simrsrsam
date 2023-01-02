@@ -34,6 +34,13 @@ class Rajal_model extends CI_Model
         return $this->db->affected_rows();
     }
 
+    // form kajian awal keperawatan
+    function insertAwal($data)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->insert("rj_awal_rawat", $data);
+    }
+
     // form kajian awal medis
     function getAwalMedis($nomr, $idx)
     {
