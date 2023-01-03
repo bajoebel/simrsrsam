@@ -62,7 +62,7 @@
 <div class="form-group row">
     <div class="col-md-6">
         <label for="nama_ttd">Tanggal </label>
-        <input type="date" class="form-control" name="tanggal_ka" placeholder="Enter Text...." value="<?= date("Y-m-d") ?>">
+        <input type="date" class="form-control" name="tgl_ka" placeholder="Enter Text...." value="<?= date("Y-m-d") ?>">
     </div>
     <div class="col-md-6">
         <label for="nama_ttd">Jam </label>
@@ -234,7 +234,7 @@
             <label><input type="checkbox" name="status_mental_prilaku_ka" value="">Ada masalah prilaku, Sebuatkan <input type="text" class="custom-input w-300" name="status_mental_prilaku_detail_ka"></label>
         </div>
         <div class="checkbox">
-            <label><input type="checkbox" name="status_mental_keras_ka" value="">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300"></label>
+            <label class="mt-1"><input type="checkbox" name="status_mental_keras_ka" value="">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300"></label>
         </div>
     </div>
     <div class="col-md-12">

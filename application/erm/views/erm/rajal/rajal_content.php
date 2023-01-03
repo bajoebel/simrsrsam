@@ -42,9 +42,7 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Kajian Awal Keperawatan</h3>
                     <div class="box-tools pull-right">
-                        <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
-                            <i class='fa fa-print'></i>
-                        </button>
+                        
                     </div>
                 </div>
                 <div class="box-body">

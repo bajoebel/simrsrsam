@@ -69,19 +69,50 @@
     </div>
 <?php } else if ($pil == 3) { ?>
     <!-- Kajian awal keperawatan -->
-    <div class="" style="max-height: 450px; overflow-y: scroll; ">
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Poliklinik</th>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-            </tbody>
-        </table>
+    <div class="" style="max-height: 600px; overflow-y: scroll; ">
+    <?php $no = 1;
+        foreach ($list as $r) : ?>
+            <div class="panel box box-success">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->tgl) . " - " . $r->jam ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                        <strong>Poli Tujuan</strong><br />
+                        <p><?= $r->poli_text ?></p>
+                        <strong>DPJP</strong><br />
+                        <p><?= $r->dpjp_text ?></p>
+                        <strong>Tiba Di Ruangan Dengan Cara</strong><br />
+                        <p><?= $r->tiba ?></p>
+                        <strong>Rujukan</strong><br />
+                        <p><?= $r->rujukan." - ". $r->rujukan_lain ?></p>
+                        <strong>Keluhan Utama</strong><br />
+                        <p><?= $r->keluhan ?></p>
+                        <strong>Riwayat Kesehatan / Pengobatan / Perawatan Sebelumnya</strong><br />
+                        <p>Pernah Dirawat : <?= trueOrFalse($r->dirawat)." - ".(($r->dirawat==1)?$r->kapan_dirawat." - ".$r->dimana_dirawat:"")  ?></p>
+                        <strong>Diagnosis</strong><br />
+                        <p><?= $r->diagnosis ?></p>
+                        <strong>Alat Implant Terpasang</strong><br />
+                        <p><?= $r->implant ." - ". $r->implant_detail ?></p>
+                        <strong>Riwayat Operasi</strong><br />
+                        <p><?= $r->riwayat_operasi ." - ". $r->operasi_tahun ?></p>
+                        <strong>Riwayat Penyakit Dahulu</strong><br />
+                        <p><?= arr_to_list($r->riwayat_sakit) ?></p>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                            <i class="fa fa-print"></i>
+                        </button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 <?php } else if ($pil == 4) { ?>
     <!-- <p><?php print_r($list) ?></p> -->

@@ -330,7 +330,7 @@
                     $('#form-data-kaji-awal')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
-                    getRiwayat(4, <?= $detail->idx ?>);
+                    getRiwayat(3, <?= $detail->idx ?>);
                 },
                 error: function(e) {
                     console.log(e)
@@ -460,6 +460,26 @@
             success: function(response) {
                 if (response.status) {
                     getRiwayat(2, idx);
+                }
+            },
+            error: function(e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function hapusAwalRawat(idx, id) {
+        $.ajax({
+            type: "GET",
+            url: base_url + `rajal/delete_kaji_awal/${idx}/${id}`,
+            data: "data",
+            dataType: "json",
+            success: function(response) {
+                if (response.status) {
+                    getRiwayat(4, idx);
+                    swal("Success", "Data Berhasil Di Hapus", "success");
+                } else {
+                    swal("Failed", "Something Wrong", "error");
                 }
             },
             error: function(e) {

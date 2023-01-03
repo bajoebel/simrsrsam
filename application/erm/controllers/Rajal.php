@@ -261,15 +261,15 @@ class Rajal extends CI_Controller
             "kultural_nama" => $this->input->post("kultural_nama_ka"),
             "kultural_hubungan" => $this->input->post("kultural_hubungan_ka"),
             "kultural_phone" => $this->input->post("kultural_phone_ka"),
-            "kultural_kepercayaan" => $this->input->post("kultural_kepercayaan_ka"),
-            "status_ekonoomi" => $this->input->post("status_ekonoomi_ka"),
+            "nilai_kepercayaan" => $this->input->post("nilai_kepercayaan_ka"),
+            "status_ekonomi" => $this->input->post("status_ekonomi_ka"),
             "spiritual_biasa" => $this->input->post("spiritual_biasa_ka"),
             "spiritual_butuh" => $this->input->post("spiritual_butuh_ka"),
             "budaya" => $this->input->post("budaya_ka"),
             "obat" => $this->input->post("obat_ka"),
             "makanan" => $this->input->post("makanan_ka"),
             "obat_detail" => $this->input->post("obat_detail_ka"),
-            "makan_detail" => $this->input->post("makan_detail_ka"),
+            "makanan_detail" => $this->input->post("makanan_detail_ka"),
             "riwayat_lain" => $this->input->post("riwayat_lain_ka"),
             "nyeri" => $this->input->post("nyeri_ka"),
             "profokatif" => $this->input->post("profokatif_ka"),
@@ -324,7 +324,7 @@ class Rajal extends CI_Controller
             "komunikasi_penerjemah" => $this->input->post("komunikasi_penerjemah_ka"),
             "komunikasi_penerjemah_detail" => $this->input->post("komunikasi_penerjemah_detail_ka"),
             "komunikasi_isyarat" => $this->input->post("komunikasi_isyarat_ka"),
-            "komunikasi_edukasi" => $this->input->post("komunikasi_edukasi_ka"),
+            "kebutuhan_edukasi" => $this->input->post("kebutuhan_edukasi_ka"),
             "diagnosa_keperawatan" => $this->input->post("diagnosa_keperawatan_ka"),
             "tindakan_keperawatan" => $this->input->post("tindakan_keperawatan_ka"),
             "dijelaskan" => $this->input->post("dijelaskan_ka"),
@@ -350,15 +350,27 @@ class Rajal extends CI_Controller
         if (is_array($this->input->post("status_ekonomi_ka"))) {
             $data_post['status_ekonomi'] = implode(";", removeChar($this->input->post("status_ekonomi_ka")));
         }
-
+        // komunikasi_detail_ka
+        if (is_array($this->input->post("komunikasi_detail_ka"))) {
+            $data_post['komunikasi_detail'] = implode(";", removeChar($this->input->post("komunikasi_detail_ka")));
+        }
         // header("Content-Type:text/html");
         // echo json_encode(["data" => $data_post]);
         // exit();
-        $insert = $this->rajal->insertAwal($data_post);
+        $insert = $this->rajal->insertAwalRawat($data_post);
         if ($insert) {
             echo json_encode(["status" => true, "data" => $data_post]);
         } else {
             echo json_encode(["status" => false]);
+        }
+    }
+
+    public function delete_kaji_awal($idx,$id) {
+        $delete = $this->rajal->deleteAwalMedis($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
         }
     }
 

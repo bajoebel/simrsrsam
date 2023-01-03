@@ -179,6 +179,8 @@ class Erm extends CI_Controller
             $data['list'] = $this->erm_model->getPendaftaranList($d->nomr);
         } else if ($pil == 2) {
             $data['list'] = $this->rajal->getSetujuUmum($d->nomr, $d->idx)->result();
+        } else if ($pil==3) {
+            $data['list'] = $this->rajal->getAwalRawat($d->nomr, $d->idx)->result();
         } else if ($pil == 4) {
             $data['list'] = $this->rajal->getAwalMedis($d->nomr, $d->idx)->result();
         } else if ($pil == 5) {

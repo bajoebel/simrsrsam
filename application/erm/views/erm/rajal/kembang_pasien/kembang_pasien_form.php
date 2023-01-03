@@ -101,7 +101,7 @@
             <b>Assessment</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="assesment_k" id="assesment_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="assesment_k" id="assesment_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
             <b>Planning</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="planning_k" id="planning_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="planning_k" id="planning_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
             <b>Intruksi</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="intruksi_k" id="intruksi_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="intruksi_k" id="intruksi_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
             <b>Review</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="review_k" id="review_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="review_k" id="review_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>
