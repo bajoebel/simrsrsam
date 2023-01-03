@@ -34,5 +34,5 @@ kepada petugas sampai kasir</b>-->
 </div>
 <script>
     window.print();
-    //window.close();
+    window.close();
 </script>

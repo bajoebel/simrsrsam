@@ -2251,7 +2251,6 @@
                 nama_kecamatan: $('#kecamatan').val(),
                 nama_kelurahan: $('#kelurahan').val(),
                 alamat: $('#alamatktp').val(),
-                
                 rt: $('#rt').val(),
                 rw: $('#rw').val(),
                 id_provinsi_domisili: $('#id_provinsi_domisili').val(),
