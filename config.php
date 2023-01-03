@@ -153,6 +153,7 @@ defined('CONS_ID_JKN')   	or define('CONS_ID_JKN', '9682');
 defined('SECREET_ID_JKN')   or define('SECREET_ID_JKN', '0aNCA78C3A');
 defined('KEY_JKN')   		or define('KEY_JKN', '1cd82ae8717ec38184e2d3b56a2021de');
 defined('STATUS_JKN')   	or define('STATUS_JKN', '1');
+defined('PRINT_TRACERT')   	or define('PRINT_TRACERT', '');
 
 /*
 Database Elektronik Rekam Medis

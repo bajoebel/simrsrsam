@@ -2245,8 +2245,6 @@ function periksaRujukan(norujukan="",faskes=""){
 			}
 		}); 
 	}
-	
-	   
 }
 function setRujukanInternal(id_daftar,sep){
 	$('#txtNorujuk').val(id_daftar);
