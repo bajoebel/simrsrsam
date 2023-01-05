@@ -38,7 +38,16 @@ class Rajal_model extends CI_Model
     function insertAwalRawat($data)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->insert("rj_awal_rawat", $data);
+        $idx = $data['idx'];
+        $nomr = $data['nomr'];
+        $cek = $db2->where(['idx'=>$idx,'nomr'=>$nomr])->get("rj_awal_rawat")->num_rows();
+        if ($cek>0) {
+            unset($data["idx"]);
+            unset($data["nomr"]);
+            return $db2->where(['idx'=>$idx,'nomr'=>$nomr])->update("rj_awal_rawat",$data);
+        } else {
+            return $db2->insert("rj_awal_rawat", $data);
+        }
     }
 
     function getAwalRawat($nomr,$idx) {
@@ -47,6 +56,23 @@ class Rajal_model extends CI_Model
             ->order_by("id desc")
             ->get("rj_awal_rawat");
     }
+    function getAwalRawatById($nomr,$idx,$id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->where(['idx' => $idx, "nomr" => $nomr,"id"=>$id])
+            ->order_by("id desc")
+            ->get("rj_awal_rawat")
+            ->row();
+    }
+
+    function deleteAwalRawat($idx, $id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2
+            ->where(["idx" => $idx, "id" => $id])
+            ->delete("rj_awal_rawat");
+        return $this->db->affected_rows();
+    }
+
 
     // form kajian awal medis
     function getAwalMedis($nomr, $idx)

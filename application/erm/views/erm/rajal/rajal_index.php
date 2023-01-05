@@ -327,7 +327,7 @@
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
                     console.log(response);
-                    $('#form-data-kaji-awal')[0].reset();
+                    // $('#form-data-kaji-awal')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(3, <?= $detail->idx ?>);
@@ -475,8 +475,9 @@
             data: "data",
             dataType: "json",
             success: function(response) {
+                console.log(response);
                 if (response.status) {
-                    getRiwayat(4, idx);
+                    getRiwayat(3, idx);
                     swal("Success", "Data Berhasil Di Hapus", "success");
                 } else {
                     swal("Failed", "Something Wrong", "error");

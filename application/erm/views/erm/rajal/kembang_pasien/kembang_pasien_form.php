@@ -85,7 +85,7 @@
             <b>Subyektif</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="subyektif_k" id="subyektif_k" id="" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="subyektif_k" id="subyektif_k" id="" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <b>Obyektif</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="obyektif_k" id="obyektif_k" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </textarea>
+                    <textarea name="obyektif_k" id="obyektif_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>

@@ -146,22 +146,6 @@
     </div>
 </div>
 <div class="form-group row">
-    <div class="col-md-4">
-        <label for="">Riwayat Operasi</label>
-        <input type="text" name="riwayat_operasi_ka" id="riwayat_operasi_ka" class="form-control" placeholder="Enter lainnya.....">
-    </div>
-    <div class="col-md-4">
-        <label for="">Operasi Tahun</label>
-        <select class="form-control" name="riwayat_operasi_tahun_ka" id="riwayat_operasi_tahun_ka">
-            <option value="">Select Year</option>
-            <?php $years = range(date('Y'), 1970);
-            foreach ($years as $year) : ?>
-                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-</div>
-<div class="form-group row">
     <div class="col-md-12">
         <label for="nama_ttd" class="text-blue">c. Riwayat Penyakit Dahulu </label><br>
     </div>
@@ -178,11 +162,11 @@
     </div>
     <div class="col-md-4">
         <label for="">Riwayat Operasi</label>
-        <input type="text" name="riwayat_sakit_operasi_ka" id="riwayat_sakit_operasi_ka" class="form-control" placeholder="Enter lainnya.....">
+        <input type="text" name="riwayat_operasi_ka" id="riwayat_operasi_ka" class="form-control" placeholder="Enter lainnya.....">
     </div>
     <div class="col-md-4">
         <label for="">Operasi Tahun</label>
-        <select class="form-control" name="riwayat_sakit_tahun_ka" id="riwayat_sakit_tahun_ka">
+        <select class="form-control" name="riwayat_operasi_tahun_ka" id="riwayat_operasi_tahun_ka">
             <option>Select Year</option>
             <?php $years = range(date('Y'), 1970);
             foreach ($years as $year) : ?>
@@ -216,7 +200,7 @@
     </div>
     <div class="col-md-6">
         <label for="nama_ttd" class="text-green">&nbsp;a) Status Psikologis <small>Bisa diisi lainnya</small> </label>
-        <select class="form-control select2-tag" name="riwayat_psikologis_ka" id="riwayat_psikologis_ka" multiple="multiple" data-placeholder="Riwayat Penyakit Dahulu..." style="width: 100%;">
+        <select class="form-control select2-tag" name="riwayat_psikologis_ka[]" id="riwayat_psikologis_ka" multiple="multiple" data-placeholder="Riwayat Penyakit Dahulu..." style="width: 100%;">
             <option value="cemas">Cemas</option>
             <option value="takut">Takut</option>
             <option value="marah">Marah</option>
@@ -234,7 +218,7 @@
             <label><input type="checkbox" name="status_mental_prilaku_ka" value="">Ada masalah prilaku, Sebuatkan <input type="text" class="custom-input w-300" name="status_mental_prilaku_detail_ka"></label>
         </div>
         <div class="checkbox">
-            <label class="mt-1"><input type="checkbox" name="status_mental_keras_ka" value="">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300"></label>
+            <label class="mt-1"><input type="checkbox" name="status_mental_keras_ka" value="1">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300"></label>
         </div>
     </div>
     <div class="col-md-12">
@@ -242,7 +226,7 @@
     </div>
     <div class="col-md-4">
         <label>Hubungan pasien dengan anggota keluarga </label>
-        <label class="radio-inline"><input type="radio" name="kultural_ka" value="1"> Baik</label>
+        <label class="radio-inline"><input type="radio" name="kultural_ka" value="1" checked> Baik</label>
         <label class="radio-inline"><input type="radio" name="kultural_ka" value="0"> Tidak Baik</label>
     </div>
     <div class="col-md-8">
@@ -314,7 +298,7 @@
         <label for="nama_ttd" class="col-md-2"><input type="text" class='custom-input' name="riwayat_lain_ka"> </label>
     </div>
 </div>
-<div class="form-group row hide">
+<div class="form-group row">
     <div class="col-md-12">
         <label for="nama_ttd" class="text-blue">g. Skrining Nyeri </label>
     </div>
@@ -369,7 +353,7 @@
         <label class="col-sm-3 radio-inline"> <input type="radio" name="nyeri_pilih_ka" value="3">FLACC Anak < 3 Tahun</label>
     </div>
 </div>
-<div class="form-group row hide" id="vas_pilih">
+<div class="form-group row hide" id="vas_pilih" >
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_vas_ka" id="skala_vas_ka" class="form-control">
@@ -379,7 +363,7 @@
         <img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="100%" alt="">
     </div>
 </div>
-<div class="form-group row hide" id="wbfs_pilih">
+<div class="form-group row hide" id="wbfs_pilih" >
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_wbfs" id="skala_wbfs" class="form-control">
@@ -389,7 +373,7 @@
         <img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" width="100%" alt="">
     </div>
 </div>
-<div class="row" id="flacc_pilih">
+<div class="row hide" id="flacc_pilih" >
     <div class="col-md-6">
         <div class="form-group row">
             <label for="" class="col-md-4 control-label">Face Wajah</label>
@@ -497,7 +481,7 @@
         </p>
     </div>
 </div>
-<div class="form-group row hide">
+<div class="form-group row">
     <div class="col-md-12">
         <label for="" class="text-blue">i. Status fungsional </label><br>
         <p class="text-muted">&nbsp;&nbsp;&nbsp;Aktivitas dan Mobilisasi : (lampirkan formulir pengkajian status fungsional Bartel Index)</p>
@@ -527,7 +511,7 @@
         </label>
     </div>
 </div>
-<div class="form-group row hide">
+<div class="form-group row">
     <div class="col-md-12">
         <label for="" class="text-blue">j. Risiko Cidera / Jatuh </label><br>
         <p class="text-muted">&nbsp;&nbsp;&nbsp;Aktivitas dan Mobilisasi : (lampirkan formulir pengkajian status fungsional Bartel Index)</p>
@@ -556,7 +540,7 @@
         <label class="radio">
             Diberitahukan ke dokter
             <label class="radio-inline">
-                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="text" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input" readonly>
+                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="time" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input" readonly >
             </label>
             <label class="radio-inline">
                 <input type="radio" name="risiko_info_ka" value="0">Tidak
@@ -570,7 +554,7 @@
     </div>
     <div class="col-md-3">
         <label for="keadaan_umum">Keadaan Umum</label>
-        <select name="keadaan_umum" id="keadaan_umum" class="form-control form-control-sm">
+        <select name="keadaan_umum_ka" id="keadaan_umum_ka" class="form-control form-control-sm">
             <option value="">== Pilih ==</option>
             <option value="Tampak Tidak Sehat">Tampak Tidak Sehat</option>
             <option value="Tampak Sakit Ringan">Tampak Sakit Ringan</option>
@@ -580,7 +564,7 @@
     </div>
     <div class="col-md-3">
         <label for="">Kesadaran</label>
-        <select name="kesadaran_umum" id="kesadaran_umum" class="form-control form-control-sm">
+        <select name="kesadaran_umum_ka" id="kesadaran_umum_ka" class="form-control form-control-sm">
             <option value="kesadaran_umum">== Pilih ==</option>
             <option value="Kompos Mentis">Kompos Mentis</option>
             <option value="Apatis">Apatis</option>
@@ -706,7 +690,7 @@
 <div class="form-group row">
     <div class="col-md-12">
         <label for="diagonosa_keperawatan_ka">Diagnosa Keperawatan</label>
-        <textarea name="diagonosa_keperawatan_ka" id="diagonosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea>
+        <textarea name="diagnosa_keperawatan_ka" id="diagnosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea>
     </div>
 </div>
 <div class="form-group row">
@@ -729,7 +713,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#diagonosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
+        $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
 
         $(".rujukan_ka_lainnya").change(function() {
             if ($(this).is(":checked")) {
@@ -849,6 +833,22 @@
                 $("[name='dijelaskan_hubungan_ka']").removeAttr("readonly").focus();
             } else {
                 $("[name='dijelaskan_hubungan_ka']").attr("readonly", true).val("");
+            }
+        });
+        
+        $("[name='nyeri_pilih_ka']").change(function(){
+            if (this.value==1)  {
+                $("#vas_pilih").removeClass("hide")
+                $("#wbfs_pilih").addClass("hide")
+                $("#flacc_pilih").addClass("hide")
+            } else if (this.value==2) {
+                $("#vas_pilih").addClass("hide")
+                $("#wbfs_pilih").removeClass("hide")
+                $("#flacc_pilih").addClass("hide")
+            } else if (this.value==3) {
+                $("#vas_pilih").addClass("hide")
+                $("#wbfs_pilih").addClass("hide")
+                $("#flacc_pilih").removeClass("hide")
             }
         });
 

@@ -337,7 +337,7 @@ function arr_to_list($arr, $start = "<span>&nbsp;&nbsp;&nbsp;", $end = "</span><
 {
     $arr_list = explode(";", $arr);
     $list = "";
-    if (count($arr_list)) {
+    if (count($arr_list)>0) {
         for ($al = 0; $al < count($arr_list); $al++) {
             $list .=  $start . ($al + 1) . ". " . $arr_list[$al] . $end;
         }

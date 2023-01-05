@@ -212,13 +212,28 @@ class Rajal extends CI_Controller
         $this->load->view($this->folder . "/" . $this->subfolder . "/hak_wajib/hak_wajib_cetak", compact('data'));
     }
 
-    public function kaji_awal()
+    public function kaji_awal($id="",$idx="",$nomr="")
     {
         // form rm 0200 rev.01 surat masuk rawat jalan
-        $data = [
-            "data" => []
-        ];
-        $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal/kaji_awal_cetak", compact('data'));
+        if ($id!="" and $idx!="" and $nomr!="" ) {
+            // data pendaftaran
+            $d = $this->erm->getPendaftaran($idx);
+            // data pasien
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getAwalRawatById($nomr,$idx,$id);
+            $data = [
+                "d" => $d,
+                "p" => $p,
+                "k" => $k
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal/kaji_awal_cetak", $data);
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal/kaji_awal_cetak_master", compact('data'));
+        }
     }
 
     public function insert_kaji_awal()
@@ -237,19 +252,17 @@ class Rajal extends CI_Controller
             "jam" => $this->input->post("jam_ka"),
             "tiba" => $this->input->post("tiba_ka"),
             "rujukan" => $this->input->post("rujukan_ka"),
-            "rujukan_lain" => $this->input->post("rujukan_lain_ka"),
+            "rujukan_lain" => $this->input->post("rujukan_lainnya_ka"),
             "keluhan" => $this->input->post("keluhan_ka"),
             "dirawat" => $this->input->post("dirawat_ka"),
             "kapan_dirawat" => $this->input->post("kapan_dirawat_ka"),
             "dimana_dirawat" => $this->input->post("dimana_dirawat_ka"),
             "diagnosis" => $this->input->post("diagnosis_ka"),
-            "implant" => $this->input->post("implan_ka"),
-            "implant_detail" => $this->input->post("implan_detail_ka"),
+            "implant" => $this->input->post("implant_ka"),
+            "implant_detail" => $this->input->post("implant_detail_ka"),
+            "riwayat_sakit" => $this->input->post("riwayat_sakit_ka"),
             "riwayat_operasi" => $this->input->post("riwayat_operasi_ka"),
             "riwayat_operasi_tahun" => $this->input->post("riwayat_operasi_tahun_ka"),
-            "riwayat_sakit" => $this->input->post("riwayat_sakit_ka"),
-            "riwayat_sakit_operasi" => $this->input->post("riwayat_sakit_operasi_ka"),
-            "riwayat_sakit_tahun" => $this->input->post("riwayat_sakit_tahun_ka"),
             "riwayat_sakit_keluarga" => $this->input->post("riwayat_sakit_keluarga_ka"),
             "riwayat_psikologis" => $this->input->post("riwayat_psikologis_ka"),
             "status_mental_sadar" => $this->input->post("status_mental_sadar_ka"),
@@ -294,6 +307,7 @@ class Rajal extends CI_Controller
             "skor_gizi" => $this->input->post("skor_gizi_ka"),
             "strong_kids" => $this->input->post("strong_kids_ka"),
             "aktivitas" => $this->input->post("aktivitas_ka"),
+            "aktivitas_detail" => $this->input->post("aktivitas_detail_ka"),
             "aktivitas_info" => $this->input->post("aktivitas_info_ka"),
             "aktivitas_info_detail" => $this->input->post("aktivitas_info_detail_ka"),
             "jatuh" => $this->input->post("jatuh_ka"),
@@ -366,7 +380,7 @@ class Rajal extends CI_Controller
     }
 
     public function delete_kaji_awal($idx,$id) {
-        $delete = $this->rajal->deleteAwalMedis($idx, $id);
+        $delete = $this->rajal->deleteAwalRawat($idx, $id);
         if ($delete) {
             echo json_encode(["status" => true]);
         } else {

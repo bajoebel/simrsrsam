@@ -163,19 +163,19 @@ $date = date("Y-m-d");
                             <table>
                                 <tr>
                                     <td>No.Rekam Medis</td>
-                                    <td>: <?= $p->nomr ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Nama Lengkap</td>
-                                    <td>: <?= $p->nama ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Lahir</td>
-                                    <td>: <?= $p->tgl_lahir ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
-                                    <td>: <?= jns_kelamin($p->jns_kelamin) ?></td>
+                                    <td>:</td>
                                 </tr>
                             </table>
                         </div>
@@ -185,22 +185,22 @@ $date = date("Y-m-d");
                     <h3 style="font-family: Cambria,Georgia,serif;">PENGKAJIAN AWAL RAWAT JALAN TERINTEGRASI</h3>
                     <small style="display:block;margin-top:-10px">(Pengkajian ini dilengkapi dalam waktu 2 jam setelah pasien diperiksa)</small>
                     <p>I. PENGKAJIAN AWAL KEPERAWATAN</p>
-                    <!-- <small style="display:block;margin-top:-10px;text-align:left">(Diisi oleh perawat dengan cara memberi tanda "&#9745;" pada kotak yang telah di sediakan)</small> -->
+                    <small style="display:block;margin-top:-10px;text-align:left">(Diisi oleh perawat dengan cara memberi tanda "&#9745;" pada kotak yang telah di sediakan)</small>
                     <table class='main'>
                         <tr>
                             <td style="border:1px solid #000">
                                 <table style='width:100%'>
                                     <tr>
                                         <td width="10%">Poliklinik</td>
-                                        <td width="40%">: <?= $k->poli_text ?></td>
+                                        <td width="40%">:</td>
                                         <td width="10%">Tanggal</td>
-                                        <td width="40%">: <?= $k->tgl ?></td>
+                                        <td width="40%">:</td>
                                     </tr>
                                     <tr>
                                         <td width="10%">DPJP</td>
-                                        <td width="40%">: <?= $k->dpjp_text ?></td>
+                                        <td width="40%">:</td>
                                         <td width="10%">Jam</td>
-                                        <td width="40%">: <?= $k->jam ?></td>
+                                        <td width="40%">:</td>
                                     </tr>
                                 </table>
                             </td>
@@ -212,18 +212,21 @@ $date = date("Y-m-d");
                             <td style="border:1px solid #000;">
                                 <table style='width:100%'>
                                     <tr>
-                                        <td width="25%">Tiba di Ruang Dengan Cara</td>
-                                        <td width="5%">: </td>
-                                        <td width="75%" >
-                                            <?= $k->tiba?>
-                                           
+                                        <td width=" 20%">Tiba di ruang dengan cara</td>
+                                        <td width="5%">:</td>
+                                        <td width="75%" style="display: flex;justify-content:space-around">
+                                            <span>&#9744; Jalan </span>
+                                            <span>&#9744; Kursi Roda </span>
+                                            <span>&#9744; Brankar </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width=" 20%">Rujukan</td>
                                         <td width="5%">:</td>
-                                        <td width="75%" >
-                                           <?= $k->rujukan ?>
+                                        <td width="75%" style="display: flex;justify-content:space-around">
+                                            <span>&#9744; Puskesmas </span>
+                                            <span>&#9744; Bidan </span>
+                                            <span>&#9744; Lainnya <?= str_pad(" ", 30, ".") ?> </span>
                                         </td>
                                     </tr>
                                 </table>
@@ -237,16 +240,15 @@ $date = date("Y-m-d");
                                 <table>
                                     <tr>
                                         <td>
-                                            <b>a. Keluhan Utama :</b> <?= $k->keluhan ?>
+                                            <b>a. Keluhan Utama :</b> <?= str_pad(" ", 150, ".") ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <b>b. Riwayat Kesehatan / Pengobatan / Perawatan Sebelumnya :</b>
                                             <br>
-                                            <!-- <span>&nbsp;&nbsp;&nbsp;&nbsp;Pernah di rawat &#9744; Tidak &#9744; Ya, Kapan <?= str_pad(" ", 30, ".") ?> Dimana <?= str_pad(" ", 30, ".") ?> </span><br> -->
-                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Pernah di rawat : <?=trueOrFalse($k->dirawat)?> <?= ($k->dirawat==1?", Kapan : $k->kapan_dirawat dimana : $k->dimana_dirawat":"")?> </span><br>
-                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Diagnosis : <b><?= str_pad($k->diagnosis, 30, " ") ?> </b> <?=($k->implant==1)?"&#9745; Alat implant yang terpasang : <b>$k->implant_detail</b>":""?></span>
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Pernah di rawat &#9744; Tidak &#9744; Ya, Kapan <?= str_pad(" ", 30, ".") ?> Dimana <?= str_pad(" ", 30, ".") ?> </span><br>
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;Diagnosis <?= str_pad(" ", 30, ".") ?> &#9744; Alat implant yang terpasang, sebutkan <?= str_pad(" ", 30, ".") ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -257,9 +259,8 @@ $date = date("Y-m-d");
                                     <tr>
                                         <td>
 
-                                            <!-- &nbsp;&nbsp;&nbsp;&nbsp;&#9744; Asma &#9744; Jantung &#9744; Hipertensi &#9744; DM &#9744; Tiroid &#9744; Epilepsi<br /> -->
-                                            &nbsp;&nbsp;&nbsp;&nbsp; <?= arr_to_list($k->riwayat_sakit,"<span>&#9745; ","</span> ") ?><br />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;Riwayat operasi : <b><?= $k->riwayat_operasi ?></b> Tahun : <b> <?= $k->riwayat_operasi_tahun ?></b>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&#9744; Asma &#9744; Jantung &#9744; Hipertensi &#9744; DM &#9744; Tiroid &#9744; Epilepsi<br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;Riwayat operasi <?= str_pad(" ", 80, ".") ?> Tahun <?= str_pad(" ", 30, ".") ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -269,7 +270,9 @@ $date = date("Y-m-d");
                                     </tr>
                                     <tr>
                                         <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp; <?= arr_to_list($k->riwayat_sakit_keluarga,"<span>&#9745; ","</span> ") ?><br />
+
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&#9744; Kanker &#9744; Penyakit Hati &#9744; Hipertensi &#9744; DM &#9744; Penyakit Ginjal &#9744; Penyakit Jiwa &#9744; Kelainan Bawaan &#9744; Hamil Kembar &#9744; TBC <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&#9744; Epilepsi &#9744; Alergi &#9744; Lain - lain
                                         </td>
                                     </tr>
                                     <tr>
@@ -281,39 +284,30 @@ $date = date("Y-m-d");
                                         <td>
                                             <span style='margin-left:3mm'>a) Status Psikologis :</span><br>
                                             <span style='margin-left:6mm'>
-                                                <?= arr_to_list($k->riwayat_psikologis,"<span>&#9745; ","</span> ") ?>
+                                                &#9744; Cemas &#9744; Takut &#9744; Marah &#9744; Sedih &#9744; Kecendrungan Bunuh Diri
                                             </span><br>
-                                            <!-- <span style='margin-left:6mm'>&#9744; Lain-lain, Sebutkan <?= str_pad(" ", 150, ".") ?></span><br/> -->
+                                            <span style='margin-left:6mm'>&#9744; Lain-lain, Sebutkan <?= str_pad(" ", 150, ".") ?></span>
                                             <span style='margin-left:3mm'>b) Status Mental :</span><br>
-                                            <?=($k->status_mental_sadar==1)?"<span style='margin-left:6mm'>&#9745; Sadar dan orientasi baik</span><br>":""?>
-                                            <!-- <span style='margin-left:6mm'>&#9744; Ada masalah prilaku, sebutkan <?= str_pad(" ", 100, ".") ?></span><br> -->
-                                            <?=($k->status_mental_prilaku==1)?"<span style='margin-left:6mm'>&#9745; Ada masalah prilaku, $k->status_mental_prilaku_detail</span><br>":""?>
-                                            <!-- <span style='margin-left:6mm'>&#9744; Prilaku kekerasan yang dialami pasien <?= str_pad(" ", 100, ".") ?></span><br> -->
-                                            <?=($k->status_mental_keras==1)?"<span style='margin-left:6mm'>&#9745; Ada masalah prilaku, $k->status_mental_keras_detail</span><br>":""?>
+                                            <span style='margin-left:6mm'>&#9744; Sadar dan orientasi baik</span><br>
+                                            <span style='margin-left:6mm'>&#9744; Ada masalah prilaku, sebutkan <?= str_pad(" ", 100, ".") ?></span><br>
+                                            <span style='margin-left:6mm'>&#9744; Prilaku kekerasan yang dialami pasien <?= str_pad(" ", 100, ".") ?></span><br>
                                             <span style='margin-left:3mm'>c ) Kultural :</span><br>
-                                            <!-- <span style='margin-left:6mm'><b>Hubungan pasien dengan anggota keluarga : </b> &#9744; Baik &#9744; Tidak Baik </span><br> -->
-                                            <span style='margin-left:6mm'><b>Hubungan pasien dengan anggota keluarga : </b><?= ($k->kultural==1)?" &#9745; Baik" : " &#9745; Tidak Baik" ?></span><br>
+                                            <span style='margin-left:6mm'><b>Hubungan pasien dengan anggota keluarga </b> &#9744; Baik &#9744; Tidak Baik </span><br>
                                             <span style='margin-left:6mm'><b>Kerabat terdekat yang dapat dihubungi </b></span><br />
-                                            <span style='margin-left:6mm'>Nama : <b><?=$k->kultural_nama?></b> Hubungan : <b><?=$k->kultural_hubungan?></b> Telepon : <b><?=$k->kultural_phone?></b></span><br />
-                                            <span style='margin-left:6mm'>Nilai-nilai dan kepercayaan yang dianut pasien : <?= $k->nilai_kepercayaan ?></span><br />
+                                            <span style='margin-left:6mm'>Nama : <?= str_pad(" ", 100, ".") ?> Hubungan : <?= str_pad(" ", 60, ".") ?> Telepon : <?= str_pad(" ", 80, ".") ?></span><br />
+                                            <span style='margin-left:6mm'>Nilai-nilai dan kepercayaan yang dianut pasien </span><br />
                                             <span style='margin-left:3mm'>d ) Status Sosial dan Ekonomi</span><br>
-                                            <!-- <span style='margin-left:6mm'>&#9744; Asuransi &#9744; Jaminan &#9744; Biaya Sendiri &#9744; Lainnya, Sebutkan <?= str_pad(" ", 80, ".") ?> </span><br /> -->
-                                            <span style='margin-left:6mm'>
-                                                <?= arr_to_list($k->status_ekonomi,"<span>&#9745; ","</span> ") ?>
-                                            </span><br />
+                                            <span style='margin-left:6mm'>&#9744; Asuransi &#9744; Jaminan &#9744; Biaya Sendiri &#9744; Lainnya, Sebutkan <?= str_pad(" ", 80, ".") ?> </span><br />
                                             <span style='margin-left:3mm'>e ) Status Spiritual</span><br>
-                                            <span style='margin-left:6mm'>Kegiatan keagamaan yang bisa dilakukan : <?= $k->spiritual_biasa ?></span><br>
-                                            <span style='margin-left:6mm'>Kegiatan spiritual yang dibutuhkan selama perawatan : <?= $k->spiritual_butuh ?></span><br>
-                                            <span style='margin-left:3mm'>f ) Budaya dan nilai-nilai yang dianut : <?= $k->budaya ?></span><br>
+                                            <span style='margin-left:6mm'>Kegiatan keagamaan yang bisa dilakukan : <?= str_pad(" ", 100, ".") ?></span><br>
+                                            <span style='margin-left:6mm'>Budaya dan nilai-nilai yang di anut : <?= str_pad(" ", 100, ".") ?></span><br>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <!-- <b>f. Riwayat alergi : </b> a. Obat <span style='margin-left:4mm'>&#9744; tidak</span><span style='margin-left:4mm'>&#9744; Ya Sebutkan: <?= str_pad(" ", 100, ".") ?></span><br /> -->
-                                            <b>f. Riwayat alergi : </b> a. Obat <?= ($k->obat==0)?"<span style='margin-left:4mm'>&#9745; tidak</span>":"<span style='margin-left:4mm'>&#9745; Ya Sebutkan: $k->obat_detail</span>" ?><br />
-                                            <!-- <span style='margin-left:25mm'></span>b. Makanan <span style='margin-left:4mm'>&#9744; tidak</span><span style='margin-left:4mm'>&#9744; Ya Sebutkan: <?= str_pad(" ", 80, ".") ?></span><br /> -->
-                                            <span style='margin-left:25mm'></span>b. Makanan <?= ($k->makanan==0)?"<span style='margin-left:4mm'>&#9745; tidak</span>":"<span style='margin-left:4mm'>&#9745; Ya Sebutkan: $k->makanan_detail</span>" ?><br />
-                                            <span style='margin-left:25mm'>Lain-lain : <?= $k->riwayat_lain ?></span><br>
+                                            <b>f. Riwayat alergi : </b> a. Obat <span style='margin-left:4mm'>&#9744; tidak</span><span style='margin-left:4mm'>&#9744; Ya Sebutkan: <?= str_pad(" ", 100, ".") ?></span><br />
+                                            <span style='margin-left:25mm'></span>b. Makanan <span style='margin-left:4mm'>&#9744; tidak</span><span style='margin-left:4mm'>&#9744; Ya Sebutkan: <?= str_pad(" ", 80, ".") ?></span><br />
+                                            <span style='margin-left:25mm'>Lain-lain <?= str_pad(" ", 80, ".") ?></span><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -322,25 +316,25 @@ $date = date("Y-m-d");
                                     <tr>
                                         <td>
                                             <div style='width:80mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
-                                                <span style="margin-left:3mm"><b><?= $k->nyeri ?></b></span><br />
-                                                <span>P (Profokatif/Penyebab) : <?= $k->quality ?></span><br>
-                                                <span>Q (Quality/Gambaran Nyeri) : <?= $k->skala ?></span><br>
-                                                <span>R (Region/Lokasi Nyeri) : <?= $k->region ?></span><br>
-                                                <span>S (Skala Severitas) : <?= $k->nyeri ?></span><br>
-                                                <span>T (Timing/Waktu Nyeri) :<?= $k->timing ?></span><br>
+                                                <span style="margin-left:3mm">Tidak ada nyeri &nbsp;&nbsp;&nbsp; Nyeri Akut &nbsp;&nbsp;&nbsp; Nyeri Kronis</span><br />
+                                                <span>P (Profokatif/Penyebab) : <?= str_pad(" ", 60, ".") ?></span><br>
+                                                <span>Q (Quality/Gambaran Nyeri) : <?= str_pad(" ", 60, ".") ?></span><br>
+                                                <span>R (Region/Lokasi Nyeri) : <?= str_pad(" ", 60, ".") ?></span><br>
+                                                <span>S (Skala Severitas) : <?= str_pad(" ", 60, ".") ?></span><br>
+                                                <span>T (Timing/Waktu Nyeri) : <?= str_pad(" ", 60, ".") ?></span><br>
                                                 Apakah nyeri yang dirasakan :
                                                 <ul style="margin : 1px 0 0 -10px;">
-                                                    <li>Menghalangi tidur malam anda : <b><?= trueOrFalse($k->tidur_malam) ?></b></li>
-                                                    <li>Menghalangi anda beraktifitas : <b><?= trueOrFalse($k->halangan_aktivitas) ?></b></li>
-                                                    <li>Sakit dirasakan setiak hari : <b><?= trueOrFalse($k->nyeri_sakit) ?></b></li>
+                                                    <li>Menghalangi tidur malam anda</li>
+                                                    <li>Menghalangi anda beraktifitas</li>
+                                                    <li>Sakit dirasakan setiak hari</li>
                                                 </ul>
                                             </div>
                                             <div style='width:85mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
                                                 <span style='margin-left:10mm'>Dewasa Menggunakan Visual Analog Scale(VAS)</span><br>
-                                                <span><img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="300mm"></span><br>
+                                                <span><img src="<?= base_url("assets/images/form/vas.png") ?>" width="300mm"></span><br>
                                                 <span style='margin-left:8mm'>Tidak nyeri</span><br>
                                                 <span>Skrining nyeri anak-anak >3 Menggunakan Wong Barker Face Scale </span><br>
-                                                <span><img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" height="50mm" width="300mm"></span></span>
+                                                <span><img src="<?= base_url("assets/images/form/bfs.png") ?>" height="50mm" width="300mm"></span></span>
                                             </div>
                                         </td>
                                     </tr>
@@ -572,10 +566,9 @@ $date = date("Y-m-d");
                         <tr>
                             <td>
                                 <span><b>Aktivitas dan Mobilisasi : (lampirkan formulir pengkajian status fungsional Barthel index)</b></span><br>
-                                <!-- <span>&#9744; Mandiri &#9744; Perlu bantuan, sebutkan <?= str_pad(" ", 100, ".") ?></span><br> -->
-                                <span>&#9745; <?= strtoupper($k->aktivitas) ?> - <?= $k->aktivitas_detail ?></span><br>
+                                <span>&#9744; Mandiri &#9744; Perlu bantuan, sebutkan <?= str_pad(" ", 100, ".") ?></span><br>
                                 <span>(Bila ketergantungan penuh kolaborasi ke DPJP untuk konsul ke Rehabilitasi Medik) </span><br>
-                                <span>Diberitahukan ke dokter &#9745; <?= trueOrFalse($k->aktivitas_info) ?> - <?= $k->aktivitas_info_detail ?> 
+                                <span>Diberitahukan ke dokter &#9744; Ya, pukul <?= str_pad(" ", 40, ".") ?></span> &#9744; Tidak
                             </td>
                         </tr>
                         <tr>
@@ -584,13 +577,13 @@ $date = date("Y-m-d");
                         <tr>
                             <td>
                                 <span style='margin-left:6mm'>
-                                    &#9745; <?=trueOrFalse($k->jatuh)?> &nbsp;&nbsp;&nbsp;<?= ($k->jatuh==1)?"Risiko Jatuh : $k->jatuh_detail":"" ?>
+                                    &#9744; Tidak &#9744; Ya &nbsp;&nbsp;&nbsp;Bila ya, Risiko Jatuh : Rendah/Sedang/Tinggi
                                 </span><br />
                                 <span style='margin-left:6mm'>
-                                <?= ($k->jatuh_detail=="sedang" or $k->jatuh_detail=="tinggi" )?"dipasang gelang risiko jatuh warna kuning : ".trueOrFalse($k->gelang_risiko):"-" ?>
+                                    Jika risiko jatuh sedang atau tinggi dipasang gelang risiko jatuh warna kuning &#9744;Ya &nbsp;&nbsp;&nbsp; &#9744; Tidak
                                 </span><br />
                                 <span style="margin-left:6mm">
-                                    Diberitahukan ke dokter : <?= trueOrFalse($k->risiko_info)?> <?=($k->risiko_info==1)?" , Jam  ".$k->risiko_info_detail:""?>
+                                    Diberitahukan ke dokter &#9744; Ya, jam <?= str_pad(" ", 30, ".") ?> &#9744; Tidak
                                 </span>
                             </td>
                         </tr>
@@ -600,8 +593,8 @@ $date = date("Y-m-d");
                         <tr>
                             <td>
                                 <ol>
-                                    <li>Keadaan umum <span style="margin-left:6mm">: &#9745; <?=$k->keadaan_umum?> </span></li>
-                                    <li>Kesadaran <span style="margin-left:6mm">: &#9745; <?=$k->kesadaran_umum?></span> </li>
+                                    <li>Keadaan umum <span style="margin-left:6mm">: &#9744; Tampak tidak sakit &#9744; Tampak sakit ringan &#9744; Tampak sakit sedang &#9744; tampak sakit berat</span></li>
+                                    <li>Kesadaran <span style="margin-left:6mm">: &#9744; Kompos mentis &#9744; Apatis &#9744; Somnolen &#9744; Soporo &#9744; koma</span> </li>
                                     <li>GCS <span style="margin-left:6mm">: E :<?= str_pad(" ", 30, "_") ?> M:<?= str_pad(" ", 30, "_") ?>V:<?= str_pad(" ", 30, "_") ?></span></li>
                                     <li>
                                         TTV <span style="margin-left:6mm">: Sh <?= str_pad(" ", 30, "_") ?> Nd<?= str_pad(" ", 30, "_") ?> , Rr<?= str_pad(" ", 30, "_") ?>SpO2<?= str_pad(" ", 30, "_") ?>, TD<?= str_pad(" ", 30, "_") ?> , Down Score <?= str_pad(" ", 30, "_") ?></span></li>
@@ -634,7 +627,7 @@ $date = date("Y-m-d");
                         </tr>
                         <tr>
                             <td>
-                                <div class="box" style="width:100%;height:20mm"><?=$k->diagnosa_keperawatan?></div>
+                                <div class="box" style="width:100%;height:20mm"></div>
                             </td>
                         </tr>
                         <tr>
@@ -642,7 +635,7 @@ $date = date("Y-m-d");
                         </tr>
                         <tr>
                             <td>
-                                <div class="box" style="width:100%;height:20mm"><?=$k->tindakan_keperawatan?></div>
+                                <div class="box" style="width:100%;height:20mm"></div>
                             </td>
                         </tr>
                     </table>

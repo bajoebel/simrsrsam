@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="">Bahasa</label>
-                            <select class="form-control select2" name="bahasa_e[]" id="bahasa_e" multiple="multiple">
+                            <select class="form-control select2" name="bahasa_e[]" id="bahasa_e" multiple="multiple" width="100%">
                                 <option value="Indonesia">Indonesia</option>
                                 <option value="Daerah">Daerah</option>
                                 <option value="Isyarat">Isyarat</option>
@@ -410,7 +410,7 @@
         // $(".select2-tag").select2()
         $(".select2").select2({});
         $(".select2-tag").select2({
-            tags: true
+            tags: true,
         });
 
         $('#bahasa_e').on('select2:select', function(e) {

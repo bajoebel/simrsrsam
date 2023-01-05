@@ -97,16 +97,19 @@
                         <strong>Diagnosis</strong><br />
                         <p><?= $r->diagnosis ?></p>
                         <strong>Alat Implant Terpasang</strong><br />
-                        <p><?= $r->implant ." - ". $r->implant_detail ?></p>
+                        <p><?= trueOrFalse($r->implant) ." - ". $r->implant_detail ?></p>
                         <strong>Riwayat Operasi</strong><br />
-                        <p><?= $r->riwayat_operasi ." - ". $r->operasi_tahun ?></p>
+                        <p><?= $r->riwayat_operasi ." - ". $r->riwayat_operasi_tahun ?></p>
                         <strong>Riwayat Penyakit Dahulu</strong><br />
                         <p><?= arr_to_list($r->riwayat_sakit) ?></p>
+                        <strong>Riwayat Penyakit Keluarga</strong><br />
+                        <p><?= arr_to_list($r->riwayat_sakit_keluarga) ?></p>
+                        <p></p>
                     </div>
                     <div class="box-footer">
-                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                        <a href="<?= base_url("erm.php/rajal/kaji_awal/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
-                        </button>
+                        </a>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                     </div>
