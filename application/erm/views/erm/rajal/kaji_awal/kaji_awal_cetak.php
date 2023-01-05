@@ -136,6 +136,7 @@ $date = date("Y-m-d");
             display: flex;
         }
     </style>
+    <script src="<?php echo base_url() ?>js/remedis.js"></script>
 </head>
 
 <body>
@@ -335,133 +336,93 @@ $date = date("Y-m-d");
                                                     <li>Sakit dirasakan setiak hari : <b><?= trueOrFalse($k->nyeri_sakit) ?></b></li>
                                                 </ul>
                                             </div>
+                                            <?php if ($k->metode==1 or $k->metode==2){ ?>
                                             <div style='width:85mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
+                                                <?php if ($k->metode==1){ ?>
                                                 <span style='margin-left:10mm'>Dewasa Menggunakan Visual Analog Scale(VAS)</span><br>
                                                 <span><img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="300mm"></span><br>
-                                                <span style='margin-left:8mm'>Tidak nyeri</span><br>
-                                                <span>Skrining nyeri anak-anak >3 Menggunakan Wong Barker Face Scale </span><br>
-                                                <span><img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" height="50mm" width="300mm"></span></span>
+                                                <span style='margin-left:8mm'>Skor : <b><?= $k->skala_vas." - ".skalaVas($k->skala_vas)?></b></span><br>
+                                                <?php }?>
+                                                <?php if ($k->metode==2){ ?>
+                                                    <span>Skrining nyeri anak-anak >3 Menggunakan Wong Barker Face Scale </span><br>
+                                                    <span><img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" height="50mm" width="300mm"></span></span>
+                                                    <span style='margin-left:8mm'>Skor : <b><?= $k->skala_wbfs." - ".skalaWbfs($k->skala_wbfs)?></b></span><br>
+                                                <?php }?>
                                             </div>
+                                            <?php } ?>
                                         </td>
                                     </tr>
+                                    <?php 
+                                    $wajah = ["Tidak ada ekspresi tertentu untuk senyuman","Menyiringai sekali-kali atau mengerutkan dahi, muram, ogah-ogahan","Dagu gemetar dan rahang diketap"];
+                                    $leg = ["Posisi normal atau santai","Gelisah, resah dan tegang","Menendang dan menarik kaki"];
+                                    $gerakan = ["Rebahan dengan tenang, posisi normal, bergerak dengan mudah","Menggeliat, maju mundur, tegang","Menekuk / posisi tubuh meringkuk, kaku dan menyentak"];
+                                    $tangis = ["Tidak ada tangisan, terjaga atau tertidur","Mengerak / Merengek, gerukan sakali-kali","Menangis tersedu-sedu, menjerit, terisak-isak, menggerutu berulang-ulang"];
+                                    $kemampuan = ["Senang, santai","Dapat ditenangkann dengan sentuhan, pelukan atau berbicara, dapat dialihkan",""];
+                                    if ($k->metode==3){ ?>
                                     <tr>
                                         <td>
                                             <span>Skrining Nyeri Anak < 3 Tahun Menggunakan FLACC</span>
                                                     <table class='nyeri'>
                                                         <tr>
                                                             <td colspan="2">Kategori</td>
-                                                            <td>Nilai</td>
                                                             <td>Skor</td>
                                                         </tr>
                                                         <tr>
-                                                            <td rowspan="3" width='10%'>
+                                                            <td width='10%'>
                                                                 Face (Wajah)
                                                             </td>
-                                                            <td>Tidak ada ekspresi tertentu untuk senyuman</td>
-                                                            <td>0</td>
-                                                            <td></td>
+                                                            <td><?= $wajah[$k->wajah]?></td>
+                                                            <td><?= $k->wajah ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Menyiringai sekali-kali atau mengerutkan dahi, muram, ogah-ogahan</td>
-                                                            <td>1</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Dagu gemetar dan rahang diketap</td>
-                                                            <td>2</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td rowspan="3">
+                                                            <td>
                                                                 Legs
                                                                 (Ekstermitas)
                                                             </td>
-                                                            <td>Posisi normal atau santai</td>
-                                                            <td>0</td>
-                                                            <td></td>
+                                                            <td><?= $leg[$k->leg]?></td>
+                                                            <td><?= $k->leg ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Gelisah, resah dan tegang</td>
-                                                            <td>1</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Menendang dan menarik kaki</td>
-                                                            <td>2</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td rowspan="3">
+                                                            <td>
                                                                 Activity (Gerakan)
                                                             </td>
-                                                            <td>Rebahan dengan tenang, posisi normal, bergerak dengan mudah</td>
-                                                            <td>0</td>
-                                                            <td></td>
+                                                            <td><?= $gerakan[$k->gerakan]?></td>
+                                                            <td><?= $k->gerakan ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Menggeliat, maju mundur, tegang</td>
-                                                            <td>1</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Menekuk / posisi tubuh meringkuk, kaku dan menyentak</td>
-                                                            <td>2</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td rowspan="3">
+                                                            <td>
                                                                 Cry (Tangisan)
                                                             </td>
-                                                            <td>Rebahan dengan tenang, posisi normal, bergerak dengan mudah</td>
-                                                            <td>0</td>
-                                                            <td></td>
+                                                            <td><?= $tangis[$k->tangis]?></td>
+                                                            <td><?= $k->tangis ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Menggeliat, maju mundur, tegang</td>
-                                                            <td>1</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Menekuk / posisi tubuh meringkuk, kaku dan menyentak</td>
-                                                            <td>2</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td rowspan="3">
+                                                            <td>
                                                                 Consolability
                                                                 (Kemampuan ditenangkan)
                                                             </td>
-                                                            <td>Senang, santai</td>
-                                                            <td>0</td>
-                                                            <td></td>
+                                                            <td><?= $kemampuan[$k->kemampuan]?></td>
+                                                            <td><?= $k->kemampuan ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Dapat ditenangkann dengan sentuhan, pelukan atau berbicara, dapat dialihkan</td>
-                                                            <td>1</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Sulit/tidak dapat ditenangkan dengan pelukan, sentuhan, atau distraksi</td>
-                                                            <td>2</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="3" style="text-align:center">
-                                                                <b>Skor Total</b>
+                                                            <td colspan="2" style="text-align:center">
+                                                                <b>Skor Total </b>
                                                             </td>
+                                                            <td><?= $k->flacc_skor ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4" style="text-align:center">
-                                                                <span style='margin-left:10mm'>0 : nyeri</span>
+                                                            <td colspan="2" style="text-align:center">
                                                                 <span style='margin-left:10mm'>0 : nyeri</span>
                                                                 <span style='margin-left:6mm'>1-3 : nyeri ringan</span>
                                                                 <span style='margin-left:6mm'>4-6 : nyeri sedang</span>
                                                                 <span style='margin-left:6mm'>7-10 : nyeri berat</span>
                                                             </td>
+                                                            <td><?= $k->flacc_skor_detail ?></td>
                                                         </tr>
                                                     </table>
                                         </td>
                                     </tr>
+                                    <?php }?>
                                     <tr>
                                         <td><b>h. Skrining Gizi Awal : </b></td>
                                     </tr>
@@ -473,83 +434,32 @@ $date = date("Y-m-d");
                                                         <b>1. Apakah pasien mengalami penurunan berat badan yang tidak direncanakan/tidak diinginkan dalam 6 bulan terakhir?</b>
                                                     </td>
                                                     <td>
-                                                        <b>Skor</b>
-                                                    </td>
-                                                    <td>
                                                         <b>Skor Pasien</b>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>&#9744; Tidak</td>
-                                                    <td>0</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&#9744; Tidak Yakin (ada tanda : baju menjadi longgar)</td>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&#9744; Ya, ada penurunan BB sebanyak : </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span style='margin-left:5mm'>&#9744; 1-5 kg</span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span style='margin-left:5mm'>&#9744; 6-10 kg</span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span style='margin-left:5mm'>&#9744; 11-15 kg</span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span style='margin-left:5mm'>&#9744; > 15 kg</span></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&#9744; Tidak tahu berapa kg penurunannya</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>&#9745; <?=$k->gizi_detail?></td>
+                                                    <td>
+                                                        <?=$k->gizi_value?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="70%">
                                                         <b>2. Apakah asupan makan pasien berkurang karena penurunan nafsu makan/kesulitan menerima makanan?</b>
                                                     </td>
                                                     <td>
-                                                        <b>Skor</b>
-                                                    </td>
-                                                    <td>
                                                         <b>Skor Pasien</b>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>&#9744; Tidak</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>&#9745; <?=$k->gizi_makan_detail?></td>
+                                                    <td>
+                                                       <?=$k->gizi_makan_value?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>&#9744; Ya</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="70%">
-                                                        <b>TOTAL SKOR (Bila skor≥2, pasien berisiko malnutrisi, konsul ke Ahli Gizi)</b>
-                                                    </td>
-                                                    <td>
-                                                        <b></b>
-                                                    </td>
-                                                    <td>
-                                                        <b></b>
-                                                    </td>
+                                                    <td>Total SKOR (Bilai skor >= 2, pasien berisiko malnutrisi, konsul ke ahli gizi)</td>
+                                                    <td><?=$k->skor_gizi?></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -560,10 +470,7 @@ $date = date("Y-m-d");
                         <tr>
                             <td>
                                 Adaptasi Strong Kids (nilai 1 setiap jawaban “ya”. Beresiko bila bilai lebih dari 1)<br />
-                                1. Apakah pasien tampak kurus?<br />
-                                2. Apakah terdapat penurunan BB selama satu bulan terakhir?<br />
-                                3. Apakah ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu?<br>
-                                Apakah terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi?<br>
+                               <?= arr_to_list($k->strong_kids,"&#9745<span>","</span></br>") ?>
                             </td>
                         </tr>
                         <tr>
@@ -602,14 +509,13 @@ $date = date("Y-m-d");
                                 <ol>
                                     <li>Keadaan umum <span style="margin-left:6mm">: &#9745; <?=$k->keadaan_umum?> </span></li>
                                     <li>Kesadaran <span style="margin-left:6mm">: &#9745; <?=$k->kesadaran_umum?></span> </li>
-                                    <li>GCS <span style="margin-left:6mm">: E :<?= str_pad(" ", 30, "_") ?> M:<?= str_pad(" ", 30, "_") ?>V:<?= str_pad(" ", 30, "_") ?></span></li>
+                                    <li>GCS <span style="margin-left:6mm">: E : <?= $k->gcs_e ?> M: <?= $k->gcs_m ?>  V: <?= $k->gcs_v ?></span></li>
                                     <li>
-                                        TTV <span style="margin-left:6mm">: Sh <?= str_pad(" ", 30, "_") ?> Nd<?= str_pad(" ", 30, "_") ?> , Rr<?= str_pad(" ", 30, "_") ?>SpO2<?= str_pad(" ", 30, "_") ?>, TD<?= str_pad(" ", 30, "_") ?> , Down Score <?= str_pad(" ", 30, "_") ?></span></li>
+                                        TTV <span style="margin-left:6mm">: Sh <?= $k->ttv_sh ?> Nd <?= $k->ttv_nd ?> , Rr <?= $k->ttv_rr ?> SpO2 <?= $k->ttv_spo2 ?>, TD <?= $k->ttv_td ?> , Down Score <?= $k->ttv_ds ?></span></li>
                                     <li>Pemeriksaan <span style="margin-left:6mm">: Status generalis & status lokalis (inspeksi,palpasi,perkusi,auskulasi)<br>
-                                            <?= str_pad(" ", 150, "_") ?><br>
-                                            <?= str_pad(" ", 150, "_") ?>
+                                            &nbsp;&nbsp;<?= $k->status_generalis ?>
                                     </li>
-                                    <li>Pemeriksaan penunjang sebelum rawat inap : &#9744; Radiologi,<?= str_pad(" ", 30, "_") ?> &#9744; Lab<?= str_pad(" ", 30, "_") ?> &#9744; Lain-lain <?= str_pad(" ", 30, "_") ?></li>
+                                    <li>Pemeriksaan penunjang sebelum rawat inap : <?= ($k->penunjang_rad==1)?"&#9745; Radiologi, $k->penunjang_rad_detail ":"" ?><?= ($k->penunjang_lab==1)?"&#9745; Lab, $k->penunjang_lab_detail ":"" ?><?= ($k->penunjang_lain==1)?"&#9745; Lain-lain, $k->penunjang_lain_detail ":"" ?> </li>
                                     <li>Pemeriksaan penunjang (Laboratorium, Radiologi, dll) dilampirkan</li>
                                 </ol>
                             </td>
@@ -619,14 +525,18 @@ $date = date("Y-m-d");
                         </tr>
                         <tr>
                             <td>
-                                <span>Terdapat hambatan dalam pembelajaran : </span><br>
-                                <span>&#9744;Tidak &nbsp;&nbsp;&nbsp;&nbsp;&#9744; Ya, Jika Ya : &#9744; Pendengaran &#9744; Penglihatan &#9744; Kognitif &#9744; Fisik</span><br>
-                                <span style="margin-left:34mm">&#9744; Budaya &#9744; Emosi &#9744; Bahasa &#9744; Lainnya <?= str_pad(" ", 30, ".") ?></span>
-                                <span>Dibutuhkan penerjemah &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9744; Tidak &nbsp;&nbsp;&#9744; Ya, Sebutkan <?= str_pad(" ", 30, ".") ?>Bahasa Isyarat : &#9744; Tidak &#9744; Ya</span>
+                                <span>Terdapat hambatan dalam pembelajaran : </span>
+                                <?= ($k->komunikasi==0)?"&#9745;Tidak":"&#9745;Ya,".arr_to_list($k->komunikasi_detail,"<span>","</span>&nbsp;&nbsp;")." - ".$k->komunikasi_lain?><br/>
+                                Dibutuhkan penerjemah : <?= ($k->komunikasi_penerjemah==0)?"&#9744;Tidak":"&#9745;Ya,".$k->komunikasi_penerjemah_detail?>&nbsp;&nbsp;&nbsp; Bahasa Isyarat : <?= trueOrFalse($k->komunikasi_isyarat)?>
+                                
+                                <br/>
                                 <span>Kebutuhan edukasi (Pilih topik edukasi pada kotak yang tersedia) :</span><br>
-                                &#9744; Diagnosa dan manajemen penyakit &#9744; Obat – obatan / Terapi &#9744; Diet dan nutrisi <br />
-                                &#9744; Tindakan keperawatan <?= str_pad(" ", 30, ".") ?> &#9744; Rehabilitasi &#9744; Manajemen Nyeri <br />
-                                &#9744; Lain-lain, Sebutkan <?= str_pad(" ", 30, ".") ?>
+                                <?= arr_to_list($k->kebutuhan_edukasi,"<span>","</span>&nbsp;&nbsp;") ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                
                             </td>
                         </tr>
                         <tr>
@@ -654,7 +564,7 @@ $date = date("Y-m-d");
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>Telah dijelaskan dan dipahami kepada <br>&#9744; Pasien &nbsp;&nbsp;&nbsp;&#9744;Keluarga, Hubungan <?= str_pad(" ", 20, ".") ?></td>
+                                <td>Telah dijelaskan dan dipahami kepada <br><?= "&#9745".$k->dijelaskan?> <?= ($k->dijelaskan=="Keluarga")?", Hubungan $k->dijelaskan_hubungan":"" ?></td>
                             </tr>
                             <tr>
                                 <td height="50px">&nbsp;</td>

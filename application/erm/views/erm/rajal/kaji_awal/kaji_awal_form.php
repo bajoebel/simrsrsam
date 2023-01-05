@@ -348,9 +348,9 @@
 <div class="form-group row">
     <div class="col-md-12">
         <label for="nama_ttd" class="col-md-2">Metode </label>
-        <label class="col-sm-3 radio-inline"> <input type="radio" name="nyeri_pilih_ka" value="1">Visual Analog Scale (VAS) dewasa</label>
-        <label class="col-sm-3 radio-inline"> <input type="radio" name="nyeri_pilih_ka" value="2">Wong Barker Face Scale (WBFS) anak > 3 Tahun </label>
-        <label class="col-sm-3 radio-inline"> <input type="radio" name="nyeri_pilih_ka" value="3">FLACC Anak < 3 Tahun</label>
+        <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="1">Visual Analog Scale (VAS) dewasa</label>
+        <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="2">Wong Barker Face Scale (WBFS) anak > 3 Tahun </label>
+        <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="3">FLACC Anak < 3 Tahun</label>
     </div>
 </div>
 <div class="form-group row hide" id="vas_pilih" >
@@ -366,7 +366,7 @@
 <div class="form-group row hide" id="wbfs_pilih" >
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
-        <input type="number" min="0" max="10" name="skala_wbfs" id="skala_wbfs" class="form-control">
+        <input type="number" min="0" max="10" name="skala_wbfs_ka" id="skala_wbfs_ka" class="form-control">
     </div>
     <div class="col-md-8">
         <label for="">Metode Wong Barker Face Scale</label>
@@ -378,7 +378,7 @@
         <div class="form-group row">
             <label for="" class="col-md-4 control-label">Face Wajah</label>
             <div class="col-md-8">
-                <select name="face_wajah_ka" id="face_wajah_ka" class="form-control">
+                <select name="wajah_ka" id="wajah_ka" class="form-control">
                     <option value="0">Tidak Ada Ekspresi tertentu untuk senyuman</option>
                     <option value="1">Menyiringai sekali-kali atau mengerutkan dahi, muram, ogah-ogahan</option>
                     <option value="2">Dagu gemetar dan rahang diketap</option>
@@ -437,21 +437,21 @@
         <label for="" class="text-blue">g. Skrining Gizi Awal </label>
     </div>
 </div>
-<div class="row hide">
+<div class="row">
     <div class="col-md-8">
         <div class="form-group row">
             <label for="" class="col-md-6 control-label"> Apakah pasien mengalami penurunan berat badan yang tidak direncanakan/tidak diinginkan dalam 6 bulan terakhir</label>
             <div class="col-md-6">
                 <select name="gizi_ka" id="gizi_ka" class="form-control" placeholder="Silahkan Pilih....">
-                    <option data-id="1" value="0">Tidak</option>
-                    <option data-id="2" value="2">Tidak yakin (ada tanda : baju menjadi longgar)</option>
+                    <option value="1">Tidak</option>
+                    <option value="2">Tidak yakin (ada tanda : baju menjadi longgar)</option>
                     <optgroup label="Ya, ada penurunan BB sebanyak :">
-                        <option data-id="3" value="1">1-5 kg</option>
-                        <option data-id="4" value="2">6-10 kg</option>
-                        <option data-id="5" value="3">11-15 kg</option>
-                        <option data-id="6" value="4">15 kg</option>
+                        <option value="3">1-5 kg</option>
+                        <option value="4">6-10 kg</option>
+                        <option value="5">11-15 kg</option>
+                        <option value="6">15 kg</option>
                     </optgroup>
-                    <option value="2">Tidak tahu berapa kg penurunannya</option>
+                    <option value="7">Tidak tahu berapa kg penurunannya</option>
                 </select>
             </div>
         </div>
@@ -459,8 +459,8 @@
             <label for="" class="col-md-6 control-label"> Apakah asupan makan pasien berkurang karena penurunan nafsu makan/ kesulitan menerima makanan</label>
             <div class="col-md-6">
                 <select name="gizi_makan_ka" id="gizi_makan_ka" class="form-control">
-                    <option value="0">Tidak</option>
-                    <option value="1">Ya</option>
+                    <option value="8">Tidak</option>
+                    <option value="9">Ya</option>
                 </select>
             </div>
         </div>
@@ -474,10 +474,10 @@
         <p>
             Adaptasi Strong Kids (nilai 1 setiap jawaban “ya”. Beresiko bila bilai lebih dari 1)<br />
             ceklis jika jawaban ya<br />
-            <input type="checkbox" name="strong_kids_k[]" value="1"> 1. Apakah pasien tampak kurus?<br />
-            <input type="checkbox" name="strong_kids_k[]" value="1"> 2. Apakah terdapat penurunan BB selama satu bulan terakhir?<br />
-            <input type="checkbox" name="strong_kids_k[]" value="1"> 3. Apakah ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu?<br>
-            <input type="checkbox" name="strong_kids_k[]" value="1"> Apakah terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi?<br>
+            <input type="checkbox" name="strong_kids_ka[]" value="pasien tampak kurus"> 1. Apakah pasien tampak kurus?<br />
+            <input type="checkbox" name="strong_kids_ka[]" value="terdapat penurunan BB selama satu bulan terakhir"> 2. Apakah terdapat penurunan BB selama satu bulan terakhir?<br />
+            <input type="checkbox" name="strong_kids_ka[]" value="ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu"> 3. Apakah ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu?<br>
+            <input type="checkbox" name="strong_kids_ka[]" value="terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi"> Apakah terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi?<br>
         </p>
     </div>
 </div>
@@ -614,7 +614,7 @@
         </label>
     </div>
 </div>
-<div class="form-group row hide">
+<div class="form-group row">
     <div class="col-md-12">
         <label for="" class="text-blue">l. Kebutuhan Komunikasi dan Edukasi </label><br>
     </div>
@@ -627,7 +627,7 @@
     </div>
     <div class="col-md-4">
         <label for="">Jika Ya</label>
-        <select name="komunikasi_detail_ka[]" id="komunikasi_detail_ka" class="form-control select2">
+        <select name="komunikasi_detail_ka[] select2" id="komunikasi_detail_ka" class="form-control select2" multiple="multiple">
             <option value="Pendengaran">Pendengaran</option>
             <option value="Budaya">Budaya</option>
             <option value="Penglihatan">Penglihatan</option>
@@ -711,6 +711,12 @@
         </label>
     </div>
 </div>
+<div class="form-group row">
+    <div class="col-md-6">
+        <label for="">Perawat Yang Melakukan Kajian</label>
+        <input type="text" class="form-control" name="perawat_ka" id="perawat_ka">
+    </div>
+</div>
 <script>
     $(document).ready(function() {
         $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
@@ -748,11 +754,7 @@
         })
         // $("#vas_pilih,#wbfs_pilih,#flacc_pilih").hide();
 
-        $("#gizi_ka").change(function() {
-            $(this).data("id")
-            hitung_skor_gizi()
-        })
-        $("#gizi_makan_ka").change(function() {
+        $("#gizi_ka,#gizi_makan_ka").change(function() {
             hitung_skor_gizi()
         })
 
@@ -824,7 +826,7 @@
             }
         });
 
-        $("#face_wajah_ka,#leg_ka,#gerakan_ka,#tangis_ka,#kemampuan_ka").change(function() {
+        $("#wajah_ka,#leg_ka,#gerakan_ka,#tangis_ka,#kemampuan_ka").change(function() {
             hitung_flacc();
         });
         $('[name=dijelaskan_ka]').change(function() {
@@ -836,7 +838,7 @@
             }
         });
         
-        $("[name='nyeri_pilih_ka']").change(function(){
+        $("[name='metode_ka']").change(function(){
             if (this.value==1)  {
                 $("#vas_pilih").removeClass("hide")
                 $("#wbfs_pilih").addClass("hide")
@@ -857,12 +859,13 @@
     function hitung_skor_gizi() {
         let a = $("#gizi_ka").val()
         let b = $("#gizi_makan_ka").val()
-        let sum = parseFloat(a) + parseFloat(b);
+        let sum = source_gizi(a).value + source_gizi(b).value;
         $("#skor_gizi").text(sum)
     }
 
+
     function hitung_flacc() {
-        let f = $("#face_wajah_ka").val();
+        let f = $("#wajah_ka").val();
         let l = $("#leg_ka").val();
         let g = $("#gerakan_ka").val();
         let t = $("#tangis_ka").val();
@@ -883,4 +886,5 @@
         $("#skor_flacc").text(sum)
         $("#skor_flacc_detail").text(text)
     }
+ 
 </script>

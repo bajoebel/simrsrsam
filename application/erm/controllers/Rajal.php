@@ -296,14 +296,19 @@ class Rajal extends CI_Controller
             "metode" => $this->input->post("metode_ka"),
             "skala_vas" => $this->input->post("skala_vas_ka"),
             "skala_wbfs" => $this->input->post("skala_wbfs_ka"),
-            "face_wajah" => $this->input->post("face_wajah_ka"),
+            "wajah" => $this->input->post("wajah_ka"),
             "leg" => $this->input->post("leg_ka"),
             "gerakan" => $this->input->post("gerakan_ka"),
             "tangis" => $this->input->post("tangis_ka"),
             "kemampuan" => $this->input->post("kemampuan_ka"),
-            "skor_flacc" => $this->input->post("skor_flacc_ka"),
+            "flacc_skor" => $this->input->post("flacc_skor_ka"),
+            "flacc_skor_detail" => $this->input->post("flacc_skor_detail_ka"),
             "gizi" => $this->input->post("gizi_ka"),
+            "gizi_detail" => $this->input->post("gizi_detail_ka"),
+            "gizi_value" => $this->input->post("gizi_value_ka"),
             "gizi_makan" => $this->input->post("gizi_makan_ka"),
+            "gizi_makan_detail" => $this->input->post("gizi_makan_detail_ka"),
+            "gizi_makan_value" => $this->input->post("gizi_makan_value_ka"),
             "skor_gizi" => $this->input->post("skor_gizi_ka"),
             "strong_kids" => $this->input->post("strong_kids_ka"),
             "aktivitas" => $this->input->post("aktivitas_ka"),
@@ -367,6 +372,14 @@ class Rajal extends CI_Controller
         // komunikasi_detail_ka
         if (is_array($this->input->post("komunikasi_detail_ka"))) {
             $data_post['komunikasi_detail'] = implode(";", removeChar($this->input->post("komunikasi_detail_ka")));
+        }
+        // kebutuhan edukasi
+        if (is_array($this->input->post("kebutuhan_edukasi_ka"))) {
+            $data_post['kebutuhan_edukasi'] = implode(";", removeChar($this->input->post("kebutuhan_edukasi_ka")));
+        }
+         // kebutuhan edukasi
+         if (is_array($this->input->post("strong_kids_ka"))) {
+            $data_post['strong_kids'] = implode(";", removeChar($this->input->post("strong_kids_ka")));
         }
         // header("Content-Type:text/html");
         // echo json_encode(["data" => $data_post]);

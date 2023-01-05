@@ -155,6 +155,8 @@
     <link href="<?php echo base_url() ?>assets/bower_components/fonts.googleapis/fonts.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/plugins/sweetalert/sweetalert.css">
     <script src="<?= base_url() ?>assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- custom js -->
+    <script src="<?php echo base_url() ?>js/remedis.js"></script>
     <script type='text/javascript'>
         var rooturl = "<?= base_url() ?>";
         var base_url = "<?= base_url() . "erm.php/"; ?>";

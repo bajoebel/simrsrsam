@@ -311,7 +311,28 @@
             }, {
                 "name": "poli_text_ka",
                 "value": $("#poli_ka").select2("data")[0].text
-            }, ];
+            },{
+                "name": "flacc_skor_ka",
+                "value": parseInt($("#skor_flacc").text())
+            },{
+                "name": "flacc_skor_detail_ka",
+                "value": $("#skor_flacc_detail").text()
+            },{
+                "name": "skor_gizi_ka",
+                "value": parseInt($("#skor_gizi").text())
+            },{
+                "name": "gizi_detail_ka",
+                "value": $("#gizi_ka option:selected").text()
+            },{
+                "name": "gizi_makan_detail_ka",
+                "value": $("#gizi_makan_ka option:selected").text()
+            },{
+                "name": "gizi_makan_value_ka",
+                "value": source_gizi($("#gizi_makan_ka").val()).value
+            },{
+                "name": "gizi_value_ka",
+                "value": source_gizi($("#gizi_ka").val()).value
+            }];
             data_form = $.merge(data_form, data_push)
             // console.log(data_push)
             // console.log(data_form);

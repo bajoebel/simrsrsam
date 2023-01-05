@@ -406,17 +406,17 @@ $date = date("Y-m-d");
                                                             <td rowspan="3">
                                                                 Cry (Tangisan)
                                                             </td>
-                                                            <td>Rebahan dengan tenang, posisi normal, bergerak dengan mudah</td>
+                                                            <td>Tidak ada tangisan, terjaga atau tertidur</td>
                                                             <td>0</td>
                                                             <td></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Menggeliat, maju mundur, tegang</td>
+                                                            <td>Mengerak / Merengek, gerukan sakali-kali</td>
                                                             <td>1</td>
                                                             <td></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Menekuk / posisi tubuh meringkuk, kaku dan menyentak</td>
+                                                            <td>Menangis tersedu-sedu, menjerit, terisak-isak, menggerutu berulang-ulang</td>
                                                             <td>2</td>
                                                             <td></td>
                                                         </tr>

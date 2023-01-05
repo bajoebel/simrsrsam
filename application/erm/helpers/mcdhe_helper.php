@@ -404,4 +404,43 @@ function badOrGood($param)
     }
 }
 
+function skalaVas($skor) {
+    $result = "";
+    if ($skor==0) {
+        $result = "Tidak Nyeri";   
+    } else if ($skor>=1 && $skor<=3) {
+        $result = "Nyeri Ringan";   
+    } else if ($skor>=4 && $skor<=6) {
+        $result = "Nyeri Sedang";
+    } else if ($skor>=7 && $skor<=10) {
+        $result = "Nyeri Berat";
+    };
+    return $result;
+}
+
+function skalaWbfs($skor) {
+    
+    switch ($skor) {
+        case '1':
+            $result = "Tidak Nyeri";
+            break;
+        case '2':
+            $result = "Sedikit Nyeri";
+            break;
+        case '3':
+            $result = "Sedikit Lebih Nyeri";
+            break;
+        case '4':
+            $result = "Lebih Nyeri";
+            break;
+        case '5':
+            $result = "Sangat Nyeri";
+            break;
+        default:
+            $result = "-";
+            break;
+    }
+    return $result;
+}
+
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */
