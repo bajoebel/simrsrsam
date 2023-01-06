@@ -443,4 +443,12 @@ function skalaWbfs($skor) {
     return $result;
 }
 
+function getPegawai($arr=[]) {
+    $CI = &get_instance();
+    if (sizeof($arr) != 0) {
+        $CI->db->where_in("profId",$arr);
+    }
+    return $CI->db->get("tbl01_pegawai");
+}
+
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

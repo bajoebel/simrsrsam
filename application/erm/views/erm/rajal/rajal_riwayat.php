@@ -127,7 +127,7 @@
                 <div class="box-header with-border">
                     <h4 class="box-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                            <?= strtoupper($r->hari) . " - " . DateToIndo($r->tgl) . " - " . $r->jam ?>
+                            <?= strtoupper($r->hari) . " - " . DateToIndo($r->tgl) . " - " . $r->jam." - ".$r->dokter ?>
                         </a>
                     </h4>
                 </div>
@@ -148,10 +148,10 @@
                         <p><?= $r->terapi ?></p>
                     </div>
                     <div class="box-footer">
-                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                        <a href="<?= base_url("erm.php/rajal/kaji_awal_medis/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
-                        </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                        </a>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalMedis(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                     </div>
                 </div>
@@ -181,16 +181,16 @@
                         <strong>Assessment</strong><br />
                         <p><?= $r->assesment ?></p>
                         <strong>Planning</strong><br />
-                        <p><?= $r->assesment ?></p>
+                        <p><?= $r->planning ?></p>
                         <strong>Instruksi</strong><br />
-                        <p><?= $r->assesment ?></p>
+                        <p><?= $r->instruksi ?></p>
                         <strong>Review</strong><br />
                         <p><?= $r->review ?></p>
                     </div>
                     <div class="box-footer">
-                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                        <a href="<?= base_url("erm.php/rajal/kembang_pasien/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
-                        </button>
+                        </a>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                     </div>
@@ -226,9 +226,9 @@
                         <p><?= arr_to_list($r->hambatan, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
                     </div>
                     <div class="box-footer">
-                        <button class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                        <a href="<?= base_url("erm.php/rajal/edukasi_pasien/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
-                        </button>
+                        </a>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusEdukasiPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                     </div>

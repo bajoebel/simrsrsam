@@ -31,7 +31,7 @@ class Erm extends CI_Controller
                         $jns_layanan = 'RJ';
                         if ($ruang->grid == 1 || $ruang->grid == 4) {
                             $jns_layanan = 'RJ';
-                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar', '=action[{{status_pasien}}]');
+                            $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', '=jekel[{{jns_kelamin}}]', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar', '=action[{{status_pasien}}]','=erm[{{status_erm}}]');
                             $param = array('jns_layanan' => 'jns_layanan', 'dari' => 'tglAwal', 'sampai' => 'tglAkhir');
                             $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
                             $dokter = $this->Layanan_model->getDokter($kondisi);
@@ -52,7 +52,7 @@ class Erm extends CI_Controller
                         $action = "<div class='btn-group'><button onclick='pilihPasien({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
                         $config = array(
                             'url'           => 'erm.php/layanan/getdata',
-                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien'),
+                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien','status_erm' => 'status_erm'),
                             'field'         => $field,
                             'function'      => 'getPasienSaatini',
                             'keyword_id'    => 'q',
@@ -93,6 +93,7 @@ class Erm extends CI_Controller
                             'content' => $this->load->view('erm/erm_index', $data, true),
                             'ajaxdata' => "var jekel = {'0':'Perempuan','1':'Laki-Laki','P':'Perempuan','L':'Laki-Laki'};
                                             var response = {'0':'<span class=\"btn btn-danger btn-xs\" >Belum Diresponse</span>','1':'<span class=\"btn btn-success btn-xs\">Sudah Diresponse</span>'}; 
+                                            var erm = {'0':'<span class=\"pull-right badge bg-yellow\" >Proses</span>','1':'<span class=\"pull-right badge bg-green btn-xs\">Final</span>'}; 
                                             var action = {'1':'<span class=\"pull-right badge bg-green\">Aktif</span>','2':'<span class=\"pull-right badge bg-yellow\">Dirawat</span>','3':'<span class=\"pull-right badge bg-yellow\">Menunggu Response <br>Pindah</span>','4':'<span class=\"pull-right badge bg-yellow\">Sudah Pindah</span>','5':'<span class=\"pull-right badge bg-yellow\">Sudah Pulang</span>','6':'<span class=\"pull-right badge bg-yellow\">Batal Berobat</span>'}; 
                                             var dis=['','disabled']" . getData($config),
                             'lib' => array('js/layanan.js', 'js/daftarlayanan.js')
@@ -140,7 +141,7 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
             ];
-            $ta["3"] = "active";
+            $ta["6"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,

@@ -2,6 +2,7 @@
 foreach ($data->result() as $e) : ?>
     <tr>
         <td><?= $no++ ?></td>
+        <td><?= dateToIndo($e->tgl)." / ". $e->jam ?></td>
         <td><?= arr_to_list($e->topik_list) ?></td>
         <td><?= $e->metode ?></td>
         <td><?= $e->media ?></td>

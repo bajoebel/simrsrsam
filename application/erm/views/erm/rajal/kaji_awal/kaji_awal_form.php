@@ -714,7 +714,14 @@
 <div class="form-group row">
     <div class="col-md-6">
         <label for="">Perawat Yang Melakukan Kajian</label>
-        <input type="text" class="form-control" name="perawat_ka" id="perawat_ka">
+        <select name="perawat_id_ka" id="perawat_id_ka" class="form-control select2" style="width:100%">
+            <?php $list = getPegawai([3,4])->result();
+                echo "<option value=''>Pilih Nama Perawat</option>";
+                foreach ($list as $r) { ?>
+                <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
+            <?php    }
+            ?>
+        </select>
     </div>
 </div>
 <script>

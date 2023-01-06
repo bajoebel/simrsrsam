@@ -348,6 +348,8 @@ class Rajal extends CI_Controller
             "tindakan_keperawatan" => $this->input->post("tindakan_keperawatan_ka"),
             "dijelaskan" => $this->input->post("dijelaskan_ka"),
             "dijelaskan_hubungan" => $this->input->post("dijelaskan_hubungan_ka"),
+            "perawat_id" => $this->input->post("perawat_id_ka"),
+            "perawat" => $this->input->post("perawat_ka"),
             "status" => 0,
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
@@ -401,37 +403,28 @@ class Rajal extends CI_Controller
         }
     }
 
-    public function kaji_awal_medis()
+    public function kaji_awal_medis($id="",$idx="",$nomr="")
     {
         // form rm 0203 rev.01 surat masuk rawat jalan
-        $c = [
-            1 => "", // hari
-            2 => "", // tanggal
-            3 => "", // jam
-            4 => "", // auto
-            5 => "", // auto_detail
-            6 => "", // allo
-            7 => "", // allo_detail
-            8 => "", // TD
-            9 => "", // Nadi
-            10 => "", // Pernapasan
-            11 => "", // Suhu
-            12 => "", // Keterangan Pemeriksaan fisik
-            13 => "", // diagnosis kerja
-            14 => "", // diagnosis banding
-            15 => "", // pemeriksaan penunjang
-            16 => "", // therapi/tindakan
-            17 => "", // kontrol
-            18 => "", // kontrol tanggal
-            19 => "", // kontrol jam
-            20 => "", // kontrol tujuan
-            21 => "", // penjelasan,
-            22 => "" // lainnya...
-        ];
-        $data = [
-            "data" => []
-        ];
-        $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal_medis/kaji_awal_medis_cetak", compact('data'));
+        if ($id!="" and $idx!="" and $nomr!="" ) {
+            // data pendaftaran
+            $d = $this->erm->getPendaftaran($idx);
+            // data pasien
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getAwalMedisById($nomr,$idx,$id);
+            $data = [
+                "d" => $d,
+                "p" => $p,
+                "k" => $k
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal_medis/kaji_awal_medis_cetak", $data);
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kaji_awal_medis/kaji_awal_medis_cetak_master", compact('data'));
+        }
     }
 
     public function insert_kaji_awal_medis()
@@ -451,7 +444,7 @@ class Rajal extends CI_Controller
             "nadi" => $this->input->post("nadi_m"),
             "napas" => $this->input->post("napas_m"),
             "suhu" => $this->input->post("suhu_m"),
-            "fisik_detail_m" => $this->input->post("fisik_detail_m"),
+            "fisik_detail" => $this->input->post("fisik_detail_m"),
             "diagnosis_kerja" => $this->input->post("diagnosis_kerja_m"),
             "diagnosis_banding" => $this->input->post("diagnosis_banding_m"),
             "penunjang" => $this->input->post("penunjang_m"),
@@ -459,8 +452,12 @@ class Rajal extends CI_Controller
             "kontrol" => $this->input->post("kontrol_m"),
             "kontrol_tgl" => $this->input->post("kontrol_tanggal_m"),
             "kontrol_jam" => $this->input->post("kontrol_jam_m"),
+            "kontrol_tujuan_id" => $this->input->post("kontrol_tujuan_id_m"),
             "kontrol_tujuan" => $this->input->post("kontrol_tujuan_m"),
             "pj" => $this->input->post("pj_m"),
+            "pj_detail" => $this->input->post("pj_detail_m"),
+            "dokter" => $this->input->post("dokter_m"),
+            "dokter_id" => $this->input->post("dokter_id_m"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_m")
@@ -486,13 +483,28 @@ class Rajal extends CI_Controller
         }
     }
 
-    public function kembang_pasien()
+    public function kembang_pasien($id="",$idx="",$nomr="")
     {
         // form rm 0.2.03 rev.02 catatan perkembangan pasien terintegrasi rawat jalan
-        $data = [
-            "data" => []
-        ];
-        $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak", compact('data'));
+        if ($id!="" and $idx!="" and $nomr!="" ) {
+            // data pendaftaran
+            $d = $this->erm->getPendaftaran($idx);
+            // data pasien
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getKembangPasien($nomr,$idx);
+            $data = [
+                "d" => $d,
+                "p" => $p,
+                "k" => $k
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak", $data);
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak_master", compact('data'));
+        }
     }
 
     public function insert_kembang_pasien()
@@ -505,13 +517,14 @@ class Rajal extends CI_Controller
             "tgl" => $this->input->post("tgl_k"),
             "jam" => $this->input->post("jam_k"),
             "jenis_tenaga_medis_id" => $this->input->post("jenis_tenaga_medis_id_k"),
-            "jenis_tenaga_medis" => jenis_tenaga_medis($this->input->post("jenis_tenaga_medis_id_k")),
+            "jenis_tenaga_medis" => $this->input->post("jenis_tenaga_medis_k"),
+            "nama_tenaga_medis_id" => $this->input->post("nama_tenaga_medis_id_k"),
             "nama_tenaga_medis" => $this->input->post("nama_tenaga_medis_k"),
             "subyektif" => $this->input->post("subyektif_k"),
             "obyektif" => $this->input->post("obyektif_k"),
             "assesment" => $this->input->post("assesment_k"),
             "planning" => $this->input->post("planning_k"),
-            "intruksi" => $this->input->post("intruksi_k"),
+            "instruksi" => $this->input->post("instruksi_k"),
             "review" => $this->input->post("review_k"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
@@ -539,13 +552,28 @@ class Rajal extends CI_Controller
     }
 
     // edukasi pasien
-    public function informasi_edukasi()
+    public function edukasi_pasien($id="",$idx="",$nomr="")
     {
         // form rm 0.2.03 rev.02 catatan perkembangan pasien terintegrasi rawat jalan
-        $data = [
-            "data" => []
-        ];
-        $this->load->view($this->folder . "/" . $this->subfolder . "/informasi_edukasi/informasi_edukasi_cetak", compact('data'));
+        if ($id!="" and $idx!="" and $nomr!="" ) {
+            // data pendaftaran
+            $d = $this->erm->getPendaftaran($idx);
+            // data pasien
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getEdukasiPasienById($nomr,$idx,$id);
+            $data = [
+                "d" => $d,
+                "p" => $p,
+                "k" => $k
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/edukasi_pasien/edukasi_pasien_cetak", $data);
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak_master", compact('data'));
+        }
     }
 
     public function insert_edukasi_pasien()

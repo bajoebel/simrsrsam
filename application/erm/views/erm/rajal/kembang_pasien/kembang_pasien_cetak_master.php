@@ -45,7 +45,7 @@ $date = date("Y-m-d");
         .kode {
             margin-top: 10px;
             margin-right: 50px;
-            width: 40%;
+            width: 30%;
             float: right;
             font-size: 13px;
             font-weight: bold;
@@ -147,19 +147,19 @@ $date = date("Y-m-d");
                             <table>
                                 <tr>
                                     <td>No.Rekam Medis</td>
-                                    <td>: <?= $p->nomr ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Nama Lengkap</td>
-                                    <td>: <?= $p->nama ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Lahir</td>
-                                    <td>: <?= $p->tgl_lahir ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
-                                    <td>: <?= jns_kelamin($p->jns_kelamin) ?></td>
+                                    <td>:</td>
                                 </tr>
                             </table>
                         </div>
@@ -185,7 +185,7 @@ $date = date("Y-m-d");
                                 seluruh Rencana Asuhan)
                             </td>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <td>
                                 <div style="height:180mm">
 
@@ -195,25 +195,7 @@ $date = date("Y-m-d");
                             <td></td>
                             <td></td>
                             <td></td>
-                        </tr> -->
-                        <?php foreach ($k->result() as $r) { ?>
-                            <tr>
-                                <td><?= dateToIndo($r->tgl)." / ".$r->jam ?></td>
-                                <td><?= $r->jenis_tenaga_medis." - ".$r->nama_tenaga_medis ?></td>
-                                <td>
-                                    S : <?= $r->subyektif ?>
-                                    O : <?= $r->obyektif ?>
-                                    A :<?= $r->assesment ?>
-                                    P : <?= $r->planning ?>
-                                </td>
-                                <td>
-                                    <?= $r->instruksi?>
-                                </td>
-                                <td>
-                                    <?= $r->review?>
-                                </td>
-                            </tr>
-                        <?php }?>
+                        </tr>
                     </table>
                 </div>
             </td>

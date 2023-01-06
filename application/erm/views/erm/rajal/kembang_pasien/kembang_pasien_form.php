@@ -66,6 +66,7 @@
             <div class="col-md-3">
                 <label for="">Profesional</label>
                 <select name="jenis_tenaga_medis_id_k" id="jenis_tenaga_medis_id_k" class="form-control">
+                    <option value="1">Pilih Profesional</option>
                     <option value="1">Dokter</option>
                     <option value="2">Anastesi</option>
                     <option value="3">Paramedis</option>
@@ -78,7 +79,13 @@
             </div>
             <div class="col-md-5">
                 <label for="">Nama Profesional</label>
-                <input type="text" name="nama_tenaga_medis_k" id="nama_tenaga_medis_k" class="form-control">
+                <select name="tenaga_medis_id_k" id="tenaga_medis_id_k" class="form-control select2" style="width:100%">
+                <?php $list = getPegawai([])->result();
+                    echo "<option value=''>Pilih Nama Tenaga Medis</option>";
+                    foreach ($list as $r) { ?>
+                    <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
+                <?php } ?>
+                </select>
             </div>
         </div>
         <div class="form-group row">
@@ -117,7 +124,7 @@
             <b>Intruksi</b>
             <div class="form-group row">
                 <div class="col-md-12">
-                    <textarea name="intruksi_k" id="intruksi_k" rows="5" class="form-control"></textarea>
+                    <textarea name="instruksi_k" id="instruksi_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
         </div>

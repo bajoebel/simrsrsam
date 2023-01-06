@@ -73,11 +73,11 @@
         </div>
         <div class="col-md-3">
             <label for="">Tanggal</label>
-            <input type="date" name="tgl_m" id="tgl_m" class="form-control">
+            <input type="date" name="tgl_m" id="tgl_m" class="form-control" value="<?= date("Y-m-d") ?>">
         </div>
         <div class="col-md-2">
             <label for="">Jam</label>
-            <input type="time" name="jam_m" id="jam_m" class="form-control">
+            <input type="time" name="jam_m" id="jam_m" class="form-control" value="<?= date("h:i")?>">
         </div>
     </div>
     <b>Anamnesis</b>
@@ -105,7 +105,7 @@
             <table class="fisik">
                 <tr>
                     <td width="100px">TD</td>
-                    <td><input type="text" name="td_m" id="td_m" class="custom-input w-100"></td>
+                    <td><input type="text" name="td_m" id="td_m" class="custom-input w-100" value="110/80"></td>
                     <td>mmHG</td>
                 </tr>
                 <tr>
@@ -160,7 +160,7 @@
         </div>
         <div class="col-md-8" style="display:flex;justify-content: space-between;">
             <label class="checkbox-inline">
-                <input type="checkbox" name="kontrol_m" id="kontrol_m" value="puskesmas">Kembali Kontrol
+                <input type="checkbox" name="kontrol_m" id="kontrol_m" value="1">Kembali Kontrol
             </label>
             <label for="" class="checkbox-inline">Hari/Tanggal</label>
             <label class="checkbox-inline">
@@ -174,7 +174,7 @@
             </label>
         </div>
         <div class="col-md-4">
-            <select name="kontrol_tujuan_m" id="kontrol_tujuan_m" class="form-control" disabled>
+            <select name="kontrol_tujuan_id_m" id="kontrol_tujuan_id_m" class="form-control select2" style="width:100%" disabled >
                 <option value="">== Pilih ==</option>
                 <?php foreach ($ruang as $r) { ?>
                     <option value="<?= $r->idx ?>"><?= $r->ruang ?></option>
@@ -193,10 +193,23 @@
             </label>
         </div>
     </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="">DPJP</label>
+            <select name="dokter_id_m" id="dokter_id_m" class="form-control select2">
+                <?php $list = getPegawai([1,2])->result();
+                    echo "<option value=''>Pilih Nama Dokter</option>";
+                    foreach ($list as $r) { ?>
+                    <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
 </div>
 <script>
     $(document).ready(function() {
-        $("#tgl_m").on("change")
+        // $("[name='auto_detail_m'],[name='allo_detail_m']").wysihtml5();
+        // $("#tgl_m").on("change")
         // auto
         $("[name='auto_m']").change(function() {
             if ($(this).is(":checked")) {
@@ -220,11 +233,11 @@
             if ($(this).is(":checked")) {
                 $("#kontrol_tanggal_m").removeAttr("readonly").focus()
                 $("#kontrol_jam_m").removeAttr("readonly")
-                $("#kontrol_tujuan_m").removeAttr("disabled")
+                $("#kontrol_tujuan_id_m").removeAttr("disabled")
             } else {
                 $("#kontrol_tanggal_m").attr('readonly', true).val("");
                 $("#kontrol_jam_m").attr('readonly', true);
-                $("#kontrol_tujuan_m").attr("disabled", true)
+                $("#kontrol_tujuan_id_m").attr("disabled", true)
             }
         });
 

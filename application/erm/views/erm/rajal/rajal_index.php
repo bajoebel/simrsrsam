@@ -270,7 +270,7 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(3, <?= $detail->idx ?>);
+        getRiwayat(6, <?= $detail->idx ?>);
 
     });
 </script>
@@ -332,6 +332,9 @@
             },{
                 "name": "gizi_value_ka",
                 "value": source_gizi($("#gizi_ka").val()).value
+            },{
+                "name": "perawat_ka",
+                "value": $("#perawat_id_ka").text()
             }];
             data_form = $.merge(data_form, data_push)
             // console.log(data_push)
@@ -363,7 +366,20 @@
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
+            var data_push = [
+                {
+                    name : "dokter_m",
+                    value : $("#dokter_id_m option:selected").text()
+                },
+                {
+                    name : "kontrol_tujuan_m",
+                    value : $("#kontrol_tujuan_id_m option:selected").text()
+                }
+            ];
+            data_form = $.merge(data_form, data_push)
+
             // console.log(data_form);
+            // return false;
             $.ajax({
                 type: "POST",
                 url: base_url + "/rajal/insert_kaji_awal_medis",
@@ -375,7 +391,7 @@
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
-                    $('#form-data-kaji-awal-medis')[0].reset();
+                    // $('#form-data-kaji-awal-medis')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(4, <?= $detail->idx ?>);
@@ -390,6 +406,17 @@
         $("#form-data-kembang-pasien").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
+            var data_push = [
+                {
+                    name : "jenis_tenaga_medis_k",
+                    value : $("#jenis_tenaga_medis_id_k option:selected").text()
+                },
+                {
+                    name : "nama_tenaga_medis_k",
+                    value : $("#tenaga_medis_id_k option:selected").text()
+                }
+            ];
+            data_form = $.merge(data_form, data_push)
             // console.log(data_form);
             // return false;
             $.ajax({
@@ -403,7 +430,7 @@
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
-                    $('#form-data-kembang-pasien')[0].reset();
+                    // $('#form-data-kembang-pasien')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(5, <?= $detail->idx ?>);
@@ -473,81 +500,93 @@
     }
 
     function hapusSetujuUmum(idx, id) {
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
         $.ajax({
-            type: "GET",
-            url: base_url + `rajal/delete_setuju_umum/${idx}/${id}`,
-            data: "data",
-            dataType: "json",
-            success: function(response) {
-                if (response.status) {
-                    getRiwayat(2, idx);
+                type: "GET",
+                url: base_url + `rajal/delete_setuju_umum/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(2, idx);
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
                 }
-            },
-            error: function(e) {
-                console.log(e.responseText);
-            }
-        });
+            });
+        }
     }
 
     function hapusAwalRawat(idx, id) {
-        $.ajax({
-            type: "GET",
-            url: base_url + `rajal/delete_kaji_awal/${idx}/${id}`,
-            data: "data",
-            dataType: "json",
-            success: function(response) {
-                console.log(response);
-                if (response.status) {
-                    getRiwayat(3, idx);
-                    swal("Success", "Data Berhasil Di Hapus", "success");
-                } else {
-                    swal("Failed", "Something Wrong", "error");
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_kaji_awal/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                    if (response.status) {
+                        getRiwayat(3, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
                 }
-            },
-            error: function(e) {
-                console.log(e.responseText);
-            }
-        });
+            });
+        }
     }
 
     function hapusAwalMedis(idx, id) {
-        $.ajax({
-            type: "GET",
-            url: base_url + `rajal/delete_kaji_awal_medis/${idx}/${id}`,
-            data: "data",
-            dataType: "json",
-            success: function(response) {
-                if (response.status) {
-                    getRiwayat(4, idx);
-                    swal("Success", "Data Berhasil Di Hapus", "success");
-                } else {
-                    swal("Failed", "Something Wrong", "error");
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_kaji_awal_medis/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(4, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
                 }
-            },
-            error: function(e) {
-                console.log(e.responseText);
-            }
-        });
+            });
+        }
     }
 
     function hapusKembangPasien(idx, id) {
-        $.ajax({
-            type: "GET",
-            url: base_url + `rajal/delete_kembang_pasien/${idx}/${id}`,
-            data: "data",
-            dataType: "json",
-            success: function(response) {
-                if (response.status) {
-                    getRiwayat(5, idx);
-                    swal("Success", "Data Berhasil Di Hapus", "success");
-                } else {
-                    swal("Failed", "Something Wrong", "error");
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_kembang_pasien/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(5, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
                 }
-            },
-            error: function(e) {
-                console.log(e.responseText);
-            }
-        });
+            });
+        }
     }
 
     function hapusEdukasiPasien(idx, id) {

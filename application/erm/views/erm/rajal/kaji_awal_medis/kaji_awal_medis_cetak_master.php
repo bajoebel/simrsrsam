@@ -109,7 +109,7 @@ $date = date("Y-m-d");
         }
 
         table.fisik {
-            width: 35mm;
+            width: 25mm
         }
 
         table.fisik,
@@ -158,19 +158,19 @@ $date = date("Y-m-d");
                             <table>
                                 <tr>
                                     <td>No.Rekam Medis</td>
-                                    <td>: <?= $p->nomr ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Nama Lengkap</td>
-                                    <td>: <?= $p->nama ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Lahir</td>
-                                    <td>: <?= $p->tgl_lahir ?></td>
+                                    <td>:</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
-                                    <td>: <?= jns_kelamin($p->jns_kelamin) ?></td>
+                                    <td>:</td>
                                 </tr>
                             </table>
                         </div>
@@ -193,75 +193,62 @@ $date = date("Y-m-d");
                     <table class="main">
                         <tr>
                             <td>
-                                <span>ANAMNESIS : </span><?=($k->auto==1)?"<span style='margin-left:3mm'>&#9745; Auto</span>":""?></span><?=($k->allo==1)?"<span style='margin-left:3mm'>&#9745; Allo</span>":""?></span><br>
-                                
-                                <?php if ($k->auto==1) { ?><div style="height:20mm">
-                                    Allo detail : <?=$k->auto_detail?></br>
-                                </div>
-                                <?php } ?>
-                                <?php if ($k->allo==2) { ?><div style="height:20mm">
-                                    Allo detail : <?=$k->allo_detail?></br>
-                                </div>
-                                <?php } ?>
+                                <span>ANAMNESIS : </span><span style='margin-left:3mm'>&#9744; Auto</span><span style='margin-left:10mm'>&#9744; Allo</span><br>
+                                <div style="height:20mm"></div>
+
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>Pemeriksaan Fisik : </span>
                                 <table class="fisik">
-                                    <tbody>
-                                        <tr>
-                                            <td>Td </td>
-                                            <td>: <?= $k->td ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nadi </td>
-                                            <td>: <?= $k->nadi ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pernafasan </td>
-                                            <td>: <?= $k->napas ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suhu </td>
-                                            <td>: <?= $k->suhu ?></td>
-                                        </tr>
-                                    </tbody>
+                                    <tr>
+                                        <td>Td </td>
+                                        <td>: </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nadi </td>
+                                        <td>: </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pernafasan </td>
+                                        <td>: </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Suhu </td>
+                                        <td>: </td>
+                                    </tr>
                                 </table>
-                                <div style="height:20mm"><?= $k->fisik_detail?></div>
+                                <div style="height:20mm"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>DIAGNOSIS KERJA : </span>
-                                <div style="height:10mm"><?= $k->diagnosis_kerja?></div>
+                                <div style="height:10mm"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>DIAGNOSIS BANDING : </span>
-                                <div style="height:10mm"><?= $k->diagnosis_banding?></div>
+                                <div style="height:10mm"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>PEMERIKSAAN PENUNJANG : </span>
-                                <div style="height:20mm"><?= $k->penunjang?></div>
+                                <div style="height:20mm"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>THERAPI / TINDAKAN : </span>
-                                <div style="height:20mm"><?= $k->terapi ?></div>
+                                <div style="height:20mm"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?php if ($k->kontrol==1) { ?>
-                                <span>KONTROL ULANG : &nbsp;&nbsp;&#9745;Kembali Kontrol </span><span style='margin-left:10mm;'>Hari/Tanggal: <?=DateToIndo($k->kontrol_tgl) ?> </span><span style='margin-left:3mm;'>Jam : <?=$k->kontrol_jam?></span><span> Poliklinik : <b><?= $k->kontrol_tujuan ?></b></span>
-                                <?php } else { ?>
-                                <span>Kontrol Ulang : Tidak</span>
-                                <?php }?>
+                                <span>KONTROL ULANG : &nbsp;&nbsp;&#9744;Kembali Kontrol </span><span style='margin-left:10mm;'>Hari/Tanggal:.........................</span><span style='margin-left:10mm;'>Jam : .........................</span><span> Poliklinik : </span>
                             </td>
                         </tr>
                         <tr>
@@ -274,8 +261,7 @@ $date = date("Y-m-d");
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <!-- &#9744; Pasien &nbsp;&nbsp;&nbsp; &#9744; Keluarga, hubungan <?= str_pad(" ", 40, ".") ?> -->
-                                                    <?= ($k->pj=="pasien")?" &#9745; ".$k->pj:" &#9745; ".$k->pj.", Hubungan ".$k->pj_detail ?>
+                                                    &#9744; Pasien &nbsp;&nbsp;&nbsp; &#9744; Keluarga, hubungan <?= str_pad(" ", 40, ".") ?>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -292,7 +278,7 @@ $date = date("Y-m-d");
                                     <div class="petugas">
                                         <table class='footer' style="margin-top:0px">
                                             <tr>
-                                                <td>Bukittinggi, <?php echo DateToIndo($k->tgl) ?></td>
+                                                <td>Bukittinggi, <?php echo DateToIndo(date('Y-m-d')) ?></td>
                                             </tr>
                                             <tr>
                                                 <td style='text-align:center'>DPJP</td>
@@ -301,7 +287,7 @@ $date = date("Y-m-d");
                                                 <td height="50px">&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td>( <?= $k->dokter ?> )</td>
+                                                <td>( <?= str_pad(" ", 150, ".") ?> )</td>
                                             </tr>
                                             <tr>
                                                 <td><i>diisi nama lengkap beserta gelar</i></td>

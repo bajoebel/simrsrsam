@@ -348,6 +348,7 @@
                                                 else echo "<th>Poli</th>" ?>
                                                 <th style="width: 100px">Mode Bayar</th>
                                                 <th>Status</th>
+                                                <th>Status RME</th>
                                                 <th style="width: 100px">Action</th>
                                             </tr>
                                         </thead>

@@ -165,7 +165,7 @@
                     <label for="">Hambatan Emosional dan Motivasi</label>
                     <div class="row">
                         <div class="col-md-12">
-                            <select name="hambatan_e[]" id="hambatan_e" class="form-control select2" multiple="multiple">
+                            <select name="hambatan_e[]" id="hambatan_e" class="form-control select2" multiple="multiple" width="100%">
                                 <option value="Tidak ada">Tidak ada</option>
                                 <option value="Penglihatan Terganggu">Penglihatan Terganggu</option>
                                 <option value="Emosional Terganggu">Emosional Terganggu</option>
@@ -269,9 +269,11 @@
             <table class="table table-hover" id="table-detail-edukasi-pasien">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Tanggal/Jam</th>
                         <th>Topik Edukasi</th>
                         <th>Metode</th>
+                        <th>Media</th>
                         <th>Sasaran</th>
                         <th>Evaluasi Awal</th>
                         <th>Pemberi Edukasi</th>
