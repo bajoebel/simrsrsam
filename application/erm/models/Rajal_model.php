@@ -40,25 +40,27 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         $idx = $data['idx'];
         $nomr = $data['nomr'];
-        $cek = $db2->where(['idx'=>$idx,'nomr'=>$nomr])->get("rj_awal_rawat")->num_rows();
-        if ($cek>0) {
+        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_awal_rawat")->num_rows();
+        if ($cek > 0) {
             unset($data["idx"]);
             unset($data["nomr"]);
-            return $db2->where(['idx'=>$idx,'nomr'=>$nomr])->update("rj_awal_rawat",$data);
+            return $db2->where(['idx' => $idx, 'nomr' => $nomr])->update("rj_awal_rawat", $data);
         } else {
             return $db2->insert("rj_awal_rawat", $data);
         }
     }
 
-    function getAwalRawat($nomr,$idx) {
+    function getAwalRawat($nomr, $idx)
+    {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['idx' => $idx, "nomr" => $nomr])
             ->order_by("id desc")
             ->get("rj_awal_rawat");
     }
-    function getAwalRawatById($nomr,$idx,$id) {
+    function getAwalRawatById($nomr, $idx, $id)
+    {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->where(['idx' => $idx, "nomr" => $nomr,"id"=>$id])
+        return $db2->where(['idx' => $idx, "nomr" => $nomr, "id" => $id])
             ->order_by("id desc")
             ->get("rj_awal_rawat")
             ->row();
@@ -83,9 +85,10 @@ class Rajal_model extends CI_Model
             ->get("rj_awal_medis");
     }
 
-    function getAwalMedisById($nomr,$idx,$id) {
+    function getAwalMedisById($nomr, $idx, $id)
+    {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->where(['idx' => $idx, "nomr" => $nomr,"id"=>$id])
+        return $db2->where(['idx' => $idx, "nomr" => $nomr, "id" => $id])
             ->order_by("id desc")
             ->get("rj_awal_medis")
             ->row();
@@ -97,11 +100,11 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         $idx = $data['idx'];
         $nomr = $data['nomr'];
-        $cek = $db2->where(['idx'=>$idx,'nomr'=>$nomr])->get("rj_awal_rawat")->num_rows();
-        if ($cek>0) {
+        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_awal_rawat")->num_rows();
+        if ($cek > 0) {
             unset($data["idx"]);
             unset($data["nomr"]);
-            return $db2->where(['idx'=>$idx,'nomr'=>$nomr])->update("rj_awal_medis",$data);
+            return $db2->where(['idx' => $idx, 'nomr' => $nomr])->update("rj_awal_medis", $data);
         } else {
             return $db2->insert("rj_awal_medis", $data);
         }
@@ -149,7 +152,7 @@ class Rajal_model extends CI_Model
             ->get("rj_iep");
     }
 
-    function getEdukasiPasienById($idx, $id)
+    function getEdukasiPasienById($nomr, $idx, $id)
     {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['id' => $id, "idx" => $idx])
@@ -165,12 +168,12 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         $idx = $data['idx'];
         $nomr = $data['nomr'];
-        $cek = $db2->where(['idx'=>$idx,'nomr'=>$nomr])->get("rj_iep")->num_rows();
-        if ($cek>0) {
+        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_iep");
+        if ($cek->num_rows() > 0) {
             unset($data["idx"]);
             unset($data["nomr"]);
-            $db2->where(['idx'=>$idx,'nomr'=>$nomr])->update("rj_iep",$data);
-            return $idx;
+            $db2->where(['idx' => $idx, 'nomr' => $nomr])->update("rj_iep", $data);
+            return $cek->row()->id;
         } else {
             $db2->insert("rj_iep", $data);
             return $db2->insert_id();

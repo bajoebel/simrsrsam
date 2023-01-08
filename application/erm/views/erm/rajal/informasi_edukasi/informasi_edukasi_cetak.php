@@ -151,19 +151,19 @@ $date = date("Y-m-d");
                         <table class='identitas'>
                             <tr>
                                 <td width='50%'>No.Rekam Medis</td>
-                                <td width='50%'>:</td>
+                                <td width='50%'>: <?= $p->nomr ?></td>
                             </tr>
                             <tr>
                                 <td>Nama Lengkap</td>
-                                <td>:</td>
+                                <td>: <?= $p->nama ?></td>
                             </tr>
                             <tr>
                                 <td>Tanggal Lahir</td>
-                                <td>:</td>
+                                <td>: <?= DateToIndo($p->tgl_lahir) ?></td>
                             </tr>
                             <tr>
                                 <td>Jenis Kelamin</td>
-                                <td>:</td>
+                                <td>: <?= jns_kelamin($p->jns_kelamin) ?></td>
                             </tr>
                         </table>
                     </div>
@@ -192,64 +192,55 @@ $date = date("Y-m-d");
                                 <td width='20%'>Bahasa Yang Digunakan</td>
                                 <td>
                                     :
-                                    <span>&#9744; Indonesia</span>
+                                    <!-- <span>&#9744; Indonesia</span>
                                     <span style='margin-left:4mm'>&#9744; Daerah (sebutkan) <?= str_pad(" ", 30, ".") ?></span>
                                     <span style='margin-left:4mm'>&#9744; Isyarat</span>
-                                    <span style='margin-left:4mm'>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span>
+                                    <span style='margin-left:4mm'>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span> -->
+                                    <?= arr_to_list($k->bahasa, "<span style='margin-left:4mm'>&#9745;", "</span>"); ?>
+                                    <?= ($k->bahasa_lain != null) ? ", " . $k->bahasa_lain : "-" ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Kebutuhan Penerjemah</td>
                                 <td>
                                     :
-                                    <span>&#9744; Ya</span>
-                                    <span style='margin-left:4mm'>&#9744; Tidak</span>
+                                    <span>&#9745; <?= trueOrFalse($k->penerjemah) ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Agama Pasien</td>
                                 <td>
                                     :
-                                    <span>&#9744; Islam</span>
-                                    <span style='margin-left:4mm'>&#9744;Kristen</span>
-                                    <span style='margin-left:4mm'>&#9744;Katolik</span>
-                                    <span style='margin-left:4mm'>&#9744;Hindu</span>
-                                    <span style='margin-left:4mm'>&#9744;Budha</span>
-                                    <span style='margin-left:4mm'>&#9744;Konghocu</span>
+                                    <span>&#9745; <?= agama($k->agama) ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Pendidikan Pasien</td>
                                 <td>
                                     :
-                                    <span>&#9744; SD</span>
-                                    <span style='margin-left:4mm'>&#9744;SMP</span>
-                                    <span style='margin-left:4mm'>&#9744;SMA</span>
-                                    <span style='margin-left:4mm'>&#9744;PT</span>
-                                    <span style='margin-left:4mm'>&#9744;Tidak Sekolah</span>
+                                    <span>&#9745; <?= pendidikan($k->pendidikan) ?></span>
+
                                 </td>
                             </tr>
                             <tr>
                                 <td>Kesedian Menerima Informasi</td>
                                 <td>
                                     :
-                                    <span>&#9744; Bersedia</span>
-                                    <span style='margin-left:4mm'>&#9744;Tidak Bersedia (alasannya) <?= str_pad(" ", 30, ".") ?></span>
+                                    <span>&#9745; <?= ($k->kesediaan == 1) ? "Bersedia" : "Tidak Bersedia, alasannya :" . $k->kesediaan_alasan  ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Kemampuan Membaca</td>
                                 <td>
                                     :
-                                    <span>&#9744; Baik</span>
-                                    <span style='margin-left:4mm'>&#9744;Kurang</span>
+                                    <span>&#9745; <?= ($k->kesediaan == 1) ? "Baik" : "Kurang" ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Keyakinan dan Nilai-nilai</td>
                                 <td>
                                     :
-                                    <span>&#9744; <?= str_pad(" ", 30, ".") ?></span>
+                                    <span>&#9745; <?= $k->keyakinan ?></span>
                                 </td>
                             </tr>
                         </table>
@@ -259,24 +250,21 @@ $date = date("Y-m-d");
                             <tr>
                                 <td>Keterbatasan Fisik dan Kognitif</td>
                                 <td>
-                                    <span>&#9744; Tidak ada</span><br />
+                                    <!-- <span>&#9744; Tidak ada</span><br />
                                     <span>&#9744; Penglihatan terganggu</span><br />
-                                    <span>&#9744; Pendengaran terganggu</span><br />
-                                </td>
-                                <td>
-                                    <span>&#9744; Gangguan Bicara</span><br />
-                                    <span>&#9744; Fisik Lemah</span><br />
-                                    <span>&#9744; Kognitif terbatas</span><br />
-                                    <span>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span>
+                                    <span>&#9744; Pendengaran terganggu</span><br /> -->
+                                    <?= arr_to_list($k->terbatas_fisik, "<span>&#9745;", "</span>") ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Hambatan Emosional dan Motivasi</td>
                                 <td>
-                                    <span>&#9744; Tidak ada</span><br />
+                                    <!-- <span>&#9744; Tidak ada</span><br />
                                     <span>&#9744; Motivasi Kurang</span><br />
                                     <span>&#9744; Emosional Terganggu</span><br />
-                                    <span>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span><br />
+                                    <span>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span><br /> -->
+                                    <?= arr_to_list($k->hambatan, "<span>&#9745;", "</span>") ?>
+                                    <?= ($k->hambatan_lain != null) ? "Lainnya..., " . $k->hambatan_lain : "" ?>
                                 </td>
                                 <td>
                                     &nbsp;
@@ -291,7 +279,7 @@ $date = date("Y-m-d");
             <td colspan='3'>
                 <div>
                     <span>ASESMEN KEMAMPUAN, KEMAUAN BELAJAR <small>(lingkari nomor sesuai kebutuhan pasien)</small></span>
-                    <span style="margin-left:10mm">&#9744; 1. Asuhan Medis</span>
+                    <!-- <span style="margin-left:10mm">&#9744; 1. Asuhan Medis</span>
                     <span style="margin-left:5mm">&#9744; 2. Asuhan Keperawatan</span>
                     <span style="margin-left:5mm">&#9744; 3. Pengobatan</span>
                     <span style="margin-left:5mm">&#9744; 4. Asuhan Gizi</span>
@@ -301,8 +289,9 @@ $date = date("Y-m-d");
                     <span style="margin-left:5mm">&#9744; 9. Hand Hygiene</span>
                     <span style="margin-left:5mm">&#9744; 10. Rohani</span>
                     <span style="margin-left:5mm">&#9744; 11. Pendaftaran dan admisi</span>
-                    <span style="margin-left:5mm">&#9744; 12. Prosedur dan perawatan</span>
-                    <span style="margin-left:5mm">&#9744; 13. Lainnya <?= str_pad(" ", 30, ".") ?>(sebutkan)</span>
+                    <span style="margin-left:5mm">&#9744; 12. Prosedur dan perawatan</span> -->
+                    <?= arr_to_list($k->kebutuhan_edukasi, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
+                    <?= ($k->kebutuhan_edukasi_lain != null) ? "Lainnya..., " . $k->kebutuhan_edukasi_lain : "" ?>
                 </div>
             </td>
         </tr>
@@ -311,22 +300,23 @@ $date = date("Y-m-d");
                 <span>PERENCANAAN EDUKASI</span>
                 <div class="edukasi">
                     <div class='metode'>
-                        <span>Metode <small>(Lingkari Nomor berikut sesuai metode direncanakan)</small></span><br />
-                        <span style="margin-left:5mm">1. Diskusi</span>
+                        <span>Metode <small>(Ceklist Nomor berikut sesuai metode direncanakan)</small></span><br />
+                        <!-- <span style="margin-left:5mm">1. Diskusi</span>
                         <span style="margin-left:5mm">2. Ceramah</span>
-                        <span style="margin-left:5mm">3. Demontrasi</span>
+                        <span style="margin-left:5mm">3. Demontrasi</span> -->
+                        <?= arr_to_list($k->metode, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                     <div class='media'>
-                        <span>Media <small>(Lingkari Nomor berikut)</small></span><br />
-                        <span style="margin-left:5mm">1. Liflet</span>
+                        <span>Media <small>(ceklist Nomor berikut)</small></span><br />
+                        <!-- <span style="margin-left:5mm">1. Liflet</span>
                         <span style="margin-left:5mm">2. Lembar Balik</span>
                         <span style="margin-left:5mm">3. Audio Visual</span>
-                        <span style="margin-left:5mm">3. Lain-lain <?= str_pad(" ", 30, ".") ?></span>
+                        <span style="margin-left:5mm">3. Lain-lain <?= str_pad(" ", 30, ".") ?></span> -->
+                        <?= arr_to_list($k->media, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                     <div class='sasaran'>
                         <span>Sasaran Edukasi <small>(Lingkari Nomor berikut)</small></span><br />
-                        <span style="margin-left:5mm">1. Pasien</span>
-                        <span style="margin-left:5mm">2. Keluarga <?= str_pad(" ", 30, ".") ?></span>
+                        <?= arr_to_list($k->sasaran_edukasi, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                 </div>
             </td>
@@ -362,220 +352,36 @@ $date = date("Y-m-d");
                             3. Re-Demonstrasi<br />
                         </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>PENDAFTARAN DAN ADMISI</b><br>
-                            &#9744; Hak-hak pasien<br>
-                            &#9744; Aturan Umum RS<br>
-                            &#9744; Perkiraan Biaya Rawatan<br>
-                            &#9744; Alasan Penundaan Pelayanan<br>
-                            &#9744; Informasi Rujukan<br>
-                            &#9744; Lain-lain <?= str_pad(" ", 30, ".") ?><br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>DPJP/PPJM</b><br>
-                            &#9744; Hasil Asesmen<br>
-                            &#9744; Diagnona dan Rencana Asuhan<br>
-                            &#9744; Proses Asuhan<br>
-                            &#9744; Hasil Asuhan dan Pengobatan<br>
-                            &#9744; Hasil Asuhan Yang Tidak Diharapkan<br>
-                            &#9744; Asuhan Lanjutan di rumah<br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            Resiko medis akibat asuhan medis yang belum lengkap (AMA dan APS)<br>
-                            Lain-lain <?= str_pad(" ", 30, ".") ?>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>APOTEKER</b><br>
-                            &#9744; Penggunaan Obat Efektif dan aman :<br>
-                            Dosis<br>
-                            Cara Makan<br>
-                            Efek Samping<br>
-                            Interaksi Obat<br>
-                            Penyimpanan<br>
-                            &#9744; lain-lain
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>DPJP/PPJA/PPA LAINNYA</b><br>
-                            Penggunaan alat medis :<br>
-                            Nama<br>
-                            &#9744; Keamanan alat<br>
-                            &#9744; Efektivitas Alat<br>
-                            &#9744; Lain-lain <?= str_pad(" ", 30, ".") ?><br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>Nyeri</b><br>
-                            &#9744; Keamanan alat<br>
-                            &#9744; Efektivitas Alat<br>
-                            &#9744; Lain-lain <?= str_pad(" ", 30, ".") ?><br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>Tekhnik-tekhnik Rehabilitasi (sebutkan)</b><br>
-                            &#9744; <br>
-                            &#9744; <br>
-                            &#9744; <br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>Diet Dan Nutrisi Yang Memadai</b><br>
-                            &#9744; <br>
-                            &#9744; <br>
-                            &#9744; <br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>Prosedur dan Perawatan</b><br>
-                            &#9744; Cuci Tangan yang Benar <br>
-                            &#9744; Penggunaan APD (masker,sarung tangan dll)<br>
-                            &#9744; Mobilisasi/ROM<br>
-                            &#9744; Batuk Efektif<br>
-                            &#9744; Perawatan Metode Kangguru<br>
-                            &#9744; Perawatan Bayi Baru Lahir<br>
-                            &#9744; Pemberian makan melalui NGT<br>
-                            &#9744; Perawatan luka<br>
-                            &#9744; Inisiasi dan menyusui dini (IMD)<br>
-                            &#9744; Asi Ekskusif<br>
-                            &#9744; <?= str_pad(" ", 30, ".") ?><br>
-                            &#9744; <?= str_pad(" ", 30, ".") ?><br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>Rohaniawan</b><br>
-                            &#9744; <br>
-                            &#9744; <br>
-                            &#9744; <br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <b>PEMULANGAN PASIEN DAN ASUHAN LANJUTAN DI RUMAH</b><br>
-                            &#9744; Jadwal kontrol ke Dokter <br>
-                            &#9744; Dokumen yang dibawa pulang<br>
-                            &#9744; Hasil Pemerikasaan Penunjang : Lab/RO<br>
-                            &#9744; Rencana Pemerikasaan Penunjang : Lab/RO<br>
-                            &#9744; Obat-obatan yang dibawa pulang<br>
-                            &#9744; Penatalaksanaan Kesehatan di Rumah<br>
-                            &#9744; Edukasi Asuhan Lanjutan<br>
-                            <span style='margin-left:3mm'>&#9744; Perawatan luka</span><br>
-                            <span style='margin-left:3mm'>&#9744; Dokter Keluarga</span><br>
-                            <span style='margin-left:3mm'>&#9744; Home Care</span><br>
-                            <span style='margin-left:3mm'>&#9744; Klinik Terdekat/Prakter Dokter Mandiri</span><br>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                    <?php
+                    $db2 = $this->load->database('dberm', TRUE);
+                    $list =  $db2->where(['id_rj_iep' => $k->id])
+                        ->order_by("topik_id asc, tgl asc")
+                        ->get("rj_iep_detail")->result();
+                    foreach ($list as $rl) {
+                    ?>
+                        <tr>
+                            <td><?= DateToIndo($rl->tgl) . "/" . $rl->jam ?></td>
+                            <td>
+                                <b><?= ($rl->topik_title) ?></b><br>
+                                <!-- &#9744; Hak-hak pasien<br>
+                                &#9744; Aturan Umum RS<br>
+                                &#9744; Perkiraan Biaya Rawatan<br>
+                                &#9744; Alasan Penundaan Pelayanan<br>
+                                &#9744; Informasi Rujukan<br>
+                                &#9744; Lain-lain <?= str_pad(" ", 30, ".") ?><br> -->
+                                <?= arr_to_list($rl->topik_list) ?>
+                            </td>
+                            <td style="text-align:center">&nbsp;<?= $rl->metode ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl->media ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl->sasaran ?></td>
+                            <td style="text-align:center">&nbsp;&#10004;</td>
+                            <td style="text-align:center">&nbsp;<?= $rl->evaluasi_awal ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl->pemberi_edukasi ?></td>
+                            <td style="text-align:center">&nbsp;&#10004;</td>
+                            <td style="text-align:center">&nbsp;<?= $rl->verifikasi ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl->evaluasi_lanjut ?></td>
+                        </tr>
+                    <?php } ?>
                 </table>
             </td>
         </tr>

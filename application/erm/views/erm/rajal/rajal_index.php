@@ -199,7 +199,7 @@
                                                 <b>
                                                     Status Rekam Medis<br>
                                                     <?php echo status_erm($detail->status_erm) ?><br /><br />
-                                                    <button class="btn btn-sm btn-primary"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis"></i></button>
+                                                    <button class="btn btn-sm btn-primary"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" onclick="return final()"></i></button>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
                                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -311,28 +311,28 @@
             }, {
                 "name": "poli_text_ka",
                 "value": $("#poli_ka").select2("data")[0].text
-            },{
+            }, {
                 "name": "flacc_skor_ka",
                 "value": parseInt($("#skor_flacc").text())
-            },{
+            }, {
                 "name": "flacc_skor_detail_ka",
                 "value": $("#skor_flacc_detail").text()
-            },{
+            }, {
                 "name": "skor_gizi_ka",
                 "value": parseInt($("#skor_gizi").text())
-            },{
+            }, {
                 "name": "gizi_detail_ka",
                 "value": $("#gizi_ka option:selected").text()
-            },{
+            }, {
                 "name": "gizi_makan_detail_ka",
                 "value": $("#gizi_makan_ka option:selected").text()
-            },{
+            }, {
                 "name": "gizi_makan_value_ka",
                 "value": source_gizi($("#gizi_makan_ka").val()).value
-            },{
+            }, {
                 "name": "gizi_value_ka",
                 "value": source_gizi($("#gizi_ka").val()).value
-            },{
+            }, {
                 "name": "perawat_ka",
                 "value": $("#perawat_id_ka").text()
             }];
@@ -366,14 +366,13 @@
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
-            var data_push = [
-                {
-                    name : "dokter_m",
-                    value : $("#dokter_id_m option:selected").text()
+            var data_push = [{
+                    name: "dokter_m",
+                    value: $("#dokter_id_m option:selected").text()
                 },
                 {
-                    name : "kontrol_tujuan_m",
-                    value : $("#kontrol_tujuan_id_m option:selected").text()
+                    name: "kontrol_tujuan_m",
+                    value: $("#kontrol_tujuan_id_m option:selected").text()
                 }
             ];
             data_form = $.merge(data_form, data_push)
@@ -406,14 +405,13 @@
         $("#form-data-kembang-pasien").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
-            var data_push = [
-                {
-                    name : "jenis_tenaga_medis_k",
-                    value : $("#jenis_tenaga_medis_id_k option:selected").text()
+            var data_push = [{
+                    name: "jenis_tenaga_medis_k",
+                    value: $("#jenis_tenaga_medis_id_k option:selected").text()
                 },
                 {
-                    name : "nama_tenaga_medis_k",
-                    value : $("#tenaga_medis_id_k option:selected").text()
+                    name: "nama_tenaga_medis_k",
+                    value: $("#tenaga_medis_id_k option:selected").text()
                 }
             ];
             data_form = $.merge(data_form, data_push)
@@ -502,7 +500,7 @@
     function hapusSetujuUmum(idx, id) {
         var x = confirm("Yakin Ingin Hapus Data");
         if (x) {
-        $.ajax({
+            $.ajax({
                 type: "GET",
                 url: base_url + `rajal/delete_setuju_umum/${idx}/${id}`,
                 data: "data",
@@ -633,6 +631,13 @@
                     console.log(e.responseText);
                 }
             });
+        }
+    }
+
+    function final() {
+        var x = confirm("Finalkan Semua Form Rekam Medis?");
+        if (x) {
+            alert("baiklah")
         }
     }
 </script>

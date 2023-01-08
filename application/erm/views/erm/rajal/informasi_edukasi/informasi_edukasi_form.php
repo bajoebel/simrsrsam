@@ -266,28 +266,34 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-hover" id="table-detail-edukasi-pasien">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal/Jam</th>
-                        <th>Topik Edukasi</th>
-                        <th>Metode</th>
-                        <th>Media</th>
-                        <th>Sasaran</th>
-                        <th>Evaluasi Awal</th>
-                        <th>Pemberi Edukasi</th>
-                        <th>Verifikasi</th>
-                        <th>Evaluasi Lanjutan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="table-detail-edukasi-pasien">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal/Jam</th>
+                                    <th>Topik Edukasi</th>
+                                    <th>Metode</th>
+                                    <th>Media</th>
+                                    <th>Sasaran</th>
+                                    <th>Evaluasi Awal</th>
+                                    <th>Pemberi Edukasi</th>
+                                    <th>Verifikasi</th>
+                                    <th>Evaluasi Lanjutan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -556,6 +562,7 @@
         let tgl = $("[name='tgl_e']").val();
         let jam = $("[name='jam_e']").val();
         let topik_id = $("[name='topik_e']").val();
+        let topik_title = $("[name='topik_e'] option:selected").text();
         let topik_list = $("#topik_list_e").val();
         let metode = $("[name='metode_topik_e']").val();
         let media = $("[name='media_topik_e']").val();
@@ -575,6 +582,7 @@
                 tgl: tgl,
                 jam: jam,
                 topik_id: topik_id,
+                topik_title: topik_title,
                 topik_list: topik_list,
                 metode: metode,
                 media: media,
