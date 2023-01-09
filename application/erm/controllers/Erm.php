@@ -141,7 +141,7 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
             ];
-            $ta["6"] = "active";
+            $ta["1"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,

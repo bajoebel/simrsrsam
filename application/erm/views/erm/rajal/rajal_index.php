@@ -294,7 +294,7 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(6, <?= $detail->idx ?>);
+        getRiwayat(1, <?= $detail->idx ?>);
 
     });
 </script>
@@ -716,7 +716,7 @@
                         <td>${v.tgl_masuk}</td>
                         <td>${v.dokterJaga}</td>
                         <td>${status_erm(v.status_erm)}</td>
-                        <td><button class="btn btn-xs btn-default">Lihat</button></td>
+                        <td><button class="btn btn-xs btn-default" onclick="pilih_pasien('${v.idx}')">Lihat</button></td>
                     </tr>`
                 })
 
@@ -729,6 +729,13 @@
                 }
             }
         });
+    }
+
+    function pilih_pasien(a) {
+        //alert(a + b);
+        var url = base_url + 'erm/detail?idx=' + a;
+        // window.location.href = url;
+        window.open(url,'_blank',"left=800,top=100,width=800,height=400");
     }
  
 </script>
