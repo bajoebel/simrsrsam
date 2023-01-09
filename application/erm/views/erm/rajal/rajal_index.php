@@ -197,14 +197,15 @@
                                         <tr>
                                             <td colspan="5">
                                                 <b>
-                                                    Status Rekam Medis<br>
+                                                    Status Rekam Medis<br/>
                                                     <span><?php echo status_erm($detail->status_erm) ?></span> <br /><br />
+                                                    Aksi <br/>
                                                     <?php if ($detail->status_erm==1) {?>
-                                                        <button class="btn btn-sm btn-danger" onclick="final('<?=$detail->idx?>',0)"><i class="fa fa-refresh" data-toggle="tooltip" title="Batalkan rekam medis" ></i></button>
+                                                        <button class="btn btn-sm btn-danger" onclick="final('<?=$detail->idx?>',0,'Batalkan Final Rekam Medis')"><i class="fa fa-refresh" data-toggle="tooltip" title="Batalkan rekam medis" ></i></button>
                                                     <?php } else {?>
-                                                        <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1)"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
+                                                        <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1,'Final Rekam Medis')"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
                                                     <?php } ?>
-                                                    <div class="btn-group">
+                                                    <!-- <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
                                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                             <span class="caret"></span>
@@ -218,12 +219,13 @@
                                                             <li><a href="#">CPPT</a></li>
                                                             <li><a href="#">Edukasi Pasien</a></li>
                                                         </ul>
-                                                    </div>
+                                                    </div> -->
                                             </td>
                                             <td>
                                                 <b>Hari/Tanggal Masuk</b><br />
-                                                <?php echo DateToIndoDayTime($detail->tgl_masuk) ?>
-
+                                                <?php echo DateToIndoDayTime($detail->tgl_masuk) ?> <br/><br/>
+                                                <b>Riwayat</b><br/>
+                                                <button class="btn btn-sm btn-success" onclick="riwayatRajal('<?= $detail->nomr ?>')"><i class="fa fa-history" data-toggle="tooltip" title="Tampilkan Riwayat" ></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -247,7 +249,7 @@
                 <div class="box box-success">
                     <div class="box-header ui-sortable-handle" style="cursor: move;">
                         <i class="ion ion-clipboard"></i>
-                        <h5 class="box-title">Riwayat Sebelumnya</h5>
+                        <h5 class="box-title">Detail</h5>
                     </div>
                     <div class="box-body" id="riwayat">
 
@@ -268,13 +270,31 @@
     </section>
 
 <?php } ?>
-<script>
 
-</script>
+<div class="modal fade" id="modal-riwayat-rajal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Riwayat Rawat Jalan</h4>
+            </div>
+            <div class="modal-body" id="modal-riwayat-rajal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(6, <?= $detail->idx ?>);
+        getRiwayat(1, <?= $detail->idx ?>);
 
     });
 </script>
@@ -638,8 +658,8 @@
         }
     }
 
-    function final(id,status) {
-        var x = confirm("Set Form Rekam Medis?");
+    function final(id,status,msg="") {
+        var x = confirm($msg);
         // alert(id)
         // return false;
         if (x) {
@@ -661,5 +681,63 @@
             });
         }
     }
+
+    function riwayatRajal(nomr) {
+        $.ajax({
+            type: "POST",
+            url: base_url+"rajal/get_riwayat_rajal",
+            data: {
+                nomr : nomr
+            },
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var first = response.list[0];
+                var table = `<dl>
+                    <dt>Nama</dt>
+                    <dd>${first.nama}</dd>
+                    <dt>NOMR</dt>
+                    <dd>${first.nomr}</dd>
+                    <dt>Tgl lahir</dt>
+                    <dd>${convertDateFromDBIndoFull(first.tgl_lahir)}</dd>
+                </dl>`;
+                table += `<div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tgl Masuk</th>
+                                        <th>Dokter Jaga</th>
+                                        <th>Status RME</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                $.each(response.list,function (k,v) {
+                    table+=`<tr>
+                        <td>${v.tgl_masuk}</td>
+                        <td>${v.namaDokterJaga}</td>
+                        <td>${status_erm(v.status_erm)}</td>
+                        <td><button class="btn btn-xs btn-default" onclick="pilih_pasien('${v.idx}')">Lihat</button></td>
+                    </tr>`
+                })
+
+                table+= `</tbody>
+                            </table>
+                        </div>`;
+                if (response.status==true) {
+                    $("#modal-riwayat-rajal-body").html(table);
+                    $("#modal-riwayat-rajal").modal("show");
+                }
+            }
+        });
+    }
+
+    function pilih_pasien(a) {
+        //alert(a + b);
+        var url = base_url + 'erm/detail?idx=' + a;
+        // window.location.href = url;
+        window.open(url,'_blank',"left=800,top=100,width=800,height=400");
+    }
+ 
 </script>
 <!--  -->

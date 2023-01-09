@@ -2,6 +2,11 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Rajal_model extends CI_Model
 {
+
+    // form masuk rajal
+    function masukRajal($nomr, $idx) {
+        return $this->db->where(['nomr'=> $nomr,"idx"=>$idx])->order_by("idx desc")->get('tbl02_pendaftaran')->result();
+    }
     // form persetujuan umum
     function insertSetujuUmum($data)
     {
@@ -16,6 +21,7 @@ class Rajal_model extends CI_Model
             ->order_by("id desc")
             ->get("rj_setuju_umum");
     }
+    
 
     function getSetujuUmumById($idx, $id)
     {

@@ -15,6 +15,16 @@ class Erm_model extends CI_Model
             return $this->db->get('tbl02_pendaftaran')->result();
         }
     }
+
+    function getPendaftaranListByTipe($nomr = "",$tipe="")
+    {
+        if ($nomr != "") {
+            return $this->db->where(['nomr'=> $nomr,"jns_layanan"=>$tipe])->order_by("idx desc")->get('tbl02_pendaftaran')->result();
+        } else {
+            return $this->db->get('tbl02_pendaftaran')->result();
+        }
+    }
+
     function getPasien($nomr)
     {
         return $this->db->where('nomr', $nomr)->get('tbl01_pasien')->row();
