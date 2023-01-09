@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="">Bahasa</label>
-                            <select class="form-control select2" name="bahasa_e[]" id="bahasa_e" multiple="multiple" width="100%">
+                            <select class="form-control select2" name="bahasa_e[]" id="bahasa_e" multiple="multiple" style="width:100%">
                                 <option value="Indonesia">Indonesia</option>
                                 <option value="Daerah">Daerah</option>
                                 <option value="Isyarat">Isyarat</option>
@@ -146,7 +146,7 @@
                     <label for="">Keterbatasan Fisik dan Kognitif</label>
                     <div class="row">
                         <div class="col-md-12">
-                            <select name="terbatas_fisik_e[]" id="terbatas_fisik_e" class="form-control select2" multiple="multiple">
+                            <select name="terbatas_fisik_e[]" id="terbatas_fisik_e" class="form-control select2" multiple="multiple" style="width:100%">
                                 <option value="Tidak ada">Tidak ada</option>
                                 <option value="Penglihatan terganggu">Penglihatan terganggu</option>
                                 <option value="Pendengaran terganggu">Pendengaran terganggu</option>
@@ -165,7 +165,7 @@
                     <label for="">Hambatan Emosional dan Motivasi</label>
                     <div class="row">
                         <div class="col-md-12">
-                            <select name="hambatan_e[]" id="hambatan_e" class="form-control select2" multiple="multiple" width="100%">
+                            <select name="hambatan_e[]" id="hambatan_e" class="form-control select2" multiple="multiple" style="width:100%">
                                 <option value="Tidak ada">Tidak ada</option>
                                 <option value="Penglihatan Terganggu">Penglihatan Terganggu</option>
                                 <option value="Emosional Terganggu">Emosional Terganggu</option>
@@ -183,7 +183,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-8">
-                            <select name="kebutuhan_edukasi_e[]" id="kebutuhan_edukasi_e" class="form-control select2" multiple="multiple">
+                            <select name="kebutuhan_edukasi_e[]" id="kebutuhan_edukasi_e" class="form-control select2" multiple="multiple" style="width:100%">
                                 <option value="Asuhan Medis">Asuhan Medis</option>
                                 <option value="Asuhan Keperawatan">Asuhan Keperawatan</option>
                                 <option value="Pengobatan">Pengobatan</option>
@@ -208,7 +208,7 @@
             <div class="form-group row">
                 <div class="col-md-3">
                     <label for="">Metode</label>
-                    <select name="metode_e[]" id="metode_e" class="form-control select2" multiple="multiple">
+                    <select name="metode_e[]" id="metode_e" class="form-control select2" multiple="multiple" style="width:100%">
                         <option value="1-Diskusi">Diskusi</option>
                         <option value="2-Ceramah">Ceramah</option>
                         <option value="3-Demonstrasi">Demonstrasi</option>
@@ -216,7 +216,7 @@
                 </div>
                 <div class="col-md-3">
                     <label for="">Media</label>
-                    <select name="media_e[]" id="media_e" class="form-control select2" multiple="multiple">
+                    <select name="media_e[]" id="media_e" class="form-control select2" multiple="multiple" style="width:100%">
                         <option value="1-Liflet">Liflet</option>
                         <option value="2-Lembar Balik">Lembar Balik</option>
                         <option value="3-Audio Visual">Audio Visual</option>
@@ -449,13 +449,13 @@
         $('#terbatas_fisik_e').on('select2:select', function(e) {
             let value = e.params.data;
             //console.log(value.id)
-            if (value.id == 7) {
+            if (value.id == "Lain-lain....") {
                 $("#terbatas_fisik_lain_e").removeAttr("readonly").focus();
             }
         });
         $('#terbatas_fisik_e').on('select2:unselect', function(e) {
             let value = e.params.data;
-            if (value.id == 7) {
+            if (value.id == "Lain-lain....") {
                 $("#terbatas_fisik_lain_e").attr("readonly", true).val("");
             }
         });
@@ -479,13 +479,13 @@
             let value = e.params.data;
             // console.log(value.id)
             //console.log(value.id)
-            if (value.id == "12") {
+            if (value.id == "Lain-lain") {
                 $("#kebutuhan_edukasi_lain_e").removeAttr("readonly").focus();
             }
         });
         $('#kebutuhan_edukasi_e').on('select2:unselect', function(e) {
             let value = e.params.data;
-            if (value.id == "12") {
+            if (value.id == "Lain-lain") {
                 $("#kebutuhan_edukasi_lain_e").attr("readonly", true).val("");
             }
         });

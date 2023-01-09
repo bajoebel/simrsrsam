@@ -4,7 +4,7 @@
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Form Input Surat Masuk Rawat Jalan</h3>
+                <h3 class="box-title">Preview Surat Masuk Rawat Jalan</h3>
                 <div class="box-tools pull-right">
                     <a href="<?= base_url() . "erm.php/rajal/masuk_rajal/" . $detail->idx ?>" class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" target="_blank">
                         <i class='fa fa-print'></i>
@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="box-body">
-
+                <?php $data = ["d"=> $detail,"p"=>$pasien]; $this->load->view("erm/rajal/masuk_rj/masuk_rj_form",$data) ?>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
 
-                <h3 class="box-title">Form Input Persetujuan Umum</h3>
+                <h3 class="box-title">Preview Persetujuan Umum</h3>
 
                 <div class="box-tools pull-right">
                     <a href="<?= base_url() . "erm.php/rajal/setuju_umum/" . $detail->idx ?>" class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" target="_blank">
