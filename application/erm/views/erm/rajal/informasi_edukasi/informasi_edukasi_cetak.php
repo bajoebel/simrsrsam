@@ -253,7 +253,7 @@ $date = date("Y-m-d");
                                     <!-- <span>&#9744; Tidak ada</span><br />
                                     <span>&#9744; Penglihatan terganggu</span><br />
                                     <span>&#9744; Pendengaran terganggu</span><br /> -->
-                                    <?= arr_to_list($k->terbatas_fisik, "<span>&#9745;", "</span>") ?>
+                                    <?= arr_to_list($k->terbatas_fisik, "<span> &#9745;", " </span>") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -263,7 +263,7 @@ $date = date("Y-m-d");
                                     <span>&#9744; Motivasi Kurang</span><br />
                                     <span>&#9744; Emosional Terganggu</span><br />
                                     <span>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span><br /> -->
-                                    <?= arr_to_list($k->hambatan, "<span>&#9745;", "</span>") ?>
+                                    <?= arr_to_list($k->hambatan, "<span> &#9745;", " </span>") ?>
                                     <?= ($k->hambatan_lain != null) ? "Lainnya..., " . $k->hambatan_lain : "" ?>
                                 </td>
                                 <td>

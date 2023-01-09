@@ -115,9 +115,9 @@ if (!function_exists('status_erm')) {
     {
         $result = "";
         if ($param == 0) {
-            $result = "<span class='badge bg-green'>Proses</span>";
+            $result = "<span class='badge bg-yellow'>Proses</span>";
         } else if ($param == 1) {
-            $result = "<span class='badge bg-red'>Final</span>";
+            $result = "<span class='badge bg-green'>Final</span>";
         }
         return $result;
     }

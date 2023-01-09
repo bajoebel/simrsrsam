@@ -213,4 +213,11 @@ class Rajal_model extends CI_Model
             ->delete("rj_iep_detail");
         return $this->db->affected_rows();
     }
+
+    function setFinalRekamMedis($id,$status) {
+        $this->db
+        ->where(["idx"=> $id])
+        ->update("tbl02_pendaftaran",["status_erm"=>$status]);
+        return $this->db->affected_rows();
+    }
 }

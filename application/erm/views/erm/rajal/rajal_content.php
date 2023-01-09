@@ -49,7 +49,7 @@
                     <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
                 </div>
                 <div class="box-footer">
-                    <button type="form" class="btn btn-primary">Simpan</button>
+                    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
                 </div>
             </div>
         </form>
@@ -71,7 +71,8 @@
                     <?php $this->load->view("erm/rajal/kaji_awal_medis/kaji_awal_medis_form") ?>
                 </div>
                 <div class="box-footer">
-                    <button type="form" class="btn btn-primary">Simpan</button>
+                    <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
+                    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
                 </div>
             </div>
         </form>
@@ -92,7 +93,8 @@
                     <?php $this->load->view("erm/rajal/kembang_pasien/kembang_pasien_form") ?>
                 </div>
                 <div class="box-footer">
-                    <button type="form" class="btn btn-primary">Simpan</button>
+                    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
+                    <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
                 </div>
             </div>
         </form>

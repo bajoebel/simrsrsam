@@ -241,7 +241,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="form" class="btn btn-primary pull-right">Simpan</button>
+            <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary pull-right'>Simpan</button>":"" ?>
+
+                <!-- <button type="form" class="btn btn-primary pull-right">Simpan</button> -->
             </div>
             <!-- <button class="btn btn-primary nextBtn pull-right" type="button">Next</button> -->
         </div>
@@ -255,7 +257,8 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-success" data-toggle="modal" href='#modal-edukasi-pasien'><i class="fa fa-plus-circle" aria-hidden="true"></i>Tambah</button>
+                    <?= ($detail->status_erm!=1)?"<button type='button' class='btn btn-success' data-toggle='modal' href='#modal-edukasi-pasien'><i class='fa fa-plus-circle' aria-hidden='true'></i>Tambah</button>":"" ?>
+                    <!-- <button type="button" class="btn btn-success" data-toggle="modal" href='#modal-edukasi-pasien'><i class="fa fa-plus-circle" aria-hidden="true"></i>Tambah</button> -->
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
@@ -408,7 +411,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="simpan_detail()">Save changes</button>
+                <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary' onclick='simpan_detail()'>Save Change</button>":"" ?>
+
+                <!-- <button type="button" class="btn btn-primary" onclick="simpan_detail()">Save changes</button> -->
             </div>
         </div>
     </div>

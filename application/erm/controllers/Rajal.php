@@ -704,4 +704,15 @@ class Rajal extends CI_Controller
             echo json_encode(["status" => true]);
         }
     }
+
+    public function set_final_rekam_medis() {
+        $id = $this->input->post("id");
+        $status = $this->input->post("status");
+        $update = $this->rajal->setFinalRekamMedis($id,$status);
+        if ($update) {
+            echo json_encode(["status"=>TRUE]);
+        } else {
+            echo json_encode(["status"=>FALSE]);
+        }
+    }
 }

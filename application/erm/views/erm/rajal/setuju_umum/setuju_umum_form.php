@@ -86,7 +86,8 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-        <button type="form" class="btn btn-primary">Simpan</button>
+    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
+        <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
     </div>
 </form>
 <script>

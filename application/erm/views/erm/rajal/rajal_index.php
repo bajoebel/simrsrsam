@@ -198,8 +198,12 @@
                                             <td colspan="5">
                                                 <b>
                                                     Status Rekam Medis<br>
-                                                    <?php echo status_erm($detail->status_erm) ?><br /><br />
-                                                    <button class="btn btn-sm btn-primary"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" onclick="return final()"></i></button>
+                                                    <span><?php echo status_erm($detail->status_erm) ?></span> <br /><br />
+                                                    <?php if ($detail->status_erm==1) {?>
+                                                        <button class="btn btn-sm btn-danger" onclick="final('<?=$detail->idx?>',0)"><i class="fa fa-refresh" data-toggle="tooltip" title="Batalkan rekam medis" ></i></button>
+                                                    <?php } else {?>
+                                                        <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1)"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
+                                                    <?php } ?>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
                                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -634,10 +638,27 @@
         }
     }
 
-    function final() {
-        var x = confirm("Finalkan Semua Form Rekam Medis?");
+    function final(id,status) {
+        var x = confirm("Set Form Rekam Medis?");
+        // alert(id)
+        // return false;
         if (x) {
-            alert("baiklah")
+            $.ajax({
+                type: "POST",
+                url: base_url+"rajal/set_final_rekam_medis",
+                data: {
+                    id : id,
+                    status: status
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status==true) {
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+                }
+            });
         }
     }
 </script>
