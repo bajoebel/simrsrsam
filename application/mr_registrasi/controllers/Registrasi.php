@@ -572,7 +572,7 @@ class registrasi extends CI_Controller
                 
                 $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,`no_ktp`,
                 `nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,`id_ruang`,`nama_ruang`,
-                `id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,
+                `id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,alamat,rt,rw,nama_provinsi,nama_kab_kota,nama_kecamatan,nama_kelurahan,
                 jns_layanan,tgl_jaminan,tgl_masuk,dokterJaga');
                 $this->db->from('tbl02_pendaftaran');
                 // $this->db->join('tbl02_antrian', 'tbl02_pendaftaran.id_daftar=tbl02_antrian.id_daftar', 'LEFT');
@@ -1995,7 +1995,7 @@ class registrasi extends CI_Controller
             if (isset($_GET['kode'])) {
                 $kode = $_GET['kode'];
 
-                $SQL_SMRI = "SELECT a.nomr,b.id_daftar,b.reg_unit,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,
+                $SQL_SMRI = "SELECT a.nomr,b.id_daftar,b.reg_unit,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
                 agama,a.pekerjaan,a.no_ktp,no_telpon,a.alamat,nama_ruang,nama_asal_ruang,nama_negara,jns_layanan,
                 b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,cara_bayar,tgl_masuk,kewarganegaraan,user_daftar,
                 b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
@@ -2594,7 +2594,7 @@ class registrasi extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             if (isset($_GET['kode'])) {
                 $kode = $_GET['kode'];
-                $SQL_SMRJ = "SELECT a.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,
+                $SQL_SMRJ = "SELECT a.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
                 a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
                 b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
                 pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,

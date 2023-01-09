@@ -5052,3 +5052,8 @@ function konfirmasiPesan(title,pesan){
 	});
 	return konf;
 }
+function setTTD(){
+	var customttd=$('#customttd').prop('checked');
+	if(customttd) $('.customttd').show();
+	else $('.customttd').hide();
+}

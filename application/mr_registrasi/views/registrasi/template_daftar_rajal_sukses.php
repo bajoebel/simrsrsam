@@ -215,7 +215,7 @@
                         <?php
                         }
                         ?>
-                        <!-- <li><a data-toggle="tab" href="#menu2">Buat Surat Kontrol</a></li> -->
+                        <li><a data-toggle="tab" href="#menu3">General Concent</a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -765,6 +765,126 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                        <div id="menu3" class="tab-pane fade in" >
+                            <br>
+                            <!-- <div class="row"> -->
+                                <div class="col-md-12">
+                                    
+                                    <form class="form-horizontal" id="generalconcent" style="font-size:12px">
+                                        <fieldset>
+                                            <legend>Profile Pasien</legend>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Nomr:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="gc_nomr" id="gc_nomr" class="form-control" value="<?= $nomr ?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Nama Lengkap:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="gc_nama_lengkap" id="gc_nama_lengkap" class="form-control" value="<?= $nama_pasien ?>" readonly>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Tanggal Lahir:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="hidden" name="gc_tgl_lahir" id="gc_tgl_lahir" value="<?= $tgl_lahir ?>" >
+                                                    <input type="text" name="gc_priview_tgl_lahir" id="gc_priview_tgl_lahir" class="form-control" value="<?= longDate($tgl_lahir) ?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
+                                                <div class="col-sm-9">
+                                                <input type="hidden" name="gc_jns_kelamin" id="gc_jns_kelamin" value="<?= $tgl_lahir ?>" >
+                                                    <input type="text" name="gc_priview_jns_kelamin" id="gc_priview_jns_kelamin" class="form-control" value="<?= $jns_kelamin==1 ? "Laki-Laki" : ($jns_kelamin==2 ? "Perempuan" : ($jns_kelamin==3 ? "Tidak Datap Ditentukan" : "Tidak Mengisi")) ?>"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">ALamat:</label>
+                                                <div class="col-sm-9">
+                                                    <textarea name="gc_alamatpasien" id="gc_alamatpasien" cols="5" rows="2" class="form-control" readonly><?= $alamat ." RT. " .$rt ." RW. ".$rw ." Kel. " .$nama_kelurahan ." Kec. " .$nama_kecamatan ." Kab / Kota ".$nama_kab_kota ." Prov " .$nama_provinsi ?></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">No Telp / HP:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="gc_no_telpon" id="gc_no_telpon" class="form-control" value="<?= getField('no_telpon',array('nomr'=>$nomr),'tbl01_pasien') ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="customttd" id="customttd" onclick="setTTD()"> General Consent Ditandatangani Keluarga / Orang Tua/ Wali /Lainnya
+                                                </div>
+                                            </div>
+                                            <div class="customttd" style="display:none;">
+                                                <legend>Profile Penanda Tangan General Consent</legend>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Nama:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="gc_namattd" id="gc_namattd" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Tgl Lahir:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="gc_tgl_lahirttd" id="gc_tgl_lahirttd" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="gc_jnskelaminttd" id="gc_jnskelaminttd" class="form-control">
+                                                            <option value="1">Laki-Laki</option>
+                                                            <option value="2">Perempuan</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Alamat:</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea name="gc_alamatttd" id="gc_alamatttd" cols="30" rows="2" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Hubungan Keluarga:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="sebagai" id="sebagai" class="form-control" style="width:100%;">
+                                                            <option value="wali">Wali</option>
+                                                            <option value="orang tua">Orang Tua</option>
+                                                            <option value="keluarga">Keluarga</option>
+                                                            <option value="lainnya">Lainnya</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <legend>Keinginan Privasi</legend>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="gc_izinaksesbesuk" id="gc_izinaksesbesuk" value="1"> Pasien Mengizinkan Rumah Sakit Memberi Akses bagi : keluarga serta orang yang  akan menengok / menemuinya
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Privasi Khusus</label>
+                                                <div class="col-sm-9 fieldAdd">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-success" type="button" onclick="addmore(1)"><i class="fa fa-plus"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <legend>Pelepasan Informasi</legend>
+                                        </fieldset>
+                                        
+                                    </form>
+                                </div>
+                            <!-- </div> -->
+                            
                         </div>
                     </div>
                 </div>
@@ -1891,6 +2011,12 @@
         }
     }
     $(document).ready(function() {
+        $(".fieldAdd").on('click', '.removeMore', function(e) {
+            $(this).parent().parent('div').remove();
+        })
+        $(".fieldAdd2").on('click', '.removeMore2', function(e) {
+            $(this).parent().parent('div').remove();
+        })
         $('select').not('#asesmenTujuanKunjungan')
         .not('#dpjpLayan')
         .not('#kodeDPJP')
@@ -2169,7 +2295,7 @@
                 .append("<td style='width:100px'>" + item['kode'] + "</td><td style='width:300px'>" + item['nama'] + "</td>")
                 .appendTo(table);
         };
-
+        
     });
 
     function editKunjungan(id){
@@ -2292,7 +2418,37 @@
         win.focus();
     }
 
-    
+    function addmore(pil) {
+        var maxField = 10;
+        // alert(pil)
+        if (pil == 1) {
+            var x = 1;
+            var fieldHtml = `<div class="input-group" style="margin-top:2px">
+                            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger removeMore" type="button"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </div>`;
+            if (x < maxField) {
+                x++;
+                $(".fieldAdd").append(fieldHtml);
+            }
+        }
+
+        if (pil == 2) {
+            var y = 1;
+            var fieldHtml2 = `<div class="input-group" style="margin-top:2px">
+            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+            <span class="input-group-btn">
+            <button class="btn btn-danger removeMore2" type="button"><i class="fa fa-trash"></i></button>
+            </span>
+            </div>`;
+            if (y < maxField) {
+                $(".fieldAdd2").append(fieldHtml2);
+                y++;
+            }
+        }
+    }
     var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
     // var url_call_back = "<?php echo base_url() . "mr_registrasi.php/"; ?>";
 </script>

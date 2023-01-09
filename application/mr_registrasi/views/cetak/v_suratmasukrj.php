@@ -228,7 +228,13 @@ table tr td{
                         <?php echo $data['nama_provinsi'] ?> 
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <td>No. BPJS</td>
+                        <td>:</td>
+                        <td>
+                        <?php echo $data['no_bpjs'] ?>
+                        </td>
+                    </tr>
                     <tr>
                         <td colspan="4" height="50px" valign="bottom"><strong>Penanggung Jawab Pasien</strong></td>
                     </tr>
@@ -301,7 +307,7 @@ table tr td{
             <div class="sign_in">
                 <table>
                     <tr>
-                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo(date('Y-m-d')) ?></td>
+                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo($data['tgl_reg']) ?></td>
                     </tr>
                     <tr>
                         <td>Petugas Rekam Medis</td>

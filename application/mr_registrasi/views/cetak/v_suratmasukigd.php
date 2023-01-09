@@ -116,7 +116,7 @@ table tr td{
                     </div>
                 </div>
                 <div class="kode">
-                    FORM RM 02.00 Rev. 00
+                    FORM RM 02.00 Rev. 01
                 </div>
             </div>
             <div class="content">
@@ -127,6 +127,13 @@ table tr td{
                         <td id="spasi">:</td>
                         <td>
                         <?php echo $data['nomr'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="info">No. KTP</td>
+                        <td id="spasi">:</td>
+                        <td>
+                        <?php echo $data['no_ktp'] ?>
                         </td>
                     </tr>
                     <tr>
@@ -152,7 +159,7 @@ table tr td{
                     </tr>
                     
                     <tr>
-                        <td>Kebangsaan</td>
+                        <td>Kewarganegaraan</td>
                         <td>:</td>
                         <td>
                         <?php echo ucwords(strtoupper($neg)); ?>            
@@ -166,33 +173,52 @@ table tr td{
                         </td>
                     </tr>
                     <tr>
+                        <td>Etnis</td>
+                        <td>:</td>
+                        <td>
+                        <?php echo $data['suku'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bahasa</td>
+                        <td>:</td>
+                        <td>
+                        <?php echo $data['bahasa'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Keterbatasan Bahasa</td>
+                        <td>:</td>
+                        <td>
+                        <?php echo $data['hambatan_bahasa'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pendidikan</td>
+                        <td>:</td>
+                        <td>
+                        <?php echo $data['pendidikan'] ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Pekerjaan</td>
                         <td>:</td>
                         <td>
                         <?php echo $data['pekerjaan'] ?>
                         </td>
                     </tr>
+                    
+                    
                     <tr>
-                        <td>Alamat Kantor</td>
-                        <td>:</td>
-                        <td> - </td>
-                    </tr>
-                    <tr>
-                        <td>No. KTP</td>
+                        <td>No. Telp / HP</td>
                         <td>:</td>
                         <td>
-                        <?php echo $data['no_ktp'] ?>
+                        <?php echo $data['no_telpon'] ." / " .$data['no_hp'] ?>
                         </td>
                     </tr>
+                    
                     <tr>
-                        <td>No. Telp/HP</td>
-                        <td>:</td>
-                        <td>
-                        <?php echo $data['no_telpon'] ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top">Alamat Rumah</td>
+                        <td valign="top">Alamat</td>
                         <td valign="top">:</td>
                         <td>
                         <?php echo ucwords(strtoupper($data['alamat'])) ?>, 
@@ -203,17 +229,10 @@ table tr td{
                         </td>
                     </tr>
                     <tr>
-                        <td>Tanggal Kunjungan</td>
+                        <td>No. BPJS</td>
                         <td>:</td>
                         <td>
-                        <?php echo DateFormatIndo($data['tgl_reg']); ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jam</td>
-                        <td>:</td>
-                        <td>
-                        <?php echo $data['JAM']; ?>
+                        <?php echo $data['no_bpjs'] ?>
                         </td>
                     </tr>
                     <tr>
@@ -268,7 +287,7 @@ table tr td{
                         <?php echo $data['rujukan'] ?>
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>Alamat Pengirim</td>
                         <td>:</td>
                         <td>
@@ -281,14 +300,14 @@ table tr td{
                         <td>
                         <?php echo $data['namaDokterJaga'] ?>
                         </td>
-                    </tr>
+                    </tr> -->
             
                 </table>
             </div>
             <div class="sign_in">
                 <table>
                     <tr>
-                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo($data['tgl_masuk']) ?></td>
+                        <td><?php echo ALMT_SURAT; ?>, <?php echo DateToIndo($data['tgl_reg']) ?></td>
                     </tr>
                     <tr>
                         <td>Petugas Rekam Medis</td>
