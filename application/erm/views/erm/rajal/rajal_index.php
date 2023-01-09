@@ -691,6 +691,7 @@
             },
             dataType: "json",
             success: function (response) {
+                console.log(response);
                 var first = response.list[0];
                 var table = `<dl>
                     <dt>Nama</dt>
@@ -714,7 +715,7 @@
                 $.each(response.list,function (k,v) {
                     table+=`<tr>
                         <td>${v.tgl_masuk}</td>
-                        <td>${v.dokterJaga}</td>
+                        <td>${v.namaDokterJaga}</td>
                         <td>${status_erm(v.status_erm)}</td>
                         <td><button class="btn btn-xs btn-default" onclick="pilih_pasien('${v.idx}')">Lihat</button></td>
                     </tr>`
