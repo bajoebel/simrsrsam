@@ -173,7 +173,7 @@
             <ul class="nav nav-tabs nav-pills">
                 <li class="active"><a data-toggle="tab" href="#pendaftaran">Pendaftaran</a></li>
                 <li><a data-toggle="tab" href="#editpasien">Edit Pasien</a></li>
-                <li><a data-toggle="tab" href="#riwayatkunjunganpasien">Riwayat</a></li>
+                <li><a data-toggle="tab" href="#riwayatkunjunganpasien" onclick="getHistoryPasien()">Riwayat</a></li>
             </ul>
 
             <div class="tab-content">
@@ -1561,8 +1561,10 @@
                                                     <th style="width: 100px">No Registrasi</th>
                                                     <th style="width: 150px">No Unit Registrasi</th>
                                                     <th style="width: 120px">Tgl Registrasi</th>
+                                                    <th style="width: 120px">DPJP</th>
                                                     <th>Tujuan</th>
                                                     <th>Cara Bayar</th>
+                                                    <th>NO BPJS</th>
                                                     <th style="width: 150px">Jenis Layanan</th>
                                                     <th style="width: 150px">Users</th>
                                                 </tr>
@@ -2148,7 +2150,7 @@
             }
         });
 
-        getHistoryPasien();
+        // getHistoryPasien();
         $('select').not('#optJnsRujukan')
         .not('#optAsalRujukan')
         .not('#lakaLantas')

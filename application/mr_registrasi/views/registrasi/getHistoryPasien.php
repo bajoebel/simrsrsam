@@ -12,8 +12,10 @@
         <td><?php echo $xHis['id_daftar'] ?></td>
         <td><a href='<?= $link ?>' class='btn btn-default btn-xs'><?php echo $xHis['reg_unit'] ?></a></td>
         <td><?php echo $xHis['tgl_masuk'] ?></td>
+        <td><?php echo $xHis['namaDokterJaga'] ?></td>
         <td><?php echo $xHis['nama_ruang'] ?></td>
         <td><?= $xHis['cara_bayar'] ."(".$xHis['jenis_peserta'].")"?></td>
+        <td><?php echo $xHis['no_bpjs'] ?></td>
         <td><?php echo $xHis['jns_layanan'] ?></td>
         <td><?php echo $xHis['user_daftar'] ?></td>
     </tr>

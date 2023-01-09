@@ -310,8 +310,10 @@
                                                     <th style="width: 150px">No Registrasi</th>
                                                     <th style="width: 150px">No Unit Registrasi</th>
                                                     <th style="width: 120px">Tgl Registrasi</th>
+                                                    <th style="width: 120px">DPJP</th>
                                                     <th>Tujuan</th>
                                                     <th>Cara Bayar</th>
+                                                    <th>No BPJS</th>
                                                     <th style="width: 150px">Jns Pelayanan</th>
                                                     <th style="width: 150px">Users</th>
                                                 </tr>

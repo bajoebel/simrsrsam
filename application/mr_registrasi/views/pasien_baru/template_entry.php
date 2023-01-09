@@ -861,7 +861,7 @@
                         $('#iconSimpan').addClass('fa fa-spinner fa-spin')
                     },
                     success: function(data) {
-                        alert(data.message);
+                        tampilkanPesan('Peringatan',data.message,'info');
                         if (data.code == 200) {
                             var jns_layanan = "<?= $jns_layanan ?>";
                             if (jns_layanan == 'rj') var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/daftar_rawat_jalan/' ?>' + data.nomr;

@@ -85,7 +85,9 @@
                                 <th style="width: 120px">No Reg Unit</th>
                                 <th style="width: 100px">Tgl Registrasi</th>
                                 <th>Tujuan</th>
+                                <th>DPJP</th>
                                 <th style="width: 150px">Cara Bayar</th>
+                                <th style="width: 80px">No BPJS</th>
                                 <th style="width: 80px">Jns Layanan</th>
                                 <th style="width: 80px">Status<br/>Register</th>
                                 <th style="width: 150px">Users</th>

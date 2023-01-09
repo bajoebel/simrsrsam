@@ -749,7 +749,11 @@ class Sep extends CI_Controller{
         $this->load->view('template/theme', $view);
     }
     function updateseppendaftaran(){
-        $data=array('no_jaminan'=>$this->input->post('no_jaminan'));
+        $data['no_jaminan']=$this->input->post('no_jaminan');
+        if(!empty($data['no_jaminan'])) {
+            $data['id_cara_bayar']=2;
+            $data['cara_bayar']='JKN';
+        }
         $this->db->where('idx',$this->input->post('idx'));
         $this->db->update('tbl02_pendaftaran',$data);
         echo json_encode(array('status'=>true));

@@ -200,5 +200,11 @@ class Patch_model extends CI_Model
         $this->db->where('idx',$id);
         return $this->db->get('tbl01_cara_bayar')->row();
     }
+
+    function validasiPasien($nama,$tgllahir){
+        return $this->db->where('nama',$nama)
+        ->where('tgl_lahir',$tgllahir)
+        ->get('tbl01_pasien')->row();
+    }
     
 }

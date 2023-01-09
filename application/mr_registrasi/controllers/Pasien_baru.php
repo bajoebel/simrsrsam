@@ -586,53 +586,63 @@ class pasien_baru extends CI_Controller {
                         $params['session_id'] = getSessionID();
                         if($_POST['idx'] == ""){
                             // Insert Pasien Baru
-                            $params['nomr'] = $this->patch_model->get_nomr(); 
-                            $cekCommand = $this->db->insert('tbl01_pasien',$params);
-                            
-                            if($cekCommand){
-                                $this->db->from('tbl01_pasien');
-                                $this->db->where('session_id', getSessionID());
-                                $this->db->order_by('idx', 'desc');
-                                $this->db->limit(1);
-                                $cekQuery = $this->db->get(); 
-                                if($cekQuery->num_rows() > 0){
-                                    // Insert Ke database pendaftaran online
-                                    $this->onlineDB = $this->load->database('online', true);
-                                    
-                                    $cek=$this->onlineDB->where('nomr',$params['nomr'])->get('m_pasien')->row();
-                                    if(empty($cek)){
-                                        $data = array(
-                                            'nomr' => $params['nomr'],
-                                            'nama' => $params['nama'],
-                                            'tgl_lahir' => $params['tgl_lahir'],
-                                            'alamat' => $params['alamat']
-                                        );
+                            // Validasi nama dan tgl_lahir 
+                            $validasi=$this->patch_model->validasiPasien($params['nama'],$params['tgl_lahir']);
+                            if(empty($validasi)){
+                                $params['nomr'] = $this->patch_model->get_nomr(); 
+                                $cekCommand = $this->db->insert('tbl01_pasien',$params);
+                                
+                                if($cekCommand){
+                                    $this->db->from('tbl01_pasien');
+                                    $this->db->where('session_id', getSessionID());
+                                    $this->db->order_by('idx', 'desc');
+                                    $this->db->limit(1);
+                                    $cekQuery = $this->db->get(); 
+                                    if($cekQuery->num_rows() > 0){
+                                        // Insert Ke database pendaftaran online
+                                        $this->onlineDB = $this->load->database('online', true);
                                         
-                                        $this->onlineDB->insert('m_pasien', $data);
-                                    }
-                                    
-                                    $kode = $this->input->post('kodebooking');
-                                        if(!empty($kode)){
+                                        $cek=$this->onlineDB->where('nomr',$params['nomr'])->get('m_pasien')->row();
+                                        if(empty($cek)){
                                             $data = array(
-                                                'kode_booking' => $kode,
-                                                'verifikasi' => '1'
+                                                'nomr' => $params['nomr'],
+                                                'nama' => $params['nama'],
+                                                'tgl_lahir' => $params['tgl_lahir'],
+                                                'alamat' => $params['alamat']
                                             );
-                                            $this->onlineDB->where('kode_booking', $kode);
-                                            $update = $this->onlineDB->update('m_pasien_baru', $data);
+                                            
+                                            $this->onlineDB->insert('m_pasien', $data);
                                         }
-                                    $resPasien = $cekQuery->row_array();
-                                    $response['code'] = 200;
-                                    $response['message'] = "Simpan data sukses";
-                                    $response['nomr'] = $resPasien['nomr']; 
+                                        
+                                        $kode = $this->input->post('kodebooking');
+                                            if(!empty($kode)){
+                                                $data = array(
+                                                    'kode_booking' => $kode,
+                                                    'verifikasi' => '1'
+                                                );
+                                                $this->onlineDB->where('kode_booking', $kode);
+                                                $update = $this->onlineDB->update('m_pasien_baru', $data);
+                                            }
+                                        $resPasien = $cekQuery->row_array();
+                                        $response['code'] = 200;
+                                        $response['message'] = "Simpan data sukses";
+                                        $response['nomr'] = $resPasien['nomr']; 
+                                    }else{
+                                        $response['code'] = 202;
+                                        $response['message'] = "Simpan data sukses namun cookies telah dihapus. Silahkan cari dan pilih pasien";
+                                        $response['nomr'] = null;                                            
+                                    }
                                 }else{
-                                    $response['code'] = 202;
-                                    $response['message'] = "Simpan data sukses namun cookies telah dihapus. Silahkan cari dan pilih pasien";
-                                    $response['nomr'] = null;                                            
+                                    $response['code'] = 501;
+                                    $response['message'] = "Ops. Query error! Silahkan hubungi administrator.";                                            
                                 }
                             }else{
-                                $response['code'] = 501;
-                                $response['message'] = "Ops. Query error! Silahkan hubungi administrator.";                                            
+                                $response['code'] = 204;
+                                $response['message'] = "Pasien dengan nama dan tgl lahir ini sudah ada";
+                                $response['metod']= "POST";
+                                $response['response']= $validasi;
                             }
+                            
                         }else{
                             if($_POST['nomr'] == ''){
                                 $nomr=$this->patch_model->get_nomr();

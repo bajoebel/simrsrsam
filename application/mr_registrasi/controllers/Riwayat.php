@@ -61,8 +61,8 @@ class riwayat extends CI_Controller
         } else $condition = " ";
         $like = "  (nomr LIKE '%$q%' OR nama_pasien LIKE '%$q%' OR a.id_daftar LIKE '%$q%' OR nama_ruang LIKE '%$q%' OR cara_bayar LIKE '%$q%' OR jns_layanan LIKE '%$q%' )";
         //echo "KONDISI " .$condition ."<br>";
-        $SQL = "SELECT a.idx,a.id_daftar,a.reg_unit,a.tgl_masuk,a.nomr,a.nama_pasien,a.nama_ruang,a.cara_bayar,a.jns_layanan,IF(IFNULL(b.user_id,TRUE),'Active',CONCAT('Batal\n',b.tgl_created)) AS State,
-        b.user_id AS userBatal,a.user_daftar 
+        $SQL = "SELECT a.idx,a.id_daftar,a.reg_unit,a.tgl_masuk,a.nomr,a.nama_pasien,a.nama_ruang,a.cara_bayar,a.no_bpjs,a.jns_layanan,IF(IFNULL(b.user_id,TRUE),'Active',CONCAT('Batal\n',b.tgl_created)) AS State,
+        b.user_id AS userBatal,a.user_daftar,a.namaDokterJaga 
         FROM tbl02_pendaftaran a LEFT JOIN tbl02_pendaftaran_batal b ON a.reg_unit=b.reg_unit
         WHERE $tgl $condition $like
         ORDER BY idx DESC";

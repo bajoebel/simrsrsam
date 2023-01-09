@@ -888,7 +888,6 @@ function cekPeserta(nobpjs="",tgllayanan="") {
 			},
 		});
 	}
-
 }
 
 function ceknikbpjs(pesan = 0) {
@@ -937,6 +936,28 @@ function ceknikbpjs(pesan = 0) {
 				$('.statusjkn').html(x.peserta.statusPeserta.keterangan);
 				if(pesan==1) tampilkanPesan('success', x.peserta.statusPeserta.keterangan);
 				$('#tempat_lahir').focus();
+				var nomr=$('#nomr').val();
+				if(nomr==""){
+					// Jika Pasien Baru
+					if(x.peserta.mr.noMR != null){
+						swal({
+							title: "Konfirmasi",
+							text: "Pasien sudah pernah terdaftar di Rumah sakit dengan nomr "+x.peserta.mr.noMR +" Apakah pasien akan didaftarkan sebagai pasien lama?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonText: "Ya",
+							cancelButtonText: "Tidak",
+							closeOnConfirm: true,
+							closeOnCancel: true
+						},
+						function (isConfirm) {
+							if (isConfirm) {
+								var url=base_url+"registrasi/daftar_rawat_jalan/"+x.peserta.mr.noMR;
+								window.location.href = url;
+							}
+						});
+					}
+				}
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);
@@ -982,6 +1003,34 @@ function ceknomorbpjs(pesan = 0) {
 				$('#kodeppk').val(x.peserta.provUmum.kdProvider)
 				$('#namappk').val(x.peserta.provUmum.nmProvider)
 				$('#tempat_lahir').focus();
+				var nomr=$('#nomr').val();
+				if(nomr==""){
+					// Jika Pasien Baru
+					if(x.peserta.mr.noMR != null){
+						swal({
+							title: "Konfirmasi",
+							text: "Pasien sudah pernah terdaftar di Rumah sakit dengan nomr "+x.peserta.mr.noMR +" Apakah pasien akan didaftarkan sebagai pasien lama?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonText: "Ya",
+							cancelButtonText: "Tidak",
+							closeOnConfirm: true,
+							closeOnCancel: true
+						},
+						function (isConfirm) {
+							if (isConfirm) {
+								var url=base_url+"registrasi/daftar_rawat_jalan/"+x.peserta.mr.noMR;
+								window.location.href = url;
+							}
+						});
+						// var konfi=konfirmasiPesan("Konfirmasi","Pasien sudah pernah terdaftar di Rumah sakit dengan nomr "+x.peserta.mr.noMR +" Apakah pasien akan didaftarkan sebagai pasien lama?");
+						// if(konfi){
+						// 	var url=base_url+"registrasi/daftar_rawat_jalan/"+x.peserta.mr.noMr;
+						// 	window.location.href = url;
+						// }
+						// alert(konf)
+					}
+				}
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);
@@ -4979,4 +5028,27 @@ function updateStatusDpo(){
             console.log(jqXHR.responseText);
         }
     });
+}
+function konfirmasiPesan(title,pesan){
+	var konf=false;
+	swal({
+		title: title,
+		text: pesan,
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Ya",
+		cancelButtonText: "Tidak",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+	function (isConfirm) {
+		if (isConfirm) {
+			konf=true;
+			// return true;
+		}else{
+			konf=false;
+			// return false;
+		}
+	});
+	return konf;
 }

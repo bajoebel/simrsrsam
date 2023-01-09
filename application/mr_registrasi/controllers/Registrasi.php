@@ -1175,7 +1175,7 @@ class registrasi extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             if (isset($_GET['kode'])) {
                 $kode = $_GET['kode'];
-                $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,
+                $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
                 a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
                 b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
                 pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,
