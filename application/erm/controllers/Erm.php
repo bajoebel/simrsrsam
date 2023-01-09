@@ -177,7 +177,7 @@ class Erm extends CI_Controller
             "jns_layanan" => "RJ"
         ];
         if ($pil == 1) {
-            $data['list'] = $this->erm_model->getPendaftaranList($d->nomr);
+            $data['list'] = $this->rajal->masukRajal($d->nomr,$idx);
         } else if ($pil == 2) {
             $data['list'] = $this->rajal->getSetujuUmum($d->nomr, $d->idx)->result();
         } else if ($pil==3) {

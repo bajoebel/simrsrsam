@@ -715,4 +715,10 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>FALSE]);
         }
     }
+
+    public function get_riwayat_rajal() {
+        $nomr = $this->input->post("nomr");
+        $list = $this->erm->getPendaftaranListByTipe($nomr,"RJ");
+        echo json_encode(["status"=>true,"list"=> $list]);
+    }
 }
