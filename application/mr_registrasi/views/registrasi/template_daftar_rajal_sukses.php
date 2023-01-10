@@ -93,6 +93,24 @@
         -moz-border-radius: 0px;
         background-image: none;
     }
+
+    .olcostum {
+    counter-reset: item;
+    margin-left: 0;
+    padding-left: 0;
+    }
+    .licostum {
+    display: block;
+    margin-bottom: .5em;
+    margin-left: 3em;
+    }
+    .licostum::before {
+    display: inline-block;
+    content: counter(item) ") ";
+    counter-increment: item;
+    width: 2em;
+    margin-left: -2em;
+    }
 </style>
 <section class="content-header">
     <h1><?php echo $contentTitle ?></h1>
@@ -864,21 +882,45 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">&nbsp;</label>
                                                 <div class="col-sm-9">
-                                                    <input type="checkbox" name="gc_izinaksesbesuk" id="gc_izinaksesbesuk" value="1"> Pasien Mengizinkan Rumah Sakit Memberi Akses bagi : keluarga serta orang yang  akan menengok / menemuinya
+                                                    <input type="checkbox" name="gc_izinaksesbesuk" id="gc_izinaksesbesuk" value="1" checked> Pasien Mengizinkan Rumah Sakit Memberi Akses bagi : keluarga serta orang yang  akan menengok / menemuinya
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">Privasi Khusus</label>
                                                 <div class="col-sm-9 fieldAdd">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+                                                        <input type="text" class="form-control" name="privasi[]" placeholder="Masukkan Privasi Yang Diinginkan">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-success" type="button" onclick="addmore(1)"><i class="fa fa-plus"></i></button>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <legend>Pelepasan Informasi</legend>
+                                            <legend>Persetujuan Pelepasan Informasi</legend>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" name="gc_izinpemberianinformasidiagnosis" id="gc_izinpemberianinformasidiagnosis" value="1" checked> Pasien Memberi wewenang kepada RSUD dr. Achmad Mochtar untuk memberikan informasi tentang diagnosis, hasil pelayanan dab pengobatan saya kepada
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">Informasi Terbatas Pada</label>
+                                                <div class="col-sm-9 fieldAdd2">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" value="1" name="terbatas" > </span>
+                                                        <input type="text" class="form-control" name="terbatas_list[]" placeholder="Masukkan Nama">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-success" type="button" onclick="addmore(2)"><i class="fa fa-plus"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                <div class="col-sm-9">
+                                                    <button class="btn btn-primary btn-sm" type="button" id="btnSimpanGC" onclick="confirmasiPenyipananGC()"><span class="fa fa-save" id="iconSimpanGC"></span> Simpan Data General Concent</button>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                         
                                     </form>
@@ -1918,6 +1960,46 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="privgc" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
+    <div class="modal-dialog modal-lg" style="overflow-y: initial !important">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 class="modal-title" id="headRujukan">PERSETUJUAN UMUM (<i>GENERAL CONSENT</i>)</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>1. PERSETUJUAN UNTUK PERAWATAN DAN PENGOBATAN</h4>
+                        <ol class="olcostum">
+                            <li class="licostum">Saya mengetahui bahwa saya memiliki kondisi yang membutuhkan perawatan medis, saya mengizinkan dokter dan profesional kesehatan lainnya untuk melakukan prosedur dignostik dan untuk memberikan pengobatan medis seperti yang diperlukan dalam penilaian profesional mereka. </li>
+                            <li class="licostum">Saya sadar bahwa praktik kedokteran bukanlah ilmu pasti dan saya mengakui bahwa tidak ada jaminan atas hasil apapun, terhadap perawatan prosedur atau pemeriksaan apapun yang dilakukan kepada saya.</li>
+                            <li class="licostum">Saya mengetahui bahwa RSUD Dr. Achmad Mochtar Bukittinggi merupakan Rumah Sakit yang dipakai untuk Pendidikan. Karena itu, saya menyetujui bila mahasiswa kedokteran dan profesi kesehatan lain berpartisipasi dalam perawatan saya, sepanjang dibawah supervise oleh supervisornya.</li>
+                        </ol>
+                        <h4>2. KEINGINAN PRIVASI</h4>
+                        <p> Saya <span id="izinbesuk">Mengizinkan</span> Rumah Sakit Memberi akses bagi : Keluarga serta orang yang akan menengok /menemui saya.</p>
+                        <div id="privasikhusus"></div>
+                        <h4>3. PERSETUJUAN PELEPASAN INFORMASI</h4>
+                        <ul>
+                            <li>Saya memahami informasi yang ada di dalam diri saya termasuk diagnosis, hasil laboratorium dan hasil tes diagnosis yang akan digunakan untuk perawatan medis, RSUD Dr Achmad Mochtar Bukittinggi akan menjamin kerahasiannya</li>
+                            <li>Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi tentang rahasia kedokteran saya bila diperlukan untuk memproses klaim asuransi dan atau lembaga pemerintah lainya.</li>
+                            <li>Saya <span id="izininformasidiagnosis"></span> memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi * tentang diagnosis, hasil pelayanan dan pengobatan saya kepada
+                                <br>Terbatas Pada
+                            </li>
+
+                        </ul>
+                        <h4>4. INFORMASI TATA TERTIB BAGI PASIEN, PENGUNJUNG DAN PENUNGGU PASIEN (Terlampir)</h4>
+                        <p>Saya telah menerima informasi tentang peraturan yang diberlakukan oleh Rumah Sakit dan saya beserta keluarga bersedia untuk mematuhinya, termasuk akan mematuhi jam berkunjung pasien sesuai dengan aturan di Rumah Sakit.</p>
+                        <h4>5. INFORMASI BIAYA</h4>
+                        <p>Sebagai peserta JKN/IKS saya bersedia mengurus jaminan rawat inap dalam waktu 3 hari kerja (terhitung mulai pasien masuk) dan apabila saya tidak mengurus dalam waktu tersebut diatas, saya bersedia terdaftar sebagai pasien Umum/Pribadi. Saya memahami tentang informasi biaya pengobatan atau biaya tindakanyang dijelaskan oleh petugas Rumah Sakit.</p>
+                        <input type="checkbox" name="setujui" id="setujui" value="1" onclik="simpanPersetujuanUmum()"><b>Pasien / Keluarga pasien Telah Diberitahukan dan telah memahami item pada persetujuan umum / General Concent</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     var Base64 = {
@@ -2448,6 +2530,10 @@
                 y++;
             }
         }
+    }
+    function confirmasiPenyipananGC(){
+
+        // $('#privgc').modal('show')
     }
     var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
     // var url_call_back = "<?php echo base_url() . "mr_registrasi.php/"; ?>";
