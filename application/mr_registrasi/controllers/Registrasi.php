@@ -269,7 +269,7 @@ class registrasi extends CI_Controller
         $nomr = $this->input->post('nomr', true);
         $SQL_HISTORY = "SELECT * FROM tbl02_pendaftaran WHERE nomr = '$nomr' 
         AND reg_unit NOT IN(SELECT reg_unit FROM tbl02_pendaftaran_batal)
-        ORDER BY tgl_masuk DESC LIMIT 10";
+        ORDER BY tgl_masuk DESC LIMIT 20";
         $y['getHistory'] = $this->db->query("$SQL_HISTORY");
         $this->load->view('registrasi/getHistoryPasien', $y);
     }
