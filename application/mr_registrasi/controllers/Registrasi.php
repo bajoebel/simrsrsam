@@ -2796,4 +2796,94 @@ class registrasi extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    function simpangc(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            
+            $customttd=$this->input->post('customttd');
+            if($customttd==1){
+                $namattd=$this->input->post('gc_namattd');
+                $tempat_lahirttd=$this->input->post('gc_tempat_lahirttd');
+                $tanggal_lahirttd=$this->input->post('gc_tgl_lahirttd');
+                $jkttd=$this->input->post('gc_jnskelaminttd');
+                $alamatttd=$this->input->post('gc_alamatttd');
+                $selaku=$this->input->post('sebagai');
+            }else{
+                $namattd=$this->input->post('gc_nama_lengkap');
+                $tempat_lahirttd=$this->input->post('gc_tempat_lahir');
+                $tanggal_lahirttd=$this->input->post('gc_tgl_lahir');
+                $jkttd=$this->input->post('gc_jns_kelamin');
+                $alamatttd=$this->input->post('gc_alamatpasien');
+                $selaku="pasien";
+            }
+            $izinbesuk=(empty($this->input->post('gc_izinaksesbesuk'))) ? 0:1;
+            $terbatas=(empty($this->input->post('terbatas'))) ? 0:1;
+            $izininformasidiagnosis=(empty($this->input->post('gc_izinpemberianinformasidiagnosis'))) ? 0:1;
+            $privasi=(empty($this->input->post('privasi'))) ? "":implode(";",$this->input->post('privasi'));
+            $terbatas_list=(empty($this->input->post('terbatas_list'))) ? "":implode(";",$this->input->post('terbatas_list'));
+            $data=array(
+                'idx'=>$this->input->post('gc_idx'),
+                'nomr'=>$this->input->post('gc_nomr'),
+                'nama'=>$this->input->post('gc_nama_lengkap'),
+                'tempat_lahir'=>$this->input->post('gc_tempat_lahir'),
+                'tanggal_lahir'=>$this->input->post('gc_tgl_lahir'),
+                'jk'=>$this->input->post('gc_jns_kelamin'),
+                'alamat'=>$this->input->post('gc_alamatpasien'),
+                'phone'=>$this->input->post('gc_no_telpon'),
+                'namattd'=>$namattd,
+                'tempat_lahirttd'=>$tempat_lahirttd,
+                'tanggal_lahirttd'=>$tanggal_lahirttd,
+                'jkttd'=>$jkttd,
+                'alamatttd'=>$alamatttd,
+                'izinbesuk'=>$izinbesuk,
+                'izininformasidiagnosis'=>$izininformasidiagnosis,
+                'users_id'=>$this->session->userdata('get_uid'),
+                'privasi_list'=>$privasi,
+                'terbatas'=>$terbatas,
+                'terbatas_list'=>$terbatas_list,
+                'selaku'=>$selaku,
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+                'selaku_lainnya'=>$this->input->post('selakulainnya'),
+            );
+            $id=$this->input->post('gc_id');
+            if(empty($id)){
+                $simpan=$this->pendaftaran_model->simpanGeneralConsent($data);
+                if($simpan) $response = array('status' => true, 'message' => 'Persetujuan Umum Berhasi Diinput', 'data' => $data);
+                else $response = array('status' => false, 'Gagal Input Data Persetujuan Umum', 'data' => $data);
+            }else{
+                $this->pendaftaran_model->updateGeneralConsent($data,$id);
+                $response = array('status' => true, 'message' => 'Persetujuan Umum Berhasi Diupdate', 'data' => $data);
+            }
+            
+        
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    function datagc($idx){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $this->erm = $this->load->database('erm', true);
+            $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row();
+            if(!empty($data)) $response = array('status' => true, 'message' => 'OK', 'data' => $data);
+            else $response=array('status'=>false,'message'=>"Belum Input General Consent");
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    function persetujuan_umum($idx){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $this->erm = $this->load->database('erm', true);
+            $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row();
+            if(!empty($data)) $this->load->view('cetak/setuju_umum_cetak',$data);
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+    }
 }

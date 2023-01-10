@@ -427,4 +427,15 @@ class Pendaftaran_model extends CI_Model
 
         }
     }
+    function simpanGeneralConsent($data){
+        $this->erm = $this->load->database('erm', true);
+        $this->erm->insert('rj_setuju_umum',$data);
+        return $this->erm->insert_id();
+    }
+    function updateGeneralConsent($data,$id){
+        $this->erm = $this->load->database('erm', true);
+        $this->db->where('id',$id);
+        $this->erm->update('rj_setuju_umum',$data);
+        return $this->erm->insert_id();
+    }
 }

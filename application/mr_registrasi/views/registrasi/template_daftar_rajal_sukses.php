@@ -233,7 +233,7 @@
                         <?php
                         }
                         ?>
-                        <li><a data-toggle="tab" href="#menu3">General Concent</a></li>
+                        <li><a data-toggle="tab" href="#menu3" onclick="getGC(<?= $idx ?>)">General Concent</a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -795,6 +795,9 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">Nomr:</label>
                                                 <div class="col-sm-9">
+                                                    <input type="hidden" name="reload" id="reload" value="0">
+                                                    <input type="hidden" name="gc_idx" id="gc_idx" value="<?= $idx ?>">
+                                                    <input type="hidden" name="gc_id" id="gc_id" value="">
                                                     <input type="text" name="gc_nomr" id="gc_nomr" class="form-control" value="<?= $nomr ?>" readonly>
                                                 </div>
                                             </div>
@@ -806,10 +809,13 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Tanggal Lahir:</label>
-                                                <div class="col-sm-9">
+                                                <label class="control-label col-sm-3" for="email">Tempat/Tanggal Lahir:</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" name="gc_tempat_lahir" id="gc_tempat_lahir" class="form-control" value="<?= $tempat_lahir ?>" readonly>
+                                                </div>
+                                                <div class="col-sm-4">
                                                     <input type="hidden" name="gc_tgl_lahir" id="gc_tgl_lahir" value="<?= $tgl_lahir ?>" >
-                                                    <input type="text" name="gc_priview_tgl_lahir" id="gc_priview_tgl_lahir" class="form-control" value="<?= longDate($tgl_lahir) ?>" readonly>
+                                                    <input type="text" name="gc_priview_tgl_lahir" id="gc_priview_tgl_lahir" class="form-control datepicker" value="<?= longDate($tgl_lahir) ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -828,13 +834,13 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">No Telp / HP:</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" name="gc_no_telpon" id="gc_no_telpon" class="form-control" value="<?= getField('no_telpon',array('nomr'=>$nomr),'tbl01_pasien') ?>">
+                                                    <input type="text" name="gc_no_telpon" id="gc_no_telpon" class="form-control" value="<?= getField('no_telpon',array('nomr'=>$nomr),'tbl01_pasien') ?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">&nbsp;</label>
                                                 <div class="col-sm-9">
-                                                    <input type="checkbox" name="customttd" id="customttd" onclick="setTTD()"> General Consent Ditandatangani Keluarga / Orang Tua/ Wali /Lainnya
+                                                    <input type="checkbox" name="customttd" id="customttd" value="1" onclick="setTTD()"> General Consent Ditandatangani Keluarga / Orang Tua/ Wali /Lainnya
                                                 </div>
                                             </div>
                                             <div class="customttd" style="display:none;">
@@ -846,9 +852,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Tgl Lahir:</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" name="gc_tgl_lahirttd" id="gc_tgl_lahirttd" class="form-control">
+                                                    <label class="control-label col-sm-3" for="email">Tempat / Tanggal Lahir:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="gc_tempat_lahirttd" id="gc_tempat_lahirttd" class="form-control" value="">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="gc_tgl_lahirttd" id="gc_tgl_lahirttd" class="form-control datepicker">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -868,13 +877,16 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-3" for="email">Hubungan Keluarga:</label>
-                                                    <div class="col-sm-9">
-                                                        <select name="sebagai" id="sebagai" class="form-control" style="width:100%;">
+                                                    <div class="col-sm-4">
+                                                        <select name="sebagai" id="sebagai" class="form-control" style="width:100%;" onchange="cekHubungan()">
                                                             <option value="wali">Wali</option>
                                                             <option value="orang tua">Orang Tua</option>
                                                             <option value="keluarga">Keluarga</option>
                                                             <option value="lainnya">Lainnya</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-5 lain" style="display:none;">
+                                                        <input type="text" name="selakulainnya" id="selakulainnya" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -889,7 +901,7 @@
                                                 <label class="control-label col-sm-3" for="email">Privasi Khusus</label>
                                                 <div class="col-sm-9 fieldAdd">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="privasi[]" placeholder="Masukkan Privasi Yang Diinginkan">
+                                                        <input type="text" class="form-control" name="privasi[]" id="privasi" placeholder="Masukkan Privasi Yang Diinginkan">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-success" type="button" onclick="addmore(1)"><i class="fa fa-plus"></i></button>
                                                         </span>
@@ -908,7 +920,7 @@
                                                 <div class="col-sm-9 fieldAdd2">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" value="1" name="terbatas" > </span>
-                                                        <input type="text" class="form-control" name="terbatas_list[]" placeholder="Masukkan Nama">
+                                                        <input type="text" class="form-control" id="terbatas_list" name="terbatas_list[]" placeholder="Masukkan Nama">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-success" type="button" onclick="addmore(2)"><i class="fa fa-plus"></i></button>
                                                         </span>
@@ -917,8 +929,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">&nbsp;</label>
-                                                <div class="col-sm-9">
+                                                <div class="col-sm-5">
                                                     <button class="btn btn-primary btn-sm" type="button" id="btnSimpanGC" onclick="confirmasiPenyipananGC()"><span class="fa fa-save" id="iconSimpanGC"></span> Simpan Data General Concent</button>
+                                                </div>
+                                                <div class="col-sm-4 text-right" id="cetakgc" style="display:none;">
+                                                    <a href="<?= base_url() ."mr_registrasi.php/registrasi/persetujuan_umum/".$idx?>" class="btn btn-warning btn-sm" target="_blank"><span class="fa fa-print"></span> Cetak Persetujuan Umum</a>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -2506,7 +2521,7 @@
         if (pil == 1) {
             var x = 1;
             var fieldHtml = `<div class="input-group" style="margin-top:2px">
-                            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+                            <input type="text" class="form-control" name="privasi[]" placeholder="Masukkan Privasi Yang Diinginkan">
                             <span class="input-group-btn">
                                 <button class="btn btn-danger removeMore" type="button"><i class="fa fa-trash"></i></button>
                             </span>
@@ -2520,7 +2535,7 @@
         if (pil == 2) {
             var y = 1;
             var fieldHtml2 = `<div class="input-group" style="margin-top:2px">
-            <input type="text" class="form-control" name="privasi[]" placeholder="Enter text.....">
+            <input type="text" class="form-control" name="terbatas_list[]" placeholder="Masukkan Nama">
             <span class="input-group-btn">
             <button class="btn btn-danger removeMore2" type="button"><i class="fa fa-trash"></i></button>
             </span>
@@ -2531,9 +2546,129 @@
             }
         }
     }
+    function cekHubungan(){
+        var sebagai=$('#sebagai').val();
+        if(sebagai=="lainnya") $('.lain').show();
+        else $('.lain').hide();
+    }
     function confirmasiPenyipananGC(){
+        var url = '<?= base_url() ."mr_registrasi.php/registrasi/simpangc" ?>';
+        var formData = new FormData($('#generalconcent')[0]);
+        $.ajax({
+            url : url,
+            type: "POST",
+            data : formData,
+            processData: false,
+            contentType: false,
+            dataType: 'JSON',
+            beforeSend: function() {
+                // setting a timeout
+                $('#btnSimpanGC').prop("disabled",true);
+                $('#iconSimpanGC').removeClass('fa fa-save')
+                $('#iconSimpanGC').addClass('fa fa-spinner spin')
+                // $(placeholder).addClass('loading');
+                $('#reload').val(1);
+            },
+            success: function(data)
+            {
+                if(data.status==true){
+                    tampilkanPesan('warning',data.message);
+                    var idx=$('#gc_idx').val();
+                    getGC(idx);
+                    // location.reload(); 
+                }
+                else{
+                    swal({
+                        title: "Peringatan",
+                        text: data.message,
+                        type: "warning",
+                        timer: 5000
+                    });
+                }
+                
+            },
+            error: function(xhr) { // if error occured
+                tampilkanPesan('error',xhr.statusText+' - '+xhr.responseText)
+                $('#btnSimpanGC').prop("disabled",false);
+                $('#iconSimpanGC').removeClass('fa fa-spinner spin')
+                $('#iconSimpanGC').addClass('fa fa-save')
+            },
+            complete: function() {
+                $('#btnSimpanGC').prop("disabled",false);
+                $('#iconSimpanGC').removeClass('fa fa-spinner spin')
+                $('#iconSimpanGC').addClass('fa fa-save')
+            }
+        });
+    }
 
-        // $('#privgc').modal('show')
+    function getGC(idx){
+        $.ajax({
+            url: "<?php echo base_url() . 'mr_registrasi.php/registrasi/datagc/' ?>"+idx,
+            dataType: "JSON",
+            method: "GET",
+            data: {},
+            success: function(data) {
+                // alert(data.data.nama + " "+ data.data.namattd)
+                if(data.status==true){
+                    $('#cetakgc').show();
+                    if(data.data.nama==data.data.namattd) $('#customttd').prop('checked',false)
+                    else $('#customttd').prop('checked',true)
+                    setTTD();
+                    $('#gc_id').val(data.data.id)
+                    $('#gc_namattd').val(data.data.namattd)
+                    $('#gc_tempat_lahirttd').val(data.data.tempat_lahirttd)
+                    $('#gc_tgl_lahirttd').val(data.data.tanggal_lahirttd)
+                    $('#gc_jnskelaminttd').val(data.data.jkttd)
+                    $('#gc_alamatttd').val(data.data.alamatttd)
+                    $('#gc_alamatttd').val(data.data.alamatttd)
+                    $('#selakulainnya').val(data.data.selaku_lainnya)
+                    $('#sebagai').val(data.data.selaku).trigger('change');
+                    (data.data.izinbesuk==1) ? $('#gc_izinaksesbesuk').prop('checked',true):$('#gc_izinaksesbesuk').prop('checked',false);
+                    (data.data.izininformasidiagnosis==1) ? $('#gc_izinpemberianinformasidiagnosis').prop('checked',true):$('#gc_izinpemberianinformasidiagnosis').prop('checked',false);
+                    var reload=$('#reload').val();
+                    if(reload==0){
+                        var privasi_list=data.data.privasi_list;
+                        var pl_arr = privasi_list.split(";");
+                        if(pl_arr.length>0){
+                            $('#privasi').val(pl_arr[0])
+                            for (let i = 1; i < pl_arr.length; i++) {
+                                const ele = pl_arr[i];
+                                var fieldHtml = `<div class="input-group" style="margin-top:2px">
+                                    <input type="text" class="form-control" name="privasi[]" placeholder="Masukkan Privasi Yang Diinginkan" value="`+ele+`">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger removeMore" type="button"><i class="fa fa-trash"></i></button>
+                                    </span>
+                                </div>`;
+                            }
+                            $(".fieldAdd").append(fieldHtml);
+                        }
+                        var terbatas_list=data.data.terbatas_list;
+                        var terbatas_arr=terbatas_list.split(';');
+                        if(terbatas_arr.length>0){
+                            $('#terbatas_list').val(terbatas_arr[0])
+                            for (let i = 1; i < terbatas_arr.length; i++) {
+                                const ele = terbatas_arr[i];
+                                var fieldHtml2 = `<div class="input-group" style="margin-top:2px">
+                                <input type="text" class="form-control" name="terbatas_list[]" placeholder="Masukkan Nama" value="`+ele+`">
+                                <span class="input-group-btn">
+                                <button class="btn btn-danger removeMore2" type="button"><i class="fa fa-trash"></i></button>
+                                </span>
+                                </div>`;
+                            }
+                            $(".fieldAdd2").append(fieldHtml2);
+                        }
+                        $('#reload').val(1);
+                    }
+                }else{
+                    $('#cetakgc').hide();
+                }
+                
+                
+            },
+            error: function(jqXHR, ajaxOption, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
     }
     var base_url = "<?php echo base_url() . "mr_registrasi.php"; ?>";
     // var url_call_back = "<?php echo base_url() . "mr_registrasi.php/"; ?>";
