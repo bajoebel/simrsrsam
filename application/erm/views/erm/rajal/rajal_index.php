@@ -294,7 +294,14 @@
 <script>
     $(document).ready(function() {
         // default ketika di load pertama kali
-        getRiwayat(1, <?= $detail->idx ?>);
+        let tab_aktif = localStorage.getItem("tab_aktif");
+        if (tab_aktif) {
+            // getRiwayat(tab_aktif, <?= $detail->idx ?>);
+            $(`a[href='#tab_${tab_aktif}']`).trigger("click")
+        } else {
+            // getRiwayat(1, <?= $detail->idx ?>);
+            $("a[href='#tab_1']").trigger("click")
+        }
 
     });
 </script>
@@ -397,10 +404,14 @@
                 {
                     name: "kontrol_tujuan_m",
                     value: $("#kontrol_tujuan_id_m option:selected").text()
+                },
+                {
+                    name : "pj_nama_m",
+                    value : $("#pj_nama_m").val()
                 }
             ];
             data_form = $.merge(data_form, data_push)
-
+            // console.log($("#pj_nama_m").val())
             // console.log(data_form);
             // return false;
             $.ajax({
@@ -413,7 +424,7 @@
                 },
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
-                    // console.log(response);
+                    console.log(response);
                     // $('#form-data-kaji-awal-medis')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
@@ -513,9 +524,70 @@
                         </div>`);
             },
             success: function(response) {
+                localStorage.setItem("tab_aktif",pil)
                 $("#riwayat").html(response);
             },
             error: function(e) {
+                console.log(e)
+            }
+        });
+    }
+
+    function editAwalMedis(idx,id,nomr) {
+        $.ajax({
+            type: "POST",
+            url: base_url+"rajal/edit_awal_medis",
+            data: {
+                idx : idx,
+                id : id,
+                nomr : nomr
+            },
+            dataType: "JSON",
+            success: function (response) {
+                let data = response.data;
+                console.log(data.kontrol_tgl)
+                $("[name='hari_m']").val(data.hari)
+                $("[name='tgl_m']").val(data.tgl)
+                $("[name='jam_m']").val(data.jam)
+                $("[name='auto_detail_m']").val(data.auto_detail)
+                $("[name='allo_m']").val(data.allo)
+                $("[name='allo_detail_m']").val(data.allo_detail)
+                $("[name='td_m']").val(data.td)
+                $("[name='nadi_m']").val(data.nadi)
+                $("[name='napas_m']").val(data.napas)
+                $("[name='suhu_m']").val(data.suhu)
+                $("[name='fisik_detail_m']").text(data.fisik_detail)
+                $("[name='diagnosis_kerja_m']").text(data.diagnosis_kerja)
+                $("[name='diagnosis_banding_m']").text(data.diagnosis_banding)
+                $("[name='penunjang_m']").text(data.penunjang)
+                $("[name='terapi_m']").text(data.terapi)
+                $("[name='kontrol_m']").val(data.kontrol)
+                $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
+                $("[name='kontrol_jam_m']").val(data.kontrol_jam)
+                $("[name='kontrol_tujuan_id_m']").val(data.kontrol_tujuan_id).trigger("change")
+                $("[name='pj_m']").val(data.pj)
+                $("[name='pj_detail_m']").val(data.pj_detail)
+                $("[name='pj_nama_m']").val(data.pj_nama)
+                $("[name='dokter_id_m']").val(data.dokter_id).trigger("change")
+                if (data.auto) {
+                    $("[name='auto_m']").prop("checked",true).trigger("change")
+                } else {
+                    $("[name='auto_m']").prop("checked",false).trigger("change")
+                }
+                if (data.allo) {
+                    $("[name='allo_m']").prop("checked",true).trigger("change")
+                } else {
+                    $("[name='allo_m']").prop("checked",false).trigger("change")
+                }
+                if (data.kontrol) {
+                    $("[name='kontrol_m']").prop("checked",true).trigger("change")
+                    $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
+                    $("[name='kontrol_jam_m']").val(data.kontrol_jam)
+                } else {
+                    $("[name='kontrol_m']").prop("checked",false).trigger("change")
+                }
+            },
+            error: function (e) {
                 console.log(e)
             }
         });
@@ -659,7 +731,7 @@
     }
 
     function final(id,status,msg="") {
-        var x = confirm($msg);
+        var x = confirm(msg);
         // alert(id)
         // return false;
         if (x) {

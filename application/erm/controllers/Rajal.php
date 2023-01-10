@@ -413,6 +413,7 @@ class Rajal extends CI_Controller
             "kontrol_tujuan" => $this->input->post("kontrol_tujuan_m"),
             "pj" => $this->input->post("pj_m"),
             "pj_detail" => $this->input->post("pj_detail_m"),
+            "pj_nama" => $this->input->post("pj_nama_m"),
             "dokter" => $this->input->post("dokter_m"),
             "dokter_id" => $this->input->post("dokter_id_m"),
             "created_at" => date("Y-m-d h:i:s"),
@@ -428,6 +429,14 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status" => false]);
         }
+    }
+
+    public function edit_awal_medis() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getAwalMedisById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
     }
 
     public function delete_kaji_awal_medis($idx, $id)

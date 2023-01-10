@@ -141,7 +141,7 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
             ];
-            $ta["1"] = "active";
+            $ta["4"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,
@@ -174,7 +174,8 @@ class Erm extends CI_Controller
         $d = $this->erm_model->getPendaftaran($idx);
         $data = [
             "pil" => $pil,
-            "jns_layanan" => "RJ"
+            "jns_layanan" => "RJ",
+            "detail" => $d
         ];
         if ($pil == 1) {
             $data['list'] = $this->rajal->masukRajal($d->nomr,$idx);
