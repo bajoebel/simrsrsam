@@ -141,14 +141,15 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
             ];
-            $ta["4"] = "active";
+            $ta["1"] = "active";
             $data = array(
                 'contentTitle' => 'E Rekam Medis',
                 'detail' => $detail,
                 'pasien' => $pasien,
                 "ta" => $ta,
                 "ruang" => get_list_ruang("RJ"),
-                "dpjp" => get_list_dpjp()
+                "dpjp" => get_list_dpjp(),
+                "profesi" => get_list_profesi(1)
             );
 
             $view = array(

@@ -66,25 +66,24 @@
             <div class="col-md-3">
                 <label for="">Profesional</label>
                 <select name="jenis_tenaga_medis_id_k" id="jenis_tenaga_medis_id_k" class="form-control">
-                    <option value="1">Pilih Profesional</option>
-                    <option value="1">Dokter</option>
+                    <option value="">Pilih Profesional</option>
+                    <?php foreach($profesi as $pr) { ?>
+                        <option value="<?= $pr->idx ?>"><?= $pr->profesi ?></option>
+                    <?php } ?>
+                    <!-- <option value="1">Dokter</option>
                     <option value="2">Anastesi</option>
                     <option value="3">Paramedis</option>
                     <option value="4">Apoteker</option>
                     <option value="5">Bidan</option>
                     <option value="6">Analis</option>
                     <option value="7">Penata Anastesi</option>
-                    <option value="8">Nutrisionist</option>
+                    <option value="8">Nutrisionist</option> -->
                 </select>
             </div>
             <div class="col-md-5">
                 <label for="">Nama Profesional</label>
                 <select name="tenaga_medis_id_k" id="tenaga_medis_id_k" class="form-control select2" style="width:100%">
-                <?php $list = getPegawai([])->result();
-                    echo "<option value=''>Pilih Nama Tenaga Medis</option>";
-                    foreach ($list as $r) { ?>
-                    <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
-                <?php } ?>
+                        
                 </select>
             </div>
         </div>
@@ -141,6 +140,26 @@
 <script>
     $(document).ready(function() {
         $('#subyektif_k,#obyektif_k,#assesment_k,#planning_k,#instruksi_k,#review_k').wysihtml5()
+        $('#jenis_tenaga_medis_id_k').change(function() {
+            pil = this.value;
+            $.ajax({
+                type: "POST",
+                url: base_url+"rajal/get_tenaga_medis",
+                data: {
+                    "pil" : pil
+                },
+                dataType: "json",
+                success: function (response) {
+                    let data = response.data;
+                    let html =`<option value=''></option>`;
+                    $.each(data,function (k,v) {
+                        html+=`<option value="${v.NRP}">${v.pgwNama}</option>`;
+                    })
+                    $("#tenaga_medis_id_k").html(html);
+                }
+            });
+        })
     });
+
 </script>
 </script>

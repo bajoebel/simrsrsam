@@ -686,4 +686,10 @@ class Rajal extends CI_Controller
         $list = $this->erm->getPendaftaranListByTipe($nomr,"RJ");
         echo json_encode(["status"=>true,"list"=> $list]);
     }
+
+    public function get_tenaga_medis() {
+        $pil = $this->input->post("pil");
+        $list = getPegawai([$pil])->result();
+        echo json_encode(["status"=>true,"data"=>$list]);
+    }
 }

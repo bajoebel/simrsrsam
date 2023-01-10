@@ -375,6 +375,17 @@ function get_list_dpjp()
     return $result;
 }
 
+function get_list_profesi($param=0)
+{
+
+    $CI = &get_instance();
+    $result = $CI->db
+        ->where("is_medis",1)
+        ->get("tbl01_profesi")
+        ->result();
+    return $result;
+}
+
 function trueOrFalse($param)
 {
     switch ($param) {

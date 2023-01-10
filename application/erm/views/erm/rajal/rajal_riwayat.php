@@ -199,6 +199,8 @@
                             <i class="fa fa-print"></i>
                         </a>
                         <?php if($detail->status_erm!=1) { ?>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-primary' onclick="editKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                        </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                         <?php } ?>
