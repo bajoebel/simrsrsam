@@ -15,69 +15,25 @@ class Rajal extends CI_Controller
     {
 
         // form rm 0200 rev.01 surat masuk rawat jalan
-        $c = [
-            1 => "", // nomor rekam medis
-            2 => "", // nama pasien
-            3 => "", // tempat tanggal lahir
-            4 => "", // jenis kelamin
-            5 => "", // kebangsaan
-            6 => "", // agama
-            7 => "", // pekerjaan
-            8 => "", // alama kantor
-            9 => "", // no ktp
-            10 => "", // no telp
-            11 => "", // alamat rumah
-            12 => "", // tanggal kunjungan
-            13 => "", // jam
-            14 => "", // nama pj
-            15 => "", // umur pj
-            16 => "", // pekerjaan pj
-            17 => "", // alamat pj
-            18 => "", // no telp
-            19 => "", // hub keluarga
-            20 => "", // dikirim oleh
-            21 => "", // alamat pengirim,
-            22 => "" // dokter jaga
-        ];
+        
         $p = $this->erm->getPendaftaran($idx);
 
         if ($idx != "") {
             $d = $this->erm->getPendaftaran($idx);
             $p = $this->erm->getPasien($d->nomr);
-            $c[1] = $p->nomr;
-            $c[2] = $p->nama;
-            $c[3] = $p->tempat_lahir . "/" . date("d-m-Y", strtotime($p->tgl_lahir));
-            $c[4] = jns_kelamin($p->jns_kelamin);
-            $c[5] = $p->kewarganegaraan;
-            $c[6] = $p->agama;
-            $c[7] = $p->pekerjaan;
-            $c[8] = $p->alamat;
-            $c[9] = $p->no_ktp;
-            $c[10] = $p->no_telpon . "." . $p->no_hp;
-            $c[11] = $p->alamat;
-            $c[12] = date("d-m-Y", strtotime($p->tgl_daftar));
-            $c[13] = date("h:i:s", strtotime($p->tgl_daftar));
-            $c[14] = $p->penanggung_jawab;
-            $c[15] = $p->umur_pj;
-            $c[16] = $p->pekerjaan_pj;
-            $c[17] = $p->alamat_pj;
-            $c[18] = $p->no_penanggung_jawab;
-            $c[19] = $p->hub_keluarga;
-            $c[20] = $p->tujuan_daftar;
-            $c[21] = $p->tujuan_daftar;
-            $c[22] = $p->sdmrs;
             $data = [
                 "status" => true,
                 "p" => $p,
+                "d" => $d
             ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/masuk_rj/masuk_rj_cetak", $data);
         } else {
             $data = [
                 "status" => false
             ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/masuk_rj/masuk_rj_cetak_master", $data);
         }
-        $data['c'] = $c;
 
-        $this->load->view($this->folder . "/" . $this->subfolder . "/masuk_rj/masuk_rj_cetak", $data);
     }
 
     public function setuju_umum($idx = "", $id = "")
@@ -457,6 +413,7 @@ class Rajal extends CI_Controller
             "kontrol_tujuan" => $this->input->post("kontrol_tujuan_m"),
             "pj" => $this->input->post("pj_m"),
             "pj_detail" => $this->input->post("pj_detail_m"),
+            "pj_nama" => $this->input->post("pj_nama_m"),
             "dokter" => $this->input->post("dokter_m"),
             "dokter_id" => $this->input->post("dokter_id_m"),
             "created_at" => date("Y-m-d h:i:s"),
@@ -472,6 +429,14 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status" => false]);
         }
+    }
+
+    public function edit_awal_medis() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getAwalMedisById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
     }
 
     public function delete_kaji_awal_medis($idx, $id)
@@ -720,5 +685,11 @@ class Rajal extends CI_Controller
         $nomr = $this->input->post("nomr");
         $list = $this->erm->getPendaftaranListByTipe($nomr,"RJ");
         echo json_encode(["status"=>true,"list"=> $list]);
+    }
+
+    public function get_tenaga_medis() {
+        $pil = $this->input->post("pil");
+        $list = getPegawai([$pil])->result();
+        echo json_encode(["status"=>true,"data"=>$list]);
     }
 }

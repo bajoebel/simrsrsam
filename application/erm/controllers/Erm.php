@@ -148,7 +148,8 @@ class Erm extends CI_Controller
                 'pasien' => $pasien,
                 "ta" => $ta,
                 "ruang" => get_list_ruang("RJ"),
-                "dpjp" => get_list_dpjp()
+                "dpjp" => get_list_dpjp(),
+                "profesi" => get_list_profesi(1)
             );
 
             $view = array(
@@ -174,7 +175,8 @@ class Erm extends CI_Controller
         $d = $this->erm_model->getPendaftaran($idx);
         $data = [
             "pil" => $pil,
-            "jns_layanan" => "RJ"
+            "jns_layanan" => "RJ",
+            "detail" => $d
         ];
         if ($pil == 1) {
             $data['list'] = $this->rajal->masukRajal($d->nomr,$idx);

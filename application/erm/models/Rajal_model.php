@@ -106,7 +106,7 @@ class Rajal_model extends CI_Model
         $db2 = $this->load->database('dberm', TRUE);
         $idx = $data['idx'];
         $nomr = $data['nomr'];
-        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_awal_rawat")->num_rows();
+        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_awal_medis")->num_rows();
         if ($cek > 0) {
             unset($data["idx"]);
             unset($data["nomr"]);

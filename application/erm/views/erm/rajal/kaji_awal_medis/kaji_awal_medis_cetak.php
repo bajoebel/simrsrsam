@@ -186,7 +186,7 @@ $date = date("Y-m-d");
                         <tr>
                         <tr>
                             <td>
-                                <span>Tanggal : <?= str_pad(" ", 40, ".") ?></span><span style="margin-left:4mm">Jam: <?= str_pad(" ", 40, ".") ?> WIB</span>
+                                <span>Tanggal : <?= dateToIndo($k->tgl) ?></span><span style="margin-left:4mm">Jam: <?= $k->jam ?> WIB</span>
                             </td>
                         </tr>
                     </table>
@@ -282,7 +282,7 @@ $date = date("Y-m-d");
                                                 <td height="50px">&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td>( <?= str_pad(" ", 150, ".") ?> )</td>
+                                                <td>( <?= str_pad($k->pj_nama, 20, ".",STR_PAD_BOTH) ?> )</td>
                                             </tr>
                                             <tr>
                                                 <td><i>diisi nama lengkap pasien / keluarga</i></td>

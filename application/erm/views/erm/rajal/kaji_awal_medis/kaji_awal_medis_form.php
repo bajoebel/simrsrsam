@@ -105,22 +105,22 @@
             <table class="fisik">
                 <tr>
                     <td width="100px">TD</td>
-                    <td><input type="text" name="td_m" id="td_m" class="custom-input w-100" value="110/80"></td>
+                    <td><input type="text" name="td_m" id="td_m" class="custom-input w-100"></td>
                     <td>mmHG</td>
                 </tr>
                 <tr>
                     <td>Nadi</td>
-                    <td><input type="text" name="nadi_m" id="nadi_m" class="custom-input w-50" value="10"></td>
+                    <td><input type="text" name="nadi_m" id="nadi_m" class="custom-input w-50"></td>
                     <td>x/i</td>
                 </tr>
                 <tr>
                     <td>Pernapasan</td>
-                    <td><input type="text" name="napas_m" id="napas_m" class="custom-input w-50" value="40"></td>
+                    <td><input type="text" name="napas_m" id="napas_m" class="custom-input w-50"></td>
                     <td>x/i</td>
                 </tr>
                 <tr>
                     <td>Suhu</td>
-                    <td><input type="text" name="suhu_m" id="suhu_m" class="custom-input w-50" value="30"></td>
+                    <td><input type="text" name="suhu_m" id="suhu_m" class="custom-input w-50"></td>
                     <td>&deg;C</td>
                 </tr>
             </table>
@@ -132,26 +132,25 @@
     <b>Diagnosis Kerja</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
+            <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control"></textarea>
         </div>
     </div>
     <b>Diagnosis Banding</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
+            <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control"></textarea>
         </div>
     </div>
     <b>Pemeriksaan Penunjang</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            </textarea>
+            <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control"></textarea>
         </div>
     </div>
     <b>THERAPI/TINDAKAN</b>
     <div class="form-group row">
         <div class="col-md-12">
-            <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </textarea>
+            <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control"></textarea>
         </div>
     </div>
     <div class="form-group row">
@@ -186,17 +185,19 @@
         <div class="col-md-12">
             <label for="">Telah di jelaskan kepada</label>
             <label class="radio-inline">
-                <input type="radio" name="pj_m" value="pasien">Pasien
+                <input type="radio" name="pj_m" value="pasien" checked>Pasien
             </label>
             <label class="radio-inline">
                 <input type="radio" name="pj_m" value="keluarga">Keluarga, Hubungan <input type="text" name="pj_detail_m" id="pj_detail_m" class="custom-input w-200" readonly>
             </label>
+            <label for="">Nama</label>
+            <input type="text" nama="pj_nama_m" id="pj_nama_m" class="custom-input w-200">
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
             <label for="">DPJP</label>
-            <select name="dokter_id_m" id="dokter_id_m" class="form-control select2">
+            <select name="dokter_id_m" id="dokter_id_m" class="form-control select2" style="width:100%">
                 <?php $list = getPegawai([1,2])->result();
                     echo "<option value=''>Pilih Nama Dokter</option>";
                     foreach ($list as $r) { ?>
@@ -243,10 +244,12 @@
 
         $("input[name=pj_m][value='keluarga']").click(function() {
             $("#pj_detail_m").removeAttr("readonly").focus();
+            $("#pj_nama_m").val("");
         })
-
+        
         $("input[name=pj_m][value='pasien']").click(function() {
             $("#pj_detail_m").attr("readonly", true).val("");
+            $("#pj_nama_m").val("<?=$p->nama?>");
         })
 
 
