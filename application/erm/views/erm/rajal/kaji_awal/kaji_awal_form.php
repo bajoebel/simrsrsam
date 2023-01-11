@@ -730,6 +730,9 @@
         CKEDITOR.replace('diagnosa_keperawatan_ka')
         CKEDITOR.replace('tindakan_keperawatan_ka')
 
+        $("#poli_ka").val("<?=$detail->id_ruang?>");
+        $("#dpjp_ka").val("<?=$detail->dokterJaga?>");
+
         $(".rujukan_ka_lainnya").change(function() {
             if ($(this).is(":checked")) {
                 $("[name='rujukan_lainnya_ka']").removeAttr("readonly").focus();

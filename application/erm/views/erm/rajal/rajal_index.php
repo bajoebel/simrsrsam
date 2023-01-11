@@ -425,7 +425,23 @@
                 {
                     name : "pj_nama_m",
                     value : $("#pj_nama_m").val()
-                }
+                },
+                {
+                    name : "diagnosis_kerja_mt",
+                    value : CKEDITOR.instances.diagnosis_kerja_m.getData()
+                },
+                {
+                    name : "diagnosis_banding_mt",
+                    value : CKEDITOR.instances.diagnosis_banding_m.getData()
+                },
+                {
+                    name : "penunjang_mt",
+                    value : CKEDITOR.instances.penunjang_m.getData()
+                },
+                {
+                    name : "terapi_mt",
+                    value : CKEDITOR.instances.terapi_m.getData()
+                },
             ];
             data_form = $.merge(data_form, data_push)
             // console.log($("#pj_nama_m").val())
