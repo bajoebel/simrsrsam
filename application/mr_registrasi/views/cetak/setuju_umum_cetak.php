@@ -168,15 +168,15 @@ $date = date("Y-m-d");
                             <table>
                                 <tr>
                                     <td>No.Rekam Medis</td>
-                                    <td>: <?= $nomr ?></td>
+                                    <td>: <?= $s->nomr ?></td>
                                 </tr>
                                 <tr>
                                     <td>Nama Lengkap</td>
-                                    <td>: <?= $nama ?></td>
+                                    <td>: <?= $s->nama ?></td>
                                 </tr>
                                 <tr>
                                     <td>Tempat / Tanggal Lahir</td>
-                                    <td>: <?= $tempat_lahir ."/".longDate($tanggal_lahir) ?></td>
+                                    <td>: <?= $s->tempat_lahir ."/".longDate($tanggal_lahir) ?></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>

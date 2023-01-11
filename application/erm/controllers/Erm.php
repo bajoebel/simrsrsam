@@ -125,6 +125,7 @@ class Erm extends CI_Controller
             $detail = $this->erm_model->getPendaftaran($idx);
             $folder = "rajal";
             $pasien = array();
+            $s = $this->rajal->getSetujuUmumByIdx($idx);
             if (!empty($detail)) {
                 if ($detail->jns_layanan == "PJ") $folder = 'penunjang';
                 else if ($detail->jns_layanan == "GD") $folder = 'igd';
@@ -149,7 +150,8 @@ class Erm extends CI_Controller
                 "ta" => $ta,
                 "ruang" => get_list_ruang("RJ"),
                 "dpjp" => get_list_dpjp(),
-                "profesi" => get_list_profesi(1)
+                "profesi" => get_list_profesi(1),
+                's' => $s
             );
 
             $view = array(

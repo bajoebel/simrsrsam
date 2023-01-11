@@ -37,7 +37,6 @@
                     <th style="width: 10px">#</th>
                     <th>Nama</th>
                     <th>Tanggal</th>
-                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 <?php $no = 1;
@@ -47,21 +46,8 @@
                         <td><?= $r->nama ?></td>
                         <td><?= $r->created_at ?></td>
                         <td>
-                            <?php
-                            if ($r->status == 1) {
-                                echo "<span class='badge bg-green'>Approved</span>";
-                            } else {
-                                echo "<span class='badge '>Waiting</span>";
-                            }
-                            ?>
-                        </td>
-                        <td>
                             <a href="<?= base_url() . 'erm.php/rajal/setuju_umum/' . $r->idx . "/" . $r->id ?>" class='btn btn-xs btn-default' data-toggle="tooltip" data-placement="top" title="Preview" target="_blank"> <i class='fa fa-print'></i>
                             </a>
-                            <?php if($detail->status_erm!=1) { ?>
-                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-xs btn-danger' onclick="hapusSetujuUmum(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
-                            </button>
-                            <?php } ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -174,12 +160,12 @@
             <div class="panel box box-success">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                            <?= DateToIndo($r->tgl) . " - " . $r->jam . " - " . $r->jenis_tenaga_medis . " - " . $r->nama_tenaga_medis ?>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#kb_<?=$r->id?>" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->tgl) . " - " . $r->jam . " - " . $r->jenis_tenaga_medis . " - " . $r->tenaga_medis ?>
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div id="kb_<?=$r->id?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
                         <strong>Subyektif</strong><br />
                         <p><?= $r->subyektif ?></p>
@@ -199,7 +185,7 @@
                             <i class="fa fa-print"></i>
                         </a>
                         <?php if($detail->status_erm!=1) { ?>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-primary' onclick="editKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>

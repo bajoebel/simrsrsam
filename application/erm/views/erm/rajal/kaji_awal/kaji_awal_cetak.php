@@ -567,29 +567,29 @@ $date = date("Y-m-d");
                                 <td>Telah dijelaskan dan dipahami kepada <br><?= "&#9745".$k->dijelaskan?> <?= ($k->dijelaskan=="Keluarga")?", Hubungan $k->dijelaskan_hubungan":"" ?></td>
                             </tr>
                             <tr>
-                                <td height="50px">&nbsp;</td>
+                                <td height="40px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= str_pad(" ", 100, ".") ?> )</td>
+                                <td>( <?= str_pad(($k->dijelaskan=="Pasien")?$d->nama_pasien:$k->dijelaskan_nama, 20, " ",STR_PAD_BOTH) ?> )</td>
                             </tr>
                             <tr>
-                                <td>diisi nama lengkap pasien/keluarga</td>
+                                <td>Nama lengkap pasien/keluarga</td>
                             </tr>
                         </table>
                     </div>
                     <div class="pasien">
                         <table style="margin-top:0px">
                             <tr>
-                                <td>Tanggal <?= str_pad(" ", 30, ".") ?> Jam <?= str_pad(" ", 30, ".") ?></td>
+                                <td>Tanggal <?= dateToIndo($k->tgl) ?> Jam <?= $k->jam ?></td>
                             </tr>
                             <tr>
                                 <td>Perawat yang melakukan pengkajian<br>&nbsp</td>
                             </tr>
                             <tr>
-                                <td height="50px">&nbsp;</td>
+                                <td height="40px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= str_pad(" ", 100, ".") ?> )</td>
+                                <td>( <?= str_pad($k->perawat, 20, ".") ?> )</td>
                             </tr>
                             <tr>
                                 <td>Diisi nama lengkap dan gelar</td>

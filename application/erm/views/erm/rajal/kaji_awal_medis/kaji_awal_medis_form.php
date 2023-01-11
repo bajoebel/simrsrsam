@@ -211,6 +211,13 @@
     $(document).ready(function() {
         // $("[name='auto_detail_m'],[name='allo_detail_m']").wysihtml5();
         // $("#tgl_m").on("change")
+
+        CKEDITOR.replace("diagnosis_kerja_m")
+        CKEDITOR.replace("diagnosis_banding_m")
+        CKEDITOR.replace("penunjang_m")
+        CKEDITOR.replace("terapi_m")
+
+        $("#dokter_id_m").val("<?=$detail->dokterJaga?>").trigger("change")
         // auto
         $("[name='auto_m']").change(function() {
             if ($(this).is(":checked")) {

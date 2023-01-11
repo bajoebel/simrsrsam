@@ -42,7 +42,7 @@
 <div class="form-group row">
     <div class="col-md-6">
         <label for="nama_ttd">Poliklinik </label>
-        <select name="poli_ka" id="poli_ka" class="form-control select2">
+        <select name="poli_ka" id="poli_ka" class="form-control select2" style="width:100%">
             <option value="">== Pilih ==</option>
             <?php foreach ($ruang as $r) { ?>
                 <option value="<?= $r->idx ?>"><?= $r->ruang ?></option>
@@ -51,7 +51,7 @@
     </div>
     <div class="col-md-6">
         <label for="nama_ttd">DPJP </label>
-        <select name="dpjp_ka" id="dpjp_ka" class="form-control select2">
+        <select name="dpjp_ka" id="dpjp_ka" class="form-control select2" style="width:100%">
             <option value="">== Pilih ==</option>
             <?php foreach ($dpjp as $r) { ?>
                 <option value="<?= $r->NRP ?>"><?= $r->pgwNama ?></option>
@@ -689,7 +689,7 @@
 </div>
 <div class="form-group row">
     <div class="col-md-12">
-        <label for="diagonosa_keperawatan_ka">Diagnosa Keperawatan</label>
+        <label for="diagnosa_keperawatan_ka">Diagnosa Keperawatan</label>
         <textarea name="diagnosa_keperawatan_ka" id="diagnosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea>
     </div>
 </div>
@@ -707,7 +707,7 @@
             <input type="radio" name="dijelaskan_ka" value="Pasien">Pasien
         </label>
         <label class="radio-inline">
-            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly>
+            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly> Nama <input type="text" name="dijelaskan_nama_ka" id="dijelaskan_nama_ka" class="custom-input w-200" readonly>
         </label>
     </div>
 </div>
@@ -726,7 +726,12 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
+        // $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
+        CKEDITOR.replace('diagnosa_keperawatan_ka')
+        CKEDITOR.replace('tindakan_keperawatan_ka')
+
+        $("#poli_ka").val("<?=$detail->id_ruang?>");
+        $("#dpjp_ka").val("<?=$detail->dokterJaga?>");
 
         $(".rujukan_ka_lainnya").change(function() {
             if ($(this).is(":checked")) {
@@ -840,8 +845,10 @@
             // console.log(this.value)
             if ($(this).val() == "Keluarga") {
                 $("[name='dijelaskan_hubungan_ka']").removeAttr("readonly").focus();
+                $("[name='dijelaskan_nama_ka']").removeAttr("readonly");
             } else {
                 $("[name='dijelaskan_hubungan_ka']").attr("readonly", true).val("");
+                $("[name='dijelaskan_nama_ka']").attr("readonly", true).val("");
             }
         });
         
