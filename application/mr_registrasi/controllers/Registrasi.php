@@ -475,16 +475,6 @@ class registrasi extends CI_Controller
         }
         echo json_encode($response);
     }
-    function cobakirim($idx){
-        $this->load->helper('http');
-                                            $kirim=$this->db->query("SELECT id_daftar AS kode_booking,`nama_pasien` AS nama,
-                                            CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()),' Tahun ',TIMESTAMPDIFF(MONTH, `tgl_lahir`, CURDATE()) MOD TIMESTAMPDIFF(YEAR, `tgl_lahir`, CURDATE()),' Bulan') AS umur,
-                                            'ONSITE' AS cara_daftar,(CASE WHEN(`tgl_daftar`=DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d')) THEN 'baru' ELSE 'lama' END) AS jenis_pasien ,dokterJaga AS nrpdokter,tgl_masuk AS tgllayanan
-                                            FROM `tbl02_pendaftaran` WHERE idx=".$idx)->row_array();
-                                            // print_r($kirim);
-                                            $res= httprequest($kirim,"http://localhost/wsonline/simrs/registrasi","","POST");
-                                            echo $res;
-    }
     
     function cetakulang()
     {
