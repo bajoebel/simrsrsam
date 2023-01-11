@@ -438,6 +438,10 @@
 
         // insert perkembangan pasien terintegrasi
         $("#form-data-kembang-pasien").on("submit", function(e) {
+            if ($("#jenis_tenaga_medis_id_k").val()=="") {
+                alert("Profesional wajib diisi")
+                return false;
+            }
             e.preventDefault();
             var data_form = $(this).serializeArray();
             var data_push = [{
@@ -445,9 +449,32 @@
                     value: $("#jenis_tenaga_medis_id_k option:selected").text()
                 },
                 {
-                    name: "nama_tenaga_medis_k",
+                    name: "tenaga_medis_k",
                     value: $("#tenaga_medis_id_k option:selected").text()
-                }
+                },
+                {
+                    name : "subyektif_kt",
+                    value : CKEDITOR.instances.subyektif_k.getData()
+                },{
+                    name : "obyektif_kt",
+                    value : CKEDITOR.instances.obyektif_k.getData()
+                },
+                {
+                    name : "assesment_kt",
+                    value : CKEDITOR.instances.assesment_k.getData()
+                },
+                {
+                    name : "planning_kt",
+                    value : CKEDITOR.instances.planning_k.getData()
+                },
+                {
+                    name : "instruksi_kt",
+                    value : CKEDITOR.instances.instruksi_k.getData()
+                },
+                {
+                    name : "review_kt",
+                    value : CKEDITOR.instances.review_k.getData()
+                },
             ];
             data_form = $.merge(data_form, data_push)
             // console.log(data_form);
@@ -463,7 +490,8 @@
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
-                    // $('#form-data-kembang-pasien')[0].reset();
+                    resetKembangPasien()
+                    // $('#subyektif_k,#obyektif_k,#assesment_k,#planning_k,#instruksi_k,#review_k').text("")
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(5, <?= $detail->idx ?>);
@@ -593,25 +621,44 @@
         });
     }
 
-    function hapusSetujuUmum(idx, id) {
-        var x = confirm("Yakin Ingin Hapus Data");
-        if (x) {
-            $.ajax({
-                type: "GET",
-                url: base_url + `rajal/delete_setuju_umum/${idx}/${id}`,
-                data: "data",
-                dataType: "json",
-                success: function(response) {
-                    if (response.status) {
-                        getRiwayat(2, idx);
-                    }
-                },
-                error: function(e) {
-                    console.log(e.responseText);
-                }
-            });
-        }
+    function editKembangPasien(idx,id,nomr) {
+        $.ajax({
+            type: "POST",
+            url: base_url+"rajal/edit_kembang_pasien",
+            data: {
+                idx : idx,
+                id : id,
+                nomr : nomr
+            },
+            dataType: "JSON",
+            success: function (response) {
+                let data = response.data;
+                console.log(data.tenaga_medis_id)
+                $("[name='id_kembang_pasien']").val(data.id);
+                $("[name='tgl_k']").val(data.tgl);
+                $("[name='jam_k']").val(data.jam);
+                $("[name='jenis_tenaga_medis_id_k']").val(data.jenis_tenaga_medis_id);
+                //$("[name='tenaga_medis_id_k']").val(data.tenaga_medis_id).trigger("change");
+                // $("subyektif_k").text(data.subyektif);
+                CKEDITOR.instances['subyektif_k'].setData(data.subyektif)
+                CKEDITOR.instances['obyektif_k'].setData(data.obyektif)
+                CKEDITOR.instances['assesment_k'].setData(data.assesment)
+                CKEDITOR.instances['planning_k'].setData(data.planning)
+                CKEDITOR.instances['instruksi_k'].setData(data.instruksi)
+                CKEDITOR.instances['review_k'].setData(data.review)
+                // $("#obyektif_k").text(data.obyektif);
+                // $("#assesment_k").text(data.assesment);
+                // $("#planning_k").text(data.planning);
+                // $("#instruksi_k").text(data.instruksi);
+                // $("#review_k").text(data.review);
+                list_tenaga_medis(data.jenis_tenaga_medis_id,data.tenaga_medis_id);
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
     }
+
 
     function hapusAwalRawat(idx, id) {
         var x = confirm("Yakin Ingin Hapus Data");
@@ -809,6 +856,17 @@
         var url = base_url + 'erm/detail?idx=' + a;
         // window.location.href = url;
         window.open(url,'_blank',"left=800,top=100,width=800,height=400");
+    }
+
+    function resetKembangPasien() {
+        $('#form-data-kembang-pasien')[0].reset();
+        CKEDITOR.instances['subyektif_k'].setData('');
+        CKEDITOR.instances['obyektif_k'].setData('');
+        CKEDITOR.instances['assesment_k'].setData('');
+        CKEDITOR.instances['planning_k'].setData('');
+        CKEDITOR.instances['instruksi_k'].setData('');
+        CKEDITOR.instances['review_k'].setData('');
+        $("[name='id_kembang_pasien']").val("");
     }
  
 </script>

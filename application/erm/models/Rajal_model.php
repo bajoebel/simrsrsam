@@ -31,6 +31,14 @@ class Rajal_model extends CI_Model
             ->get("rj_setuju_umum")->row();
     }
 
+    function getSetujuUmumByIdx($idx)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->where(["idx" => $idx])
+            ->order_by("id desc")
+            ->get("rj_setuju_umum")->row();
+    }
+
     function deleteSetujuUmum($idx, $id)
     {
         $db2 = $this->load->database('dberm', TRUE);
@@ -134,10 +142,22 @@ class Rajal_model extends CI_Model
             ->get("rj_ppt");
     }
 
+    function getKembangPasienById($nomr, $idx,$id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->where(['id' => $id,'nomr'=>$nomr,'idx'=>$idx])
+            ->get("rj_ppt")->row();
+    }
+
     function insertKembangPasien($data)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->insert("rj_ppt", $data);
+        $id = $this->input->post("id_kembang_pasien");
+        if ($id!="") {
+            return $db2->where("id", $id)->update("rj_ppt", $data);
+        } else {
+            return $db2->insert("rj_ppt", $data);
+        }
     }
 
     function deleteKembangPasien($idx, $id)

@@ -43,72 +43,23 @@ class Rajal extends CI_Controller
         $d = $this->erm->getPendaftaran($idx);
         // data pasien
         $p = $this->erm->getPasien($d->nomr);
-
-        $c = [
-            1 => "", // nomor rekam medis
-            2 => "", // nama pasien
-            3 => "", // tanggal lahir
-            4 => "", // jenis kelamin
-            5 => "", // nama ttd
-            6 => "", // tempat tanggal lahir ttd
-            7 => "", // alamat
-            8 => "", // no telp
-            9 => "", // selaku
-            10 => "", // privasi list
-            11 => "", // 
-            12 => "", // 
-            13 => "", // 
-            14 => "", // 
-            15 => "", // 
-        ];
         if ($idx != "" && $id != "") {
 
             // data table setuju umum
             $s = $this->rajal->getSetujuUmumById($idx, $id);
-            if ($s->selaku == "lainnya") {
-                $s->selaku = $s->selaku_lainnya;
-            }
-            // $arr_privasi = explode(";", $s->privasi_list);
-            // $privasi = "";
-            // for ($ap = 1; $ap < count($arr_privasi); $ap++) {
-            //     $privasi .= "<span>&nbsp;&nbsp;&nbsp;" . $ap . ". " . $arr_privasi[$ap] . " </span><br/>";
-            // }
-            $privasi_list = arr_to_list($s->privasi_list);
-            if ($s->terbatas == 1) {
-                $terbatas = "&#9745;";
-            } else {
-                $terbatas = "&#9744;";
-            }
-            $terbatas_list = arr_to_list($s->terbatas_list);
-            $c[1] = $p->nomr;
-            $c[2] = $p->nama;
-            $c[3] = date("d-m-Y", strtotime($p->tgl_lahir));
-            $c[4] = jns_kelamin($p->jns_kelamin);
-            $c[5] = $s->nama;
-            $c[6] = $s->tempat_lahir . "/" . date("d-m-Y", strtotime($s->tanggal_lahir));
-            $c[7] = $s->alamat;
-            $c[8] = $s->phone;
-            $c[9] = $s->selaku;
-            $c[10] = $privasi_list;
-            $c[11] = $terbatas;
-            $c[12] = $terbatas_list;
-            $c[13] = $s->selaku;
-            $c[14] = strtoupper($s->nama);
-            $c[15] = getNamaDokter($d->user_daftar);
-
-
             $data = [
                 "status" => true,
+                "d" => $d,
                 "p" => $p,
                 "s" => $s
             ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/setuju_umum/setuju_umum_cetak", $data);
         } else {
             $data = [
                 "status" => false
             ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/setuju_umum/setuju_umum_cetak_master", $data);
         }
-        $data['c'] = $c;
-        $this->load->view($this->folder . "/" . $this->subfolder . "/setuju_umum/setuju_umum_cetak", $data);
     }
     public function insert_setuju_umum()
     {
@@ -484,14 +435,14 @@ class Rajal extends CI_Controller
             "jam" => $this->input->post("jam_k"),
             "jenis_tenaga_medis_id" => $this->input->post("jenis_tenaga_medis_id_k"),
             "jenis_tenaga_medis" => $this->input->post("jenis_tenaga_medis_k"),
-            "nama_tenaga_medis_id" => $this->input->post("nama_tenaga_medis_id_k"),
-            "nama_tenaga_medis" => $this->input->post("nama_tenaga_medis_k"),
-            "subyektif" => $this->input->post("subyektif_k"),
-            "obyektif" => $this->input->post("obyektif_k"),
-            "assesment" => $this->input->post("assesment_k"),
-            "planning" => $this->input->post("planning_k"),
-            "instruksi" => $this->input->post("instruksi_k"),
-            "review" => $this->input->post("review_k"),
+            "tenaga_medis_id" => $this->input->post("tenaga_medis_id_k"),
+            "tenaga_medis" => $this->input->post("tenaga_medis_k"),
+            "subyektif" => $this->input->post("subyektif_kt"),
+            "obyektif" => $this->input->post("obyektif_kt"),
+            "assesment" => $this->input->post("assesment_kt"),
+            "planning" => $this->input->post("planning_kt"),
+            "instruksi" => $this->input->post("instruksi_kt"),
+            "review" => $this->input->post("review_kt"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_k")
@@ -505,6 +456,14 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status" => false]);
         }
+    }
+
+    public function edit_kembang_pasien() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getKembangPasienById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
     }
 
     public function delete_kembang_pasien($idx, $id)

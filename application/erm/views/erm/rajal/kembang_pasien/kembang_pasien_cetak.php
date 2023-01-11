@@ -199,12 +199,12 @@ $date = date("Y-m-d");
                         <?php foreach ($k->result() as $r) { ?>
                             <tr>
                                 <td><?= dateToIndo($r->tgl)." / ".$r->jam ?></td>
-                                <td><?= $r->jenis_tenaga_medis." - ".$r->nama_tenaga_medis ?></td>
+                                <td><?= $r->jenis_tenaga_medis." - ".$r->tenaga_medis ?></td>
                                 <td>
-                                    S : <?= $r->subyektif ?>
-                                    O : <?= $r->obyektif ?>
-                                    A :<?= $r->assesment ?>
-                                    P : <?= $r->planning ?>
+                                    <b>S</b> : <?= str_replace("<p>","",str_replace("</p>","<br/>",$r->subyektif)) ?>
+                                    <b>O</b> : <?= str_replace("<p>","",str_replace("</p>","<br/>",$r->obyektif))?>
+                                    <b>A</b> :<?= str_replace("<p>","",str_replace("</p>","<br/>",$r->assesment)) ?>
+                                    <b>P</b>: <?= str_replace("<p>","",str_replace("</p>","<br/>",$r->planning)) ?>
                                 </td>
                                 <td>
                                     <?= $r->instruksi?>

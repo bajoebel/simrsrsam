@@ -54,6 +54,7 @@
         <input type="hidden" name="nomr_k" value="<?= $detail->nomr ?>">
         <input type="hidden" name="nama_k" value="<?= $detail->nama_pasien ?>">
         <input type="hidden" name="user_daftar_k" value="<?= $detail->user_daftar ?>">
+        <input type="hidden" name="id_kembang_pasien" id="id_kembang_pasien" value="">
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="">Tanggal</label>
@@ -139,27 +140,44 @@
 </form>
 <script>
     $(document).ready(function() {
-        $('#subyektif_k,#obyektif_k,#assesment_k,#planning_k,#instruksi_k,#review_k').wysihtml5()
+        // $('#subyektif_k,#obyektif_k,#assesment_k,#planning_k,#instruksi_k,#review_k').wysihtml5()
+        CKEDITOR.replace('subyektif_k')
+        CKEDITOR.replace('obyektif_k')
+        CKEDITOR.replace('assesment_k')
+        CKEDITOR.replace('planning_k')
+        CKEDITOR.replace('instruksi_k')
+        CKEDITOR.replace('review_k')
+
+        // CKEDITOR.replace('#subyektif_k')
         $('#jenis_tenaga_medis_id_k').change(function() {
             pil = this.value;
-            $.ajax({
-                type: "POST",
-                url: base_url+"rajal/get_tenaga_medis",
-                data: {
-                    "pil" : pil
-                },
-                dataType: "json",
-                success: function (response) {
-                    let data = response.data;
-                    let html =`<option value=''></option>`;
-                    $.each(data,function (k,v) {
-                        html+=`<option value="${v.NRP}">${v.pgwNama}</option>`;
-                    })
-                    $("#tenaga_medis_id_k").html(html);
-                }
-            });
+            id = "";
+            list_tenaga_medis(pil,id)
         })
     });
-
+    function list_tenaga_medis(pil,id) {
+        $.ajax({
+            type: "POST",
+            url: base_url+"rajal/get_tenaga_medis",
+            data: {
+                "pil" : pil
+            },
+            dataType: "json",
+            success: function (response) {
+                let data = response.data;
+                let html =`<option value=''></option>`;
+                $.each(data,function (k,v) {
+                    // console.log(id+"--"+v.NRP);
+                    if (id==v.NRP) {
+                        // console.log("ini sama")
+                        html+=`<option value="${v.NRP}" selected="selected">${v.pgwNama}</option>`;
+                    } else {
+                        html+=`<option value="${v.NRP}">${v.pgwNama}</option>`;
+                    }
+                })
+                $("#tenaga_medis_id_k").html(html);
+            }
+        });
+    }
 </script>
 </script>

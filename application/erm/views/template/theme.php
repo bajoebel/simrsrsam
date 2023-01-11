@@ -29,6 +29,10 @@
     <script src="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url() ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
     <script src="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/bower_components/ckeditor4/ckeditor.js"></script>
+    <!-- <script src="<?php echo base_url() ?>assets/bower_components/ckeditor4/adapters/jquery.js"></script> -->
+
+    
     <!--[if lt IE 9]>
     <script src="<?php echo base_url() ?>assets/js/html5shiv.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/respond.min.js"></script>

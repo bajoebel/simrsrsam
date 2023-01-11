@@ -46,9 +46,9 @@ $date = date("Y-m-d");
         .kode {
             margin-top: 10px;
             margin-right: 50px;
-            width: 40%;
+            width: 50%;
             float: right;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
         }
 
@@ -70,13 +70,13 @@ $date = date("Y-m-d");
         }
 
         .logo img {
-            height: 90px;
+            height: 70px;
         }
 
         .info {
             float: left;
-            padding-top: 20px;
-            font-size: 13px;
+            padding-top: 10px;
+            font-size: 10px;
         }
 
         #info {
@@ -91,6 +91,7 @@ $date = date("Y-m-d");
             font-family: Cambria, Georgia, serif;
             font-size: 12px;
             margin-top: 10px;
+            width:100%;
         }
 
         table tr td {
@@ -106,11 +107,44 @@ $date = date("Y-m-d");
             display: flex;
             justify-content: space-around;
         }
+        .olcostum {
+        counter-reset: item;
+        margin-left: -14px;
+        padding-left: 0;
+        }
+        .ol28{
+            margin-left: -28px;
+        }
+        .licostum {
+        display: block;
+        margin-bottom: .5em;
+        margin-left: 3em;
+        }
+        .licostum::before {
+        display: inline-block;
+        content: counter(item) ") ";
+        counter-increment: item;
+        width: 2em;
+        margin-left: -2em;
+        }
+        .baris {
+            margin-right: 0px;
+            margin-left: 0px;
+            width:800px;
+        }
+        .labelidentitas {
+            float:left;
+            width: 200px;
+        }
+        .keteranganidentitas {
+            float:left;
+            width: 500px;
+        }
     </style>
 </head>
 
-<body>
-    <table width="210mm" border="0">
+<body style="text-align:justify;">
+    <table style="width:180mm;" border="0">
         <tr>
             <td>
                 <div class="wrap">
@@ -134,100 +168,118 @@ $date = date("Y-m-d");
                             <table>
                                 <tr>
                                     <td>No.Rekam Medis</td>
-                                    <td>: <?= $c[1] ?></td>
+                                    <td>: <?= $p->nomr ?></td>
                                 </tr>
                                 <tr>
                                     <td>Nama Lengkap</td>
-                                    <td>: <?= $c[2] ?></td>
+                                    <td>: <?= $p->nama ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Lahir</td>
-                                    <td>: <?= $c[3] ?></td>
+                                    <td>Tempat / Tanggal Lahir</td>
+                                    <td>: <?= $d->tempat_lahir ."/".$d->tgl_lahir ?></td>
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin</td>
-                                    <td>: <?= $c[4] ?></td>
+                                    <td>: <?= ($d->jns_kelamin==1) ?"Laki-Laki": "Perempuan";?></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
                 <div class="content">
-                    <h3 style="font-family: Cambria,Georgia,serif;">Persetujuan Umum (General Consent)</h3>
-                    <table>
+                    
+                    <table style="width:180mm;">
+                        <tr>
+                            <td colspan="3" style="text-align:center;"><h3 style="font-family: Cambria,Georgia,serif;">Persetujuan Umum (General Consent)</h3></td>
+                        </tr>
                         <tr>
                             <td colspan='3'><b>PASIEN DAN ATAU WALI DIMINTA MEMBACA, MEMAHAMI DAN MENGISI INFORMASI BERIKUT</b></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <table style="margin-top:0">
-                                    <tr>
-                                        <td>Yang Bertanda Tangan Di Bawah Ini</td>
-                                        <td>: <?= $c[5] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tempat Tanggal Lahir / Jenis Kelamin</td>
-                                        <td>: <?= $c[6] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alamat</td>
-                                        <td>: <?= $c[7] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>No. Telp</td>
-                                        <td>: <?= $c[8] ?></td>
-                                    </tr>
-                                </table>
+                            <td colspan="3">
+                                <p>Yang Bertanda tangan dibawah ini :
+                                    <div class="baris">
+                                        <div class="labelidentitas">Nama </div>
+                                        <div class="keteranganidentitas">: <?= $s->namattd ?></div>
+                                    </div>
+                                    <br>
+                                    <div class="baris">
+                                        <div class="labelidentitas">Tempat / Tgl Lahir / Jenis Kelamin </div>
+                                        <div class="keteranganidentitas">: <?php ($s->jkttd==1) ? $s->jekel="Laki-Laki": $s->jekel="Perempuan"; ?><?= $s->tempat_lahirttd ."/".longDate($s->tanggal_lahirttd) ." / " .$s->jekel ?></div>
+                                    </div>
+                                    <br>
+                                    <div class="baris">
+                                        <div class="labelidentitas">Alamat </div>
+                                        <div class="keteranganidentitas">: <?= $s->alamatttd ?></div>
+                                    </div>
+                                    <br>
+                                    <div class="baris">
+                                        <div class="labelidentitas">Nomor Telpon </div>
+                                        <div class="keteranganidentitas">: <?= $s->phonettd ?></div>
+                                    </div>
+                                </p>    
+                                
                             </td>
-                            <td></td>
                         </tr>
                         <tr>
-                            <td colspan='3'>Selaku (<?= $c[9] ?>) dengan ini menyatakan persetujuan : </td>
+                            <td colspan='3'>Selaku (<?= $s->selaku_lainnya=="" ? $s->selaku : $s->selaku_lainnya ?>) dengan ini menyatakan persetujuan : </td>
                         </tr>
                         <tr>
                             <td colspan='3'>
-                                <b>1. PERSETUJUAN UNTUK PERAWATAN DAN PENGOBATAN</b>
-                                <br />
-                                <span>&nbsp;&nbsp; 1) Saya mengetahui bahwa saya memiliki kondisi yang membutuhkan perawatan medis, saya mengizinkan dokter dan profesional kesehatan lainnya untuk melakukan prosedur dignostik dan untuk memberikan pengobatan medis seperti yang diperlukan dalam penilaian profesional mereka.</span>
-                                <br />
-                                <span>&nbsp;&nbsp; 2) Saya sadar bahwa praktik kedokteran bukanlah ilmu pasti dan saya mengakui bahwa tidak ada jaminan atas hasil apapun, terhadap perawatan prosedur atau pemeriksaan apapun yang dilakukan kepada saya.</span>
-                                <br>
-                                <span>&nbsp;&nbsp; 3) Saya mengetahui bahwa RSUD Dr. Achmad Mochtar Bukittinggi merupakan Rumah Sakit yang dipakai untuk Pendidikan. Karena itu, saya menyetujui bila mahasiswa kedokteran dan profesi kesehatan lain berpartisipasi dalam perawatan saya, sepanjang dibawah supervise oleh supervisornya.</span>
-                                <br>
-                                <b>2. KEINGINAN PRIVASI</b>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;Saya (mengizinkan/ tidak mengizinkan)* Rumah Sakit Memberi akses bagi : Keluarga serta orang yang akan menengok /menemui saya.</span>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;Saya menginginkan privasi khusus berupa:</span>
-                                <br>
-                                <!-- <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
-                                <br>
-                                <span>&nbsp;&nbsp;&nbsp;2 <?= str_pad(" ", 30, ".") ?></span> -->
-                                <?= $c[10] ?>
-                                <!-- <br> -->
-                                <b>3. PERSETUJUAN PELEPASAN INFORMASI</b>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;• Saya memahami informasi yang ada di dalam diri saya termasuk diagnosis, hasil laboratorium dan hasil tes diagnosis yang akan digunakan untuk perawatan medis, RSUD Dr Achmad Mochtar Bukittinggi akan menjamin kerahasiannya. </span>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;• Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi tentang rahasia kedokteran saya bila diperlukan untuk memproses klaim asuransi dan atau lembaga pemerintah lainya.</span>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;• Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan (informasi / tidak)* tentang diagnosis, hasil pelayanan dan pengobatan saya kepada</span>
-                                <br />
-                                <span>&nbsp;&nbsp;<?= $c[11] ?>Terbatas Pada (sebutkan nama):</span>
-                                <br>
-                                <!-- <span>&nbsp;&nbsp;&nbsp;1 <?= str_pad(" ", 30, ".") ?></span>
-                                <br>
-                                <span>&nbsp;&nbsp;&nbsp;2 <?= str_pad(" ", 30, ".") ?></span>
-                                <br> -->
-                                <?= $c[12] ?>
-                                <b>4. INFORMASI TATA TERTIB BAGI PASIEN,PENGUNJUNG DAN PENUNGGU PASIEN</b>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;Saya telah menerima informasi tentang peraturan yang diberlakukan oleh Rumah Sakit dan saya beserta keluarga bersedia untuk mematuhinya, termasuk akan mematuhi jam berkunjung pasien sesuai dengan aturan di Rumah Sakit.</span>
-                                <br>
-                                <b>5. INFORMASI BIAYA</b>
-                                <br />
-                                <span>&nbsp;&nbsp;&nbsp;Sebagai peserta JKN/IKS saya bersedia mengurus jaminan rawat inap dalam waktu 3 hari kerja (terhitung mulai pasien masuk) dan apabila saya tidak mengurus dalam waktu tersebut diatas, saya bersedia terdaftar sebagai pasien Umum/Pribadi. Saya memahami tentang informasi biaya pengobatan atau biaya tindakanyang dijelaskan oleh petugas Rumah Sakit.</span>
-                                <br>
+                                <ol style="margin-left:-30px;">
+                                    <li><b>PERSETUJUAN UNTUK PERAWATAN DAN PENGOBATAN</b>
+                                        <ol class="olcostum">
+                                            <li class="licostum">Saya mengetahui bahwa saya memiliki kondisi yang membutuhkan perawatan medis, saya mengizinkan dokter dan profesional kesehatan lainnya untuk melakukan prosedur dignostik dan untuk memberikan pengobatan medis seperti yang diperlukan dalam penilaian profesional mereka.</li>
+                                            <li class="licostum">Saya sadar bahwa praktik kedokteran bukanlah ilmu pasti dan saya mengakui bahwa tidak ada jaminan atas hasil apapun, terhadap perawatan prosedur atau pemeriksaan apapun yang dilakukan kepada saya</li>
+                                            <li class="licostum">Saya mengetahui bahwa RSUD Dr. Achmad Mochtar Bukittinggi merupakan Rumah Sakit yang dipakai untuk Pendidikan. Karena itu, saya menyetujui bila mahasiswa kedokteran dan profesi kesehatan lain berpartisipasi dalam perawatan saya, sepanjang dibawah supervise oleh supervisornya.</li>
+                                        </ol>
+                                    </li>
+                                    <li><b>KEINGINAN PRIVASI</b>
+                                        <p>Saya <?= ($s->izinbesuk==1)?" Mengizinkan ":"Tidak Mengizinkan" ?>* Rumah Sakit Memberi akses bagi : Keluarga serta orang yang akan menengok /menemui saya.
+                                        <?php if(!empty($s->privasi_list)){ ?>
+                                        <br>Saya menginginkan privasi khusus berupa:
+                                        <ol class="ol28">
+                                        <?php 
+                                        $s->arrpriv=explode(';',$s->privasi_list);
+                                        foreach ($s->arrpriv as $p) {
+                                            ?>
+                                            <li><?= $p ?></li>
+                                            <?php
+                                        }
+                                        ?>
+                                        </ol>
+                                        <?php } ?>
+                                        </p>
+                                    </li>
+                                    <li><b>PERSETUJUAN PELEPASAN INFORMASI</b>
+                                        <ul class="ol28">
+                                            <li>Saya memahami informasi yang ada di dalam diri saya termasuk diagnosis, hasil laboratorium dan hasil tes diagnosis yang akan digunakan untuk perawatan medis, RSUD Dr Achmad Mochtar Bukittinggi akan menjamin kerahasiannya.</li>
+                                            <li>Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi tentang rahasia kedokteran saya bila diperlukan untuk memproses klaim asuransi dan atau lembaga pemerintah lainya.</li>
+                                            <li>Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan (informasi / tidak)* tentang diagnosis, hasil pelayanan dan pengobatan saya kepada<br>
+                                            <?php if(!empty($terbatas_list)){ ?>
+                                            <?= ($terbatas==1)?"&#9745;" : "&#9744" ?>Terbatas Pada (sebutkan nama):
+                                            <ol>
+                                                <?php 
+                                                $arrbatas=explode(";",$terbatas_list);
+                                                foreach ($arrbatas as $a ) {
+                                                    ?>
+                                                    <li><?= $a ?></li>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </ol>
+                                            <?php } ?>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><b>INFORMASI TATA TERTIB BAGI PASIEN,PENGUNJUNG DAN PENUNGGU PASIEN</b>
+                                        <br>Saya telah menerima informasi tentang peraturan yang diberlakukan oleh Rumah Sakit dan saya beserta keluarga bersedia untuk mematuhinya, termasuk akan mematuhi jam berkunjung pasien sesuai dengan aturan di Rumah Sakit.
+                                    </li>
+                                    <li><b>INFORMASI BIAYA</b>
+                                        <br>Sebagai peserta JKN/IKS saya bersedia mengurus jaminan rawat inap dalam waktu 3 hari kerja (terhitung mulai pasien masuk) dan apabila saya tidak mengurus dalam waktu tersebut diatas, saya bersedia terdaftar sebagai pasien Umum/Pribadi. Saya memahami tentang informasi biaya pengobatan atau biaya tindakanyang dijelaskan oleh petugas Rumah Sakit.
+                                    </li>
+                                </ol>
+                                
                             </td>
                         <tr>
                             <td colspan="3" style="text-align: center;"><b>Tanda Tangan</b></td>
@@ -246,20 +298,20 @@ $date = date("Y-m-d");
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td><?= ($c[13] == "") ? str_pad("dfsd", 40, ".") : $c[13] ?> dari Pasien</td>
+                                <td><?= ($s->selaku_lainnya == "") ? $s->selaku : $s->selaku_lainnya ?></td>
                             </tr>
                             <tr>
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= ($c[14] == "") ? str_pad(" ", 40, ".") : $c[14]  ?> )</td>
+                                <td>( <?= $s->namattd  ?> )</td>
                             </tr>
                         </table>
                     </div>
                     <div class="petugas">
                         <table style="margin-top:0px">
                             <tr>
-                                <td>Bukittinggi, <?php echo DateToIndo(date('Y-m-d')) ?></td>
+                                <td>Bukittinggi, <?php echo longDate(date('Y-m-d')) ?></td>
                             </tr>
                             <tr>
                                 <td>Petugas Admission</td>
@@ -268,7 +320,7 @@ $date = date("Y-m-d");
                                 <td height="50px">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>( <?= ($c[15] == "") ? str_pad(" ", 40, ".") : $c[15]  ?> )</td>
+                                <td>( <?= getNmLengkap($s->users_id) ?> )</td>
                             </tr>
                         </table>
                     </div>
