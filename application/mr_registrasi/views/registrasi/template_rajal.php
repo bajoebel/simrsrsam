@@ -2590,7 +2590,7 @@
         $('#id_rujuk').on('select2:select', function(e) {
             //$('#no_jaminan').focus();
             id_rujuk = $('#id_rujuk').val();
-            var url = base_url + "/patch/getpengirim/" + parseInt(id_rujuk);
+            var url = "<?= base_url() ."mr_registrasi.php"?>" + "/patch/getpengirim/" + parseInt(id_rujuk);
             console.log(url);
             $.ajax({
                 url: url,
