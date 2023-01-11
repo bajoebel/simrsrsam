@@ -335,38 +335,51 @@
         // insert data kaji awal keperawatan
         $("#form-data-kaji-awal").on("submit", function(e) {
             e.preventDefault();
+            if ($("#perawat_id_ka").val()=="") {
+                alert("Perawat Yang Melakukan Kajian Wajib Di ISI");
+                return false;
+            }
             var data_form = $(this).serializeArray();
             var data_push = [{
-                "name": "dpjp_text_ka",
-                "value": $("#dpjp_ka").select2("data")[0].text
-            }, {
-                "name": "poli_text_ka",
-                "value": $("#poli_ka").select2("data")[0].text
-            }, {
-                "name": "flacc_skor_ka",
-                "value": parseInt($("#skor_flacc").text())
-            }, {
-                "name": "flacc_skor_detail_ka",
-                "value": $("#skor_flacc_detail").text()
-            }, {
-                "name": "skor_gizi_ka",
-                "value": parseInt($("#skor_gizi").text())
-            }, {
-                "name": "gizi_detail_ka",
-                "value": $("#gizi_ka option:selected").text()
-            }, {
-                "name": "gizi_makan_detail_ka",
-                "value": $("#gizi_makan_ka option:selected").text()
-            }, {
-                "name": "gizi_makan_value_ka",
-                "value": source_gizi($("#gizi_makan_ka").val()).value
-            }, {
-                "name": "gizi_value_ka",
-                "value": source_gizi($("#gizi_ka").val()).value
-            }, {
-                "name": "perawat_ka",
-                "value": $("#perawat_id_ka").text()
-            }];
+                    "name": "dpjp_text_ka",
+                    "value": $("#dpjp_ka").select2("data")[0].text
+                }, {
+                    "name": "poli_text_ka",
+                    "value": $("#poli_ka").select2("data")[0].text
+                }, {
+                    "name": "flacc_skor_ka",
+                    "value": parseInt($("#skor_flacc").text())
+                }, {
+                    "name": "flacc_skor_detail_ka",
+                    "value": $("#skor_flacc_detail").text()
+                }, {
+                    "name": "skor_gizi_ka",
+                    "value": parseInt($("#skor_gizi").text())
+                }, {
+                    "name": "gizi_detail_ka",
+                    "value": $("#gizi_ka option:selected").text()
+                }, {
+                    "name": "gizi_makan_detail_ka",
+                    "value": $("#gizi_makan_ka option:selected").text()
+                }, {
+                    "name": "gizi_makan_value_ka",
+                    "value": source_gizi($("#gizi_makan_ka").val()).value
+                }, {
+                    "name": "gizi_value_ka",
+                    "value": source_gizi($("#gizi_ka").val()).value
+                }, {
+                    "name": "perawat_ka",
+                    "value": $("#perawat_id_ka option:selected").text()
+                },
+                {
+                    name : "diagnosa_keperawatan_kat",
+                    value : CKEDITOR.instances.diagnosa_keperawatan_ka.getData()
+                },
+                {
+                    name : "tindakan_keperawatan_kat",
+                    value : CKEDITOR.instances.tindakan_keperawatan_ka.getData()
+                }
+            ];
             data_form = $.merge(data_form, data_push)
             // console.log(data_push)
             // console.log(data_form);
@@ -396,6 +409,10 @@
         // insert data kaji awal medis
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
+            if ($("#dokter_id_m").val()=="") {
+                alert("DPJP wijib diisi");
+                return false;
+            }
             var data_form = $(this).serializeArray();
             var data_push = [{
                     name: "dokter_m",
@@ -440,6 +457,10 @@
         $("#form-data-kembang-pasien").on("submit", function(e) {
             if ($("#jenis_tenaga_medis_id_k").val()=="") {
                 alert("Profesional wajib diisi")
+                return false;
+            }
+            if ($("#tenaga_medis_id_k").val()=="") {
+                alert("Nama Profesional wajib diisi")
                 return false;
             }
             e.preventDefault();
@@ -867,6 +888,8 @@
         CKEDITOR.instances['instruksi_k'].setData('');
         CKEDITOR.instances['review_k'].setData('');
         $("[name='id_kembang_pasien']").val("");
+        $("[name='tenaga_medis_id_k']").val("");
+        $("[name='tenaga_medis_id_k']").val("");
     }
  
 </script>
