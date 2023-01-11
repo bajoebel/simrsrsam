@@ -419,14 +419,21 @@ class registrasi extends CI_Controller
                                         //Insert Data Antrian Poly
                                         if ($params['jns_layanan'] == "RJ") {
                                             $this->load->model('patch_model');
-                                                $antri = array(
-                                                    'id_daftar' => $resData["id_daftar"], 
-                                                    'no_antrian_poly' => $this->patch_model->getAntrianpoly($resData["id_ruang"]),
-                                                    'tanggal'=>date('Y-m-d'),
-                                                    'antrianruang'=>$resData["id_ruang"],
-                                                    'antriandokter'=>$resData["dokterJaga"]
-                                                );
-                                                $this->db->insert('tbl02_antrian', $antri);
+                                            $antri = array(
+                                                'id_daftar' => $resData["id_daftar"], 
+                                                'no_antrian_poly' => $this->patch_model->getAntrianpoly($resData["id_ruang"]),
+                                                'tanggal'=>date('Y-m-d'),
+                                                'antrianruang'=>$resData["id_ruang"],
+                                                'antriandokter'=>$resData["dokterJaga"]
+                                            );
+                                            $this->db->insert('tbl02_antrian', $antri);
+                                            // Kirim data pendaftaran ke server mobile rsam
+                                            $this->load->helper('http');
+                                            $kirim=$this->db->query("SELECT id_daftar AS kode_booking,`nama_pasien` AS nama,
+                                            CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()),' Tahun ',TIMESTAMPDIFF(MONTH, `tgl_lahir`, CURDATE()) MOD TIMESTAMPDIFF(YEAR, `tgl_lahir`, CURDATE()),' Bulan') AS umur,
+                                            'ONSITE' AS cara_daftar,(CASE WHEN(`tgl_daftar`=DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d')) THEN 'baru' ELSE 'lama' END) AS jenis_pasien ,dokterJaga AS nrpdokter,tgl_masuk AS tgllayanan
+                                            FROM `tbl02_pendaftaran` WHERE idx=".$resData["idx"])->row_array();
+                                            httprequest($kirim,"http://192.168.2.223/wsonline/simrs/registrasi","","POST");
                                         }
 
                                         // Update booking
@@ -468,42 +475,17 @@ class registrasi extends CI_Controller
         }
         echo json_encode($response);
     }
-    function cekRegUnit()
-    {
-        $ses_state = $this->users_model->cek_session_id();
-        if ($ses_state) {
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                if (isset($_POST['regUnitRajal'])) {
-                    if ($_POST['regUnitRajal'] == "") {
-                        $response['code'] = 501;
-                        $response['message'] = "Ops. No registrasi unit rawat jalan tidak boleh kosong!";
-                    } else {
-                        $this->db->where('reg_unit', $_POST['regUnitRajal']);
-                        $this->db->where_in('jns_layanan', array('RJ', 'PG'));
-                        $cekQuery = $this->db->get('tbl02_pendaftaran');
-                        if ($cekQuery->num_rows() > 0) {
-                            $response['code'] = 200;
-                            $response['message'] = "";
-                            $response['unikID'] = encrypt_decrypt('encrypt', $_POST['regUnitRajal'], true);
-                        } else {
-                            $response['code'] = 402;
-                            $response['message'] = "Data registrasi unit rawat jalan tidak ditemukan.";
-                        }
-                    }
-                } else {
-                    $response['code'] = 401;
-                    $response['message'] = "Ops. Ada kesalahan permintaan. Coba ulangi kembali.";
-                }
-            } else {
-                $response['code'] = 402;
-                $response['message'] = "Ops. Ada kesalahan permintaan. Coba ulangi kembali.";
-            }
-        } else {
-            $response['code'] = 404;
-            $response['message'] = "Ops. Sesi anda telah berubah! Silahkan login kembali";
-        }
-        echo json_encode($response);
+    function cobakirim($idx){
+        $this->load->helper('http');
+                                            $kirim=$this->db->query("SELECT id_daftar AS kode_booking,`nama_pasien` AS nama,
+                                            CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()),' Tahun ',TIMESTAMPDIFF(MONTH, `tgl_lahir`, CURDATE()) MOD TIMESTAMPDIFF(YEAR, `tgl_lahir`, CURDATE()),' Bulan') AS umur,
+                                            'ONSITE' AS cara_daftar,(CASE WHEN(`tgl_daftar`=DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d')) THEN 'baru' ELSE 'lama' END) AS jenis_pasien ,dokterJaga AS nrpdokter,tgl_masuk AS tgllayanan
+                                            FROM `tbl02_pendaftaran` WHERE idx=".$idx)->row_array();
+                                            // print_r($kirim);
+                                            $res= httprequest($kirim,"http://localhost/wsonline/simrs/registrasi","","POST");
+                                            echo $res;
     }
+    
     function cetakulang()
     {
         $ses_state = $this->users_model->cek_session_id();
@@ -2073,6 +2055,11 @@ class registrasi extends CI_Controller
                                     $this->rsam = $this->load->database('rsam2', true);
                                     $this->rsam->where('id_daftar',$params['id_daftar'])
                                         ->delete('t_sep');
+
+                                    // Batal Online
+                                    $this->load->helper('http');
+                                    $batal=array('kode_booking'=>$params['id_daftar']);
+                                    httprequest($batal,"http://192.168.2.223/wsonline/simrs/registrasi","","DELETE");
                                     $response['code'] = 200;
                                     $response['message'] = "Registrasi telah dibatalkan.";
                                 } else {

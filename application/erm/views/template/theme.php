@@ -41,7 +41,6 @@
             white-space: normal;
             border-bottom: 1px solid #f4f4f4;
         }
-
         .navbar-nav>.notifications-menu>.dropdown-menu,
         .navbar-nav>.messages-menu>.dropdown-menu,
         .navbar-nav>.tasks-menu>.dropdown-menu {
@@ -50,7 +49,6 @@
             margin: 0;
             top: 100%;
         }
-
         .lock {
             bottom: 0;
             left: 0;
