@@ -652,4 +652,29 @@ class Rajal extends CI_Controller
         $list = getPegawai([$pil])->result();
         echo json_encode(["status"=>true,"data"=>$list]);
     }
+
+    public function get_riwayat_form() {
+        $pil = $this->input->post("pil");
+        $nomr = $this->input->post("nomr");
+        $idx = $this->input->post("idx");
+        $data = [
+            "pil" => $pil
+        ];
+        if ($pil=="awal_rawat") {
+            $data["list"] = $this->rajal->getAwalRawatByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="awal_medis") {
+            $data["list"] = $this->rajal->getAwalMedisByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="cppt") {
+            $data["list"] = $this->rajal->getKembangPasienByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="edukasi_pasien") {
+            $data["list"] = $this->rajal->getEdukasiPasienByNomr($nomr);
+            $data['idx'] = $idx;
+        }
+
+        $this->load->view("erm/rajal/rajal_modal",$data);
+        // echo json_encode(["data"=>true]);
+    }
 }

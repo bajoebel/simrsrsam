@@ -75,9 +75,18 @@ class Rajal_model extends CI_Model
     {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['idx' => $idx, "nomr" => $nomr, "id" => $id])
-            ->order_by("id desc")
             ->get("rj_awal_rawat")
             ->row();
+    }
+
+    function getAwalRawatByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.perawat_id,a.perawat,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_awal_rawat a")
+            ->result();
     }
 
     function deleteAwalRawat($idx, $id)
@@ -106,6 +115,16 @@ class Rajal_model extends CI_Model
             ->order_by("id desc")
             ->get("rj_awal_medis")
             ->row();
+    }
+
+    function getAwalMedisByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.dokter_id,a.dokter,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_awal_medis a")
+            ->result();
     }
 
     function insertAwalMedis($data)
@@ -149,6 +168,16 @@ class Rajal_model extends CI_Model
             ->get("rj_ppt")->row();
     }
 
+    function getKembangPasienByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.tenaga_medis,a.jenis_tenaga_medis,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_ppt a")
+            ->result();
+    }
+
     function insertKembangPasien($data)
     {
         $db2 = $this->load->database('dberm', TRUE);
@@ -184,6 +213,16 @@ class Rajal_model extends CI_Model
         return $db2->where(['id' => $id, "idx" => $idx])
             ->order_by("id desc")
             ->get("rj_iep")->row();
+    }
+
+    function getEdukasiPasienByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.updated_at")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_iep a")
+            ->result();
     }
 
     function insertEdukasiPasien($data)

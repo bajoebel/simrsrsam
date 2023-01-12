@@ -62,12 +62,12 @@
             <div class="panel box box-success">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
-                            <?= DateToIndo($r->tgl) . " - " . $r->jam ?>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#ar_<?=$r->id?>" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->tgl) . " - " . $r->jam. " - ". $r->perawat ?>
                         </a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div id="ar_<?=$r->id?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
                         <strong>Poli Tujuan</strong><br />
                         <p><?= $r->poli_text ?></p>

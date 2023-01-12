@@ -205,21 +205,19 @@
                                                     <?php } else {?>
                                                         <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1,'Final Rekam Medis')"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
                                                     <?php } ?>
-                                                    <!-- <div class="btn-group">
+                                                    <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
                                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                             <span class="caret"></span>
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Resume Medis</a></li>
-                                                            <li><a href="#">List Instrumen</a></li>
-                                                            <li><a href="#">Kajian Awal Rawat</a></li>
-                                                            <li><a href="#">Kajian Awal Medis</a></li>
-                                                            <li><a href="#">CPPT</a></li>
-                                                            <li><a href="#">Edukasi Pasien</a></li>
+                                                            <li><a href="#" data-pil="awal_rawat" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Rawat</a></li>
+                                                            <li><a href="#" data-pil="awal_medis" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Medis</a></li>
+                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >CPPT</a></li>
+                                                            <li><a href="#" data-pil="edukasi_pasien" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Edukasi Pasien</a></li>
                                                         </ul>
-                                                    </div> -->
+                                                    </div>
                                             </td>
                                             <td>
                                                 <b>Hari/Tanggal Masuk</b><br />
@@ -281,6 +279,17 @@
             <div class="modal-body" id="modal-riwayat-rajal-body">
                 
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-riwayat-form">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" id="modal-riwayat-form-body"> </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -568,6 +577,30 @@
                 },
                 error: function(e) {
                     console.log(e)
+                }
+            });
+        })
+
+        $(".riwayat-form-link").on("click",function(e) {
+            e.preventDefault();
+            var pil = $(this).data("pil")
+            var nomr = $(this).data("nomr")
+            var idx = $(this).data("idx")
+            $.ajax({
+                type: "POSt",
+                url: base_url+"rajal/get_riwayat_form",
+                data: {
+                    pil:pil,
+                    nomr : nomr,
+                    idx : idx
+                },
+                dataType: "html",
+                success: function (response) {
+                    $("#modal-riwayat-form").modal("show")
+                    $("#modal-riwayat-form-body").html(response)
+                },
+                error : function(e) {
+                    console.log(e.responseText)
                 }
             });
         })
@@ -907,6 +940,8 @@
         $("[name='tenaga_medis_id_k']").val("");
         $("[name='tenaga_medis_id_k']").val("");
     }
+
+    
  
 </script>
 <!--  -->
