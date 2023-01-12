@@ -199,6 +199,7 @@
     <div class="" style="max-height: 600px; overflow-y: auto; ">
         <?php $no = 1;
         foreach ($list as $r) : ?>
+            <input type="text" class="hidden" name="id_rj_iep" id="id_rj_iep" value="<?=$r->id?>">
             <div class="panel box box-success">
                 <div class="box-header with-border">
                     <h4 class="box-title">
@@ -206,18 +207,21 @@
                             <?= DateToIndo($r->created_at) ?>
                         </a>
                     </h4>
+                    <?php if($detail->status_erm!=1) { ?>
+                        <button type='button' class='btn btn-sm btn-success pull-right' data-toggle='modal' href='#modal-edukasi-pasien'><i class='fa fa-plus-circle' aria-hidden='true'></i>Tambah Topik Edukasi</button>
+                    <?php } ?>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
                         <strong>Bahasa Yang Digunakan</strong>
                         <p><?= arr_to_list($r->bahasa, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
-                        <strong>Kembutuhan Penerjemah</strong>
+                        <strong>Kebutuhan Penerjemah</strong>
                         <p><?= trueOrFalse($r->penerjemah) ?></p>
                         <strong>Agama</strong>
                         <p><?= agama($r->agama) ?></p>
                         <strong>Pendidikan Pasien</strong>
                         <p><?= pendidikan($r->pendidikan) ?></p>
-                        <strong>Keterbatasn Fisik</strong>
+                        <strong>Keterbatasan Fisik</strong>
                         <p><?= arr_to_list($r->terbatas_fisik, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
                         <strong>Hambatan</strong>
                         <p><?= arr_to_list($r->hambatan, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
@@ -226,7 +230,7 @@
                         <a href="<?= base_url("erm.php/rajal/edukasi_pasien/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
                         </a>
-                        <?php if($detail->status_erm==1) { ?>
+                        <?php if($detail->status_erm!=1) { ?>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusEdukasiPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                         <?php } ?>

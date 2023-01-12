@@ -552,6 +552,7 @@
         $("#form-data-edukasi-pasien").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
+            var idx = $("#idx_e").val()
             // console.log(data_form);
             // return false;
             $.ajax({
@@ -563,17 +564,16 @@
                     $("#form-data-edukasi-pasien:submit").attr("disabled", true);
                 },
                 success: function(response) {
-                    localStorage.setItem("id_rj_iep", response.id);
-                    console.log()
-                    $("#id_rj_iep").val(localStorage.getItem("id_rj_iep"));
-                    $("#form-data-edukasi-pasien").addClass("hide");
-                    $("#form-data-edukasi-pasien-detail").removeClass("hide");
-                    // swal("Success", "Data Berhasil Di Simpan", "success");
+                    // localStorage.setItem("id_rj_iep_"+idx, response.id);
+                    // $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
+                    // $("#form-data-edukasi-pasien").addClass("hide");
+                    // $("#form-data-edukasi-pasien-detail").removeClass("hide");
+                    swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
                     // $('#form-data-edukasi-pasien')[0].reset();
                     // console.log(response);
-                    // $(":submit").attr("disabled", false);
-                    // getRiwayat(6, <?= $detail->idx ?>);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(6, <?= $detail->idx ?>);
                 },
                 error: function(e) {
                     console.log(e)

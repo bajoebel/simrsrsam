@@ -197,9 +197,9 @@ class Erm extends CI_Controller
         $this->load->view("erm/rajal/rajal_riwayat", $data);
     }
 
-    function getList()
-    {
-        $data['list'] = $this->rajal->getSetujuUmum(381387)->result();
-        var_dump($data);
-    }
+    // function getList()
+    // {
+    //     $data['list'] = $this->rajal->getSetujuUmum(381387)->result();
+    //     var_dump($data);
+    // }
 }

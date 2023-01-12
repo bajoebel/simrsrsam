@@ -50,7 +50,7 @@
             <h3 class="panel-title">Data Awal</h3>
         </div>
         <div class="panel-body">
-            <input type="hidden" name="idx_e" value="<?= $detail->idx ?>">
+            <input type="hidden" name="idx_e" id="idx_e" value="<?= $detail->idx ?>">
             <input type="hidden" name="nomr_e" value="<?= $detail->nomr ?>">
             <input type="hidden" name="nama_e" value="<?= $detail->nama_pasien ?>">
             <input type="hidden" name="user_daftar_e" value="<?= $detail->user_daftar ?>">
@@ -249,7 +249,7 @@
         </div>
     </div>
 </form>
-<form role="form" id='form-data-edukasi-pasien-detail' method="post" class="hide">
+<form role="form" id='form-data-edukasi-pasien-detail' method="post">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Topik Edukasi</h3>
@@ -257,15 +257,15 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-2">
-                    <?= ($detail->status_erm!=1)?"<button type='button' class='btn btn-success' data-toggle='modal' href='#modal-edukasi-pasien'><i class='fa fa-plus-circle' aria-hidden='true'></i>Tambah</button>":"" ?>
+                    <!-- <?= ($detail->status_erm!=1)?"<button type='button' class='btn btn-success' data-toggle='modal' href='#modal-edukasi-pasien'><i class='fa fa-plus-circle' aria-hidden='true'></i>Tambah</button>":"" ?> -->
                     <!-- <button type="button" class="btn btn-success" data-toggle="modal" href='#modal-edukasi-pasien'><i class="fa fa-plus-circle" aria-hidden="true"></i>Tambah</button> -->
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="filter_e" id="filter_e" class="form-control">
+                        <!-- <select name="filter_e" id="filter_e" class="form-control">
                             <option value="">==filter==</option>
 
-                        </select>
+                        </select> -->
                     </div>
                 </div>
             </div>
@@ -300,8 +300,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <button type="button" class="btn btn-secondary nextBtn pull-left" onclick="batal()">Cancel</button>
-                        <button type="form" class="btn btn-primary pull-right">Selesai</button>
+                        <!-- <button type="button" class="btn btn-secondary nextBtn pull-left" onclick="batal()">Cancel</button> -->
+                        <!-- <button type="form" class="btn btn-primary pull-right">Selesai</button> -->
                     </div>
                 </div>
             </div>
@@ -317,7 +317,6 @@
                 <h4 class="modal-title">Tambah Data</h4>
             </div>
             <div class="modal-body">
-                <input type="text" class="hidden" name="id_rj_iep" id="id_rj_iep">
                 <div class="form-group row">
                     <div class="col-md-3">
                         <label for="">Tanggal</label>
@@ -522,16 +521,17 @@
             });
         });
 
-        tampil_awal();
+        // tampil_awal();
         tampil_tabel();
 
     });
 
     function tampil_awal() {
-        let id = localStorage.getItem("id_rj_iep")
+        var idx = $("#idx_e").val();
+        let id = localStorage.getItem("id_rj_iep_"+idx)
         if (id != null) {
             $("#form-data-edukasi-pasien:submit").attr("disabled", true);
-            $("#id_rj_iep").val(localStorage.getItem("id_rj_iep"));
+            $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
             $("#form-data-edukasi-pasien").addClass("hide");
             $("#form-data-edukasi-pasien-detail").removeClass("hide");
         }
@@ -539,23 +539,28 @@
     }
 
     function tampil_tabel() {
-        let id = localStorage.getItem("id_rj_iep");
-        $.ajax({
-            type: "GET",
-            url: base_url + "rajal/get_edukasi_pasien_detail/" + id,
-            data: "data",
-            dataType: "html",
-            success: function(response) {
-                $("#table-detail-edukasi-pasien tbody").html(response);
-            }
-        });
+        // var idx = $("#idx_e").val();
+        var id = $("#idx_e").val();
+        // alert(id)
+        if (id) {
+            $.ajax({
+                type: "GET",
+                url: base_url + "rajal/get_edukasi_pasien_detail/" + id,
+                data: "data",
+                dataType: "html",
+                success: function(response) {
+                    $("#table-detail-edukasi-pasien tbody").html(response);
+                }
+            });
+        }
+       
     }
 
     function batal() {
-        let id = localStorage.getItem("id_rj_iep");
-        let idx = <?= $detail->idx ?>;
+        var idx = $("#idx_e").val();
+        let id = localStorage.getItem("id_rj_iep_"+idx);
 
-        localStorage.removeItem("id_rj_iep")
+        localStorage.removeItem("id_rj_iep_"+idx)
         $("#form-data-edukasi-pasien-detail").addClass("hide");
         $("#form-data-edukasi-pasien").removeClass("hide");
         $("#form-data-edukasi-pasien:submit").attr("disabled", false);

@@ -266,9 +266,13 @@ class Rajal_model extends CI_Model
     function getEdukasiPasienDetail($id)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2
-            ->where(["id_rj_iep" => $id])
+        $id_rj = $db2->select("id")->where("idx",$id)->get("rj_iep")->row();
+        if ($id_rj) {
+            return $db2
+            ->where(["id_rj_iep" => $id_rj->id])
             ->get("rj_iep_detail");
+        }
+        
     }
     function deleteEdukasiPasienDetail($id)
     {
