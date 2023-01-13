@@ -175,3 +175,55 @@
         </div>
     </div>
 <?php } ?>
+
+<!-- Profil Ringkas Medis Rawat Jalan (PRMRJ) -->
+<?php if ($pil == "prmrj") { ?>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Profil Ringkas Medis Rawat Jalan (PRMRJ)</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="table-prmrj" class="table table-striped table-bordered" >
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam</th>
+                                    <th>Catatan Informasi Pasien</th>
+                                    <th>Nama / TTD DPJP</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no =1;foreach ($list->result() as $r) { ?>
+                                <tr>
+                                    <td><?=$no++?></td>
+                                    <td><?=$r->tgl?></td>
+                                    <td><?=$r->jam?></td>
+                                    <td><?= "S : ".gantiTagP($r->subyektif)."O : ".gantiTagP($r->obyektif)."A : ".gantiTagP($r->assesment)."P : ".gantiTagP($r->planning)."I : ".gantiTagP($r->instruksi) ?></td>
+                                    <td>
+                                        <?= $r->tenaga_medis ?><br/>
+                                        qrcode
+                                    </td>
+                                    <td> <button class="btn btn-xs btn-primary">Assign</button></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                var table = $("#table-prmrj").DataTable({
+                    // ordering : false,
+                    scrollY: '400px',
+                    scrollCollapse: true,
+                    paging: false, 
+                });
+            });
+        </script>
+    </div>
+<?php } ?>

@@ -214,8 +214,9 @@
                                                         <ul class="dropdown-menu" role="menu">
                                                             <li><a href="#" data-pil="awal_rawat" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Rawat</a></li>
                                                             <li><a href="#" data-pil="awal_medis" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Medis</a></li>
-                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >CPPT</a></li>
                                                             <li><a href="#" data-pil="edukasi_pasien" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Edukasi Pasien</a></li>
+                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >CPPT</a></li>
+                                                            <li><a href="#" data-pil="prmrj" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Profil Ringkas Medis Rawat Jalan</a></li>
                                                         </ul>
                                                     </div>
                                             </td>
@@ -288,8 +289,10 @@
 </div>
 <div class="modal fade" id="modal-riwayat-form">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body" id="modal-riwayat-form-body"> </div>
+        <div class="modal-content" style="overflow:hidden">
+            <div class="modal-body" id="modal-riwayat-form-body" >
+
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -297,6 +300,7 @@
         </div>
     </div>
 </div>
+
 
 
 

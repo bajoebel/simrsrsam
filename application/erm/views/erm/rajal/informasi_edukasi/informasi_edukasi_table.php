@@ -1,4 +1,5 @@
 <?php $no = 1;
+if ($data) {
 foreach ($data->result() as $e) : ?>
     <tr>
         <td><?= $no++ ?></td>
@@ -16,4 +17,4 @@ foreach ($data->result() as $e) : ?>
             </button>
         </td>
     </tr>
-<?php endforeach; ?>
+<?php endforeach; } ?>

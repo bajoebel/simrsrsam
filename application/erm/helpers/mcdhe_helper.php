@@ -470,4 +470,8 @@ function getInfoDaftar($idx) {
     ->row();
 }
 
+function gantiTagP($str) {
+    return str_replace("<p>","",str_replace("</p>","<br/>",$str));
+}
+
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

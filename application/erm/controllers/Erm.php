@@ -91,7 +91,7 @@ class Erm extends CI_Controller
                             'index_menu' => 2,
                             'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
                             'content' => $this->load->view('erm/erm_index', $data, true),
-                            'ajaxdata' => "var jekel = {'0':'Perempuan','1':'Laki-Laki','P':'Perempuan','L':'Laki-Laki'};
+                            'ajaxdata' => "var jekel = {'1':'Laki-Laki','2':'Perempuan','3':'Tidak Dapat Didefenisikan','4':'Tidak Diketahui'};
                                             var response = {'0':'<span class=\"btn btn-danger btn-xs\" >Belum Diresponse</span>','1':'<span class=\"btn btn-success btn-xs\">Sudah Diresponse</span>'}; 
                                             var erm = {'0':'<span class=\"pull-right badge bg-yellow\" >Proses</span>','1':'<span class=\"pull-right badge bg-green btn-xs\">Final</span>'}; 
                                             var action = {'1':'<span class=\"pull-right badge bg-green\">Aktif</span>','2':'<span class=\"pull-right badge bg-yellow\">Dirawat</span>','3':'<span class=\"pull-right badge bg-yellow\">Menunggu Response <br>Pindah</span>','4':'<span class=\"pull-right badge bg-yellow\">Sudah Pindah</span>','5':'<span class=\"pull-right badge bg-yellow\">Sudah Pulang</span>','6':'<span class=\"pull-right badge bg-yellow\">Batal Berobat</span>'}; 
@@ -116,6 +116,28 @@ class Erm extends CI_Controller
             window.location.href = '$url_login'
             </script>";
         }
+    }
+
+    function index2() {
+        $z = setNav("nav_1");
+        $folder = "rajal";
+        $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
+        $dokter = $this->Layanan_model->getDokter($kondisi);
+        $ruang = $this->nota_model->getRuang($this->session->userdata('kdlokasi'));
+        $data = [
+            'contentTitle' => 'Cari Pasien',
+            'ruangID' => $this->session->userdata('kdlokasi'),
+            'ruang' => $ruang,
+            'getDokter' => $dokter,
+            'kelas' => $this->db->get('tbl01_kelas_layanan')->result(),
+        ];
+        $view = array(
+            'header' => $this->load->view('template/header', '', true),
+            'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
+            'content' => $this->load->view('erm/erm_index2', $data, true),
+        );
+        
+        $this->load->view('template/theme', $view);
     }
     function detail()
     {

@@ -289,4 +289,12 @@ class Rajal_model extends CI_Model
         ->update("tbl02_pendaftaran",["status_erm"=>$status]);
         return $this->db->affected_rows();
     }
+
+    function getPrmrjByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->where(["nomr" => $nomr])
+            ->where_in("jenis_tenaga_medis_id",[1,2])
+            ->order_by("id desc")
+            ->get("rj_ppt");
+    }
 }

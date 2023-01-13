@@ -672,6 +672,9 @@ class Rajal extends CI_Controller
         } else if ($pil=="edukasi_pasien") {
             $data["list"] = $this->rajal->getEdukasiPasienByNomr($nomr);
             $data['idx'] = $idx;
+        } else if ($pil=="prmrj") {
+            $data["list"] = $this->rajal->getPrmrjByNomr($nomr);
+            $data['idx'] = $idx;
         }
 
         $this->load->view("erm/rajal/rajal_modal",$data);
