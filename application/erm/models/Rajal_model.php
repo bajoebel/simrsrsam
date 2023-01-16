@@ -292,9 +292,90 @@ class Rajal_model extends CI_Model
 
     function getPrmrjByNomr($nomr) {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2->where(["nomr" => $nomr])
-            ->where_in("jenis_tenaga_medis_id",[1,2])
-            ->order_by("id desc")
-            ->get("rj_ppt");
+        return $db2
+            ->select("a.*,b.diagnosis_kerja,b.terapi,b.dokter")
+            ->join("rj_awal_medis b","a.idx=b.idx","LEFT")
+            ->where(["a.nomr" => $nomr])
+            ->where_in("a.jenis_tenaga_medis_id",[1,2])
+            ->order_by("a.id desc")
+            ->get("rj_ppt a");
+    }
+
+    public function updateSignAwalMedis($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_awal_medis",[
+            "dokterSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
+    public function updateSignKembangPasien($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_ppt",[
+            "tenagaMedisSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
+    public function updateSignAwalRawat($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_awal_rawat",[
+            "perawatSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
     }
 }

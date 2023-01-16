@@ -279,10 +279,10 @@ $date = date("Y-m-d");
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td height="50px">&nbsp;</td>
+                                                <td height="80px">&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td>( <?= str_pad($k->pj_nama, 20, ".",STR_PAD_BOTH) ?> )</td>
+                                                <td>( <?= $k->pj_nama ?> )</td>
                                             </tr>
                                             <tr>
                                                 <td><i>diisi nama lengkap pasien / keluarga</i></td>
@@ -298,7 +298,9 @@ $date = date("Y-m-d");
                                                 <td style='text-align:center'>DPJP</td>
                                             </tr>
                                             <tr>
-                                                <td height="50px">&nbsp;</td>
+                                                <td height="50px" >
+                                                    <div id="qrcode_awal_medis"></div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>( <?= $k->dokter ?> )</td>
@@ -320,5 +322,17 @@ $date = date("Y-m-d");
         </tr>
     </table>
 </body>
-
+<!-- qrcode -->
+<script src="<?php echo base_url() ?>assets/jquery/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
+<script type="text/javascript">
+    var code = "<?= $k->dokterSign?>";
+    var qrcode = new QRCode(document.getElementById("qrcode_awal_medis"), {
+        text: code,
+        width: 80,
+        height: 80,
+        colorDark : "#000",
+        colorLight : "#fff",
+    });
+</script>
 </html>

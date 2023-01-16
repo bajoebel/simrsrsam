@@ -61,9 +61,7 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Kajian Awal Medis</h3>
                     <div class="box-tools pull-right">
-                        <button class='btn btn-sm btn-default' data-toggle="tooltip" data-placement="top" title="Preview" onclick="preview()">
-                            <i class='fa fa-print'></i>
-                        </button>
+                       
                     </div>
                 </div>
 
@@ -99,7 +97,6 @@
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
                 <h3 class="box-title">Form Input Informasi Pasien dan Keluarga</h3>
-                
             </div>
             <div class="box-body">
                 <?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_form") ?>

@@ -567,7 +567,7 @@ $date = date("Y-m-d");
                                 <td>Telah dijelaskan dan dipahami kepada <br><?= "&#9745".$k->dijelaskan?> <?= ($k->dijelaskan=="Keluarga")?", Hubungan $k->dijelaskan_hubungan":"" ?></td>
                             </tr>
                             <tr>
-                                <td height="40px">&nbsp;</td>
+                                <td height="80px">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td>( <?= str_pad(($k->dijelaskan=="Pasien")?$d->nama_pasien:$k->dijelaskan_nama, 20, " ",STR_PAD_BOTH) ?> )</td>
@@ -586,7 +586,7 @@ $date = date("Y-m-d");
                                 <td>Perawat yang melakukan pengkajian<br>&nbsp</td>
                             </tr>
                             <tr>
-                                <td height="40px">&nbsp;</td>
+                                <td height="80px"><div id="qrcode_awal_rawat"></div></td>
                             </tr>
                             <tr>
                                 <td>( <?= str_pad($k->perawat, 20, ".") ?> )</td>
@@ -601,5 +601,17 @@ $date = date("Y-m-d");
         </tr>
     </table>
 </body>
-
+<!-- qrcode -->
+<script src="<?php echo base_url() ?>assets/jquery/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
+<script type="text/javascript">
+    var code = "<?= $k->perawatSign?>";
+    var qrcode = new QRCode(document.getElementById("qrcode_awal_rawat"), {
+        text: code,
+        width: 80,
+        height: 80,
+        colorDark : "#000",
+        colorLight : "#fff",
+    });
+</script>
 </html>

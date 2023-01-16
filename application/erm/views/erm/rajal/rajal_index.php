@@ -289,20 +289,18 @@
 </div>
 <div class="modal fade" id="modal-riwayat-form">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="overflow:hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
             <div class="modal-body" id="modal-riwayat-form-body" >
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 <script>
     $(document).ready(function() {
@@ -315,6 +313,16 @@
             // getRiwayat(1, <?= $detail->idx ?>);
             $("a[href='#tab_1']").trigger("click")
         }
+
+        $('#table-prmrj').on('shown.bs.collapse', function () {
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
 
     });
 </script>
@@ -733,7 +741,6 @@
         });
     }
 
-
     function hapusAwalRawat(idx, id) {
         var x = confirm("Yakin Ingin Hapus Data");
         if (x) {
@@ -851,6 +858,82 @@
         }
     }
 
+    function signAwalMedis(idx,id,nomr,dokter) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_awal_medis",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    dokter : dokter
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+        
+    }
+
+    function signKembangPasien(idx,id,nomr,user) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_kembang_pasien",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    user : user
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+    }
+
+    function signAwalRawat(idx,id,nomr,user) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_awal_rawat",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    user : user
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+    }
+
     function final(id,status,msg="") {
         var x = confirm(msg);
         // alert(id)
@@ -945,7 +1028,12 @@
         $("[name='tenaga_medis_id_k']").val("");
     }
 
-    
- 
+    function assign_prmrj(id) {
+        let pin = prompt("Enter Pin");
+    }
+
+    function cetak_prmrj(nomr) {
+        window.open(base_url+"rajal/prmrj/"+nomr,"_blank")
+    } 
 </script>
 <!--  -->
