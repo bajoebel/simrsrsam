@@ -336,6 +336,69 @@ class Rajal extends CI_Controller
         }
     }
 
+    public function sign_awal_medis() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $dokter = $this->input->post("dokter");
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_awal_medis",
+            "dokter" => $dokter 
+        ];
+        $data = $this->rajal->getAwalMedisById($nomr,$idx,$id);
+        if ($data) {
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignAwalMedis($id,$code,$code_detail);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
+    public function sign_kembang_pasien() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $user = $this->input->post("user");
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_ppt",
+            "tenaga_medis" => $user 
+        ];
+        $data = $this->rajal->getKembangPasienById($nomr,$idx,$id);
+        if ($data) {
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignKembangPasien($id,$code,$code_detail);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
+    public function sign_awal_rawat() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $user = $this->input->post("user");
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_awal_rawat",
+            "perawat_id" => $user 
+        ];
+        $data = $this->rajal->getAwalRawatById($nomr,$idx,$id);
+        if ($data) {
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignAwalRawat($id,$code,$code_detail);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
     public function insert_kaji_awal_medis()
     {
         $data_post = [
@@ -652,4 +715,54 @@ class Rajal extends CI_Controller
         $list = getPegawai([$pil])->result();
         echo json_encode(["status"=>true,"data"=>$list]);
     }
+
+    public function get_riwayat_form() {
+        $pil = $this->input->post("pil");
+        $nomr = $this->input->post("nomr");
+        $idx = $this->input->post("idx");
+        $data = [
+            "pil" => $pil
+        ];
+        if ($pil=="awal_rawat") {
+            $data["list"] = $this->rajal->getAwalRawatByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="awal_medis") {
+            $data["list"] = $this->rajal->getAwalMedisByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="cppt") {
+            $data["list"] = $this->rajal->getKembangPasienByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="edukasi_pasien") {
+            $data["list"] = $this->rajal->getEdukasiPasienByNomr($nomr);
+            $data['idx'] = $idx;
+        } else if ($pil=="prmrj") {
+            $data["list"] = $this->rajal->getPrmrjByNomr($nomr);
+            $data['idx'] = $idx;
+            $data['nomr'] = $nomr;
+        }
+
+        $this->load->view("erm/rajal/rajal_modal",$data);
+        // echo json_encode(["data"=>true]);
+    }
+
+    public function prmrj($nomr="") {
+        if ($nomr != "") {
+           
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getPrmrjByNomr($nomr);
+            $data = [
+                "p" => $p,
+                "k" => $k
+            ];
+
+            $this->load->view($this->folder . "/" . $this->subfolder . "/prmrj/prmrj_cetak", $data);
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/prmrj/prmrj_cetak_master", compact('data'));
+        }
+    }
+
 }

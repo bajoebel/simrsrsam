@@ -205,21 +205,20 @@
                                                     <?php } else {?>
                                                         <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1,'Final Rekam Medis')"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
                                                     <?php } ?>
-                                                    <!-- <div class="btn-group">
+                                                    <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
                                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                             <span class="caret"></span>
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Resume Medis</a></li>
-                                                            <li><a href="#">List Instrumen</a></li>
-                                                            <li><a href="#">Kajian Awal Rawat</a></li>
-                                                            <li><a href="#">Kajian Awal Medis</a></li>
-                                                            <li><a href="#">CPPT</a></li>
-                                                            <li><a href="#">Edukasi Pasien</a></li>
+                                                            <li><a href="#" data-pil="awal_rawat" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Rawat</a></li>
+                                                            <li><a href="#" data-pil="awal_medis" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Medis</a></li>
+                                                            <li><a href="#" data-pil="edukasi_pasien" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Edukasi Pasien</a></li>
+                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >CPPT</a></li>
+                                                            <li><a href="#" data-pil="prmrj" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Profil Ringkas Medis Rawat Jalan</a></li>
                                                         </ul>
-                                                    </div> -->
+                                                    </div>
                                             </td>
                                             <td>
                                                 <b>Hari/Tanggal Masuk</b><br />
@@ -288,8 +287,20 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-riwayat-form">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-riwayat-form-body" >
 
-
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -302,6 +313,16 @@
             // getRiwayat(1, <?= $detail->idx ?>);
             $("a[href='#tab_1']").trigger("click")
         }
+
+        $('#table-prmrj').on('shown.bs.collapse', function () {
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+            $($.fn.dataTable.tables(true)).DataTable()
+                .columns.adjust();
+        });
 
     });
 </script>
@@ -543,6 +564,7 @@
         $("#form-data-edukasi-pasien").on("submit", function(e) {
             e.preventDefault();
             var data_form = $(this).serializeArray();
+            var idx = $("#idx_e").val()
             // console.log(data_form);
             // return false;
             $.ajax({
@@ -554,20 +576,43 @@
                     $("#form-data-edukasi-pasien:submit").attr("disabled", true);
                 },
                 success: function(response) {
-                    localStorage.setItem("id_rj_iep", response.id);
-                    console.log()
-                    $("#id_rj_iep").val(localStorage.getItem("id_rj_iep"));
-                    $("#form-data-edukasi-pasien").addClass("hide");
-                    $("#form-data-edukasi-pasien-detail").removeClass("hide");
-                    // swal("Success", "Data Berhasil Di Simpan", "success");
+                    // localStorage.setItem("id_rj_iep_"+idx, response.id);
+                    // $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
+                    // $("#form-data-edukasi-pasien").addClass("hide");
+                    // $("#form-data-edukasi-pasien-detail").removeClass("hide");
+                    swal("Success", "Data Berhasil Di Simpan", "success");
                     // console.log(response);
                     // $('#form-data-edukasi-pasien')[0].reset();
                     // console.log(response);
-                    // $(":submit").attr("disabled", false);
-                    // getRiwayat(6, <?= $detail->idx ?>);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(6, <?= $detail->idx ?>);
                 },
                 error: function(e) {
                     console.log(e)
+                }
+            });
+        })
+
+        $(".riwayat-form-link").on("click",function(e) {
+            e.preventDefault();
+            var pil = $(this).data("pil")
+            var nomr = $(this).data("nomr")
+            var idx = $(this).data("idx")
+            $.ajax({
+                type: "POSt",
+                url: base_url+"rajal/get_riwayat_form",
+                data: {
+                    pil:pil,
+                    nomr : nomr,
+                    idx : idx
+                },
+                dataType: "html",
+                success: function (response) {
+                    $("#modal-riwayat-form").modal("show")
+                    $("#modal-riwayat-form-body").html(response)
+                },
+                error : function(e) {
+                    console.log(e.responseText)
                 }
             });
         })
@@ -696,7 +741,6 @@
         });
     }
 
-
     function hapusAwalRawat(idx, id) {
         var x = confirm("Yakin Ingin Hapus Data");
         if (x) {
@@ -814,6 +858,82 @@
         }
     }
 
+    function signAwalMedis(idx,id,nomr,dokter) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_awal_medis",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    dokter : dokter
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+        
+    }
+
+    function signKembangPasien(idx,id,nomr,user) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_kembang_pasien",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    user : user
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+    }
+
+    function signAwalRawat(idx,id,nomr,user) {
+        var x = prompt("Masukkan Pin");
+            if (x=="1234") {
+                $.ajax({
+                type: "POST",
+                url: base_url+"rajal/sign_awal_rawat",
+                data: {
+                    idx : idx,
+                    id : id,
+                    nomr : nomr,
+                    user : user
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response)
+                },
+                error : function (e) {
+                    console.log(e.responseText)
+                }
+            });
+        } else {
+            alert("Pin Salah")
+        }
+    }
+
     function final(id,status,msg="") {
         var x = confirm(msg);
         // alert(id)
@@ -907,6 +1027,13 @@
         $("[name='tenaga_medis_id_k']").val("");
         $("[name='tenaga_medis_id_k']").val("");
     }
- 
+
+    function assign_prmrj(id) {
+        let pin = prompt("Enter Pin");
+    }
+
+    function cetak_prmrj(nomr) {
+        window.open(base_url+"rajal/prmrj/"+nomr,"_blank")
+    } 
 </script>
 <!--  -->

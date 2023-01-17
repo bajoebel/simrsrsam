@@ -75,9 +75,18 @@ class Rajal_model extends CI_Model
     {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['idx' => $idx, "nomr" => $nomr, "id" => $id])
-            ->order_by("id desc")
             ->get("rj_awal_rawat")
             ->row();
+    }
+
+    function getAwalRawatByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.perawat_id,a.perawat,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_awal_rawat a")
+            ->result();
     }
 
     function deleteAwalRawat($idx, $id)
@@ -106,6 +115,16 @@ class Rajal_model extends CI_Model
             ->order_by("id desc")
             ->get("rj_awal_medis")
             ->row();
+    }
+
+    function getAwalMedisByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.dokter_id,a.dokter,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_awal_medis a")
+            ->result();
     }
 
     function insertAwalMedis($data)
@@ -149,6 +168,16 @@ class Rajal_model extends CI_Model
             ->get("rj_ppt")->row();
     }
 
+    function getKembangPasienByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.tenaga_medis,a.jenis_tenaga_medis,a.tgl,a.jam")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_ppt a")
+            ->result();
+    }
+
     function insertKembangPasien($data)
     {
         $db2 = $this->load->database('dberm', TRUE);
@@ -184,6 +213,16 @@ class Rajal_model extends CI_Model
         return $db2->where(['id' => $id, "idx" => $idx])
             ->order_by("id desc")
             ->get("rj_iep")->row();
+    }
+
+    function getEdukasiPasienByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.id,a.idx,a.nomr,a.updated_at")
+            ->where(["a.nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_iep a")
+            ->result();
     }
 
     function insertEdukasiPasien($data)
@@ -227,9 +266,13 @@ class Rajal_model extends CI_Model
     function getEdukasiPasienDetail($id)
     {
         $db2 = $this->load->database('dberm', TRUE);
-        return $db2
-            ->where(["id_rj_iep" => $id])
+        $id_rj = $db2->select("id")->where("idx",$id)->get("rj_iep")->row();
+        if ($id_rj) {
+            return $db2
+            ->where(["id_rj_iep" => $id_rj->id])
             ->get("rj_iep_detail");
+        }
+        
     }
     function deleteEdukasiPasienDetail($id)
     {
@@ -245,5 +288,94 @@ class Rajal_model extends CI_Model
         ->where(["idx"=> $id])
         ->update("tbl02_pendaftaran",["status_erm"=>$status]);
         return $this->db->affected_rows();
+    }
+
+    function getPrmrjByNomr($nomr) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("a.*,b.diagnosis_kerja,b.terapi,b.dokter")
+            ->join("rj_awal_medis b","a.idx=b.idx","LEFT")
+            ->where(["a.nomr" => $nomr])
+            ->where_in("a.jenis_tenaga_medis_id",[1,2])
+            ->order_by("a.id desc")
+            ->get("rj_ppt a");
+    }
+
+    public function updateSignAwalMedis($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_awal_medis",[
+            "dokterSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
+    public function updateSignKembangPasien($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_ppt",[
+            "tenagaMedisSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
+    public function updateSignAwalRawat($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $update = $db2->where("id",$id)->update("rj_awal_rawat",[
+            "perawatSign" => $kode,
+            "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
     }
 }

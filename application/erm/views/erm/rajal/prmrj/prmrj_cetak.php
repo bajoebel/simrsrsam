@@ -51,6 +51,10 @@ $date = date("Y-m-d");
             font-weight: bold;
         }
 
+        .kode-form {
+            text-align : right;
+        }
+
         .kode-form,
         .kode-pasien {
             margin-bottom: 5px;
@@ -92,18 +96,21 @@ $date = date("Y-m-d");
             margin-top: 10px;
         }
 
-        table tr td {
+        table tr td,
+        table tr th {
             font-family: Cambria, Georgia, serif;
             font-size: 12px;
         }
 
         table.main {
             border-collapse: collapse;
+            width:100%;
         }
-
+        
         table.main,
         table.main td {
-            border: 1px solid #000
+            border: 1px solid #000;
+            font-size: 10px !important;
         }
 
         .content {
@@ -120,8 +127,6 @@ $date = date("Y-m-d");
             text-align: left;
         }
     </style>
-    <script src="<?php echo base_url() ?>assets/jquery/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
 </head>
 
 <body>
@@ -144,7 +149,7 @@ $date = date("Y-m-d");
                         </div>
                     </div>
                     <div class="kode">
-                        <div class='kode-form'>FORM RM 1.1.00.00 Rev. 02</div>
+                        <div class='kode-form'>FORM RM 02.05 Rev. 02</div>
                         <div class='kode-pasien'>
                             <table>
                                 <tr>
@@ -168,73 +173,38 @@ $date = date("Y-m-d");
                     </div>
                 </div>
                 <div class="content">
-                    <h3 style="font-family: Cambria,Georgia,serif;">CATATAN PERKEMBANGAN TERINTEGRASI<br>RAWAT JALAN</h3>
+                    <h3 style="font-family: Cambria,Georgia,serif;">Profil Ringkas Medis Rawat Jalan (PRMRJ)</h3>
                     <table class='main'>
                         <tr>
-                            <td style='text-align:center'><b>Tanggal/Jam</b></td>
-                            <td style='text-align:center'><b>Profesional Pemberi Asuhan (PPA)</b></td>
-                            <td style='text-align:center'>
-                                <b>Hasil Pemeriksaan,Analisis,Dan Tindak Lanjut Subjective, Objective, pengkajian/Penilaian, Planning (SOAP) / ADIME
-                                    <small>Tulis, Baca, Konfirmasi (TbaK)</small></b>
-                                (dituliskan dengan format SOAP, disertai dengan sasaran / target yang terukur, evaluasi hasil tatalaksana dituliskan dalam pengkajian, harap bubuhkan nama dan paraf pada setiap akhir catatan)
+                            <td style='text-align:center'><b>No</b></td>
+                            <td style='text-align:center;width:10%'><b>Tanggal</b></td>
+                            <td style='text-align:center'><b>Jam</b></td>
+                            <td style='text-align:center;width:60%'>
+                                <b>Catatan Informasi  Pasien</b><br/>
+                                <small>(Diagnosa, Tindakan, Rencana Tindak Lanjut</small>
                             </td>
-                            <td style='text-align:center'><b>Instruksi Tenaga Kesehatan Termasuk Pasca Bedah / Prosedur</b>
-                                (Instruksi ditulis dengan rinci dan jelas)
-                            </td>
-                            <td style='text-align:center'>
-                                <b>REVIEW & VERIFIKASI DPJP</b> (Bubuhkan Nama, Paraf, Tgl, Jam)
-                                (DPJP harus membaca
-                                seluruh Rencana Asuhan)
+                            <td style='text-align:center'><b>Nama / TTD DPJP</b></td>
+                        </tr>
+                        <?php $no =1;foreach ($k->result() as $r) { ?>
+                        <tr>
+                            <td style='text-align:center;'><?=$no++?></td>
+                            <td style='text-align:center;'><?=dateToIndo($r->tgl)?></td>
+                            <td style='text-align:center;'><?=$r->jam?></td>
+                            <td>
+                                <?= ($r->diagnosis_kerja!="")?"Diagnosis Kerja : ($r->dokter) ".gantiTagP($r->diagnosis_kerja):""?>
+                                <?=  ($r->terapi!="")?"Terapi dan Tindakan : ".gantiTagP($r->terapi):""?>
+                                <?= "S : ".gantiTagP($r->subyektif)."O : ".gantiTagP($r->obyektif)."A : ".gantiTagP($r->assesment)."P : ".gantiTagP($r->planning)."I : ".gantiTagP($r->instruksi) ?></td>
+                            <td>
+                                <?= $r->tenaga_medis ?><br/>
+                                qrcode
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td>
-                                <div style="height:180mm">
-
-                                </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr> -->
-                        <?php foreach ($k->result() as $r) { ?>
-                            <tr>
-                                <td><?= dateToIndo($r->tgl)." / ".$r->jam ?></td>
-                                <td><?= $r->jenis_tenaga_medis." - ".$r->tenaga_medis ?></td>
-                                <td>
-                                    <b>S</b> : <?= gantiTagP($r->subyektif) ?>
-                                    <b>O</b> : <?= gantiTagP($r->obyektif)?>
-                                    <b>A</b> :<?= gantiTagP($r->assesment) ?>
-                                    <b>P</b>: <?= gantiTagP($r->planning) ?>
-                                </td>
-                                <td>
-                                    <?= $r->instruksi?>
-                                </td>
-                                <td>
-                                    <?= $r->review?>
-                                    <div id="qrcode_cppt_<?=$r->id?>">
-                                </td>
-                            </tr>
-                            <script type="text/javascript">
-                                var id = "<?= $r->id?>";
-                                var code = "<?= $r->tenagaMedisSign?>";
-                                if (code) {
-                                    var qrcode = new QRCode(document.getElementById("qrcode_cppt_"+id), {
-                                    text: code,
-                                    width: 60,
-                                    height: 60,
-                                    colorDark : "#000",
-                                    colorLight : "#fff",
-                                });
-                                }
-                              
-                            </script>
-                        <?php }?>
+                        <?php } ?>
                     </table>
                 </div>
             </td>
         </tr>
     </table>
 </body>
+
 </html>

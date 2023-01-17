@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/select2/dist/css/select2.css">
+     <!-- DataTables -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
 
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/css/AdminLTE.css" />
@@ -31,6 +33,11 @@
     <!-- <script src="<?php echo base_url() ?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
     <script src="<?php echo base_url() ?>assets/bower_components/ckeditor4/ckeditor.js"></script>
     <!-- <script src="<?php echo base_url() ?>assets/bower_components/ckeditor4/adapters/jquery.js"></script> -->
+    <!-- DataTables -->
+    <script src="<?php echo base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- qrcode -->
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
 
     
     <!--[if lt IE 9]>
