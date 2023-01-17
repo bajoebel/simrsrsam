@@ -334,5 +334,6 @@ $date = date("Y-m-d");
         colorDark : "#000",
         colorLight : "#fff",
     });
+    // $(`#qrcode_awal_rawat > img`).css({"margin":"auto"});
 </script>
 </html>

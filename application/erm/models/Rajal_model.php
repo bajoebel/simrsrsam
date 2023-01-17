@@ -320,8 +320,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_awal_medis",[
-            "dokterSign" => $kode,
+            "dokterSign" => $insert_id,
             "status_form" => 1
         ]);
         if ($db2->trans_status() === FALSE)
@@ -346,8 +348,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_ppt",[
-            "tenagaMedisSign" => $kode,
+            "tenagaMedisSign" => $insert_id,
             "status_form" => 1
         ]);
         if ($db2->trans_status() === FALSE)
@@ -372,8 +376,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_awal_rawat",[
-            "perawatSign" => $kode,
+            "perawatSign" => $insert_id,
             "status_form" => 1
         ]);
         if ($db2->trans_status() === FALSE)
@@ -398,8 +404,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_iep_detail",[
-            "pemberiSign" => $kode,
+            "pemberiSign" => $insert_id,
             "status_form" => 1,
             "updated_at" => date("Y-m-d"),
             "status_form_disetujui" => date("Y-m-d")
