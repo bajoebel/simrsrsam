@@ -18,7 +18,7 @@
                 $this->load->view('template/theme',$x);
             }else{
                 $sid = getSessionID();
-                $url_login = base_url().'administrator.php/login?sid='.$sid;
+                $url_login = base_url().'erm.php/login?sid='.$sid;
                 echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
                 window.location.href = '$url_login'
                 </script>";

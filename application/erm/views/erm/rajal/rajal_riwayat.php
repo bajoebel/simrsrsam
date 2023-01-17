@@ -202,7 +202,7 @@
         <?php endforeach; ?>
     </div>
 <?php } else if ($pil == 6) { ?>
-    <div class="" style="max-height: 600px; overflow-y: auto; ">
+    <div class="" style="max-height: 800px; overflow-y: auto; ">
         <?php $no = 1;
         foreach ($list as $r) : ?>
             <input type="text" class="hidden" name="id_rj_iep" id="id_rj_iep" value="<?=$r->id?>">
@@ -227,16 +227,27 @@
                         <p><?= agama($r->agama) ?></p>
                         <strong>Pendidikan Pasien</strong>
                         <p><?= pendidikan($r->pendidikan) ?></p>
-                        <strong>Keterbatasan Fisik</strong>
+                        <strong>Keterbatasan Fisik dan kognitif</strong>
                         <p><?= arr_to_list($r->terbatas_fisik, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
-                        <strong>Hambatan</strong>
+                        <strong>Hambatan emosional dan motivasi</strong>
                         <p><?= arr_to_list($r->hambatan, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Assessment Kebutuhan Edukasi</strong>
+                        <p><?= arr_to_list($r->kebutuhan_edukasi, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Perencanaan Edukasi (Metode)</strong>
+                        <p><?= arr_to_list($r->metode, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Perencanaan Edukasi (Media)</strong>
+                        <p><?= arr_to_list($r->media, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Perencanaan Edukasi (Sasaran Edukasi)</strong>
+                       
+                        <p><?=$r->sasaran_edukasi?><?=($r->sasaran_edukasi=="keluarga")?", hubungan : $r->hubungan_keluarga":""?></p>
                     </div>
                     <div class="box-footer">
                         <a href="<?= base_url("erm.php/rajal/edukasi_pasien/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
                         </a>
                         <?php if($detail->status_erm!=1) { ?>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editEdukasiPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                        </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusEdukasiPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
                         <?php } ?>

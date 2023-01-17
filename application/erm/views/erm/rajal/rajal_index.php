@@ -741,6 +741,10 @@
         });
     }
 
+    function editEdukasiPasien(idx,id,nomr) {
+        
+    }
+
     function hapusAwalRawat(idx, id) {
         var x = confirm("Yakin Ingin Hapus Data");
         if (x) {
@@ -859,79 +863,176 @@
     }
 
     function signAwalMedis(idx,id,nomr,dokter) {
-        var x = prompt("Masukkan Pin");
-            if (x=="1234") {
-                $.ajax({
-                type: "POST",
-                url: base_url+"rajal/sign_awal_medis",
+        var x = prompt("Masukkan Password");
+        if (x!=null && x!="") {
+            $.ajax({
+                type: "post",
+                url: base_url+"rajal/cekPin",
                 data: {
-                    idx : idx,
-                    id : id,
-                    nomr : nomr,
-                    dokter : dokter
+                    x : x,
+                    user : dokter
                 },
-                dataType: "JSON",
+                dataType: "json",
                 success: function (response) {
-                    console.log(response)
+                    if (response.status == true ) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url+"rajal/sign_awal_medis",
+                            data: {
+                                idx : idx,
+                                id : id,
+                                nomr : nomr,
+                                dokter : dokter
+                            },
+                            dataType: "JSON",
+                            success: function (response) {
+                                console.log(response)
+                            },
+                            error : function (e) {
+                                console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
                 },
                 error : function (e) {
-                    console.log(e.responseText)
+                    console.log(e)
                 }
             });
-        } else {
-            alert("Pin Salah")
         }
         
     }
 
     function signKembangPasien(idx,id,nomr,user) {
-        var x = prompt("Masukkan Pin");
-            if (x=="1234") {
-                $.ajax({
-                type: "POST",
-                url: base_url+"rajal/sign_kembang_pasien",
+        var x = prompt("Masukkan Password");
+        if (x!=null && x!="") {
+            $.ajax({
+                type: "post",
+                url: base_url+"rajal/cekPin",
                 data: {
-                    idx : idx,
-                    id : id,
-                    nomr : nomr,
+                    x : x,
                     user : user
                 },
-                dataType: "JSON",
+                dataType: "json",
                 success: function (response) {
-                    console.log(response)
+                    if (response.status == true ) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url+"rajal/sign_kembang_pasien",
+                            data: {
+                                idx : idx,
+                                id : id,
+                                nomr : nomr,
+                                user : user
+                            },
+                            dataType: "JSON",
+                            success: function (response) {
+                                console.log(response)
+                            },
+                            error : function (e) {
+                                console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
                 },
                 error : function (e) {
-                    console.log(e.responseText)
+                    console.log(e)
                 }
             });
-        } else {
-            alert("Pin Salah")
         }
     }
 
-    function signAwalRawat(idx,id,nomr,user) {
-        var x = prompt("Masukkan Pin");
-            if (x=="1234") {
-                $.ajax({
-                type: "POST",
-                url: base_url+"rajal/sign_awal_rawat",
+    function signEdukasiPasienDetail(id,user) {
+        // console.log(user)
+        // return false;
+        var x = prompt("Masukkan Password");
+        if (x!=null && x!="") {
+            $.ajax({
+                type: "post",
+                url: base_url+"rajal/cekPin",
                 data: {
-                    idx : idx,
-                    id : id,
-                    nomr : nomr,
+                    x : x,
                     user : user
                 },
-                dataType: "JSON",
+                dataType: "json",
                 success: function (response) {
-                    console.log(response)
+                    if (response.status == true ) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url+"rajal/sign_edukasi_pasien_detail",
+                            data: {
+                                id : id,
+                                user : user
+                            },
+                            dataType: "JSON",
+                            success: function (response) {
+                                tampil_tabel();
+                                console.log(response)
+                            },
+                            error : function (e) {
+                                console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
                 },
                 error : function (e) {
-                    console.log(e.responseText)
+                    console.log(e)
                 }
             });
-        } else {
-            alert("Pin Salah")
         }
+    }
+
+    function signEdukasiPasienDetailSasaran(id) {
+        
+    }
+    
+
+    function signAwalRawat(idx,id,nomr,user) {
+        var x = prompt("Masukkan Password");
+        if (x!=null) {
+            $.ajax({
+                type: "post",
+                url: base_url+"rajal/cekPin",
+                data: {
+                    x : x,
+                    user : user
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == true ) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url+"rajal/sign_awal_rawat",
+                            data: {
+                                idx : idx,
+                                id : id,
+                                nomr : nomr,
+                                user : user
+                            },
+                            dataType: "JSON",
+                            success: function (response) {
+                                alert("QRCODE Berhasi di generate")
+                                // console.log(response)
+                            },
+                            error : function (e) {
+                                // console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
+                },
+                error : function (e) {
+                    console.log(e)
+                }
+            });
+        }
+     
     }
 
     function final(id,status,msg="") {
