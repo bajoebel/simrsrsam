@@ -228,10 +228,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="radio-inline">
-                                <input type="radio" name="sasaran_edukasi_e" value="1" checked>Pasien
+                                <input type="radio" name="sasaran_edukasi_e" value="pasien" checked>Pasien
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="sasaran_edukasi_e" value="2">Keluarga
+                                <input type="radio" name="sasaran_edukasi_e" value="keluarga">Keluarga
                             </label>
                         </div>
                         <div class="col-md-12 mt-1">
@@ -282,10 +282,9 @@
                                     <th>Media</th>
                                     <th>Sasaran</th>
                                     <th>Evaluasi Awal</th>
-                                    <th>Pemberi Edukasi</th>
                                     <th>Verifikasi</th>
                                     <th>Evaluasi Lanjutan</th>
-                                    <th>Aksi</th>
+                                    <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -390,12 +389,18 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="">Pemberi Edukasi (nama)</label>
-                                <input type="text" name="pemberi_edukasi_e" id="pemberi_edukasi_e" class="form-control">
+                                <select name="pemberi_edukasi_e" id="pemberi_edukasi_e" class="form-control select2" style="width:100%">
+                                    <?php $list = getPegawai([])->result();
+                                        echo "<option value=''>Pilih Nama</option>";
+                                        foreach ($list as $r) { ?>
+                                        <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <label for="">Verifikasi</label>
                                 <input type="text" name="verifikasi_e" id="verifikasi_e" class="form-control">
-                            </div>
+                            </div> -->
                             <div class="col-md-12">
                                 <label for="">Evaluasi Lanjutan</label>
                                 <select name="evaluasi_lanjut_e" id="evaluasi_lanjut_e" class="form-control">
@@ -491,7 +496,7 @@
 
         $("[name='sasaran_edukasi_e']").on("click", function() {
             let value = $(this).val();
-            if (value == 2) {
+            if (value == "keluarga") {
                 $("#hubungan_keluarga_e").removeAttr("readonly").focus();
             } else {
                 $("#hubungan_keluarga_e").attr("readonly", true).val("");
@@ -578,7 +583,8 @@
         let media = $("[name='media_topik_e']").val();
         let sasaran = $("[name='sasaran_topik_e']").val();
         let evaluasi_awal = $("[name='evaluasi_awal_e']").val();
-        let pemberi_edukasi = $("[name='pemberi_edukasi_e']").val();
+        let pemberi_edukasi_id = $("[name='pemberi_edukasi_e']").val();
+        let pemberi_edukasi = $("[name='pemberi_edukasi_e'] option:selected").text();
         let verifikasi = $("[name='verifikasi_e']").val();
         let evaluasi_lanjut = $("[name='evaluasi_lanjut_e']").val();
         let user_daftar = "<?= $detail->user_daftar ?>";
@@ -599,6 +605,7 @@
                 sasaran: sasaran,
                 evaluasi_awal: evaluasi_awal,
                 pemberi_edukasi: pemberi_edukasi,
+                pemberi_edukasi_id: pemberi_edukasi_id,
                 verifikasi: verifikasi,
                 evaluasi_lanjut: evaluasi_lanjut,
                 user_daftar: user_daftar,

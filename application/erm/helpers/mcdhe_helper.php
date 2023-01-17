@@ -474,4 +474,18 @@ function gantiTagP($str) {
     return str_replace("<p>","",str_replace("</p>","<br/>",$str));
 }
 
+function cekPasswordUser($pass,$nrp) {
+    $ci = get_instance();
+    $cek = $ci->db->select("NRP")
+    ->where(['NRP'=>$nrp,'userPasw'=>md5($pass)])
+    ->get("tbl01_pegawai")
+    ->num_rows();
+    if ($cek>0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

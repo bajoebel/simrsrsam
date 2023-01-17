@@ -274,6 +274,15 @@ class Rajal_model extends CI_Model
         }
         
     }
+
+    function getEdukasiPasienDetailById($id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->where(["id" => $id])
+            ->get("rj_iep_detail")
+            ->row();
+    }
+
     function deleteEdukasiPasienDetail($id)
     {
         $db2 = $this->load->database('dberm', TRUE);
@@ -311,8 +320,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_awal_medis",[
-            "dokterSign" => $kode,
+            "dokterSign" => $insert_id,
             "status_form" => 1
         ]);
         if ($db2->trans_status() === FALSE)
@@ -337,8 +348,10 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_ppt",[
-            "tenagaMedisSign" => $kode,
+            "tenagaMedisSign" => $insert_id,
             "status_form" => 1
         ]);
         if ($db2->trans_status() === FALSE)
@@ -363,9 +376,41 @@ class Rajal_model extends CI_Model
             "updated_at" => date("Y-m-d"),
 
         ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
         $update = $db2->where("id",$id)->update("rj_awal_rawat",[
-            "perawatSign" => $kode,
+            "perawatSign" => $insert_id,
             "status_form" => 1
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
+    public function updateSignEdukasiPasienDetail($id,$kode,$kode_detail) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
+        $update = $db2->where("id",$id)->update("rj_iep_detail",[
+            "pemberiSign" => $insert_id,
+            "status_form" => 1,
+            "updated_at" => date("Y-m-d"),
+            "status_form_disetujui" => date("Y-m-d")
         ]);
         if ($db2->trans_status() === FALSE)
         {

@@ -116,6 +116,9 @@ $date = date("Y-m-d");
             justify-content: space-between;
         }
     </style>
+     <script src="<?php echo base_url() ?>assets/jquery/js/jquery-3.3.1.min.js"></script>
+    <!-- qrcode -->
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
 </head>
 
 <body>
@@ -377,15 +380,32 @@ $date = date("Y-m-d");
                             <td style="text-align:center">&nbsp;&#10004;</td>
                             <td style="text-align:center">&nbsp;<?= $rl->evaluasi_awal ?></td>
                             <td style="text-align:center">&nbsp;<?= $rl->pemberi_edukasi ?></td>
-                            <td style="text-align:center">&nbsp;&#10004;</td>
+                            <td style="text-align:center">&nbsp;<div id="qrcode_epd_<?=$rl->id?>"></div></td>
                             <td style="text-align:center">&nbsp;<?= $rl->verifikasi ?></td>
                             <td style="text-align:center">&nbsp;<?= $rl->evaluasi_lanjut ?></td>
                         </tr>
+                         <!-- qrcode -->
+                        <script type="text/javascript">
+                            var id = "<?= $rl->id?>";
+                            var code = "<?= $rl->pemberiSign?>";
+                            if (code) {
+                                var qrcode = new QRCode(document.getElementById("qrcode_epd_"+id), {
+                                    text: code,
+                                    width: 60,
+                                    height: 60,
+                                    colorDark : "#000",
+                                    colorLight : "#fff",
+                                });
+                                $(`#qrcode_epd_${id} > img`).css({"margin":"auto"});
+                            }
+                        </script>
                     <?php } ?>
                 </table>
             </td>
         </tr>
     </table>
 </body>
+<script>
 
+</script>
 </html>

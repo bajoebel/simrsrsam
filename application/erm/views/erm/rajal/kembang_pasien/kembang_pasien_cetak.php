@@ -221,12 +221,13 @@ $date = date("Y-m-d");
                                 var code = "<?= $r->tenagaMedisSign?>";
                                 if (code) {
                                     var qrcode = new QRCode(document.getElementById("qrcode_cppt_"+id), {
-                                    text: code,
-                                    width: 60,
-                                    height: 60,
-                                    colorDark : "#000",
-                                    colorLight : "#fff",
-                                });
+                                        text: code,
+                                        width: 60,
+                                        height: 60,
+                                        colorDark : "#000",
+                                        colorLight : "#fff",
+                                    });
+                                    $(`#qrcode_cppt_${id} > img`).css({"margin":"auto"});
                                 }
                               
                             </script>

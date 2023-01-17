@@ -77,13 +77,13 @@ $(document).ready(function () {
             $('#reNewPass').focus();
         }else{
             $.ajax({
-                url         : "<?php echo base_url().'nota_tagihan.php/users/ubahPass' ?>",
+                url         : "<?php echo base_url().'erm.php/users/ubahPass' ?>",
                 type        : "POST",
                 data        : $('#form1').serialize(),
                 dataType    : "JSON",
                 success     : function(data){
                     if(data.code==200){
-                        var url = '<?php echo base_url().'nota_tagihan.php/login/logout' ?>';
+                        var url = '<?php echo base_url().'erm.php/login/logout' ?>';
                         window.location.href = url;
                     }else{
                         alert(data.message);
