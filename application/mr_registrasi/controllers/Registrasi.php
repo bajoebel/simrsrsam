@@ -2857,8 +2857,16 @@ class registrasi extends CI_Controller
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $this->erm = $this->load->database('erm', true);
-            $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row();
-            if(!empty($data)) $this->load->view('cetak/setuju_umum_cetak',$data);
+            $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row_array();
+            if(!empty($data)) {
+                if(empty($data->signPetugas)) $data["sign"]=array();
+                else{
+                    $signPetugas=base64_decode($data->signPetugas);
+                    $data['sign']=$this->db->where('id',$signPetugas)->get('log_assign')->row_array();
+                }
+                // print_r($data);exit;
+                $this->load->view('cetak/setuju_umum_cetak',$data);
+            }
         }else {
             $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
         }
@@ -2868,7 +2876,7 @@ class registrasi extends CI_Controller
         if ($ses_state) {
             $hub=$this->input->post('hubkeluarga');
             $this->db->where('nomr_pasien',$this->input->post('nomr_pasien'));
-            $this->db->where('hub_keluarga',$hub);
+            $this->db->where('hubkeluarga',$hub);
             if($hub!="Diri Sendiri"){
                 $this->db->where('namattd',$this->input->post('namattd'));
             }
@@ -2889,7 +2897,7 @@ class registrasi extends CI_Controller
                     'tglbuat'=>date('Y-m-d H:i:s'),
                 );
                 $this->db->where('nomr_pasien',$this->input->post('nomr_pasien'));
-                $this->db->where('hub_keluarga',$hub);
+                $this->db->where('hubkeluarga',$hub);
                 if($hub!="Diri Sendiri"){
                     $this->db->where('namattd',$this->input->post('namattd'));
                 }
@@ -2905,6 +2913,46 @@ class registrasi extends CI_Controller
             $this->erm->where('id',$this->input->post('id'));
             $this->erm->update('rj_setuju_umum',$gcttd);
             $response = array('status' => true, 'message' => 'Dokumen Berhasil Di Tanda Tangani', 'data' => array());
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    function signgc(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $cek=cekPasswordUser($this->input->post('pin'),$this->session->userdata('get_uid'));
+            if($cek){
+                $id=$this->input->post('id');
+                $param = [
+                    "id" => $id,
+                    "tabel" => "rj_setuju_umum",
+                    "petugas" => $this->session->userdata('get_uid') 
+                ];
+                $code = base64_encode(json_encode($param));
+                $this->erm = $this->load->database('erm', true);
+                $data=$this->erm->where('id',$id)->get('rj_setuju_umum')->row_array();
+                $code_detail = base64_encode(json_encode($data));
+                $signdata=array(
+                    'kode'=>$code,
+                    'kode_detail'=>$code_detail,
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
+                );
+                $this->erm->insert('log_assign',$signdata);
+                $insert_id=$this->erm->insert_id();
+                $signcode=base64_encode($insert_id);
+                $update=array(
+                    'signPetugas'=>$signcode
+                );
+                $this->erm->where('id',$id);
+                $this->erm->update('rj_setuju_umum',$update);
+                $response = array('status' => true, 'message' => 'Dokumen Berhasil Di Tanda Tangani', 'data' => $signcode);
+            }else{
+                $response = array('status' => false, 'message' => 'Pin yang anda masukkan salah');
+            }
+            
         }else {
             $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
         }

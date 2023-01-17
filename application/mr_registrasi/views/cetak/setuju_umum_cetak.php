@@ -355,7 +355,6 @@ $date = date("Y-m-d");
                                                                     <?php
                                                                 }
                                                                 ?>
-                                                                ?>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -372,7 +371,9 @@ $date = date("Y-m-d");
                                                             <td>Petugas Admission</td>
                                                         </tr>
                                                         <tr>
-                                                            <td height="50px" id="ttdpetugas">&nbsp;</td>
+                                                            <td height="50px" id="ttdpetugas">
+                                                                
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>( <?= getNmLengkap($users_id) ?> )</td>
@@ -546,9 +547,41 @@ $date = date("Y-m-d");
         </div>
     </div>
 </div>
+<div id="sign" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Masukkan PIN</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="hidden" class="form-control" name="id" id="id" value="<?= $id ?>">
+                            <input type="password" class="form-control" name="pin" id="pin" placeholder="Masukkan PIN">
+                            <div class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="signGC()">
+                                <i class="glyphicon glyphicon-certificate"></i> Sign
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
     <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
     <script src="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
     <script>
         <?php if(!empty($ttd)){?>
         // var canvas = document.getElementById("signature-pasien");
@@ -595,7 +628,10 @@ $date = date("Y-m-d");
                     
                 },
                 error: function(xhr) { // if error occured
-                    tampilkanPesan('error',xhr.responseText)
+                    // tampilkanPesan('error',xhr.responseText)
+                    console.clear();
+                    console.log(xhr.responseText);
+                    alert('Error')
                     $('#save').prop("disabled",false);
                     $('#save').html('Save')
                 },
@@ -609,6 +645,65 @@ $date = date("Y-m-d");
         cancelButton.addEventListener('click', function (event) {
             signaturePad.clear();
         });
+        <?php if(!empty($signPetugas)) { ?>
+        var code = "<?= $signPetugas ?>";
+        var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
+            text: code,
+            width: 80,
+            height: 80,
+            colorDark : "#000",
+            colorLight : "#fff",
+        });
+        <?php } else{ ?>
+            var button=`<button class="btn btn-primary" id="btnSignPetugas" type="button" onclick="signPetugas()">Sign</button>`;
+            $('#ttdpetugas').html(button)
+        <?php } ?>
+        function signPetugas(){
+            $('#sign').modal('show');
+        }
+        function signGC(){
+            formData={
+                id: $('#id').val(),
+                pin: $('#pin').val()
+            }
+
+            $.ajax({
+                url: "<?php echo base_url() . 'mr_registrasi.php/registrasi/signgc' ?>",
+                type: "POST",
+                data: formData,
+                dataType: "JSON",
+                beforeSend  : function(){
+                    $('#btnSign').prop("disabled",true);
+                    $('#btnSign').html('<i class="fa fa-spinner fa-spin"></i> Proses...')
+                },
+                success: function(data) {
+                    if (data.status==true) {
+                        $('#ttdpetugas').html("")
+                        var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
+                            text: data.data,
+                            width: 80,
+                            height: 80,
+                            colorDark : "#000",
+                            colorLight : "#fff",
+                        });
+                    }else{
+                        alert(data.message)
+                    }
+                },
+                error: function(xhr) { // if error occured
+                    // tampilkanPesan('error',xhr.responseText)
+                    console.clear();
+                    console.log(xhr.responseText);
+                    // alert('Error')
+                    $('#sign').prop("disabled",false);
+                    $('#sign').html('<i class="glyphicon glyphicon-certificate"></i>Sign')
+                },
+                complete: function() {
+                    $('#sign').prop("disabled",false);
+                    $('#sign').html('<i class="glyphicon glyphicon-certificate"></i> Sign')
+                }
+            });
+        }
     </script>
     
 </body>

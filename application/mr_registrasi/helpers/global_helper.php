@@ -563,3 +563,15 @@ function getField($field, $kondisi, $table)
         return $cekQuery->$field;
     }
 }
+function cekPasswordUser($pass,$nrp) {
+    $ci = get_instance();
+    $cek = $ci->db->select("NRP")
+    ->where(['NRP'=>$nrp,'userPasw'=>md5($pass)])
+    ->get("tbl01_pegawai")
+    ->num_rows();
+    if ($cek>0) {
+        return true;
+    } else {
+        return false;
+    }
+}

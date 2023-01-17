@@ -346,6 +346,7 @@ class Rajal extends CI_Controller
             "tabel" => "rj_awal_medis",
             "dokter" => $dokter 
         ];
+        
         $data = $this->rajal->getAwalMedisById($nomr,$idx,$id);
         if ($data) {
             $code = base64_encode(json_encode($param));
