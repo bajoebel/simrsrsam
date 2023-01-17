@@ -16,6 +16,9 @@ class pasien_baru extends CI_Controller {
         $ses_state = $this->users_model->cek_session_id();
         $this->session->unset_userdata('sPage');
         $this->session->unset_userdata('sLike');
+        $this->session->unset_userdata('method');
+        $this->session->unset_userdata('keynama');
+        $this->session->unset_userdata('keytgllahir');
         $y['index_menu'] = 3;
         if($ses_state){
             $x['header'] = $this->load->view('template/header','',true);
@@ -33,14 +36,24 @@ class pasien_baru extends CI_Controller {
         }        
     }
     function getView(){
-        if(isset($_POST['method'])):
-            $method = $this->input->post('method',true);
-            $tgl_lahir = setDateEng($this->input->post('keyDob',true));
-            $nama = $this->input->post('keyNama',true);    
-        else:
-            $method = "";
-        endif;
-
+        $method = ($this->session->userdata('method')) ? $this->session->userdata('method') : "";
+        if(empty($method)){
+            if(isset($_POST['method'])):
+                $method = $this->input->post('method',true);
+                $tgl_lahir = setDateEng($this->input->post('keyDob',true));
+                $nama = $this->input->post('keyNama',true);    
+                $this->session->set_userdata('method',$method);
+                $this->session->set_userdata('keynama',$nama);
+                $this->session->set_userdata('keytgllahir',$tgl_lahir);
+            else:
+                $method = "";
+                $this->session->unset_userdata('method');
+                $this->session->unset_userdata('keynama');
+                $this->session->unset_userdata('keytgllahir');
+            endif;
+        }
+        
+        
         if(isset($_POST['page'])):
             $offset = $this->input->post('page');
             $this->session->set_userdata('sPage',$offset);
@@ -52,6 +65,8 @@ class pasien_baru extends CI_Controller {
 
         $condition = "";
         if($method == "Inquery"){
+            $nama=$this->session->userdata('keynama');
+            $tgl_lahir=$this->session->userdata('keytgllahir');
             $condition .= "WHERE nama LIKE '%$nama%' AND tgl_lahir='$tgl_lahir'";
         }else{
             if(isset($_POST['sLike'])){
@@ -70,7 +85,7 @@ class pasien_baru extends CI_Controller {
         
         $SQL = "SELECT * FROM tbl01_pasien $condition";
         // echo $SQL; exit;
-        $SQLROW="SELECT count(idx) as total FROM tbl01_pasien";
+        $SQLROW="SELECT count(idx) as total FROM tbl01_pasien $condition";
         $SQL_Count = $this->db->query("$SQLROW")->row();
         $totalRec = $SQL_Count->total;
         $config['target']      = 'tbody#getdata';
