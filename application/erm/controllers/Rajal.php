@@ -378,6 +378,26 @@ class Rajal extends CI_Controller
         }
     }
 
+    public function sign_edukasi_pasien_detail() {
+        $id = $this->input->post("id");
+        $user = $this->input->post("user");
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_iep_detail",
+            "tenaga_medis" => $user 
+        ];
+        $data = $this->rajal->getEdukasiPasienDetailById($id);
+        
+        if ($data) {
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignEdukasiPasienDetail($id,$code,$code_detail);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
     public function sign_awal_rawat() {
         $idx = $this->input->post("idx");
         $id = $this->input->post("id");
@@ -637,7 +657,8 @@ class Rajal extends CI_Controller
             "sasaran" => $this->input->post("sasaran"),
             "evaluasi_awal" => $this->input->post("evaluasi_awal"),
             "pemberi_edukasi" => $this->input->post("pemberi_edukasi"),
-            "verifikasi" => $this->input->post("verifikasi"),
+            "pemberi_edukasi_id" => $this->input->post("pemberi_edukasi_id"),
+            // "verifikasi" => $this->input->post("verifikasi"),
             "evaluasi_lanjut" => $this->input->post("evaluasi_lanjut"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
@@ -762,6 +783,17 @@ class Rajal extends CI_Controller
                 "data" => []
             ];
             $this->load->view($this->folder . "/" . $this->subfolder . "/prmrj/prmrj_cetak_master", compact('data'));
+        }
+    }
+
+    public function cekPin() {
+        $pass = $this->input->post("x");
+        $user = $this->input->post("user");
+        $cek = cekPasswordUser($pass,$user);
+        if ($cek) {
+            echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
         }
     }
 
