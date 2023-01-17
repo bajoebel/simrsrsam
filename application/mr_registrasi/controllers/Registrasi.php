@@ -2863,4 +2863,52 @@ class registrasi extends CI_Controller
             $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
         }
     }
+    function simpanttd(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $hub=$this->input->post('hubkeluarga');
+            $this->db->where('nomr_pasien',$this->input->post('nomr_pasien'));
+            $this->db->where('hub_keluarga',$hub);
+            if($hub!="Diri Sendiri"){
+                $this->db->where('namattd',$this->input->post('namattd'));
+            }
+            $cek=$this->db->get('tbl01_pasien_ttd')->row();
+            if(empty($cek)){
+                $ttd=array(
+                    'nomr_pasien'=>$this->input->post('nomr_pasien'),
+                    'nama_pasien'=>$this->input->post('nama_pasien'),
+                    'namattd'=>$this->input->post('namattd'),
+                    'hubkeluarga'=>$this->input->post('hubkeluarga'),
+                    'ttd'=>$this->input->post('ttd'),
+                    'tglbuat'=>date('Y-m-d H:i:s'),
+                );
+                $this->db->insert('tbl01_pasien_ttd',$ttd);
+            }else{
+                $ttd=array(
+                    'ttd'=>$this->input->post('ttd'),
+                    'tglbuat'=>date('Y-m-d H:i:s'),
+                );
+                $this->db->where('nomr_pasien',$this->input->post('nomr_pasien'));
+                $this->db->where('hub_keluarga',$hub);
+                if($hub!="Diri Sendiri"){
+                    $this->db->where('namattd',$this->input->post('namattd'));
+                }
+                $this->db->update('tbl01_pasien_ttd',$ttd);
+            }
+            
+
+            // Update ttd GC
+            $this->erm = $this->load->database('erm', true);
+            $gcttd=array(
+                'ttd'=>$this->input->post('ttd')
+            );
+            $this->erm->where('id',$this->input->post('id'));
+            $this->erm->update('rj_setuju_umum',$gcttd);
+            $response = array('status' => true, 'message' => 'Dokumen Berhasil Di Tanda Tangani', 'data' => array());
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
 }

@@ -275,7 +275,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-3" >Nama Pasien <span style="color: red"> * </span></label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)">
+                                    <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)" onfocusout="validasiNamaTTL()">
                                     <div class="text-error" id="err_nama"></div>    
                                 </div>
                                 </div>
@@ -283,9 +283,9 @@
                                     <label  class="control-label col-sm-3" >Tempat Lahir / DOB <span style="color: red"> * </span></label>
                                     <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-sm" name="tempat_lahir" id="tempat_lahir" value="<?php echo $tempat_lahir ?>" >
+                                        <input type="text" class="form-control input-sm" name="tempat_lahir" id="tempat_lahir" value="<?php echo $tempat_lahir ?>" onfocusout="validasiNamaTTL()">
                                         <div class="input-group-btn" style="width: 30%">
-                                            <input type="text" class="form-control input-sm" name="tgl_lahir" id="tgl_lahir" placeholder="__/__/____" value="<?php if(!empty($tgl_lahir)) echo setDateInd($tgl_lahir) ?>">
+                                            <input type="text" class="form-control input-sm" name="tgl_lahir" id="tgl_lahir" placeholder="__/__/____" value="<?php if(!empty($tgl_lahir)) echo setDateInd($tgl_lahir) ?>" onfocusout="validasiNamaTTL()">
                                         </div>
                                     </div>
                                     <div class="text-error" id="err_ttl"></div>
@@ -1238,6 +1238,10 @@
                 }
             });
         }
+    }
+
+    function validasiNamaTTL(){
+        
     }
 
     function reg_rajal() {
