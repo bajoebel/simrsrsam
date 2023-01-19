@@ -602,7 +602,9 @@ class pasien_baru extends CI_Controller {
                         if($_POST['idx'] == ""){
                             // Insert Pasien Baru
                             // Validasi nama dan tgl_lahir 
-                            $validasi=$this->patch_model->validasiPasien($params['nama'],$params['tgl_lahir']);
+                            $skip=$this->input->post('skip');
+                            if($skip==0) $validasi=$this->patch_model->validasiPasien($params['nama'],$params['tgl_lahir']);
+                            else $validasi=array();
                             if(empty($validasi)){
                                 $params['nomr'] = $this->patch_model->get_nomr(); 
                                 $cekCommand = $this->db->insert('tbl01_pasien',$params);
@@ -667,6 +669,7 @@ class pasien_baru extends CI_Controller {
                             }
     
                             $params['nomr'] = $nomr;
+                            $params['status_lengkap'] = 1;
                             // update Pasien BAru
                             $this->db->where('idx',  $this->input->post('idx',TRUE));
                             $cekCommand = $this->db->update('tbl01_pasien',$params); 

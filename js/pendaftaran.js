@@ -1464,7 +1464,7 @@ function updatePasien() {
 	var id_pekerjaan=$('#e-pekerjaan').val();
 	if(id_pekerjaan==5) var nama_pekerjaan=$('#e-pekerjaanlain').val();
 	else var nama_pekerjaan=$('#e-pekerjaan :selected').html();
-	var jns_kelamin=$("input[name='jns_kelamin']:checked").val();
+	var jns_kelamin=$("#e-jns_kelamin").val();
 	var hambatan_bahasa=$('#e-keterbatasanbahasa').prop('checked');
 	if(hambatan_bahasa==true) hambatan_bahasa=1; else hambatan_bahasa=0;
 	var formdata = {
@@ -1533,7 +1533,7 @@ function updatePasien() {
 	}
 	console.clear();
 	console.log(formdata);
-	
+	// return false;
 	var x = confirm("Apakah anda yakin akan menyimpan data pasien ini?");
 	if (x) {
 			$.ajax({

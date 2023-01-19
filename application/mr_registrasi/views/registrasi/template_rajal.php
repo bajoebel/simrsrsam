@@ -345,7 +345,19 @@
                                                             </div>
                                                         </div>
                                                     <?php
+                                                    }else{
+                                                        if(empty($status_pasien)){
+                                                            ?>
+                                                            <div class="col-md-12">
+                                                                <div class="alert alert-warning alert-dismissible">
+                                                                    <p>Data pasien belum lengkap, untuk melengkapi data pasien silahkan buka tab edit pasien<br>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <?php
+                                                        }
                                                     }
+                                                    
                                                     ?>
                                                     <div class="col-md-12">
                                                     <input type="hidden" name="kodebooking" id="kodebooking" value="<?= $kodebooking ?>">
