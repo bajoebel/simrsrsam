@@ -21,10 +21,15 @@
         border-left-color: rgb(221, 221, 221);
     }
 
-    .modal-content {
+    /* .modal-content {
         max-height: 600px;
+        overflow-y: scroll:
+    } */
+    .modal-content {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height: 95vh;
     }
-
     .input-group-btn {
         border: none;
     }
@@ -275,7 +280,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-3" >Nama Pasien <span style="color: red"> * </span></label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)" onfocusout="validasiNamaTTL()">
+                                    <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)">
                                     <div class="text-error" id="err_nama"></div>    
                                 </div>
                                 </div>
@@ -283,9 +288,9 @@
                                     <label  class="control-label col-sm-3" >Tempat Lahir / DOB <span style="color: red"> * </span></label>
                                     <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-sm" name="tempat_lahir" id="tempat_lahir" value="<?php echo $tempat_lahir ?>" onfocusout="validasiNamaTTL()">
+                                        <input type="text" class="form-control input-sm" name="tempat_lahir" id="tempat_lahir" value="<?php echo $tempat_lahir ?>">
                                         <div class="input-group-btn" style="width: 30%">
-                                            <input type="text" class="form-control input-sm" name="tgl_lahir" id="tgl_lahir" placeholder="__/__/____" value="<?php if(!empty($tgl_lahir)) echo setDateInd($tgl_lahir) ?>" onfocusout="validasiNamaTTL()">
+                                            <input type="text" class="form-control input-sm" name="tgl_lahir" id="tgl_lahir" placeholder="__/__/____" value="<?php if(!empty($tgl_lahir)) echo setDateInd($tgl_lahir) ?>">
                                         </div>
                                     </div>
                                     <div class="text-error" id="err_ttl"></div>
@@ -706,7 +711,81 @@
     </div>
     
 </section>
-
+<div class="modal fade" id="priview_pasien" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
+    <div class="modal-dialog" style="overflow-y: initial !important;  max-height:85%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 class="modal-title" id="headSep">Profile Pasien</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <tr>
+                                <td>Nomr</td>
+                                <td  id="pr_nomr"></td>
+                            </tr>
+                            <tr>
+                                <td>NIK</td>
+                                <td  id="pr_no_ktp"></td>
+                            </tr>
+                            <tr>
+                                <td>Nama</td>
+                                <td  id="pr_nama"></td>
+                            </tr>
+                            <tr>
+                                <td>TTL</td>
+                                <td  id="pr_ttl"></td>
+                            </tr>
+                            <tr>
+                                <td>Jenis Kelamin</td>
+                                <td  id="pr_jns_kelamin"></td>
+                            </tr>
+                            <tr>
+                                <td>Agama</td>
+                                <td  id="pr_agama"></td>
+                            </tr>
+                            <tr>
+                                <td>Pendidikan</td>
+                                <td  id="pr_pendidikan"></td>
+                            </tr>
+                            <tr>
+                                <td>Pekerjaan</td>
+                                <td  id="pr_pekerjaan"></td>
+                            </tr>
+                            <tr>
+                                <td>Status Kawin</td>
+                                <td  id="pr_status_kawin"></td>
+                            </tr>
+                            <tr>
+                                <td>Etnis</td>
+                                <td  id="pr_suku"></td>
+                            </tr>
+                            <tr>
+                                <td>Bahasa</td>
+                                <td  id="pr_bahasa"></td>
+                            </tr>
+                            <tr>
+                                <td>Alamat Sesuai KTP</td>
+                                <td  id="pr_alamatktp"></td>
+                            </tr>
+                            <tr>
+                                <td>Alamat Domisili</td>
+                                <td  id="pr_alamatdomisili"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button class="btn btn-danger" type="button" onclick="simpan(1)">Skip</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
 <script src="<?php echo base_url() ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
@@ -722,7 +801,8 @@
     var xnama_kecamatan = '<?php echo $nama_kecamatan ?>';
     var xnama_kelurahan = '<?php echo $nama_kelurahan ?>';
     // alert(xKewarganegaraan);
-    function simpan() {
+    function simpan(skip=0) {
+        if(skip==1) $('#priview_pasien').modal('hide');
         var kewarganegaraan=$('#kewarganegaraan').val();
         var id_provinsi=$('#nama_provinsi').val()
         var provinsi=$('#nama_provinsi :selected').html()
@@ -840,7 +920,8 @@
             pekerjaan_pj:$('#pekerjaan_pj').val(),
             alamat_pj:$('#alamat_pj').val(),
             no_penanggung_jawab:$('#no_penanggung_jawab').val(),
-            hub_keluarga:$('#hub_keluarga').val()
+            hub_keluarga:$('#hub_keluarga').val(),
+            skip:skip
         }
         console.clear();
         console.log(formdata);
@@ -907,6 +988,39 @@
                             $('#err_no_penanggung_jawab').html(data.error.no_penanggung_jawab);
                             $('#err_hub_keluarga').html(data.error.hub_keluarga);
 
+                        } else if(data.code==204){
+                            $('#priview_pasien').modal('show');
+                            var daftar=`<a href='<?= base_url()?>mr_registrasi.php/registrasi/daftar_rawat_jalan/`+data.response.nomr+`' class='btn btn-default btn-xs' >`+data.response.nomr+`</a> *<i>Klik Nomr Untuk Mendaftarkan Pasien Sebagai pasien lama</i>`;
+                            $('#pr_nomr').html(daftar);
+                            $('#pr_no_ktp').html(data.response.no_ktp);
+                            $('#pr_nama').html(data.response.nama);
+                            $('#pr_ttl').html(data.response.tempat_lahir +" / "+data.response.tgl_lahir);
+                            var jns_kelamin=(data.response.jns_kelamin=1 ? "laki-Laki":(data.response.jns_kelamin==2 ? "Perempuan":"-"))
+                            $('#pr_jns_kelamin').html(jns_kelamin);
+                            $('#pr_agama').html(data.response.agama);
+                            $('#pr_pendidikan').html(data.response.pendidikan);
+                            $('#pr_pekerjaan').html(data.response.pekerjaan);
+                            $('#pr_status_kawin').html(data.response.status_kawin);
+                            $('#pr_suku').html(data.response.suku);
+                            $('#pr_bahasa').html(data.response.bahasa);
+                            var alamat=data.response.alamat+
+                            " RT "+data.response.rt+
+                            " RW "+data.response.rw+
+                            " Kel. "+data.response.nama_kelurahan+
+                            " Kec. "+data.response.nama_kecamatan+
+                            " Kab/Kota. "+data.response.nama_kab_kota+
+                            " Prov. "+data.response.nama_provinsi+
+                            " Kode Pos. "+data.response.kodepos;
+                            var alamat_domisili=data.response.alamat_domisili+
+                            " RT "+data.response.rt_domisili+
+                            " RW "+data.response.rw_domisili+
+                            " Kel. "+data.response.nama_kelurahan_domisili+
+                            " Kec. "+data.response.nama_kecamatan_domisili+
+                            " Kab/Kota. "+data.response.nama_kab_kota_domisili+
+                            " Prov. "+data.response.nama_provinsi_domisili+
+                            " Kode Pos. "+data.response.kodepos_domisili+
+                            $('#pr_alamatktp').html(alamat);
+                            $('#pr_alamatdomisili').html(alamat_domisili);
                         }
                     },
                     error: function (xhr) { // if error occured
@@ -1238,10 +1352,6 @@
                 }
             });
         }
-    }
-
-    function validasiNamaTTL(){
-        
     }
 
     function reg_rajal() {
