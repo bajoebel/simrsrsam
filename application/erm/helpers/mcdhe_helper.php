@@ -324,6 +324,24 @@ function DateFormatIndo($date)
     $result = $tgl . "-" . $bulan . "-" . $tahun;
     return ($result);
 }
+
+function dateTimeDBtoIndo($string){
+    // contoh : 2019-01-30 10:20:20
+    
+    $bulanIndo = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September' , 'Oktober', 'November', 'Desember'];
+
+    $date = explode(" ", $string)[0];
+    $time = explode(" ", $string)[1];
+    
+    $tanggal = explode("-", $date)[2];
+    $bulan = explode("-", $date)[1];
+    $tahun = explode("-", $date)[0];
+    
+    
+
+    return $tanggal . " " . $bulanIndo[abs($bulan)] . " " . $tahun . " " . $time;
+}
+
 function removeChar($arr)
 {
 
@@ -482,6 +500,32 @@ function cekPasswordUser($pass,$nrp) {
     ->num_rows();
     if ($cek>0) {
         return true;
+    } else {
+        return false;
+    }
+}
+
+function getNip($nrp) {
+    $ci = get_instance();
+    $cek = $ci->db->select("NIP")
+    ->where(['NRP'=>$nrp])
+    ->get("tbl01_pegawai")
+    ->row();
+    if ($cek) {
+        return $cek->NIP;
+    } else {
+        return "-";
+    }
+}
+
+function getTtd($nomr) {
+    $ci = get_instance();
+    $cek = $ci->db->select("*")
+    ->where(['nomr_pasien'=>$nomr])
+    ->get("tbl01_pasien_ttd")
+    ->row();
+    if ($cek) {
+        return $cek;
     } else {
         return false;
     }

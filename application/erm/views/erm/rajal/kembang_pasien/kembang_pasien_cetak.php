@@ -213,7 +213,8 @@ $date = date("Y-m-d");
                                 </td>
                                 <td>
                                     <?= $r->review?>
-                                    <div id="qrcode_cppt_<?=$r->id?>">
+                                    <div id="qrcode_cppt_<?=$r->id?>"></div><br/>
+                                    <?=$r->tenaga_medis?>
                                 </td>
                             </tr>
                             <script type="text/javascript">
@@ -227,7 +228,7 @@ $date = date("Y-m-d");
                                         colorDark : "#000",
                                         colorLight : "#fff",
                                     });
-                                    $(`#qrcode_cppt_${id} > img`).css({"margin":"auto"});
+                                    $(`#qrcode_cppt_${id} > img`).css({"margin":"auto","padding":"2px"});
                                 }
                               
                             </script>

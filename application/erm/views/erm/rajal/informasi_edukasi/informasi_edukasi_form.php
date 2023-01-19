@@ -422,6 +422,20 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-psw-e">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         // $(".select2-tag").select2()
@@ -531,17 +545,17 @@
 
     });
 
-    function tampil_awal() {
-        var idx = $("#idx_e").val();
-        let id = localStorage.getItem("id_rj_iep_"+idx)
-        if (id != null) {
-            $("#form-data-edukasi-pasien:submit").attr("disabled", true);
-            $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
-            $("#form-data-edukasi-pasien").addClass("hide");
-            $("#form-data-edukasi-pasien-detail").removeClass("hide");
-        }
+    // function tampil_awal() {
+    //     var idx = $("#idx_e").val();
+    //     let id = localStorage.getItem("id_rj_iep_"+idx)
+    //     if (id != null) {
+    //         $("#form-data-edukasi-pasien:submit").attr("disabled", true);
+    //         $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
+    //         $("#form-data-edukasi-pasien").addClass("hide");
+    //         $("#form-data-edukasi-pasien-detail").removeClass("hide");
+    //     }
 
-    }
+    // }
 
     function tampil_tabel() {
         // var idx = $("#idx_e").val();
@@ -591,6 +605,18 @@
         let id_rj_iep = $("[name='id_rj_iep']").val();
         // console.log(media);
         // return false;
+        if (topik_id=="") {
+            alert("Topik Edukasi Tidak Boleh Kosong")
+            return false;
+        }
+        if (pemberi_edukasi=="") {
+            alert("Pemberi Edukasi Tidak Boleh Kosong")
+            return false;
+        }
+        if (sasaran=="") {
+            alert("Sasaran Edukasi Tidak Boleh Kosong")
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: base_url + "rajal/insert_edukasi_pasien_detail",

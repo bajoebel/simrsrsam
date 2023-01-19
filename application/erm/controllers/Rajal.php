@@ -168,6 +168,7 @@ class Rajal extends CI_Controller
             "implant" => $this->input->post("implant_ka"),
             "implant_detail" => $this->input->post("implant_detail_ka"),
             "riwayat_sakit" => $this->input->post("riwayat_sakit_ka"),
+            "riwayat_operasi_cek" => $this->input->post("riwayat_operasi_cek_ka"),
             "riwayat_operasi" => $this->input->post("riwayat_operasi_ka"),
             "riwayat_operasi_tahun" => $this->input->post("riwayat_operasi_tahun_ka"),
             "riwayat_sakit_keluarga" => $this->input->post("riwayat_sakit_keluarga_ka"),
@@ -235,6 +236,7 @@ class Rajal extends CI_Controller
             "ttv_sh" => $this->input->post("ttv_sh_ka"),
             "ttv_nd" => $this->input->post("ttv_nd_ka"),
             "ttv_rr" => $this->input->post("ttv_rr_ka"),
+            "ttv_spo2" => $this->input->post("ttv_spo2_ka"),
             "ttv_td" => $this->input->post("ttv_td_ka"),
             "ttv_ds" => $this->input->post("ttv_ds_ka"),
             "status_generalis" => $this->input->post("status_generalis_ka"),
@@ -310,6 +312,14 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status" => true]);
         }
+    }
+
+    public function edit_kaji_awal() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getAwalRawatById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
     }
 
     public function kaji_awal_medis($id = "", $idx = "", $nomr = "")
@@ -418,6 +428,7 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
         }
     }
+
 
     public function insert_kaji_awal_medis()
     {
@@ -641,6 +652,14 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status" => false]);
         }
+    }
+
+    public function edit_edukasi_pasien() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getEdukasiPasienById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
     }
 
     public function insert_edukasi_pasien_detail()

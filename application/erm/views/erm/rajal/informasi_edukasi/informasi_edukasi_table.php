@@ -8,8 +8,8 @@ foreach ($data->result() as $e) : ?>
         <td><?= $e->metode ?></td>
         <td><?= $e->media ?></td>
         <td>
-            <button type="button" data-id="<?= $e->id ?>" data-user="<?= $e->pemberi_edukasi_id ?>" class='btn btn-xs btn-info' onclick="signEdukasiPasienDetailSasaran(this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Tanda Tangan Sasaran"> <i class='fa fa-sign-in'></i>
-            </button>
+            <!-- <button type="button" data-id="<?= $e->id ?>" data-user="<?= $e->pemberi_edukasi_id ?>" class='btn btn-xs btn-info' onclick="signEdukasiPasienDetailSasaran(this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Tanda Tangan Sasaran"> <i class='fa fa-sign-in'></i>
+            </button> -->
             <?= $e->sasaran ?>
         </td>
         <td><?= $e->evaluasi_awal ?></td>

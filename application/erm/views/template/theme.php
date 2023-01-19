@@ -73,8 +73,6 @@
 
         }
 
-
-
         .center {
             margin: 150px auto auto auto;
             padding: 10px;

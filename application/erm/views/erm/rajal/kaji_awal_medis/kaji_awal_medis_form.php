@@ -208,6 +208,7 @@
     </div>
 </div>
 <script>
+    var id_ruang = <?= $detail->id_ruang ?>;
     $(document).ready(function() {
         // $("[name='auto_detail_m'],[name='allo_detail_m']").wysihtml5();
         // $("#tgl_m").on("change")
@@ -241,11 +242,11 @@
             if ($(this).is(":checked")) {
                 $("#kontrol_tanggal_m").removeAttr("readonly").focus()
                 $("#kontrol_jam_m").removeAttr("readonly")
-                $("#kontrol_tujuan_id_m").removeAttr("disabled")
+                $("#kontrol_tujuan_id_m").removeAttr("disabled").val(id_ruang).trigger("change")
             } else {
                 $("#kontrol_tanggal_m").attr('readonly', true).val("");
                 $("#kontrol_jam_m").attr('readonly', true);
-                $("#kontrol_tujuan_id_m").attr("disabled", true)
+                $("#kontrol_tujuan_id_m").attr("disabled", true).val("").trigger("change")
             }
         });
 
@@ -259,6 +260,8 @@
             $("#pj_nama_m").val("<?=$p->nama?>");
         })
 
+        $("input[name=pj_m][value='pasien']").trigger("click")
+
 
         $("#td_m").inputmask({
             "mask": "999/99"
@@ -268,4 +271,7 @@
         });
 
     });
+</script>
+<script>
+   
 </script>

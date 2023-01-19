@@ -151,23 +151,24 @@
     </div>
     <div class="col-md-4">
         <label for="">&nbsp;Pilih Bisa Lebih Dari 1</label>
-        <select class="form-control select2" name="riwayat_sakit_ka[]" id="riwayat_sakit_ka[]" multiple="multiple" data-placeholder="Riwayat Penyakit Dahulu..." style="width: 100%;">
+        <select class="form-control select2" name="riwayat_sakit_ka[]" id="riwayat_sakit_ka" multiple="multiple" data-placeholder="Riwayat Penyakit Dahulu..." style="width: 100%;">
             <option value="asma">Asma</option>
             <option value="jantung">Jantung</option>
             <option value="hipertensi">Hipertensi</option>
             <option value="dm">DM</option>
             <option value="tiroid">Tiroid</option>
             <option value="epilepsi">Epilepsi</option>
+            <option value="tidak ada">Tidak Ada</option>
         </select>
     </div>
     <div class="col-md-4">
-        <label for="">Riwayat Operasi</label>
-        <input type="text" name="riwayat_operasi_ka" id="riwayat_operasi_ka" class="form-control" placeholder="Enter lainnya.....">
+        <label for="">Riwayat Operasi</label> <input type="checkbox" name="riwayat_operasi_cek_ka" id="riwayat_operasi_cek_ka"> <small>Ceklist Jika Ya</small>
+        <input type="text" name="riwayat_operasi_ka" id="riwayat_operasi_ka" class="form-control" value="tidak ada" readonly>
     </div>
     <div class="col-md-4">
         <label for="">Operasi Tahun</label>
-        <select class="form-control" name="riwayat_operasi_tahun_ka" id="riwayat_operasi_tahun_ka">
-            <option>Select Year</option>
+        <select class="form-control" name="riwayat_operasi_tahun_ka" id="riwayat_operasi_tahun_ka" disabled>
+            <option value="0000">Select Year</option>
             <?php $years = range(date('Y'), 1970);
             foreach ($years as $year) : ?>
                 <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
@@ -177,8 +178,8 @@
 </div>
 <div class="form-group row">
     <div class="col-md-12">
-        <label for="nama_ttd" class="text-blue">d. Riwayat Penyakit Keluarga </label>
-        <select class="form-control select2" name="riwayat_sakit_keluarga_ka[]" id="riwayat_sakit_keluarga_ka[]" multiple="multiple" data-placeholder="Riwayat Penyakit Keluarga..." style="width: 100%;">
+        <label for="riwayat_sakit_keluarga" class="text-blue">d. Riwayat Penyakit Keluarga </label>
+        <select class="form-control select2" name="riwayat_sakit_keluarga_ka[]" id="riwayat_sakit_keluarga_ka" multiple="multiple" data-placeholder="Riwayat Penyakit Keluarga..." style="width: 100%;">
             <option value="kanker">Kanker</option>
             <option value="penyakit hati">Penyakit Hati</option>
             <option value="hipertensi">Hipertensi</option>
@@ -191,6 +192,7 @@
             <option value="epilepsi">Epilepsi</option>
             <option value="alergi">Alergi</option>
             <option value="lain-lain">Lain-lain</option>
+            <option value="tidak ada">Tidak Ada</option>
         </select>
     </div>
 </div>
@@ -207,6 +209,8 @@
             <option value="sedih">Sedih</option>
             <option value="kecendrungan bunuh diri">Kecendrungan Bunuh Diri</option>
             <option value="lainnya">Lainnya...</option>
+            <option value="tidak ada">Tidak Ada</option>
+
         </select>
     </div>
     <div class="col-md-12">
@@ -215,10 +219,10 @@
             <label><input type="checkbox" name="status_mental_sadar_ka" value="1">Sadar dan orientasi baik</label>
         </div>
         <div class="checkbox">
-            <label><input type="checkbox" name="status_mental_prilaku_ka" value="">Ada masalah prilaku, Sebuatkan <input type="text" class="custom-input w-300" name="status_mental_prilaku_detail_ka"></label>
+            <label><input type="checkbox" name="status_mental_prilaku_ka" value="">Ada masalah prilaku, Sebutkan <input type="text" class="custom-input w-300" name="status_mental_prilaku_detail_ka" readonly></label>
         </div>
         <div class="checkbox">
-            <label class="mt-1"><input type="checkbox" name="status_mental_keras_ka" value="1">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300"></label>
+            <label class="mt-1"><input type="checkbox" name="status_mental_keras_ka" value="1">Perilaku kekerasan yang dialami pasien sebelumnya <input type="text" name="status_mental_keras_detail_ka" class="custom-input w-300" readonly></label>
         </div>
     </div>
     <div class="col-md-12">
@@ -264,17 +268,17 @@
         <div class="row">
             <div class="col-md-6">
                 Kegiatan Keagamaan yang biasa dilakukan :
-                <input type="text" name="spiritual_biasa_ka" id="spiritual_biasa_ka" class="form-control" placeholder="">
+                <input type="text" name="spiritual_biasa_ka" id="spiritual_biasa_ka" class="form-control" value="tidak ada">
             </div>
             <div class="col-md-6">
                 Kegiatan spiritual yang dibutuhkan selama perawatan :
-                <input type="text" name="spiritual_butuh_ka" id="spiritual_butuh_ka" class="form-control" placeholder="">
+                <input type="text" name="spiritual_butuh_ka" id="spiritual_butuh_ka" class="form-control" value="tidak ada">
             </div>
         </div>
     </div>
     <div class="col-md-8">
         <label for="nama_ttd" class="text-green">&nbsp;f) Budaya dan nilai-nilai yang di anut </label>
-        <input type="text" name="budaya_ka" id="budaya_ka" class="form-control" placeholder="">
+        <input type="text" name="budaya_ka" id="budaya_ka" class="form-control" value="tidak ada">
     </div>
 </div>
 <div class="form-group row">
@@ -285,13 +289,13 @@
         <label for="nama_ttd" class="col-md-2">a. Obat </label>
         <label class="col-sm-2 radio-inline"> <input type="radio" name="obat_ka" value="0">Tidak</label>
         <label class="col-sm-2 radio-inline"> <input type="radio" name="obat_ka" value="1">Ya Sebutkan </label>
-        <label for="nama_ttd" class="col-md-2"><input type="text" name="obat_detail_ka" class='custom-input'> </label>
+        <label for="nama_ttd" class="col-md-2"><input type="text" name="obat_detail_ka" class='custom-input' readonly> </label>
     </div>
     <div class="col-md-12">
         <label for="nama_ttd" class="col-md-2">b. Makanan </label>
-        <label class="col-sm-2 radio-inline"> <input type="radio" name="makanan_ka" value="1">Tidak</label>
-        <label class="col-sm-2 radio-inline"> <input type="radio" name="makanan_ka" value="0">Ya Sebutkan </label>
-        <label for="nama_ttd" class="col-md-2"><input type="text" class='custom-input' name="makanan_detail_ka"> </label>
+        <label class="col-sm-2 radio-inline"> <input type="radio" name="makanan_ka" value="0">Tidak</label>
+        <label class="col-sm-2 radio-inline"> <input type="radio" name="makanan_ka" value="1">Ya Sebutkan </label>
+        <label for="nama_ttd" class="col-md-2"><input type="text" class='custom-input' name="makanan_detail_ka" readonly> </label>
     </div>
     <div class="col-md-12">
         <label for="nama_ttd" class="col-md-2">b. Lain-lain </label>
@@ -308,6 +312,8 @@
         <label class="col-sm-2 radio-inline"> <input type="radio" name="nyeri_ka" value="nyeri akut">Nyeri Akut</label>
         <label class="col-sm-2 radio-inline"> <input type="radio" name="nyeri_ka" value="nyeri kronis">Nyeri Kronis</label>
     </div>
+</div>
+<div class="form-group row skrining_nyeri">
     <div class="col-md-3">
         <label for="">P (Profokatif/Penyebab)</label>
         <input type="text" name="profokatif_ka" id="profokatif_ka" class="form-control">
@@ -335,17 +341,17 @@
             <div class="col-md-6"><input type="radio" name="tidur_malam_ka" id="" value="1"> Ya <input type="radio" name="tidur_malam_ka" id="" value="0"> Tidak</div>
         </div>
         <div class="row">
-            <div class="col-md-6">Menghalangi tidur malam anda</div>
+            <div class="col-md-6">Menghalangi anda beraktifitas</div>
             <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" id="" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" id="" value="0"> Tidak</div>
         </div>
         <div class="row">
-            <div class="col-md-6">Menghalangi tidur malam anda</div>
+            <div class="col-md-6">Sakit dirasakan setiak hari</div>
             <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" id="" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" id="" value="0"> Tidak</div>
         </div>
     </div>
 
 </div>
-<div class="form-group row">
+<div class="form-group row skrining_nyeri">
     <div class="col-md-12">
         <label for="nama_ttd" class="col-md-2">Metode </label>
         <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="1">Visual Analog Scale (VAS) dewasa</label>
@@ -353,7 +359,7 @@
         <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="3">FLACC Anak < 3 Tahun</label>
     </div>
 </div>
-<div class="form-group row hide" id="vas_pilih" >
+<div class="form-group row skrining_nyeri" id="vas_pilih" >
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_vas_ka" id="skala_vas_ka" class="form-control">
@@ -361,9 +367,10 @@
     <div class="col-md-8">
         <label for="">Metode VAS</label>
         <img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="100%" alt="">
+        <p><span>0 : Nyeri</span>  <span style='margin-left:10px'>1-3 : Nyeri Ringan</span> <span style='margin-left:10px'> 4-6 : Nyeri Sedang</span> <span style='margin-left:10px'> 7-10:Nyeri Berat</span></p>
     </div>
 </div>
-<div class="form-group row hide" id="wbfs_pilih" >
+<div class="form-group row skrining_nyeri" id="wbfs_pilih" >
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_wbfs_ka" id="skala_wbfs_ka" class="form-control">
@@ -373,7 +380,7 @@
         <img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" width="100%" alt="">
     </div>
 </div>
-<div class="row hide" id="flacc_pilih" >
+<div class="row skrining_nyeri" id="flacc_pilih" >
     <div class="col-md-6">
         <div class="form-group row">
             <label for="" class="col-md-4 control-label">Face Wajah</label>
@@ -432,7 +439,7 @@
         <h3 id="skor_flacc_detail">0: tidak nyeri 1-3 nyeri ringan 4-6 : nyeri sedang 7-10 : nyeri berat</h3>
     </div>
 </div>
-<div class="form-group row hide">
+<div class="form-group row">
     <div class="col-md-12">
         <label for="" class="text-blue">g. Skrining Gizi Awal </label>
     </div>
@@ -476,7 +483,7 @@
             ceklis jika jawaban ya<br />
             <input type="checkbox" name="strong_kids_ka[]" value="pasien tampak kurus"> 1. Apakah pasien tampak kurus?<br />
             <input type="checkbox" name="strong_kids_ka[]" value="terdapat penurunan BB selama satu bulan terakhir"> 2. Apakah terdapat penurunan BB selama satu bulan terakhir?<br />
-            <input type="checkbox" name="strong_kids_ka[]" value="ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu"> 3. Apakah ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu?<br>
+            <input type="checkbox" name="strong_kids_ka[]" value="ada diare">5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu"> 3. Apakah ada diare >5x/hari atau muntah >3x/hari atau asupan turun dalam 1 minggu?<br>
             <input type="checkbox" name="strong_kids_ka[]" value="terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi"> Apakah terdapat penyakit atau keadaan yang mengakibatkan pesien beresiko malnutrisi?<br>
         </p>
     </div>
@@ -540,7 +547,7 @@
         <label class="radio">
             Diberitahukan ke dokter
             <label class="radio-inline">
-                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="time" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input" readonly >
+                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="time" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input w-200" readonly >
             </label>
             <label class="radio-inline">
                 <input type="radio" name="risiko_info_ka" value="0">Tidak
@@ -576,18 +583,18 @@
     <div class="col-md-6">
         <label for="">GCS</label>
         <div>
-            E : <input type="number" name="gcs_e_ka" id="gcs_e_ka" class="custom-input w-50">
-            M : <input type="number" name="gcs_m_ka" id="gcs_m_ka" class="custom-input w-50">
-            V : <input type="number" name="gcs_v_ka" id="gcs_v_ka" class="custom-input w-50">
+            E : <input type="number" name="gcs_e_ka" id="gcs_e_ka" min="0" max="4" class="custom-input w-50">
+            M : <input type="number" name="gcs_m_ka" id="gcs_m_ka" min="0" max="6" class="custom-input w-50">
+            V : <input type="number" name="gcs_v_ka" id="gcs_v_ka" min="0" max="6" class="custom-input w-50">
         </div>
     </div>
     <div class="col-md-12">
         <label for="">TTV</label>
         <div>
-            Sh : <input type="number" name="ttv_sh_ka" id="ttv_sh_ka" class="custom-input w-50">
+            Sh : <input type="number" name="ttv_sh_ka" id="ttv_sh_ka" min="0" max="45" class="custom-input w-50">
             Nd : <input type="number" name="ttv_nd_ka" id="ttv_nd_ka" class="custom-input w-50">
             Rr : <input type="number" name="ttv_rr_ka" id="ttv_rr_ka" class="custom-input w-50">
-            Sp02 : <input type="number" name="ttv_sp02_ka" id="ttv_sp02_ka" class="custom-input w-50">
+            Sp02 : <input type="number" name="ttv_spo2_ka" id="ttv_spo2_ka" class="custom-input w-50">
             TD : <input type="number" name="ttv_td_ka" id="ttv_td_ka" class="custom-input w-50">
             Down Score : <input type="number" name="ttv_ds_ka" id="ttv_ds_ka" class="custom-input w-50">
         </div>
@@ -627,7 +634,7 @@
     </div>
     <div class="col-md-4">
         <label for="">Jika Ya</label>
-        <select name="komunikasi_detail_ka[] select2" id="komunikasi_detail_ka" class="form-control select2" multiple="multiple">
+        <select name="komunikasi_detail_ka[]" id="komunikasi_detail_ka" class="form-control select2" multiple="multiple" style="width:100%" disabled>
             <option value="Pendengaran">Pendengaran</option>
             <option value="Budaya">Budaya</option>
             <option value="Penglihatan">Penglihatan</option>
@@ -674,7 +681,7 @@
             <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Diet dan nutrisi">Diet dan nutrisi
         </label>
         <label class="checkbox-inline">
-            <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Tindakan keperawatan sebutkan">Tindakan keperawatan sebutkan<input type="text" name="kebutuhan_edukasi_tindakan_ka" id="kebutuhan_edukasi_tindakan_ka" class="custom-input w-200">
+            <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Tindakan keperawatan">Tindakan keperawatan sebutkan<input type="text" name="kebutuhan_edukasi_tindakan_ka" id="kebutuhan_edukasi_tindakan_ka" class="custom-input w-200" readonly>
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Rehabilitasi">Rehabilitasi
@@ -683,7 +690,7 @@
             <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Manajemen nyeri">Manajemen nyeri
         </label>
         <label class="checkbox-inline">
-            <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Lain-lain">Lain-lain sebutkan <input type="text" name="kebutuhan_edukasi_lain_ka" id="kebutuhan_edukasi_lain_ka" class="custom-input w-200">
+            <input type="checkbox" name="kebutuhan_edukasi_ka[]" value="Lain-lain">Lain-lain sebutkan <input type="text" name="kebutuhan_edukasi_lain_ka" id="kebutuhan_edukasi_lain_ka" class="custom-input w-200" readonly>
         </label>
     </div>
 </div>
@@ -704,10 +711,10 @@
     <div class="col-md-12">
         <label for="">Telah di jelaskan kepada</label>
         <label class="radio-inline">
-            <input type="radio" name="dijelaskan_ka" value="Pasien">Pasien
+            <input type="radio" name="dijelaskan_ka" value="Pasien" checked>Pasien
         </label>
         <label class="radio-inline">
-            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly> Nama <input type="text" name="dijelaskan_nama_ka" id="dijelaskan_nama_ka" class="custom-input w-200" readonly>
+            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly> Nama <input type="text" name="dijelaskan_nama_ka" id="dijelaskan_nama_ka" class="custom-input w-200" value="<?=$detail->nama_pasien?>" readonly>
         </label>
     </div>
 </div>
@@ -725,21 +732,58 @@
     </div>
 </div>
 <script>
+    var nama = "<?= $detail->nama_pasien?> ";
+    var ruang = "<?=$detail->id_ruang?>";
+    var dokter = "<?=$detail->dokterJaga?>";
+</script>
+<script>
     $(document).ready(function() {
         // $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
         CKEDITOR.replace('diagnosa_keperawatan_ka')
         CKEDITOR.replace('tindakan_keperawatan_ka')
 
-        $("#poli_ka").val("<?=$detail->id_ruang?>");
-        $("#dpjp_ka").val("<?=$detail->dokterJaga?>");
+        $("#poli_ka").val(ruang);
+        $("#dpjp_ka").val(dokter);
 
-        $(".rujukan_ka_lainnya").change(function() {
-            if ($(this).is(":checked")) {
+        $(".skrining_nyeri").prop("hidden",true);
+        $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden",true)
+
+        $("[name='rujukan_ka']").change(function() {
+            if (this.value=='lainnya') {
                 $("[name='rujukan_lainnya_ka']").removeAttr("readonly").focus();
             } else {
-                $("[name='rujukan_lainnya_ka']").attr('readonly', true).val("");
+                $("[name='rujukan_lainnya_ka']").prop('readonly',true).val("");
             }
         })
+
+        $("[name='obat_ka']").change(function() {
+            if (this.value==1) {
+                $("[name='obat_detail_ka']").removeAttr("readonly").focus();
+            } else {
+                $("[name='obat_detail_ka']").prop('readonly',true).val("");
+            }
+        })
+
+        $("[name='kebutuhan_edukasi_ka[]']").change(function() {
+            if (this.value=="Tindakan keperawatan") {
+                $("[name='kebutuhan_edukasi_tindakan_ka']").removeAttr("readonly").focus();
+            }
+            if (this.value=="Lain-lain") {
+                $("[name='kebutuhan_edukasi_lain_ka']").removeAttr("readonly").focus();
+            }
+        })
+
+        $("[name='makanan_ka']").change(function() {
+            if (this.value==1) {
+                $("[name='makanan_detail_ka']").removeAttr("readonly").focus();
+            } else {
+                $("[name='makanan_detail_ka']").prop('readonly',true).val("");
+            }
+        })
+
+        // skrining nyeri
+
+
 
         $("[name='dirawat_ka']").change(function() {
             let val = $(this).val();
@@ -765,6 +809,16 @@
             }
         })
         // $("#vas_pilih,#wbfs_pilih,#flacc_pilih").hide();
+
+        $("[name='riwayat_operasi_cek_ka']").change(function() {
+            if ($(this).is(":checked")) {
+                $("[name='riwayat_operasi_ka']").removeAttr("readonly").val("").focus();
+                $("[name='riwayat_operasi_tahun_ka']").prop("disabled",false);
+            } else {
+                $("[name='riwayat_operasi_ka']").attr('readonly', true).val("tidak ada");
+                $("[name='riwayat_operasi_tahun_ka']").prop("disabled",true).val("0000");
+            }
+        })
 
         $("#gizi_ka,#gizi_makan_ka").change(function() {
             hitung_skor_gizi()
@@ -829,6 +883,22 @@
             }
         });
 
+        $('input[type=checkbox][name=status_mental_keras_ka]').change(function() {
+            if (this.checked) {
+                $("[name='status_mental_keras_detail_ka']").removeAttr("readonly").focus();
+            } else {
+                $("[name='status_mental_keras_detail_ka']").attr("readonly", true).val("");
+            }
+        });
+
+        $('input[type=checkbox][name=status_mental_prilaku_ka]').change(function() {
+            if (this.checked) {
+                $("[name='status_mental_prilaku_detail_ka']").removeAttr("readonly").focus();
+            } else {
+                $("[name='status_mental_prilaku_detail_ka']").attr("readonly", true).val("");
+            }
+        });
+
         $('[name=komunikasi_penerjemah_ka]').change(function() {
             // console.log(this.value)
             if ($(this).val() == 1) {
@@ -838,35 +908,54 @@
             }
         });
 
+        $('[name=komunikasi_ka]').change(function() {
+            // console.log(this.value)
+            if ($(this).val() == 1) {
+                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled",false);
+            } else {
+                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled",true);
+                $("[name='komunikasi_detail_ka[]']").val(null).trigger("change");
+            }
+        });
+
         $("#wajah_ka,#leg_ka,#gerakan_ka,#tangis_ka,#kemampuan_ka").change(function() {
             hitung_flacc();
         });
-        $('[name=dijelaskan_ka]').change(function() {
+        $('[name=dijelaskan_ka]').on("click",function() {
             // console.log(this.value)
             if ($(this).val() == "Keluarga") {
                 $("[name='dijelaskan_hubungan_ka']").removeAttr("readonly").focus();
-                $("[name='dijelaskan_nama_ka']").removeAttr("readonly");
+                $("[name='dijelaskan_nama_ka']").removeAttr("readonly").val("");
             } else {
                 $("[name='dijelaskan_hubungan_ka']").attr("readonly", true).val("");
-                $("[name='dijelaskan_nama_ka']").attr("readonly", true).val("");
+                $("[name='dijelaskan_nama_ka']").attr("readonly", true).val(nama);
             }
         });
         
         $("[name='metode_ka']").change(function(){
             if (this.value==1)  {
-                $("#vas_pilih").removeClass("hide")
-                $("#wbfs_pilih").addClass("hide")
-                $("#flacc_pilih").addClass("hide")
+                $("#vas_pilih").prop("hidden",false)
+                $("#wbfs_pilih").prop("hidden",true)
+                $("#flacc_pilih").prop("hidden",true)
             } else if (this.value==2) {
-                $("#vas_pilih").addClass("hide")
-                $("#wbfs_pilih").removeClass("hide")
-                $("#flacc_pilih").addClass("hide")
+                $("#vas_pilih").prop("hidden",true)
+                $("#wbfs_pilih").prop("hidden",false)
+                $("#flacc_pilih").prop("hidden",true)
             } else if (this.value==3) {
-                $("#vas_pilih").addClass("hide")
-                $("#wbfs_pilih").addClass("hide")
-                $("#flacc_pilih").removeClass("hide")
+                 $("#vas_pilih").prop("hidden",true)
+                $("#wbfs_pilih").prop("hidden",true)
+                $("#flacc_pilih").prop("hidden",false)
             }
         });
+
+        $("[name='nyeri_ka']").on("change",function () {
+            if (this.value!="tidak ada nyeri") {
+                $(".skrining_nyeri").prop("hidden",false)
+                $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden",true)
+            } else {
+                $(".skrining_nyeri").prop("hidden",true)
+            }
+        })
 
     });
 

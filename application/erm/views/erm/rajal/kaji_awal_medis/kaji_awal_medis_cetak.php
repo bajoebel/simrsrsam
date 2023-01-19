@@ -279,7 +279,13 @@ $date = date("Y-m-d");
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td height="80px">&nbsp;</td>
+                                                <td height="64px">
+                                                <?php $ttd = getTtd($k->nomr); if ($ttd) { ?>
+                                                    <img src="" alt="">
+                                                <?php } else { ?>
+                                                    &nbsp;
+                                                <?php } ?>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>( <?= $k->pj_nama ?> )</td>
@@ -298,7 +304,7 @@ $date = date("Y-m-d");
                                                 <td style='text-align:center'>DPJP</td>
                                             </tr>
                                             <tr>
-                                                <td height="50px" >
+                                                <td height="64px" >
                                                     <div id="qrcode_awal_medis"></div>
                                                 </td>
                                             </tr>
@@ -329,11 +335,11 @@ $date = date("Y-m-d");
     var code = "<?= $k->dokterSign?>";
     var qrcode = new QRCode(document.getElementById("qrcode_awal_medis"), {
         text: code,
-        width: 80,
-        height: 80,
+        width: 64,
+        height: 64,
         colorDark : "#000",
         colorLight : "#fff",
     });
-    // $(`#qrcode_awal_rawat > img`).css({"margin":"auto"});
+    $(`#qrcode_awal_medis > img`).css({"margin":"auto"});
 </script>
 </html>
