@@ -544,7 +544,7 @@ $date = date("Y-m-d");
                         </tr>
                         <tr>
                             <td>
-                                <div class="box" style="width:100%;height:20mm"><?=$k->diagnosa_keperawatan?></div>
+                                <div class="box" style=""><?=arr_to_list($k->diagnosa_keperawatan)?></div>
                             </td>
                         </tr>
                         <tr>
@@ -552,7 +552,7 @@ $date = date("Y-m-d");
                         </tr>
                         <tr>
                             <td>
-                                <div class="box" style="width:100%;height:20mm"><?=$k->tindakan_keperawatan?></div>
+                                <div class="box" style=""><?=arr_to_list($k->tindakan_keperawatan)?></div>
                             </td>
                         </tr>
                     </table>

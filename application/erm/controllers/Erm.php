@@ -173,6 +173,8 @@ class Erm extends CI_Controller
                 "ruang" => get_list_ruang("RJ"),
                 "dpjp" => get_list_dpjp(),
                 "profesi" => get_list_profesi(1),
+                "sdki" => get_list_sdki(),
+                "siki" => get_list_siki(),
                 's' => $s
             );
 

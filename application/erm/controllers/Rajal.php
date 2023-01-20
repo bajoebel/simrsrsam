@@ -293,6 +293,14 @@ class Rajal extends CI_Controller
         if (is_array($this->input->post("strong_kids_ka"))) {
             $data_post['strong_kids'] = implode(";", removeChar($this->input->post("strong_kids_ka")));
         }
+        // diagnosa keperawatan
+        if (is_array($this->input->post("diagnosa_keperawatan_ka"))) {
+            $data_post['diagnosa_keperawatan'] = implode(";", removeChar($this->input->post("diagnosa_keperawatan_ka")));
+        }
+        // diagnosa keperawatan
+        if (is_array($this->input->post("tindakan_keperawatan_ka"))) {
+            $data_post['tindakan_keperawatan'] = implode(";", removeChar($this->input->post("tindakan_keperawatan_ka")));
+        }
         // header("Content-Type:text/html");
         // echo json_encode(["data" => $data_post]);
         // exit();

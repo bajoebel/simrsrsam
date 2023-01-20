@@ -203,6 +203,13 @@ $date = date("Y-m-d");
                                 <td><?= dateToIndo($r->tgl)." / ".$r->jam ?></td>
                                 <td><?= $r->jenis_tenaga_medis." - ".$r->tenaga_medis ?></td>
                                 <td>
+                                    <?php 
+                                        if ($r->jenis_tenaga_medis_id==3||$r->jenis_tenaga_medis_id==4 ) {
+                                        $rd = getAwalRawatByIdx($r->idx);
+                                        echo tampilRawatByIdx($rd);
+                                    ?>
+                                    <hr>
+                                    <?php } ?>
                                     <b>S</b> : <?= gantiTagP($r->subyektif) ?>
                                     <b>O</b> : <?= gantiTagP($r->obyektif)?>
                                     <b>A</b> :<?= gantiTagP($r->assesment) ?>

@@ -398,14 +398,14 @@
                     "name": "perawat_ka",
                     "value": $("#perawat_id_ka option:selected").text()
                 },
-                {
-                    name : "diagnosa_keperawatan_kat",
-                    value : CKEDITOR.instances.diagnosa_keperawatan_ka.getData()
-                },
-                {
-                    name : "tindakan_keperawatan_kat",
-                    value : CKEDITOR.instances.tindakan_keperawatan_ka.getData()
-                }
+                // {
+                //     name : "diagnosa_keperawatan_kat",
+                //     value : CKEDITOR.instances.diagnosa_keperawatan_ka.getData()
+                // },
+                // {
+                //     name : "tindakan_keperawatan_kat",
+                //     value : CKEDITOR.instances.tindakan_keperawatan_ka.getData()
+                // }
             ];
             data_form = $.merge(data_form, data_push)
             // console.log(data_push)
@@ -866,8 +866,10 @@
         }
         $("[name='kebutuhan_edukasi_tindakan_ka']").val(data.kebutuhan_edukasi_tindakan);
         $("[name='kebutuhan_edukasi_lain_ka']").val(data.kebutuhan_edukasi_lain);
-        CKEDITOR.instances['diagnosa_keperawatan_ka'].setData(data.diagnosa_keperawatan)
-        CKEDITOR.instances['tindakan_keperawatan_ka'].setData(data.tindakan_keperawatan)
+        // CKEDITOR.instances['diagnosa_keperawatan_ka'].setData(data.diagnosa_keperawatan)
+        // CKEDITOR.instances['tindakan_keperawatan_ka'].setData(data.tindakan_keperawatan)
+        $("[name='diagnosa_keperawatan_ka[]']").val(data.diagnosa_keperawatan?.split(";")).trigger("change");
+        $("[name='tindakan_keperawatan_ka[]']").val(data.tindakan_keperawatan?.split(";")).trigger("change");
         $(`[name='dijelaskan_ka'][value='${data.dijelaskan}']`).prop("checked",true);
         $("[name='dijelaskan_hubungan_ka']").val(data.dijelaskan_hubungan);
         $("[name='dijelaskan_nama_ka']").val(data.dijelaskan_nama);
@@ -909,8 +911,6 @@
                 $("[name='kemampuan_ka']").val(data.kemampuan);
                 $("#skor_flacc").text(data.flacc_skor)
             }
-            
-
         } else {
             $(".skrining_nyeri").prop("hidden",true)
             $("[name='profokatif_ka']").val("tidak ada");

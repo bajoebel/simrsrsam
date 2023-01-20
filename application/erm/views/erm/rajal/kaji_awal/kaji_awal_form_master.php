@@ -697,25 +697,13 @@
 <div class="form-group row">
     <div class="col-md-12">
         <label for="diagnosa_keperawatan_ka">Diagnosa Keperawatan</label>
-        <!-- <textarea name="diagnosa_keperawatan_ka" id="diagnosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
-        <select name="diagnosa_keperawatan_ka[]" id="diagnosa_keperawatan_ka" class="form-control select2-tag" style="width:100%" multiple="multiple">
-            <option value="">=Pilih=</option>
-            <?php foreach($sdki as $sd) { ?>
-                <option value="<?= $sd->kode."-".$sd->name ?>"><?= $sd->kode."-".$sd->name ?></option>
-                <?php }  ?>
-            </select>
-        </div>
+        <textarea name="diagnosa_keperawatan_ka" id="diagnosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea>
     </div>
-    <div class="form-group row">
-        <div class="col-md-12">
+</div>
+<div class="form-group row">
+    <div class="col-md-12">
         <label for="tindakan_keperawatan_ka">Tindakan Keperawatan</label>
-        <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
-        <select name="tindakan_keperawatan_ka[]" id="tindakan_keperawatan_ka" class="form-control select2-tag" style="width:100%" multiple="multiple">
-            <option value="">=Pilih=</option>
-            <?php foreach($siki as $sk) { ?>
-                <option value="<?= $sk->kode."-".$sk->intervensi ?>"><?= $sk->kode."-".$sk->intervensi ?></option>
-            <?php }  ?>
-        </select>
+        <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea>
     </div>
 </div>
 <hr>
@@ -751,8 +739,8 @@
 <script>
     $(document).ready(function() {
         // $('#diagnosa_keperawatan_ka,#tindakan_keperawatan_ka').wysihtml5()
-        // CKEDITOR.replace('diagnosa_keperawatan_ka')
-        // CKEDITOR.replace('tindakan_keperawatan_ka')
+        CKEDITOR.replace('diagnosa_keperawatan_ka')
+        CKEDITOR.replace('tindakan_keperawatan_ka')
 
         $("#poli_ka").val(ruang);
         $("#dpjp_ka").val(dokter);
