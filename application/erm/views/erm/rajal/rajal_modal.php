@@ -1,6 +1,5 @@
 <!-- Kajian Awal Rawat -->
 <?php if ($pil=="awal_rawat") { ?>
-    
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">Riwayat Kajian Awal Rawat</div>
@@ -40,8 +39,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    
+    </div>  
 <?php } ?>
 
 <!-- Kajian Awal Medis -->
@@ -237,4 +235,47 @@
            
         });
     </script>
+<?php } ?>
+
+<!-- Kajian Awal Rawat -->
+<?php if ($pil=="riwayat_awal_rawat") { ?>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Riwayat Kajian Awal Rawat</div>
+            <div class="panel-body">
+                
+            </div>
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID Daftar - Reg Unit</th>
+                        <th>Tgl Masuk</th>
+                        <th>Tgl & Jam RME</th>
+                        <th>Perawat</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no=1;foreach($list as $r) { 
+                        $d = getInfoDaftar($r->idx)
+                    ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= $d->id_daftar." - ".$d->reg_unit ?></td>
+                        <td><?= $d->tgl_masuk ?></td>
+                        <td><?=$r->tgl."/".$r->jam?></td>
+                        <td><?=$r->perawat?></td>
+                        <td>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                            </button>
+                            <?= ($r->idx==$idx)?"<span class='badge bg-green'>current</span>":""?>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>  
 <?php } ?>

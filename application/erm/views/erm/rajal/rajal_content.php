@@ -42,7 +42,7 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Kajian Awal Keperawatan</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-sm btn-warning" onclick="panggilRiwayat('<?=$detail->idx?>','<?=$detail->nomr?>')">Gunakan Riwayat Sebelumnya</button>
+                        <a href="#" class="btn btn-sm btn-warning riwayat-form-link" data-pil="riwayat_awal_rawat" data-idx="<?=$detail->idx?>" data-nomr="<?=$detail->nomr?>">Gunakan Riwayat Sebelumnya</a>
                     </div>
                 </div>
                 <div class="box-body">

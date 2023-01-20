@@ -780,6 +780,9 @@ class Rajal extends CI_Controller
             $data["list"] = $this->rajal->getPrmrjByNomr($nomr);
             $data['idx'] = $idx;
             $data['nomr'] = $nomr;
+        } else if ($pil=="riwayat_awal_rawat") {
+            $data["list"] = $this->rajal->getAwalRawatByNomr($nomr);
+            $data['idx'] = $idx;
         }
 
         $this->load->view("erm/rajal/rajal_modal",$data);
@@ -816,5 +819,6 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>false]);
         }
     }
+
 
 }

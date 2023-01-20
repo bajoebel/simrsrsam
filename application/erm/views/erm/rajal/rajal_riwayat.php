@@ -56,7 +56,7 @@
     </div>
 <?php } else if ($pil == 3) { ?>
     <!-- Kajian awal keperawatan -->
-    <div class="" style="max-height: 600px; overflow-y: scroll; ">
+    <div class="">
     <?php $no = 1;
         foreach ($list as $r) : ?>
             <div class="panel box box-success">

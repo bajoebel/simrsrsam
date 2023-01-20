@@ -84,7 +84,7 @@ class Rajal_model extends CI_Model
         return $db2
             ->select("a.id,a.idx,a.nomr,a.perawat_id,a.perawat,a.tgl,a.jam")
             ->where(["a.nomr" => $nomr])
-            ->order_by("id desc")
+            ->order_by("a.idx desc")
             ->get("rj_awal_rawat a")
             ->result();
     }
