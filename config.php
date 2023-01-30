@@ -163,3 +163,12 @@ defined('PORT_HOST_ERM')   		or define('PORT_HOST_ERM', 3306);
 defined('DB_USER_ERM')   		or define('DB_USER_ERM', 'root');
 defined('DB_PASS_ERM')   		or define('DB_PASS_ERM', '');
 defined('DB_NAME_ERM')   		or define('DB_NAME_ERM', 'simrs_erm');
+
+/*
+Database SIMRS V2
+*/
+defined('DB_HOST_SIMRSV2')   		or define('DB_HOST_SIMRSV2', 'localhost');
+defined('PORT_HOST_SIMRSV2')   		or define('PORT_HOST_SIMRSV2', 3306);
+defined('DB_USER_SIMRSV2')   		or define('DB_USER_SIMRSV2', 'root');
+defined('DB_PASS_SIMRSV2')   		or define('DB_PASS_SIMRSV2', '');
+defined('DB_NAME_SIMRSV2')   		or define('DB_NAME_SIMRSV2', 'rsam_v2');

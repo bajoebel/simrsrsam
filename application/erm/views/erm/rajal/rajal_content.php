@@ -42,14 +42,28 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Kajian Awal Keperawatan</h3>
                     <div class="box-tools pull-right">
+
+                        <?php if ($detail->status_erm!=1) { if ($ar=="") {?>
+                            <button type="button" class="btn btn-sm btn-success" onclick="tambahAwalRawat()">Tambah Data</button>
+                        <?php } ?>
                         <a href="#" class="btn btn-sm btn-warning riwayat-form-link" data-pil="riwayat_awal_rawat" data-idx="<?=$detail->idx?>" data-nomr="<?=$detail->nomr?>">Gunakan Riwayat Sebelumnya</a>
+                        <?php } ?>
                     </div>
                 </div>
-                <div class="box-body">
-                    <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
+                <div id="ar_preview">
+                    <div class="box-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?=base_url('erm.php/rajal/kaji_awal/'.$ar.'/'.$detail->idx.'/'.$detail->nomr)?>"></iframe>
+                        </div>
+                    </div>
                 </div>
-                <div class="box-footer">
-                    <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary'>Simpan</button>":"" ?>
+                <div id="ar_form">
+                    <div class="box-body">
+                        <?php $this->load->view("erm/rajal/kaji_awal/kaji_awal_form") ?>
+                    </div>
+                    <div class="box-footer">
+                        <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary'>Simpan</button>":"" ?>
+                    </div>
                 </div>
             </div>
         </form>
@@ -61,17 +75,31 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Kajian Awal Medis</h3>
                     <div class="box-tools pull-right">
-                       
+                        <?php if ($detail->status_erm!=1) { if (!$am){?>
+                            <button type="button" class="btn btn-sm btn-success" onclick="tambahAwalMedis()">Tambah Data</button>
+                        <?php } else { ?>
+
+                        <?php }?>
+                        <?php } ?>
                     </div>
                 </div>
-
-                <div class="box-body">
-                    <?php $this->load->view("erm/rajal/kaji_awal_medis/kaji_awal_medis_form") ?>
+                <div id="am_preview">
+                    <div class="box-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?=base_url('erm.php/rajal/kaji_awal_medis/'.$am.'/'.$detail->idx.'/'.$detail->nomr)?>"></iframe>
+                        </div>
+                    </div>
                 </div>
-                <div class="box-footer">
-                    <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
-                    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
+                <div id="am_form">
+                    <div class="box-body">
+                        <?php $this->load->view("erm/rajal/kaji_awal_medis/kaji_awal_medis_form") ?>
+                    </div>
+                    <div class="box-footer">
+                        <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
+                        <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
+                    </div>
                 </div>
+                
             </div>
         </form>
     </div>
@@ -81,25 +109,59 @@
                 <div class="box-header ui-sortable-handle" style="cursor: move;">
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Perkembangan Pasien Terintegrasi</h3>
+                    <div class="box-tools pull-right">
+                        <?php if ($detail->status_erm!=1) { if (!$kp){?>
+                            <button type="button" class="btn btn-sm btn-success" onclick="tambahKembangPasien()">Tambah Data</button>
+                        <?php } else { ?>
+
+                        <?php }?>
+                        <?php } ?>
+                    </div>
                 </div>
-                <div class="box-body">
-                    <?php $this->load->view("erm/rajal/kembang_pasien/kembang_pasien_form") ?>
+                <div id="kp_form">
+                    <div class="box-body">
+                        <?php $this->load->view("erm/rajal/kembang_pasien/kembang_pasien_form") ?>
+                    </div>
+                    <div class="box-footer">
+                        <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
+                        <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
+                    </div>
                 </div>
-                <div class="box-footer">
-                    <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary'>Simpan</button>":"" ?>
-                    <!-- <button type="form" class="btn btn-primary">Simpan</button> -->
+                <div id="kp_preview">
+                    <div class="box-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?=base_url('erm.php/rajal/kembang_pasien/'.$kp.'/'.$detail->idx.'/'.$detail->nomr)?>"></iframe>
+                        </div>
+                    </div>
                 </div>
+            
             </div>
         </form>
     </div>
     <div class="tab-pane <?= $ta[6] ?>" id="tab_6">
+        <form role="form" id='form-data-p-penunjang' method="post">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Form Input Informasi Pasien dan Keluarga</h3>
+                </div>
+                <div class="box-body">
+                    <?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_form") ?>
+                </div>
+                <!-- <div class="box-footer"> -->
+                <!-- <button type="form" class="btn btn-primary pull-right">Selanjutnya</button> -->
+                <!-- </div> -->
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane <?= $ta[7] ?>" id="tab_7">
         <div class="box box-success">
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Form Input Informasi Pasien dan Keluarga</h3>
+                <h3 class="box-title">Form Input Permintaan Penunjang</h3>
             </div>
             <div class="box-body">
-                <?php $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_form") ?>
+                <?php $this->load->view("erm/rajal/p_penunjang/p_penunjang_form") ?>
             </div>
             <!-- <div class="box-footer"> -->
             <!-- <button type="form" class="btn btn-primary pull-right">Selanjutnya</button> -->

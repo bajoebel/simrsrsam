@@ -420,7 +420,18 @@ function get_list_siki()
     $CI = &get_instance();
     $db2 = $CI->load->database('dberm', TRUE);
     $result = $db2
+        ->order_by("kode asc")
         ->get("m_siki")
+        ->result();
+    return $result;
+}
+function get_list_slki()
+{
+
+    $CI = &get_instance();
+    $db2 = $CI->load->database('dberm', TRUE);
+    $result = $db2
+        ->get("m_slki")
         ->result();
     return $result;
 }
@@ -600,8 +611,35 @@ function tampilRawatByIdx($d) {
     $html.=", GCS : E: $d->gcs_e M: $d->gcs_m V: $d->gcs_v";
     $html.=", TTV : Sh: $d->ttv_sh ,Nd: $d->ttv_nd ,Rr: $d->ttv_rr ,SpO2: $d->ttv_spo2 ,TD: $d->ttv_td ,Down Score: $d->ttv_ds";
     $html.=", Pemeriksaan : ".$d->status_generalis;
-    $html.=", Penunjang : Radiologi : $d->penunjang_rad_detail Labor : $d->penunjang_lab_detail Lain-lain : $d->penunjang_lain_detail";
+    $html.=", Penunjang : Radiologi : $d->penunjang_rad_detail Labor : $d->penunjang_lab_detail Lain-lain : $d->penunjang_lain_detail"."<br/>";
+    $html.="<b>A :</b>";
+    $html.="".arr_to_list($d->diagnosa_keperawatan,"","; ");
+    $html.="<br/><b>P :</b>";
+    $html.="".arr_to_list($d->tindakan_keperawatan,"","; ");
     return $html;
+}
+
+function group_lab($key) {
+    switch ($key) {
+        case "A":
+            return "HEMATOLOGI";
+            break;
+        case 'B':
+            return "URINE";
+        case 'C':
+            return "FAECES";
+        case 'D':
+            return "SERULOGI";
+        case 'E':
+            return "KIMIA KLINIK";
+        case 'F':
+            return "SEROLOGI";
+        case 'G':
+            return "TEST NARKOBA";
+        default:
+            return "-";
+            break;
+    }
 }
 
 

@@ -54,10 +54,12 @@
     }
 </style>
 <div class="box-body">
+    <!-- <?php print_r($detail) ?> -->
     <input type="hidden" name="idx_m" value="<?= $detail->idx ?>">
     <input type="hidden" name="nomr_m" value="<?= $detail->nomr ?>">
     <input type="hidden" name="nama_m" value="<?= $detail->nama_pasien ?>">
     <input type="hidden" name="user_daftar_m" value="<?= $detail->user_daftar ?>">
+    <input type="hidden" name="cppt_id_m" value="">
     <div class="form-group row">
         <div class="col-md-2">
             <label for="">Hari</label>
@@ -141,7 +143,7 @@
             <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control"></textarea>
         </div>
     </div>
-    <b>Pemeriksaan Penunjang</b>
+    <b>Pemeriksaan Penunjang</b></br>
     <div class="form-group row">
         <div class="col-md-12">
             <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control"></textarea>

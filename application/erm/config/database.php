@@ -116,3 +116,25 @@ $db['dberm'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['dbsimrs'] = array(
+	'dsn'	=> '',
+	'hostname' => DB_HOST_SIMRSV2,
+	'username' => DB_USER_SIMRSV2,
+	'password' => DB_PASS_SIMRSV2,
+	'database' => DB_NAME_SIMRSV2,
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);

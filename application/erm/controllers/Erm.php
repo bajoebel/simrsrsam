@@ -148,6 +148,10 @@ class Erm extends CI_Controller
             $folder = "rajal";
             $pasien = array();
             $s = $this->rajal->getSetujuUmumByIdx($idx);
+            $ar = $this->rajal->getAwalRawatByIdx($idx);
+            $am = $this->rajal->getAwalMedisByIdx($idx);
+            $ep = $this->rajal->getEdukasiPasienByIdx($idx);
+            $pp = $this->rajal->getPermintaanPenunjangByIdx($idx);
             if (!empty($detail)) {
                 if ($detail->jns_layanan == "PJ") $folder = 'penunjang';
                 else if ($detail->jns_layanan == "GD") $folder = 'igd';
@@ -163,6 +167,7 @@ class Erm extends CI_Controller
                 "4" => "", //kajian awal medis
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
+                "7" => "", //Permintaan Penunjang
             ];
             $ta["1"] = "active";
             $data = array(
@@ -175,7 +180,13 @@ class Erm extends CI_Controller
                 "profesi" => get_list_profesi(1),
                 "sdki" => get_list_sdki(),
                 "siki" => get_list_siki(),
-                's' => $s
+                "slki" => get_list_slki(),
+                "s" => $s,
+                "ar" => ($ar)?$ar->id:"",
+                "am" => ($am)?$am->id:"",
+                "kp" => 0,
+                "pp" => $pp,
+
             );
 
             $view = array(

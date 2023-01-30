@@ -261,6 +261,7 @@ class Rajal extends CI_Controller
             "perawat_id" => $this->input->post("perawat_id_ka"),
             "perawat" => $this->input->post("perawat_ka"),
             "status" => 0,
+            "cppt_id" => $this->input->post("cppt_id_m"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_ka")
@@ -366,7 +367,7 @@ class Rajal extends CI_Controller
         ];
         
         $data = $this->rajal->getAwalMedisById($nomr,$idx,$id);
-        if ($data) {
+        if ($data) {    
             $code = base64_encode(json_encode($param));
             $code_detail = base64_encode(json_encode($data));
             $update = $this->rajal->updateSignAwalMedis($id,$code,$code_detail);
@@ -713,6 +714,79 @@ class Rajal extends CI_Controller
         $this->load->view("erm/rajal/informasi_edukasi/informasi_edukasi_table", $data);
     }
 
+    
+    public function permintaan_penunjang($idx,$id) {
+        // data pendaftaran
+        $d = $this->erm->getPendaftaran($idx);
+        // data pasien
+        $p = $this->erm->getPasien($d->nomr);
+        if ($idx != "" && $id != "") {
+
+            // data table setuju umum
+            $s = $this->rajal->getPermintaanPenunjangById($id)->row();
+            $sd = $this->rajal->getPermintaanPenunjangDetail($id)->result();
+            $data = [
+                "status" => true,
+                "d" => $d,
+                "p" => $p,
+                "s" => $s,
+                "sd" =>$sd
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/p_penunjang/p_penunjang_cetak", $data);
+        } else {
+            $data = [
+                "status" => false
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/p_penunjang/p_penunjang_cetak_master", $data);
+        }
+    }
+    public function insert_permintaan_penunjang() {
+        $data = [
+            "idx" => $this->input->post("idx_pp"),
+            "nomr" => $this->input->post("nomr_pp"),
+            "nama" => $this->input->post("nama_pp"),
+            "grId" => $this->input->post("pemeriksaan_pp"),
+            "group_name" => $this->input->post("pemeriksaan_text_pp"),
+            "tindakan" => $this->input->post("tindakan_pp"),
+            "dpjp" => $this->input->post("dpjp_pp"),
+            "dpjp_name" => $this->input->post("dpjp_text_pp"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+        $insert = $this->rajal->insertPermintaanPenunjang($data);
+        echo json_encode(["status"=>$insert,"post"=>$data]);
+    }
+
+    public function sign_permintaan_penunjang() {
+        $user = $this->input->post("user");
+        $password = $this->input->post("password");
+        $id = $this->input->post("id");
+        $validation = cekPasswordUser($user,$password);
+        if (!$validation) {
+            echo json_encode(["status"=>false,"msg"=>"Username Dan Password Salah"]); 
+            exit();
+        }
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_p_penunjang_detail",
+            "dokter" => $user 
+        ];
+        
+        $data = [
+            "utama" => $this->rajal->getPermintaanPenunjangById($id),
+            "detail" => $this->rajal->getPermintaanPenunjangDetail($id)
+        ];
+
+        if ($data) {    
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignPermintaanPenunjang($id,$code,$code_detail);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
     function get_topik_list()
     {
         $id = $this->input->get("id");
@@ -823,6 +897,16 @@ class Rajal extends CI_Controller
         $cek = cekPasswordUser($pass,$user);
         if ($cek) {
             echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    public function get_tindakan_penunjang() {
+        $ruang = $this->input->post("ruang");
+        $data = $this->rajal->getTindakanPenunjang($ruang);
+          if ($data) {
+            echo json_encode(["status"=>true,"data"=>$data->result()]);
         } else {
             echo json_encode(["status"=>false]);
         }
