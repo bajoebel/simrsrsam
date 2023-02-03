@@ -324,6 +324,7 @@ $date = date("Y-m-d");
                                         <td>
                                             <div style='width:80mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
                                                 <span style="margin-left:3mm"><b><?= $k->nyeri ?></b></span><br />
+                                                <?php if ($k->nyeri!="tidak ada nyeri") { ?>
                                                 <span>P (Profokatif/Penyebab) : <?= $k->quality ?></span><br>
                                                 <span>Q (Quality/Gambaran Nyeri) : <?= $k->skala ?></span><br>
                                                 <span>R (Region/Lokasi Nyeri) : <?= $k->region ?></span><br>
@@ -335,8 +336,9 @@ $date = date("Y-m-d");
                                                     <li>Menghalangi anda beraktifitas : <b><?= trueOrFalse($k->halangan_aktivitas) ?></b></li>
                                                     <li>Sakit dirasakan setiak hari : <b><?= trueOrFalse($k->nyeri_sakit) ?></b></li>
                                                 </ul>
+                                                <?php } ?>
                                             </div>
-                                            <?php if ($k->metode==1 or $k->metode==2){ ?>
+                                            <?php if($k->nyeri!="tidak ada nyeri") { if ($k->metode==1 or $k->metode==2){ ?>
                                             <div style='width:85mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
                                                 <?php if ($k->metode==1){ ?>
                                                 <span style='margin-left:10mm'>Dewasa Menggunakan Visual Analog Scale(VAS)</span><br>
@@ -349,7 +351,7 @@ $date = date("Y-m-d");
                                                     <span style='margin-left:8mm'>Skor : <b><?= $k->skala_wbfs." - ".skalaWbfs($k->skala_wbfs)?></b></span><br>
                                                 <?php }?>
                                             </div>
-                                            <?php } ?>
+                                            <?php }} ?>
                                         </td>
                                     </tr>
                                     <?php 

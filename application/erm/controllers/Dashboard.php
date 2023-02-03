@@ -10,6 +10,7 @@ class Dashboard extends CI_Controller
     }
     function index()
     {
+        // var_dump($this->session->userdata());
         $ses_state = $this->users_model->cek_session_id();
         if ($ses_state) {
             $this->load->model('Smart_model');
@@ -70,6 +71,8 @@ class Dashboard extends CI_Controller
         $row = $this->db->get('tbl01_ruang')->row();
         if (!empty($row)) {
             $this->session->set_userdata('kdlokasi', $row->idx);
+            $this->session->set_userdata('grlokasi', $row->grid);
+            $this->session->set_userdata('grRuang', $row->koderuanglama);
         }
         echo json_encode(array('status' => true));
     }

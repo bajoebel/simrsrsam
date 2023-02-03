@@ -205,23 +205,24 @@ $date = date("Y-m-d");
                                 <td>
                                     <?php 
                                         if ($r->jenis_tenaga_medis_id==3||$r->jenis_tenaga_medis_id==4 ) {
-                                        $rd = getAwalRawatByIdx($r->idx);
-                                        echo tampilRawatByIdx($rd);
-                                    ?>
-                                    <hr>
+                                            $rd = getAwalRawatByIdx($r->idx);
+                                            if ($rd) {
+                                                echo tampilRawatByIdx($rd);
+                                            }
+                                        } else {?>
+                                            S: <?= gantiTagP($r->subyektif) ?> <br/>
+                                            O: <?= gantiTagP($r->obyektif) ?> <br/>
+                                            A: <?= gantiTagP($r->assesment) ?> <br/>
+                                            P: <?= gantiTagP($r->planning) ?> <br/>
                                     <?php } ?>
-                                    <b>S</b> : <?= gantiTagP($r->subyektif) ?>
-                                    <b>O</b> : <?= gantiTagP($r->obyektif)?>
-                                    <b>A</b> :<?= gantiTagP($r->assesment) ?>
-                                    <b>P</b>: <?= gantiTagP($r->planning) ?>
                                 </td>
                                 <td>
                                     <?= $r->instruksi?>
+                                    <div id="qrcode_cppt_<?=$r->id?>"></div><br/>
+                                    <?=$r->tenaga_medis?>
                                 </td>
                                 <td>
                                     <?= $r->review?>
-                                    <div id="qrcode_cppt_<?=$r->id?>"></div><br/>
-                                    <?=$r->tenaga_medis?>
                                 </td>
                             </tr>
                             <script type="text/javascript">

@@ -6,5 +6,7 @@
         <li class="<?= $ta[4] ?>" onclick="getRiwayat(4,<?= $detail->idx ?>)"><a href="#tab_4" data-toggle="tab">Kajian Awal Medis</a></li>
         <li class="<?= $ta[5] ?>" onclick="getRiwayat(5,<?= $detail->idx ?>)"><a href="#tab_5" data-toggle="tab">Perkembangan Pasien Terintegrasi</a></li>
         <li class="<?= $ta[6] ?>" onclick="getRiwayat(6,<?= $detail->idx ?>)"><a href="#tab_6" data-toggle="tab">Informasi Pasien Dan Keluarga</a></li>
+        <li class="<?= $ta[7] ?>" onclick="getRiwayat(7,<?= $detail->idx ?>)"><a href="#tab_7" data-toggle="tab">Permintaan Penunjang</a></li>
+        <li class="<?= $ta[7] ?>" onclick="getRiwayat(8,<?= $detail->idx ?>)"><a href="#tab_8" data-toggle="tab">Permintaan Resep</a></li>
     </ul>
 </div>

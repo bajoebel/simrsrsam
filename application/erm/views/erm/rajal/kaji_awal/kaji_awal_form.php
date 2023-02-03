@@ -33,12 +33,12 @@
     }
 </style>
 <!-- <?php print_r($detail) ?> -->
-<div class="box-body">
-    <input type="hidden" name="idx_ka" value="<?= $detail->idx ?>">
-    <input type="hidden" name="nomr_ka" value="<?= $detail->nomr ?>">
-    <input type="hidden" name="nama_ka" value="<?= $detail->nama_pasien ?>">
-    <input type="hidden" name="user_daftar_ka" value="<?= $detail->user_daftar ?>">
-</div>
+<input type="hidden" name="idx_ka" value="<?= $detail->idx ?>">
+<input type="hidden" name="nomr_ka" value="<?= $detail->nomr ?>">
+<input type="hidden" name="nama_ka" value="<?= $detail->nama_pasien ?>">
+<input type="hidden" name="user_daftar_ka" value="<?= $detail->user_daftar ?>">
+<input type="hidden" name="cppt_id_m" value="">
+
 <div class="form-group row">
     <div class="col-md-6">
         <label for="nama_ttd">Poliklinik </label>
@@ -229,7 +229,7 @@
         <label for="nama_ttd" class="text-green">&nbsp;c) Kultural</label>
     </div>
     <div class="col-md-4">
-        <label>Hubungan pasien dengan anggota keluarga </label>
+        <label>Hubungan pasien dengan anggota keluarga </label><br>
         <label class="radio-inline"><input type="radio" name="kultural_ka" value="1" checked> Baik</label>
         <label class="radio-inline"><input type="radio" name="kultural_ka" value="0"> Tidak Baik</label>
     </div>
@@ -338,15 +338,15 @@
         <label for="">Apakah Nyeri yang di rasakan : </label>
         <div class="row">
             <div class="col-md-6">Menghalangi tidur malam anda</div>
-            <div class="col-md-6"><input type="radio" name="tidur_malam_ka" id="" value="1"> Ya <input type="radio" name="tidur_malam_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="tidur_malam_ka" value="1"> Ya <input type="radio" name="tidur_malam_ka" value="0"> Tidak</div>
         </div>
         <div class="row">
             <div class="col-md-6">Menghalangi anda beraktifitas</div>
-            <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" id="" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" value="0"> Tidak</div>
         </div>
         <div class="row">
             <div class="col-md-6">Sakit dirasakan setiak hari</div>
-            <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" id="" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" value="0"> Tidak</div>
         </div>
     </div>
 
@@ -600,7 +600,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        <label for="status_generalis">Pemeriksaan : Status generalis & status lokalis ( </label>
+        <label for="status_generalis">Pemeriksaan : Status generalis & status lokalis (inspeksi, paipasi, perkusi, dan auskulasi)</label>
         <input type="text" name="status_generalis_ka" id="status_generalis_ka" class="form-control">
     </div>
     <div class="col-md-12">
@@ -747,6 +747,12 @@
     var nama = "<?= $detail->nama_pasien?> ";
     var ruang = "<?=$detail->id_ruang?>";
     var dokter = "<?=$detail->dokterJaga?>";
+</script>
+<script>
+    var today = new Date();
+    var priorDate = new Date(new Date().setDate(today.getDate() + 30));
+    console.log(priorDate)
+
 </script>
 <script>
     $(document).ready(function() {

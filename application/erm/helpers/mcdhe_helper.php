@@ -420,7 +420,18 @@ function get_list_siki()
     $CI = &get_instance();
     $db2 = $CI->load->database('dberm', TRUE);
     $result = $db2
+        ->order_by("kode asc")
         ->get("m_siki")
+        ->result();
+    return $result;
+}
+function get_list_slki()
+{
+
+    $CI = &get_instance();
+    $db2 = $CI->load->database('dberm', TRUE);
+    $result = $db2
+        ->get("m_slki")
         ->result();
     return $result;
 }
@@ -600,9 +611,116 @@ function tampilRawatByIdx($d) {
     $html.=", GCS : E: $d->gcs_e M: $d->gcs_m V: $d->gcs_v";
     $html.=", TTV : Sh: $d->ttv_sh ,Nd: $d->ttv_nd ,Rr: $d->ttv_rr ,SpO2: $d->ttv_spo2 ,TD: $d->ttv_td ,Down Score: $d->ttv_ds";
     $html.=", Pemeriksaan : ".$d->status_generalis;
-    $html.=", Penunjang : Radiologi : $d->penunjang_rad_detail Labor : $d->penunjang_lab_detail Lain-lain : $d->penunjang_lain_detail";
+    $html.=", Penunjang : Radiologi : $d->penunjang_rad_detail Labor : $d->penunjang_lab_detail Lain-lain : $d->penunjang_lain_detail"."<br/>";
+    $html.="<b>A :</b>";
+    $html.="".arr_to_list($d->diagnosa_keperawatan,"","; ");
+    $html.="<br/><b>P :</b>";
+    $html.="".arr_to_list($d->tindakan_keperawatan,"","; ");
     return $html;
 }
+
+function group_lab($key) {
+    switch ($key) {
+        case "A":
+            return "HEMATOLOGI";
+            break;
+        case 'B':
+            return "URINE";
+        case 'C':
+            return "FAECES";
+        case 'D':
+            return "SERULOGI";
+        case 'E':
+            return "KIMIA KLINIK";
+        case 'F':
+            return "SEROLOGI";
+        case 'G':
+            return "TEST NARKOBA";
+        default:
+            return "-";
+            break;
+    }
+}
+
+function getPermintaanPenunjang($idx) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.idx" => $idx])
+        ->get("rj_p_penunjang a")
+        ->result();
+}
+
+function getPermintaanPenunjangById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.id" => $id])
+        ->get("rj_p_penunjang a")
+        ->row();
+}
+
+function getPermintaanPenunjangDetail($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.rj_p_penunjang_id" => $id])
+        ->get("rj_p_penunjang_detail a")
+        ->result();
+}
+
+function getPermintaanPenunjangDetailById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.id" => $id])
+        ->get("rj_p_penunjang_detail a")
+        ->row();
+}
+
+function getPanduanKlinik() {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->get("m_pk a")
+        ->result();
+}
+
+function getListObat() {
+    $ci = get_instance();
+    $db3 = $ci->load->database('dbfarmasi', TRUE);
+    return $db3
+        ->select("*")
+        ->get("tbl04_barang a")
+        ->result();
+}
+
+function getPermintaanResep($idx) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.idx" => $idx])
+        ->get("rj_p_resep a")
+        ->row();
+}
+
+function getPermintaanResepDetailById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["rj_p_resep_id" => $id])
+        ->get("rj_p_resep_detail a")
+        ->result();
+}
+
+
 
 
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

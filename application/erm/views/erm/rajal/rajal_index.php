@@ -219,6 +219,7 @@
                                                             <li><a href="#" data-pil="prmrj" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Profil Ringkas Medis Rawat Jalan</a></li>
                                                         </ul>
                                                     </div>
+                                                    <button type="button" class="btn btn-sm btn-default" onclick="reloadPage()"><i class="fa fa-refresh"></i></button>
                                             </td>
                                             <td>
                                                 <b>Hari/Tanggal Masuk</b><br />
@@ -330,6 +331,7 @@
                 .columns.adjust();
         });
 
+        loadAwal()
     });
 </script>
 <!-- script persetujuan umum -->
@@ -362,10 +364,137 @@
         // insert data kaji awal keperawatan
         $("#form-data-kaji-awal").on("submit", function(e) {
             e.preventDefault();
-            if ($("#perawat_id_ka").val()=="") {
-                alert("Perawat Yang Melakukan Kajian Wajib Di isi");
+            // alert($("[name='tiba_ka']:checked").val()==undefined);
+            // return false;
+            if ($("[name='tiba_ka']:checked").val()==undefined) {
+                swal("Tiba di ruangan wajib di isi");
                 return false;
             }
+            if ($("[name='rujukan_ka']:checked").val()==undefined) {
+                swal("Rujukan Wajib Diisi");
+                return false;
+            }
+
+            if ($("#keluhan_ka").val()=="") {
+                swal("Keluhan Waji Di ISI");
+                return false;
+            }
+            
+            if ($("#dirawat_ka").val()=="") {
+                swal("Riwayat rawat wajib diisi");
+                return false;
+            }
+
+            if ($("#diagnosis_ka").val()=="") {
+                swal("Riwayat Diagnosis wajib diisi");
+                return false;
+            }
+
+            if ($("#riwayat_sakit_ka").val()=="") {
+                swal("Riwayat penyakit dahulu wajib diisi");
+                return false;
+            }
+
+            if ($("#riwayat_sakit_keluarga_ka").val()=="") {
+                swal("Riwayat penyakit keluarga dahulu wajib diisi");
+                return false;
+            }
+
+            if ($("#riwayat_psikologis_ka").val()=="") {
+                swal("Riwayat psikologis wajib diisi");
+                return false;
+            }
+
+            if ($("[name='kultural_ka']:checked").val()==undefined) {
+                swal("Hubungan pasien dan keluarga Wajib Diisi");
+                return false;
+            }
+
+            if ($("#status_ekonomi_ka").val()=="") {
+                swal("Status ekonomi pasien wajib diisi");
+                return false;
+            }
+
+            if ($("[name='obat_ka']:checked").val()==undefined) {
+                swal("Riwayat alergi obat Wajib Diisi");
+                return false;
+            }
+
+            if ($("[name='makanan_ka']:checked").val()==undefined) {
+                swal("Riwayat alergi makanan Wajib Diisi");
+                return false;
+            }
+
+            if ($("[name='nyeri_ka']:checked").val()==undefined) {
+                swal("Skrining nyeri Wajib Diisi");
+                return false;
+            }
+
+            if ($("[name='aktivitas_ka']:checked").val()==undefined) {
+                swal("Status fungsional Wajib Diisi");
+                return false;
+            }
+
+            if ($("[name='jatuh_ka']:checked").val()==undefined) {
+                swal("Resiko Jatuh Wajib Diisi");
+                return false;
+            }
+
+            if ($("#keadaan_umum_ka").val()=="") {
+                swal("Keadaan umum pasien wajib diisi");
+                return false;
+            }
+
+            if ($("#kesadaran_umum_ka").val()=="") {
+                swal("Kesadaran pasien wajib diisi");
+                return false;
+            }
+
+            if ($("#gcs_e_ka").val()=="" && $("#gcs_m_ka").val()=="" && $("#gcs_v_ka").val()=="" ) {
+                swal("GCS wajib diisi semua");
+                return false;
+            }
+
+            if ($("#ttv_sh_ka").val()=="" && $("#ttv_nd_ka").val()=="" && $("#ttv_rr_ka").val()=="" && $("#ttv_spo2_ka").val()=="" && $("#ttv_td_ka").val()=="" && $("#ttv_ds_ka").val()=="") {
+                swal("TTV wajib diisi semua");
+                return false;
+            }
+
+            if ($("#status_generalis_ka").val()=="") {
+                swal("Status generalis wajib diisi");
+                return false;
+            }
+
+            if ($("#komunikasi_ka").val()=="") {
+                swal("Hambatan dalam pemberlajaran wajib diisi");
+                return false;
+            }
+
+            if ($("#komunikasi_penerjemah_ka").val()=="") {
+                swal("Kebutuhan penerjemah wajib diisi");
+                return false;
+            }
+
+            if ($("[name='jatuh_ka']:checked").val()==undefined) {
+                swal("Kebutuhan edukasi Wajib Diisi");
+                return false;
+            }
+
+            if ($("#diagnosa_keperawatan_ka").val()=="") {
+                swal("Diagnosa keperawatan wajib diisi");
+                return false;
+            }
+            if ($("#tindakan_keperawatan_ka").val()=="") {
+                swal("Tindakan keperawatan wajib diisi");
+                return false;
+            }
+
+
+            if ($("#perawat_id_ka").val()=="") {
+                swal("Perawat Yang Melakukan Kajian Wajib Di isi");
+                return false;
+            }
+
             var data_form = $(this).serializeArray();
             var data_push = [{
                     "name": "dpjp_text_ka",
@@ -421,11 +550,16 @@
                 },
                 success: function(response) {
                     swal("Success", "Data Berhasil Di Simpan", "success");
-                    console.log(response);
+                    // console.log(response);
                     // $('#form-data-kaji-awal')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(3, <?= $detail->idx ?>);
+                    setTimeout(() => {
+                        reload_page()
+                    }, 2000); 
+                    $("#ar_preview").removeClass("hide")
+                    $("#ar_form").addClass("hide")
                 },
                 error: function(e) {
                     console.log(e)
@@ -436,10 +570,55 @@
         // insert data kaji awal medis
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
-            if ($("#dokter_id_m").val()=="") {
-                alert("DPJP wijib diisi");
+            if ($("#td_m").val()=="") {
+                alert("TD wajib diisi");
                 return false;
             }
+
+            if ($("#nadi_m").val()=="") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            if ($("#napas_m").val()=="") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            if ($("#suhu_m").val()=="") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            var diagnosis_kerja = CKEDITOR.instances['diagnosis_kerja_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!diagnosis_kerja) {
+                alert("Diagnosis kerja wajib diisi");
+                return false;
+            }
+
+            var penunjang = CKEDITOR.instances['penunjang_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!penunjang) {
+                alert("Pemeriksaan penunjang wajib diisi");
+                return false;
+            }
+
+            var banding = CKEDITOR.instances['diagnosis_banding_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!banding) {
+                alert("Pemeriksaan penunjang wajib diisi");
+                return false;
+            }
+
+            var terapi = CKEDITOR.instances['terapi_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!terapi) {
+                alert("Terapi dan tindakan wajib diisi");
+                return false;
+            }
+
+            if ($("#dokter_id_m").val()=="") {
+                alert("DPJP wajib diisi");
+                return false;
+            }
+
             var data_form = $(this).serializeArray();
             var data_push = [{
                     name: "dokter_m",
@@ -483,12 +662,14 @@
                     $(":submit").attr("disabled", true);
                 },
                 success: function(response) {
+                    // console.log(response)
+                    // return false;
                     swal("Success", "Data Berhasil Di Simpan", "success");
-                    console.log(response);
                     // $('#form-data-kaji-awal-medis')[0].reset();
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(4, <?= $detail->idx ?>);
+                    reloadPage();
                 },
                 error: function(e) {
                     console.log(e)
@@ -498,6 +679,7 @@
 
         // insert perkembangan pasien terintegrasi
         $("#form-data-kembang-pasien").on("submit", function(e) {
+            e.preventDefault();
             if ($("#jenis_tenaga_medis_id_k").val()=="") {
                 alert("Profesional wajib diisi")
                 return false;
@@ -506,7 +688,37 @@
                 alert("Nama Profesional wajib diisi")
                 return false;
             }
-            e.preventDefault();
+
+            // var subyektif = CKEDITOR.instances['subyektif_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!subyektif) {
+            //     alert("Subyektif wajib diisi")
+            //     return false;
+            // }
+            // var obyektif = CKEDITOR.instances['obyektif_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!obyektif) {
+            //     alert("Obyektif wajib diisi")
+            //     return false;
+            // }
+            // var assesment = CKEDITOR.instances['assesment_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!assesment) {
+            //     alert("Assesment wajib diisi")
+            //     return false;
+            // }
+            // var planning = CKEDITOR.instances['planning_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!planning) {
+            //     alert("planning wajib diisi")
+            //     return false;
+            // }
+            // var instruksi = CKEDITOR.instances['instruksi_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!instruksi) {
+            //     alert("intruksi wajib diisi")
+            //     return false;
+            // }
+            // var review = CKEDITOR.instances['review_k'].getData().replace(/<[^>]*>/gi, '').length;
+            // if (!review) {
+            //     alert("review wajib diisi")
+            //     return false;
+            // }
             var data_form = $(this).serializeArray();
             var data_push = [{
                     name: "jenis_tenaga_medis_k",
@@ -559,6 +771,7 @@
                     // console.log(response);
                     $(":submit").attr("disabled", false);
                     getRiwayat(5, <?= $detail->idx ?>);
+                    reloadPage();
                 },
                 error: function(e) {
                     console.log(e)
@@ -599,6 +812,36 @@
             });
         })
 
+        // inser permintaan Penunjang
+        $("#form-permintaan-penunjang").on("submit",function(e) {
+            e.preventDefault();
+            let data_form = $(this).serializeArray();
+            var data_push = [{
+                    "name": "dpjp_text_pp",
+                    "value": $("#dpjp_pp :selected").text()
+                },
+                {
+                    "name": "pemeriksaan_text_pp",
+                    "value": $("#pemeriksaan_pp :selected").text()
+                }
+            ]
+            data_form = $.merge(data_form,data_push);
+            // console.log(data_form)
+            // return false;
+            $.ajax({
+                method: "POST",
+                url: base_url+"rajal/insert_permintaan_penunjang",
+                data: data_form,
+                dataType: "json",
+                success: function (response) {
+                    reloadPage();
+                },
+                error : function (e) {
+                    console.log(e)
+                }
+            });
+        })
+
         $(".riwayat-form-link").on("click",function(e) {
             e.preventDefault();
             var pil = $(this).data("pil")
@@ -623,8 +866,39 @@
             });
         })
 
+        $("#kembang-pasien-review-sign").on("submit",function (e) {
+            e.preventDefault();
+            alert("OK")
+        })
+
+        
+
     });
 
+
+    function loadAwal() {
+        $("#ar_form").addClass("hide")
+        $("#am_form").addClass("hide")
+        $("#kp_form").addClass("hide")
+    }
+
+    function reloadPage() {
+        location.reload();
+    }
+    function tambahAwalRawat() {
+        $("#ar_preview").addClass("hide")
+        $("#ar_form").removeClass("hide")
+    }
+
+    function tambahAwalMedis() {
+        $("#am_preview").addClass("hide")
+        $("#am_form").removeClass("hide")
+    }
+
+    function tambahKembangPasien() {
+        $("#kp_preview").addClass("hide")
+        $("#kp_form").removeClass("hide")
+    }
     function getRiwayat(pil, idx) {
         $.ajax({
             type: "post",
@@ -661,7 +935,10 @@
             dataType: "JSON",
             success: function (response) {
                 let data = response.data;
-                console.log(data.kontrol_tgl)
+                // console.log(data.kontrol_tgl)
+
+                $("#tampil_awal_medis").show()
+                $("#panduan_m").val(data.kode_m_pk).trigger("change");
                 $("[name='hari_m']").val(data.hari)
                 $("[name='tgl_m']").val(data.tgl)
                 $("[name='jam_m']").val(data.jam)
@@ -673,10 +950,10 @@
                 $("[name='napas_m']").val(data.napas)
                 $("[name='suhu_m']").val(data.suhu)
                 $("[name='fisik_detail_m']").text(data.fisik_detail)
-                $("[name='diagnosis_kerja_m']").text(data.diagnosis_kerja)
-                $("[name='diagnosis_banding_m']").text(data.diagnosis_banding)
-                $("[name='penunjang_m']").text(data.penunjang)
-                $("[name='terapi_m']").text(data.terapi)
+                CKEDITOR.instances['diagnosis_kerja_m'].setData(data.diagnosis_kerja)
+                CKEDITOR.instances['diagnosis_banding_m'].setData(data.diagnosis_banding)
+                // CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
+                CKEDITOR.instances['terapi_m'].setData(data.terapi)
                 $("[name='kontrol_m']").val(data.kontrol)
                 $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
                 $("[name='kontrol_jam_m']").val(data.kontrol_jam)
@@ -702,6 +979,12 @@
                 } else {
                     $("[name='kontrol_m']").prop("checked",false).trigger("change")
                 }
+
+                
+
+                swal("Silahkan Edit Data")
+                $("#am_form").removeClass("hide")
+                $("#am_preview").addClass("hide")
             },
             error: function (e) {
                 console.log(e)
@@ -721,7 +1004,6 @@
             dataType: "JSON",
             success: function (response) {
                 let data = response.data;
-                console.log(data.tenaga_medis_id)
                 $("[name='id_kembang_pasien']").val(data.id);
                 $("[name='tgl_k']").val(data.tgl);
                 $("[name='jam_k']").val(data.jam);
@@ -734,12 +1016,11 @@
                 CKEDITOR.instances['planning_k'].setData(data.planning)
                 CKEDITOR.instances['instruksi_k'].setData(data.instruksi)
                 CKEDITOR.instances['review_k'].setData(data.review)
-                // $("#obyektif_k").text(data.obyektif);
-                // $("#assesment_k").text(data.assesment);
-                // $("#planning_k").text(data.planning);
-                // $("#instruksi_k").text(data.instruksi);
-                // $("#review_k").text(data.review);
+
                 list_tenaga_medis(data.jenis_tenaga_medis_id,data.tenaga_medis_id);
+                $("#kp_form").removeClass("hide")
+                $("#kp_preview").addClass("hide")
+                swal("Silahkan Edit Data")
             },
             error: function (e) {
                 console.log(e)
@@ -764,6 +1045,9 @@
                 responseAwalRawat(data)
                 swal("Silahkan Edit Data")
                 $("#modal-riwayat-form").modal("hide")
+                $("ar_form").removeClass("hide")
+                $("#ar_preview").addClass("hide")
+                $("#ar_form").removeClass("hide")
             },
             error: function (e) {
                 console.log(e)
@@ -772,6 +1056,7 @@
     }
 
     function responseAwalRawat(data) {
+        $("[name='cppt_id_m']").val(data.cppt_id);
         $("[name='poli_ka']").val(data.poli).trigger("change");
         $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
         $("[name='dpjp_id_ka']").val(data.dpjp_id).trigger("change");
@@ -874,6 +1159,7 @@
         $("[name='dijelaskan_hubungan_ka']").val(data.dijelaskan_hubungan);
         $("[name='dijelaskan_nama_ka']").val(data.dijelaskan_nama);
         $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
+        $("[name='komunikasi_penerjemah_ka']").val(data.komunikasi_penerjemah)
         
         // skrining nyeri
         var nyeri = data.nyeri;
@@ -980,6 +1266,7 @@
                     if (response.status) {
                         getRiwayat(3, idx);
                         swal("Success", "Data Berhasil Di Hapus", "success");
+                        reloadPage()
                     } else {
                         swal("Failed", "Something Wrong", "error");
                     }
@@ -1029,6 +1316,7 @@
                     } else {
                         swal("Failed", "Something Wrong", "error");
                     }
+                    reloadPage();
                 },
                 error: function(e) {
                     console.log(e.responseText);
@@ -1110,6 +1398,7 @@
                             success: function (response) {
                                 // console.log(response)
                                 swal("QRCODE berhasil di generate")
+                                reloadPage()
                             },
                             error : function (e) {
                                 console.log(e.responseText)
@@ -1151,7 +1440,7 @@
                             },
                             dataType: "JSON",
                             success: function (response) {
-                                console.log(response)
+                                reloadPage();
                             },
                             error : function (e) {
                                 console.log(e.responseText)
@@ -1166,6 +1455,14 @@
                 }
             });
         }
+    }
+
+    function signKembangPasienDpjp(idx,id,nomr,user) {
+        $("[name='idDpjp']").val(id);
+        $("[name='idxDpjp']").val(idx);
+        $("[name='nomrDpjp']").val(nomr);
+        $("[name='userDpjp']").val(user);
+        $("#modal-kembang-pasien-review-form").modal("show")
     }
 
     function signEdukasiPasienDetail(id,user) {
@@ -1258,6 +1555,42 @@
      
     }
 
+    function signPermintaanPenunjang(id,idx,user) {
+        $("#sign_id").val(id)
+        $("#sign_user").val(user)
+        $("#sign_password").val("");
+        $("#modal-sign-penunjang").modal("show")
+    }
+    function signPermintaanPenunjangAction() {
+        let id = $("#sign_id").val();
+        let password = $("#sign_password").val();
+        let user = $("#sign_user").val();
+        if (id) {
+            $.ajax({
+                url: base_url+"rajal/sign_permintaan_penunjang",
+                method: "post",
+                data: {
+                    id : id,
+                    password : password,
+                    user : user
+                },
+                dataType: "json",
+                success: function (response) {
+                    console.log(response)
+                    swal(response.msg)
+                    $("#modal-sign-penunjang").modal("hide")
+                    $("#sign_id").val("")
+                    $("#sign_user").val("")
+                },
+                error : function (e) {
+                    console.log(e)
+                }
+            });
+        } else {
+            alert("id kosong")
+        }
+    }
+
     function final(id,status,msg="") {
         var x = confirm(msg);
         // alert(id)
@@ -1272,11 +1605,7 @@
                 },
                 dataType: "json",
                 success: function (response) {
-                    if (response.status==true) {
-                        location.reload();
-                    } else {
-                        location.reload();
-                    }
+                    reloadPage()
                 },
                 error : function (e) {
                     e

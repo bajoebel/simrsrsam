@@ -331,10 +331,10 @@ $date = date("Y-m-d");
                                             </div>
                                             <div style='width:85mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
                                                 <span style='margin-left:10mm'>Dewasa Menggunakan Visual Analog Scale(VAS)</span><br>
-                                                <span><img src="<?= base_url("assets/images/form/vas.png") ?>" width="300mm"></span><br>
+                                                <span><img src="<?= base_url("assets/images/erm_images/vas.png") ?>" width="300mm"></span><br>
                                                 <span style='margin-left:8mm'>Tidak nyeri</span><br>
                                                 <span>Skrining nyeri anak-anak >3 Menggunakan Wong Barker Face Scale </span><br>
-                                                <span><img src="<?= base_url("assets/images/form/bfs.png") ?>" height="50mm" width="300mm"></span></span>
+                                                <span><img src="<?= base_url("assets/images/erm_images/bfs.png") ?>" height="50mm" width="300mm"></span></span>
                                             </div>
                                         </td>
                                     </tr>

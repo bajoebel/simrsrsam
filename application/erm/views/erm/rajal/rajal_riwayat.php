@@ -69,31 +69,9 @@
                 </div>
                 <div id="ar_<?=$r->id?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                        <strong>Poli Tujuan</strong><br />
-                        <p><?= $r->poli_text ?></p>
-                        <strong>DPJP</strong><br />
-                        <p><?= $r->dpjp_text ?></p>
-                        <strong>Tiba Di Ruangan Dengan Cara</strong><br />
-                        <p><?= $r->tiba ?></p>
-                        <strong>Rujukan</strong><br />
-                        <p><?= $r->rujukan." - ". $r->rujukan_lain ?></p>
-                        <strong>Keluhan Utama</strong><br />
-                        <p><?= $r->keluhan ?></p>
-                        <strong>Riwayat Kesehatan / Pengobatan / Perawatan Sebelumnya</strong><br />
-                        <p>Pernah Dirawat : <?= trueOrFalse($r->dirawat)." - ".(($r->dirawat==1)?$r->kapan_dirawat." - ".$r->dimana_dirawat:"")  ?></p>
-                        <strong>Diagnosis</strong><br />
-                        <p><?= $r->diagnosis ?></p>
-                        <strong>Alat Implant Terpasang</strong><br />
-                        <p><?= trueOrFalse($r->implant) ." - ". $r->implant_detail ?></p>
-                        <strong>Riwayat Operasi</strong><br />
-                        <p><?= $r->riwayat_operasi ." - ". $r->riwayat_operasi_tahun ?></p>
-                        <strong>Riwayat Penyakit Dahulu</strong><br />
-                        <p><?= arr_to_list($r->riwayat_sakit) ?></p>
-                        <strong>Riwayat Penyakit Keluarga</strong><br />
-                        <p><?= arr_to_list($r->riwayat_sakit_keluarga) ?></p>
-                        <p></p>
+                        
                     </div>
-                    <div class="box-footer">
+                    <div class="box-footer text-center">
                         <a href="<?= base_url("erm.php/rajal/kaji_awal/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
                         </a>
@@ -102,7 +80,7 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm btn-info' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-sign-in'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm btn-info' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-barcode'></i>
                         </button>
                         <?php } ?>
                     </div>
@@ -126,21 +104,9 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                        <strong>Anamnesis</strong><br />
-                        <p>Auto - <?= $r->auto_detail ?></p>
-                        <p>Allo - <?= $r->allo_detail ?></p>
-                        <strong>Pemeriksaan Fisik</strong><br />
-                        <p>TD: <?= $r->td ?>mmHg - Nadi: <?= $r->nadi ?> x/i - Pernapasan : <?= $r->napas ?> x/i - Suhu: <?= $r->suhu ?>C</p>
-                        <strong>Diagnosisi Kerja</strong><br />
-                        <p><?= $r->diagnosis_kerja ?></p>
-                        <strong>Diagnosisi Banding</strong><br />
-                        <p><?= $r->diagnosis_banding ?></p>
-                        <strong>Pemeriksaan Penunjang</strong><br />
-                        <p><?= $r->penunjang ?></p>
-                        <strong>Therapi / Tindakan</strong><br />
-                        <p><?= $r->terapi ?></p>
+                        
                     </div>
-                    <div class="box-footer">
+                    <div class="box-footer text-center">
                         <a href="<?= base_url("erm.php/rajal/kaji_awal_medis/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
                         </a>
@@ -149,7 +115,7 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalMedis(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-dokter="<?=$r->dokter_id?>" class='btn btn-sm btn-info' onclick="signAwalMedis(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-dokter'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-sign-in'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-dokter="<?=$r->dokter_id?>" class='btn btn-sm bg-black' onclick="signAwalMedis(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-dokter'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-qrcode'></i>
                         </button>
                         <?php } ?>
                     </div>
@@ -173,20 +139,9 @@
                 </div>
                 <div id="kb_<?=$r->id?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                     <div class="box-body">
-                        <strong>Subyektif</strong><br />
-                        <p><?= $r->subyektif ?></p>
-                        <strong>Subyektif</strong><br />
-                        <p><?= $r->obyektif ?></p>
-                        <strong>Assessment</strong><br />
-                        <p><?= $r->assesment ?></p>
-                        <strong>Planning</strong><br />
-                        <p><?= $r->planning ?></p>
-                        <strong>Instruksi</strong><br />
-                        <p><?= $r->instruksi ?></p>
-                        <strong>Review</strong><br />
-                        <p><?= $r->review ?></p>
+                        
                     </div>
-                    <div class="box-footer">
+                    <div class="box-footer text-center">
                         <a href="<?= base_url("erm.php/rajal/kembang_pasien/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
                             <i class="fa fa-print"></i>
                         </a>
@@ -195,7 +150,7 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-tenagamedis="<?=$r->tenaga_medis_id?>" class='btn btn-sm btn-info' onclick="signKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-tenagamedis'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-sign-in'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-tenagamedis="<?=$r->tenaga_medis_id?>" class='btn btn-sm btn-default' onclick="signKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-tenagamedis'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> Assign Pemberi Asuhan</i></button>
                         </button>
                         <?php } ?>
                     </div>
