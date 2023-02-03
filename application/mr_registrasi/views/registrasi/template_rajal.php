@@ -624,6 +624,13 @@
                                                                         </select>
                                                                     </div>
                                                                     <input type="hidden" name="groupantri" id="groupantri" value="">
+                                                                    <input type="hidden" name="kodepoli" id="kodepoli" value="">
+                                                                    <input type="hidden" name="namapoli" id="namapoli" value="">
+                                                                    <input type="hidden" name="kodedokter" id="kodedokter" value="">
+                                                                    <input type="hidden" name="namadokter" id="namadokter" value="">
+                                                                    <input type="hidden" name="jampraktek" id="jampraktek" value="">
+                                                                    <input type="hidden" name="kuotajkn" id="kuotajkn" value="">
+                                                                    <input type="hidden" name="kuotanonjkn" id="kuotanonjkn" value="">
                                                                 </div>
                                                             </div>
                                                             <?php
@@ -2211,6 +2218,7 @@
             var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/rawat_jalan' ?>';
             window.location.href = url;
         });
+
         $('#daftar').click(function() {
             //alert($('#txtNorujuk').val());
             var c19=$('#c19').prop('checked');
@@ -2219,8 +2227,14 @@
             var sdm=$('#sdm').prop('checked');
             if(sdm==true) sdm=1; else sdm=0;
             var formdata = {
-                nomr: $('#nomr').val(),
-                kodebooking: $('#kodebooking').val(),
+                kodepoli: $('#kodepoli').val(),
+                namapoli: $('#namapoli').val(),
+                kodedokter: $('#kodedokter').val(),
+                namadokter: $('#namadokter').val(),
+                jampraktek: $('#jampraktek').val(),
+                kuotajkn: $('#kuotajkn').val(),
+                kuotajkn: $('#kuotajkn').val(),
+                kuotanonjkn: $('#kuotanonjkn').val(),
                 no_ktp: $('#no_ktp').val(),
                 nama_pasien: $('#nama').val(),
                 tempat_lahir: $('#tempat_lahir').val(),
@@ -2551,7 +2565,7 @@
             else $('#daftar').focus();
             var dokter=$('#dokterJaga').val();
             var poly=$('#id_ruang').val();
-            cekGroupAntri(poly,dokter);
+            getJadwal(poly,dokter);
         });
         $('#id_cara_bayar').on('select2:select', function(e) {
             var carabayar = $('#id_cara_bayar').val();

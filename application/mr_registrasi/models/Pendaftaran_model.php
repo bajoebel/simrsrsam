@@ -480,4 +480,7 @@ class Pendaftaran_model extends CI_Model
         $res= $this->db->get('tbl02_pendaftaran')->row();
         return $res->jml;
     }
+    // function getJadwal(){
+
+    // }
 }

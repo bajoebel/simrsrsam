@@ -1062,6 +1062,14 @@ function getDokter(id_ruang = "") {
 				var option = "<option value=''>Pilih Dokter</option>";
 				//Create Tabel
 				var jns_layanan = $('#jns_layanan').val();
+				$('#groupantri').val("")
+				$('#kodepoli').val("")
+				$('#namapoli').val("")
+				$('#kodedokter').val("")
+				$('#namadokter').val("")
+				$('#jampraktek').val("")
+				$('#kuotajkn').val("")
+				$('#kuotanonjkn').val("")
 				// alert(jns_layanan);
 				for (var i = 0; i < jmlData; i++) {
 					// if(dokter[i]['did'] == null && jns_layanan=='RJ') var dis='disabled'; else dis='';
@@ -3971,26 +3979,77 @@ function cetakUlang(reg_unit = "") {
 	});
 }
 
-function cekGroupAntri(poly, dokter) {
+function getJadwal(poly, dokter) {
 	var url = base_url + "registrasi/jadwaldokter/" + poly + "/" + dokter;
 	console.log(url);
 	$.ajax({
 		url: url,
 		type: "GET",
 		dataType: "json",
-		data: {
-			get_param: 'value'
-		},
+		data: {},
 		success: function (data) {
 			if (data.status == true) {
 				$('#groupantri').val(data.data.group)
+				$('#kodepoli').val(data.data.jadwal_subspesialis_jkn)
+				$('#namapoli').val(data.data.jadwal_poly_nama)
+				$('#kodedokter').val(data.data.dokterjkn)
+				$('#namadokter').val(data.data.jadwal_dokter_nama)
+				$('#jampraktek').val(data.data.jadwal_jam_mulai+"-"+data.data.jadwal_jam_selesai)
+				$('#kuotajkn').val(data.data.kuotajkn)
+				$('#kuotanonjkn').val(data.data.kuotanonjkn)
 			} else {
 				$('#groupantri').val("")
+				$('#groupantri').val("")
+				$('#kodepoli').val("")
+				$('#namapoli').val("")
+				$('#kodedokter').val("")
+				$('#namadokter').val("")
+				$('#jampraktek').val("")
+				$('#kuotajkn').val("")
+				$('#kuotanonjkn').val("")
 			}
 
 		}
 	});
 }
+// function getJadwal(){
+// 	var ruang = $('#id_ruang').val()
+// 	var dokter= $('#dokterJaga').val()
+// 	var url=base_url+"registrasi/jadwaldokter/"+ruang+"/"+dokter;
+// 	$.ajax({
+// 		url: url,
+// 		type: "GET",
+// 		dataType: "json",
+// 		data: {},
+// 		beforeSend: function () {
+// 			// $('#cekStatus').prop("disabled", true);
+// 			// $('#iconCekStatus').removeClass('fa fa-check')
+// 			// $('#iconCekStatus').addClass('fa fa-spinner fa-spin')
+// 		},
+// 		success: function (data) {
+// 			console.log(data);
+// 			if (data.status == true) {
+				
+// 				//alert("Ok");	
+// 			} else {
+// 				tampilkanPesan('warning', data.message);
+// 			}
+// 		},
+// 		error: function (xhr) { // if error occured
+// 			console.log(xhr.status + ' ' + xhr.responseText);
+// 			$('#error').modal('show');
+// 			$('#xhr').html(xhr.responseText)
+// 			// $('#cekStatus').prop("disabled", false);
+// 			// $('#iconCekStatus').removeClass('fa fa-spinner fa-spin')
+// 			// $('#iconCekStatus').addClass('fa fa-search')
+// 		},
+// 		complete: function () {
+// 			// $('#cekStatus').prop("disabled", false);
+// 			// $('#iconCekStatus').removeClass('fa fa-spinner fa-spin')
+// 			// $('#iconCekStatus').addClass('fa fa-search')
+// 		},
+// 	});
+// }
 
 function caripoliKontrol() {
 	var jnsKontrol = $('#jnsKontrol').val();
@@ -5057,3 +5116,4 @@ function setTTD(){
 	if(customttd) $('.customttd').show();
 	else $('.customttd').hide();
 }
+
