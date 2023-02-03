@@ -642,5 +642,85 @@ function group_lab($key) {
     }
 }
 
+function getPermintaanPenunjang($idx) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.idx" => $idx])
+        ->get("rj_p_penunjang a")
+        ->result();
+}
+
+function getPermintaanPenunjangById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.id" => $id])
+        ->get("rj_p_penunjang a")
+        ->row();
+}
+
+function getPermintaanPenunjangDetail($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.rj_p_penunjang_id" => $id])
+        ->get("rj_p_penunjang_detail a")
+        ->result();
+}
+
+function getPermintaanPenunjangDetailById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.id" => $id])
+        ->get("rj_p_penunjang_detail a")
+        ->row();
+}
+
+function getPanduanKlinik() {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->get("m_pk a")
+        ->result();
+}
+
+function getListObat() {
+    $ci = get_instance();
+    $db3 = $ci->load->database('dbfarmasi', TRUE);
+    return $db3
+        ->select("*")
+        ->get("tbl04_barang a")
+        ->result();
+}
+
+function getPermintaanResep($idx) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["a.idx" => $idx])
+        ->get("rj_p_resep a")
+        ->row();
+}
+
+function getPermintaanResepDetailById($id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    return $db2
+        ->select("*")
+        ->where(["rj_p_resep_id" => $id])
+        ->get("rj_p_resep_detail a")
+        ->result();
+}
+
+
+
 
 /* End of file mcdhe_helper.php and path \application\helpers\mcdhe_helper.php */

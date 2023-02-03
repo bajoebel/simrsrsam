@@ -242,6 +242,8 @@
     elseif ($ruang->grid == 2) $jns_layanan = 'RI';
     elseif ($ruang->grid == 3) $jns_layanan = 'PJ';
     else $jns_layanan = 'GD';
+
+    $grLokasi = $this->session->userdata('grlokasi');
 ?>
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $jns_layanan ?>">
     <section class="content container-fluid">
@@ -262,9 +264,15 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class=""><a href="#tab_1" data-toggle="tab">Data Kunjungan</a></li>
+                        <?php if($grLokasi==1 or $grLokasi==2) {?>
+                            <li class="active"><a href="#tab_1" data-toggle="tab">Data Kunjungan</a></li>
+                        <?php } ?>
+                        <?php if($grLokasi==3) {?>
+                            <li class="active"><a href="#tab_2" data-toggle="tab">List Permintaan</a></li>
+                        <?php } ?>
                     </ul>
                     <div class="tab-content">
+                        <?php if($grLokasi==1 or $grLokasi==2) {?>
                         <div class="tab-pane active" id="tab_1">
                             <div class="row">
                                 <div class="">
@@ -360,333 +368,65 @@
                                         </tfoot>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- /.tab-pane -->
+                        <?php } ?>
+                        <?php if($grLokasi==3) {?>
+                        <div class="tab-pane active" id="tab_2">
+                            <div class="row" style="margin-bottom:15px">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-1 text-right">
+                                            <span>Periode</span>
+                                        </div>
+                                        <div class="col-md-11 col-sm-9 col-xs-12">
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control tanggal" name="ptglAwal" id="ptglAwal" value="<?= date('Y-m-d') ?>" placeholder="____-__-__" >
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <input disabled="" type="text" class="form-control" value="s/d" style="text-align: center;border: none;">
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control tanggal" name="ptglAkhir" value="<?= date('Y-m-d') ?>" id="ptglAkhir"  placeholder="____-__-__" onchange="getPasienSaatini(1)">
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control" name="psearch" value="" id="psearch"  placeholder="enter keyword" onchange="getPasienSaatini(1)">
+                                            </span>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 table-responsive">
+                                    <table class="table table-bordered" id="permintaanTable">
+                                        <thead class="bg-green">
+                                            <tr>
+                                                <th style="width: 60px">#</th>
+                                                <th style="width: 100px">No.Reg RS</th>
+                                                <th style="width: 120px">No.Reg Unit</th>
+                                                <th style="width: 80px">Tgl.Minta</th>
+                                                <th style="width: 60px">No MR</th>
+                                                <th style="width: 100px">Nama Pasien</th>
+                                                <th>Ringkasan Permintaan</th>
+                                                <th style="width: 80px">Ruang Pengirim</th>
+                                                <th style="width: 80px">Dokter Pengirim</th>
+                                                <th style="width: 50px">Status</th>
+                                                <th style="width: 100px">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dataPermintaan"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                     <!-- /.tab-content -->
                 </div>
                 <!-- nav-tabs-custom -->
             </div>
     </section>
-
-    <!--Modal-->
-    <div id="formbatal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Batal Pindah</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="alasan">Alasan</label>
-                            <input type="hidden" id="id_pindah_ranap" name="id_pindah_ranap">
-                            <input type="hidden" id="id_daftar" name="id_daftar">
-                            <input type="hidden" id="reg_unit" name="reg_unit">
-                            <textarea name="alasan" id="alasan" cols="30" rows="10" class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" onclick="BatalPindahRanap()">Batalkan</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <?php if ($jns_layanan == 'RJ') {
-    ?>
-        <div class="modal fade" id="modal_rujukan_internal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-green">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title">Daftarkan Pasien</h3>
-                    </div>
-
-                    <div class="modal-body form">
-                        <form class="form-horizontal" method="POST" id="form" action="#" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <input type="hidden" name="no_permintaan" id="ri_no_permintaan" value="">
-                                <input type="hidden" name="id_daftar" id="ri_id_daftar" value="">
-                                <input type="hidden" name="rag_unit" id="ri_reg_unit" value="">
-                                <input type="hidden" name="nomr" id="ri_nomr" value="">
-                                <input type="hidden" name="nama_pasien" id="ri_nama_pasien" value="">
-                                <input type="hidden" name="ruang_pengirim" id="ri_ruang_pengirim" value="">
-                                <input type="hidden" name="nama_ruang_pengirim" id="ri_nama_ruang_pengirim" value="">
-                                <input type="hidden" name="id_poli" id="ri_id_poli" value="">
-                                <input type="hidden" name="nama_poli" id="ri_nama_poli" value="">
-                                <input type="hidden" name="dokter_pengirim" id="ri_dokter_pengirim" value="">
-                                <input type="hidden" name="nama_dokter_pengirim" id="ri_nama_dokter_pengirim" value="">
-                                <input type="hidden" name="keterangan" id="ri_keterangan" value="">
-
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">Dokter Jaga</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control" id="dokterJaga" name="dokterJaga" style="width: 100%;">
-                                            <option value="">Pilih</option>
-                                            <?php
-
-                                            foreach ($getDokter->result() as $d) {
-                                            ?>
-                                                <option value="<?= $d->NRP ?>"><?= $d->pgwNama; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                        <span class ext-error" id="err_dokterJaga"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" id="btnSave" onclick="daftarkanPasien()" class="btn btn-success">Daftarkan</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div><!-- /.modal-content -->
-        </div>
-
-        <div id="modalbatalantrean" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Batalkan Antrean</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-warning alert-dismissible text-center">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            Sistem ini terintegrasi dengan JKN Antrean, jika antrean di batalkan maka kunjungan hari ini juga akan otomatis dibatalkan pada server antrean JKN dan juga dibatalkan pada SIMRS
-                            <h3 class='text-center'><i class="icon fa fa-question-circle "></i><br>Apakah Anda Yakin Akan Membatalkan bookingan antrean ini ?</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="alasan">Keterangan</label>
-                                <input type="hidden" id="btlkodebooking" name="btlkodebooking">
-                                <input type="hidden" id="btlid_daftar" name="btlid_daftar">
-                                <input type="hidden" id="btlreg_unit" name="btlreg_unit">
-                                <textarea name="btlketerangan" id="btlketerangan" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="button" id="btnBatalAntrean" onclick="batalkanAntrean()"><span id="iconBatalAntrean" class="fa fa-remove"></span> Batalkan</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     <?php
-    } elseif ($jns_layanan == "PJ") {
-    ?>
-        <div class="modal fade" id="persetujuanRegistrasi" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Form Persetujuan Penunjang</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form id="formPenunjang" role="form" action="<?= base_url() . "nota_tagihan.php/permintaan_penunjang/registrasiPasien" ?>" method="POST">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="row">
-                                        <input type="hidden" name="no_permintaan" id="no_permintaan">
-                                        <input type="hidden" name="id_ruang" id="id_ruang" value="<?php echo $ruangID ?>">
-                                        <input type="hidden" name="jmldata" id="jmldata" value="">
-                                        <div class="form-group">
-                                            <div class="col-md-12"><label style="width: 100%">Pilih Dokter / Petugas</label></div>
-                                            <div class="col-md-12">
-                                                <select name="dokterJaga" id="dokterJaga" class="form-control" style="width: 100%;">
-                                                    <?php
-                                                    foreach ($getDokter->result() as $res) {
-                                                    ?>
-                                                        <option value="<?= $res->NRP; ?>"><?= $res->pgwNama ?></option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12"><label>Permintaan Tindakan</label> </div>
-                                            <div class="col-md-12">
-                                                <table class="table table-bordered">
-                                                    <thead class="bg-blue">
-                                                        <th>No</th>
-                                                        <th>Layanan</th>
-                                                    </thead>
-                                                    <tbody id="permintaan-tindakan"></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                        <button type="button" id="submit" class="btn btn-primary" onclick="registrasiPasienPermintaanPenunjang()">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
-    } elseif ($jns_layanan == "RI") {
-    ?>
-        <div class="modal fade" id="modalpindahkamar" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-body">
-                        <form action="#" method="POST" id="form">
-
-                            <div class="row">
-                                <div class="col-md-12 col-xs-12">
-                                    <div class="box box-widget widget-user-2">
-                                        <div class="bg-aqua-active" style="padding:10px;border-radius:15px 15px 0px 0px">
-                                            <div class="widget-user-image" id="lblimagejekel">
-                                                <img class="img-circle" src="<?= base_url() ?>assets/images/female.png" alt="" id="imgFemale">
-                                            </div>
-                                            <h4 class="widget-user-username" id="lblnamapasien">RANI ALFIQIAH DS</h4>
-                                            <p id="lblregunit" style="margin-left: 75px;">1374025006010001</p>
-                                        </div>
-
-                                        <div class="box-body">
-                                            <div class="nav-tabs-custom">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active"><a title="Profile Peserta" href="#tab_1" data-toggle="tab"><span class="fa fa-user"></span></a></li>
-                                                </ul>
-                                                <form action="#" method="POST" id="form">
-                                                    <div class="tab-content" style="padding:0px;">
-                                                        <div class="tab-pane active" id="tab_1">
-                                                            <input type="hidden" name="dokterPengirim" id="dokterPengirim">
-                                                            <input type="hidden" name="id_daftar" id="id_daftar">
-                                                            <input type="hidden" name="id_ruang" id="id_ruang">
-                                                            <input type="hidden" name="idx" id="idx">
-                                                            <input type="hidden" name="kamar_pengirim" id="kamar_pengirim">
-                                                            <input type="hidden" name="kelas_layanan" id="kelas_layanan">
-                                                            <input type="hidden" name="keterangan" id="keterangan">
-                                                            <input type="hidden" name="nama_dokter_pengirim" id="nama_dokter_pengirim">
-                                                            <input type="hidden" name="nama_kamar_pengirim" id="nama_kamar_pengirim">
-                                                            <input type="hidden" name="nama_pasien" id="nama_pasien">
-                                                            <input type="hidden" name="nama_ruang" id="nama_ruang">
-                                                            <input type="hidden" name="nama_ruang_pengirim" id="nama_ruang_pengirim">
-                                                            <input type="hidden" name="nomr" id="nomr">
-                                                            <input type="hidden" name="reg_unit" id="reg_unit">
-                                                            <input type="hidden" name="ruang_pengirim" id="ruang_pengirim">
-                                                            <input type="hidden" name="tgl_minta" id="tgl_minta">
-                                                            <ul class="list-group list-group-unbordered">
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">NOMR</div>
-                                                                        <div class="col-xs-8" id="lblnomr">: 393713</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">NO. REGISTRASI</div>
-                                                                        <div class="col-xs-8" id="lbliddaftar">: 2021011882</div>
-                                                                    </div>
-                                                                </li>
-
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">KELAS LAYANAN</div>
-                                                                        <div class="col-xs-8" id="lblkelaslayanan">: Rawat Jalan</div>
-                                                                    </div>
-                                                                </li>
-
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">RUANG PEGIRIM</div>
-                                                                        <div class="col-xs-8" id="lblruangpengirim">: GIGI &amp; MULUT</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">DOKTER PENGIRIM</div>
-                                                                        <div class="col-xs-8" id="lblnama_dokter_pengirim">: drg. ELSY GUSMAN</div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">RUANG PENERIMA</div>
-                                                                        <div class="col-xs-8" id="lblruangpenerima"></div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">KELAS LAYANAN</div>
-                                                                        <div class="col-xs-8">
-                                                                            <select name="id_kelas" id="id_kelas" class="form-control" onchange="getKamar()" style="width: 100%;">
-                                                                                <option value="">Pilih Kelas</option>
-                                                                                <?php
-                                                                                foreach ($kelas as $k) {
-                                                                                ?>
-                                                                                    <option value="<?= $k->idx ?>"><?= $k->kelas_layanan ?></option>
-                                                                                <?php
-                                                                                }
-                                                                                ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-4">KAMAR</div>
-                                                                        <div class="col-xs-8">
-                                                                            <select name="id_kamar" id="id_kamar" class="form-control" style="width: 100%;">
-                                                                                <option value="">Pilih kamar</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-group-item">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-12">
-                                                                            <button class="btn btn-success btn-block" id="terima" type="button" onclick="registrasikan()">Registrasikan</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
-    }
 } else { ?>
     <section class="content container-fluid">
         <div class="alert alert-danger alert-dismissible">
@@ -696,3 +436,69 @@
         </div>
     </section>
 <?php } ?>
+
+<script>
+    $(document).ready(function () {
+        var table = $("#permintaanTable").DataTable({
+            bAutoWidth: false,
+            processing: true,
+            serverSide: true,
+            ajax : {
+                url: base_url+"erm/get_permintaan_json",
+                type: "POST",
+                data: function (d) {
+                    d.cari = $("#psearch").val();
+                    d.tglAwal = $("#ptglAwal").val()
+                    d.tglAkhir = $("#ptglAkhir").val()
+                    // etc
+                }
+            },
+            searching: false,
+            columns: [
+                {"data": "id"},
+                {"data": "id_daftar"},
+                {"data": "reg_unit"},
+                {"data": "created_at"},
+                {"data": "nomr"},
+                {"data": "nama"},
+                {"data": "ringkasan_tindakan"},
+                {"data": "group_name"},
+                {"data": "dpjp_name"},
+                {"data": "status_form",render:function(data,type,row){
+                    switch (data) {
+                        case "1":
+                            return "<span class='badge bg-default'>Diajukan</span>"
+                            break;
+                        case "2":
+                            return "<span class='badge bg-yellow'>Diproses</badge>"
+                            break;
+                        case "3":
+                            return "<span class='badge bg-green'>Selesai<badge>"
+                            break;
+                        default:
+                            return "-"
+                            break;
+                    }
+                }},
+                {"data": "view"}
+            ],
+            order: [[3, 'desc']]
+        });
+
+        $("#psearch").keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                table.ajax.reload()
+            }
+        })
+        $("#ptglAwal,#ptglAkhir").on("change",function(){
+             table.ajax.reload();
+        })
+
+    });
+    
+    function detailPermintaan(idx,id)
+    {
+        window.location.href = base_url+"erm/detail_permintaan?idx="+idx+"&id="+id;
+    }    
+</script>

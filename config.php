@@ -172,3 +172,12 @@ defined('PORT_HOST_SIMRSV2')   		or define('PORT_HOST_SIMRSV2', 3306);
 defined('DB_USER_SIMRSV2')   		or define('DB_USER_SIMRSV2', 'root');
 defined('DB_PASS_SIMRSV2')   		or define('DB_PASS_SIMRSV2', '');
 defined('DB_NAME_SIMRSV2')   		or define('DB_NAME_SIMRSV2', 'rsam_v2');
+
+/*
+Database FARMASI
+*/
+defined('DB_HOST_FARMASI')   		or define('DB_HOST_FARMASI', 'localhost');
+defined('PORT_HOST_FARMASI')   		or define('PORT_HOST_FARMASI', 3306);
+defined('DB_USER_FARMASI')   		or define('DB_USER_FARMASI', 'root');
+defined('DB_PASS_FARMASI')   		or define('DB_PASS_FARMASI', '');
+defined('DB_NAME_FARMASI')   		or define('DB_NAME_FARMASI', 'db_farmasi');

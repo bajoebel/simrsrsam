@@ -43,8 +43,8 @@
                                     <td><?= $pp->keterangan?></td>
                                     <td><?= $pp->ringkasan_tindakan?></td>
                                     <td>
-                                        <a href="<?= base_url("erm.php/rajal/permintaan_penunjang/$pp->idx/$pp->id")?>" target="_blank" type="button" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Cetak Permintaan</a>
-                                        <button type="button" class="btn btn-sm btn-default bg-black" onclick="signPermintaanPenunjang('<?=$pp->idx?>','<?=$pp->id?>','<?=$pp->dpjp?>')"><i class="fa fa-qrcode"></i></button>
+                                        <a href="<?= base_url("erm.php/rajal/permintaan_penunjang/$pp->idx/$pp->id")?>" target="_blank" type="button" class="btn btn-sm btn-default"><i class="fa fa-print"></i></a>
+                                        <button type="button" class="btn btn-sm btn-default bg-black" onclick="signPermintaanPenunjang('<?=$pp->id?>','<?=$pp->idx?>','<?=$pp->dpjp?>')"><i class="fa fa-qrcode"></i></button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -59,6 +59,8 @@
                 <input type="hidden" name="idx_pp"  value="<?=$detail->idx?>">
                 <input type="hidden" name="nomr_pp"  value="<?=$detail->nomr?>">
                 <input type="hidden" name="nama_pp"  value="<?=$detail->nama_pasien?>">
+                <input type="hidden" name="id_daftar_pp"  value="<?=$detail->id_daftar?>">
+                <input type="hidden" name="reg_unit_pp"  value="<?=$detail->reg_unit?>">
                 <fieldset>
                     <legend>Informasi Klinis</legend>
                     <div class="form-group">
@@ -124,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">Autentikasi QRCODE</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group input-group-sm">

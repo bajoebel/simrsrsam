@@ -445,6 +445,7 @@ class Rajal extends CI_Controller
         $data_post = [
             "idx" => $this->input->post("idx_m"),
             "nomr" => $this->input->post("nomr_m"),
+            "cppt_id" => $this->input->post("cppt_id_m"),
             "nama" => $this->input->post("nama_m"),
             "hari" => $this->input->post("hari_m"),
             "tgl" => $this->input->post("tgl_m"),
@@ -472,10 +473,21 @@ class Rajal extends CI_Controller
             "pj_nama" => $this->input->post("pj_nama_m"),
             "dokter" => $this->input->post("dokter_m"),
             "dokter_id" => $this->input->post("dokter_id_m"),
+            "kode_m_pk"=> $this->input->post("panduan_m"),
+            "m_pk_definisi"=> $this->input->post("definisi_m"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_m")
         ];
+        if (is_array($this->input->post("auto_detail_m"))) {
+            $data_post['auto_detail'] = implode(";", removeChar($this->input->post("auto_detail_m")));
+        }
+        if (is_array($this->input->post("allo_detail_m"))) {
+            $data_post['allo_detail'] = implode(";", removeChar($this->input->post("allo_detail_m")));
+        }
+        if (is_array($this->input->post("fisik_detail_m"))) {
+            $data_post['fisik_detail'] = implode(";", removeChar($this->input->post("fisik_detail_m")));
+        }
         // header("Content-Type:text/html");
         // echo json_encode(["data" => $data_post]);
         // exit();
@@ -745,6 +757,8 @@ class Rajal extends CI_Controller
             "idx" => $this->input->post("idx_pp"),
             "nomr" => $this->input->post("nomr_pp"),
             "nama" => $this->input->post("nama_pp"),
+            "id_daftar" => $this->input->post("id_daftar_pp"),
+            "reg_unit" => $this->input->post("reg_unit_pp"),
             "grId" => $this->input->post("pemeriksaan_pp"),
             "group_name" => $this->input->post("pemeriksaan_text_pp"),
             "tindakan" => $this->input->post("tindakan_pp"),
@@ -761,22 +775,21 @@ class Rajal extends CI_Controller
         $user = $this->input->post("user");
         $password = $this->input->post("password");
         $id = $this->input->post("id");
-        $validation = cekPasswordUser($user,$password);
+        $validation = cekPasswordUser($password,$user);
         if (!$validation) {
-            echo json_encode(["status"=>false,"msg"=>"Username Dan Password Salah"]); 
+            echo json_encode(["status"=>false,"msg"=>"Username Dan Password Salah","user"=>$user,"password"=>$password]); 
             exit();
         }
         $param = [
             "id" => $id,
-            "tabel" => "rj_p_penunjang_detail",
+            "tabel" => "rj_p_penunjang",
             "dokter" => $user 
         ];
         
         $data = [
-            "utama" => $this->rajal->getPermintaanPenunjangById($id),
-            "detail" => $this->rajal->getPermintaanPenunjangDetail($id)
+            "utama" => $this->rajal->getPermintaanPenunjangById($id)->row(),
+            "detail" => $this->rajal->getPermintaanPenunjangDetail($id)->result()
         ];
-
         if ($data) {    
             $code = base64_encode(json_encode($param));
             $code_detail = base64_encode(json_encode($data));
@@ -784,6 +797,21 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
         } else {
             echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
+    function get_panduan_klinik() {
+        $kode = $this->input->post("kode");
+        $idx = $this->input->post("idx");
+        $data =  $this->rajal->getPanduanKlinik($kode);
+        $data_rawat =  $this->rajal->getAllAwalRawatByIdx($idx);
+        if (!$data_rawat) {
+            $data_rawat = false;
+        }
+        if ($data['status']) {
+            echo json_encode(["status"=>true,"utama"=>$data['utama'],"detail"=>$data['detail'],"rawat"=>$data_rawat]); 
+        } else {
+            echo json_encode(["status"=>false]); 
         }
     }
 
@@ -905,8 +933,86 @@ class Rajal extends CI_Controller
     public function get_tindakan_penunjang() {
         $ruang = $this->input->post("ruang");
         $data = $this->rajal->getTindakanPenunjang($ruang);
-          if ($data) {
+        if ($data) {
             echo json_encode(["status"=>true,"data"=>$data->result()]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    public function get_resep() {
+        $id = $this->input->post("id");
+        $idx = $this->input->post("idx");
+        $data = $this->rajal->getResepById($id);
+        $data_resep = $this->rajal->getPermintaanResepByIdx($idx);
+        if ($data_resep) {
+            $id_resep = $data_resep->id;
+        } else {
+            $id_resep = false;
+        }
+        if ($data) {
+            echo json_encode(["status"=>true,"data"=>$data,"id_resep"=>$id_resep]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    public function insert_resep() {
+        $data = [
+            "idx" => $this->input->post("idx"),
+            "rj_p_resep_id" => $this->input->post("rj_p_resep_id"),
+            "nama_obat" => $this->input->post("nama_obat"),
+            "kode_obat" => $this->input->post("kode_obat"),
+            "satuan" => $this->input->post("satuan"),
+            "aturan_pakai" => $this->input->post("aturan_pakai"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+
+        $insert = $this->rajal->insertResep($data);
+        if ($insert["status"]) {
+            echo json_encode(["status"=>true,"id"=>$insert["id"]]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    public function hapus_obat() {
+        $id = $this->input->post("id");
+        $delete = $this->rajal->deleteObat($id);
+        if ($delete) {
+            echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    function ajukan_permintaan_resep() {
+        $data = [
+            "idx" => $this->input->post("idx_pr"),
+            "nomr" => $this->input->post("nomr_pr"),
+            "nama" => $this->input->post("nama_pr"),
+            "dpjp" => $this->input->post("dpjp_pr"),
+            "dpjp_name" => $this->input->post("dpjp_name_pr"),
+            "status_form" => 1,
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s")
+        ];      
+        $update = $this->rajal->ajukanPermintaanResep($data);
+        
+        if ($update) {
+            echo json_encode(["status"=>true,"data"=>$update]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+    function batalkan_permintaan_resep() {
+        $idx = $this->input->post("idx");
+        $delete = $this->rajal->deletePermintaanResep($idx);
+        
+        if ($delete) {
+            echo json_encode(["status"=>true]);
         } else {
             echo json_encode(["status"=>false]);
         }

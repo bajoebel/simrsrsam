@@ -159,6 +159,7 @@
             <div class="box-header ui-sortable-handle" style="cursor: move;">
                 <i class="ion ion-clipboard"></i>
                 <h3 class="box-title">Form Input Permintaan Penunjang</h3>
+                <a class="pull-right" href="#tab_4" data-toggle="tab" onclick="getRiwayat(4,<?= $detail->idx ?>)">Back To Kajian Awal Medis</a>
             </div>
             <div class="box-body">
                 <?php $this->load->view("erm/rajal/p_penunjang/p_penunjang_form") ?>
@@ -166,6 +167,18 @@
             <!-- <div class="box-footer"> -->
             <!-- <button type="form" class="btn btn-primary pull-right">Selanjutnya</button> -->
             <!-- </div> -->
+        </div>
+    </div>
+    <div class="tab-pane <?= $ta[8] ?>" id="tab_8">
+        <div class="box box-success">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+                <i class="ion ion-clipboard"></i>
+                <h3 class="box-title">Form Input Permintaan Resep</h3>
+                <a class="pull-right" href="#tab_4" data-toggle="tab" onclick="getRiwayat(4,<?= $detail->idx ?>)">Back To Kajian Awal Medis</a>
+            </div>
+            <div class="box-body">
+                <?php $this->load->view("erm/rajal/p_resep/p_resep_form") ?>
+            </div>
         </div>
     </div>
 </div>

@@ -5,13 +5,14 @@ class Erm extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        date_default_timezone_set("Asia/Jakarta");
         $this->load->model('users_model');
         $this->load->model('erm_model');
         $this->load->model('nota_model');
         $this->load->model('Layanan_model');
         $this->load->model('Rekammedis_model');
         $this->load->model('Rajal_model', 'rajal');
-        date_default_timezone_set("Asia/Bangkok");
+        $this->load->library("Datatables");
     }
     function index()
     {
@@ -118,27 +119,6 @@ class Erm extends CI_Controller
         }
     }
 
-    function index2() {
-        $z = setNav("nav_1");
-        $folder = "rajal";
-        $kondisi = array('idruang' => $this->session->userdata('kdlokasi'), 'dokter' => 1);
-        $dokter = $this->Layanan_model->getDokter($kondisi);
-        $ruang = $this->nota_model->getRuang($this->session->userdata('kdlokasi'));
-        $data = [
-            'contentTitle' => 'Cari Pasien',
-            'ruangID' => $this->session->userdata('kdlokasi'),
-            'ruang' => $ruang,
-            'getDokter' => $dokter,
-            'kelas' => $this->db->get('tbl01_kelas_layanan')->result(),
-        ];
-        $view = array(
-            'header' => $this->load->view('template/header', '', true),
-            'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
-            'content' => $this->load->view('erm/erm_index2', $data, true),
-        );
-        
-        $this->load->view('template/theme', $view);
-    }
     function detail()
     {
         $ses_state = $this->users_model->cek_session_id();
@@ -152,6 +132,7 @@ class Erm extends CI_Controller
             $am = $this->rajal->getAwalMedisByIdx($idx);
             $ep = $this->rajal->getEdukasiPasienByIdx($idx);
             $pp = $this->rajal->getPermintaanPenunjangByIdx($idx);
+            $pr = $this->rajal->getPermintaanResepDetailByIdx($idx);
             if (!empty($detail)) {
                 if ($detail->jns_layanan == "PJ") $folder = 'penunjang';
                 else if ($detail->jns_layanan == "GD") $folder = 'igd';
@@ -168,6 +149,9 @@ class Erm extends CI_Controller
                 "5" => "", //cppt
                 "6" => "", //edukasi pasien
                 "7" => "", //Permintaan Penunjang
+                "8" => "", //Permintaan Resep
+                "9" => "", //Permintaan Resep
+                "10" => "", //Permintaan Resep
             ];
             $ta["1"] = "active";
             $data = array(
@@ -186,6 +170,7 @@ class Erm extends CI_Controller
                 "am" => ($am)?$am->id:"",
                 "kp" => 0,
                 "pp" => $pp,
+                "pr" => $pr
 
             );
 
@@ -202,6 +187,46 @@ class Erm extends CI_Controller
             window.location.href = '$url_login'
             </script>";
         }
+    }
+
+    function detail_permintaan() {
+
+        $id = $this->input->get("id");
+        $idx = $this->input->get("idx");
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $idx = intval($this->input->get('idx'));
+            $detail = $this->erm_model->getPendaftaran($idx);
+             if (!empty($detail)) {
+                $folder = "penunjang";
+                $pasien = $this->erm_model->getPasien($detail->nomr);
+            }
+            $z = setNav("nav_2");
+            $data = array(
+                'contentTitle' => 'E Rekam Medis',
+                'detail' => $detail,
+                'pasien' => $pasien,
+                "penunjang" => getPermintaanPenunjangById($id),
+                "penunjang_detail" => getPermintaanPenunjangDetail($id)
+            );
+
+            $view = array(
+                'header' => $this->load->view('template/header', '', true),
+                'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
+                'content' => $this->load->view('erm/' . $folder . '/' . $folder . '_index', $data, true),
+            );
+            $this->load->view('template/theme', $view);
+        } else {
+            $sid = getSessionID();
+            $url_login = base_url() . 'erm.php/login?sid=' . $sid;
+            echo "<script>alert('Ops. Sesi anda telah berubah! Silahkan login kembali');
+            window.location.href = '$url_login'
+            </script>";
+        }
+    }
+
+    function detail_resep() {
+
     }
 
     function riwayat()
@@ -232,9 +257,36 @@ class Erm extends CI_Controller
         $this->load->view("erm/rajal/rajal_riwayat", $data);
     }
 
-    // function getList()
-    // {
-    //     $data['list'] = $this->rajal->getSetujuUmum(381387)->result();
-    //     var_dump($data);
-    // }
+    function get_permintaan_json() {
+        header('Content-Type: application/json');
+        echo $this->erm_model->getPermintaan();
+    }
+    function get_permintaan_json_() {
+		$ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $q = urldecode($this->input->get('keyword', TRUE));
+            $start = intval($this->input->get('start'));
+            $limit = intval($this->input->get('limit'));
+            $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
+            //echo $jenis_layanan;exit;
+            if ($jenis_layanan == 'RJ' || $jenis_layanan == 'GD' || $jenis_layanan == "PJ") {
+                $kondisi = array('status_pasien != ' => 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
+            } else $kondisi = " (status_pasien=1 OR status_pasien=3) ";
+            $mulai = ($start * $limit) - $limit;
+            $ruangid = $this->session->userdata('kdlokasi');
+
+            $response = array(
+                'status'    => true,
+                'message'   => "OK",
+                'start'     => $mulai,
+                'row_count' => $this->Layanan_model->countData($q, $ruangid, $jenis_layanan, $kondisi),
+                'limit'     => $limit,
+                'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan, $kondisi),
+            );
+        } else {
+            $response = array('status' => false, 'message' => 'Session Expired');
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
 }

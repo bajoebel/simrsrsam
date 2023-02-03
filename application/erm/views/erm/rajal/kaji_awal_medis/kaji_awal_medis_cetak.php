@@ -130,6 +130,11 @@ $date = date("Y-m-d");
             display: flex;
             justify-content: space-around;
         }
+
+        table.penunjang {
+            border-collapse: collapse;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -196,11 +201,11 @@ $date = date("Y-m-d");
                                 <span>ANAMNESIS : </span><?=($k->auto==1)?"<span style='margin-left:3mm'>&#9745; Auto</span>":""?></span><?=($k->allo==1)?"<span style='margin-left:3mm'>&#9745; Allo</span>":""?></span><br>
                                 
                                 <?php if ($k->auto==1) { ?><div style="height:20mm">
-                                    Allo detail : <?=$k->auto_detail?></br>
+                                    Allo detail :<br/> <?=arra_to_list($k->auto_detail)?></br>
                                 </div>
                                 <?php } ?>
-                                <?php if ($k->allo==2) { ?><div style="height:20mm">
-                                    Allo detail : <?=$k->allo_detail?></br>
+                                <?php if ($k->allo==1) { ?><div style="height:20mm">
+                                    Allo detail : <br/><?=arr_to_list($k->allo_detail)?></br>
                                 </div>
                                 <?php } ?>
                             </td>
@@ -246,13 +251,75 @@ $date = date("Y-m-d");
                         <tr>
                             <td>
                                 <span>PEMERIKSAAN PENUNJANG : </span>
-                                <div style="height:20mm"><?= $k->penunjang?></div>
+                                <?= $k->penunjang ?>
+                                <div style="height:20mm">
+                                    <?php $penunjang_m = getPermintaanPenunjang($d->idx); 
+                                        if ($penunjang_m) {?>
+                                        <table class="penunjang" style="margin-bottom:5px">
+                                            <tr>
+                                                <td colspan="3">
+                                                    PERMINTAAN PEMERIKSAAN PENUNJANG
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jenis Pemeriksaan</td>
+                                                <td>Detail Pemeriksaan</td>
+                                                <td>Lampiran Pemeriksaan</td>
+                                            </tr>
+                                            <?php foreach ($penunjang_m as $pr) {
+                                                $penunjang_detail = getPermintaanPenunjangDetail($pr->id)    
+                                            ?>
+                                                <tr>
+                                                    <td><?= $pr->group_name ?></td>
+                                                    <td>
+                                                        <?php 
+                                                            if ($penunjang_detail) {
+                                                                foreach($penunjang_detail as $prd) { 
+                                                        ?>
+                                                                <?= $prd->tlTitle." : ".$prd->hasil ?><br/>
+                                                        <?php }
+                                                            } 
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" target="_blank">Lihat Disini</a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table> 
+                                     <?php } ?>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <span>THERAPI / TINDAKAN : </span>
-                                <div style="height:20mm"><?= $k->terapi ?></div>
+                                <div><?= $k->terapi ?></div>
+                                <?php $resep = getPermintaanResep($d->idx);
+                                if ($resep) {
+                                ?>
+                                <table class="penunjang" >
+                                    <tr>
+                                        <td colspan="2">
+                                            PERMINTAAN RESEP
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nama Obat</td>
+                                        <td>Aturan Pakai</td>
+                                    </tr>
+                                    <?php 
+                                    $resep_detail =  getPermintaanResepDetailById($resep->id); 
+                                    foreach($resep_detail as $rd) {
+                                    ?>
+                                    <tr>
+                                        <td><?= $rd->nama_obat ?></td>
+                                        <td><?= $rd->aturan_pakai ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </table> 
+                                <?php } ?>
+                                <br/>
                             </td>
                         </tr>
                         <tr>

@@ -106,6 +106,15 @@ class Rajal_model extends CI_Model
             ->row();
     }
 
+    function getAllAwalRawatByIdx($idx) {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2
+            ->select("*")
+            ->where(['idx' => $idx])
+            ->get("rj_awal_rawat")
+            ->row();
+    }
+
     function getAwalRawatByNomr($nomr) {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2
@@ -567,7 +576,6 @@ class Rajal_model extends CI_Model
             "kode_detail" => $kode_detail,
             "created_at" => date("Y-m-d"),
             "updated_at" => date("Y-m-d"),
-
         ]);
         $insert_id = $db2->insert_id();
         $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
@@ -587,7 +595,95 @@ class Rajal_model extends CI_Model
         }
     }
 
-    
+    public function getPanduanKlinik($kode) {
+         $db2 = $this->load->database('dberm', TRUE);
+         $pk = $db2->where("kode",$kode)->get("m_pk")->row();
+         $pk_detail = $db2->where("kode_m_pk",$kode)->get("m_pk_detail")->result();
+         if ($pk && $pk_detail) {
+            return [
+                "status" => TRUE,
+                "utama" => $pk,
+                "detail" => $pk_detail
+            ];
+         } else {
+            return [
+                "status" => FALSE
+            ];
+         }
+    }
 
+    public function getResepById($id) {
+        $ci = get_instance();
+        $db3 = $ci->load->database('dbfarmasi', TRUE);
+        return $db3
+            ->select("*")
+            ->where("KDBRG",$id)
+            ->get("tbl04_barang a")
+            ->row();
+    }
 
+    public function getPermintaanResepByIdx($idx) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        return $db2
+            ->select("*")
+            ->where("idx",$idx)
+            ->get("rj_p_resep")
+            ->row();
+    }
+
+    public function insertResep($data) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        $hasil = [];
+        $hasil["status"] = $db2
+            ->insert("rj_p_resep_detail",$data);
+        $hasil["id"] = $db2->insert_id();
+        return $hasil;
+    }
+
+    public function getPermintaanResepDetailByIdx($idx) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        return $db2
+            ->where("a.idx",$idx)
+            ->get("rj_p_resep_detail a")->result();
+    }
+
+    public function deleteObat($id) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        $db2
+            ->where("a.id",$id)
+            ->delete("rj_p_resep_detail a");
+        return $db2->affected_rows();
+    }
+
+    public function ajukanPermintaanResep($data) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $cek = $db2->where("idx",$data['idx'])->get("rj_p_resep")->row();
+        if ($cek) {
+            $id = $cek->id;
+        } else {
+            $db2->insert("rj_p_resep",$data);
+            $id = $db2->insert_id();
+        }
+        $db2->where("idx",$data['idx'])->update("rj_p_resep_detail",["rj_p_resep_id"=>$id]);
+        if ($db2->trans_status()===FALSE) {
+            $db2->trans_rollback();
+            return false;
+        } else {
+             $db2->trans_commit();
+            return true;
+        }
+    }
+
+    public function deletePermintaanResep($idx) {
+        $ci = get_instance();
+        $db2 = $ci->load->database('dberm', TRUE);
+        $db2->where("idx",$idx)->delete("rj_p_resep");
+        return  $db2->affected_rows();
+    }
 }

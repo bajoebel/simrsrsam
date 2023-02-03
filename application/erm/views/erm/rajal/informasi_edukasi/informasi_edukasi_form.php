@@ -129,10 +129,10 @@
                     <label for="">Kemampuan Membaca</label>
                     <div class="radio">
                         <label for="" class="radio-inline">
-                            <input type="radio" name="baca_e" id="" value="1" checked>Baik
+                            <input type="radio" name="baca_e" value="1" checked>Baik
                         </label>
                         <label for="" class="radio-inline">
-                            <input type="radio" name="baca_e" id="" value="0">Kurang
+                            <input type="radio" name="baca_e" value="0">Kurang
                         </label>
                     </div>
                 </div>

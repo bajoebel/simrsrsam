@@ -132,7 +132,7 @@ function getDataTarif(start) {
     else var e = 0;
     var url = base_url +'layanan/getTarif/' + start + "?sLike=" + a + "&kelas_id=" + b + "&jns_layanan=" + c + "&id_ruang=" + d + "&all=" + e;
     console.clear();
-    console.log(url);
+    // console.log(url);
     //alert(url)ss
     $.ajax({
         url: url,

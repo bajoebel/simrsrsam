@@ -338,15 +338,15 @@
         <label for="">Apakah Nyeri yang di rasakan : </label>
         <div class="row">
             <div class="col-md-6">Menghalangi tidur malam anda</div>
-            <div class="col-md-6"><input type="radio" name="tidur_malam_ka" id="" value="1"> Ya <input type="radio" name="tidur_malam_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="tidur_malam_ka" value="1"> Ya <input type="radio" name="tidur_malam_ka" value="0"> Tidak</div>
         </div>
         <div class="row">
             <div class="col-md-6">Menghalangi anda beraktifitas</div>
-            <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" id="" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" value="0"> Tidak</div>
         </div>
         <div class="row">
             <div class="col-md-6">Sakit dirasakan setiak hari</div>
-            <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" id="" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" id="" value="0"> Tidak</div>
+            <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" value="0"> Tidak</div>
         </div>
     </div>
 

@@ -150,9 +150,10 @@
                 <tr>
                     <td width="70%"></td>
                     <td style="text-align:left">
-                    <p>Dokter Pengirim, <?= dateToIndo($s->created_at) ?></p>
-                    <br><br><br>
-                    <p>(<?= $s->dpjp_name ?>)</p>                        </td>
+                        <p>Dokter Pengirim, <?= dateToIndo($s->created_at) ?></p>
+                        <p><div id="qrcode_permintaan_penunjang"></div><d>
+                        <p>( <?= $s->dpjp_name ?> )</p>                        
+                    </td>
                 </tr>
             </table>
         </div>
@@ -160,3 +161,15 @@
     
 </body>
 </html>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
+<script type="text/javascript">
+    var code = "<?= $s->signDokter?>";
+    var qrcode = new QRCode(document.getElementById("qrcode_permintaan_penunjang"), {
+        text: code,
+        width: 80,
+        height: 80,
+        colorDark : "#000",
+        colorLight : "#fff",
+    });
+    $(`#qrcode_awal_rawat > img`).css({"margin":"auto"});
+</script>

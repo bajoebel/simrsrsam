@@ -138,3 +138,25 @@ $db['dbsimrs'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['dbfarmasi'] = array(
+	'dsn'	=> '',
+	'hostname' => DB_HOST_FARMASI,
+	'username' => DB_USER_FARMASI,
+	'password' => DB_PASS_FARMASI,
+	'database' => DB_NAME_FARMASI,
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);

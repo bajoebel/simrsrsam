@@ -662,6 +662,8 @@
                     $(":submit").attr("disabled", true);
                 },
                 success: function(response) {
+                    // console.log(response)
+                    // return false;
                     swal("Success", "Data Berhasil Di Simpan", "success");
                     // $('#form-data-kaji-awal-medis')[0].reset();
                     // console.log(response);
@@ -933,7 +935,10 @@
             dataType: "JSON",
             success: function (response) {
                 let data = response.data;
-                console.log(data.kontrol_tgl)
+                // console.log(data.kontrol_tgl)
+
+                $("#tampil_awal_medis").show()
+                $("#panduan_m").val(data.kode_m_pk).trigger("change");
                 $("[name='hari_m']").val(data.hari)
                 $("[name='tgl_m']").val(data.tgl)
                 $("[name='jam_m']").val(data.jam)
@@ -947,7 +952,7 @@
                 $("[name='fisik_detail_m']").text(data.fisik_detail)
                 CKEDITOR.instances['diagnosis_kerja_m'].setData(data.diagnosis_kerja)
                 CKEDITOR.instances['diagnosis_banding_m'].setData(data.diagnosis_banding)
-                CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
+                // CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
                 CKEDITOR.instances['terapi_m'].setData(data.terapi)
                 $("[name='kontrol_m']").val(data.kontrol)
                 $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
@@ -974,6 +979,8 @@
                 } else {
                     $("[name='kontrol_m']").prop("checked",false).trigger("change")
                 }
+
+                
 
                 swal("Silahkan Edit Data")
                 $("#am_form").removeClass("hide")
@@ -1551,6 +1558,7 @@
     function signPermintaanPenunjang(id,idx,user) {
         $("#sign_id").val(id)
         $("#sign_user").val(user)
+        $("#sign_password").val("");
         $("#modal-sign-penunjang").modal("show")
     }
     function signPermintaanPenunjangAction() {
@@ -1568,6 +1576,7 @@
                 },
                 dataType: "json",
                 success: function (response) {
+                    console.log(response)
                     swal(response.msg)
                     $("#modal-sign-penunjang").modal("hide")
                     $("#sign_id").val("")

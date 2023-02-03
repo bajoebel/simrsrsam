@@ -11,5 +11,14 @@
   </div>
   <ul class="sidebar-menu" data-widget="tree" id="menu">
     <li class="header"><?php echo getAppName() ?></li>
+    <?php
+    $lokasi = $this->session->userdata('grlokasi');
+    echo $lokasi;
+    if ($lokasi==1 or $lokasi==2) {
+    ?>
     <li><a href="<?= base_url() . "erm.php/erm" ?>"><i class="fa fa-hospital-o"></i> <span>Rekam Medis</span></a></li>
+    <?php } ?>
+    <?php if ($lokasi==3) { ?>
+    <li><a href="<?= base_url() . "erm.php/erm" ?>"><i class="fa fa-medkit"></i> <span>Penunjang</span></a></li>
+    <?php } ?>
   </ul>
