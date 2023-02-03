@@ -12,7 +12,7 @@
     <td><?php echo $x['nomr']; ?></td>
     <td><?php echo $x['nama_pasien']; ?></td>
     <td><?php echo $x['id_daftar']; ?></td>
-    <td><?php echo $x['reg_unit']; ?></td>
+    <!-- <td><?php echo $x['reg_unit']; ?></td> -->
     <td><?php echo date('d-m-Y',strtotime($x['tgl_masuk'])); ?></td>
     <td><?php echo $x['nama_ruang']; ?></td>
     <td><?php echo $x['namaDokterJaga']; ?></td>
@@ -20,6 +20,7 @@
     <td><?php echo $x['no_bpjs']; ?></td>
     <td><?php echo $x['jns_layanan']; ?></td>
     <td><?php echo $x['State']; ?></td>
+    <td><?php echo $x['jns_pasien']; ?></td>
     <td><?php echo ($x['State']=='Active') ? getNamaUserByID($x['user_daftar']) : getNamaUserByID($x['userBatal']); ?></td>
     <td><a href="<?= $link ?>" class="btn btn-success btn-sm"><span class='fa fa-list'></span> Detail</a></td>
 </tr>

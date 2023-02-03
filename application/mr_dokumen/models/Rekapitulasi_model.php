@@ -55,7 +55,7 @@ class Rekapitulasi_model extends CI_Model{
         }
     }
 
-    function data_kunjungan_pertanggal_old($dari, $sampai,$group="", $urut=""){
+    function data_kunjungan_pertanggal_old($dari, $sampai,$group="",$group2="", $urut=""){
         if(empty($group)){
             $this->db->where_in('jns_layanan',array('RJ','GD'));
             $this->db->where('tgl_masuk >=', $dari);
@@ -66,8 +66,7 @@ class Rekapitulasi_model extends CI_Model{
         }elseif($group=="jenis"){
             $this->db->join('group_ruang','stat_grId=grId');
             $this->db->select("stat_tgl as tgl_kunjungan, sum(stat_baru) as pasien_baru, sum(stat_lama) as pasien_lama,sum(stat_jml) as jml_kunjungan");
-            //$this->db->where('glId','GL002');
-            //$this->db->or_where('glId','GL003');
+            
             $this->db->where("(glId='GL002' OR glId='GL003')",null);
             $this->db->where('stat_tgl >=', $dari);
             $this->db->where('stat_tgl <=', $sampai);
@@ -75,23 +74,7 @@ class Rekapitulasi_model extends CI_Model{
             return $this->db->get('statistik_kunjungan')->result();
 
         }elseif($group=="poly"){
-            //$poly=$this->get_poly();
-            /*$field="";
-            $tgl_mulai=date_create($dari);
-            $tgl_sampai=date_create($sampai);
-            $diff=date_diff($tgl_mulai,$tgl_sampai);
-            $sub_query="(SELECT COUNT(id_daftar) FROM t_pendaftaran WHERE t_pendaftaran.grId = group_ruang.grId AND DATE_FORMAT(tgl_kunjungan,'%Y-%m-%d')='" .date_format($tgl_mulai,'Y-m-d') ."') AS '" .date_format($tgl_mulai,'Y-m-d') ."'";
-
-            if($tgl_mulai!=$tgl_sampai) $sub_query.=",";
-            for ($i=0; $i < $diff->days; $i++) { 
-                date_add($tgl_mulai,date_interval_create_from_date_string("1 days"));
-                $sub_query.="(SELECT sum(stat_jml) FROM statistik_kunjungan WHERE stat_grId = group_ruang.grId AND stat_tgl='" .date_format($tgl_mulai,'Y-m-d') ."') AS '" .date_format($tgl_mulai,'Y-m-d') ."'";
-                if($diff->days-1!=$i) $sub_query.=",";
-            }
             
-            $SQL="SELECT grNama, $sub_query FROM group_ruang WHERE glId='GL002' OR glId='GL003'";
-            return $this->db->query($SQL)->result();
-            $group_ruang=$this->getRuangrj();*/
             $header=$this->getRuangrj();
             $sub_query="";
             foreach ($header as $h) {
@@ -100,42 +83,30 @@ class Rekapitulasi_model extends CI_Model{
                 $sub_query.="(SELECT SUM(c.stat_jml) FROM statistik_kunjungan c WHERE c.stat_tgl=a.stat_tgl AND c.stat_grId='$grId') AS $grId ,";
             }
             $this->db->select("$sub_query,stat_tgl");
-            //$this->db->select('stat_tgl, grId,grNama,sum(stat_jml) as jml_kunjungan');
             $this->db->join('group_ruang b','a.stat_grId=b.grId');
-            //$this->db->where('glId','GL002');
-            //$this->db->or_where('glId','GL003');
+            
             $this->db->where("(glId='GL002' OR glId='GL003')",null);
             $this->db->where('stat_tgl >=', $dari);
             $this->db->where('stat_tgl <=', $sampai);
             $this->db->group_by('stat_tgl');
-            //$this->db->group_by('stat_grId');
             return $this->db->get('statistik_kunjungan a')->result();
-            //RSUD_PP@PL-LT22018
         }elseif($group=="carabayar"){
             $sub_query="";
             $carabayar=$this->get_carabayar();
             foreach ($carabayar as $c) {
                 $carabayar=$c->id_cara_bayar;
-                //$sub_query.="(SELECT count(id_daftar) FROM t_pendaftaran WHERE DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') =DATE_FORMAT(tgl_kunjungan, '%Y-%m-%d') AND id_cara_bayar='" .$c->id_cara_bayar ."' ) as " ."COL_" .$c->id_cara_bayar .",";
                 $sub_query.="(SELECT SUM(c.stat_jml) FROM statistik_kunjungan c JOIN group_ruang d ON c.stat_grId=d.grId WHERE c.stat_tgl=a.stat_tgl AND c.stat_carabayar='$carabayar' AND (d.glId='GL002' OR d.glId='GL003')) AS COL_$carabayar ,";
             }
 
             $this->db->select("$sub_query,a.stat_tgl as tgl_kunjungan");
-            //$this->db->select('stat_tgl, grId,grNama,sum(stat_jml) as jml_kunjungan');
             $this->db->join('group_ruang b','a.stat_grId=b.grId');
-            //$this->db->where('glId','GL002');
-            //$this->db->or_where('glId','GL003');
             $this->db->where("(glId='GL002' OR glId='GL003')",null);
             $this->db->where('stat_tgl >=', $dari);
             $this->db->where('stat_tgl <=', $sampai);
             $this->db->group_by('stat_tgl');
-            //$this->db->group_by('stat_grId');
             return $this->db->get('statistik_kunjungan a')->result();
+        }elseif($group=="user"){
 
-            //$SQL="SELECT tgl_kunjungan,COUNT(id_daftar) as jml_kunjungan";
-            /*$SQL="SELECT DATE_FORMAT(t_pendaftaran.tgl_kunjungan, '%Y-%m-%d') AS tgl_kunjungan, $sub_query DATE_FORMAT(tgl_kunjungan, '%d %M %Y') as tgl_kunjungan
-            FROM (`t_pendaftaran`) JOIN group_ruang ON t_pendaftaran.grId=group_ruang.grId JOIN m_cara_bayar ON t_pendaftaran.id_cara_bayar=m_cara_bayar.id_cara_bayar WHERE `tgl_kunjungan` >= '$dari' AND `tgl_kunjungan` <= '$sampai' AND (glId='GL002' OR glId='GL003')GROUP BY  DATE_FORMAT(tgl_kunjungan, '%d %M %Y') ORDER BY tgl_kunjungan ";
-            return $this->db->query($SQL)->result();*/
         }
     }
     function data_kunjungan_pertanggal($dari, $sampai,$group="", $layanan=""){
@@ -188,8 +159,6 @@ class Rekapitulasi_model extends CI_Model{
             foreach ($carabayar as $c) {
                 $cb="cara_".$c->idx;
                 $sub[] = "SUM(CASE WHEN id_cara_bayar = " . $c->idx . " THEN 1 ELSE 0 END) AS `$cb`";
-                //$sub_query.="(SELECT count(id_daftar) FROM t_pendaftaran WHERE DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') =DATE_FORMAT(tgl_kunjungan, '%Y-%m-%d') AND id_cara_bayar='" .$c->id_cara_bayar ."' ) as " ."COL_" .$c->id_cara_bayar .",";
-                //$sub_query.="(SELECT SUM(c.stat_jml) FROM statistik_kunjungan c JOIN group_ruang d ON c.stat_grId=d.grId WHERE c.stat_tgl=a.stat_tgl AND c.stat_carabayar='$carabayar' AND (d.glId='GL002' OR d.glId='GL003')) AS COL_$carabayar ,";
             }
             if (!empty($sub)) $sub_query = implode(',', $sub);
             else $sub_query = "";
@@ -215,6 +184,25 @@ class Rekapitulasi_model extends CI_Model{
             $this->db->group_by("DATE_FORMAT(tgl_masuk,'%d-%M-%Y')");
             $this->db->order_by('tgl_masuk');
             return $this->db->get('tbl02_pendaftaran')->result();
+        }elseif($group=="user"){
+            $sub_query="";
+            $sub_query="";
+            $users=$this->getUsers($dari,$sampai);
+            foreach ($users as $c) {
+                $cb="nrp_".$c->nrp;
+                $sub[] = "SUM(CASE WHEN user_daftar = " . $c->NRP . " THEN 1 ELSE 0 END) AS `$cb`";
+            }
+            if (!empty($sub)) $sub_query = implode(',', $sub);
+            else $sub_query = "";
+            $this->db->select("$sub_query,DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') as tgl_kunjungan, COUNT(idx) AS jml_kunjungan");
+            if (!empty($dari)) $this->db->where("DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >= ", $dari);
+            if (!empty($sampai)) $this->db->where("DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <= ", $sampai);
+            if (!empty($layanan)) $this->db->where('jns_layanan', $layanan);
+            $this->db->where("reg_unit NOT IN (SELECT reg_unit FROM tbl02_pendaftaran_batal)");
+            $this->db->group_by("DATE_FORMAT(tgl_masuk,'%d-%M-%Y')");
+            $this->db->order_by('tgl_masuk');
+            return $this->db->get('tbl02_pendaftaran')->result();
+            // $sub[]="";
         }
     }
     function data_kunjungan_perbulan($dari, $sampai, $group = "", $layanan = "")
@@ -451,5 +439,14 @@ class Rekapitulasi_model extends CI_Model{
         $this->db->where("DATE_FORMAT(tgl_kunjungan,'%Y-%m-%d')!=m_pasien.tgl_kunjungan");
         $this->db->where("status_daftar","0");
         return $this->db->get("t_pendaftaran")->num_rows();
+    }
+    function getUsers($dari,$sampai){
+        return $this->db->select("NRP,(CASE WHEN(pgwNama IS NULL) THEN user_daftar ELSE pgwNama END) as pgwNama")
+        ->join('tbl01_pegawai','user_daftar=NRP','LEFT')
+        ->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') >=",$dari)
+        ->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') <=",$sampai)
+        ->group_by("user_daftar")
+        ->get("tbl02_pendaftaran")
+        ->result();
     }
 }

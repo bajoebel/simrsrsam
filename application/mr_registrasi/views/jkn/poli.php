@@ -256,16 +256,8 @@
 <script type="text/javascript">
     
     $(document).ready(function() {
-        getPoli();
-        $('#example1').DataTable()
-        // $('#example1').DataTable({
-        //     'paging'      : true,
-        //     'lengthChange': false,
-        //     'searching'   : false,
-        //     'ordering'    : true,
-        //     'info'        : true,
-        //     'autoWidth'   : false
-        // })
+        // getPoli();
+        $('#example1').DataTable();
     });
     var url_call_back = "<?php echo base_url() . "mr_registrasi.php/"; ?>";
 </script>

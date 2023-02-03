@@ -144,6 +144,7 @@ class registrasi extends CI_Controller
             if ($cekNum->num_rows() > 0) {
                 // Data detail pasien
                 $y = $cekNum->row_array();
+                // print_r($y); exit;
                 $y['contentTitle'] = "Registrasi pasien rawat jalan";
                 $y['index_menu'] = 4;
                 $this->db->where_in('profId', array('1', '2'));
@@ -2737,7 +2738,9 @@ class registrasi extends CI_Controller
             $data['reg_unit']=$this->input->post('reg_unit');
             if($id_ruang_asal!=$data['id_ruang'] || $tl[0]!=$tb[0]){
                 // generate Regunit baru
-                $data['reg_unit']=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang'],$jns_layanan);
+                $auto=$this->pendaftaran_model->getRegUnit($data['tgl_masuk'],$data['id_ruang'],$jns_layanan);
+                $data['reg_unit']=$auto["reg_unit"];
+                $data['no_urut_unit']=$auto["no_urut"];
                 $data['id_ruanglama']=getField('koderuanglama',array('idx'=>$data["id_ruang"]),'tbl01_ruang'); 
                 $t_daftar['grId']=$data['id_ruanglama'];
             }

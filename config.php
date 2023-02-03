@@ -70,7 +70,7 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_dev');
 		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3');
 		break;
 	case 'production':
@@ -149,9 +149,9 @@ defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://192.168.12.254
  * Host Antrean Online
  */
 defined('HOST_JKN')     	or define('HOST_JKN', 'https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/');
-defined('CONS_ID_JKN')   	or define('CONS_ID_JKN', '9682');
-defined('SECREET_ID_JKN')   or define('SECREET_ID_JKN', '0aNCA78C3A');
-defined('KEY_JKN')   		or define('KEY_JKN', '1cd82ae8717ec38184e2d3b56a2021de');
+defined('CONS_ID_JKN')   	or define('CONS_ID_JKN', '16095');
+defined('SECREET_ID_JKN')   or define('SECREET_ID_JKN', '5iO913C770');
+defined('KEY_JKN')   		or define('KEY_JKN', '382ef0547906193cacb957f2b2e3e9d7');
 defined('STATUS_JKN')   	or define('STATUS_JKN', '1');
 defined('PRINT_TRACERT')   	or define('PRINT_TRACERT', '');
 

@@ -821,7 +821,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
                                                 <div class="col-sm-9">
-                                                <input type="hidden" name="gc_jns_kelamin" id="gc_jns_kelamin" value="<?= $tgl_lahir ?>" >
+                                                <input type="hidden" name="gc_jns_kelamin" id="gc_jns_kelamin" value="<?= $jns_kelamin ?>" >
                                                     <input type="text" name="gc_priview_jns_kelamin" id="gc_priview_jns_kelamin" class="form-control" value="<?= $jns_kelamin==1 ? "Laki-Laki" : ($jns_kelamin==2 ? "Perempuan" : ($jns_kelamin==3 ? "Tidak Datap Ditentukan" : "Tidak Mengisi")) ?>"  readonly>
                                                 </div>
                                             </div>

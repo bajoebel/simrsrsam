@@ -77,11 +77,12 @@ class Rekapitulasi extends CI_Controller{
         $dari = urldecode($this->input->get('dari'));
         $sampai = urldecode($this->input->get('sampai'));
         $group = urldecode($this->input->get('group'));
+        $group2 = urldecode($this->input->get('group2'));
         $urut = urldecode($this->input->get('urut'));
         $layanan = urldecode($this->input->get('layanan'));
         //echo $group;
         //exit;
-        $content = $this->rekapitulasi_model->data_kunjungan_pertanggal($dari, $sampai, $group, $layanan);
+        $content = $this->rekapitulasi_model->data_kunjungan_pertanggal($dari, $sampai, $group,$group2, $layanan);
         $header="";
         if ($group == "") {
             $header = "<tr><th class=\"center\">TANGGAL KUNJUNGAN</th><th class=\"center\">JML KUNJUNGAN</th><tr>";
@@ -116,11 +117,20 @@ class Rekapitulasi extends CI_Controller{
             //$header.="</tr>";
 
             //$content="<tr><td colspan='$jml_carabayar'>Kosong</td></tr>";
+        }elseif($group=="user"){
+            $user=$this->rekapitulasi_model->getUsers($dari,$sampai);
+            $jmluser=count($user);
+            $header = "<tr><th class=\"center\" rowspan='2'>TANGGAL</th><th class=\"center\" colspan='$jmluser'>Nama Users</th><th rowspan='2'></th><tr>";
+            foreach ($user as $u ) {
+                $header .= "<th>" . $u->pgwNama . "</th>";
+                $field[] = "nrp_" . $u->NRP;
+            }
         }
         if (empty($field)) $field = array();
         header('Content-Type: application/json');
         echo json_encode(array('header' => $header, 'content' => $content, 'field' => $field));
     }
+    
     function databulanan()
     {
         $dari = urldecode($this->input->get('dari'));
