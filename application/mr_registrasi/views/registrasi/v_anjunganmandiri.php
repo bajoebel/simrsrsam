@@ -58,26 +58,18 @@
             <div class="box box-success">
                 <div class="box-header with-border">
                     <div class="row">
-                        <div class="col-md-2">
-                            <h3 class="box-title">Pasien Pendaftaran Online</h3>
+                        <div class="col-md-3">
+                            <h3 class="box-title">Pasien Anjungan Mandiri</h3>
                         </div>
                         <div class="col-md-2">
                             <div class="input-group">
-                                <input type="radio" name="filter" value="lama" checked onclick="cari_pasien(0)">Pasien Lama
-                                <input type="radio" name="filter" value="baru" onclick="cari_pasien(0)">Pasien Baru
+                                <input type="radio" name="filter" value="lama" onclick="cari_pasien(0)">Pasien Lama
+                                <input type="radio" name="filter" value="baru" checked onclick="cari_pasien(0)">Pasien Baru
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="input-group">
-                                <input type="date" class="form-control input-sm" name="dari" id="dari" placeholder="Tanggal" onchange="cari_pasien(0)" value="<?php echo date('Y-m-d'); ?>">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default btn-sm"> <span class="fa fa-calendar"></span></button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <input type="date" class="form-control input-sm" name="sampai" id="sampai" placeholder="Tanggal" onchange="cari_pasien(0)" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="date" class="form-control input-sm" name="tgl" id="tgl" placeholder="Tanggal" onchange="cari_pasien(0)" value="<?php echo date('Y-m-d'); ?>">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default btn-sm"> <span class="fa fa-calendar"></span></button>
                                 </span>
@@ -90,14 +82,14 @@
                                 <?php
                                 foreach ($poly as $p) {
                                 ?>
-                                    <option value="<?php echo $p->grId ?>"><?php echo $p->grNama; ?></option>
+                                    <option value="<?php echo $p->idx ?>"><?php echo $p->ruang; ?></option>
                                 <?php
                                 }
                                 ?>
                             </select>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <input type="text" class="form-control input-sm" name="q" id="q" value="" placeholder="Search">
                                 <span class="input-group-btn">
@@ -111,28 +103,26 @@
                 </div>
 
                 <div class="box-body table-responsive">
-                <table class="table table-bordered table-hover" style='color:#000000;'>
-										<thead id="headertabel">
-											<tr>
-												<th class="center">NO</th>
-												<th class="center">KODE BOOKING</th>
-												<th class="center">CARA BEROBAT</th>
-												<th class="center">NOMR</th>
-												<th class="center">NAMA</th>
-												<th class="center">NO BPJS</th>
-												<th class="center">NO RUJUKAN</th>
-												<th class="center">TGL KONTROL</th>
-												<th class="center">NO HP</th>
-												<th class="center">TUJUAN</th>
-												<th class="center">TGL BOOKING</th>
-												<th class="center">STATUS</th>
-												<th class="center">ALASAN</th>
-												<th class="center" colspan="2">#</th>
-											</tr>
-										</thead>
-										<tbody id="getdata">
-										</tbody>
-									</table>
+                    <table id="simple-table" class="table table-bordered table-hover" style='color:#000000;'>
+                        <thead class="bg-blue">
+                            <th>No</th>
+                            <th>Nomr</th>
+                            <th>No Reg</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Poly Tujuan</th>
+                            <th>Rencana Kunj.</th>
+                            <th>Rujukan</th>
+                            <th>Dokter</th>
+                            <th>Cara Bayar</th>
+                            <th>No BPJS</th>
+                            <th>#</th>
+                        </thead>
+                        <tbody id="data">
+
+                        </tbody>
+                    </table><br>&nbsp;
+                    <div id="nav"></div>
                 </div>
             </div>
         </div>
@@ -322,18 +312,15 @@
     function cari_pasien(start) {
         var search;
         var url;
-        // var poly = $('#poly').val();
-        var dari = $('#dari').val();
-        var sampai = $('#sampai').val();
+        var poly = $('#poly').val();
+        var tgl = $('#tgl').val();
         search = $('#q').val();
-        poly = $('#poly').val();
         if ($('input:radio[name=filter]').is(':checked')) {
             var filter = $('input[name=filter]:checked').val();
         } else {
             var filter = "";
         }
-        // filter pasien lama dan pasien baru
-        url = "<?php echo base_url() . "mr_registrasi.php/pasien_online/online_data?q="; ?>" + search + "&dari=" + dari +"&sampai=" + sampai + "&poly=" + poly+ "&filter=" + filter;
+        url = "<?php echo base_url() . "mr_registrasi.php/anjungan/data?q="; ?>" + search + "&start=" + start + "&poly=" + poly + "&tgl=" + tgl + "&filter=" + filter;
         //alert(url);
         console.log(url);
         $.ajax({
@@ -344,144 +331,74 @@
                 get_param: 'value'
             },
             success: function(data) {
-                if(filter=="lama"){
-                    var headertabel='<tr>'+
-                    '<th class="center">NO</th>'+
-                    '<th class="center">KODE BOOKING</th>'+
-                    '<th class="center">CARA BEROBAT</th>'+
-                    '<th class="center">NOMR</th>'+
-                    '<th class="center">NAMA</th>'+
-                    '<th class="center">NO BPJS</th>'+
-                    '<th class="center">NO RUJUKAN</th>'+
-                    '<th class="center">TGL KONTROL</th>'+
-                    '<th class="center">NO HP</th>'+
-                    '<th class="center">TUJUAN</th>'+
-                    '<th class="center">TGL BOOKING</th>'+
-                    '<th class="center">STATUS</th>'+
-                    '<th class="center">ALASAN</th>'+
-                    '<th class="center" colspan="2">#</th>'+
-                    '</tr>';
+                //menghitung jumlah data
+                jmlData = data.length;
 
-                    
-                }else{
-                    var headertabel='<tr>'+
-                    '<th class="center">NO</th>'+
-                    '<th class="center">KODE BOOKING</th>'+
-                    '<th class="center">NOKTP</th>'+
-                    '<th class="center">NAMA</th>'+
-                    '<th class="center">TEMPAT / TGL LAHIR</th>'+
-                    '<th class="center">GENDER</th>'+
-                    '<th class="center">ALAMAT</th>'+
-                    '<th class="center">NO BPJS</th>'+
-                    '<th class="center">NO HP</th>'+
-                    '<th class="center">TUJUAN</th>'+
-                    '<th class="center">TGL BOOKING</th>'+
-                    '<th class="center">STATUS</th>'+
-                    '<th class="center" colspan="2">#</th>'+
-					'</tr>'
+                //variabel untuk menampung tabel yang akan digenerasikan
+                //buatTabel = "";
+                pagination = "";
+                row = 0;
+                limit = 0;
+                start = 0;
+                pagination_count = 0;
+                idx = 1;
+                cur_idx = 0;
+                next = limit;
+                prev = 0;
+
+                pagination_count = data["row_count"] / data["limit"];
+                sisa = data["start"] % data["limit"];
+                cur_idx = data["start"] / data["limit"];
+                cur_idx = Math.ceil(cur_idx);
+                prev = (cur_idx - 2) * data["limit"];
+                next = (cur_idx) * data["limit"];
+                paging = Math.ceil(pagination_count);
+                if (cur_idx <= 2) {
+                    min = 0;
+                    max = 3;
+                } else {
+                    min = cur_idx - 2;
+                    max = cur_idx + 2;
                 }
-                $('#headertabel').html(headertabel)
-                var buatTabel="";
-                var a=0;
-                if(filter=='lama'){
-                    for (let i = 0; i < data.length; i++) {
-                        const ele = data[i];
-
-                        if(ele.verifikasi=="1"){
-                            var ver = "Terdaftar";
-                        }else if(ele.verifikasi=="2"){
-                            var ver = "Dibatalkan";
-                        }else{
-                            var ver = "Booked";
+                for (i = 0; i < paging; i++) {
+                    active = '';
+                    num = i + 1;
+                    if (i == 0) {
+                        pagination += "<nav><ul class='pagination' style='margin-top:0px'><li><a class='btn btn-primary' >Record Count : " + data["row_count"] + "</a></li><li " + active + "><a  onclick='cari_pasien(" + idx + ")'>First</a></li>";
+                        if (next <= row - sisa) pagination += "<li " + active + "><a onclick='cari_pasien(" + next + ")'>Next</a></li>";
+                        if (num == cur_idx) active = "class='active'";
+                        else active = "";
+                        pagination += "<li " + active + "><a onclick='cari_pasien(" + idx + ")'>" + num + "</a></li>";
+                    } else if (i > 0 && i < paging - 1) {
+                        if (num >= min && num <= max) {
+                            idx = (data["limit"] * i) + 1;
+                            if (num == cur_idx) active = "class='active'";
+                            else active = "";
+                            pagination += "<li " + active + "><a onclick='cari_pasien(" + idx + ")'>" + num + "</a></li>";
                         }
-                            
-                        if(ele.cara_berobat=="1"){
-                            var cara = "UMUM";
-                        }else if(ele.cara_berobat=="2"){
-                            var cara = "BPJS";
-                        }else{
-                            var cara = "-";
-                        }
-                        a++;
-                        buatTabel += "<tr>"
-                            + "<td>" + a + "</td>"
-                            + "<td>" + ele.kode_booking + "</td>"
-                            + "<td>" + cara + "</td>"
-                            + "<td>" + ele.nomr + "</td>"
-                            + "<td>" + ele.nama + "</td>"
-                            + "<td>" + ele.no_bpjs + "</td>"
-                            + "<td>" + ele.no_rujukan + "</td>"
-                            + "<td>" + ele.tgl_kontrol + "</td>"
-                            + "<td>" + ele.nohp + "</td>"
-                            + "<td>" + ele.grNama + "</td>"
-                            + "<td>" + ele.tgl_booking + "</td>"
-                            + "<td>" + ver + "</td>"
-                            + "<td>" + ele.alasan_batal + "</td>"
-                            + "<td class=center> <a onclick=\"cetaktracer('"+ ele.kode_booking +"')\" data-rel='tooltip' data-placement='left' title='Cetak'> <i class='ace-icon fa fa-print bigger-130'></i> </a> </td>"
-                            + "<td class=center> <a onclick=\"daftaronline('"+ ele.nomr +"','"+ ele.kode_booking +"')\" data-rel='tooltip' data-placement='left' title='Daftar'> <i class='ace-icon fa fa-external-link bigger-130'></i> </a> </td>"
-                            + "<tr/>";
-                    }
-                }else{
-                    for (let i = 0; i < data.length; i++) {
-                        const ele = data[i];
 
-                        if(ele.verifikasi=="1"){
-								var ver = "Terdaftar";
-							}else if(ele.verifikasi=="2"){
-								var ver = "Dibatalkan";
-							}else{
-								var ver = "Booked";
-							}
-							
-							if(ele.jns_kelamin=="L"){
-								var gender = "LAKI-LAKI";
-							}
-							if(ele.jns_kelamin=="P"){
-								var gender = "PEREMPUAN";
-							}
-                        a++;
-                        buatTabel += "<tr>"
-								+ "<td>" + a + "</td>"
-								+ "<td>" + ele.kode_booking + "</td>"
-								+ "<td>" + ele.no_ktp + "</td>"
-								+ "<td>" + ele.nama + "</td>"
-								+ "<td>" + ele.tempat_lahir + "/" + ele.tgl_lahir + "</td>"
-								+ "<td>" + gender + "</td>"
-								+ "<td>" + ele.alamat + "</td>"
-								+ "<td>" + ele.no_bpjs + "</td>"
-								+ "<td>" + ele.no_telpon + "</td>"
-								+ "<td>" + ele.grNama + "</td>"
-								+ "<td>" + ele.tgl_booking + "</td>"
-								+ "<td>" + ver + "</td>"
-								+ "<td class=center> <a onclick=\"cetaktracerbaru('"+ ele.kode_booking +"')\" data-rel='tooltip' data-placement='left' title='Cetak'> <i class='ace-icon fa fa-print bigger-130'></i> </a> </td>"
-								+ "<td class=center> <a onclick=\"daftaronlinebaru('"+ ele.kode_booking +"')\" data-rel='tooltip' data-placement='left' title='Daftar'> <i class='ace-icon fa fa-external-link bigger-130'></i> </a> </td>"
-								+ "<tr/>";
+                    } else {
+                        idx = (data["limit"] * i) + 1;
+                        if (num == cur_idx) active = "class='active'";
+                        else active = "";
+                        pagination = pagination + "<li " + active + "><a onclick='cari_pasien(" + idx + ")'>" + num + "</a></li>";
+                        if (prev >= 0) pagination += "<li><a onclick='view(" + prev + ")'>Prev</a></li>";
+                        pagination += "<li><a onclick='cari_pasien(" + idx + ")'>Last</a></li></ul></nav>";
                     }
+                    if (idx == cur_idx) active = "class='active'";
+                    else active = "";
                 }
-                $('#getdata').html(buatTabel);
+                console.log(data["row_count"]);
+                console.log(data["limit"]);
+                if (data["row_count"] <= data["limit"]) pagination = "";
+                //document.getElementById("nav").innerHTML = pagination;
+                //document.getElementById('asesi').innerHTML = data["tabel"];
+                $('#nav').html(pagination);
+                $('#data').html(data['tabel']);
             }
         });
     }
-    function cetaktracerbaru(a){
-		var kode = a;
-		var url = '<?php echo base_url() .'mr_registrasi.php/pasien_online/cetakTracerOnlineBaru/'; ?>'+kode;
-		window.open(url);
-	}
-    function cetaktracer(a){
-		var kode = a;
-		var url = '<?php echo base_url() .'mr_registrasi.php/pasien_online/cetakTracerOnline/'; ?>'+kode;
-		window.open(url);
-	}
-    function daftaronline(nomr,kodebooking){
-		// var nomr = a;
-		var url = "<?php echo base_url() .'mr_registrasi.php/registrasi/daftar_rawat_jalan/'; ?>"+nomr+"?kodebooking="+kodebooking;
-        window.open(url);
-    }
-    function daftaronlinebaru(kodebooking){
-		// var nomr = a;
-		var url = "<?php echo base_url() .'mr_registrasi.php/pasien_baru/tambah?jns=rj&kodebooking='; ?>"+kodebooking;
-        window.open(url);
-    }
+
     function aprove(id) {
 
         var url = base_url + "online/aprove/" + id;

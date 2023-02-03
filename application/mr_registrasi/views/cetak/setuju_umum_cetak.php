@@ -226,7 +226,7 @@ $date = date("Y-m-d");
                                                             </tr>
                                                             <tr>
                                                                 <td>Jenis Kelamin</td>
-                                                                <td>: <?= ($jk==1) ?"Laki-Laki": "Perempuan";?></td>
+                                                                <td>: <?= ($jk==1) ? "Laki-Laki": "Perempuan";?></td>
                                                             </tr>
                                                         </table>
                                                     </div>

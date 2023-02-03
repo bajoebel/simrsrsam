@@ -678,7 +678,7 @@ function updateSuratKontrol() {
 	var noSuratKontrol = $('#noSuratKontrol').val();
 	swal({
 			title: "Konfirmasi",
-			text: 'Apakah anda yakin akan mengedirt surat kontrol ' + noSuratKontrol + '?',
+			text: 'Apakah anda yakin akan mengedit surat kontrol ' + noSuratKontrol + '?',
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonText: "Ya",

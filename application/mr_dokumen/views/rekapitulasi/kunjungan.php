@@ -36,8 +36,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="">Group</label>
-
+                                    <label for="">Group 1</label>
                                     <div class="input-group">
                                         <select name="group" id="group" class="form-control">
                                             <option value="">Pilih Group</option>
@@ -45,6 +44,21 @@
                                             <option value="poly">Per Poli</option>
                                             <option value="carabayar">Per Cara Bayar</option>
                                             <option value="wilayah">Per Wilayah</option>
+                                            <option value="user">Per User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Group 2</label>
+
+                                    <div class="input-group">
+                                        <select name="group2" id="group2" class="form-control">
+                                            <option value="">Pilih Group</option>
+                                            <option value="jenis">Per Jenis Pasien (Baru / Lama)</option>
+                                            <option value="poly">Per Poli</option>
+                                            <option value="carabayar">Per Cara Bayar</option>
+                                            <option value="wilayah">Per Wilayah</option>
+                                            <option value="user">Per Users</option>
                                         </select>
                                         <div class="input-group-btn">
                                             <button type="button" id="btn_keyword" class="btn btn-primary" onclick="view_rekapitulasi()">
@@ -99,9 +113,10 @@
         var dari = $('#dari').val();
         var sampai = $('#sampai').val();
         var group = $('#group').val();
+        var group2 = $('#group2').val();
         var layanan = $('#jnslayanan').val();
         var header = "";
-        var url = base_url + "/rekapitulasi/data?dari=" + dari + "&sampai=" + sampai + "&group=" + group + "&layanan=" + layanan;
+        var url = base_url + "/rekapitulasi/data?dari=" + dari + "&sampai=" + sampai + "&group=" + group + "&group2=" + group2 + "&layanan=" + layanan;
         console.log(url);
         $.ajax({
             url: url,

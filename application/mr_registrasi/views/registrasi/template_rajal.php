@@ -346,7 +346,8 @@
                                                         </div>
                                                     <?php
                                                     }else{
-                                                        if(empty($status_pasien)){
+                                                        // echo $status_pasien;
+                                                        if(empty($status_lengkap)){
                                                             ?>
                                                             <div class="col-md-12">
                                                                 <div class="alert alert-warning alert-dismissible">

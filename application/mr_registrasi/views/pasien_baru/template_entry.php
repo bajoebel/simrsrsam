@@ -301,13 +301,14 @@
                                     <div class="col-sm-9">
                                     <div class="input-group">
                                         <select name="jns_kelamin"  class="form-control input-sm" id="jns_kelamin">
-                                            <option value="4" <?=  ($jns_kelamin == "4") ? "checked='checked'" : "" ?>>Tidak Mengisi</option>
-                                            <option value="0" <?=  ($jns_kelamin == "0") ? "checked='checked'" : "" ?>>Tidak Diketahui</option>
+                                            <option value="">Pilih Jenis Kelamin</option>
+                                            <!-- <option value="4" <?=  ($jns_kelamin == "4") ? "checked='checked'" : "" ?>>Tidak Mengisi</option>
+                                            <option value="0" <?=  ($jns_kelamin == "0") ? "checked='checked'" : "" ?>>Tidak Diketahui</option> -->
                                             <option value="1" <?= ($jns_kelamin == "L" || $jns_kelamin == "1") ? "checked='checked'" : ""; ?>>Laki-Laki</option>
                                             <option value="2" <?= ($jns_kelamin == "P" || $jns_kelamin == "2") ? "checked='checked'" : "" ?>>Perempuan</option>
-                                            <option value="3" <?=  ($jns_kelamin == "3") ? "checked='checked'" : "" ?>>Tidak Dapat Ditentukan</option>
+                                            <!-- <option value="3" <?=  ($jns_kelamin == "3") ? "checked='checked'" : "" ?>>Tidak Dapat Ditentukan</option> -->
                                         </select>
-                                        
+                                        <div class="text-error" id="err_jekel"></div>
                                     </div>
                                     </div>
                                 </div>
@@ -987,6 +988,7 @@
                             $('#err_alamat_pj').html(data.error.alamat_pj);
                             $('#err_no_penanggung_jawab').html(data.error.no_penanggung_jawab);
                             $('#err_hub_keluarga').html(data.error.hub_keluarga);
+                            $('#err_jekel').html(data.error.jns_kelamin);
 
                         } else if(data.code==204){
                             $('#priview_pasien').modal('show');

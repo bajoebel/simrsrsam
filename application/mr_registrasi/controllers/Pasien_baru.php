@@ -481,6 +481,11 @@ class pasien_baru extends CI_Controller {
                             'label' => 'hubungan keluarga',
                             'rules' => 'required'
                         ),
+                        array(
+                            'field' => 'jns_kelamin',
+                            'label' => 'Jenis Kelamin',
+                            'rules' => 'required'
+                        ),
                     );
                     $this->form_validation->set_rules($config);
                     $this->form_validation->set_message('required', '%s Tidak Boleh Kosong');
@@ -517,7 +522,7 @@ class pasien_baru extends CI_Controller {
                             'pekerjaan_pj'=>form_error('pekerjaan_pj'), 
                             'alamat_pj'=>form_error('alamat_pj'),  
                             'no_penanggung_jawab'=>form_error('no_penanggung_jawab'),  
-                            'hub_keluarga'=>form_error('hub_keluarga'),  
+                            'jns_kelamin'=>form_error('jns_kelamin'),  
                         );
                     }else{
                         $hambatan=$this->input->post('hambatan_bahasa',TRUE);

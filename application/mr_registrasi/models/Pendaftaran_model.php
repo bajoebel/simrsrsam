@@ -420,10 +420,16 @@ class Pendaftaran_model extends CI_Model
         ->get('tbl02_pendaftaran')
         ->row();
         if(empty($reg)) {
-            return $separator."0001";
+            return array(
+                "reg_unit"=>$separator."0001",
+                "no_urut"=>"0001"
+            );
         }else{
             $nourut=intval($reg->no_urut_unit)+1;
-            return $separator .STR_PAD($nourut,4,"0",STR_PAD_LEFT);
+            return array(
+                "reg_unit"=>$separator .STR_PAD($nourut,4,"0",STR_PAD_LEFT),
+                "no_urut"=>STR_PAD($nourut,4,"0",STR_PAD_LEFT)
+            );
 
         }
     }
@@ -437,5 +443,41 @@ class Pendaftaran_model extends CI_Model
         $this->db->where('id',$id);
         $this->erm->update('rj_setuju_umum',$data);
         return $this->erm->insert_id();
+    }
+    function getPasienAnjungan($poly="",$tgl,$filter,$q,$start,$limit){
+        if(!empty($poly)) $this->db->where("id_ruang",$poly);
+        $this->db->select("idx,nomr,id_daftar,reg_unit,no_ktp,nama_pasien,nama_ruang,tgl_masuk,tgl_daftar,rujukan,namaDokterJaga,cara_bayar,no_bpjs");
+        if($filter=="baru") $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') = tgl_daftar");
+        else $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') != tgl_daftar");
+        $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d')",$tgl);
+        $this->db->where("user_daftar",'Anjungan Mandiri');
+        $this->db->group_start();
+        $this->db->like('nomr',$q);
+        $this->db->or_like('no_ktp',$q);
+        $this->db->or_like('no_bpjs',$q);
+        $this->db->or_like('nama_pasien',$q);
+        $this->db->or_like('tempat_lahir',$q);
+        $this->db->or_like('namaDokterJaga',$q);
+        $this->db->group_end();
+        $this->db->limit($limit,$start);
+        return $this->db->get('tbl02_pendaftaran')->result();
+    }
+    function countPasienAnjungan($poly="",$tgl,$filter,$q){
+        $this->db->select("COUNT(idx) AS jml");
+        if(!empty($poly)) $this->db->where("id_ruang",$poly);
+        if($filter=="baru") $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') = tgl_daftar");
+        else $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d') != tgl_daftar");
+        $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d')",$tgl);
+        $this->db->where("user_daftar",'Anjungan Mandiri');
+        $this->db->group_start();
+        $this->db->like('nomr',$q);
+        $this->db->or_like('no_ktp',$q);
+        $this->db->or_like('no_bpjs',$q);
+        $this->db->or_like('nama_pasien',$q);
+        $this->db->or_like('tempat_lahir',$q);
+        $this->db->or_like('namaDokterJaga',$q);
+        $this->db->group_end();
+        $res= $this->db->get('tbl02_pendaftaran')->row();
+        return $res->jml;
     }
 }

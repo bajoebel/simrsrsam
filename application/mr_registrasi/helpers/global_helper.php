@@ -373,7 +373,7 @@ function getNamaUserByID($nrp)
         $res = $cekQuery->row_array();
         return $res['pgwNama'];
     } else {
-        return "";
+        return $nrp;
     }
 }
 
