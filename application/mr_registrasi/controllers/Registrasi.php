@@ -420,14 +420,33 @@ class registrasi extends CI_Controller
                                         //Insert Data Antrian Poly
                                         if ($params['jns_layanan'] == "RJ") {
                                             $this->load->model('patch_model');
-                                            $antri = array(
-                                                'id_daftar' => $resData["id_daftar"], 
-                                                'no_antrian_poly' => $this->patch_model->getAntrianpoly($resData["id_ruang"]),
-                                                'tanggal'=>date('Y-m-d'),
-                                                'antrianruang'=>$resData["id_ruang"],
-                                                'antriandokter'=>$resData["dokterJaga"]
-                                            );
-                                            $this->db->insert('tbl02_antrian', $antri);
+
+                                            if(STATUS_JKN=="1"){
+                                                // Jika Integrasi Antrian JKN Diaktifkan
+                                                $antrianpoly=$this->patch_model->getAntrianpoly($resData["id_ruang"],$resData["dokterJaga"]);
+                                                $antri = array(
+                                                    'id_daftar' => $resData["id_daftar"], 
+                                                    'kodebooking'=>$resData["reg_unit"],
+                                                    'no_antrian_poly' => $antrianpoly,
+                                                    'tanggal'=>date('Y-m-d'),
+                                                    'antrianruang'=>$resData["id_ruang"],
+                                                    'antriandokter'=>$resData["dokterJaga"],
+                                                    'kodepolijkn'=>$this->input->post('kodepoli'),
+                                                    'kodedokterjkn'=>$this->input->post('kodedokter'),
+                                                    'nokartu'=>$this->input->post('no_bpjs'),
+                                                    'labelantrean'=>'',
+                                                );
+                                                $this->db->insert('tbl02_antrian', $antri);
+                                            }else{
+                                                $antri = array(
+                                                    'id_daftar' => $resData["id_daftar"], 
+                                                    'no_antrian_poly' => $this->patch_model->getAntrianpoly($resData["id_ruang"]),
+                                                    'tanggal'=>date('Y-m-d'),
+                                                    'antrianruang'=>$resData["id_ruang"],
+                                                    'antriandokter'=>$resData["dokterJaga"]
+                                                );
+                                                $this->db->insert('tbl02_antrian', $antri);
+                                            }
                                             // Kirim data pendaftaran ke server mobile rsam
                                             $this->load->helper('http');
                                             $kirim=$this->db->query("SELECT id_daftar AS kode_booking,`nama_pasien` AS nama,
@@ -448,6 +467,7 @@ class registrasi extends CI_Controller
                                             $this->onlineDB->where('kode_booking', $kode);
                                             $update = $this->onlineDB->update('t_online', $data);
                                         }
+                                        
                                         $response['code'] = 200;
                                         $response['message'] = "Simpan data sukses.";
                                         $response['unikID'] = encrypt_decrypt('encrypt', $resData['reg_unit'], true);
@@ -2962,4 +2982,5 @@ class registrasi extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    
 }
