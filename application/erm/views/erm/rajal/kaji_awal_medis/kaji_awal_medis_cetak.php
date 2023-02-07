@@ -252,7 +252,7 @@ $date = date("Y-m-d");
                             <td>
                                 <span>PEMERIKSAAN PENUNJANG : </span>
                                 <?= $k->penunjang ?>
-                                <div style="height:20mm">
+                                <div>
                                     <?php $penunjang_m = getPermintaanPenunjang($d->idx); 
                                         if ($penunjang_m) {?>
                                         <table class="penunjang" style="margin-bottom:5px">

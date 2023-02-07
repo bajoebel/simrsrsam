@@ -301,7 +301,7 @@ $date = date("Y-m-d");
                                 <td><?= ($s->selaku_lainnya == "") ? $s->selaku : $s->selaku_lainnya ?></td>
                             </tr>
                             <tr>
-                                <td height="50px">&nbsp;</td>
+                                <td><img src="<?=$s->ttd?>" height="70px" alt=""></td>
                             </tr>
                             <tr>
                                 <td>( <?= $s->namattd  ?> )</td>
@@ -317,7 +317,7 @@ $date = date("Y-m-d");
                                 <td>Petugas Admission</td>
                             </tr>
                             <tr>
-                                <td height="50px">&nbsp;</td>
+                                <td height="70px"><div id="qrcode_setuju_umum"></div></td>
                             </tr>
                             <tr>
                                 <td>( <?= getNmLengkap($s->users_id) ?> )</td>
@@ -330,5 +330,18 @@ $date = date("Y-m-d");
         </tr>
     </table>
 </body>
-
+<!-- qrcode -->
+<script src="<?php echo base_url() ?>assets/jquery/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
+<script type="text/javascript">
+    var code = "<?= $s->petugasSign?>";
+    var qrcode = new QRCode(document.getElementById("qrcode_setuju_umum"), {
+        text: code,
+        width: 70,
+        height: 70,
+        colorDark : "#000",
+        colorLight : "#fff",
+    });
+    $(`#qrcode_setuju_umum > img`).css({"margin":"auto"});
+</script>
 </html>

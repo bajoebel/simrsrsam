@@ -102,8 +102,8 @@ if (!$permintaan_resep) { ?>
                         <td><?= $no++ ?></td>
                         <td><?= $prd->kode_obat ?></td>
                         <td><?= $prd->nama_obat ?></td>
-                        <td><?= $prd->aturan_pakai ?></td>
                         <td><?= $prd->satuan ?></td>
+                        <td><?= $prd->aturan_pakai ?></td>
                         <td>
                             <?php if (!$permintaan_resep) { ?>
                             <button type="button" class="btn btn-xs btn-danger" onclick="hapusObat(<?=$prd->id?>)"><i class="fa fa-trash"></i></button>
