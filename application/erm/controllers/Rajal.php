@@ -994,6 +994,11 @@ class Rajal extends CI_Controller
             "nama" => $this->input->post("nama_pr"),
             "dpjp" => $this->input->post("dpjp_pr"),
             "dpjp_name" => $this->input->post("dpjp_name_pr"),
+            "id_daftar" => $this->input->post("id_daftar"),
+            "reg_unit" => $this->input->post("reg_unit_pr"),
+            "id_daftar" => $this->input->post("id_daftar_pr"),
+            "id_ruanglama" => $this->input->post("id_ruanglama_pr"),
+            "nama_ruang" => $this->input->post("nama_ruang_pr"),
             "status_form" => 1,
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s")

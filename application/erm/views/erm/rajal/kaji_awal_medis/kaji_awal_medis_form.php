@@ -211,6 +211,31 @@
             </div>
         </div>
         <b>Permintaan THERAPI</b> <a href="#tab_8" data-toggle="tab">Tambah Permintaan</a></br>
+        <?php $resep = getPermintaanResep($d->idx);;
+        if ($resep) {
+        ?>
+        <table class="table" >
+            <tr>
+                <td colspan="2">
+                    PERMINTAAN RESEP
+                </td>
+            </tr>
+            <tr>
+                <td>Nama Obat</td>
+                <td>Aturan Pakai</td>
+            </tr>
+            <?php 
+            $resep_detail =  getPermintaanResepDetailById($resep->id); 
+            foreach($resep_detail as $rd) {
+            ?>
+            <tr>
+                <td><?= $rd->nama_obat ?></td>
+                <td><?= $rd->aturan_pakai ?></td>
+            </tr>
+            <?php } ?>
+        </table> 
+        <?php } ?>
+        <br/>
         <div class="form-group row">
             <div class="col-md-12">
                 <label for="">Kontrol Ulang</label>

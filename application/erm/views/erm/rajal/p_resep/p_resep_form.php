@@ -25,6 +25,10 @@ if (!$permintaan_resep) { ?>
                 <input type="hidden" name="reg_unit_pr"  value="<?=$detail->reg_unit?>">
                 <input type="hidden" name="dpjp_pr"  value="<?=$detail->dokterJaga?>">
                 <input type="hidden" name="dpjp_name_pr"  value="<?=$detail->namaDokterJaga?>">
+                <input type="hidden" name="id_daftar_pr" value="<?=$detail->id_daftar?>">
+                <input type="hidden" name="reg_unit_pr" value="<?=$detail->reg_unit?>">
+                <input type="hidden" name="id_ruanglama_pr" value="<?=$detail->id_ruanglama?>">
+                <input type="hidden" name="nama_ruang_pr" value="<?=$detail->nama_ruang?>">
                 <fieldset>
                     <legend>Jenis Pemeriksaan</legend>  
                     <div class="form-group" style="margin-bottom:20px !important">
