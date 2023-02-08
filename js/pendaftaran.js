@@ -3997,6 +3997,9 @@ function getJadwal(poly, dokter) {
 				$('#jampraktek').val(data.data.jadwal_jam_mulai+"-"+data.data.jadwal_jam_selesai)
 				$('#kuotajkn').val(data.data.kuotajkn)
 				$('#kuotanonjkn').val(data.data.kuotanonjkn)
+				$('#spm').val(data.data.spm)
+				$('#jammulai').val(data.data.jadwal_jam_mulai)
+				$('#jamselesai').val(data.data.jadwal_jam_selesai)
 			} else {
 				$('#groupantri').val("")
 				$('#groupantri').val("")

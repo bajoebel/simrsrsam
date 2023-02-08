@@ -645,8 +645,8 @@ $date = date("Y-m-d");
         cancelButton.addEventListener('click', function (event) {
             signaturePad.clear();
         });
-        <?php if(!empty($signPetugas)) { ?>
-        var code = "<?= $signPetugas ?>";
+        <?php if(!empty($petugasSign)) { ?>
+        var code = "<?= $petugasSign ?>";
         var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
             text: code,
             width: 80,
