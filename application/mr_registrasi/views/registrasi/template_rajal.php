@@ -624,7 +624,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <input type="hidden" name="groupantri" id="groupantri" value="">
-                                                                    <input type="text" name="kodepoli" id="kodepoli" value="">
+                                                                    <input type="hidden" name="kodepoli" id="kodepoli" value="">
                                                                     <input type="hidden" name="namapoli" id="namapoli" value="">
                                                                     <input type="hidden" name="kodedokter" id="kodedokter" value="">
                                                                     <input type="hidden" name="namadokter" id="namadokter" value="">
