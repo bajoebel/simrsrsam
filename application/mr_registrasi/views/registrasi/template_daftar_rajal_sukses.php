@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert.css">
 <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/jquery/css/jquery-ui.css">
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/qrcodejs/qrcode.js"></script>
 <style>
     /*.modal-content {
         max-height: 600px;
@@ -10,16 +11,18 @@
             overflow-y: scroll;
             overflow-x: hidden;
             height: 600px;
-            white-space: nowrap
+            /* white-space: nowrap */
         }
     }
-
+    .hide{
+        display:none;
+    }
     .modal-content {
 
         overflow-y: scroll;
         overflow-x: hidden;
-        max-height: 800px;
-        white-space: nowrap
+        max-height: 700px;
+        /* white-space: nowrap */
     }
 
     .control[readonly] {
@@ -110,6 +113,12 @@
     counter-increment: item;
     width: 2em;
     margin-left: -2em;
+    }
+    .wd70{
+        width:70px;
+    }
+    .tebal{
+        font-weight:bold;
     }
 </style>
 <section class="content-header">
@@ -233,7 +242,7 @@
                         <?php
                         }
                         ?>
-                        <li><a data-toggle="tab" href="#menu3" onclick="getGC(<?= $idx ?>)">General Concent</a></li>
+                        <li><a data-toggle="tab" href="#menu3" onclick="getGC(<?= $idx ?>)">Dokumen Rekam Medis</a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -323,6 +332,8 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <?php 
+                            $dokumenpasien=cekPersetujuan($idx);
+                            $edukasi=cekEdukasi($idx);
                             if(empty($rujukanonline)){
                                 ?>
                                 <br>
@@ -418,7 +429,7 @@
                                 <?php
                             }else{
                                 ?>
-                                <table class="table table-bordered">
+                                    <table class="table table-bordered">
                                         <tr>
                                             <th style="width: 150px">No Registrasi RS</th>
                                             <th style="font-size: 20px" ><?php echo $id_daftar ?></th>
@@ -786,161 +797,206 @@
                         </div>
                         <div id="menu3" class="tab-pane fade in" >
                             <br>
-                            <!-- <div class="row"> -->
-                                <div class="col-md-12">
+                            <div class="sorcutdokumen">
+                                <div class="col-md-3 text-center">
+                                    <a href="#" onclick="priviewSuratMasukRajal('<?= $idx ?>')">
+                                    <img src="<?= base_url() ."assets/images/directory.png" ?>" alt="" class="img wd70">
+                                    </a> 
+                                    <p class="tebal"><input type="checkbox" name="suratmasukrajal" id="suratmasukrajal" value="<?= $idx ?>" onclick="cekCeklis()"><br>Surat Masuk Rawat Jalan</p>
                                     
-                                    <form class="form-horizontal" id="generalconcent" style="font-size:12px">
-                                        <fieldset>
-                                            <legend>Profile Pasien</legend>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Nomr:</label>
-                                                <div class="col-sm-9">
-                                                    <input type="hidden" name="reload" id="reload" value="0">
-                                                    <input type="hidden" name="gc_idx" id="gc_idx" value="<?= $idx ?>">
-                                                    <input type="hidden" name="gc_id" id="gc_id" value="">
-                                                    <input type="text" name="gc_nomr" id="gc_nomr" class="form-control" value="<?= $nomr ?>" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Nama Lengkap:</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" name="gc_nama_lengkap" id="gc_nama_lengkap" class="form-control" value="<?= $nama_pasien ?>" readonly>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Tempat/Tanggal Lahir:</label>
-                                                <div class="col-sm-5">
-                                                    <input type="text" name="gc_tempat_lahir" id="gc_tempat_lahir" class="form-control" value="<?= $tempat_lahir ?>" readonly>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <input type="hidden" name="gc_tgl_lahir" id="gc_tgl_lahir" value="<?= $tgl_lahir ?>" >
-                                                    <input type="text" name="gc_priview_tgl_lahir" id="gc_priview_tgl_lahir" class="form-control datepicker" value="<?= longDate($tgl_lahir) ?>" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
-                                                <div class="col-sm-9">
-                                                <input type="hidden" name="gc_jns_kelamin" id="gc_jns_kelamin" value="<?= $jns_kelamin ?>" >
-                                                    <input type="text" name="gc_priview_jns_kelamin" id="gc_priview_jns_kelamin" class="form-control" value="<?= $jns_kelamin==1 ? "Laki-Laki" : ($jns_kelamin==2 ? "Perempuan" : ($jns_kelamin==3 ? "Tidak Datap Ditentukan" : "Tidak Mengisi")) ?>"  readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">ALamat:</label>
-                                                <div class="col-sm-9">
-                                                    <textarea name="gc_alamatpasien" id="gc_alamatpasien" cols="5" rows="2" class="form-control" readonly><?= $alamat ." RT. " .$rt ." RW. ".$rw ." Kel. " .$nama_kelurahan ." Kec. " .$nama_kecamatan ." Kab / Kota ".$nama_kab_kota ." Prov " .$nama_provinsi ?></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">No Telp / HP:</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" name="gc_no_telpon" id="gc_no_telpon" class="form-control" value="<?= getField('no_telpon',array('nomr'=>$nomr),'tbl01_pasien') ?>" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
-                                                <div class="col-sm-9">
-                                                    <input type="checkbox" name="customttd" id="customttd" value="1" onclick="setTTD()"> General Consent Ditandatangani Keluarga / Orang Tua/ Wali /Lainnya
-                                                </div>
-                                            </div>
-                                            <div class="customttd" style="display:none;">
-                                                <legend>Profile Penanda Tangan General Consent</legend>
+                                </div>
+
+                                <div class="col-md-3 text-center">
+                                    <a href="#"  onclick="priviewPersetujuanUmum('<?= $idx ?>')">
+                                    
+                                    <img src="<?= (!empty($dokumenpasien)) ? base_url() ."assets/images/directory.png" :base_url()."assets/images/emptydirectory.png" ?>" alt="" class="img wd70">
+                                    </a>
+                                    <p class="tebal"><input type="checkbox" name="persetujuanumum" id="persetujuanumum" value="<?= (!empty($dokumenpasien))  ? $dokumenpasien['id'] : "-"; ?>" <?= (empty($dokumenpasien))  ? "disabled" : ""; ?>  onclick="cekCeklis()"><br>Form Persetujuan Umum</p>
+                                </div>
+
+                                <div class="col-md-3 text-center">
+                                    <a href="#"  onclick="priviewHakKewajiban('<?= $idx ?>')">
+                                    <img src="<?= (!empty($dokumenpasien)) ? base_url() ."assets/images/directory.png" :base_url()."assets/images/emptydirectory.png" ?>" alt="" class="img wd70">
+                                    </a>
+                                    <p class="tebal"><input type="checkbox" name="hakkewajibanpasien" id="hakkewajibanpasien" value="<?= (!empty($dokumenpasien))  ? $dokumenpasien['id'] : "-"; ?>" disabled><br>Hak Dan Kewajiban Pasien</p>
+                                </div>
+                                
+                                <div class="col-md-3 text-center">
+                                    <a href="#"  onclick="priviewEdukasi('<?= $idx ?>')">
+                                    <img src="<?= (!empty($edukasi)) ? base_url() ."assets/images/directory.png" :base_url()."assets/images/emptydirectory.png" ?>" alt="" class="img wd70">
+                                    </a>
+                                    <p class="tebal"><input type="checkbox" name="informasiedukasi" id="informasiedukasi" value="<?= (!empty($edukasi))  ? $edukasi['id'] : "-"; ?>" <?= (empty($edukasi))  ? "disabled" : ""; ?>  onclick="cekCeklis()"><br>Catatan Pemberian Informasi Dan Edukasi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="">
+                            <hr>
+                                <div class="col-md-6 text-center">
+                                    <button class="btn btn-primary btn-block" id="btnSignPetugas" type="button" onclick="signPetugas()" disabled>Sign</button>
+                                </div>
+                                <div class="col-md-6 text-center"  id="cetakgc">
+                                <a href="<?= base_url() ."mr_registrasi.php/registrasi/persetujuan_umum/".$idx?>" class="btn btn-warning btn-block btn-sm" target="_blank"><span class="fa fa-print"></span> Tanda Tangan Pasien</a>
+                                </div>
+                                <p>&nbsp;</p>
+                                <hr>
+                            </div>
+                            <!-- <div id="formerm" class="hide" >
+                                <div class="gc" id="buatgeneralconcent">
+                                    <div class="col-md-12">
+                                        <form class="form-horizontal" id="generalconcent" style="font-size:12px">
+                                            <fieldset>
+                                                <legend>Profile Pasien</legend>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Nama:</label>
+                                                    <label class="control-label col-sm-3" for="email">Nomr:</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" name="gc_namattd" id="gc_namattd" class="form-control">
+                                                        <input type="hidden" name="reload" id="reload" value="0">
+                                                        <input type="hidden" name="gc_idx" id="gc_idx" value="<?= $idx ?>">
+                                                        <input type="hidden" name="gc_id" id="gc_id" value="">
+                                                        <input type="text" name="gc_nomr" id="gc_nomr" class="form-control" value="<?= $nomr ?>" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Tempat / Tanggal Lahir:</label>
+                                                    <label class="control-label col-sm-3" for="email">Nama Lengkap:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="gc_nama_lengkap" id="gc_nama_lengkap" class="form-control" value="<?= $nama_pasien ?>" readonly>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Tempat/Tanggal Lahir:</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" name="gc_tempat_lahirttd" id="gc_tempat_lahirttd" class="form-control" value="">
+                                                        <input type="text" name="gc_tempat_lahir" id="gc_tempat_lahir" class="form-control" value="<?= $tempat_lahir ?>" readonly>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="gc_tgl_lahirttd" id="gc_tgl_lahirttd" class="form-control datepicker">
+                                                        <input type="hidden" name="gc_tgl_lahir" id="gc_tgl_lahir" value="<?= $tgl_lahir ?>" >
+                                                        <input type="text" name="gc_priview_tgl_lahir" id="gc_priview_tgl_lahir" class="form-control datepicker" value="<?= longDate($tgl_lahir) ?>" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
                                                     <div class="col-sm-9">
-                                                        <select name="gc_jnskelaminttd" id="gc_jnskelaminttd" class="form-control">
-                                                            <option value="1">Laki-Laki</option>
-                                                            <option value="2">Perempuan</option>
-                                                        </select>
+                                                    <input type="hidden" name="gc_jns_kelamin" id="gc_jns_kelamin" value="<?= $jns_kelamin ?>" >
+                                                        <input type="text" name="gc_priview_jns_kelamin" id="gc_priview_jns_kelamin" class="form-control" value="<?= $jns_kelamin==1 ? "Laki-Laki" : ($jns_kelamin==2 ? "Perempuan" : ($jns_kelamin==3 ? "Tidak Datap Ditentukan" : "Tidak Mengisi")) ?>"  readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Alamat:</label>
+                                                    <label class="control-label col-sm-3" for="email">ALamat:</label>
                                                     <div class="col-sm-9">
-                                                        <textarea name="gc_alamatttd" id="gc_alamatttd" cols="30" rows="2" class="form-control"></textarea>
+                                                        <textarea name="gc_alamatpasien" id="gc_alamatpasien" cols="5" rows="2" class="form-control" readonly><?= $alamat ." RT. " .$rt ." RW. ".$rw ." Kel. " .$nama_kelurahan ." Kec. " .$nama_kecamatan ." Kab / Kota ".$nama_kab_kota ." Prov " .$nama_provinsi ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-sm-3" for="email">Hubungan Keluarga:</label>
-                                                    <div class="col-sm-4">
-                                                        <select name="sebagai" id="sebagai" class="form-control" style="width:100%;" onchange="cekHubungan()">
-                                                            <option value="wali">Wali</option>
-                                                            <option value="orang tua">Orang Tua</option>
-                                                            <option value="keluarga">Keluarga</option>
-                                                            <option value="lainnya">Lainnya</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-5 lain" style="display:none;">
-                                                        <input type="text" name="selakulainnya" id="selakulainnya" class="form-control">
+                                                    <label class="control-label col-sm-3" for="email">No Telp / HP:</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name="gc_no_telpon" id="gc_no_telpon" class="form-control" value="<?= getField('no_telpon',array('nomr'=>$nomr),'tbl01_pasien') ?>" readonly>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <legend>Keinginan Privasi</legend>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
-                                                <div class="col-sm-9">
-                                                    <input type="checkbox" name="gc_izinaksesbesuk" id="gc_izinaksesbesuk" value="1" checked> Pasien Mengizinkan Rumah Sakit Memberi Akses bagi : keluarga serta orang yang  akan menengok / menemuinya
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Privasi Khusus</label>
-                                                <div class="col-sm-9 fieldAdd">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="privasi[]" id="privasi" placeholder="Masukkan Privasi Yang Diinginkan">
-                                                        <span class="input-group-btn">
-                                                            <button class="btn btn-success" type="button" onclick="addmore(1)"><i class="fa fa-plus"></i></button>
-                                                        </span>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="customttd" id="customttd" value="1" onclick="setTTD()"> General Consent Ditandatangani Keluarga / Orang Tua/ Wali /Lainnya
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <legend>Persetujuan Pelepasan Informasi</legend>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
-                                                <div class="col-sm-9">
-                                                    <input type="checkbox" name="gc_izinpemberianinformasidiagnosis" id="gc_izinpemberianinformasidiagnosis" value="1" checked> Pasien Memberi wewenang kepada RSUD dr. Achmad Mochtar untuk memberikan informasi tentang diagnosis, hasil pelayanan dab pengobatan saya kepada
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">Informasi Terbatas Pada</label>
-                                                <div class="col-sm-9 fieldAdd2">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" value="1" name="terbatas" > </span>
-                                                        <input type="text" class="form-control" id="terbatas_list" name="terbatas_list[]" placeholder="Masukkan Nama">
-                                                        <span class="input-group-btn">
-                                                            <button class="btn btn-success" type="button" onclick="addmore(2)"><i class="fa fa-plus"></i></button>
-                                                        </span>
+                                                <div class="customttd" style="display:none;">
+                                                    <legend>Profile Penanda Tangan General Consent</legend>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-3" for="email">Nama:</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" name="gc_namattd" id="gc_namattd" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-3" for="email">Tempat / Tanggal Lahir:</label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" name="gc_tempat_lahirttd" id="gc_tempat_lahirttd" class="form-control" value="">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="text" name="gc_tgl_lahirttd" id="gc_tgl_lahirttd" class="form-control datepicker">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-3" for="email">Jenis Kelamin:</label>
+                                                        <div class="col-sm-9">
+                                                            <select name="gc_jnskelaminttd" id="gc_jnskelaminttd" class="form-control">
+                                                                <option value="1">Laki-Laki</option>
+                                                                <option value="2">Perempuan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-3" for="email">Alamat:</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea name="gc_alamatttd" id="gc_alamatttd" cols="30" rows="2" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-3" for="email">Hubungan Keluarga:</label>
+                                                        <div class="col-sm-4">
+                                                            <select name="sebagai" id="sebagai" class="form-control" style="width:100%;" onchange="cekHubungan()">
+                                                                <option value="wali">Wali</option>
+                                                                <option value="orang tua">Orang Tua</option>
+                                                                <option value="keluarga">Keluarga</option>
+                                                                <option value="lainnya">Lainnya</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5 lain" style="display:none;">
+                                                            <input type="text" name="selakulainnya" id="selakulainnya" class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3" for="email">&nbsp;</label>
-                                                <div class="col-sm-5">
-                                                    <button class="btn btn-primary btn-sm" type="button" id="btnSimpanGC" onclick="confirmasiPenyipananGC()"><span class="fa fa-save" id="iconSimpanGC"></span> Simpan Data General Concent</button>
+                                                <legend>Keinginan Privasi</legend>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="gc_izinaksesbesuk" id="gc_izinaksesbesuk" value="1" checked> Pasien Mengizinkan Rumah Sakit Memberi Akses bagi : keluarga serta orang yang  akan menengok / menemuinya
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-4 text-right" id="cetakgc" style="display:none;">
-                                                    <a href="<?= base_url() ."mr_registrasi.php/registrasi/persetujuan_umum/".$idx?>" class="btn btn-warning btn-sm" target="_blank"><span class="fa fa-print"></span> Cetak Persetujuan Umum</a>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Privasi Khusus</label>
+                                                    <div class="col-sm-9 fieldAdd">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="privasi[]" id="privasi" placeholder="Masukkan Privasi Yang Diinginkan">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-success" type="button" onclick="addmore(1)"><i class="fa fa-plus"></i></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                        
-                                    </form>
+                                                <legend>Persetujuan Pelepasan Informasi</legend>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="checkbox" name="gc_izinpemberianinformasidiagnosis" id="gc_izinpemberianinformasidiagnosis" value="1" checked> Pasien Memberi wewenang kepada RSUD dr. Achmad Mochtar untuk memberikan informasi tentang diagnosis, hasil pelayanan dab pengobatan saya kepada
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">Informasi Terbatas Pada</label>
+                                                    <div class="col-sm-9 fieldAdd2">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <input type="checkbox" aria-label="Checkbox for following text input" value="1" name="terbatas" > </span>
+                                                            <input type="text" class="form-control" id="terbatas_list" name="terbatas_list[]" placeholder="Masukkan Nama">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-success" type="button" onclick="addmore(2)"><i class="fa fa-plus"></i></button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-3" for="email">&nbsp;</label>
+                                                    <div class="col-sm-5">
+                                                        <button class="btn btn-primary btn-sm" type="button" id="btnSimpanGC" onclick="confirmasiPenyipananGC()"><span class="fa fa-save" id="iconSimpanGC"></span> Simpan Data General Concent</button>
+                                                    </div>
+                                                    <div class="col-sm-4 text-right" id="cetakgc" style="display:none;">
+                                                        <a href="<?= base_url() ."mr_registrasi.php/registrasi/persetujuan_umum/".$idx?>" class="btn btn-warning btn-sm" target="_blank"><span class="fa fa-print"></span> Cetak Persetujuan Umum</a>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            
+                                        </form>
+                                    </div>
                                 </div>
-                            <!-- </div> -->
+                                <div class="gc" id="priviewgeneralconcent"></div>
+                            </div> -->
                             
                         </div>
                     </div>
@@ -1978,43 +2034,55 @@
 <div class="modal fade" id="privgc" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
     <div class="modal-dialog modal-lg" style="overflow-y: initial !important">
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" style="width:700px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h3 class="modal-title" id="headRujukan">PERSETUJUAN UMUM (<i>GENERAL CONSENT</i>)</h3>
+                <h3 class="modal-title" id="headPriv">PERSETUJUAN UMUM (<i>GENERAL CONSENT</i>)</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>1. PERSETUJUAN UNTUK PERAWATAN DAN PENGOBATAN</h4>
-                        <ol class="olcostum">
-                            <li class="licostum">Saya mengetahui bahwa saya memiliki kondisi yang membutuhkan perawatan medis, saya mengizinkan dokter dan profesional kesehatan lainnya untuk melakukan prosedur dignostik dan untuk memberikan pengobatan medis seperti yang diperlukan dalam penilaian profesional mereka. </li>
-                            <li class="licostum">Saya sadar bahwa praktik kedokteran bukanlah ilmu pasti dan saya mengakui bahwa tidak ada jaminan atas hasil apapun, terhadap perawatan prosedur atau pemeriksaan apapun yang dilakukan kepada saya.</li>
-                            <li class="licostum">Saya mengetahui bahwa RSUD Dr. Achmad Mochtar Bukittinggi merupakan Rumah Sakit yang dipakai untuk Pendidikan. Karena itu, saya menyetujui bila mahasiswa kedokteran dan profesi kesehatan lain berpartisipasi dalam perawatan saya, sepanjang dibawah supervise oleh supervisornya.</li>
-                        </ol>
-                        <h4>2. KEINGINAN PRIVASI</h4>
-                        <p> Saya <span id="izinbesuk">Mengizinkan</span> Rumah Sakit Memberi akses bagi : Keluarga serta orang yang akan menengok /menemui saya.</p>
-                        <div id="privasikhusus"></div>
-                        <h4>3. PERSETUJUAN PELEPASAN INFORMASI</h4>
-                        <ul>
-                            <li>Saya memahami informasi yang ada di dalam diri saya termasuk diagnosis, hasil laboratorium dan hasil tes diagnosis yang akan digunakan untuk perawatan medis, RSUD Dr Achmad Mochtar Bukittinggi akan menjamin kerahasiannya</li>
-                            <li>Saya memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi tentang rahasia kedokteran saya bila diperlukan untuk memproses klaim asuransi dan atau lembaga pemerintah lainya.</li>
-                            <li>Saya <span id="izininformasidiagnosis"></span> memberi wewenang kepada RSUD Dr Achmad Mochtar Bukittinggi untuk memberikan informasi * tentang diagnosis, hasil pelayanan dan pengobatan saya kepada
-                                <br>Terbatas Pada
-                            </li>
-
-                        </ul>
-                        <h4>4. INFORMASI TATA TERTIB BAGI PASIEN, PENGUNJUNG DAN PENUNGGU PASIEN (Terlampir)</h4>
-                        <p>Saya telah menerima informasi tentang peraturan yang diberlakukan oleh Rumah Sakit dan saya beserta keluarga bersedia untuk mematuhinya, termasuk akan mematuhi jam berkunjung pasien sesuai dengan aturan di Rumah Sakit.</p>
-                        <h4>5. INFORMASI BIAYA</h4>
-                        <p>Sebagai peserta JKN/IKS saya bersedia mengurus jaminan rawat inap dalam waktu 3 hari kerja (terhitung mulai pasien masuk) dan apabila saya tidak mengurus dalam waktu tersebut diatas, saya bersedia terdaftar sebagai pasien Umum/Pribadi. Saya memahami tentang informasi biaya pengobatan atau biaya tindakanyang dijelaskan oleh petugas Rumah Sakit.</p>
-                        <input type="checkbox" name="setujui" id="setujui" value="1" onclik="simpanPersetujuanUmum()"><b>Pasien / Keluarga pasien Telah Diberitahukan dan telah memahami item pada persetujuan umum / General Concent</b>
+                    <div id="priviewdokumen"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div id="sign" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Masukkan PIN</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="hidden" name="idx_pendaftaran" id="idx_pendaftaran" value="<?= $idx ?>">
+                            <input type="hidden" name="id_persetujuan" id="id_persetujuan" value="">
+                            <input type="hidden" name="id_edukasi" id="id_edukasi" value="">
+                            <input type="password" class="form-control" name="pin" id="pin" placeholder="Masukkan PIN">
+                            <div class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="sign()">
+                                <i class="glyphicon glyphicon-certificate"></i> Sign
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     var Base64 = {

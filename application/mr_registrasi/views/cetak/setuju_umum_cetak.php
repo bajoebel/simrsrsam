@@ -395,7 +395,7 @@ $date = date("Y-m-d");
                     <div class="row">
                         <div class="col-md-12" >
                             <div style="padding:10px;">
-                            <table width="210mm" border="0">
+                                <table width="210mm" border="0">
                                     <tr>
                                         <td>
                                             <div class="wrap">

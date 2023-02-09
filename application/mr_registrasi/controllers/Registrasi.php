@@ -3045,12 +3045,14 @@ class registrasi extends CI_Controller
             $cek=cekPasswordUser($this->input->post('pin'),$this->session->userdata('get_uid'));
             if($cek){
                 $id=$this->input->post('id');
+                // IDENTITAS DOKUMEN
                 $param = [
                     "id" => $id,
                     "tabel" => "rj_setuju_umum",
                     "petugas" => $this->session->userdata('get_uid') 
                 ];
                 $code = base64_encode(json_encode($param));
+                // ENCRYPSI DATA
                 $this->erm = $this->load->database('erm', true);
                 $data=$this->erm->where('id',$id)->get('rj_setuju_umum')->row_array();
                 $code_detail = base64_encode(json_encode($data));
@@ -3079,5 +3081,208 @@ class registrasi extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    function sign(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $cek=cekPasswordUser($this->input->post('pin'),$this->session->userdata('get_uid'));
+            if($cek){
+                $id_persetujuan=$this->input->post('id_persetujuan');
+                // IDENTITAS DOKUMEN
+                if(!empty($id_persetujuan)){
+                    $param = [
+                        "id" => $id_persetujuan,
+                        "tabel" => "rj_setuju_umum",
+                        "petugas" => $this->session->userdata('get_uid'),
+                        'dokumen' => 'FORM RM 1.1.00 Rev. 02'
+                    ];
+                    $code = base64_encode(json_encode($param));
+                    // ENCRYPSI DATA
+                    $this->erm = $this->load->database('erm', true);
+                    $data=$this->erm->where('id',$id_persetujuan)->get('rj_setuju_umum')->row_array();
+                    $code_detail = base64_encode(json_encode($data));
+                    $signdata=array(
+                        'kode'=>$code,
+                        'kode_detail'=>$code_detail,
+                        'created_at'=>date('Y-m-d H:i:s'),
+                        'updated_at'=>date('Y-m-d H:i:s')
+                    );
+                    $this->erm->insert('log_assign',$signdata);
+                    $insert_id=$this->erm->insert_id();
+                    $signcode=base64_encode($insert_id);
+                    $update=array(
+                        'admisiSign'=>$signcode
+                    );
+                    $this->erm->where('id',$id_persetujuan);
+                    $this->erm->update('rj_setuju_umum',$update);
+                }
+                $idx_pendaftaran=$this->input->post('idx_pendaftaran');
+                if(!empty($idx_pendaftaran)){
+                    $cek=$this->db->where('idx_pendaftaran',$idx_pendaftaran)
+                        ->where('jenis_dokumen','Surat Masuk Rawat Jalan')
+                        ->get('tbl02_dokumerekammedis')->row_array();
+                    if(empty($cek)){
+                        $param = [
+                            "id" => $idx_pendaftaran,
+                            "tabel" => "tbl02_pendaftaran",
+                            "petugas" => $this->session->userdata('get_uid'),
+                            'dokumen' => 'FORM RM 02.00 Rev. 01'
+                        ];
+                        $code = base64_encode(json_encode($param));
+                        // ENCRYPSI DATA
+                        
+                        $data=$this->db->select("b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
+                        a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
+                        b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
+                        pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,
+                        dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM")
+                        ->join('tbl01_pasien a','a.nomr=b.nomr')
+                        ->where('a.idx',$idx_pendaftaran)
+                        ->get('tbl02_pendaftaran b')->row_array();
+                        $code_detail = base64_encode(json_encode($data));
+                        $signdata=array(
+                            'kode'=>$code,
+                            'kode_detail'=>$code_detail,
+                            'created_at'=>date('Y-m-d H:i:s'),
+                            'updated_at'=>date('Y-m-d H:i:s')
+                        );
+                        $this->erm = $this->load->database('erm', true);
+                        $this->erm->insert('log_assign',$signdata);
+                        $insert_id=$this->erm->insert_id();
     
+                        $signcode=base64_encode($insert_id);
+                        
+                        $ttd=array(
+                            'idx_pendaftaran'=>$idx_pendaftaran,
+                            'jenis_dokumen'=>'Surat Masuk Rawat Jalan',
+                            'admisiSign'=>$signcode
+                        );
+                        $this->db->insert('tbl02_dokumerekammedis',$ttd);
+                    }
+                    
+                }
+                $response = array('status' => true, 'message' => 'Dokumen Berhasil Di Tanda Tangani', 'data' => $signcode);
+            }else{
+                $response = array('status' => false, 'message' => 'Pin yang anda masukkan salah');
+            }
+            
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    function priviewpersetujuanumum($idx){
+        $this->erm = $this->load->database('erm', true);
+        $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row_array();
+        if(!empty($data)) {
+            if(empty($data['admisiSign'])) $data["sign"]=array();
+            else{
+                $admisiSign=base64_decode($data['admisiSign']);
+                $data['ttdpetugas']=$admisiSign;
+                $data['sign']=$this->erm->where('id',$admisiSign)->get('log_assign')->row_array();
+            }
+            // print_r($data);exit;
+            $this->load->view('priview/priview_persetujuan_umum',$data);
+        }else{
+            $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,`no_ktp`,
+                `nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,`id_ruang`,`nama_ruang`,
+                `id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,alamat,rt,rw,nama_provinsi,nama_kab_kota,nama_kecamatan,nama_kelurahan,
+                jns_layanan,tgl_jaminan,tgl_masuk,dokterJaga');
+            // $this->db->from('tbl02_pendaftaran');
+            // $this->db->join('tbl02_antrian', 'tbl02_pendaftaran.id_daftar=tbl02_antrian.id_daftar', 'LEFT');
+            $this->db->where('idx', $idx);
+            $data = $this->db->get('tbl02_pendaftaran')->row_array();
+            // print_r($data);exit;
+            $data['ttdpetugas']='';
+            $this->load->view('priview/form_persetujuan_umum',$data);
+        }
+    }
+    function priviewhakkewajiban($idx){
+        $this->erm = $this->load->database('erm', true);
+        $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row_array();
+        if(empty($data)){
+            $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir as tanggal_lahir,a.jns_kelamin as jk,'' as selaku,user_daftar,
+                dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
+                FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
+                WHERE b.idx='$idx'";
+
+            $data = $this->db->query("$SQL_SMRJ")->row_array();
+        }
+        if(empty($data->petugasSign)) $data["sign"]=array();
+        else{
+            $petugasSign=base64_decode($data->petugasSign);
+            $data['sign']=$this->db->where('id',$petugasSign)->get('log_assign')->row_array();
+        }
+        // print_r($data); exit;
+        if(empty($data)){
+            $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
+                a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
+                b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
+                pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
+                dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
+                FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
+                WHERE b.idx='$idx'";
+
+            $data = $this->db->query("$SQL_SMRJ")->row_array();
+        }
+        // print_r($data);exit;
+        $this->load->view('priview/priview_hakkewajiban',$data);
+    }
+    function priviewsuratmasukrajal($idx){
+        $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
+                a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
+                b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
+                pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
+                dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
+                FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
+                WHERE b.idx='$idx'";
+
+                $cekQuery = $this->db->query("$SQL_SMRJ");
+                if ($cekQuery->num_rows() > 0) {
+                    $resData['data'] = $cekQuery->row_array();
+                    $d=$this->db->where('idx_pendaftaran',$idx)->where("jenis_dokumen",'Surat Masuk Rawat Jalan')->get('tbl02_dokumerekammedis')->row_array();
+                    if(!empty($d)) $resData['ttdpetugas']=$d['admisiSign'];
+                    else $resData['ttdpetugas']="";
+                    $this->load->view('priview/priview_suratmasukrj', $resData);
+                } else {
+                    echo "<script>alert('Ops. Data pendaftaran pasien tidak ditemukan. Silahkan coba kembali.');
+                    window.close();</script>";
+                }
+    }
+    function priviewedukasi($idx){
+        $this->erm = $this->load->database('erm', true);
+        $data['iep']=$this->erm->where('idx',$idx)->get('rj_iep')->row_array();
+        if(empty($data['iep']))  $data['iepdetail']=array();
+        else $data['iepdetail'] = $this->db->where('topik_id',1)->where("id_rj_iep",$data['iep']['id'])->row_array();
+
+        $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,id_agama,agama,suku,id_bahasa,bahasa,hambatan_bahasa,no_hp,id_tk_pddkn,pendidikan,
+                a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
+                b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
+                pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
+                dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
+                FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
+                WHERE b.idx='$idx'";
+        $data['pasien']=$this->db->query("$SQL_SMRJ")->row_array();
+        // print_r($data); exit;
+        $this->load->view('priview/priview_edukasi',$data);
+        // $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
+        //         a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
+        //         b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
+        //         pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
+        //         dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
+        //         FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
+        //         WHERE b.idx='$idx'";
+
+        //         $cekQuery = $this->db->query("$SQL_SMRJ");
+        //         if ($cekQuery->num_rows() > 0) {
+        //             $resData['data'] = $cekQuery->row_array();
+        //             $d=$this->db->where('idx_pendaftaran',$idx)->where("jenis_dokumen",'Surat Masuk Rawat Jalan')->get('tbl02_dokumerekammedis')->row_array();
+        //             if(!empty($d)) $resData['ttdpetugas']=$d['admisiSign'];
+        //             else $resData['ttdpetugas']="";
+        //             $this->load->view('priview/priview_suratmasukrj', $resData);
+        //         } else {
+        //             echo "<script>alert('Ops. Data pendaftaran pasien tidak ditemukan. Silahkan coba kembali.');
+        //             window.close();</script>";
+        //         }
+    }
 }

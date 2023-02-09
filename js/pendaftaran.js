@@ -4729,7 +4729,95 @@ function spesialistiRujukan() {
 		}
 	});
 }
+function priviewPersetujuanUmum(idx) {
+	var url = base_url + "registrasi/priviewpersetujuanumum/" + idx;
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "HTML",
+		data: {},
+		success: function (data) {
+			$('#privgc').modal('show');
+			$('#headPriv').html("PERSETUJUAN UMUM (<i>GENERAL CONSENT</i>)")
+			$('#priviewdokumen').html(data);
+		},
+		complete: function() {
+			var code = $('#ttdkode').val();
+			var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
+				text: code,
+				width: 80,
+				height: 80,
+				colorDark : "#000",
+				colorLight : "#fff",
+			});
+		},
+	});
+}
+function priviewSuratMasukRajal(idx) {
+	var url = base_url + "registrasi/priviewsuratmasukrajal/" + idx;
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "HTML",
+		data: {},
+		success: function (data) {
+			$('#privgc').modal('show');
+			$('#headPriv').html("Surat Masuk Rawat Jalan")
+			$('#priviewdokumen').html(data);
+			
+		},
+		complete: function() {
+			var code = $('#ttdkode').val();
+			var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
+				text: code,
+				width: 80,
+				height: 80,
+				colorDark : "#000",
+				colorLight : "#fff",
+			});
+		},
+	});
+}
+function priviewHakKewajiban(idx) {
+	var url = base_url + "registrasi/priviewhakkewajiban/" + idx;
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "HTML",
+		data: {},
+		success: function (data) {
+			$('#privgc').modal('show');
+			$('#headPriv').html("Hak Dan Kewajiban Pasien")
+			$('#priviewdokumen').html(data);
+		}
+	});
+}
+function priviewEdukasi(idx) {
+	var url = base_url + "registrasi/priviewedukasi/" + idx;
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "HTML",
+		data: {},
+		success: function (data) {
+			$('#privgc').modal('show');
+			$('#headPriv').html("Hak Dan Kewajiban Pasien")
+			$('#priviewdokumen').html(data);
+		}
+	});
+}
+function cekCeklis(){
+	var suratmasukrajal=$('#suratmasukrajal').prop("checked");
+	var persetujuanumum=$('#persetujuanumum').prop("checked");
+	var informasiedukasi=$('#informasiedukasi').prop("checked");
+	var pu = (persetujuanumum==true) ? $('#persetujuanumum').val():"";
+	var edu = (informasiedukasi==true) ? $('#informasiedukasi').val():"";
 
+	$('#id_persetujuan').val(pu);
+	$('#id_edukasi').val(edu);
+	if(suratmasukrajal==true || persetujuanumum==true || informasiedukasi==true) $('#btnSignPetugas').prop("disabled",false);
+	else $('#btnSignPetugas').prop("disabled",true)
+}
 function createRujukan() {
 	var jnsPelayanan = $("input[name='jnsPelayanan']:checked").val();
 
@@ -5120,3 +5208,51 @@ function setTTD(){
 	else $('.customttd').hide();
 }
 
+function signPetugas(){
+	$('#sign').modal('show');
+}
+function sign(){
+	formData={
+		idx_pendaftaran: $('#idx_pendaftaran').val(),
+		id_persetujuan: $('#id_persetujuan').val(),
+		id_edukasi: $('#id_edukasi').val(),
+		pin: $('#pin').val()
+	}
+
+	$.ajax({
+		url: base_url+"registrasi/sign",
+		type: "POST",
+		data: formData,
+		dataType: "JSON",
+		beforeSend  : function(){
+			$('#btnSign').prop("disabled",true);
+			$('#btnSign').html('<i class="fa fa-spinner fa-spin"></i> Proses...')
+		},
+		success: function(data) {
+			if (data.status==true) {
+				$('#ttdpetugas').html("")
+				var qrcode = new QRCode(document.getElementById("ttdpetugas"), {
+					text: data.data,
+					width: 80,
+					height: 80,
+					colorDark : "#000",
+					colorLight : "#fff",
+				});
+			}else{
+				alert(data.message)
+			}
+		},
+		error: function(xhr) { // if error occured
+			// tampilkanPesan('error',xhr.responseText)
+			console.clear();
+			console.log(xhr.responseText);
+			// alert('Error')
+			$('#sign').prop("disabled",false);
+			$('#sign').html('<i class="glyphicon glyphicon-certificate"></i>Sign')
+		},
+		complete: function() {
+			$('#sign').prop("disabled",false);
+			$('#sign').html('<i class="glyphicon glyphicon-certificate"></i> Sign')
+		}
+	});
+}

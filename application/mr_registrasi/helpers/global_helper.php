@@ -575,3 +575,15 @@ function cekPasswordUser($pass,$nrp) {
         return false;
     }
 }
+function cekPersetujuan($idx) {
+    $ci = get_instance();
+    $ci->erm = $ci->load->database('erm', true);
+    $data=$ci->erm->where('idx',$idx)->get('rj_setuju_umum')->row_array();
+    return $data;
+}
+function cekEdukasi($idx) {
+    $ci = get_instance();
+    $ci->erm = $ci->load->database('erm', true);
+    $data=$ci->erm->where('idx',$idx)->get('rj_iep')->row_array();
+    return $data;
+}
