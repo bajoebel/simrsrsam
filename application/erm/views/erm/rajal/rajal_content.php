@@ -139,7 +139,7 @@
         </form>
     </div>
     <div class="tab-pane <?= $ta[6] ?>" id="tab_6">
-        <form role="form" id='form-data-p-penunjang' method="post">
+        <!-- <form role="form" id='form-data-p-penunjang' method="post"> -->
             <div class="box box-success">
                 <div class="box-header ui-sortable-handle" style="cursor: move;">
                     <i class="ion ion-clipboard"></i>
@@ -152,7 +152,7 @@
                 <!-- <button type="form" class="btn btn-primary pull-right">Selanjutnya</button> -->
                 <!-- </div> -->
             </div>
-        </form>
+        <!-- </form> -->
     </div>
     <div class="tab-pane <?= $ta[7] ?>" id="tab_7">
         <div class="box box-success">

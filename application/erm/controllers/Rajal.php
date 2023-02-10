@@ -253,8 +253,10 @@ class Rajal extends CI_Controller
             "komunikasi_penerjemah_detail" => $this->input->post("komunikasi_penerjemah_detail_ka"),
             "komunikasi_isyarat" => $this->input->post("komunikasi_isyarat_ka"),
             "kebutuhan_edukasi" => $this->input->post("kebutuhan_edukasi_ka"),
-            "diagnosa_keperawatan" => $this->input->post("diagnosa_keperawatan_kat"),
-            "tindakan_keperawatan" => $this->input->post("tindakan_keperawatan_kat"),
+            "diagnosa_keperawatan" => $this->input->post("diagnosa_keperawatan_ka"),
+            "tindakan_keperawatan" => $this->input->post("tindakan_keperawatan_ka"),
+            "apd" => $this->input->post("apd_ka"),
+            "bmhp" => $this->input->post("bmhp_ka"),
             "dijelaskan" => $this->input->post("dijelaskan_ka"),
             "dijelaskan_hubungan" => $this->input->post("dijelaskan_hubungan_ka"),
             "dijelaskan_nama" => $this->input->post("dijelaskan_nama_ka"),
@@ -301,6 +303,12 @@ class Rajal extends CI_Controller
         // diagnosa keperawatan
         if (is_array($this->input->post("tindakan_keperawatan_ka"))) {
             $data_post['tindakan_keperawatan'] = implode(";", removeChar($this->input->post("tindakan_keperawatan_ka")));
+        }
+        if (is_array($this->input->post("apd_ka"))) {
+            $data_post['apd'] = implode(";", removeChar($this->input->post("apd_ka")));
+        }
+         if (is_array($this->input->post("bmhp_ka"))) {
+            $data_post['bmhp'] = implode(";", removeChar($this->input->post("bmhp_ka")));
         }
         // header("Content-Type:text/html");
         // echo json_encode(["data" => $data_post]);
@@ -376,6 +384,39 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
         }
     }
+
+    public function sign_review_dpjp() {
+        $idx = $this->input->post("sign_dpjp_idx");
+        $id = $this->input->post("sign_dpjp_id");
+        $nomr = $this->input->post("sign_dpjp_nomr");
+        $dokter = $this->input->post("sign_dpjp_user");
+        $review = $this->input->post("sign_dpjp_review");
+        $pass = $this->input->post("sign_dpjp_pass");
+        $dokterNama =  $this->input->post("sign_dpjp_user_name");
+         $cek = cekPasswordUser($pass,$dokter);
+        if (!$cek) {
+            echo json_encode(["status"=>false,"msg"=> "Password pin salah"]);
+            exit();
+        }
+
+        $param = [
+            "id" => $id,
+            "tabel" => "rj_ppt",
+            "dokter" => $dokter 
+        ];
+        
+        $data = $this->rajal->getKembangPasienById($nomr,$idx,$id);
+        if ($data) {
+            $code = base64_encode(json_encode($param));
+            $code_detail = base64_encode(json_encode($data));
+            $update = $this->rajal->updateSignReviewKembangPasien($id,$code,$code_detail,$review,$dokterNama,$dokter);
+            echo json_encode(["status"=>true,"msg"=>"QRCODE berhasil di generate"]); 
+        } else {
+            echo json_encode(["status"=>false,"msg"=>"QRCODE gagal di generate"]); 
+        }
+    }
+
+
 
     public function sign_kembang_pasien() {
         $idx = $this->input->post("idx");
@@ -510,6 +551,7 @@ class Rajal extends CI_Controller
     public function delete_kaji_awal_medis($idx, $id)
     {
         $delete = $this->rajal->deleteAwalMedis($idx, $id);
+        // echo json_encode(["id"=> $delete]);
         if ($delete) {
             echo json_encode(["status" => true]);
         } else {
@@ -559,7 +601,7 @@ class Rajal extends CI_Controller
             "assesment" => $this->input->post("assesment_kt"),
             "planning" => $this->input->post("planning_kt"),
             "instruksi" => $this->input->post("instruksi_kt"),
-            "review" => $this->input->post("review_kt"),
+            // "review" => $this->input->post("review_kt"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_k")
@@ -764,11 +806,23 @@ class Rajal extends CI_Controller
             "tindakan" => $this->input->post("tindakan_pp"),
             "dpjp" => $this->input->post("dpjp_pp"),
             "dpjp_name" => $this->input->post("dpjp_text_pp"),
+            "status_form" => 1,
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
         ];
         $insert = $this->rajal->insertPermintaanPenunjang($data);
         echo json_encode(["status"=>$insert,"post"=>$data]);
+    }
+
+    public function delete_permintaan_penunjang() {
+        $id = $this->input->post("id");
+        $idx = $this->input->post("idx");
+        $delete = $this->rajal->deletePermintaanPenunjang($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
     }
 
     public function sign_permintaan_penunjang() {
@@ -994,6 +1048,11 @@ class Rajal extends CI_Controller
             "nama" => $this->input->post("nama_pr"),
             "dpjp" => $this->input->post("dpjp_pr"),
             "dpjp_name" => $this->input->post("dpjp_name_pr"),
+            "id_daftar" => $this->input->post("id_daftar"),
+            "reg_unit" => $this->input->post("reg_unit_pr"),
+            "id_daftar" => $this->input->post("id_daftar_pr"),
+            "id_ruanglama" => $this->input->post("id_ruanglama_pr"),
+            "nama_ruang" => $this->input->post("nama_ruang_pr"),
             "status_form" => 1,
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s")

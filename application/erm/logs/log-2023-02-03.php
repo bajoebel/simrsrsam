@@ -31,3 +31,4 @@ ERROR - 2023-02-03 15:13:22 --> Query error: Unknown column 'rj_p_resep' in 'whe
 FROM `rj_p_resep_detail` `a`
 WHERE `rj_p_resep` = '29'
 ERROR - 2023-02-03 15:13:54 --> Severity: Warning --> Use of undefined constant fore - assumed 'fore' (this will throw an Error in a future version of PHP) C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_cetak.php 313
+ERROR - 2023-02-03 16:32:18 --> Severity: error --> Exception: Call to undefined function getPermintaanRese() C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 214

@@ -173,7 +173,7 @@
                                         <tr>
                                             <td><?= $detail->tempat_lahir . " / " . longDate($detail->tgl_lahir) ?></td>
                                             <td><?= getUmur($detail->tgl_lahir, $detail->tgl_masuk) ?></td>
-                                            <td><?= $detail->jns_kelamin ?></td>
+                                            <td><?= jns_kelamin($detail->jns_kelamin) ?></td>
                                             <td><?= $pasien->agama ?></td>
                                             <td><?= $pasien->pekerjaan ?></td>
                                         </tr>
@@ -197,13 +197,13 @@
                                         <tr>
                                             <td colspan="5">
                                                 <b>
-                                                    Status Rekam Medis<br/>
+                                                    Status Rekam Medis<br />
                                                     <span><?php echo status_erm($detail->status_erm) ?></span> <br /><br />
-                                                    Aksi <br/>
-                                                    <?php if ($detail->status_erm==1) {?>
-                                                        <button class="btn btn-sm btn-danger" onclick="final('<?=$detail->idx?>',0,'Batalkan Final Rekam Medis')"><i class="fa fa-refresh" data-toggle="tooltip" title="Batalkan rekam medis" ></i></button>
-                                                    <?php } else {?>
-                                                        <button class="btn btn-sm btn-primary" onclick="final('<?=$detail->idx?>',1,'Final Rekam Medis')"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis" ></i></button>
+                                                    Aksi <br />
+                                                    <?php if ($detail->status_erm == 1) { ?>
+                                                        <button class="btn btn-sm btn-danger" onclick="final('<?= $detail->idx ?>',0,'Batalkan Final Rekam Medis')"><i class="fa fa-refresh" data-toggle="tooltip" title="Batalkan rekam medis"></i></button>
+                                                    <?php } else { ?>
+                                                        <button class="btn btn-sm btn-primary" onclick="final('<?= $detail->idx ?>',1,'Final Rekam Medis')"><i class="fa fa-check" data-toggle="tooltip" title="Final rekam medis"></i></button>
                                                     <?php } ?>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-print" data-toggle="tooltip" title="Cetak"></i></button>
@@ -212,20 +212,20 @@
                                                             <span class="sr-only">Toggle Dropdown</span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#" data-pil="awal_rawat" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Rawat</a></li>
-                                                            <li><a href="#" data-pil="awal_medis" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Kajian Awal Medis</a></li>
-                                                            <li><a href="#" data-pil="edukasi_pasien" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Edukasi Pasien</a></li>
-                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >CPPT</a></li>
-                                                            <li><a href="#" data-pil="prmrj" data-idx="<?= $detail->idx ?>" data-nomr="<?=$detail->nomr?>" class="riwayat-form-link" >Profil Ringkas Medis Rawat Jalan</a></li>
+                                                            <li><a href="#" data-pil="awal_rawat" data-idx="<?= $detail->idx ?>" data-nomr="<?= $detail->nomr ?>" class="riwayat-form-link">Kajian Awal Rawat</a></li>
+                                                            <li><a href="#" data-pil="awal_medis" data-idx="<?= $detail->idx ?>" data-nomr="<?= $detail->nomr ?>" class="riwayat-form-link">Kajian Awal Medis</a></li>
+                                                            <li><a href="#" data-pil="edukasi_pasien" data-idx="<?= $detail->idx ?>" data-nomr="<?= $detail->nomr ?>" class="riwayat-form-link">Edukasi Pasien</a></li>
+                                                            <li><a href="#" data-pil="cppt" data-idx="<?= $detail->idx ?>" data-nomr="<?= $detail->nomr ?>" class="riwayat-form-link">CPPT</a></li>
+                                                            <li><a href="#" data-pil="prmrj" data-idx="<?= $detail->idx ?>" data-nomr="<?= $detail->nomr ?>" class="riwayat-form-link">Profil Ringkas Medis Rawat Jalan</a></li>
                                                         </ul>
                                                     </div>
                                                     <button type="button" class="btn btn-sm btn-default" onclick="reloadPage()"><i class="fa fa-refresh"></i></button>
                                             </td>
                                             <td>
                                                 <b>Hari/Tanggal Masuk</b><br />
-                                                <?php echo DateToIndoDayTime($detail->tgl_masuk) ?> <br/><br/>
-                                                <b>Riwayat</b><br/>
-                                                <button class="btn btn-sm btn-success" onclick="riwayatRajal('<?= $detail->nomr ?>')"><i class="fa fa-history" data-toggle="tooltip" title="Tampilkan Riwayat" ></i></button>
+                                                <?php echo DateToIndoDayTime($detail->tgl_masuk) ?> <br /><br />
+                                                <b>Riwayat</b><br />
+                                                <button class="btn btn-sm btn-success" onclick="riwayatRajal('<?= $detail->nomr ?>')"><i class="fa fa-history" data-toggle="tooltip" title="Tampilkan Riwayat"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -237,7 +237,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-2 col-md-3">
                 <div class="row">
                     <div class="col-md-12" style="padding-right:2px !important">
                         <div class="box box-success">
@@ -250,7 +250,7 @@
                         <div class="box box-success">
                             <div class="box-header ui-sortable-handle" style="cursor: move;">
                                 <i class="ion ion-clipboard"></i>
-                                <h5 class="box-title">Detail</h5>
+                                <h5 class="box-title">Detail & Aksi</h5>
                             </div>
                             <div class="box-body" id="riwayat">
 
@@ -259,7 +259,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8" style="padding:0 2px !important">
+            <div class="col-sm-10 col-md-9" style="padding:0 2px !important">
                 <?php $this->load->view("erm/rajal/rajal_content") ?>
             </div>
         </div>
@@ -285,7 +285,7 @@
                 <h4 class="modal-title">Riwayat Rawat Jalan</h4>
             </div>
             <div class="modal-body" id="modal-riwayat-rajal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -299,12 +299,46 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body" id="modal-riwayat-form-body" >
+            <div class="modal-body" id="modal-riwayat-form-body">
 
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-sign-dpjp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Review & Generate Barcode</h4>
+            </div>
+            <form action="javascript:void(0)" id="form-sign-dpjp">
+                <div class="modal-body">
+                    <input type="hidden" name="sign_dpjp_idx" id="sign_dpjp_idx">
+                    <input type="hidden" name="sign_dpjp_id" id="sign_dpjp_id">
+                    <input type="hidden" name="sign_dpjp_nomr" id="sign_dpjp_nomr">
+                    <input type="hidden" name="sign_dpjp_user" id="sign_dpjp_user" value="<?=$detail->dokterJaga?>">
+                    <div class="form-group">
+                        <label for="">Nama Dokter</label>
+                        <input type="text" name="sign_dpjp_user_name" id="sign_dpjp_user_name" class="form-control" value="<?=$detail->namaDokterJaga?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Review DPJP</label>
+                        <textarea name="sign_dpjp_review" id="sign_dpjp_review" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" name="sign_dpjp_pass" id="sign_dpjp_pass" class="form-control" name="" id="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="SaveSignReviewDpjp()">Save & Generate Barcode</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -321,12 +355,12 @@
             $("a[href='#tab_1']").trigger("click")
         }
 
-        $('#table-prmrj').on('shown.bs.collapse', function () {
+        $('#table-prmrj').on('shown.bs.collapse', function() {
             $($.fn.dataTable.tables(true)).DataTable()
                 .columns.adjust();
         });
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
             $($.fn.dataTable.tables(true)).DataTable()
                 .columns.adjust();
         });
@@ -366,134 +400,147 @@
             e.preventDefault();
             // alert($("[name='tiba_ka']:checked").val()==undefined);
             // return false;
-            if ($("[name='tiba_ka']:checked").val()==undefined) {
+            if ($("[name='tiba_ka']:checked").val() == undefined) {
                 swal("Tiba di ruangan wajib di isi");
                 return false;
             }
-            if ($("[name='rujukan_ka']:checked").val()==undefined) {
+            if ($("[name='rujukan_ka']:checked").val() == undefined) {
                 swal("Rujukan Wajib Diisi");
                 return false;
             }
 
-            if ($("#keluhan_ka").val()=="") {
+            if ($("#keluhan_ka").val() == "") {
                 swal("Keluhan Waji Di ISI");
                 return false;
             }
-            
-            if ($("#dirawat_ka").val()=="") {
+
+            if ($("#dirawat_ka").val() == "") {
                 swal("Riwayat rawat wajib diisi");
                 return false;
             }
 
-            if ($("#diagnosis_ka").val()=="") {
+            if ($("#diagnosis_ka").val() == "") {
                 swal("Riwayat Diagnosis wajib diisi");
                 return false;
             }
 
-            if ($("#riwayat_sakit_ka").val()=="") {
+            if ($("#riwayat_sakit_ka").val() == "") {
                 swal("Riwayat penyakit dahulu wajib diisi");
                 return false;
             }
 
-            if ($("#riwayat_sakit_keluarga_ka").val()=="") {
+            if ($("#riwayat_sakit_keluarga_ka").val() == "") {
                 swal("Riwayat penyakit keluarga dahulu wajib diisi");
                 return false;
             }
 
-            if ($("#riwayat_psikologis_ka").val()=="") {
+            if ($("#riwayat_psikologis_ka").val() == "") {
                 swal("Riwayat psikologis wajib diisi");
                 return false;
             }
 
-            if ($("[name='kultural_ka']:checked").val()==undefined) {
+            if ($("[name='kultural_ka']:checked").val() == undefined) {
                 swal("Hubungan pasien dan keluarga Wajib Diisi");
                 return false;
             }
 
-            if ($("#status_ekonomi_ka").val()=="") {
+            if ($("#status_ekonomi_ka").val() == "") {
                 swal("Status ekonomi pasien wajib diisi");
                 return false;
             }
 
-            if ($("[name='obat_ka']:checked").val()==undefined) {
+            if ($("[name='obat_ka']:checked").val() == undefined) {
                 swal("Riwayat alergi obat Wajib Diisi");
                 return false;
             }
 
-            if ($("[name='makanan_ka']:checked").val()==undefined) {
+            if ($("[name='makanan_ka']:checked").val() == undefined) {
                 swal("Riwayat alergi makanan Wajib Diisi");
                 return false;
             }
 
-            if ($("[name='nyeri_ka']:checked").val()==undefined) {
+            if ($("[name='nyeri_ka']:checked").val() == undefined) {
                 swal("Skrining nyeri Wajib Diisi");
                 return false;
             }
 
-            if ($("[name='aktivitas_ka']:checked").val()==undefined) {
+            if ($("[name='aktivitas_ka']:checked").val() == undefined) {
                 swal("Status fungsional Wajib Diisi");
                 return false;
             }
 
-            if ($("[name='jatuh_ka']:checked").val()==undefined) {
+            if ($("[name='jatuh_ka']:checked").val() == undefined) {
                 swal("Resiko Jatuh Wajib Diisi");
                 return false;
             }
 
-            if ($("#keadaan_umum_ka").val()=="") {
+            if ($("#keadaan_umum_ka").val() == "") {
                 swal("Keadaan umum pasien wajib diisi");
                 return false;
             }
 
-            if ($("#kesadaran_umum_ka").val()=="") {
+            if ($("#kesadaran_umum_ka").val() == "") {
                 swal("Kesadaran pasien wajib diisi");
                 return false;
             }
 
-            if ($("#gcs_e_ka").val()=="" && $("#gcs_m_ka").val()=="" && $("#gcs_v_ka").val()=="" ) {
+            if ($("#gcs_e_ka").val() == "" && $("#gcs_m_ka").val() == "" && $("#gcs_v_ka").val() == "") {
                 swal("GCS wajib diisi semua");
                 return false;
             }
 
-            if ($("#ttv_sh_ka").val()=="" && $("#ttv_nd_ka").val()=="" && $("#ttv_rr_ka").val()=="" && $("#ttv_spo2_ka").val()=="" && $("#ttv_td_ka").val()=="" && $("#ttv_ds_ka").val()=="") {
+            if ($("#ttv_sh_ka").val() == "" && $("#ttv_nd_ka").val() == "" && $("#ttv_rr_ka").val() == "" && $("#ttv_spo2_ka").val() == "" && $("#ttv_td_ka").val() == "" && $("#ttv_ds_ka").val() == "") {
                 swal("TTV wajib diisi semua");
                 return false;
             }
 
-            if ($("#status_generalis_ka").val()=="") {
+            if ($("#status_generalis_ka").val() == "") {
                 swal("Status generalis wajib diisi");
                 return false;
             }
 
-            if ($("#komunikasi_ka").val()=="") {
+            if ($("#komunikasi_ka").val() == "") {
                 swal("Hambatan dalam pemberlajaran wajib diisi");
                 return false;
             }
 
-            if ($("#komunikasi_penerjemah_ka").val()=="") {
+            if ($("#komunikasi_penerjemah_ka").val() == "") {
                 swal("Kebutuhan penerjemah wajib diisi");
                 return false;
             }
 
-            if ($("[name='jatuh_ka']:checked").val()==undefined) {
+            if ($("[name='jatuh_ka']:checked").val() == undefined) {
                 swal("Kebutuhan edukasi Wajib Diisi");
                 return false;
             }
 
-            if ($("#diagnosa_keperawatan_ka").val()=="") {
+            if ($("#diagnosa_keperawatan_ka").val() == "") {
                 swal("Diagnosa keperawatan wajib diisi");
                 return false;
             }
-            if ($("#tindakan_keperawatan_ka").val()=="") {
+            if ($("#tindakan_keperawatan_ka").val() == "") {
                 swal("Tindakan keperawatan wajib diisi");
                 return false;
             }
 
+            // if ($("#apd_ka").val()=="") {
+            //     swal("Pemakaian apd wajib diisi");
+            //     $("#apd_ka").focus();
+            //     return false;
+            // }
 
-            if ($("#perawat_id_ka").val()=="") {
+            // if ($("#bmhp_ka").val()=="") {
+            //     swal("Pemakaian bmhp wajib diisi");
+            //     $("#bmhp_ka").focus();
+            //     return false;
+            // }
+
+            if ($("#perawat_id_ka").val() == "") {
                 swal("Perawat Yang Melakukan Kajian Wajib Di isi");
                 return false;
             }
+
+
 
             var data_form = $(this).serializeArray();
             var data_push = [{
@@ -556,8 +603,8 @@
                     $(":submit").attr("disabled", false);
                     getRiwayat(3, <?= $detail->idx ?>);
                     setTimeout(() => {
-                        reload_page()
-                    }, 2000); 
+                        reloadPage();
+                    }, 2000);
                     $("#ar_preview").removeClass("hide")
                     $("#ar_form").addClass("hide")
                 },
@@ -570,22 +617,22 @@
         // insert data kaji awal medis
         $("#form-data-kaji-awal-medis").on("submit", function(e) {
             e.preventDefault();
-            if ($("#td_m").val()=="") {
+            if ($("#td_m").val() == "") {
                 alert("TD wajib diisi");
                 return false;
             }
 
-            if ($("#nadi_m").val()=="") {
+            if ($("#nadi_m").val() == "") {
                 alert("Nadi wajib diisi");
                 return false;
             }
 
-            if ($("#napas_m").val()=="") {
+            if ($("#napas_m").val() == "") {
                 alert("Nadi wajib diisi");
                 return false;
             }
 
-            if ($("#suhu_m").val()=="") {
+            if ($("#suhu_m").val() == "") {
                 alert("Nadi wajib diisi");
                 return false;
             }
@@ -604,7 +651,7 @@
 
             var banding = CKEDITOR.instances['diagnosis_banding_m'].getData().replace(/<[^>]*>/gi, '').length;
             if (!banding) {
-                alert("Pemeriksaan penunjang wajib diisi");
+                alert("Diagnosis Banding Wajib diisi");
                 return false;
             }
 
@@ -614,7 +661,7 @@
                 return false;
             }
 
-            if ($("#dokter_id_m").val()=="") {
+            if ($("#dokter_id_m").val() == "") {
                 alert("DPJP wajib diisi");
                 return false;
             }
@@ -629,24 +676,24 @@
                     value: $("#kontrol_tujuan_id_m option:selected").text()
                 },
                 {
-                    name : "pj_nama_m",
-                    value : $("#pj_nama_m").val()
+                    name: "pj_nama_m",
+                    value: $("#pj_nama_m").val()
                 },
                 {
-                    name : "diagnosis_kerja_mt",
-                    value : CKEDITOR.instances.diagnosis_kerja_m.getData()
+                    name: "diagnosis_kerja_mt",
+                    value: CKEDITOR.instances.diagnosis_kerja_m.getData()
                 },
                 {
-                    name : "diagnosis_banding_mt",
-                    value : CKEDITOR.instances.diagnosis_banding_m.getData()
+                    name: "diagnosis_banding_mt",
+                    value: CKEDITOR.instances.diagnosis_banding_m.getData()
                 },
                 {
-                    name : "penunjang_mt",
-                    value : CKEDITOR.instances.penunjang_m.getData()
+                    name: "penunjang_mt",
+                    value: CKEDITOR.instances.penunjang_m.getData()
                 },
                 {
-                    name : "terapi_mt",
-                    value : CKEDITOR.instances.terapi_m.getData()
+                    name: "terapi_mt",
+                    value: CKEDITOR.instances.terapi_m.getData()
                 },
             ];
             data_form = $.merge(data_form, data_push)
@@ -680,11 +727,11 @@
         // insert perkembangan pasien terintegrasi
         $("#form-data-kembang-pasien").on("submit", function(e) {
             e.preventDefault();
-            if ($("#jenis_tenaga_medis_id_k").val()=="") {
+            if ($("#jenis_tenaga_medis_id_k").val() == "") {
                 alert("Profesional wajib diisi")
                 return false;
             }
-            if ($("#tenaga_medis_id_k").val()=="") {
+            if ($("#tenaga_medis_id_k").val() == "") {
                 alert("Nama Profesional wajib diisi")
                 return false;
             }
@@ -729,28 +776,28 @@
                     value: $("#tenaga_medis_id_k option:selected").text()
                 },
                 {
-                    name : "subyektif_kt",
-                    value : CKEDITOR.instances.subyektif_k.getData()
-                },{
-                    name : "obyektif_kt",
-                    value : CKEDITOR.instances.obyektif_k.getData()
+                    name: "subyektif_kt",
+                    value: CKEDITOR.instances.subyektif_k.getData()
+                }, {
+                    name: "obyektif_kt",
+                    value: CKEDITOR.instances.obyektif_k.getData()
                 },
                 {
-                    name : "assesment_kt",
-                    value : CKEDITOR.instances.assesment_k.getData()
+                    name: "assesment_kt",
+                    value: CKEDITOR.instances.assesment_k.getData()
                 },
                 {
-                    name : "planning_kt",
-                    value : CKEDITOR.instances.planning_k.getData()
+                    name: "planning_kt",
+                    value: CKEDITOR.instances.planning_k.getData()
                 },
                 {
-                    name : "instruksi_kt",
-                    value : CKEDITOR.instances.instruksi_k.getData()
+                    name: "instruksi_kt",
+                    value: CKEDITOR.instances.instruksi_k.getData()
                 },
-                {
-                    name : "review_kt",
-                    value : CKEDITOR.instances.review_k.getData()
-                },
+                // {
+                //     name: "review_kt",
+                //     value: CKEDITOR.instances.review_k.getData()
+                // },
             ];
             data_form = $.merge(data_form, data_push)
             // console.log(data_form);
@@ -795,6 +842,7 @@
                     $("#form-data-edukasi-pasien:submit").attr("disabled", true);
                 },
                 success: function(response) {
+                    console.log(response)
                     // localStorage.setItem("id_rj_iep_"+idx, response.id);
                     // $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
                     // $("#form-data-edukasi-pasien").addClass("hide");
@@ -813,7 +861,7 @@
         })
 
         // inser permintaan Penunjang
-        $("#form-permintaan-penunjang").on("submit",function(e) {
+        $("#form-permintaan-penunjang").on("submit", function(e) {
             e.preventDefault();
             let data_form = $(this).serializeArray();
             var data_push = [{
@@ -825,53 +873,53 @@
                     "value": $("#pemeriksaan_pp :selected").text()
                 }
             ]
-            data_form = $.merge(data_form,data_push);
+            data_form = $.merge(data_form, data_push);
             // console.log(data_form)
             // return false;
             $.ajax({
                 method: "POST",
-                url: base_url+"rajal/insert_permintaan_penunjang",
+                url: base_url + "rajal/insert_permintaan_penunjang",
                 data: data_form,
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     reloadPage();
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
         })
 
-        $(".riwayat-form-link").on("click",function(e) {
+        $(".riwayat-form-link").on("click", function(e) {
             e.preventDefault();
             var pil = $(this).data("pil")
             var nomr = $(this).data("nomr")
             var idx = $(this).data("idx")
             $.ajax({
                 type: "POSt",
-                url: base_url+"rajal/get_riwayat_form",
+                url: base_url + "rajal/get_riwayat_form",
                 data: {
-                    pil:pil,
-                    nomr : nomr,
-                    idx : idx
+                    pil: pil,
+                    nomr: nomr,
+                    idx: idx
                 },
                 dataType: "html",
-                success: function (response) {
+                success: function(response) {
                     $("#modal-riwayat-form").modal("show")
                     $("#modal-riwayat-form-body").html(response)
                 },
-                error : function(e) {
+                error: function(e) {
                     console.log(e.responseText)
                 }
             });
         })
 
-        $("#kembang-pasien-review-sign").on("submit",function (e) {
+        $("#kembang-pasien-review-sign").on("submit", function(e) {
             e.preventDefault();
             alert("OK")
         })
 
-        
+
 
     });
 
@@ -885,6 +933,7 @@
     function reloadPage() {
         location.reload();
     }
+
     function tambahAwalRawat() {
         $("#ar_preview").addClass("hide")
         $("#ar_form").removeClass("hide")
@@ -899,6 +948,7 @@
         $("#kp_preview").addClass("hide")
         $("#kp_form").removeClass("hide")
     }
+
     function getRiwayat(pil, idx) {
         $.ajax({
             type: "post",
@@ -914,7 +964,7 @@
                         </div>`);
             },
             success: function(response) {
-                localStorage.setItem("tab_aktif",pil)
+                localStorage.setItem("tab_aktif", pil)
                 $("#riwayat").html(response);
             },
             error: function(e) {
@@ -923,36 +973,42 @@
         });
     }
 
-    function editAwalMedis(idx,id,nomr) {
+    function editAwalMedis(idx, id, nomr) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/edit_awal_medis",
+            url: base_url + "rajal/edit_awal_medis",
             data: {
-                idx : idx,
-                id : id,
-                nomr : nomr
+                idx: idx,
+                id: id,
+                nomr: nomr
             },
             dataType: "JSON",
-            success: function (response) {
+            success: function(response) {
                 let data = response.data;
                 // console.log(data.kontrol_tgl)
 
                 $("#tampil_awal_medis").show()
+                $("#cppt_id_m").val(data.cppt_id)
                 $("#panduan_m").val(data.kode_m_pk).trigger("change");
                 $("[name='hari_m']").val(data.hari)
                 $("[name='tgl_m']").val(data.tgl)
                 $("[name='jam_m']").val(data.jam)
-                $("[name='auto_detail_m']").val(data.auto_detail)
-                $("[name='allo_m']").val(data.allo)
-                $("[name='allo_detail_m']").val(data.allo_detail)
+                // $("[name='auto_detail_m']").val(data.auto_detail)
+                // if (data.auto_detail==1) {
+                //     $("[name='auto_detail_m[]']").val(data.auto_detail?.split(";")).trigger("change");
+                // }
+                // $("[name='allo_m']").val(data.allo)
+                // $("[name='allo_detail_m']").val(data.allo_detail)
+                //  $("[name='allo_detail_m[]']").val(data.allo_detail?.split(";")).trigger("change");
                 $("[name='td_m']").val(data.td)
                 $("[name='nadi_m']").val(data.nadi)
                 $("[name='napas_m']").val(data.napas)
                 $("[name='suhu_m']").val(data.suhu)
-                $("[name='fisik_detail_m']").text(data.fisik_detail)
+                // $("[name='fisik_detail_m']").text(data.fisik_detail)
+                $("[name='fisik_detail_m[]']").val(data.fisik_detail?.split(";")).trigger("change");
                 CKEDITOR.instances['diagnosis_kerja_m'].setData(data.diagnosis_kerja)
                 CKEDITOR.instances['diagnosis_banding_m'].setData(data.diagnosis_banding)
-                // CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
+                CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
                 CKEDITOR.instances['terapi_m'].setData(data.terapi)
                 $("[name='kontrol_m']").val(data.kontrol)
                 $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
@@ -963,46 +1019,46 @@
                 $("[name='pj_nama_m']").val(data.pj_nama)
                 $("[name='dokter_id_m']").val(data.dokter_id).trigger("change")
                 if (data.auto) {
-                    $("[name='auto_m']").prop("checked",true).trigger("change")
+                    $("[name='auto_m']").prop("checked", true).trigger("change")
+                    $("[name='auto_detail_m[]']").val(data.auto_detail?.split(";")).trigger("change");
                 } else {
-                    $("[name='auto_m']").prop("checked",false).trigger("change")
+                    $("[name='auto_m']").prop("checked", false).trigger("change")
                 }
                 if (data.allo) {
-                    $("[name='allo_m']").prop("checked",true).trigger("change")
+                    $("[name='allo_m']").prop("checked", true).trigger("change")
+                    $("[name='allo_detail_m[]']").val(data.allo_detail?.split(";")).trigger("change");
                 } else {
-                    $("[name='allo_m']").prop("checked",false).trigger("change")
+                    $("[name='allo_m']").prop("checked", false).trigger("change")
                 }
                 if (data.kontrol) {
-                    $("[name='kontrol_m']").prop("checked",true).trigger("change")
+                    $("[name='kontrol_m']").prop("checked", true).trigger("change")
                     $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
                     $("[name='kontrol_jam_m']").val(data.kontrol_jam)
                 } else {
-                    $("[name='kontrol_m']").prop("checked",false).trigger("change")
+                    $("[name='kontrol_m']").prop("checked", false).trigger("change")
                 }
-
-                
 
                 swal("Silahkan Edit Data")
                 $("#am_form").removeClass("hide")
                 $("#am_preview").addClass("hide")
             },
-            error: function (e) {
+            error: function(e) {
                 console.log(e)
             }
         });
     }
 
-    function editKembangPasien(idx,id,nomr) {
+    function editKembangPasien(idx, id, nomr) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/edit_kembang_pasien",
+            url: base_url + "rajal/edit_kembang_pasien",
             data: {
-                idx : idx,
-                id : id,
-                nomr : nomr
+                idx: idx,
+                id: id,
+                nomr: nomr
             },
             dataType: "JSON",
-            success: function (response) {
+            success: function(response) {
                 let data = response.data;
                 $("[name='id_kembang_pasien']").val(data.id);
                 $("[name='tgl_k']").val(data.tgl);
@@ -1015,55 +1071,58 @@
                 CKEDITOR.instances['assesment_k'].setData(data.assesment)
                 CKEDITOR.instances['planning_k'].setData(data.planning)
                 CKEDITOR.instances['instruksi_k'].setData(data.instruksi)
-                CKEDITOR.instances['review_k'].setData(data.review)
+                // CKEDITOR.instances['review_k'].setData(data.review)
 
-                list_tenaga_medis(data.jenis_tenaga_medis_id,data.tenaga_medis_id);
+                list_tenaga_medis(data.jenis_tenaga_medis_id, data.tenaga_medis_id);
                 $("#kp_form").removeClass("hide")
                 $("#kp_preview").addClass("hide")
                 swal("Silahkan Edit Data")
             },
-            error: function (e) {
+            error: function(e) {
                 console.log(e)
             }
         });
     }
 
-    function editAwalRawat(idx,id,nomr) {
+    function editAwalRawat(idx, id, nomr, stat) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/edit_kaji_awal",
+            url: base_url + "rajal/edit_kaji_awal",
             data: {
-                idx : idx,
-                id : id,
-                nomr : nomr
+                idx: idx,
+                id: id,
+                nomr: nomr
             },
             dataType: "JSON",
-            success: function (response) {
+            success: function(response) {
                 // localStorage.setItem("response", JSON.stringify(response));
                 // console.log(response)
                 let data = response.data;
-                responseAwalRawat(data)
+                responseAwalRawat(data, stat)
                 swal("Silahkan Edit Data")
                 $("#modal-riwayat-form").modal("hide")
                 $("ar_form").removeClass("hide")
                 $("#ar_preview").addClass("hide")
                 $("#ar_form").removeClass("hide")
             },
-            error: function (e) {
+            error: function(e) {
                 console.log(e)
             }
         });
     }
 
-    function responseAwalRawat(data) {
-        $("[name='cppt_id_m']").val(data.cppt_id);
-        $("[name='poli_ka']").val(data.poli).trigger("change");
+    function responseAwalRawat(data, stat) {
+        $("[name='cppt_id_ka']").val(data.cppt_id);
         $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
-        $("[name='dpjp_id_ka']").val(data.dpjp_id).trigger("change");
-        $("[name='tanggal_ka']").val(data.tanggal);
-        $("[name='jam_ka']").val(data.jam);
-        $(`[name='tiba_ka'][value='${data.tiba}']`).prop("checked",true)
-        $(`[name='rujukan_ka'][value='${data.rujukan}']`).prop("checked",true)
+        if (stat != 1) {
+            $("[name='poli_ka']").val(data.poli).trigger("change");
+            $("[name='dpjp_id_ka']").val(data.dpjp_id).trigger("change");
+            $("[name='tanggal_ka']").val(data.tanggal);
+            $("[name='jam_ka']").val(data.jam);
+        }
+
+        $(`[name='tiba_ka'][value='${data.tiba}']`).prop("checked", true)
+        $(`[name='rujukan_ka'][value='${data.rujukan}']`).prop("checked", true)
         $("[name='rujukan_lainnya_ka']").val(data.rujukan_lainnya);
         $("[name='keluhan_ka']").val(data.keluhan);
         $("[name='dirawat_ka']").val(data.dirawat);
@@ -1071,21 +1130,21 @@
         $("[name='dimana_dirawat_ka']").val(data.dimana_dirawat);
         $("[name='diagnosis_ka']").val(data.diagnosis);
         if (data.implant) {
-            $("[name='implant_ka']").prop("checked",true)
-            $("[name='implant_detail_ka']").prop("readonly",false)
+            $("[name='implant_ka']").prop("checked", true)
+            $("[name='implant_detail_ka']").prop("readonly", false)
         } else {
-            $("[name='implant_ka']").prop("checked",false)
-            $("[name='implant_detail_ka']").prop("readonly",true)
+            $("[name='implant_ka']").prop("checked", false)
+            $("[name='implant_detail_ka']").prop("readonly", true)
         }
         $("[name='implant_detail_ka']").val(data.implant_detail);
         if (data.riwayat_operasi_cek) {
-            $("[name='riwayat_operasi_cek_ka']").prop("checked",true)
-            $("[name='riwayat_operasi_ka']").prop("readonly",false)
-            $("[name='riwayat_operasi_tahun_ka']").prop("disabled",false)
+            $("[name='riwayat_operasi_cek_ka']").prop("checked", true)
+            $("[name='riwayat_operasi_ka']").prop("readonly", false)
+            $("[name='riwayat_operasi_tahun_ka']").prop("disabled", false)
         } else {
-            $("[name='riwayat_operasi_cek_ka']").prop("checked",false)
-            $("[name='riwayat_operasi_ka']").prop("readonly",true)
-            $("[name='riwayat_operasi_tahun_ka']").prop("disabled",true)
+            $("[name='riwayat_operasi_cek_ka']").prop("checked", false)
+            $("[name='riwayat_operasi_ka']").prop("readonly", true)
+            $("[name='riwayat_operasi_tahun_ka']").prop("disabled", true)
         }
         $("[name='riwayat_operasi_ka']").val(data.riwayat_operasi)
         $("[name='riwayat_operasi_tahun_ka']").val(data.riwayat_operasi_tahun)
@@ -1093,36 +1152,36 @@
         $("[name='riwayat_sakit_ka[]']").val(data.riwayat_sakit?.split(";")).trigger("change");
         $("[name='riwayat_sakit_keluarga_ka[]']").val(data.riwayat_sakit_keluarga?.split(";")).trigger("change");
         $("[name='riwayat_psikologis_ka[]']").val(data.riwayat_psikologis?.split(";")).trigger("change");
-        (data.status_mental_sadar)?$("[name='status_mental_sadar_ka']").prop("checked",true):"";
-        (data.status_mental_prilaku)?$("[name='status_mental_prilaku_ka']").prop("checked",true):"";
-        (data.status_mental_keras)?$("[name='status_mental_keras_ka']").prop("checked",true):"";
+        (data.status_mental_sadar) ? $("[name='status_mental_sadar_ka']").prop("checked", true): "";
+        (data.status_mental_prilaku) ? $("[name='status_mental_prilaku_ka']").prop("checked", true): "";
+        (data.status_mental_keras) ? $("[name='status_mental_keras_ka']").prop("checked", true): "";
         $("[name='status_mental_prilaku_detail_ka']").val(data.status_mental_prilaku_detail)
         $("[name='status_mental_keras_detail_ka']").val(data.status_mental_keras_detail)
-        $(`[name='kultural_ka'][value='${data.kultural}']`).prop("checked",true)
+        $(`[name='kultural_ka'][value='${data.kultural}']`).prop("checked", true)
         $("[name='kultural_nama_ka']").val(data.kultural_nama);
         $("[name='kultural_hubungan_ka']").val(data.kultural_hubungan);
         $("[name='kultural_phone_ka']").val(data.kultural_phone);
         $("[name='nilai_kepercayaan_ka']").val(data.nilai_kepercayaan);
         $("[name='status_ekonomi_ka[]']").val(data.status_ekonomi?.split(";")).trigger("change");
         $("[name='spiritual_biasa_ka']").val(data.spiritual_biasa);
-        $(`[name='obat_ka'][value='${data.obat}']`).prop("checked",true)
-        $(`[name='makanan_ka'][value='${data.makanan}']`).prop("checked",true)
+        $(`[name='obat_ka'][value='${data.obat}']`).prop("checked", true)
+        $(`[name='makanan_ka'][value='${data.makanan}']`).prop("checked", true)
         $("[name='riwayat_lain_ka']").val(data.riwayat_lain);
         // strong kids
         var strong_kids = data.strong_kids?.split(";")
         if (strong_kids) {
-            strong_kids.forEach((value,index)=>{
-                $(`[name='strong_kids_ka[]'][value='${value}']`).prop("checked",true)
+            strong_kids.forEach((value, index) => {
+                $(`[name='strong_kids_ka[]'][value='${value}']`).prop("checked", true)
             })
         }
-        
-        $(`[name='aktivitas_ka'][value='${data.aktivitas}']`).prop("checked",true)
+
+        $(`[name='aktivitas_ka'][value='${data.aktivitas}']`).prop("checked", true)
         $("[name='akftivitas_detail_ka']").val(data.aktivitas_detail);
-        $(`[name='aktivitas_info_ka'][value='${data.aktivitas_info}']`).prop("checked",true)
+        $(`[name='aktivitas_info_ka'][value='${data.aktivitas_info}']`).prop("checked", true)
         $("[name='aktivitas_info_detail_ka']").val(data.aktivitas_info_detail);
-        $(`[name='jatuh_ka'][value='${data.jatuh}']`).prop("checked",true)
-        $(`[name='gelang_resiko_ka'][value='${data.gelang_resiko}']`).prop("checked",true)
-        $(`[name='risiko_info_ka'][value='${data.risiko_info}']`).prop("checked",true)
+        $(`[name='jatuh_ka'][value='${data.jatuh}']`).prop("checked", true)
+        $(`[name='gelang_resiko_ka'][value='${data.gelang_resiko}']`).prop("checked", true)
+        $(`[name='risiko_info_ka'][value='${data.risiko_info}']`).prop("checked", true)
         $("[name='risiko_info_detail_ka']").val(data.risiko_info_detail);
         $("[name='keadaan_umum_ka']").val(data.keadaan_umum);
         $("[name='kesadaran_umum_ka']").val(data.kesadaran_umum);
@@ -1136,17 +1195,17 @@
         $("[name='ttv_td_ka']").val(data.ttv_td);
         $("[name='ttv_ds_ka']").val(data.ttv_ds);
         $("[name='status_generalis_ka']").val(data.status_generalis);
-        $(`[name='penunjang_rad_ka'][value='${data.penunjang_rad}']`).prop("checked",true)
+        $(`[name='penunjang_rad_ka'][value='${data.penunjang_rad}']`).prop("checked", true)
         $("[name='penunjang_rad_detail_ka']").val(data.penunjang_rad_detail);
-        $(`[name='penunjang_lab_ka'][value='${data.penunjang_lab}']`).prop("checked",true)
+        $(`[name='penunjang_lab_ka'][value='${data.penunjang_lab}']`).prop("checked", true)
         $("[name='penunjang_lab_detail_ka']").val(data.penunjang_lab_detail);
-        $(`[name='penunjang_lain_ka'][value='${data.penunjang_lain}']`).prop("checked",true)
+        $(`[name='penunjang_lain_ka'][value='${data.penunjang_lain}']`).prop("checked", true)
         $("[name='penunjang_lain_detail_ka']").val(data.penunjang_lain_detail);
         // kebutuhan edukasi
         var kebutuhan_edukasi = data.kebutuhan_edukasi?.split(";")
         if (kebutuhan_edukasi) {
-            kebutuhan_edukasi.forEach((value,index)=>{
-                $(`[name='kebutuhan_edukasi_ka[]'][value='${value}']`).prop("checked",true)
+            kebutuhan_edukasi.forEach((value, index) => {
+                $(`[name='kebutuhan_edukasi_ka[]'][value='${value}']`).prop("checked", true)
             })
         }
         $("[name='kebutuhan_edukasi_tindakan_ka']").val(data.kebutuhan_edukasi_tindakan);
@@ -1155,39 +1214,41 @@
         // CKEDITOR.instances['tindakan_keperawatan_ka'].setData(data.tindakan_keperawatan)
         $("[name='diagnosa_keperawatan_ka[]']").val(data.diagnosa_keperawatan?.split(";")).trigger("change");
         $("[name='tindakan_keperawatan_ka[]']").val(data.tindakan_keperawatan?.split(";")).trigger("change");
-        $(`[name='dijelaskan_ka'][value='${data.dijelaskan}']`).prop("checked",true);
+        $("[name='apd_ka[]']").val(data.apd?.split(";")).trigger("change");
+        $("[name='bmhp_ka[]']").val(data.bmhp?.split(";")).trigger("change");
+        $(`[name='dijelaskan_ka'][value='${data.dijelaskan}']`).prop("checked", true);
         $("[name='dijelaskan_hubungan_ka']").val(data.dijelaskan_hubungan);
         $("[name='dijelaskan_nama_ka']").val(data.dijelaskan_nama);
         $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
         $("[name='komunikasi_penerjemah_ka']").val(data.komunikasi_penerjemah)
-        
+
         // skrining nyeri
         var nyeri = data.nyeri;
-        $(`[name='nyeri_ka'][value='${nyeri}']`).prop("checked",true)
-        if (nyeri!="tidak ada nyeri") {
-            $(".skrining_nyeri").prop("hidden",false)
+        $(`[name='nyeri_ka'][value='${nyeri}']`).prop("checked", true)
+        if (nyeri != "tidak ada nyeri") {
+            $(".skrining_nyeri").prop("hidden", false)
             $("[name='profokatif_ka']").val(data.profokatif);
             $("[name='quality_ka']").val(data.quality);
             $("[name='region_ka']").val(data.region);
             $("[name='skala_ka']").val(data.skala);
             $("[name='timing_ka']").val(data.timing);
-            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked",true)
-            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked",true)
-            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked",true)
+            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", true)
+            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", true)
+            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", true)
 
             var metode = data.metode;
-            $(`[name='metode_ka'][value='${metode}']`).prop("checked",true)
-            if (metode==1)  {
+            $(`[name='metode_ka'][value='${metode}']`).prop("checked", true)
+            if (metode == 1) {
                 $("#vas_pilih").removeClass("hide")
                 $("#wbfs_pilih").addClass("hide")
                 $("#flacc_pilih").addClass("hide")
                 $("[name='skala_vas_ka']").val(data.skala_vas);
-            } else if (metode==2) {
+            } else if (metode == 2) {
                 $("#vas_pilih").addClass("hide")
                 $("#wbfs_pilih").removeClass("hide")
                 $("#flacc_pilih").addClass("hide")
                 $("[name='skala_wbfs_ka']").val(data.skala_wbfs);
-            } else if (metode==3) {
+            } else if (metode == 3) {
                 $("#vas_pilih").addClass("hide")
                 $("#wbfs_pilih").addClass("hide")
                 $("#flacc_pilih").removeClass("hide")
@@ -1198,16 +1259,16 @@
                 $("#skor_flacc").text(data.flacc_skor)
             }
         } else {
-            $(".skrining_nyeri").prop("hidden",true)
+            $(".skrining_nyeri").prop("hidden", true)
             $("[name='profokatif_ka']").val("tidak ada");
             $("[name='quality_ka']").val("tidak ada");
             $("[name='region_ka']").val("tidak ada");
             $("[name='skala_ka']").val("tidak ada");
             $("[name='timing_ka']").val("tidak ada");
-            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked",false)
-            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked",false)
-            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked",false)
-            
+            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", false)
+            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", false)
+            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", false)
+
         }
 
         // gizi
@@ -1216,17 +1277,17 @@
         $("#skor_gizi").text(data.skor_gizi)
     }
 
-    function editEdukasiPasien(idx,id,nomr) {
+    function editEdukasiPasien(idx, id, nomr) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/edit_edukasi_pasien",
+            url: base_url + "rajal/edit_edukasi_pasien",
             data: {
-                idx : idx,
-                id : id,
-                nomr : nomr
+                idx: idx,
+                id: id,
+                nomr: nomr
             },
             dataType: "JSON",
-            success: function (response) {
+            success: function(response) {
                 let data = response.data;
                 console.log(data.penerjemah)
                 $("#bahasa_e").val(data.bahasa.split(";")).trigger("change")
@@ -1236,18 +1297,18 @@
                 $("#media_e").val(data.media.split(";")).trigger("change")
                 $("#kebutuhan_edukasi_e").val(data.kebutuhan_edukasi.split(";")).trigger("change")
                 $("#bahasa_lainnya").val(data.bahasa_lainnya)
-                $(`input[name='penerjemah_e'][value='${data.penerjemah}']`).prop("checked",true)
-                $(`input[name='kesediaan_e'][value='${data.kesediaan}']`).prop("checked",true)
-                $(`input[name='sasaran_edukasi_e'][value='${data.sasaran_edukasi}']`).prop("checked",true)
+                $(`input[name='penerjemah_e'][value='${data.penerjemah}']`).prop("checked", true)
+                $(`input[name='kesediaan_e'][value='${data.kesediaan}']`).prop("checked", true)
+                $(`input[name='sasaran_edukasi_e'][value='${data.sasaran_edukasi}']`).prop("checked", true)
                 $("#pendidikan_e").val(data.pendidikan)
                 $("#agama_e").val(data.agama)
                 $("#kesediaan_alasan_e").val(data.kesediaan_alasan)
                 $("#kebutuhan_edukasi_lain_e").val(data.kebutuhan_edukasi_lain)
                 $("#keyakinan_e").val(data.keyakinan)
                 $("#hubungan_keluarga_e").val(data.hubungan_keluarga)
-                
+
             },
-            error: function (e) {
+            error: function(e) {
                 console.log(e)
             }
         });
@@ -1293,6 +1354,7 @@
                     } else {
                         swal("Failed", "Something Wrong", "error");
                     }
+                    reloadPage();
                 },
                 error: function(e) {
                     console.log(e.responseText);
@@ -1340,6 +1402,7 @@
                     } else {
                         swal("Failed", "Something Wrong", "error");
                     }
+                    reloadPage()
                 },
                 error: function(e) {
                     console.log(e.responseText);
@@ -1372,35 +1435,35 @@
         }
     }
 
-    function signAwalMedis(idx,id,nomr,dokter) {
+    function signAwalMedis(idx, id, nomr, dokter) {
         var x = prompt("Masukkan Password");
-        if (x!=null && x!="") {
+        if (x != null && x != "") {
             $.ajax({
                 type: "post",
-                url: base_url+"rajal/cekPin",
+                url: base_url + "rajal/cekPin",
                 data: {
-                    x : x,
-                    user : dokter
+                    x: x,
+                    user: dokter
                 },
                 dataType: "json",
-                success: function (response) {
-                    if (response.status == true ) {
+                success: function(response) {
+                    if (response.status == true) {
                         $.ajax({
                             type: "POST",
-                            url: base_url+"rajal/sign_awal_medis",
+                            url: base_url + "rajal/sign_awal_medis",
                             data: {
-                                idx : idx,
-                                id : id,
-                                nomr : nomr,
-                                dokter : dokter
+                                idx: idx,
+                                id: id,
+                                nomr: nomr,
+                                dokter: dokter
                             },
                             dataType: "JSON",
-                            success: function (response) {
+                            success: function(response) {
                                 // console.log(response)
                                 swal("QRCODE berhasil di generate")
                                 reloadPage()
                             },
-                            error : function (e) {
+                            error: function(e) {
                                 console.log(e.responseText)
                             }
                         });
@@ -1408,41 +1471,41 @@
                         alert("Pin Salah...");
                     }
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
         }
-        
+
     }
 
-    function signKembangPasien(idx,id,nomr,user) {
+    function signKembangPasien(idx, id, nomr, user) {
         var x = prompt("Masukkan Password");
-        if (x!=null && x!="") {
+        if (x != null && x != "") {
             $.ajax({
                 type: "post",
-                url: base_url+"rajal/cekPin",
+                url: base_url + "rajal/cekPin",
                 data: {
-                    x : x,
-                    user : user
+                    x: x,
+                    user: user
                 },
                 dataType: "json",
-                success: function (response) {
-                    if (response.status == true ) {
+                success: function(response) {
+                    if (response.status == true) {
                         $.ajax({
                             type: "POST",
-                            url: base_url+"rajal/sign_kembang_pasien",
+                            url: base_url + "rajal/sign_kembang_pasien",
                             data: {
-                                idx : idx,
-                                id : id,
-                                nomr : nomr,
-                                user : user
+                                idx: idx,
+                                id: id,
+                                nomr: nomr,
+                                user: user
                             },
                             dataType: "JSON",
-                            success: function (response) {
+                            success: function(response) {
                                 reloadPage();
                             },
-                            error : function (e) {
+                            error: function(e) {
                                 console.log(e.responseText)
                             }
                         });
@@ -1450,14 +1513,52 @@
                         alert("Pin Salah...");
                     }
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
         }
     }
 
-    function signKembangPasienDpjp(idx,id,nomr,user) {
+    function signReviewDpjp(idx, id, nomr, user) {
+        $("#sign_dpjp_idx").val(idx)
+        $("#sign_dpjp_id").val(id)
+        $("#sign_dpjp_nomr").val(nomr)
+        // $("#sign_dpjp_user").val(user)
+        $("#modal-sign-dpjp").modal("show")
+    }
+
+    function SaveSignReviewDpjp() {
+        var form_data = $("#form-sign-dpjp").serializeArray()
+        if ($("#sign_dpjp_review").val() == "") {
+            swal("Review Wajib Diisi")
+            return false;
+        }
+        if ($("#sign_dpjp_pass").val() == "") {
+            swal("Password Wajib Diisi")
+            return false;
+        }
+        $.ajax({
+            method: "POST",
+            url: base_url + "rajal/sign_review_dpjp",
+            data: form_data,
+            dataType: "json",
+            success: function(response) {
+                if (response.status) {
+                    reloadPage()
+                } else {
+                    swal(response.msg)
+                }
+                 $("#modal-sign-dpjp").modal("hide")
+                
+                console.log(response)
+            }
+        }).done(function(data) {
+            console.log(data)
+        });
+    }
+
+    function signKembangPasienDpjp(idx, id, nomr, user) {
         $("[name='idDpjp']").val(id);
         $("[name='idxDpjp']").val(idx);
         $("[name='nomrDpjp']").val(nomr);
@@ -1465,35 +1566,35 @@
         $("#modal-kembang-pasien-review-form").modal("show")
     }
 
-    function signEdukasiPasienDetail(id,user) {
+    function signEdukasiPasienDetail(id, user) {
         // $("#modal-psw-e").modal("show")
         // console.log(user)
         // return false;
         var x = prompt("Masukkan Password");
-        if (x!=null && x!="") {
+        if (x != null && x != "") {
             $.ajax({
                 type: "post",
-                url: base_url+"rajal/cekPin",
+                url: base_url + "rajal/cekPin",
                 data: {
-                    x : x,
-                    user : user
+                    x: x,
+                    user: user
                 },
                 dataType: "json",
-                success: function (response) {
-                    if (response.status == true ) {
+                success: function(response) {
+                    if (response.status == true) {
                         $.ajax({
                             type: "POST",
-                            url: base_url+"rajal/sign_edukasi_pasien_detail",
+                            url: base_url + "rajal/sign_edukasi_pasien_detail",
                             data: {
-                                id : id,
-                                user : user
+                                id: id,
+                                user: user
                             },
                             dataType: "JSON",
-                            success: function (response) {
+                            success: function(response) {
                                 tampil_tabel();
                                 console.log(response)
                             },
-                            error : function (e) {
+                            error: function(e) {
                                 console.log(e.responseText)
                             }
                         });
@@ -1501,7 +1602,7 @@
                         alert("Pin Salah...");
                     }
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
@@ -1509,37 +1610,37 @@
     }
 
     function signEdukasiPasienDetailSasaran(id) {
-        
+
     }
-    
-    function signAwalRawat(idx,id,nomr,user) {
+
+    function signAwalRawat(idx, id, nomr, user) {
         var x = prompt("Masukkan Password");
-        if (x!=null) {
+        if (x != null) {
             $.ajax({
                 type: "post",
-                url: base_url+"rajal/cekPin",
+                url: base_url + "rajal/cekPin",
                 data: {
-                    x : x,
-                    user : user
+                    x: x,
+                    user: user
                 },
                 dataType: "json",
-                success: function (response) {
-                    if (response.status == true ) {
+                success: function(response) {
+                    if (response.status == true) {
                         $.ajax({
                             type: "POST",
-                            url: base_url+"rajal/sign_awal_rawat",
+                            url: base_url + "rajal/sign_awal_rawat",
                             data: {
-                                idx : idx,
-                                id : id,
-                                nomr : nomr,
-                                user : user
+                                idx: idx,
+                                id: id,
+                                nomr: nomr,
+                                user: user
                             },
                             dataType: "JSON",
-                            success: function (response) {
+                            success: function(response) {
                                 alert("QRCODE Berhasi di generate")
                                 // console.log(response)
                             },
-                            error : function (e) {
+                            error: function(e) {
                                 // console.log(e.responseText)
                             }
                         });
@@ -1547,42 +1648,43 @@
                         alert("Pin Salah...");
                     }
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
         }
-     
+
     }
 
-    function signPermintaanPenunjang(id,idx,user) {
+    function signPermintaanPenunjang(id, idx, user) {
         $("#sign_id").val(id)
         $("#sign_user").val(user)
         $("#sign_password").val("");
         $("#modal-sign-penunjang").modal("show")
     }
+
     function signPermintaanPenunjangAction() {
         let id = $("#sign_id").val();
         let password = $("#sign_password").val();
         let user = $("#sign_user").val();
         if (id) {
             $.ajax({
-                url: base_url+"rajal/sign_permintaan_penunjang",
+                url: base_url + "rajal/sign_permintaan_penunjang",
                 method: "post",
                 data: {
-                    id : id,
-                    password : password,
-                    user : user
+                    id: id,
+                    password: password,
+                    user: user
                 },
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     console.log(response)
                     swal(response.msg)
                     $("#modal-sign-penunjang").modal("hide")
                     $("#sign_id").val("")
                     $("#sign_user").val("")
                 },
-                error : function (e) {
+                error: function(e) {
                     console.log(e)
                 }
             });
@@ -1591,23 +1693,23 @@
         }
     }
 
-    function final(id,status,msg="") {
+    function final(id, status, msg = "") {
         var x = confirm(msg);
         // alert(id)
         // return false;
         if (x) {
             $.ajax({
                 type: "POST",
-                url: base_url+"rajal/set_final_rekam_medis",
+                url: base_url + "rajal/set_final_rekam_medis",
                 data: {
-                    id : id,
+                    id: id,
                     status: status
                 },
                 dataType: "json",
-                success: function (response) {
+                success: function(response) {
                     reloadPage()
                 },
-                error : function (e) {
+                error: function(e) {
                     e
                 }
             });
@@ -1617,12 +1719,12 @@
     function riwayatRajal(nomr) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/get_riwayat_rajal",
+            url: base_url + "rajal/get_riwayat_rajal",
             data: {
-                nomr : nomr
+                nomr: nomr
             },
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 var first = response.list[0];
                 var table = `<dl>
@@ -1644,8 +1746,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>`;
-                $.each(response.list,function (k,v) {
-                    table+=`<tr>
+                $.each(response.list, function(k, v) {
+                    table += `<tr>
                         <td>${v.tgl_masuk}</td>
                         <td>${v.namaDokterJaga}</td>
                         <td>${status_erm(v.status_erm)}</td>
@@ -1653,10 +1755,10 @@
                     </tr>`
                 })
 
-                table+= `</tbody>
+                table += `</tbody>
                             </table>
                         </div>`;
-                if (response.status==true) {
+                if (response.status == true) {
                     $("#modal-riwayat-rajal-body").html(table);
                     $("#modal-riwayat-rajal").modal("show");
                 }
@@ -1668,7 +1770,7 @@
         //alert(a + b);
         var url = base_url + 'erm/detail?idx=' + a;
         // window.location.href = url;
-        window.open(url,'_blank',"left=800,top=100,width=800,height=400");
+        window.open(url, '_blank', "left=800,top=100,width=800,height=400");
     }
 
     function resetKembangPasien() {
@@ -1678,7 +1780,7 @@
         CKEDITOR.instances['assesment_k'].setData('');
         CKEDITOR.instances['planning_k'].setData('');
         CKEDITOR.instances['instruksi_k'].setData('');
-        CKEDITOR.instances['review_k'].setData('');
+        // CKEDITOR.instances['review_k'].setData('');
         $("[name='id_kembang_pasien']").val("");
         $("[name='tenaga_medis_id_k']").val("");
         $("[name='tenaga_medis_id_k']").val("");
@@ -1689,7 +1791,7 @@
     }
 
     function cetak_prmrj(nomr) {
-        window.open(base_url+"rajal/prmrj/"+nomr,"_blank")
-    } 
+        window.open(base_url + "rajal/prmrj/" + nomr, "_blank")
+    }
 </script>
 <!--  -->

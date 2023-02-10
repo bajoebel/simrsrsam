@@ -37,7 +37,7 @@
 <input type="hidden" name="nomr_ka" value="<?= $detail->nomr ?>">
 <input type="hidden" name="nama_ka" value="<?= $detail->nama_pasien ?>">
 <input type="hidden" name="user_daftar_ka" value="<?= $detail->user_daftar ?>">
-<input type="hidden" name="cppt_id_m" value="">
+<input type="hidden" name="cppt_id_ka" value="">
 
 <div class="form-group row">
     <div class="col-md-6">
@@ -345,7 +345,7 @@
             <div class="col-md-6"><input type="radio" name="halangan_aktivitas_ka" value="1"> Ya <input type="radio" name="halangan_aktivitas_ka" value="0"> Tidak</div>
         </div>
         <div class="row">
-            <div class="col-md-6">Sakit dirasakan setiak hari</div>
+            <div class="col-md-6">Sakit dirasakan setiap hari</div>
             <div class="col-md-6"><input type="radio" name="nyeri_sakit_ka" value="1"> Ya <input type="radio" name="nyeri_sakit_ka" value="0"> Tidak</div>
         </div>
     </div>
@@ -359,7 +359,7 @@
         <label class="col-sm-3 radio-inline"> <input type="radio" name="metode_ka" value="3">FLACC Anak < 3 Tahun</label>
     </div>
 </div>
-<div class="form-group row skrining_nyeri" id="vas_pilih" >
+<div class="form-group row skrining_nyeri" id="vas_pilih">
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_vas_ka" id="skala_vas_ka" class="form-control">
@@ -367,10 +367,10 @@
     <div class="col-md-8">
         <label for="">Metode VAS</label>
         <img src="<?= base_url() . "assets/images/erm_images/vas.png" ?>" width="100%" alt="">
-        <p><span>0 : Nyeri</span>  <span style='margin-left:10px'>1-3 : Nyeri Ringan</span> <span style='margin-left:10px'> 4-6 : Nyeri Sedang</span> <span style='margin-left:10px'> 7-10:Nyeri Berat</span></p>
+        <p><span>0 : Nyeri</span> <span style='margin-left:10px'>1-3 : Nyeri Ringan</span> <span style='margin-left:10px'> 4-6 : Nyeri Sedang</span> <span style='margin-left:10px'> 7-10:Nyeri Berat</span></p>
     </div>
 </div>
-<div class="form-group row skrining_nyeri" id="wbfs_pilih" >
+<div class="form-group row skrining_nyeri" id="wbfs_pilih">
     <label for="" class="col-md-2 control-label">Skala Nyeri</label>
     <div class="col-md-2">
         <input type="number" min="0" max="10" name="skala_wbfs_ka" id="skala_wbfs_ka" class="form-control">
@@ -380,7 +380,7 @@
         <img src="<?= base_url() . "assets/images/erm_images/bfs.png" ?>" width="100%" alt="">
     </div>
 </div>
-<div class="row skrining_nyeri" id="flacc_pilih" >
+<div class="row skrining_nyeri" id="flacc_pilih">
     <div class="col-md-6">
         <div class="form-group row">
             <label for="" class="col-md-4 control-label">Face Wajah</label>
@@ -547,7 +547,7 @@
         <label class="radio">
             Diberitahukan ke dokter
             <label class="radio-inline">
-                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="time" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input w-200" readonly >
+                <input type="radio" name="risiko_info_ka" value="1">Ya jam <input type="time" name="risiko_info_detail_ka" id="risiko_info_detail_ka" class="custom-input w-200" readonly>
             </label>
             <label class="radio-inline">
                 <input type="radio" name="risiko_info_ka" value="0">Tidak
@@ -563,7 +563,7 @@
         <label for="keadaan_umum">Keadaan Umum</label>
         <select name="keadaan_umum_ka" id="keadaan_umum_ka" class="form-control form-control-sm">
             <option value="">== Pilih ==</option>
-            <option value="Tampak Tidak Sehat">Tampak Tidak Sehat</option>
+            <option value="Tampak Tidak Sakit">Tampak Tidak Sakit</option>
             <option value="Tampak Sakit Ringan">Tampak Sakit Ringan</option>
             <option value="Tampak Sakit Sedang">Tampak Sakit Sedang</option>
             <option value="Tampak Sakit Berat">Tampak Sakit Berat</option>
@@ -580,7 +580,7 @@
             <option value="Koma">Koma</option>
         </select>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <label for="">GCS</label>
         <div>
             E : <input type="number" name="gcs_e_ka" id="gcs_e_ka" min="0" max="4" class="custom-input w-50">
@@ -591,16 +591,15 @@
     <div class="col-md-12">
         <label for="">TTV</label>
         <div>
-            Sh : <input type="number" name="ttv_sh_ka" id="ttv_sh_ka" min="0" max="45" class="custom-input w-50">
-            Nd : <input type="number" name="ttv_nd_ka" id="ttv_nd_ka" class="custom-input w-50">
-            Rr : <input type="number" name="ttv_rr_ka" id="ttv_rr_ka" class="custom-input w-50">
+            Sh : <input type="number" step="any" name="ttv_sh_ka" id="ttv_sh_ka" class="custom-input w-100">
+            Nd : <input type="number" name="ttv_nd_ka" id="ttv_nd_ka" class="custom-input w-100">
+            Rr : <input type="number" name="ttv_rr_ka" id="ttv_rr_ka" class="custom-input w-100">
             Sp02 : <input type="number" name="ttv_spo2_ka" id="ttv_spo2_ka" class="custom-input w-50">
-            TD : <input type="number" name="ttv_td_ka" id="ttv_td_ka" class="custom-input w-50">
-            Down Score : <input type="number" name="ttv_ds_ka" id="ttv_ds_ka" class="custom-input w-50">
+            TD : <input type="number" name="ttv_td_ka" id="ttv_td_ka" class="custom-input w-50">/<input type="number" name="ttv_ds_ka" id="ttv_ds_ka" class="custom-input w-50">
         </div>
     </div>
     <div class="col-md-12">
-        <label for="status_generalis">Pemeriksaan : Status generalis & status lokalis (inspeksi, paipasi, perkusi, dan auskulasi)</label>
+        <label for="status_generalis">Pemeriksaan : Status generalis & status lokalis (inspeksi, palpasi, perkusi, dan auskultasi)</label>
         <input type="text" name="status_generalis_ka" id="status_generalis_ka" class="form-control">
     </div>
     <div class="col-md-12">
@@ -698,27 +697,49 @@
     <div class="col-md-12">
         <label for="diagnosa_keperawatan_ka">Diagnosa Keperawatan</label>
         <!-- <textarea name="diagnosa_keperawatan_ka" id="diagnosa_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
-        <select name="diagnosa_keperawatan_ka[]" id="diagnosa_keperawatan_ka" class="form-control select2-tag" style="width:100%" multiple="multiple">
+        <select name="diagnosa_keperawatan_ka[]" id="diagnosa_keperawatan_ka" class="form-control select2" style="width:100%" multiple="multiple">
             <option value="">=Pilih=</option>
-            <?php foreach($sdki as $sd) { ?>
-                <option value="<?= $sd->kode."-".$sd->name ?>"><?= $sd->kode."-".$sd->name ?></option>
-                <?php }  ?>
-            </select>
-        </div>
+            <?php foreach ($sdki as $sd) { ?>
+                <option value="<?= $sd->kode . "-" . $sd->name ?>"><?= $sd->kode . "-" . $sd->name ?></option>
+            <?php }  ?>
+        </select>
     </div>
-    <div class="form-group row">
-        <div class="col-md-12">
+    <div class="col-md-12">
         <label for="tindakan_keperawatan_ka">Tindakan Keperawatan</label>
         <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
-        <select name="tindakan_keperawatan_ka[]" id="tindakan_keperawatan_ka" class="form-control select2-tag" style="width:100%" multiple="multiple">
+        <select name="tindakan_keperawatan_ka[]" id="tindakan_keperawatan_ka" class="form-control select2" style="width:100%" multiple="multiple">
             <option value="">=Pilih=</option>
-            <?php foreach($siki as $sk) { ?>
-                <option value="<?= $sk->kode."-".$sk->intervensi ?>"><?= $sk->kode."-".$sk->intervensi ?></option>
+            <?php foreach ($siki as $sk) { ?>
+                <option value="<?= $sk->kode . "-" . $sk->intervensi ?>"><?= $sk->kode . "-" . $sk->intervensi ?></option>
+            <?php }  ?>
+        </select>
+    </div>
+    <div class="col-md-12">
+        <label for="apd_ka">Pemakaian APD (Alat Pelindung Diri)</label>
+        <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
+        <select name="apd_ka[]" id="apd_ka" class="form-control select2" style="width:100%" multiple="multiple">
+            <option value="Tidak Ada">Tidak Ada</option>
+            <?php
+            $alat_medis_apd = getAlatMedis("apd");
+            foreach ($alat_medis_apd as $apd) { ?>
+                <option value="<?= $apd->name ?>"><?= $apd->name ?></option>
+            <?php }  ?>
+        </select>
+    </div>
+    <div class="col-md-12">
+        <label for="apd_ka">Pemakaian BMHP (Barang Medis Habis Pakai)</label>
+        <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
+        <select name="bmhp_ka[]" id="bmhp_ka" class="form-control select2" style="width:100%" multiple="multiple">
+            <option value="Tidak Ada">Tidak Ada</option>
+            <?php
+            $alat_medis_apd = getAlatMedis("bmhp");
+            foreach ($alat_medis_apd as $apd) { ?>
+                <option value="<?= $apd->name ?>"><?= $apd->name ?></option>
             <?php }  ?>
         </select>
     </div>
 </div>
-<hr>
+<hr />
 <div class="form-group row">
     <div class="col-md-12">
         <label for="">Telah di jelaskan kepada</label>
@@ -726,7 +747,7 @@
             <input type="radio" name="dijelaskan_ka" value="Pasien" checked>Pasien
         </label>
         <label class="radio-inline">
-            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly> Nama <input type="text" name="dijelaskan_nama_ka" id="dijelaskan_nama_ka" class="custom-input w-200" value="<?=$detail->nama_pasien?>" readonly>
+            <input type="radio" name="dijelaskan_ka" value="Keluarga">Keluarga, Hubungan <input type="text" name="dijelaskan_hubungan_ka" id="dijelaskan_hubungan_ka" class="custom-input w-200" readonly> Nama <input type="text" name="dijelaskan_nama_ka" id="dijelaskan_nama_ka" class="custom-input w-200" value="<?= $detail->nama_pasien ?>" readonly>
         </label>
     </div>
 </div>
@@ -734,25 +755,24 @@
     <div class="col-md-6">
         <label for="">Perawat Yang Melakukan Kajian</label>
         <select name="perawat_id_ka" id="perawat_id_ka" class="form-control select2" style="width:100%">
-            <?php $list = getPegawai([3,4])->result();
-                echo "<option value=''>Pilih Nama Perawat</option>";
-                foreach ($list as $r) { ?>
-                <option value="<?=$r->NRP?>"><?= $r->pgwNama ?></option>
+            <?php $list = getPegawai([3, 4])->result();
+            echo "<option value=''>Pilih Nama Perawat</option>";
+            foreach ($list as $r) { ?>
+                <option value="<?= $r->NRP ?>"><?= $r->pgwNama ?></option>
             <?php    }
             ?>
         </select>
     </div>
 </div>
 <script>
-    var nama = "<?= $detail->nama_pasien?> ";
-    var ruang = "<?=$detail->id_ruang?>";
-    var dokter = "<?=$detail->dokterJaga?>";
+    var nama = "<?= $detail->nama_pasien ?> ";
+    var ruang = "<?= $detail->id_ruang ?>";
+    var dokter = "<?= $detail->dokterJaga ?>";
 </script>
 <script>
     var today = new Date();
     var priorDate = new Date(new Date().setDate(today.getDate() + 30));
     console.log(priorDate)
-
 </script>
 <script>
     $(document).ready(function() {
@@ -763,39 +783,39 @@
         $("#poli_ka").val(ruang);
         $("#dpjp_ka").val(dokter);
 
-        $(".skrining_nyeri").prop("hidden",true);
-        $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden",true)
+        $(".skrining_nyeri").prop("hidden", true);
+        $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden", true)
 
         $("[name='rujukan_ka']").change(function() {
-            if (this.value=='lainnya') {
+            if (this.value == 'lainnya') {
                 $("[name='rujukan_lainnya_ka']").removeAttr("readonly").focus();
             } else {
-                $("[name='rujukan_lainnya_ka']").prop('readonly',true).val("");
+                $("[name='rujukan_lainnya_ka']").prop('readonly', true).val("");
             }
         })
 
         $("[name='obat_ka']").change(function() {
-            if (this.value==1) {
+            if (this.value == 1) {
                 $("[name='obat_detail_ka']").removeAttr("readonly").focus();
             } else {
-                $("[name='obat_detail_ka']").prop('readonly',true).val("");
+                $("[name='obat_detail_ka']").prop('readonly', true).val("");
             }
         })
 
         $("[name='kebutuhan_edukasi_ka[]']").change(function() {
-            if (this.value=="Tindakan keperawatan") {
+            if (this.value == "Tindakan keperawatan") {
                 $("[name='kebutuhan_edukasi_tindakan_ka']").removeAttr("readonly").focus();
             }
-            if (this.value=="Lain-lain") {
+            if (this.value == "Lain-lain") {
                 $("[name='kebutuhan_edukasi_lain_ka']").removeAttr("readonly").focus();
             }
         })
 
         $("[name='makanan_ka']").change(function() {
-            if (this.value==1) {
+            if (this.value == 1) {
                 $("[name='makanan_detail_ka']").removeAttr("readonly").focus();
             } else {
-                $("[name='makanan_detail_ka']").prop('readonly',true).val("");
+                $("[name='makanan_detail_ka']").prop('readonly', true).val("");
             }
         })
 
@@ -831,10 +851,10 @@
         $("[name='riwayat_operasi_cek_ka']").change(function() {
             if ($(this).is(":checked")) {
                 $("[name='riwayat_operasi_ka']").removeAttr("readonly").val("").focus();
-                $("[name='riwayat_operasi_tahun_ka']").prop("disabled",false);
+                $("[name='riwayat_operasi_tahun_ka']").prop("disabled", false);
             } else {
                 $("[name='riwayat_operasi_ka']").attr('readonly', true).val("tidak ada");
-                $("[name='riwayat_operasi_tahun_ka']").prop("disabled",true).val("0000");
+                $("[name='riwayat_operasi_tahun_ka']").prop("disabled", true).val("0000");
             }
         })
 
@@ -929,9 +949,9 @@
         $('[name=komunikasi_ka]').change(function() {
             // console.log(this.value)
             if ($(this).val() == 1) {
-                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled",false);
+                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled", false);
             } else {
-                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled",true);
+                $("[name='komunikasi_detail_ka[]']").select2().prop("disabled", true);
                 $("[name='komunikasi_detail_ka[]']").val(null).trigger("change");
             }
         });
@@ -939,7 +959,7 @@
         $("#wajah_ka,#leg_ka,#gerakan_ka,#tangis_ka,#kemampuan_ka").change(function() {
             hitung_flacc();
         });
-        $('[name=dijelaskan_ka]').on("click",function() {
+        $('[name=dijelaskan_ka]').on("click", function() {
             // console.log(this.value)
             if ($(this).val() == "Keluarga") {
                 $("[name='dijelaskan_hubungan_ka']").removeAttr("readonly").focus();
@@ -949,29 +969,29 @@
                 $("[name='dijelaskan_nama_ka']").attr("readonly", true).val(nama);
             }
         });
-        
-        $("[name='metode_ka']").change(function(){
-            if (this.value==1)  {
-                $("#vas_pilih").prop("hidden",false)
-                $("#wbfs_pilih").prop("hidden",true)
-                $("#flacc_pilih").prop("hidden",true)
-            } else if (this.value==2) {
-                $("#vas_pilih").prop("hidden",true)
-                $("#wbfs_pilih").prop("hidden",false)
-                $("#flacc_pilih").prop("hidden",true)
-            } else if (this.value==3) {
-                 $("#vas_pilih").prop("hidden",true)
-                $("#wbfs_pilih").prop("hidden",true)
-                $("#flacc_pilih").prop("hidden",false)
+
+        $("[name='metode_ka']").change(function() {
+            if (this.value == 1) {
+                $("#vas_pilih").prop("hidden", false)
+                $("#wbfs_pilih").prop("hidden", true)
+                $("#flacc_pilih").prop("hidden", true)
+            } else if (this.value == 2) {
+                $("#vas_pilih").prop("hidden", true)
+                $("#wbfs_pilih").prop("hidden", false)
+                $("#flacc_pilih").prop("hidden", true)
+            } else if (this.value == 3) {
+                $("#vas_pilih").prop("hidden", true)
+                $("#wbfs_pilih").prop("hidden", true)
+                $("#flacc_pilih").prop("hidden", false)
             }
         });
 
-        $("[name='nyeri_ka']").on("change",function () {
-            if (this.value!="tidak ada nyeri") {
-                $(".skrining_nyeri").prop("hidden",false)
-                $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden",true)
+        $("[name='nyeri_ka']").on("change", function() {
+            if (this.value != "tidak ada nyeri") {
+                $(".skrining_nyeri").prop("hidden", false)
+                $("#vas_pilih,#wbfs_pilih,#flacc_pilih").prop("hidden", true)
             } else {
-                $(".skrining_nyeri").prop("hidden",true)
+                $(".skrining_nyeri").prop("hidden", true)
             }
         })
 
@@ -1007,5 +1027,4 @@
         $("#skor_flacc").text(sum)
         $("#skor_flacc_detail").text(text)
     }
- 
 </script>

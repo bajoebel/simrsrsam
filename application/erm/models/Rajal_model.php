@@ -129,9 +129,16 @@ class Rajal_model extends CI_Model
     {
         $db2 = $this->load->database('dberm', TRUE);
         $db2
-            ->where(["idx" => $idx, "id" => $id])
-            ->delete("rj_awal_rawat");
-        return $this->db->affected_rows();
+        ->where(["idx" => $idx, "id" => $id])
+        ->delete("rj_awal_rawat");
+        $id_cppt = $db2->select("cppt_id")->where("id",$id)->get("rj_awal_rawat")->row();
+        if($id_cppt) {
+            $db2
+            ->where(["id" => $id_cppt->cppt_id])
+            ->delete("rj_ppt");
+        }
+        
+        return $db2->affected_rows();
     }
 
 
@@ -174,7 +181,6 @@ class Rajal_model extends CI_Model
 
     function insertAwalMedis($data)
     {
-
         $db2 = $this->load->database('dberm', TRUE);
         $idx = $data['idx'];
         $nomr = $data['nomr'];
@@ -210,6 +216,13 @@ class Rajal_model extends CI_Model
         $db2
             ->where(["idx" => $idx, "id" => $id])
             ->delete("rj_awal_medis");
+        $id_cppt = $db2->select("cppt_id")->where("id",$id)->get("rj_awal_medis")->row();
+        // return $id_cppt;
+        if($id_cppt) {
+            $db2
+            ->where(["id" => $id_cppt->cppt_id])
+            ->delete("rj_ppt");
+        }
         return $this->db->affected_rows();
     }
 
@@ -437,6 +450,38 @@ class Rajal_model extends CI_Model
         }
     }
 
+    
+    public function updateSignReviewKembangPasien($id,$kode,$kode_detail,$review,$dokterNama,$dokter) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $insert = $db2->insert("log_assign",[
+            "kode" => $kode,
+            "kode_detail" => $kode_detail,
+            "created_at" => date("Y-m-d"),
+            "updated_at" => date("Y-m-d"),
+
+        ]);
+        $insert_id = $db2->insert_id();
+        $insert_id = base64_encode(str_pad($insert_id,10,"0",STR_PAD_LEFT));
+        $update = $db2->where("id",$id)->update("rj_ppt",[
+            "review" => $review,
+            "dpjpSign" => $insert_id,
+            "status_form" => 1,
+            "dpjpName" => $dokterNama,
+            "dpjpId" => $dokter
+        ]);
+        if ($db2->trans_status() === FALSE)
+        {
+                $db2->trans_rollback();
+                return false;
+        }
+        else
+        {
+                $db2->trans_commit();
+                return true;
+        }
+    }
+
     public function updateSignAwalRawat($id,$kode,$kode_detail) {
         $db2 = $this->load->database('dberm', TRUE);
         $db2->trans_begin();
@@ -568,6 +613,20 @@ class Rajal_model extends CI_Model
         }
     }
 
+    public function deletePermintaanPenunjang($idx,$id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $db2->where(["idx"=>$idx,"id"=>$id])->delete("rj_p_penunjang");
+        $db2->where(["rj_p_penunjang_id"=>$id])->delete("rj_p_penunjang_detail");
+        if ($db2->trans_status()===FALSE) {
+            $db2->trans_rollback();
+            return false;
+        } else {
+            $db2->trans_commit();
+            return true;
+        }
+    }
+
     public function updateSignPermintaanPenunjang($id,$kode,$kode_detail) {
         $db2 = $this->load->database('dberm', TRUE);
         $db2->trans_begin();
@@ -604,6 +663,12 @@ class Rajal_model extends CI_Model
                 "status" => TRUE,
                 "utama" => $pk,
                 "detail" => $pk_detail
+            ];
+         } else if ($pk) {
+            return [
+                "status" => TRUE,
+                "utama" => $pk,
+                "detail" => []
             ];
          } else {
             return [

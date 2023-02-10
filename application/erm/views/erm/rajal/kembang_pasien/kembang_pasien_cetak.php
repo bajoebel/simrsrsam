@@ -223,11 +223,14 @@ $date = date("Y-m-d");
                                 </td>
                                 <td>
                                     <?= $r->review?>
+                                    <div id="qrcode_cppt_review_<?=$r->id?>"></div><br/>
+                                    <?=$r->dpjpName?>
                                 </td>
                             </tr>
                             <script type="text/javascript">
                                 var id = "<?= $r->id?>";
                                 var code = "<?= $r->tenagaMedisSign?>";
+                                var code_review = "<?= $r->dpjpSign?>";
                                 if (code) {
                                     var qrcode = new QRCode(document.getElementById("qrcode_cppt_"+id), {
                                         text: code,
@@ -238,7 +241,17 @@ $date = date("Y-m-d");
                                     });
                                     $(`#qrcode_cppt_${id} > img`).css({"margin":"auto","padding":"2px"});
                                 }
-                              
+
+                                if (code_review) {
+                                    var qrcode2 = new QRCode(document.getElementById("qrcode_cppt_review_"+id), {
+                                        text: code_review,
+                                        width: 60,
+                                        height: 60,
+                                        colorDark : "#000",
+                                        colorLight : "#fff",
+                                    });
+                                    $(`#qrcode_cppt_review_${id} > img`).css({"margin":"auto","padding":"2px"});
+                                }
                             </script>
                         <?php }?>
                     </table>

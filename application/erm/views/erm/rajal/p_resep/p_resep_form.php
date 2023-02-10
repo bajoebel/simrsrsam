@@ -25,6 +25,10 @@ if (!$permintaan_resep) { ?>
                 <input type="hidden" name="reg_unit_pr"  value="<?=$detail->reg_unit?>">
                 <input type="hidden" name="dpjp_pr"  value="<?=$detail->dokterJaga?>">
                 <input type="hidden" name="dpjp_name_pr"  value="<?=$detail->namaDokterJaga?>">
+                <input type="hidden" name="id_daftar_pr" value="<?=$detail->id_daftar?>">
+                <input type="hidden" name="reg_unit_pr" value="<?=$detail->reg_unit?>">
+                <input type="hidden" name="id_ruanglama_pr" value="<?=$detail->id_ruanglama?>">
+                <input type="hidden" name="nama_ruang_pr" value="<?=$detail->nama_ruang?>">
                 <fieldset>
                     <legend>Jenis Pemeriksaan</legend>  
                     <div class="form-group" style="margin-bottom:20px !important">
@@ -98,8 +102,8 @@ if (!$permintaan_resep) { ?>
                         <td><?= $no++ ?></td>
                         <td><?= $prd->kode_obat ?></td>
                         <td><?= $prd->nama_obat ?></td>
-                        <td><?= $prd->aturan_pakai ?></td>
                         <td><?= $prd->satuan ?></td>
+                        <td><?= $prd->aturan_pakai ?></td>
                         <td>
                             <?php if (!$permintaan_resep) { ?>
                             <button type="button" class="btn btn-xs btn-danger" onclick="hapusObat(<?=$prd->id?>)"><i class="fa fa-trash"></i></button>
@@ -238,6 +242,7 @@ if (!$permintaan_resep) { ?>
             let status = $("#status_form_pr").val();
             if (status==2 || status==3) {
                 swal("Status sudah di proses bagian farmasi")
+                return false;
             }
             let idx = $(this).data("idx");
             $.ajax({

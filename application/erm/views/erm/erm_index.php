@@ -344,7 +344,7 @@
                                         <thead class="bg-green">
                                             <tr>
                                                 <th style="width: 60px">#</th>
-                                                <th style="width: 100px">No.Reg RS</th>
+                                                <th style="width: 60px">No.Reg RS</th>
                                                 <th style="width: 120px">No.Reg Unit</th>
                                                 <th style="width: 80px">Tgl.Masuk</th>
                                                 <th style="width: 60px">No MR</th>

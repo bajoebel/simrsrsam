@@ -241,7 +241,7 @@
 <?php if ($pil=="riwayat_awal_rawat") { ?>
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">Riwayat Kajian Awal Rawat</div>
+        <div class="panel-heading">Riwayat Kajian Awal Rawat Sebelumnya</div>
             <div class="panel-body">
                 
             </div>
@@ -268,7 +268,7 @@
                         <td><?=$r->tgl."/".$r->jam?></td>
                         <td><?=$r->perawat?></td>
                         <td>
-                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),1)" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
                             </button>
                             <?= ($r->idx==$idx)?"<span class='badge bg-green'>current</span>":""?>
                         </td>

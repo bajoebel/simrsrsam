@@ -136,6 +136,7 @@
                         <th>Kode</th>
                         <th>Name</th>
                         <th>Group</th>
+                        <th>Hasil</th>
                     </tr>
                 <?php $nr=1; foreach($sd as $r) {?>
                     <tr>
@@ -143,6 +144,7 @@
                         <td><?= $r->tlId ?></td>
                         <td><?= $r->tlTitle ?></td>
                         <td><?= group_lab($r->group) ?></td>
+                        <td><?= $r->hasil ?></td>
                     </tr>    
                 <?php } ?>              
             </table>

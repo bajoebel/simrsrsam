@@ -322,7 +322,7 @@ $date = date("Y-m-d");
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div style='width:80mm !important;height:45mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
+                                            <div style='width:80mm !important;height:<?=$k->nyeri=="tidak ada nyeri"?10:45?>mm!important;border:1px solid black;margin-left:3mm;padding:1px;float:left'>
                                                 <span style="margin-left:3mm"><b><?= $k->nyeri ?></b></span><br />
                                                 <?php if ($k->nyeri!="tidak ada nyeri") { ?>
                                                 <span>P (Profokatif/Penyebab) : <?= $k->quality ?></span><br>
@@ -513,8 +513,8 @@ $date = date("Y-m-d");
                                     <li>Kesadaran <span style="margin-left:6mm">: &#9745; <?=$k->kesadaran_umum?></span> </li>
                                     <li>GCS <span style="margin-left:6mm">: E : <?= $k->gcs_e ?> M: <?= $k->gcs_m ?>  V: <?= $k->gcs_v ?></span></li>
                                     <li>
-                                        TTV <span style="margin-left:6mm">: Sh <?= $k->ttv_sh ?> Nd <?= $k->ttv_nd ?> , Rr <?= $k->ttv_rr ?> SpO2 <?= $k->ttv_spo2 ?>, TD <?= $k->ttv_td ?> , Down Score <?= $k->ttv_ds ?></span></li>
-                                    <li>Pemeriksaan <span style="margin-left:6mm">: Status generalis & status lokalis (inspeksi,palpasi,perkusi,auskulasi)<br>
+                                        TTV <span style="margin-left:6mm">: Sh <?= $k->ttv_sh ?> Nd <?= $k->ttv_nd ?> , Rr <?= $k->ttv_rr ?> SpO2 <?= $k->ttv_spo2 ?>, TD <?= $k->ttv_td ?>/<?= $k->ttv_ds ?></span></li>
+                                    <li>Pemeriksaan <span style="margin-left:6mm">: Status generalis & status lokalis (inspeksi,palpasi,perkusi,auskultasi)<br>
                                             &nbsp;&nbsp;<?= $k->status_generalis ?>
                                     </li>
                                     <li>Pemeriksaan penunjang sebelum rawat inap : <?= ($k->penunjang_rad==1)?"&#9745; Radiologi, $k->penunjang_rad_detail ":"" ?><?= ($k->penunjang_lab==1)?"&#9745; Lab, $k->penunjang_lab_detail ":"" ?><?= ($k->penunjang_lain==1)?"&#9745; Lain-lain, $k->penunjang_lain_detail ":"" ?> </li>
@@ -529,7 +529,7 @@ $date = date("Y-m-d");
                             <td>
                                 <span>Terdapat hambatan dalam pembelajaran : </span>
                                 <?= ($k->komunikasi==0)?"&#9745;Tidak":"&#9745;Ya,".arr_to_list($k->komunikasi_detail,"<span>","</span>&nbsp;&nbsp;")." - ".$k->komunikasi_lain?><br/>
-                                Dibutuhkan penerjemah : <?= ($k->komunikasi_penerjemah==0)?"&#9744;Tidak":"&#9745;Ya,".$k->komunikasi_penerjemah_detail?>&nbsp;&nbsp;&nbsp; Bahasa Isyarat : <?= trueOrFalse($k->komunikasi_isyarat)?>
+                                Dibutuhkan penerjemah : <?= ($k->komunikasi_penerjemah==0)?"&#9745;Tidak":"&#9745;Ya,".$k->komunikasi_penerjemah_detail?>&nbsp;&nbsp;&nbsp; Bahasa Isyarat : <?= trueOrFalse($k->komunikasi_isyarat)?>
                                 
                                 <br/>
                                 <span>Kebutuhan edukasi (Pilih topik edukasi pada kotak yang tersedia) :</span><br>
@@ -557,6 +557,23 @@ $date = date("Y-m-d");
                                 <div class="box" style=""><?=arr_to_list($k->tindakan_keperawatan)?></div>
                             </td>
                         </tr>
+                        <tr>
+                            <td><b>O. Pemakaian APD</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="box" style=""><?=arr_to_list($k->apd)?></div>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td><b>P. Pemakaian BMHP</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="box" style=""><?=arr_to_list($k->bmhp)?></div>
+                            </td>
+                        </tr>
+                        
                     </table>
                 </div>
                 <div class="sign_in">

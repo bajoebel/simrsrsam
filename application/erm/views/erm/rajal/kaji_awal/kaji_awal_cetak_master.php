@@ -598,7 +598,7 @@ $date = date("Y-m-d");
                                     <li>GCS <span style="margin-left:6mm">: E :<?= str_pad(" ", 30, "_") ?> M:<?= str_pad(" ", 30, "_") ?>V:<?= str_pad(" ", 30, "_") ?></span></li>
                                     <li>
                                         TTV <span style="margin-left:6mm">: Sh <?= str_pad(" ", 30, "_") ?> Nd<?= str_pad(" ", 30, "_") ?> , Rr<?= str_pad(" ", 30, "_") ?>SpO2<?= str_pad(" ", 30, "_") ?>, TD<?= str_pad(" ", 30, "_") ?> , Down Score <?= str_pad(" ", 30, "_") ?></span></li>
-                                    <li>Pemeriksaan <span style="margin-left:6mm">: Status generalis & status lokalis (inspeksi,palpasi,perkusi,auskulasi)<br>
+                                    <li>Pemeriksaan <span style="margin-left:6mm">: Status generalis & status lokalis (inspeksi,palpasi,perkusi,auskultasi)<br>
                                             <?= str_pad(" ", 150, "_") ?><br>
                                             <?= str_pad(" ", 150, "_") ?>
                                     </li>

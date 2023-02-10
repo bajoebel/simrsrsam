@@ -9,7 +9,8 @@
 
     </div>
   </div>
-  <ul class="sidebar-menu" data-widget="tree" id="menu">
+  <!-- <ul class="sidebar-menu" data-widget="tree" id="menu"> -->
+  <ul class="sidebar-menu" data-widget="tree">
     <li class="header"><?php echo getAppName() ?></li>
     <?php
     $lokasi = $this->session->userdata('grlokasi');

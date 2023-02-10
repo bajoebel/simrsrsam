@@ -70,7 +70,7 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_dev');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3');
 		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3');
 		break;
 	case 'production':
@@ -181,3 +181,10 @@ defined('PORT_HOST_FARMASI')   		or define('PORT_HOST_FARMASI', 3306);
 defined('DB_USER_FARMASI')   		or define('DB_USER_FARMASI', 'root');
 defined('DB_PASS_FARMASI')   		or define('DB_PASS_FARMASI', '');
 defined('DB_NAME_FARMASI')   		or define('DB_NAME_FARMASI', 'db_farmasi');
+
+/*
+REST API ERM
+*/
+defined('API_UID')   		or define('API_UID', 'ermapi');
+defined('API_PASS')   		or define('API_PASS', '12345');
+
