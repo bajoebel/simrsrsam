@@ -109,7 +109,7 @@
             </div>
             <div class="col-md-8">
                 auto detail
-                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly>
+                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2-tag" multiple="multiple" style="width:100%">
                     <?= $anamnesis = getPemeriksaan("anamnesis");
                     foreach ($anamnesis as $an) {?>
                         <option value="<?=$an->name?>"><?=$an->name?></option>
@@ -123,7 +123,7 @@
             </div>
             <div class="col-md-8">
                 allo detail
-                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly>
+                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2-tag" multiple="multiple" style="width:100%">
                     <?php foreach ($anamnesis as $an) {?>
                         <option value="<?=$an->name?>"><?=$an->name?></option>
                     <?php } ?>
@@ -316,12 +316,12 @@
         CKEDITOR.replace("penunjang_m")
         CKEDITOR.replace("terapi_m")
 
-        $("#auto_detail_m").select2({
-            disabled : true
-        });
-        $("#allo_detail_m").select2({
-            disabled : true
-        });
+        // $("#auto_detail_m").select2({
+        //     disabled : true
+        // });
+        // $("#allo_detail_m").select2({
+        //     disabled : true
+        // });
 
         // $("#tampil_awal_medis").hide();
 
@@ -424,11 +424,12 @@
                         // $("#fisik_detail_m").html(fisik_html);
                         // $("#auto_detail_m").html(anamnesis_html);
                         // $("#allo_detail_m").html(anamnesis_html);
-                        // CKEDITOR.instances['diagnosis_kerja_m'].setData(utama.diagnosis_kerja)
+                        var dk = utama.diagnosis_kerja||$("#panduan_m").select2('data')[0]['text'];
+                        CKEDITOR.instances['diagnosis_kerja_m'].setData(dk)
                         // CKEDITOR.instances['diagnosis_banding_m'].setData(utama.diagnosis_banding)
                         // CKEDITOR.instances['penunjang_m'].setData(utama.pemeriksaan_penunjang)
                         // CKEDITOR.instances['terapi_m'].setData(utama.terapi)
-
+                        
                         if (rawat) {
                             $("#td_m").val(rawat.ttv_td+"/"+rawat.ttv_ds);
                             $("#nadi_m").val(rawat.ttv_nd);

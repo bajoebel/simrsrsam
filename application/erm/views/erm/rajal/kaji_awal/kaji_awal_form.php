@@ -718,7 +718,7 @@
         <label for="apd_ka">Pemakaian APD (Alat Pelindung Diri)</label>
         <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
         <select name="apd_ka[]" id="apd_ka" class="form-control select2" style="width:100%" multiple="multiple">
-            <option value="">=Pilih=</option>
+            <option value="Tidak Ada">Tidak Ada</option>
             <?php
             $alat_medis_apd = getAlatMedis("apd");
             foreach ($alat_medis_apd as $apd) { ?>
@@ -730,7 +730,7 @@
         <label for="apd_ka">Pemakaian BMHP (Barang Medis Habis Pakai)</label>
         <!-- <textarea name="tindakan_keperawatan_ka" id="tindakan_keperawatan_ka" cols="30" rows="10" class="form-control"></textarea> -->
         <select name="bmhp_ka[]" id="bmhp_ka" class="form-control select2" style="width:100%" multiple="multiple">
-            <option value="">=Pilih=</option>
+            <option value="Tidak Ada">Tidak Ada</option>
             <?php
             $alat_medis_apd = getAlatMedis("bmhp");
             foreach ($alat_medis_apd as $apd) { ?>

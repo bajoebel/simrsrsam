@@ -282,7 +282,7 @@ $date = date("Y-m-d");
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <a href="#" target="_blank">Lihat Disini</a>
+                                                        <a href="<?=$pr->hasil_upload?>" target="_blank">Lihat Disini</a>
                                                     </td>
                                                 </tr>
                                             <?php } ?>

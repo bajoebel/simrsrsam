@@ -806,11 +806,23 @@ class Rajal extends CI_Controller
             "tindakan" => $this->input->post("tindakan_pp"),
             "dpjp" => $this->input->post("dpjp_pp"),
             "dpjp_name" => $this->input->post("dpjp_text_pp"),
+            "status_form" => 1,
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
         ];
         $insert = $this->rajal->insertPermintaanPenunjang($data);
         echo json_encode(["status"=>$insert,"post"=>$data]);
+    }
+
+    public function delete_permintaan_penunjang() {
+        $id = $this->input->post("id");
+        $idx = $this->input->post("idx");
+        $delete = $this->rajal->deletePermintaanPenunjang($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
     }
 
     public function sign_permintaan_penunjang() {

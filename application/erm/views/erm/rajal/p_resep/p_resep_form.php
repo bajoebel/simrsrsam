@@ -242,6 +242,7 @@ if (!$permintaan_resep) { ?>
             let status = $("#status_form_pr").val();
             if (status==2 || status==3) {
                 swal("Status sudah di proses bagian farmasi")
+                return false;
             }
             let idx = $(this).data("idx");
             $.ajax({

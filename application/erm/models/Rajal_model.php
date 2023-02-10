@@ -613,6 +613,20 @@ class Rajal_model extends CI_Model
         }
     }
 
+    public function deletePermintaanPenunjang($idx,$id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->trans_begin();
+        $db2->where(["idx"=>$idx,"id"=>$id])->delete("rj_p_penunjang");
+        $db2->where(["rj_p_penunjang_id"=>$id])->delete("rj_p_penunjang_detail");
+        if ($db2->trans_status()===FALSE) {
+            $db2->trans_rollback();
+            return false;
+        } else {
+            $db2->trans_commit();
+            return true;
+        }
+    }
+
     public function updateSignPermintaanPenunjang($id,$kode,$kode_detail) {
         $db2 = $this->load->database('dberm', TRUE);
         $db2->trans_begin();

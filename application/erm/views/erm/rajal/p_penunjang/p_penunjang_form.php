@@ -29,7 +29,8 @@
                                 <td>Nama Dokter Pengirim</td>
                                 <td>Diagnosa</td>
                                 <td>Keterangan</td>
-                                <td>List Permintaan</td>
+                                <td width="150px">List Permintaan</td>
+                                <td>Status Permintaan</td>
                                 <td>#</td>
                             </tr>
                         </thead>
@@ -42,9 +43,11 @@
                                     <td><?= $pp->diagnosa_klinik?></td>
                                     <td><?= $pp->keterangan?></td>
                                     <td><?= $pp->ringkasan_tindakan?></td>
+                                    <td><?=status_permintaan_penunjang($pp->status_form)?></td>
                                     <td>
                                         <a href="<?= base_url("erm.php/rajal/permintaan_penunjang/$pp->idx/$pp->id")?>" target="_blank" type="button" class="btn btn-sm btn-default"><i class="fa fa-print"></i></a>
                                         <button type="button" class="btn btn-sm btn-default bg-black" onclick="signPermintaanPenunjang('<?=$pp->id?>','<?=$pp->idx?>','<?=$pp->dpjp?>')"><i class="fa fa-qrcode"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deletePermintaanPenunjang('<?=$pp->id?>','<?=$pp->idx?>','<?=$pp->dpjp?>',<?=$pp->status_form?>)"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -196,6 +199,31 @@
                 return "-"
                 break;
         }
+    }
+
+    function deletePermintaanPenunjang(id,idx,dpjp,status) {
+        let x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+             if (status==null || status==1) {
+                $.ajax({
+                    method : "POST",
+                    url: base_url+"rajal/delete_permintaan_penunjang",
+                    data: {
+                        id : id,
+                        idx : idx,
+                        dpjp : dpjp,
+                        status : status
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        reloadPage();
+                    }
+                });
+            } else {
+                swal("Permintaan Sudah Diproses bagian penunjang")
+            }
+        }
+       
     }
 
 </script>
