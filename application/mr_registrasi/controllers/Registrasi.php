@@ -3110,7 +3110,7 @@ class registrasi extends CI_Controller
                     $insert_id=$this->erm->insert_id();
                     $signcode=base64_encode($insert_id);
                     $update=array(
-                        'admisiSign'=>$signcode
+                        'petugasSign'=>$signcode
                     );
                     $this->erm->where('id',$id_persetujuan);
                     $this->erm->update('rj_setuju_umum',$update);
@@ -3154,7 +3154,7 @@ class registrasi extends CI_Controller
                         $ttd=array(
                             'idx_pendaftaran'=>$idx_pendaftaran,
                             'jenis_dokumen'=>'Surat Masuk Rawat Jalan',
-                            'admisiSign'=>$signcode
+                            'petugasSign'=>$signcode
                         );
                         $this->db->insert('tbl02_dokumerekammedis',$ttd);
                     }
@@ -3175,11 +3175,11 @@ class registrasi extends CI_Controller
         $this->erm = $this->load->database('erm', true);
         $data=$this->erm->where('idx',$idx)->get('rj_setuju_umum')->row_array();
         if(!empty($data)) {
-            if(empty($data['admisiSign'])) $data["sign"]=array();
+            if(empty($data['petugasSign'])) $data["sign"]=array();
             else{
-                $admisiSign=base64_decode($data['admisiSign']);
-                $data['ttdpetugas']=$admisiSign;
-                $data['sign']=$this->erm->where('id',$admisiSign)->get('log_assign')->row_array();
+                $petugasSign=base64_decode($data['petugasSign']);
+                $data['ttdpetugas']=$petugasSign;
+                $data['sign']=$this->erm->where('id',$petugasSign)->get('log_assign')->row_array();
             }
             // print_r($data);exit;
             $this->load->view('priview/priview_persetujuan_umum',$data);
@@ -3241,7 +3241,7 @@ class registrasi extends CI_Controller
                 if ($cekQuery->num_rows() > 0) {
                     $resData['data'] = $cekQuery->row_array();
                     $d=$this->db->where('idx_pendaftaran',$idx)->where("jenis_dokumen",'Surat Masuk Rawat Jalan')->get('tbl02_dokumerekammedis')->row_array();
-                    if(!empty($d)) $resData['ttdpetugas']=$d['admisiSign'];
+                    if(!empty($d)) $resData['ttdpetugas']=$d['petugasSign'];
                     else $resData['ttdpetugas']="";
                     $this->load->view('priview/priview_suratmasukrj', $resData);
                 } else {
@@ -3253,9 +3253,9 @@ class registrasi extends CI_Controller
         $this->erm = $this->load->database('erm', true);
         $data['iep']=$this->erm->where('idx',$idx)->get('rj_iep')->row_array();
         if(empty($data['iep']))  $data['iepdetail']=array();
-        else $data['iepdetail'] = $this->db->where('topik_id',1)->where("id_rj_iep",$data['iep']['id'])->row_array();
+        else $data['iepdetail'] = $this->erm->where('topik_id',1)->where("id_rj_iep",$data['iep']['id'])->get("rj_iep_detail")->row_array();
 
-        $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,id_agama,agama,suku,id_bahasa,bahasa,hambatan_bahasa,no_hp,id_tk_pddkn,pendidikan,
+        $SQL_SMRJ = "SELECT b.idx,b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,id_agama,agama,suku,id_bahasa,bahasa,hambatan_bahasa,no_hp,id_tk_pddkn,pendidikan,
                 a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
                 b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
                 pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
@@ -3263,26 +3263,121 @@ class registrasi extends CI_Controller
                 FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
                 WHERE b.idx='$idx'";
         $data['pasien']=$this->db->query("$SQL_SMRJ")->row_array();
-        // print_r($data); exit;
         $this->load->view('priview/priview_edukasi',$data);
-        // $SQL_SMRJ = "SELECT b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,agama,suku,bahasa,hambatan_bahasa,no_hp,pendidikan,
-        //         a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
-        //         b.nama_provinsi,b.nama_kab_kota,b.nama_kecamatan,b.nama_kelurahan,pjPasienNama,pjPasienUmur,pjPasienPekerjaan,
-        //         pjPasienAlamat,pjPasienTelp,pjPasienHubKel,pjPasienDikirimOleh,pjPasienAlmtPengirim,user_daftar,
-        //         dokterJaga,namaDokterJaga,TIME(b.tgl_masuk) AS JAM,petugasSign
-        //         FROM tbl02_pendaftaran b LEFT JOIN tbl01_pasien a ON a.nomr=b.nomr
-        //         WHERE b.idx='$idx'";
+        
+    }
+    function simpanedukasi(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $peterjemah=(!empty($this->input->post('peterjemah')) ? $this->input->post('peterjemah'): 0);
+            $bersedia=(!empty($this->input->post('bersedia')) ? $this->input->post('bersedia'): 0);
+            $alasan=($bersedia==0 ? $this->input->post('alasantidakbersedia'): "");
+            $terbatas_fisik=$this->input->post('terbatas_fisik');
+            $hambatan=$this->input->post('hambatan');
+            $bahasa=$this->input->post('bahasa');
+            foreach ($bahasa as $b) {
+                if($b=="Daerah") $ba[]=$b."(".$this->input->post('daerahlain').")";
+                else if($b=="bahasalain") $ba[]=$b."(".$this->input->post('bahasalain').")";
+                else $ba[]=$b;
+            }
+            
+            if(!empty($ba)) $bl=implode(";",$ba);else $bl="";
+            $tf=implode(";",$terbatas_fisik);
+            if(!empty($hambatan)){
+                foreach ($hambatan as $ha) {
+                    if($ha=="Lain-Lain") $ham[]=$ha."(".$this->input->post('hambatanlain').")";
+                    else $ham[]=$ha;
+                }
+                $hamb=implode(';',$ham);
+            }else $hamb="Tidak Ada";
+            
+            $rencana_edukasi=$this->input->post('topiklist');
+            $topiklist=implode(";",$rencana_edukasi);
+            $metode=$this->input->post('metode');
+            foreach ($metode as $me ) {
+                $met[]=($me=1?"1-Diskusi":($me==2 ? "2-Ceramah":"3-Demonstrasi"));
+            }
+            $strmet=implode(';',$met);
+            $media=$this->input->post('media');
+            foreach ($media as $me ) {
+                $med[]=($me=1?"1-Liflet":($me==2 ? "2-Lembar Balik":($me==3? "3-Audio Visual": "4-Lain-Lain")));
+            }
+            $strmed=implode(';',$med);
+            $sasaran=$this->input->post('sasaran');
+            foreach ($sasaran as $me ) {
+                $sas[]=($me=1?"1-Pasien": "2-Keluarga Pasien");
+                $hubk=($me=2 ? $this->input->post('hubungan_keluarga') : "");
+                $namasas[]=($me=1? $this->input->post('nama'): $this->input->post('namakeluarga'));
 
-        //         $cekQuery = $this->db->query("$SQL_SMRJ");
-        //         if ($cekQuery->num_rows() > 0) {
-        //             $resData['data'] = $cekQuery->row_array();
-        //             $d=$this->db->where('idx_pendaftaran',$idx)->where("jenis_dokumen",'Surat Masuk Rawat Jalan')->get('tbl02_dokumerekammedis')->row_array();
-        //             if(!empty($d)) $resData['ttdpetugas']=$d['admisiSign'];
-        //             else $resData['ttdpetugas']="";
-        //             $this->load->view('priview/priview_suratmasukrj', $resData);
-        //         } else {
-        //             echo "<script>alert('Ops. Data pendaftaran pasien tidak ditemukan. Silahkan coba kembali.');
-        //             window.close();</script>";
-        //         }
+            }
+            $strsas=implode(';',$sas);
+            $this->erm = $this->load->database('erm', true);
+            $insertid=$this->input->post('iepid');
+            $data=array(
+                'idx'=>$this->input->post('eduidx'),
+                'nomr'=>$this->input->post('edunomr'),
+                'nama'=>$this->input->post('edunama'),
+                'bahasa'=>$bl,
+                'bahasa_lain'=>'',
+                'penerjemah'=>$peterjemah,
+                'agama'=>$this->input->post('agama'),
+                'pendidikan'=>$this->input->post('pendidikan'),
+                'kesediaan'=>$this->input->post('kesediaan'),
+                'kesediaan_alasan'=>$alasan,
+                'baca'=>$this->input->post('baca'),
+                'keyakinan'=>$this->input->post('keyakinan'),
+                'terbatas_fisik'=>(!empty($tf) ? $tf:"Tidak ada"),
+                'terbatas_fisik_lain'=>'',
+                'hambatan'=>(empty($hamb) ? "Tidak ada": $hamb),
+                'hambatan_lain'=>'',
+                'kebutuhan_edukasi'=>'Pendaftaran Admisi',
+                'kebutuhan_edukasi_lain'=>'',
+                'rencana_edukasi'=>$topiklist,
+                'metode'=>$strmet,
+                'media'=>$strmed,
+                'sasaran_edukasi'=>$strsas,
+                'hubungan_keluarga'=>$hubk,
+                'user_daftar'=>$this->session->userdata('get_uid'),
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            );
+            if(empty($insertid)){
+                $this->erm->insert('rj_iep',$data);
+                $insertid=$this->erm->insert_id();
+            }else{
+                $this->erm->where('id',$insertid);
+                $this->erm->update('rj_iep',$data);
+            }
+            
+            if(!empty($insertid)){
+                $det=array(
+                    'id_rj_iep'=>$insertid,
+                    'tgl'=>date('Y-m-d'),
+                    'jam'=>date('H:i:s'),
+                    'topik_id'=>1,
+                    'topik_title'=>'Pendaftaran Admisi',
+                    'topik_list'=>$topiklist,
+                    'metode'=>implode(';',$metode),
+                    'media'=>implode(';',$media),
+                    'sasaran'=>implode(';',$namasas),
+                    'evaluasi_awal'=>$this->input->post('evaluasi_awal'),
+                    'pemberi_edukasi_id'=>$this->session->userdata('get_uid'),
+                    'pemberi_edukasi'=>getNmLengkap(),
+                    'verifikasi'=>'',
+                    'evaluasi_lanjut'=>$this->input->post('evaluasi_lanjut'),
+                    'user_daftar'=>$this->session->userdata('get_uid'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                );
+                $this->erm->insert('rj_iep_detail',$det);
+                $response = array('status' => true, 'message' => 'Data berhasil Diinput', 'data' => array());
+            }else{
+                $response = array('status' => false, 'message' => 'Gagal Input Data', 'data' => array());
+            }
+        }else {
+            $response = array('status' => false, 'message' => 'Ops Session Expired', 'data' => array());
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }

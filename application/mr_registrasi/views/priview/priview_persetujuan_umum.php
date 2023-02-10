@@ -314,7 +314,7 @@
                                                         <tr>
                                                             <td>Petugas Admission
 
-                                                                <input type="hidden" name="ttdkode" id="ttdkode" value="<?= $ttdpetugas ?>">
+                                                                <input type="hidden" name="ttdkode" id="ttdkode" value="<?= (!empty($ttdpetugas)) ? $ttdpetugas : "" ?>">
                                                             </td>
                                                         </tr>
                                                         <tr>

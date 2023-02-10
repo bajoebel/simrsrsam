@@ -4801,7 +4801,7 @@ function priviewEdukasi(idx) {
 		data: {},
 		success: function (data) {
 			$('#privgc').modal('show');
-			$('#headPriv').html("Hak Dan Kewajiban Pasien")
+			$('#headPriv').html("Catatan Pemberian Informasi Dan Edukasi Pasien Dan Keluarga")
 			$('#priviewdokumen').html(data);
 		}
 	});
@@ -5253,6 +5253,23 @@ function sign(){
 		complete: function() {
 			$('#sign').prop("disabled",false);
 			$('#sign').html('<i class="glyphicon glyphicon-certificate"></i> Sign')
+		}
+	});
+}
+function simpanEdukasi(){
+	$.ajax({
+		url: base_url + "registrasi/simpanedukasi",
+		type: "POST",
+		data: $('#edukasi').serialize(),
+		dataType: "JSON",
+		success: function (data) {
+			if(data.status==true){
+				priviewEdukasi()
+			}
+		},
+		error: function (jqXHR, ajaxOption, errorThrown) {
+			console.log(jqXHR.responseText);
+			alert(jqXHR.responseText);
 		}
 	});
 }

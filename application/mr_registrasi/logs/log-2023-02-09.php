@@ -219,3 +219,9 @@ ERROR - 2023-02-09 08:32:02 --> Severity: Notice --> Trying to access array offs
 ERROR - 2023-02-09 08:32:02 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::row_array() C:\laragon\www\simrs_vclaim\application\mr_registrasi\controllers\Registrasi.php 3256
 ERROR - 2023-02-09 08:32:04 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\controllers\Registrasi.php 3256
 ERROR - 2023-02-09 08:32:04 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::row_array() C:\laragon\www\simrs_vclaim\application\mr_registrasi\controllers\Registrasi.php 3256
+ERROR - 2023-02-09 09:32:16 --> Severity: Notice --> Trying to get property 'id_tk_pddkn' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 52
+ERROR - 2023-02-09 09:32:16 --> Severity: Notice --> Trying to get property 'pendidikan' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 53
+ERROR - 2023-02-09 09:32:27 --> Severity: Notice --> Trying to get property 'id_tk_pddkn' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 52
+ERROR - 2023-02-09 09:32:27 --> Severity: Notice --> Trying to get property 'pendidikan' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 53
+ERROR - 2023-02-09 09:32:29 --> Severity: Notice --> Trying to get property 'id_tk_pddkn' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 52
+ERROR - 2023-02-09 09:32:29 --> Severity: Notice --> Trying to get property 'pendidikan' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 53
