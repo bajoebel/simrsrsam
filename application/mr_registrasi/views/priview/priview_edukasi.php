@@ -364,29 +364,29 @@ if(empty($iepdetail)){
                                     <span style='margin-left:4mm'>&#9744; Daerah (sebutkan) <?= str_pad(" ", 30, ".") ?></span>
                                     <span style='margin-left:4mm'>&#9744; Isyarat</span>
                                     <span style='margin-left:4mm'>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span> -->
-                                    <?= arr_to_list($k->bahasa, "<span style='margin-left:4mm'>&#9745;", "</span>"); ?>
-                                    <?= ($k->bahasa_lain != null) ? ", " . $k->bahasa_lain : "-" ?>
+                                    <?= arr_to_list($iep['bahasa'], "<span style='margin-left:4mm'>&#9745;", "</span>"); ?>
+                                    <?= ($iep['bahasa_lain'] != null) ? ", " . $iep['bahasa_lain'] : "-" ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Kebutuhan Penerjemah</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= trueOrFalse($k->penerjemah) ?></span>
+                                    <span>&#9745; <?= trueOrFalse($iep['penerjemah']) ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Agama Pasien</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= agama($k->agama) ?></span>
+                                    <span>&#9745; <?= agama($iep['agama']) ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Pendidikan Pasien</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= pendidikan($k->pendidikan) ?></span>
+                                    <span>&#9745; <?= pendidikan($iep['pendidikan']) ?></span>
 
                                 </td>
                             </tr>
@@ -394,21 +394,21 @@ if(empty($iepdetail)){
                                 <td>Kesedian Menerima Informasi</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= ($k->kesediaan == 1) ? "Bersedia" : "Tidak Bersedia, alasannya :" . $k->kesediaan_alasan  ?></span>
+                                    <span>&#9745; <?= ($iep['kesediaan'] == 1) ? "Bersedia" : "Tidak Bersedia, alasannya :" . $iep['kesediaan_alasan']  ?></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Kemampuan Membaca</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= ($k->kesediaan == 1) ? "Baik" : "Kurang" ?>
+                                    <span>&#9745; <?= ($iep['kesediaan'] == 1) ? "Baik" : "Kurang" ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Keyakinan dan Nilai-nilai</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= $k->keyakinan ?></span>
+                                    <span>&#9745; <?= $iep['keyakinan'] ?></span>
                                 </td>
                             </tr>
                         </table>
@@ -421,7 +421,7 @@ if(empty($iepdetail)){
                                     <!-- <span>&#9744; Tidak ada</span><br />
                                     <span>&#9744; Penglihatan terganggu</span><br />
                                     <span>&#9744; Pendengaran terganggu</span><br /> -->
-                                    <?= arr_to_list($k->terbatas_fisik, "<span> &#9745;", " </span>") ?>
+                                    <?= arr_to_list($iep['terbatas_fisik'], "<span> &#9745;", " </span>") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -431,8 +431,8 @@ if(empty($iepdetail)){
                                     <span>&#9744; Motivasi Kurang</span><br />
                                     <span>&#9744; Emosional Terganggu</span><br />
                                     <span>&#9744; Lain-lain <?= str_pad(" ", 30, ".") ?></span><br /> -->
-                                    <?= arr_to_list($k->hambatan, "<span> &#9745;", " </span>") ?>
-                                    <?= ($k->hambatan_lain != null) ? "Lainnya..., " . $k->hambatan_lain : "" ?>
+                                    <?= arr_to_list($iep['hambatan'], "<span> &#9745;", " </span>") ?>
+                                    <?= ($iep['hambatan_lain'] != null) ? "Lainnya..., " . $iep['hambatan_lain'] : "" ?>
                                 </td>
                                 <td>
                                     &nbsp;
@@ -458,8 +458,8 @@ if(empty($iepdetail)){
                     <span style="margin-left:5mm">&#9744; 10. Rohani</span>
                     <span style="margin-left:5mm">&#9744; 11. Pendaftaran dan admisi</span>
                     <span style="margin-left:5mm">&#9744; 12. Prosedur dan perawatan</span> -->
-                    <?= arr_to_list($k->kebutuhan_edukasi, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
-                    <?= ($k->kebutuhan_edukasi_lain != null) ? "Lainnya..., " . $k->kebutuhan_edukasi_lain : "" ?>
+                    <?= arr_to_list($iep['kebutuhan_edukasi'], "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
+                    <?= ($iep['kebutuhan_edukasi_lain'] != null) ? "Lainnya..., " . $iep['kebutuhan_edukasi_lain'] : "" ?>
                 </div>
             </td>
         </tr>
@@ -472,7 +472,7 @@ if(empty($iepdetail)){
                         <!-- <span style="margin-left:5mm">1. Diskusi</span>
                         <span style="margin-left:5mm">2. Ceramah</span>
                         <span style="margin-left:5mm">3. Demontrasi</span> -->
-                        <?= arr_to_list($k->metode, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
+                        <?= arr_to_list($iep['metode'], "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                     <div class='media'>
                         <span>Media <small>(ceklist Nomor berikut)</small></span><br />
@@ -480,11 +480,11 @@ if(empty($iepdetail)){
                         <span style="margin-left:5mm">2. Lembar Balik</span>
                         <span style="margin-left:5mm">3. Audio Visual</span>
                         <span style="margin-left:5mm">3. Lain-lain <?= str_pad(" ", 30, ".") ?></span> -->
-                        <?= arr_to_list($k->media, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
+                        <?= arr_to_list($iep['media'], "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                     <div class='sasaran'>
                         <span>Sasaran Edukasi <small>(Lingkari Nomor berikut)</small></span><br />
-                        <?= arr_to_list($k->sasaran_edukasi, "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
+                        <?= arr_to_list($iep['sasaran_edukasi'], "<span style='margin-left:5mm'>&#9745;", "</span>") ?>
                     </div>
                 </div>
             </td>
@@ -521,14 +521,11 @@ if(empty($iepdetail)){
                         </td>
                     </tr>
                     <?php
-                    $db2 = $this->load->database('dberm', TRUE);
-                    $list =  $db2->where(['id_rj_iep' => $k->id])
-                        ->order_by("topik_id asc, tgl asc")
-                        ->get("rj_iep_detail")->result();
+                    $list =  $iepdetail;
                     foreach ($list as $rl) {
                     ?>
                         <tr>
-                            <td><?= DateToIndo($rl->tgl) . "/" . $rl->jam ?></td>
+                            <td><?= DateToIndo($rl['tgl']) . "/" . $rl['jam'] ?></td>
                             <td>
                                 <b><?= ($rl->topik_title) ?></b><br>
                                 <!-- &#9744; Hak-hak pasien<br>
@@ -537,22 +534,22 @@ if(empty($iepdetail)){
                                 &#9744; Alasan Penundaan Pelayanan<br>
                                 &#9744; Informasi Rujukan<br>
                                 &#9744; Lain-lain <?= str_pad(" ", 30, ".") ?><br> -->
-                                <?= arr_to_list($rl->topik_list) ?>
+                                <?= arr_to_list($rl['topik_list']) ?>
                             </td>
-                            <td style="text-align:center">&nbsp;<?= $rl->metode ?></td>
-                            <td style="text-align:center">&nbsp;<?= $rl->media ?></td>
-                            <td style="text-align:center">&nbsp;<?= $rl->sasaran ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['metode'] ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['media'] ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['sasaran'] ?></td>
                             <td style="text-align:center">&nbsp;&#10004;</td>
-                            <td style="text-align:center">&nbsp;<?= $rl->evaluasi_awal ?></td>
-                            <td style="text-align:center">&nbsp;<?= $rl->pemberi_edukasi ?></td>
-                            <td style="text-align:center">&nbsp;<div id="qrcode_epd_<?=$rl->id?>"></div></td>
-                            <td style="text-align:center">&nbsp;<?= $rl->verifikasi ?></td>
-                            <td style="text-align:center">&nbsp;<?= $rl->evaluasi_lanjut ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['evaluasi_awal'] ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['pemberi_edukasi'] ?></td>
+                            <td style="text-align:center">&nbsp;<div id="qrcode_epd_<?=$rl['id']?>"></div></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['verifikasi'] ?></td>
+                            <td style="text-align:center">&nbsp;<?= $rl['evaluasi_lanjut'] ?></td>
                         </tr>
                          <!-- qrcode -->
                         <script type="text/javascript">
-                            var id = "<?= $rl->id?>";
-                            var code = "<?= $rl->pemberiSign?>";
+                            var id = "<?= $rl['id']?>";
+                            var code = "<?= $rl['pemberiSign']?>";
                             if (code) {
                                 var qrcode = new QRCode(document.getElementById("qrcode_epd_"+id), {
                                     text: code,

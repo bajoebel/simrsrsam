@@ -50,3 +50,644 @@ ERROR - 2023-02-10 08:46:47 --> Severity: Notice --> Trying to get property 'nom
 ERROR - 2023-02-10 08:46:47 --> Severity: Notice --> Undefined variable: p C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 326
 ERROR - 2023-02-10 08:46:47 --> Severity: Notice --> Trying to get property 'nama' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 326
 ERROR - 2023-02-10 08:46:47 --> Severity: error --> Exception: Call to undefined function DateToIndo() C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 330
+ERROR - 2023-02-10 09:00:23 --> Severity: error --> Exception: Call to undefined function DateToIndo() C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 330
+ERROR - 2023-02-10 09:01:39 --> Severity: error --> Exception: Call to undefined function DateToIndo() C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 330
+ERROR - 2023-02-10 09:02:22 --> Severity: error --> Exception: Call to undefined function DateToIndo() C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 330
+ERROR - 2023-02-10 09:03:04 --> Severity: error --> Exception: Call to undefined function jns_kelamin() C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 334
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Undefined variable: k C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 397
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'kesediaan_alasan' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 397
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:17 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:17 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Uninitialized string offset: 0 C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> checkdate() expects parameter 3 to be int, string given C:\laragon\www\simrs_vclaim\application\mr_registrasi\helpers\global_helper.php 597
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to access array offset on value of type null C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'tgl' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'jam' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 528
+ERROR - 2023-02-10 09:04:49 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'topik_list' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 537
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'metode' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 539
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'media' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 540
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'sasaran' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 541
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_awal' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 543
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberi_edukasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 544
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 545
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'verifikasi' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 546
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'evaluasi_lanjut' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 547
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'id' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 551
+ERROR - 2023-02-10 09:04:49 --> Severity: Warning --> Illegal string offset 'pemberiSign' C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 552
+ERROR - 2023-02-10 09:05:27 --> Severity: Notice --> Trying to get property 'topik_title' of non-object C:\laragon\www\simrs_vclaim\application\mr_registrasi\views\priview\priview_edukasi.php 530

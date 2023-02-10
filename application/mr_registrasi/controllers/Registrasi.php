@@ -3253,7 +3253,7 @@ class registrasi extends CI_Controller
         $this->erm = $this->load->database('erm', true);
         $data['iep']=$this->erm->where('idx',$idx)->get('rj_iep')->row_array();
         if(empty($data['iep']))  $data['iepdetail']=array();
-        else $data['iepdetail'] = $this->erm->where('topik_id',1)->where("id_rj_iep",$data['iep']['id'])->get("rj_iep_detail")->row_array();
+        else $data['iepdetail'] = $this->erm->where('topik_id',1)->where("id_rj_iep",$data['iep']['id'])->get("rj_iep_detail")->result_array();
 
         $SQL_SMRJ = "SELECT b.idx,b.nomr,b.id_daftar,a.nama,a.tempat_lahir,a.tgl_lahir,a.jns_kelamin,id_agama,agama,suku,id_bahasa,bahasa,hambatan_bahasa,no_hp,id_tk_pddkn,pendidikan,
                 a.pekerjaan,a.no_ktp,a.no_telpon,a.alamat,nama_negara,b.tgl_masuk AS tgl_reg,a.no_bpjs,rujukan,
