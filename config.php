@@ -70,7 +70,7 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_dev');
 		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3');
 		break;
 	case 'production':

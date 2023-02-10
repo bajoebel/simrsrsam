@@ -9,7 +9,7 @@
     @media only screen and (max-width: 1360px) {
         .modal-content {
             overflow-y: scroll;
-            overflow-x: hidden;
+            overflow-x: scroll;
             height: 600px;
             /* white-space: nowrap */
         }
@@ -20,7 +20,7 @@
     .modal-content {
 
         overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-x: scroll;
         max-height: 700px;
         /* white-space: nowrap */
     }
