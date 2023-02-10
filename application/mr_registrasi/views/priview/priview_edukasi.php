@@ -290,7 +290,7 @@ if(empty($iepdetail)){
     <div id="kode-form">
         <div>FORM RM 6.3.00 Rev 02</div>
     </div>
-    <table width="297mm">
+    <table width="100%">
         <tr>
             <td>
                 <div class="header">
@@ -527,7 +527,7 @@ if(empty($iepdetail)){
                         <tr>
                             <td><?= DateToIndo($rl['tgl']) . "/" . $rl['jam'] ?></td>
                             <td>
-                                <b><?= ($rl->topik_title) ?></b><br>
+                                <b><?= ($rl['topik_title']) ?></b><br>
                                 <!-- &#9744; Hak-hak pasien<br>
                                 &#9744; Aturan Umum RS<br>
                                 &#9744; Perkiraan Biaya Rawatan<br>
