@@ -631,6 +631,10 @@
                                                                     <input type="hidden" name="jampraktek" id="jampraktek" value="">
                                                                     <input type="hidden" name="kuotajkn" id="kuotajkn" value="">
                                                                     <input type="hidden" name="kuotanonjkn" id="kuotanonjkn" value="">
+                                                                    <input type="hidden" name="jammulai" id="jammulai" value="">
+                                                                    <input type="hidden" name="jamselesai" id="jamselesai" value="">
+                                                                    <input type="hidden" name="spm" id="spm" value="">
+                                                                    <input type="hidden" name="resource" id="resource" value="simrs">
                                                                 </div>
                                                             </div>
                                                             <?php
@@ -2233,8 +2237,12 @@
                 namadokter: $('#namadokter').val(),
                 jampraktek: $('#jampraktek').val(),
                 kuotajkn: $('#kuotajkn').val(),
-                kuotajkn: $('#kuotajkn').val(),
                 kuotanonjkn: $('#kuotanonjkn').val(),
+                jammulai: $('#jammulai').val(),
+                jamselesai: $('#jamselesai').val(),
+                resource: $('#resource').val(),
+                spm: $('#spm').val(),
+                nomr: $('#nomr').val(),
                 no_ktp: $('#no_ktp').val(),
                 nama_pasien: $('#nama').val(),
                 tempat_lahir: $('#tempat_lahir').val(),
@@ -2338,6 +2346,8 @@
                                 var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/reg_success?uid=' ?>' + data.unikID;
                                 window.location.href = url;
                             } else {
+                                console.clear();
+                                console.log(formdata);
                                 alert(data.message);
                             }
                         },

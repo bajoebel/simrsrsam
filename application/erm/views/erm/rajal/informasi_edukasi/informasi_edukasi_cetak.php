@@ -360,6 +360,7 @@ $date = date("Y-m-d");
                     $list =  $db2->where(['id_rj_iep' => $k->id])
                         ->order_by("topik_id asc, tgl asc")
                         ->get("rj_iep_detail")->result();
+                    
                     foreach ($list as $rl) {
                     ?>
                         <tr>

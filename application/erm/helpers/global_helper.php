@@ -475,3 +475,44 @@ function longDate($tanggal)
         return $tgl . " " . $bulan[$bln] . " " . $thn;
     }
 }
+function DateToIndo($date)
+{ // fungsi atau method untuk mengubah tanggal ke format indonesia
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+    $tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
+    $bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
+    $tgl   = substr($date, 8, 2); // memisahkan format tanggal menggunakan substring
+    // $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    if (checkdate($bulan, $tgl, $tahun)) {
+        $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    } else {
+        $result = "not valid date";
+    }
+    return ($result);
+}
+function arr_to_list($arr, $start = "<span>&nbsp;&nbsp;&nbsp;", $end = "</span><br/>")
+{
+    $arr_list = explode(";", $arr);
+    $list = "";
+    if (count($arr_list)>0) {
+        for ($al = 0; $al < count($arr_list); $al++) {
+            $list .=  $start . ($al + 1) . ". " . $arr_list[$al] . $end;
+        }
+    } else {
+        $list .= "-<br/>";
+    }
+    return $list;
+}
+function trueOrFalse($param)
+{
+    switch ($param) {
+        case '1':
+            return "Ya";
+            break;
+        case '0':
+            return "Tidak";
+            break;
+        default:
+            return "-";
+            break;
+    }
+}
