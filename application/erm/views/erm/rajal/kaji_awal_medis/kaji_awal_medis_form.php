@@ -59,7 +59,7 @@
     <input type="hidden" name="nomr_m" value="<?= $detail->nomr ?>">
     <input type="hidden" name="nama_m" value="<?= $detail->nama_pasien ?>">
     <input type="hidden" name="user_daftar_m" value="<?= $detail->user_daftar ?>">
-    <input type="hidden" name="cppt_id_m" value="">
+    <input type="hidden" name="cppt_id_m" id="cppt_id_m" value="">
     <div class="form-group row">
         <div class="col-md-6">
             <label for="">Pilihan Panduan Praktek Klinik</label>
@@ -109,7 +109,12 @@
             </div>
             <div class="col-md-8">
                 auto detail
-                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly></select>
+                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly>
+                    <?= $anamnesis = getPemeriksaan("anamnesis");
+                    foreach ($anamnesis as $an) {?>
+                        <option value="<?=$an->name?>"><?=$an->name?></option>
+                    <?php } ?>
+                </select>
             </div>
         </div>
         <div class="form-group row">
@@ -118,7 +123,11 @@
             </div>
             <div class="col-md-8">
                 allo detail
-                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly></select>
+                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2" multiple="multiple" style="width:100%" readonly>
+                    <?php foreach ($anamnesis as $an) {?>
+                        <option value="<?=$an->name?>"><?=$an->name?></option>
+                    <?php } ?>
+            </select>
             </div>
         </div>
         <b>Pemerikasaan Fisik</b>
@@ -150,8 +159,10 @@
             <div class="col-md-6">
                 <!-- <textarea name="fisik_detail_m" id="fisik_detail_m" rows="10" class="form-control"></textarea> -->
                 <b>Detail pemeriksaan fisik</b>
-                <select name="fisik_detail_m[]" id="fisik_detail_m" class="form-control select2" style="width:100%" multiple="multiple">
-                    
+                <select name="fisik_detail_m[]" id="fisik_detail_m" class="form-control select2-tag" style="width:100%" multiple="multiple">
+                     <?php $fisik = getPemeriksaan("fisik");foreach ($fisik as $fs) {?>
+                        <option value="<?=$fs->name?>"><?=$fs->name?></option>
+                    <?php } ?>
                 </select>
             </div>
         </div>
@@ -173,7 +184,7 @@
                 <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control"></textarea>
             </div>
         </div>
-        <b>Permintaan Pemeriksaan Penunjang</b> <a href="#tab_8" data-toggle="tab">Tambah Permintaan</a></br>
+        <b>Permintaan Pemeriksaan Penunjang</b> <a href="#tab_7" onclick="getRiwayat(7,<?= $d->idx ?>)" data-toggle="tab">Tambah Permintaan</a></br>
         <div class="form-group row">
             <div class="col-md-12">
                 <?php $penunjang_m = getPermintaanPenunjang($d->idx); 
@@ -210,17 +221,17 @@
                 <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control"></textarea>
             </div>
         </div>
-        <b>Permintaan THERAPI</b> <a href="#tab_8" data-toggle="tab">Tambah Permintaan</a></br>
+        <b>Permintaan THERAPI</b> <a href="#tab_8" onclick="getRiwayat(8,<?= $d->idx ?>)" data-toggle="tab">Tambah Permintaan</a></br>
         <?php $resep = getPermintaanResep($d->idx);;
         if ($resep) {
         ?>
         <table class="table" >
-            <tr>
+            <tr class="bg-green text-white">
                 <td colspan="2">
                     PERMINTAAN RESEP
                 </td>
             </tr>
-            <tr>
+            <tr class="bg-green text-white">
                 <td>Nama Obat</td>
                 <td>Aturan Pakai</td>
             </tr>
@@ -312,7 +323,7 @@
             disabled : true
         });
 
-        $("#tampil_awal_medis").hide();
+        // $("#tampil_awal_medis").hide();
 
         $("#dokter_id_m").val("<?=$detail->dokterJaga?>").trigger("change")
         // auto
@@ -393,52 +404,54 @@
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response)
-                    if (response.status==true) {
+                    // console.log(response)
+                    // if (response.status==true) {
                         let utama = response.utama;
                         let detail = response.detail;
                         let rawat = response.rawat;
                         $("#definisi_m").text(utama.definisi);
-                        var fisik_html = `<option value="">== Silahkan Pilih ==</option>`;
-                        var fisik = detail.filter((task)=> task.tipe="fisik");
-                        fisik.forEach(el => {
-                            fisik_html+= `<option value="${el.name}">${el.name}<option>`;
-                        });
-                        $("#fisik_detail_m").html(fisik_html);
-                        var anamnesis_html = ``;
-                        var anamnesis = detail.filter((task)=> task.tipe="anamnesis")
-                         anamnesis.forEach(el => {
-                            anamnesis_html+= `<option value="${el.name}">${el.name}<option>`;
-                        });
-                        $("#fisik_detail_m").html(fisik_html);
-                        $("#auto_detail_m").html(anamnesis_html);
-                        $("#allo_detail_m").html(anamnesis_html);
-                        CKEDITOR.instances['diagnosis_kerja_m'].setData(utama.diagnosis_kerja)
-                        CKEDITOR.instances['diagnosis_banding_m'].setData(utama.diagnosis_banding)
-                        CKEDITOR.instances['penunjang_m'].setData(utama.pemeriksaan_penunjang)
-                        CKEDITOR.instances['terapi_m'].setData(utama.terapi)
+                        // var fisik_html = `<option value="">== Silahkan Pilih ==</option>`;
+                        // var fisik = detail.filter((task)=> task.tipe="fisik");
+                        // fisik.forEach(el => {
+                        //     fisik_html+= `<option value="${el.name}">${el.name}<option>`;
+                        // });
+                        // $("#fisik_detail_m").html(fisik_html);
+                        // var anamnesis_html = ``;
+                        // var anamnesis = detail.filter((task)=> task.tipe="anamnesis")
+                        //  anamnesis.forEach(el => {
+                        //     anamnesis_html+= `<option value="${el.name}">${el.name}<option>`;
+                        // });
+                        // $("#fisik_detail_m").html(fisik_html);
+                        // $("#auto_detail_m").html(anamnesis_html);
+                        // $("#allo_detail_m").html(anamnesis_html);
+                        // CKEDITOR.instances['diagnosis_kerja_m'].setData(utama.diagnosis_kerja)
+                        // CKEDITOR.instances['diagnosis_banding_m'].setData(utama.diagnosis_banding)
+                        // CKEDITOR.instances['penunjang_m'].setData(utama.pemeriksaan_penunjang)
+                        // CKEDITOR.instances['terapi_m'].setData(utama.terapi)
 
                         if (rawat) {
                             $("#td_m").val(rawat.ttv_td+"/"+rawat.ttv_ds);
                             $("#nadi_m").val(rawat.ttv_nd);
-                            $("#napas_m").val(rawat.ttv_spo2);
+                            $("#napas_m").val(rawat.ttv_rr);
                             $("#suhu_m").val(rawat.ttv_sh);
-                        } else {
-                            swal("Belum Ada Kajian Keperawatan");
-                        }
+                        } 
+                        // else {
+                        //     swal("Belum Ada Kajian Keperawatan");
+                        // }
                       
                         $("#tampil_awal_medis").show();
-                    } else {
-                        swal("Referensi Tidak Ditemukan")
-                        $("#definisi_m").text("");
-                        CKEDITOR.instances['diagnosis_kerja_m'].setData("")
-                        CKEDITOR.instances['diagnosis_banding_m'].setData("")
-                        CKEDITOR.instances['penunjang_m'].setData("")
-                        CKEDITOR.instances['terapi_m'].setData("")
-                        $("#fisik_detail_m").html("");
-                        $("#auto_detail_m").html("");
-                        $("#allo_detail_m").html("");
-                    }
+                    // } 
+                    // else {
+                    //     swal("Referensi Tidak Ditemukan")
+                    //     $("#definisi_m").text("");
+                    //     CKEDITOR.instances['diagnosis_kerja_m'].setData("")
+                    //     CKEDITOR.instances['diagnosis_banding_m'].setData("")
+                    //     CKEDITOR.instances['penunjang_m'].setData("")
+                    //     CKEDITOR.instances['terapi_m'].setData("")
+                    //     $("#fisik_detail_m").html("");
+                    //     $("#auto_detail_m").html("");
+                    //     $("#allo_detail_m").html("");
+                    // }
                 },
                 error : function (e) {
                     console.log(e)

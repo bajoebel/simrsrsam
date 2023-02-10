@@ -241,7 +241,7 @@
                 </div>
             </div>
             <div class="form-group">
-            <?= ($detail->status_erm!=1)?" <button type='form' class='btn btn-primary pull-right'>Simpan</button>":"" ?>
+            <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary pull-right'>Simpan</button>":"" ?>
 
                 <!-- <button type="form" class="btn btn-primary pull-right">Simpan</button> -->
             </div>

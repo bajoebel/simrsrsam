@@ -80,7 +80,7 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm btn-info' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-barcode'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm bg-black' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-barcode'></i>
                         </button>
                         <?php } ?>
                     </div>
@@ -150,7 +150,9 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-tenagamedis="<?=$r->tenaga_medis_id?>" class='btn btn-sm btn-default' onclick="signKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-tenagamedis'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> Assign Pemberi Asuhan</i></button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-tenagamedis="<?=$r->tenaga_medis_id?>" class='btn btn-sm bg-black' onclick="signKembangPasien(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-tenagamedis'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class="fa fa-qrcode"></i></button>
+                        </button>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-tenagamedis="<?=$r->tenaga_medis_id?>" class='btn btn-sm btn-default' onclick="signReviewDpjp(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-tenagamedis'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> Assign DPJP</button>
                         </button>
                         <?php } ?>
                     </div>

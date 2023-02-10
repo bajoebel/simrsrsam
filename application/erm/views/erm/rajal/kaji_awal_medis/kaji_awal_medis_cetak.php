@@ -201,7 +201,7 @@ $date = date("Y-m-d");
                                 <span>ANAMNESIS : </span><?=($k->auto==1)?"<span style='margin-left:3mm'>&#9745; Auto</span>":""?></span><?=($k->allo==1)?"<span style='margin-left:3mm'>&#9745; Allo</span>":""?></span><br>
                                 
                                 <?php if ($k->auto==1) { ?><div style="height:20mm">
-                                    Allo detail :<br/> <?=arra_to_list($k->auto_detail)?></br>
+                                    Allo detail :<br/> <?=arr_to_list($k->auto_detail)?></br>
                                 </div>
                                 <?php } ?>
                                 <?php if ($k->allo==1) { ?><div style="height:20mm">

@@ -68,7 +68,7 @@
                 <label for="">Profesional</label>
                 <select name="jenis_tenaga_medis_id_k" id="jenis_tenaga_medis_id_k" class="form-control">
                     <option value="">Pilih Profesional</option>
-                    <?php foreach($profesi as $pr) { ?>
+                    <?php foreach ($profesi as $pr) { ?>
                         <option value="<?= $pr->idx ?>"><?= $pr->profesi ?></option>
                     <?php } ?>
                     <!-- <option value="1">Dokter</option>
@@ -84,7 +84,7 @@
             <div class="col-md-5">
                 <label for="">Nama Profesional</label>
                 <select name="tenaga_medis_id_k" id="tenaga_medis_id_k" class="form-control select2" style="width:100%">
-                        
+
                 </select>
             </div>
         </div>
@@ -128,14 +128,14 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
             <b>Review</b>
             <div class="form-group row">
                 <div class="col-md-12">
                     <textarea name="review_k" id="review_k" rows="5" class="form-control"></textarea>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </form>
 <script>
@@ -146,33 +146,34 @@
         CKEDITOR.replace('assesment_k')
         CKEDITOR.replace('planning_k')
         CKEDITOR.replace('instruksi_k')
-        CKEDITOR.replace('review_k')
+        // CKEDITOR.replace('review_k')
 
         // CKEDITOR.replace('#subyektif_k')
         $('#jenis_tenaga_medis_id_k').change(function() {
             pil = this.value;
             id = "";
-            list_tenaga_medis(pil,id)
+            list_tenaga_medis(pil, id)
         })
     });
-    function list_tenaga_medis(pil,id) {
+
+    function list_tenaga_medis(pil, id) {
         $.ajax({
             type: "POST",
-            url: base_url+"rajal/get_tenaga_medis",
+            url: base_url + "rajal/get_tenaga_medis",
             data: {
-                "pil" : pil
+                "pil": pil
             },
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 let data = response.data;
-                let html =`<option value=''></option>`;
-                $.each(data,function (k,v) {
+                let html = `<option value=''></option>`;
+                $.each(data, function(k, v) {
                     // console.log(id+"--"+v.NRP);
-                    if (id==v.NRP) {
+                    if (id == v.NRP) {
                         // console.log("ini sama")
-                        html+=`<option value="${v.NRP}" selected="selected">${v.pgwNama}</option>`;
+                        html += `<option value="${v.NRP}" selected="selected">${v.pgwNama}</option>`;
                     } else {
-                        html+=`<option value="${v.NRP}">${v.pgwNama}</option>`;
+                        html += `<option value="${v.NRP}">${v.pgwNama}</option>`;
                     }
                 })
                 $("#tenaga_medis_id_k").html(html);

@@ -720,6 +720,28 @@ function getPermintaanResepDetailById($id) {
         ->result();
 }
 
+function getAlatMedis($tipe="") {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    if ($tipe!="") {
+        $db2->where("a.tipe",$tipe);
+    }
+    return $db2
+        ->select("*")
+        ->get("m_alat_medis a")->result();
+}
+
+function getPemeriksaan($tipe="") {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    if ($tipe!="") {
+        $db2->where("a.tipe",$tipe);
+    }
+    return $db2
+        ->select("*")
+        ->get("m_pk_detail a")->result();
+}
+
 
 
 
