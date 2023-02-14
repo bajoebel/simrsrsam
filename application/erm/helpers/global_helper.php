@@ -475,6 +475,21 @@ function longDate($tanggal)
         return $tgl . " " . $bulan[$bln] . " " . $thn;
     }
 }
+function hariIni(){
+    $tgl=date('Y-m-d');
+        $timestamp = strtotime($tgl);
+        $day = date('D', $timestamp);
+        $hari=array(
+            'Sun'=>'Minggu',
+            'Mon'=>'Senin',
+            'Tue'=>'Selasa',
+            'Wed'=>'Rabu',
+            'Thu'=>'Kamis',
+            'Fri'=>'Jumat',
+            'Sat'=>'Sabtu'
+        );
+        return $hari[$day];
+}
 // function DateToIndo($date)
 // { // fungsi atau method untuk mengubah tanggal ke format indonesia
 //     $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");

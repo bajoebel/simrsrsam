@@ -2,7 +2,7 @@
 	error_reporting(0);
 	$idx = $this->uri->segment(3);
 	
-    function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
+    /*function DateToIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
 		$BulanIndo = array("Januari", "Februari", "Maret","April", "Mei", "Juni","Juli", "Agustus", "September","Oktober", "November", "Desember");
 		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
 		$bulan = substr($date, 5, 2); // memisahkan format bulan menggunakan substring
@@ -10,7 +10,7 @@
 		
 		$result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
 		return($result);
-    }
+    }*/
 
     function DateFormatIndo($date) { // fungsi atau method untuk mengubah tanggal ke format indonesia
 		$tahun = substr($date, 0, 4); // memisahkan format tahun menggunakan substring
