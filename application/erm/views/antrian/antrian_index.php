@@ -365,13 +365,13 @@
                     <input type="hidden" name="reg_unit" id="reg_unit" value="<?php if(!empty($lastantrean)) echo $lastantrean->reg_unit ?>">
                     <input type="hidden" name="labelantrean" id="labelantrean" value="<?php if(!empty($lastantrean)) echo $lastantrean->labelantrean ?>">
                     <input type="hidden" name="taskid" id="taskid" value="4">
-                    <input type="hidden" name="idxdaftar" id="idx_daftar" value="<?php if(!empty($lastantrean)) echo $lastantrean->idx_daftar ?>">
+                    <input type="hidden" name="idxdaftar" id="idx_da    ftar" value="<?php if(!empty($lastantrean)) echo $lastantrean->idx_daftar ?>">
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="email">Antrean:</label>
                         <div class="col-sm-9">
-                        <input type="radio" id="normal" name="antrean" checked value="1" onclick="getLastAntrean()"> Normal
-                        <input type="radio" id="prioritas" name="antrean" value="2" onclick="getLastAntrean()"> Prioritas
-                        <input type="radio" id="lewati" name="antrean" value="3" onclick="getLastAntrean()"> Lewati
+                            <input type="radio" id="normal" name="antrean" checked value="1" onclick="getLastAntrean()"> Normal
+                            <input type="radio" id="prioritas" name="antrean" value="2" onclick="getLastAntrean()"> Prioritas
+                            <input type="radio" id="lewati" name="antrean" value="3" onclick="getLastAntrean()"> Lewati
                         </div>
                     </div>
                     <div class="form-group">
@@ -386,8 +386,8 @@
                             <?php 
                             if(count($antreandokter)==1){
                                 ?>
-                                <input type="hidden" name="dokter" id="dokterJaga" value="<?= $antreandokter[0]->dokterJaga?>">
-                                <input type="text" class="form-control" id="pwd" name="namaDokterJaga" placeholder="Enter Dokter" value="<?= $antreandokter[0]->namaDokterJaga ?>" readonly>
+                                <input type="hidden" name="dokter" id="dokterJaga" value="<?= $antreandokter[0]->NRP?>">
+                                <input type="text" class="form-control" id="pwd" name="namaDokterJaga" placeholder="Enter Dokter" value="<?= $antreandokter[0]->pgwNama ?>" readonly>
                                 <?php
                             }else{
                                 ?>
@@ -421,11 +421,11 @@
                             <?php 
                             if(!empty($lastantrean)){
                                 if($lastantrean->status_panggil==1){
-                                    if($lastantrean->taskid==4){
+                                    if($lastantrean->aktiftaskid==4){
                                         ?>
                                         <button type="button" class="btn btn-danger btn-sm btn-block" id="btnPanggil" disabled><span class="fa fa-ticket" id="iconPanggil" ></span> Pasien Sedang Dilayani</button>
                                         <?php
-                                        }else{
+                                    }else{
                                         ?>
                                         <button type="button" class="btn btn-warning btn-sm btn-block" onclick="panggil()" id="btnPanggil"><span class="fa fa-ticket" id="iconPanggil"></span> Panggil Ulang</button>
                                         <?php
@@ -434,10 +434,21 @@
                                     
                                     
                                     <div class="row top10">
-                                        <div class="col-md-6">
-                                        <button type="button" class="btn btn-success btn-sm btn-block" onclick="mulaiLayan()" id="btnMulailayan"><span id="iconMulaiLayan" class="fa fa-check"></span> Mulai Layani</button>
+                                        <div class="col-md-6" id="tombolaction">
+                                            <?php 
+                                            if($lastantrean->status_panggil==1 && $lastantrean->aktiftaskid==4){
+                                                ?>
+                                                <button type="button" class="btn btn-danger btn-sm btn-block" onclick="selesaiLayan()" id="btnMulailayan"><span id="iconMulaiLayan" class="fa fa-check"></span> Selesai Dilayani</button>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <button type="button" class="btn btn-success btn-sm btn-block" onclick="mulaiLayan()" id="btnMulailayan"><span id="iconMulaiLayan" class="fa fa-check"></span> Mulai Layani</button>
+                                                <?php
+                                            }
+                                            ?>
+                                        
                                         </div>
-                                        <div class="col-md-6"><button type="button" class="btn btn-info btn-sm btn-block" onclick="skip()" <?php if($lastantrean->taskid==4) echo "disabled"; ?>><span class="fa fa-arrow-right " ></span> Skip</button></div>
+                                        <div class="col-md-6"><button type="button" class="btn btn-info btn-sm btn-block" onclick="skip()" <?php if($lastantrean->aktiftaskid==4) echo "disabled"; ?>><span class="fa fa-arrow-right " ></span> Skip</button></div>
                                     
                                     </div> 
                                     <?php
@@ -467,7 +478,7 @@
                 <div class="kotak top20">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="font20">
+                            <div class="font14">
                                 <?= getPoliByID($ruangID) ?>
                             </div>
                             <div class="font10" id="v-dokterjuga">
@@ -481,7 +492,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <a href="<?= base_url()."nota_tagihan.php/display" ?>" target="_blank" class='btn btn-primary btn-block' >Buka Display Antrean</a>
+                            <a href="<?= base_url()."erm.php/display" ?>" target="_blank" class='btn btn-primary btn-block' >Buka Display Antrean</a>
                         </div>
                     </div>
                 </div>

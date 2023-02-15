@@ -162,17 +162,16 @@ class Mobile extends CI_Controller{
             );
             
             $res = $this->jkn_model->postData("antrean/updatewaktu",$header,json_encode($req));
-            // echo $res; exit;
             $arr_res=json_decode($res);
             if($arr_res->metadata->code==200){
-                $id_daftar=$this->input->post('id_daftar');
-                $localtask=array(
-                    'id_daftar'=>$id_daftar,
-                    'kodebooking'=>$this->input->post('kodebooking'),
-                    'taskid'=>$this->input->post('taskid'),
-                    'waktu'=>$sekarang
-                );
-                $this->db->insert('tbl02_task',$localtask);
+                // $id_daftar=$this->input->post('id_daftar');
+                // $localtask=array(
+                //     'id_daftar'=>$id_daftar,
+                //     'kodebooking'=>$this->input->post('kodebooking'),
+                //     'taskid'=>$this->input->post('taskid'),
+                //     'waktu'=>$sekarang
+                // );
+                // $this->db->insert('tbl02_task',$localtask);
 
                 $aktiftask=array('aktiftaskid'=>$this->input->post('taskid'));
                 $this->db->where('kodebooking',$this->input->post('kodebooking'));
@@ -182,7 +181,7 @@ class Mobile extends CI_Controller{
                     $aktiftask=array('aktiftaskid'=>$this->input->post('taskid'));
                     $this->db->where('kodebooking',$this->input->post('kodebooking'));
                     $this->db->update('tbl02_antrian',$aktiftask);
-                }      
+                }    
             }
         }else{
             $response=array(
