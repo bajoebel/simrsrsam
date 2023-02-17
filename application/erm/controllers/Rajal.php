@@ -321,6 +321,93 @@ class Rajal extends CI_Controller
         }
     }
 
+    public function konsul_internal($id = "", $idx = "", $nomr = "")
+    {
+        // form rm 0203 rev.01 surat masuk rawat jalan
+        if ($id != "" and $idx != "" and $nomr != "") {
+            // data pendaftaran
+            $d = $this->erm->getPendaftaran($idx);
+            // data pasien
+            $p = $this->erm->getPasien($nomr);
+            // kaji awal data
+            $k = $this->rajal->getKonsulInternalById($nomr, $idx, $id);
+            $data = [
+                "d" => $d,
+                "p" => $p,
+                "k" => $k
+            ];
+            if ($k) {
+                $this->load->view($this->folder . "/" . $this->subfolder . "/konsul_internal/konsul_internal_cetak", $data);
+            } else {
+                $this->load->view($this->folder . "/" . $this->subfolder . "/konsul_internal/konsul_internal_cetak_master",$data);
+            }
+        } else {
+            $data = [
+                "data" => []
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/konsul_internal/konsul_internal_cetak_master",$data);
+        }
+    }
+
+
+
+    public function insert_konsul_internal() {
+        $data_post = [
+            "idx" => $this->input->post("idx_ki"),
+            "nomr" => $this->input->post("nomr_ki"),
+            "nama" => $this->input->post("nama_ki"),
+            "tgl" => $this->input->post("tgl_ki"),
+            "jam" => $this->input->post("jam_ki"),
+            "unit_minta_id" => $this->input->post("unit_minta_id_ki"),
+            "unit_minta" => $this->input->post("unit_minta_ki"),
+            "unit_diminta_id" => $this->input->post("unit_diminta_id_ki"),
+            "unit_diminta" => $this->input->post("unit_diminta_ki"),
+            "dpjp_minta_id" => $this->input->post("dpjp_minta_ki"),
+            "dpjp_minta" => $this->input->post("dpjp_minta_text_ki"),
+            "dpjp_diminta_id" => $this->input->post("dpjp_diminta_ki"),
+            "dpjp_diminta" => $this->input->post("dpjp_diminta_text_ki"),
+            "diagnosa_kerja" => $this->input->post("diagnosa_kerja_ki"),
+            "iktisar_klinik" => $this->input->post("iktisar_klinik_ki"),
+            "terapi_tindakan" => $this->input->post("terapi_tindakan_ki"),
+            "konsul_harap" => $this->input->post("konsul_harap_ki"),
+            "kembali" => $this->input->post("kembali_ki"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+        if (is_array($this->input->post("konsul_harap_ki"))) {
+            $data_post['konsul_harap'] = implode(";", removeChar($this->input->post("konsul_harap_ki")));
+        }
+
+        // header("Content-Type:text/html");
+        // echo json_encode(["data" => $data_post]);
+        // exit();
+        $insert = $this->rajal->insertKonsulInternal($data_post);
+        if ($insert) {
+            echo json_encode(["status" => true, "data" => $data_post]);
+        } else {
+            echo json_encode(["status" => false]);
+        }
+    }
+
+    public function edit_konsul_internal() {
+        $idx = $this->input->post("idx");
+        $id = $this->input->post("id");
+        $nomr = $this->input->post("nomr");
+        $data = $this->rajal->getKonsulInternalById($nomr,$idx,$id);
+        echo json_encode(["status"=>true,"data"=> $data]);
+    }
+
+    public function delete_konsul_internal($idx, $id)
+    {
+        $delete = $this->rajal->deleteKonsulInternal($idx, $id);
+        if ($delete) {
+            echo json_encode(["status" => true]);
+        } else {
+            echo json_encode(["status" => true]);
+        }
+    }
+
+
     public function delete_kaji_awal($idx, $id)
     {
         $delete = $this->rajal->deleteAwalRawat($idx, $id);
@@ -804,6 +891,7 @@ class Rajal extends CI_Controller
             "grId" => $this->input->post("pemeriksaan_pp"),
             "group_name" => $this->input->post("pemeriksaan_text_pp"),
             "tindakan" => $this->input->post("tindakan_pp"),
+            "tindakan_lain" => $this->input->post("tindakan_lain_pp"),
             "dpjp" => $this->input->post("dpjp_pp"),
             "dpjp_name" => $this->input->post("dpjp_text_pp"),
             "status_form" => 1,

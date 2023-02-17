@@ -860,7 +860,7 @@
             });
         })
 
-        // inser permintaan Penunjang
+        // insert permintaan Penunjang
         $("#form-permintaan-penunjang").on("submit", function(e) {
             e.preventDefault();
             let data_form = $(this).serializeArray();
@@ -882,7 +882,8 @@
                 data: data_form,
                 dataType: "json",
                 success: function(response) {
-                    reloadPage();
+                    console.log(response)
+                    // reloadPage();
                 },
                 error: function(e) {
                     console.log(e)

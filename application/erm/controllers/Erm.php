@@ -252,6 +252,8 @@ class Erm extends CI_Controller
             $data['list'] = $this->rajal->getKembangPasien($d->nomr, $d->idx)->result();
         } else if ($pil == 6) {
             $data['list'] = $this->rajal->getEdukasiPasien($d->nomr, $d->idx)->result();
+        } else if ($pil==9) {
+            $data['list'] = $this->rajal->getKonsulInternal($d->nomr, $d->idx)->result();
         }
 
         $this->load->view("erm/rajal/rajal_riwayat", $data);
@@ -261,32 +263,37 @@ class Erm extends CI_Controller
         header('Content-Type: application/json');
         echo $this->erm_model->getPermintaan();
     }
-    function get_permintaan_json_() {
-		$ses_state = $this->users_model->cek_session_id();
-        if ($ses_state) {
-            $q = urldecode($this->input->get('keyword', TRUE));
-            $start = intval($this->input->get('start'));
-            $limit = intval($this->input->get('limit'));
-            $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
-            //echo $jenis_layanan;exit;
-            if ($jenis_layanan == 'RJ' || $jenis_layanan == 'GD' || $jenis_layanan == "PJ") {
-                $kondisi = array('status_pasien != ' => 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
-            } else $kondisi = " (status_pasien=1 OR status_pasien=3) ";
-            $mulai = ($start * $limit) - $limit;
-            $ruangid = $this->session->userdata('kdlokasi');
 
-            $response = array(
-                'status'    => true,
-                'message'   => "OK",
-                'start'     => $mulai,
-                'row_count' => $this->Layanan_model->countData($q, $ruangid, $jenis_layanan, $kondisi),
-                'limit'     => $limit,
-                'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan, $kondisi),
-            );
-        } else {
-            $response = array('status' => false, 'message' => 'Session Expired');
-        }
+    function get_konsul_json() {
         header('Content-Type: application/json');
-        echo json_encode($response);
+        echo $this->erm_model->getKonsul();
     }
+    // function get_permintaan_json_() {
+	// 	$ses_state = $this->users_model->cek_session_id();
+    //     if ($ses_state) {
+    //         $q = urldecode($this->input->get('keyword', TRUE));
+    //         $start = intval($this->input->get('start'));
+    //         $limit = intval($this->input->get('limit'));
+    //         $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
+    //         //echo $jenis_layanan;exit;
+    //         if ($jenis_layanan == 'RJ' || $jenis_layanan == 'GD' || $jenis_layanan == "PJ") {
+    //             $kondisi = array('status_pasien != ' => 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
+    //         } else $kondisi = " (status_pasien=1 OR status_pasien=3) ";
+    //         $mulai = ($start * $limit) - $limit;
+    //         $ruangid = $this->session->userdata('kdlokasi');
+
+    //         $response = array(
+    //             'status'    => true,
+    //             'message'   => "OK",
+    //             'start'     => $mulai,
+    //             'row_count' => $this->Layanan_model->countData($q, $ruangid, $jenis_layanan, $kondisi),
+    //             'limit'     => $limit,
+    //             'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan, $kondisi),
+    //         );
+    //     } else {
+    //         $response = array('status' => false, 'message' => 'Session Expired');
+    //     }
+    //     header('Content-Type: application/json');
+    //     echo json_encode($response);
+    // }
 }

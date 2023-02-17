@@ -512,6 +512,14 @@ function getPegawai($arr=[]) {
     return $CI->db->get("tbl01_pegawai");
 }
 
+function getRuang($arr=[]) {
+    $CI = &get_instance();
+    if (sizeof($arr) != 0) {
+        $CI->db->where_in("grid",$arr);
+    }
+    return $CI->db->get("tbl01_ruang");
+}
+
 function getInfoDaftar($idx) {
     $ci = get_instance();
     return $ci->db->select("idx,id_daftar,reg_unit,tgl_masuk,")

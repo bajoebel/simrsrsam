@@ -8,5 +8,6 @@
         <li class="<?= $ta[6] ?>" onclick="getRiwayat(6,<?= $detail->idx ?>)"><a href="#tab_6" data-toggle="tab">Informasi Pasien Dan Keluarga</a></li>
         <li class="<?= $ta[7] ?>" onclick="getRiwayat(7,<?= $detail->idx ?>)"><a href="#tab_7" data-toggle="tab">Permintaan Penunjang</a></li>
         <li class="<?= $ta[7] ?>" onclick="getRiwayat(8,<?= $detail->idx ?>)"><a href="#tab_8" data-toggle="tab">Permintaan Resep</a></li>
+        <li class="<?= $ta[7] ?>" onclick="getRiwayat(9,<?= $detail->idx ?>)"><a href="#tab_9" data-toggle="tab">Konsul Internal</a></li>
     </ul>
 </div>

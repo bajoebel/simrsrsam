@@ -109,7 +109,7 @@
             </div>
             <div class="col-md-8">
                 auto detail
-                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2-tag" multiple="multiple" style="width:100%">
+                <select name="auto_detail_m[]" id="auto_detail_m" class="form-control select2" multiple="multiple" style="width:100%">
                     <?= $anamnesis = getPemeriksaan("anamnesis");
                     foreach ($anamnesis as $an) {?>
                         <option value="<?=$an->name?>"><?=$an->name?></option>
@@ -123,7 +123,7 @@
             </div>
             <div class="col-md-8">
                 allo detail
-                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2-tag" multiple="multiple" style="width:100%">
+                <select name="allo_detail_m[]" id="allo_detail_m" class="form-control select2" multiple="multiple" style="width:100%">
                     <?php foreach ($anamnesis as $an) {?>
                         <option value="<?=$an->name?>"><?=$an->name?></option>
                     <?php } ?>
@@ -316,12 +316,14 @@
         CKEDITOR.replace("penunjang_m")
         CKEDITOR.replace("terapi_m")
 
-        // $("#auto_detail_m").select2({
-        //     disabled : true
-        // });
-        // $("#allo_detail_m").select2({
-        //     disabled : true
-        // });
+        $("#auto_detail_m").select2({
+            disabled : true,
+            tags : true
+        });
+        $("#allo_detail_m").select2({
+            disabled : true,
+            tags : true
+        });
 
         // $("#tampil_awal_medis").hide();
 
@@ -331,12 +333,14 @@
             if ($(this).is(":checked")) {
                 // $("#auto_detail_m").removeAttr("readonly").focus();
                 $("#auto_detail_m").select2({
-                    disabled : false
+                    disabled : false,
+                    tags : true
                 });
             } else {
                 // $("#auto_detail_m").attr('readonly', true).val("");
                 $("#auto_detail_m").select2({
-                    disabled : true
+                    disabled : true,
+                    tags : true
                 });
             }
         });

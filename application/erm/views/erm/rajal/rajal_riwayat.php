@@ -80,7 +80,7 @@
                         </button>
                         <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
                         </button>
-                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm bg-black' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-barcode'></i>
+                        <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-perawat="<?=$r->perawat_id?>" class='btn btn-sm bg-black' onclick="signAwalRawat(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-perawat'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-qrcode'></i>
                         </button>
                         <?php } ?>
                     </div>
@@ -215,10 +215,56 @@
             </div>
         <?php endforeach; ?>
     </div>
+<?php } else if ($pil==9) {?>
+     <!-- <p><?php print_r($list) ?></p> -->
+    <!-- Perkembangan Pasien Terintegrasi -->
+    <div class="" style="max-height: 600px; overflow-y: auto; ">
+        <?php $no = 1;
+        foreach ($list as $r) : ?>
+            <div class="panel box box-success">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#ki_<?=$r->id?>" class="collapsed" aria-expanded="false">
+                            <?= DateToIndo($r->tgl) . " - " . $r->jam . " - " . $r->unit_diminta . " - " . $r->dpjp_diminta ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="ki_<?=$r->id?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                        <strong>Unit Yang Meminta</strong>
+                        <p><?= $r->unit_minta ?></p>
+                        <strong>Dokter Yang Meminta</strong>
+                        <p><?= $r->dpjp_minta ?></p>
+                        <strong>Ikhtisar Klinik</strong>
+                        <p><?= $r->iktisar_klinik ?></p>
+                        <strong>Terapi Tindakan Yang Diharapkan</strong>
+                        <p><?= $r->terapi_tindakan ?></p>
+                        <strong>Konsulen Di Harapkan</strong>
+                        <p><?= arr_to_list($r->konsul_harap, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
+                        <strong>Kembali Ke Dokter/Unit yang Meminta Sebelum Pengobatan</strong>
+                        <p><?= ($r->kembali)?"Ya":"Tidak" ?></p>
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="<?= base_url("erm.php/rajal/konsul_internal/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">
+                            <i class="fa fa-print"></i>
+                        </a>
+                        <?php if($detail->status_erm!=1) { ?>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" data-nomr="<?=$r->nomr?>" class='btn btn-sm btn-primary' onclick="editKonsulInternal(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'))" data-toggle="tooltip" data-placement="top" title="Edit"> <i class='fa fa-edit'></i>
+                            </button>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id ?>" class='btn btn-sm btn-danger' onclick="hapusKonsulInternal(this.getAttribute('data-idx'),this.getAttribute('data-id'))" data-toggle="tooltip" data-placement="top" title="Hapus"> <i class='fa fa-trash'></i>
+                            </button>
+                            <button data-idx="<?= $r->idx ?>" data-id="<?= $r->id  ?>" data-nomr="<?=$r->nomr?>" data-dokter="<?=$r->dpjp_minta_id?>" class='btn btn-sm bg-black' onclick="signKonsulInternal(this.getAttribute('data-idx'),this.getAttribute('data-id'),this.getAttribute('data-nomr'),this.getAttribute('data-dokter'))" data-toggle="tooltip" data-placement="top" title="Assign Form"> <i class='fa fa-qrcode'></i>
+                            </button>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 <?php } else { ?>
     <div class="alert alert-danget">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         Belum ada riwayat ditemukan
     </div>
-
 <?php } ?>

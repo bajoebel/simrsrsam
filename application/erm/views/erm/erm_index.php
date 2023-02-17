@@ -264,15 +264,15 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <?php if($grLokasi==1 or $grLokasi==2) {?>
+                        <?php if($grLokasi==1 or $grLokasi==2 or $grLokasi==3) {?>
                             <li class="active"><a href="#tab_1" data-toggle="tab">Data Kunjungan</a></li>
-                        <?php } ?>
-                        <?php if($grLokasi==3) {?>
-                            <li class="active"><a href="#tab_2" data-toggle="tab">List Permintaan</a></li>
+                            <?php } ?>
+                            <?php if($grLokasi==3) {?>
+                            <li><a href="#tab_2" data-toggle="tab">List Permintaan</a></li>
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
-                        <?php if($grLokasi==1 or $grLokasi==2) {?>
+                        <?php if($grLokasi==1 or $grLokasi==2 or $grLokasi==3) {?>
                         <div class="tab-pane active" id="tab_1">
                             <div class="row">
                                 <div class="">
@@ -372,7 +372,7 @@
                         </div>
                         <?php } ?>
                         <?php if($grLokasi==3) {?>
-                        <div class="tab-pane active" id="tab_2">
+                        <div class="tab-pane" id="tab_2">
                             <div class="row" style="margin-bottom:15px">
                                 <div class="col-md-12">
                                     <div class="form-group">

@@ -10,6 +10,8 @@ class Resepapi extends CI_Controller
     }
 
     function get_resep() {
+        $dari = "";
+        $sampai = "";
         $response = [];
         if (!empty($_POST['uid']) && !empty($_POST['pass'])) {
             if ($_POST['uid']==API_UID && $_POST['pass']==API_PASS) {
@@ -17,7 +19,9 @@ class Resepapi extends CI_Controller
                     $id = $_POST['id'];
                     $data = $this->resep->getPermintaanResepById($id);
                 } else {
-                    $data = $this->resep->getPermintaanResep();
+                    $dari = $_POST['dari']?$_POST['dari']:"";
+                    $sampai = $_POST['sampai']?$_POST['sampai']:"";
+                    $data = $this->resep->getPermintaanResep($dari,$sampai);
                 }
                 $response = [
                     "status"=> 200,
