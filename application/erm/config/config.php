@@ -23,6 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+date_default_timezone_set("Asia/Jakarta");
 
 $http = "http" . (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443)) . '://';
 $newurl = str_replace("erm.php", "", $_SERVER['SCRIPT_NAME']);

@@ -750,6 +750,13 @@ function getPemeriksaan($tipe="") {
         ->get("m_pk_detail a")->result();
 }
 
+function getKonsulInternalById($nomr,$idx,$id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    $db2->where(["nomr"=>$nomr,"idx"=>$idx,"id"=>$id]);
+    return $db2->get("rj_konsul_internal")->row();
+}
+
 
 
 

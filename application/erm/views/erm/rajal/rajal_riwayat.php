@@ -243,6 +243,8 @@
                         <p><?= arr_to_list($r->konsul_harap, "<span>&nbsp;&nbsp;&nbsp;", "</span>") ?></p>
                         <strong>Kembali Ke Dokter/Unit yang Meminta Sebelum Pengobatan</strong>
                         <p><?= ($r->kembali)?"Ya":"Tidak" ?></p>
+                        <strong>Status Form</strong>
+                        <p><?= status_permintaan_konsul($r->status_form) ?></p>
                     </div>
                     <div class="box-footer text-center">
                         <a href="<?= base_url("erm.php/rajal/konsul_internal/$r->id/$r->idx/$r->nomr")?>"  target="_blank" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Tampil Detail">

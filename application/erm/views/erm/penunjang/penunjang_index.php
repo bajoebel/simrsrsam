@@ -1,5 +1,4 @@
 <style>
-    
     .back {
         border: 2px solid;
         border-collapse: collapse;

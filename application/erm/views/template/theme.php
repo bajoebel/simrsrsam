@@ -215,7 +215,7 @@
 
     <script src="<?php echo base_url() ?>assets/dist/js/adminlte.js"></script>
     <script src="<?php echo base_url() ?>assets/js/function.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/notify.js"></script>
+    <!-- <script src="<?php echo base_url() ?>assets/js/notify.js"></script> -->
     <?php
     $layanan = $this->nota_model->cekRuang();
     $rajal = $this->nota_model->cekRuang("1");

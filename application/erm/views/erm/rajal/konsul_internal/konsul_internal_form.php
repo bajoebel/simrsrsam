@@ -6,6 +6,8 @@
             <input type="hidden" name="idx_ki" value="<?= $detail->idx ?>">
             <input type="hidden" name="nomr_ki" value="<?= $detail->nomr ?>">
             <input type="hidden" name="nama_ki" value="<?= $detail->nama_pasien ?>">
+            <input type="hidden" name="id_daftar_ki" id="id_daftar_ki" value="<?= $detail->id_daftar ?>">
+            <input type="hidden" name="reg_unit_ki" id="reg_unit_ki" value="<?= $detail->reg_unit ?>">
             <input type="hidden" class="form-control" id="unit_minta_id_ki" name="unit_minta_id_ki" value="<?=$detail->id_ruang?>">
             <input type="text" class="form-control" id="unit_minta_ki" name="unit_minta_ki" value="<?=$detail->nama_ruang?>" readonly>
         </div>

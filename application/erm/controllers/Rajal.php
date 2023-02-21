@@ -354,6 +354,9 @@ class Rajal extends CI_Controller
     public function insert_konsul_internal() {
         $data_post = [
             "idx" => $this->input->post("idx_ki"),
+            "id_daftar" => $this->input->post("id_daftar_ki"),
+            "reg_unit" => $this->input->post("reg_unit_ki"),
+            "idx" => $this->input->post("idx_ki"),
             "nomr" => $this->input->post("nomr_ki"),
             "nama" => $this->input->post("nama_ki"),
             "tgl" => $this->input->post("tgl_ki"),
