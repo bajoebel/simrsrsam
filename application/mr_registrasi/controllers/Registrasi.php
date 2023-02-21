@@ -435,6 +435,7 @@ class registrasi extends CI_Controller
                                                     'kodepolijkn'=>$this->input->post('kodepoli'),
                                                     'kodedokterjkn'=>$this->input->post('kodedokter'),
                                                     'nokartu'=>$this->input->post('no_bpjs'),
+                                                    'jampraktek'=>$this->input->post('jampraktek'),
                                                     'labelantrean'=>'',
                                                 );
                                                 $this->db->insert('tbl02_antrian', $antri);

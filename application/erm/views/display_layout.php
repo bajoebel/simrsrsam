@@ -81,7 +81,7 @@
         <div class="col-md-2">
           <a href="" class="logo" style="background-color: #00a65a;float: left;">
             <span class="logo-mini"><b>A</b>LT</span>
-            <span class="logo-lg"><img src="<?php echo base_url() ."assets/images/stiker.png" ?>" style="height:50px;" ></span>
+            <span class="logo-lg"><img src="<?php echo base_url() ."assets/images/logo.png" ?>" style="height:50px;" ></span>
           </a>
         </div>
         <div class="col-md-8">
@@ -106,8 +106,8 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; <?= date('Y') ?> <a href="rsud.padangpanjang.go.id">RSUD Kota Padang Panjang</a>.</strong> All rights
-        reserved. TEAM SIMRS RSUD Kota Padang Panjang
+        <strong>Copyright &copy; <?= date('Y') ?> <a href="rsud.padangpanjang.go.id">RS Achmad Mochtar</a>.</strong> All rights
+        reserved. TEAM SIMRS RS Achmad Mochtar
       </div>
         
     </div>

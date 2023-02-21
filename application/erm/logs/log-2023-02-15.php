@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
 ERROR - 2023-02-15 08:04:35 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-02-15 10:26:07 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-02-15 10:26:46 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
@@ -29,3 +30,7 @@ WHERE DATE_FORMAT('a.created_at','%Y-%m-%d') >= ''
 AND DATE_FORMAT(`a.created_at`,'%Y-%m-%d') <= ''
 ORDER BY `a`.`id` DESC
 ERROR - 2023-02-15 11:08:14 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+=======
+ERROR - 2023-02-15 02:53:43 --> 404 Page Not Found: Antrian/entry_nota
+ERROR - 2023-02-15 02:54:37 --> 404 Page Not Found: Antrian/entry_nota
+>>>>>>> ff6f0c07c6af997f574a5fb1e63eac980b8bb734

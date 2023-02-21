@@ -53,7 +53,7 @@ class Layanan extends CI_Controller
                             $notif = $this->nota_model->getNotif('penunjang', $this->session->userdata('kdlokasi'));
                             $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', 'jns_kelamin', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar');
                         } else $notif = 0;
-
+                        
                         $action = "<div class='btn-group'><button onclick='pilih({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
                         $config = array(
                             'url'           => 'erm.php/layanan/getdata',

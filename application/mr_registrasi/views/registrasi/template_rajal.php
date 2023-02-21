@@ -2232,6 +2232,7 @@
             if(sdm==true) sdm=1; else sdm=0;
             var formdata = {
                 kodepoli: $('#kodepoli').val(),
+                kodebooking: $('#kodebooking').val(),
                 namapoli: $('#namapoli').val(),
                 kodedokter: $('#kodedokter').val(),
                 namadokter: $('#namadokter').val(),

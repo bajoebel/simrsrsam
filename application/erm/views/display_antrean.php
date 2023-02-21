@@ -120,7 +120,7 @@
   var t;
   var hitung = 0;
   var timer_is_on = 0;
-  var base_url = "<?php echo base_url() . "nota_tagihan.php/" ?>";
+  var base_url = "<?php echo base_url() . "erm.php/" ?>";
   var interval = 1000;
   timedCount();
   
@@ -140,17 +140,21 @@
         get_param: 'value'
       },
       success: function(data) {
-        if(data.lastantrean.labelantrean=='') $('#v-nomorAntri').html(data.lastantrean.no_antrian_poly);
-        else $('#v-nomorAntri').html(data.lastantrean.labelantrean+'.'+data.lastantrean.no_antrian_poly);
-        $('#v-dokterjuga').html(data.lastantrean.namaDokterJaga)
-        $('#jamlayanan').html(data.jadwal.jadwal_jam_mulai +"-"+data.jadwal.jadwal_jam_selesai)
-        $('#v-nama').html(data.lastantrean.nama_pasien);
-        $('#v-namadokter').html(data.lastantrean.namaDokterJaga);
-        $('#v-waktudaftar').html(data.lastantrean.tgl_mulai);
-        $('#v-waktupanggil').html(data.waktupanggil);
-        if(data.lastantrean.aktiftaskid<3) $('#statuspasien').html('<button class="btn btn-success btn-lg btn-block">Pasien Sudah Dipanggil...</button>')
-        else $('#statuspasien').html('<button class="btn btn-danger btn-lg btn-block">Pasien Sedang Dilayani...</button>')
-        console.log(data)
+
+        if(data.lastantrean != null){
+          if(data.lastantrean.labelantrean=='') $('#v-nomorAntri').html(data.lastantrean.no_antrian_poly);
+          else $('#v-nomorAntri').html(data.lastantrean.labelantrean+'.'+data.lastantrean.no_antrian_poly);
+          $('#v-dokterjuga').html(data.lastantrean.namaDokterJaga)
+          $('#jamlayanan').html(data.jadwal.jadwal_jam_mulai +"-"+data.jadwal.jadwal_jam_selesai)
+          $('#v-nama').html(data.lastantrean.nama_pasien);
+          $('#v-namadokter').html(data.lastantrean.namaDokterJaga);
+          $('#v-waktudaftar').html(data.lastantrean.tgl_mulai);
+          $('#v-waktupanggil').html(data.waktupanggil);
+          if(data.lastantrean.aktiftaskid<3) $('#statuspasien').html('<button class="btn btn-success btn-lg btn-block">Pasien Sudah Dipanggil...</button>')
+          else $('#statuspasien').html('<button class="btn btn-danger btn-lg btn-block">Pasien Sedang Dilayani...</button>')
+          console.log(data)
+        }
+        
       }
     });
   }
