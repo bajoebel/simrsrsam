@@ -115,17 +115,56 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="date" class="form-control input-sm" name="tgl" id="tgl" placeholder="Tanggal" onchange="cari_pasien(0)" value="2023-02-24">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-sm"> <span class="fa fa-calendar"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
                             <div class="input-group input-group-sm">
-                                <input type="text" id="kodebooking" name="kodebooking" class="form-control" placeholder="Masukkan Kode Booking"/>
+                                <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Masukkan Keyword"/>
                                 <div class="input-group-btn">
-                                    <button type="button" id="btnBatal" class="btn btn-danger" onclick="batalkanAntrean()"><i class="fa fa-remove"></i>Batalkan Booking</button>
+                                    <button type="button" id="btnCari" class="btn btn-default" onclick="listBooking()"><i class="fa fa-search"></i> Cari</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
+                        <div class="col-md-12">
+                            <table id="simple-table" class="table table-bordered table-hover" style='color:#000000;'>
+                                <thead class="bg-blue">
+                                    <tr>
+                                    <th>No</th>
+                                    <th>Kode Booking</th>
+                                    <th>Nomr</th>
+                                    <th>NIK</th>
+                                    <th>No Kartu</th>
+                                    <th>Nama Pasien</th>
+                                    <th>Poli Tujuan</th>
+                                    <th>Dokter</th>
+                                    <th>Nomor Antrean</th>
+                                    <th>Status Checkin</th>
+                                    <th style="width: 150px;">#</th>
+                                    </tr>
+                                    
+                                </thead>
+                                <tbody id="data">
+
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="10" id="pagination"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="row">
                         <div class="col-md-4">
                         <input type="text" id="kodebookingv2" name="kodebookingv2" class="form-control" placeholder="Masukkan Kode Booking"/>
                         </div>
@@ -137,7 +176,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

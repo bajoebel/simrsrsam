@@ -363,6 +363,7 @@
                                                     <div class="col-md-12">
                                                         
                                                     <input type="hidden" name="kodebookingonsite" id="kodebookingonsite" value="<?= !empty($antrian)?$antrian->kodebooking:"" ?>">
+                                                    <input type="hidden" name="bookingjkn" id="bookingjkn" value="<?= $bookingjkn ?>">
                                                     <input type="hidden" name="kodebooking" id="kodebooking" value="<?= $kodebooking ?>">
                                                         <fieldset style="display: none;">
                                                             <legend>Data Pasien</legend>
@@ -2243,6 +2244,7 @@
             if(sdm==true) sdm=1; else sdm=0;
             var formdata = {
                 kodepoli: $('#kodepoli').val(),
+                bookingjkn: $('#bookingjkn').val(),
                 kodebookingonsite: $('#kodebookingonsite').val(),
                 kodebooking: $('#kodebooking').val(),
                 namapoli: $('#namapoli').val(),

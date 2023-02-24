@@ -5,6 +5,7 @@ class Booking extends CI_Controller{
         $this->load->model('jkn_model');
         $this->load->model('users_model');
         $this->load->helper('lz');
+        $this->load->helper('http');
         $ses_state = $this->users_model->cek_session_id();
         if(!$ses_state){  
             $metadata=array(
@@ -30,9 +31,23 @@ class Booking extends CI_Controller{
             'content'=>$this->load->view('jkn/booking', $data, true),
             'index_menu'=>7,
             'libjs'=>array(
-                'js/jkn.js'
+                'js/jkn.js',
+                'js/booking.js'
             )
         );
         $this->load->view('template/theme', $view);
+    }
+    function listbooking(){
+        $keyword=$this->input->get('keyword');
+
+        $tgl=$this->input->get('tgl');
+        $tanggal=empty($tgl)?date('Y-m-d'):$tgl;
+        $request=array(
+            'tanggal'=>$tanggal,
+            'keyword'=>$keyword
+        );
+        $response=httprequest($request,ONLINE_CALL_BACK."jkn/rsud/listbooking");
+        header('Content-Type: application/json');
+        echo $response;
     }
 }

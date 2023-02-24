@@ -316,7 +316,7 @@ class pasien_baru extends CI_Controller {
             $antrian=$this->db->where($param,$value)->where('status_kirim',1)->where('tanggalperiksa',date('Y-m-d'))->get("jkn_antrean")->row();
             // print_r($antrian); exit;
             if(!empty($antrian)){
-                $sekarang=strtotime(date('Y-m-d'))*1000;
+                $sekarang=strtotime(date('Y-m-d H:i:s'))*1000;
                 $req=array(
                     'kodebooking'=>$antrian->kodebooking,
                     'taskid'=>2,

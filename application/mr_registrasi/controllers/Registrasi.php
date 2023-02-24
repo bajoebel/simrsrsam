@@ -212,7 +212,8 @@ class registrasi extends CI_Controller
                 // $this->db->limit(1);
                 // $y['pj'] = $this->db->get('tbl01_penanggung_jawab')->row();
                 $kodebooking=$this->input->get('kodebooking');
-                $y['kodebooking']="";
+                
+                $y['bookingjkn']=!empty($this->input->get('bookingjkn'))?$this->input->get('bookingjkn'):"";
                 if(!empty($kodebooking)){
                     $y['kodebooking']=$kodebooking;
                     $this->onlineDB = $this->load->database('online', true);
@@ -244,6 +245,7 @@ class registrasi extends CI_Controller
                 }else{
                     $y['booking']=array();
                     $y['dokter']=array();
+                    $y['kodebooking']="";
                 }
                 
                 $x['libjs']=array(
@@ -427,10 +429,14 @@ class registrasi extends CI_Controller
                                             if(STATUS_JKN=="1"){
                                                 // Jika Integrasi Antrian JKN Diaktifkan
                                                 $kodebookingonsite=$this->input->post('kodebookingonsite');
+                                                $bookingjkn=$this->input->post('bookingjkn');
                                                 $antrianpoly=$this->patch_model->getAntrianpoly($resData["id_ruang"],$resData["dokterJaga"]);
+                                                if(!empty($kodebookingonsite)) $book=$kodebookingonsite;
+                                                else if(!empty($bookingjkn)) $book=$bookingjkn;
+                                                else $book=$resData["reg_unit"];
                                                 $antri = array(
                                                     'id_daftar' => $resData["id_daftar"], 
-                                                    'kodebooking'=>empty($kodebookingonsite) ? $resData["reg_unit"]:$kodebookingonsite,
+                                                    'kodebooking'=>$book,
                                                     'no_antrian_poly' => $antrianpoly,
                                                     'tanggal'=>date('Y-m-d'),
                                                     'antrianruang'=>$resData["id_ruang"],
@@ -442,9 +448,8 @@ class registrasi extends CI_Controller
                                                     'labelantrean'=>'',
                                                 );
                                                 $this->db->insert('tbl02_antrian', $antri);
-
                                                 // Kirim Booking Antrian Onsite
-                                                if(empty($kodebookingonsite)){
+                                                if(empty($kodebookingonsite) && empty($bookingjkn)){
                                                     // jika belum ada booking antrian onsite, lakukan proses booking antrian poli
                                                     $spm=intval($this->input->post('spm'));
                                                     $jammulai=$this->input->post('jammulai');
@@ -475,7 +480,7 @@ class registrasi extends CI_Controller
                                                     $estimasilayan = date("H:i", strtotime('+'.$estimasitunggu.' minutes', $time));
                                                     $estimasilayanms=strtotime($estimasilayan)*1000;
                                                     $antreanjkn=array(
-                                                        'kodebooking'=>$resData['reg_unit'],
+                                                        'kodebooking'=>$antri['kodebooking'],
                                                         'jenispasien'=> $jenispasien,
                                                         'nomorkartu'=> $params['no_bpjs'],
                                                         'nik'=> $params['no_ktp'],
@@ -513,7 +518,7 @@ class registrasi extends CI_Controller
                                                         
                                                         $sekarang=strtotime(date('Y-m-d'))*1000;
                                                         $taskid=array(
-                                                            'kodebooking'=>$resData['reg_unit'],
+                                                            'kodebooking'=>$antri['kodebooking'],
                                                             'taskid'=>3,
                                                             'waktu'=>$sekarang
                                                         );
@@ -549,7 +554,7 @@ class registrasi extends CI_Controller
                                                     // Update task 3 berdasarkan kodebooking onsite
                                                     $sekarang=strtotime(date('Y-m-d'))*1000;
                                                     $taskid=array(
-                                                        'kodebooking'=>$kodebookingonsite,
+                                                        'kodebooking'=>$antri["kodebooking"],
                                                         'taskid'=>3,
                                                         'waktu'=>$sekarang
                                                     );
@@ -569,7 +574,6 @@ class registrasi extends CI_Controller
                                                         $this->db->insert('tbl02_jknfailedrequest',$log);
                                                     }
                                                 }
-                                                
                                             }else{
                                                 $antri = array(
                                                     'id_daftar' => $resData["id_daftar"], 
