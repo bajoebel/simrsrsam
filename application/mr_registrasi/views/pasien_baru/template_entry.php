@@ -75,7 +75,7 @@
                 <div class="box-header with-border">Pasien Baru</div>
 
                 <div class="box-body">
-
+                    <div id="statusantrian"></div>
                     <form id="form1" class="form-horizontal" role="form" onsubmit="return false">
                         <?php 
                             if(!empty($kode_booking)){
@@ -235,7 +235,7 @@
                                                     </button>
                                                 </div> -->
                                                 <span class="input-group-addon statusjkn" id="status">
-                                                <a id="cekStatus" href="Javascript:ceknikbpjs(1)"><i class="fa fa-search" id="iconCekStatus"></i> Cek</a>
+                                                <a id="cekStatus" href="Javascript:ceknikbpjs(1);"><i class="fa fa-search" id="iconCekStatus"></i> Cek</a>
                                                 </span>
                                         </div>
                                     </div>

@@ -792,6 +792,7 @@ function cekPeserta(nobpjs="",tgllayanan="") {
 					else $('#cob').prop("checked", true);
 
 					$("#noKartu").val(x["peserta"]["noKartu"]);
+					$("#no_ktp").val(x["peserta"]["nik"]);
 					
 					$("#klsRawat").val(x["peserta"]["hakKelas"]["kode"]);
 					$("#noMR").val(x['peserta']['mr']['noMR']);
@@ -958,6 +959,7 @@ function ceknikbpjs(pesan = 0) {
 						});
 					}
 				}
+				cekAntrian('nik')
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);
@@ -966,7 +968,40 @@ function ceknikbpjs(pesan = 0) {
 	});
 
 }
-
+function cekAntrian(param='nik'){
+	if(param=="nik") {
+		var nik=$('#no_ktp').val();
+		var url = base_url + "pasien_baru/cekantrian/nik/" + nik;
+	}
+	else {
+		var no_bpjs=$('#no_bpjs').val();
+		var url = base_url + "pasien_baru/cekantrian/nomorkartu/" + no_bpjs;
+	}
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		data: {},
+		success: function (data) {
+			console.log(data);
+			if (data.metadata.code == 200) {
+				var pesan=`<div class="row"><div class="col-md-12">
+				<div class="alert alert-success">
+				<strong>Status Antrian JKN!</strong> Waktu Mulai Tunggu Pelayanan Admisi Terkirim
+				</div>
+				</div></div>`;
+				$('#statusantrian').html(pesan)
+			} else {
+				var pesan=`<div class="row"><div class="col-md-12">
+				<div class="alert alert-warning">
+				<strong>Status Antrian JKN!</strong> `+data.metadata.message+`
+				</div>
+				</div></div>`;
+				$('#statusantrian').html(pesan)
+			}
+		}
+	});
+}
 function ceknomorbpjs(pesan = 0) {
 	
 	var nobpjs = $("#no_bpjs").val();
@@ -1031,6 +1066,7 @@ function ceknomorbpjs(pesan = 0) {
 						// alert(konf)
 					}
 				}
+				cekAntrian('nomorkartu')
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);

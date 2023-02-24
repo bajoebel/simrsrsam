@@ -10,6 +10,7 @@ class pasien_baru extends CI_Controller {
         $this->load->library('ajax_page');
         $this->load->model('users_model');
         $this->load->model('Smart_model');
+        $this->load->helper('http');
     }
 
     public function index(){      
@@ -308,7 +309,40 @@ class pasien_baru extends CI_Controller {
             window.location.href = '$url_login';</script>";
         }        
     }
-    
+    function cekantrian($param,$value){
+        $ses_state = $this->users_model->cek_session_id();
+        $idx = $this->uri->segment(3);
+        if($ses_state){
+            $antrian=$this->db->where($param,$value)->where('status_kirim',1)->where('tanggalperiksa',date('Y-m-d'))->get("jkn_antrean")->row();
+            // print_r($antrian); exit;
+            if(!empty($antrian)){
+                $sekarang=strtotime(date('Y-m-d'))*1000;
+                $req=array(
+                    'kodebooking'=>$antrian->kodebooking,
+                    'taskid'=>2,
+                    'waktu'=>$sekarang
+                );
+                // print_r($req);exit;
+                $response=jknrequest("antrean/updatewaktu",json_encode($req),"POST");
+            }else{
+                $response=json_encode(array(
+                    'metadata'=>array(
+                        'code'=>201,
+                        'message'=>"Antrian yang dibooking tidak ditemukan"
+                    )
+                ));
+            }
+        }else{
+            $response=json_encode(array(
+                'metadata'=>array(
+                    'code'=>201,
+                    'message'=>"Session Expired"
+                )
+            ));
+        }
+        header('Content-Type: application/json');
+        echo $response;
+    }
     function simpan(){
         $ses_state = $this->users_model->cek_session_id();
         $this->load->model('patch_model');

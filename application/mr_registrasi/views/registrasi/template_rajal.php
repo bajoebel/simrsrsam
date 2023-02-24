@@ -361,9 +361,12 @@
                                                     
                                                     ?>
                                                     <div class="col-md-12">
+                                                        
+                                                    <input type="hidden" name="kodebookingonsite" id="kodebookingonsite" value="<?= !empty($antrian)?$antrian->kodebooking:"" ?>">
                                                     <input type="hidden" name="kodebooking" id="kodebooking" value="<?= $kodebooking ?>">
                                                         <fieldset style="display: none;">
                                                             <legend>Data Pasien</legend>
+                                                            
                                                             <input type="hidden" name="provinsi" id="provinsi" value="<?= $nama_provinsi ?>">
                                                             <input type="hidden" name="kabupaten" id="kabupaten" value="<?= $nama_kab_kota ?>">
                                                             <input type="hidden" name="kecamatan" id="kecamatan" value="<?= $nama_kecamatan ?>">
@@ -681,6 +684,12 @@
                                                                             <input type="checkbox" name="c19" id="c19" value="1"> Covid 19
                                                                         </span>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 col-sm-3 col-xs-12 control-label">&nbsp;</label>
+                                                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                <input type="checkbox" name="status_tracert" id="status_tracert" value="0"> Sembunyikan Pada Tracert
                                                                 </div>
                                                             </div>
                                                             <!--div class="form-group divRegCredit">
@@ -2227,11 +2236,14 @@
             //alert($('#txtNorujuk').val());
             var c19=$('#c19').prop('checked');
             if(c19==true) c19=1; else c19=0;
+            var status_tracert=$('#status_tracert').prop('checked');
+            if(status_tracert==true) status_tracert=0; else status_tracert=1;
 
             var sdm=$('#sdm').prop('checked');
             if(sdm==true) sdm=1; else sdm=0;
             var formdata = {
                 kodepoli: $('#kodepoli').val(),
+                kodebookingonsite: $('#kodebookingonsite').val(),
                 kodebooking: $('#kodebooking').val(),
                 namapoli: $('#namapoli').val(),
                 kodedokter: $('#kodedokter').val(),
@@ -2308,7 +2320,9 @@
                 icdkode: $('#kodeicd').val(),
                 icd:$('#nama_icd').val(),
                 c19:c19,
+                status_tracert:status_tracert,
             }
+            // console.log(formdata); return false;
             if (formdata['nomr'] == "" || formdata['nama_pasien'] == "") {
                 alert('Ops. No.MR tidak boleh kosong.');
             } else if (formdata['pjPasienNama'] == "") {
