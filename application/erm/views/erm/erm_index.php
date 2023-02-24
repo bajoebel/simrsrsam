@@ -247,6 +247,7 @@
 ?>
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $jns_layanan ?>">
     <section class="content container-fluid">
+        <!-- <?php print_r($this->session->userdata("kdlokasi")) ?> -->
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h4><i class="icon fa fa-info"></i> Informasi</h4>
@@ -264,88 +265,48 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <?php if($grLokasi==1 or $grLokasi==2) {?>
+                        <?php if($grLokasi==1 or $grLokasi==2 or $grLokasi==3) {?>
                             <li class="active"><a href="#tab_1" data-toggle="tab">Data Kunjungan</a></li>
-                        <?php } ?>
-                        <?php if($grLokasi==3) {?>
-                            <li class="active"><a href="#tab_2" data-toggle="tab">List Permintaan</a></li>
+                            <li><a href="#tab_3" data-toggle="tab">Konsul Internal</a></li>
+                            <?php } ?>
+                            <?php if($grLokasi==3) {?>
+                            <li><a href="#tab_2" data-toggle="tab">List Permintaan</a></li>
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
-                        <?php if($grLokasi==1 or $grLokasi==2) {?>
+                        <?php if($grLokasi==1 or $grLokasi==2 or $grLokasi==3) {?>
                         <div class="tab-pane active" id="tab_1">
                             <div class="row">
-                                <div class="">
-                                    <?php if ($ruang->grid == 2) { ?>
-                                        <div class="col-md-11">
-                                            <div class="input-group input-group-sm">
-                                                <input type="hidden" id="start" name="start" value="1">
-                                                <input type="text" name="q" id="q" class="form-control pull-right" value="" placeholder="Search" onkeyup="getPasienSaatini(1)">
-                                                <input type="hidden" value="param">
-                                                <div class="input-group-btn">
-                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                                </div>
+                                <form id="form1" onsubmit="return false" method="POST">
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-sm-2 col-xs-12 control-label text-right">Periode</label>
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control tanggal" name="tglAwal" id="tglAwal" value="<?= date('Y-m-d') ?>"  placeholder="____-__-__">
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <input disabled="" type="text" class="form-control" value="s/d" style="text-align: center;border: none;">
+                                            </span>
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control tanggal" name="tglAkhir" value="<?= date('Y-m-d') ?>" id="tglAkhir"  placeholder="____-__-__" >
+                                            </span>
 
-                                            </div>
+                                            <span class="input-group-btn">
+                                                <input type="text" class="form-control" name="search" value="" id="search" placeholder="Keyword" >
+                                            </span>
                                         </div>
-                                        <div class="col-md-1">
-                                            <select name="limit" id="limit" class="form-control input-sm" onchange="getPasienSaatini(1)">
-                                                <option value="10">10</option>
-                                                <option value="20" selected>20</option>
-                                                <option value="30">30</option>
-                                                <option value="40">40</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                        </div>
-                                    <?php } else { ?>
-                                        <form id="form1" onsubmit="return false" method="POST">
-                                            <div class="form-group">
-                                                <label class="col-md-2 col-sm-2 col-xs-12 control-label text-right">Periode</label>
-                                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <span class="input-group-btn">
-                                                        <input type="text" class="form-control tanggal" name="tglAwal" id="tglAwal" value="<?= date('Y-m-d') ?>" onkeyup="getPasienSaatini(1)" placeholder="____-__-__" onchange="getPasienSaatini(1)">
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <input disabled="" type="text" class="form-control" value="s/d" style="text-align: center;border: none;">
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <input type="text" class="form-control tanggal" name="tglAkhir" value="<?= date('Y-m-d') ?>" id="tglAkhir" onkeyup="getPasienSaatini(1)" placeholder="____-__-__" onchange="getPasienSaatini(1)">
-                                                    </span>
-
-                                                    <span class="input-group-btn">
-                                                        <input type="text" class="form-control" name="q" value="" id="q" placeholder="Keyword" onkeyup="getPasienSaatini(1)">
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <!-- <button type="button" id="btnKeyword" class="btn btn-primary">
-                                                            <i class="fa fa-search"></i> Cari</button> -->
-                                                    </span>
-                                                </div>
-
-                                                <div class="col-md-1">
-                                                    <select name="limit" id="limit" class="form-control input-sm" onchange="getData(1)">
-                                                        <option value="10">10</option>
-                                                        <option value="20">20</option>
-                                                        <option value="30">30</option>
-                                                        <option value="40">40</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    <?php } ?>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-12 table-responsive">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="kunjunganTable">
                                         <thead class="bg-green">
                                             <tr>
                                                 <th style="width: 60px">#</th>
                                                 <th style="width: 60px">No.Reg RS</th>
-                                                <th style="width: 120px">No.Reg Unit</th>
+                                                <!-- <th style="width: 120px">No.Reg Unit</th> -->
                                                 <th style="width: 80px">Tgl.Masuk</th>
                                                 <th style="width: 60px">No MR</th>
                                                 <th>Nama Pasien</th>
@@ -361,25 +322,66 @@
                                             </tr>
                                         </thead>
                                         <tbody id="data"></tbody>
-                                        <tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_3">
+                            <div class="row" style="margin-bottom:15px">
+                                <div class="form-group">
+                                    <div class="col-md-2 col-sm-2 col-xs-12 control-label text-right">
+                                        <span>Periode</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <span class="input-group-btn">
+                                            <input type="text" class="form-control tanggal" name="ktglAwal" id="ktglAwal" value="<?= date('Y-m-d') ?>" placeholder="____-__-__" >
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <input disabled="" type="text" class="form-control" value="s/d" style="text-align: center;border: none;">
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <input type="text" class="form-control tanggal" name="ktglAkhir" value="<?= date('Y-m-d') ?>" id="ktglAkhir"  placeholder="____-__-__">
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <input type="text" class="form-control" name="ksearch" value="" id="ksearch"  placeholder="enter keyword">
+                                        </span>
+                                    </div>
+                                </div>  
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-12 table-responsive">
+                                    <table class="table table-bordered" id="konsulTable">
+                                        <thead class="bg-green">
                                             <tr>
-                                                <td colspan="14" id="pagination"></td>
+                                                <th style="width: 60px">#</th>
+                                                <th style="width: 100px">No.Reg RS</th>
+                                                <th style="width: 120px">No.Reg Unit</th>
+                                                <th style="width: 80px">Tgl.Minta</th>
+                                                <th style="width: 60px">No MR</th>
+                                                <th style="width: 100px">Nama Pasien</th>
+                                                <th style="width: 200px">Konsul Diharapkan</th>
+                                                <th style="width: 80px">Ruang Pengirim</th>
+                                                <th style="width: 80px">Dokter Pengirim</th>
+                                                <th style="width: 50px">Status</th>
+                                                <th style="width: 100px">Action</th>
                                             </tr>
-                                        </tfoot>
+                                        </thead>
+                                        <tbody id="dataKonsul"></tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                         <?php } ?>
                         <?php if($grLokasi==3) {?>
-                        <div class="tab-pane active" id="tab_2">
+                        <div class="tab-pane" id="tab_2">
                             <div class="row" style="margin-bottom:15px">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="col-md-1 text-right">
+                                        <div class="col-md-2 col-sm-2 col-xs-12 control-label text-right">
                                             <span>Periode</span>
                                         </div>
-                                        <div class="col-md-11 col-sm-9 col-xs-12">
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
                                             <span class="input-group-btn">
                                                 <input type="text" class="form-control tanggal" name="ptglAwal" id="ptglAwal" value="<?= date('Y-m-d') ?>" placeholder="____-__-__" >
                                             </span>
@@ -407,9 +409,9 @@
                                                 <th style="width: 80px">Tgl.Minta</th>
                                                 <th style="width: 60px">No MR</th>
                                                 <th style="width: 100px">Nama Pasien</th>
-                                                <th>Ringkasan Permintaan</th>
+                                                <th >Ringkasan Permintaan</th>
                                                 <th style="width: 80px">Ruang Pengirim</th>
-                                                <th style="width: 80px">Dokter Pengirim</th>
+                                                <th style="width: 100px">Dokter Pengirim</th>
                                                 <th style="width: 50px">Status</th>
                                                 <th style="width: 100px">Action</th>
                                             </tr>
@@ -485,6 +487,145 @@
             order: [[3, 'desc']]
         });
 
+        var tableKonsul = $("#konsulTable").DataTable({
+            bAutoWidth: false,
+            processing: true,
+            serverSide: true,
+            ajax : {
+                url: base_url+"erm/get_konsul_json",
+                type: "POST",
+                data: function (d) {
+                    d.cari = $("#ksearch").val();
+                    d.tglAwal = $("#ktglAwal").val()
+                    d.tglAkhir = $("#ktglAkhir").val()
+                    // etc
+                },
+                error : function(e) {
+                    console.log(e)
+                }
+            },
+            searching: false,
+            columns: [
+                {"data": 'id',"sortable": false, 
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }  
+                },
+                {"data": "id_daftar"},
+                {"data": "reg_unit"},
+                {"data": "created_at"},
+                {"data": "nomr"},
+                {"data": "nama"},
+                {"data": "konsul_harap"},
+                {"data": "unit_minta"},
+                {"data": "dpjp_minta"},
+                {"data": "status_form",render:function(data,type,row){
+                    switch (data) {
+                        case "1":
+                            return "<span class='badge bg-default'>Diajukan</span>"
+                            break;
+                        case "2":
+                            return "<span class='badge bg-yellow'>Diproses</badge>"
+                            break;
+                        case "3":
+                            return "<span class='badge bg-green'>Selesai<badge>"
+                            break;
+                        default:
+                            return "-"
+                            break;
+                    }
+                }},
+                {"data": "view"}
+            ],
+            order: [[3, 'desc']]
+        });
+
+        var tableKunjungan = $("#kunjunganTable").DataTable({
+            bAutoWidth: false,
+            processing: true,
+            serverSide: true,
+            ajax : {
+                url: base_url+"erm/get_kunjungan_json",
+                type: "POST",
+                data: function (d) {
+                    d.cari = $("#search").val();
+                    d.tglAwal = $("#tglAwal").val()
+                    d.tglAkhir = $("#tglAkhir").val()
+                    // etc
+                },
+                error : function(e) {
+                    console.log(e)
+                }
+            },
+            searching: false,
+            columns: [
+                {"data": 'idx',"sortable": false, 
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }  
+                },
+                {"data": "id_daftar"},
+                // {"data": "reg_unit"},
+                {"data": "tgl_masuk"},
+                {"data": "nomr"},
+                {"data": "nama_pasien"},
+                {"data": "tgl_lahir"},
+                {"data": "jns_kelamin",render:function(data){
+                    switch (data) {
+                        case '0':
+                            return "tidak diketahui";
+                            break;
+                        case '1':
+                            return "laki-laki";
+                            break;
+                        case '2':
+                            return "perempuan";
+                            break;
+                        case '3':
+                            return "tidak dapat ditentukan";
+                            break;
+                        case '4':
+                            return "tidak mengisi";
+                            break;
+                        default:
+                            return "-";
+                            break;
+                    }
+                }},
+                {"data": "namaDokterJaga"},
+                {"data": "nama_ruang"},
+                {"data": "cara_bayar"},
+                {"data": "status_pasien",render:function(data,type,row){
+                    switch (data) {
+                        case "0":
+                            return "<span class='badge bg-default'>Nonaktif</span>"
+                            break;
+                        case "1":
+                            return "<span class='badge bg-green'>Aktif</badge>"
+                            break;
+                        default:
+                            return "-"
+                            break;
+                    }
+                }},
+                {"data": "status_erm",render:function(data,type,row){
+                    switch (data) {
+                        case "0":
+                            return "<span class='badge bg-warning'>Diproses</span>"
+                            break;
+                        case "2":
+                            return "<span class='badge bg-success'>Selesai</badge>"
+                            break;
+                        default:
+                            return "-"
+                            break;
+                    }
+                }},
+                {"data": "view"}
+            ],
+            order: [[3, 'desc']]
+        });
+
         $("#psearch").keypress(function(event){
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
@@ -495,10 +636,35 @@
              table.ajax.reload();
         })
 
+        $("#ksearch").keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                tableKonsul.ajax.reload()
+            }
+        })
+        $("#ktglAwal,#ktglAkhir").on("change",function(){
+             tableKonsul.ajax.reload();
+        })
+
+        $("#search").keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                tableKunjungan.ajax.reload()
+            }
+        })
+        $("#tglAwal,#tglAkhir").on("change",function(){
+            tableKunjungan.ajax.reload();
+        })
+
     });
     
     function detailPermintaan(idx,id)
     {
         window.location.href = base_url+"erm/detail_permintaan?idx="+idx+"&id="+id;
-    }    
+    }
+    
+    function detailKonsul(idx,id)
+    {
+        window.location.href = base_url+"erm/detail_konsul?idx="+idx+"&id="+id;
+    }   
 </script>

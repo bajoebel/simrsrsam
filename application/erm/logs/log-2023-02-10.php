@@ -119,3 +119,6 @@ ERROR - 2023-02-10 15:52:02 --> Severity: Notice --> Array to string conversion 
 ERROR - 2023-02-10 15:54:11 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-02-10 15:54:11 --> Severity: Notice --> Undefined property: stdClass::$status_form C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\p_resep\p_resep_form.php 136
 ERROR - 2023-02-10 16:00:10 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-10 09:30:30 --> Severity: Compile Error --> Cannot redeclare DateToIndo() (previously declared in C:\laragon\www\simrs_vclaim\application\erm\helpers\global_helper.php:478) C:\laragon\www\simrs_vclaim\application\erm\helpers\mcdhe_helper.php 266
+ERROR - 2023-02-10 09:30:34 --> Severity: Compile Error --> Cannot redeclare DateToIndo() (previously declared in C:\laragon\www\simrs_vclaim\application\erm\helpers\global_helper.php:478) C:\laragon\www\simrs_vclaim\application\erm\helpers\mcdhe_helper.php 266
+ERROR - 2023-02-10 16:32:53 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113

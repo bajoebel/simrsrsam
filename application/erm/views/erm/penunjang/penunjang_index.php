@@ -1,5 +1,4 @@
 <style>
-    
     .back {
         border: 2px solid;
         border-collapse: collapse;
@@ -86,10 +85,7 @@
                                             <b>Hari/Tanggal Masuk</b><br />
                                             <?php echo DateToIndoDayTime($detail->tgl_masuk) ?> <br/><br/>
                                         </td>
-                                        <td>
-                                            <b>Aksi Form</b><br/>
-                                            <button type="button" data-idform="<?=$penunjang->id?>" class="btn btn-sm btn-primary status-form"><i class="fa fa-check"></i></button>
-                                        </td>
+                                      
                                     </tr>
                                 </tbody>
                             </table>
@@ -122,6 +118,12 @@
                         <tr>
                             <td><b>Group</b></td>
                             <td>: <?= $penunjang->group_name ?></td>
+                        </tr>
+                        <tr>
+                            <td><b>Aksi</b></td>
+                            <td>: <a href="<?=base_url("erm.php/rajal/permintaan_penunjang/".$penunjang->idx."/".$penunjang->id)?>" target="_blank" ><button class="btn btn-sm btn-default"><i class="fa fa-print"></i></button></a>
+                                <button type="button" data-idform="<?=$penunjang->id?>" class="btn btn-sm btn-primary status-form"><i class="fa fa-check"></i></button>
+                            </td>
                         </tr>
                         
                     </table>
@@ -158,7 +160,6 @@
                                 <td id="hasil_<?=$pd->id?>"><?= $pd->hasil ?></td>
                                 <td>
                                     <button data-id="<?= $pd->id ?>" data-name="<?=$pd->tlTitle ?>" class="btn btn-sm btn-primary entry-hasil"><i class="fa fa-edit"></i></button>
-                                     <button data-id="<?= $pd->id ?>" class="btn btn-sm btn-secondary cetak"><i class="fa fa-print"></i></button>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -277,7 +278,6 @@
                 }
             });
         })
-
         $(".status-form").click(function(){
             $("#modal-form").modal("show")
             $("#m_idform").val($(this).data('idform'))

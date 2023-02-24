@@ -49,6 +49,34 @@ class Erm extends CI_Controller
                             $param = array('jns_layanan' => 'jns_layanan', 'dari' => 'tglAwal', 'sampai' => 'tglAkhir');
                             $field = array('id_daftar', 'reg_unit', 'tgl_masuk', 'nomr', 'nama_pasien', 'tgl_lahir', 'jns_kelamin', 'namaDokterJaga', '{{nama_ruang}}', 'cara_bayar', '=action[{{status_pasien}}]');
                         } else $notif = 0;
+
+                        $action = "<div class='btn-group'><button onclick='pilihPasien({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-search'></span> Pilih</button></div>";
+                        $config = array(
+                            'url'           => 'erm.php/layanan/getdata',
+                            'variable'      => array('idx' => 'idx', 'nama_ruang' => 'nama_ruang', 'nama_kamar' => 'nama_kamar', 'jns_kelamin' => 'jns_kelamin', 'status_pasien' => 'status_pasien','status_erm' => 'status_erm'),
+                            'field'         => $field,
+                            'function'      => 'getPasienSaatini',
+                            'keyword_id'    => 'q',
+                            'param_id'      => $param,
+                            'limit_id'      => 'limit',
+                            'data_id'       => 'data',
+                            'page_id'       => 'pagination',
+                            'number'        => true,
+                            'action'        => true,
+                            'load'          => true,
+                            'action_button' => $action,
+                        );
+                        // if ($jns_layanan == "RI") {
+                        //     $action = "<div class='btn-group'><button onclick='registrasiPasien({{idx}})' class='btn btn-success btn-sm' id='terima{{idx}}'><span class='fa fa-check'></span> Terima</button></div>";
+                        //     $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} / {{nama_kamar_pengirim}}', 'nama_dokter_pengirim');
+                        // } elseif ($jns_layanan == "RJ") {
+                        //     $action = "<div class='btn-group'><button onclick='registrasiPasienRujukInternal({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-check'></span> Terima</button></div>";
+                        //     $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} ', 'nama_dokter_pengirim');
+                        // } else {
+                        //     $action = "<div class='btn-group'><button onclick='persetujuanRegistrasi({{idx}})' class='btn btn-success btn-sm'><span class='fa fa-check'></span> Terima</button></div>";
+                        //     $field = array('id_daftar', 'reg_unit', 'tgl_minta', 'nomr', 'nama_pasien', '{{nama_ruang_pengirim}} ', 'nama_dokter_pengirim');
+                        // }
+
                         $data = array(
                             'contentTitle' => 'Cari Pasien',
                             'ruangID' => $this->session->userdata('kdlokasi'),
@@ -64,6 +92,11 @@ class Erm extends CI_Controller
                             'index_menu' => 2,
                             'nav_sidebar' => $this->load->view('template/nav_sidebar', $z, true),
                             'content' => $this->load->view('erm/erm_index', $data, true),
+                            'ajaxdata' => "var jekel = {'1':'Laki-Laki','2':'Perempuan','3':'Tidak Dapat Didefenisikan','4':'Tidak Diketahui'};
+                                            var response = {'0':'<span class=\"btn btn-danger btn-xs\" >Belum Diresponse</span>','1':'<span class=\"btn btn-success btn-xs\">Sudah Diresponse</span>'}; 
+                                            var erm = {'0':'<span class=\"pull-right badge bg-yellow\" >Proses</span>','1':'<span class=\"pull-right badge bg-green btn-xs\">Final</span>'}; 
+                                            var action = {'1':'<span class=\"pull-right badge bg-green\">Aktif</span>','2':'<span class=\"pull-right badge bg-yellow\">Dirawat</span>','3':'<span class=\"pull-right badge bg-yellow\">Menunggu Response <br>Pindah</span>','4':'<span class=\"pull-right badge bg-yellow\">Sudah Pindah</span>','5':'<span class=\"pull-right badge bg-yellow\">Sudah Pulang</span>','6':'<span class=\"pull-right badge bg-yellow\">Batal Berobat</span>'}; 
+                                            var dis=['','disabled']" . getData($config),
                             'lib' => array('js/layanan.js')
                         );
                         //<button onclick='pilihPasien({{idx}})' class='btn btn-danger btn-sm'><span class='fa fa-search'></span> Pilih</button>
@@ -278,4 +311,32 @@ class Erm extends CI_Controller
         header('Content-Type: application/json');
         echo $this->erm_model->getDaftar();
     }
+    // function get_permintaan_json_() {
+	// 	$ses_state = $this->users_model->cek_session_id();
+    //     if ($ses_state) {
+    //         $q = urldecode($this->input->get('keyword', TRUE));
+    //         $start = intval($this->input->get('start'));
+    //         $limit = intval($this->input->get('limit'));
+    //         $jenis_layanan = urldecode($this->input->get('jns_layanan', TRUE));
+    //         //echo $jenis_layanan;exit;
+    //         if ($jenis_layanan == 'RJ' || $jenis_layanan == 'GD' || $jenis_layanan == "PJ") {
+    //             $kondisi = array('status_pasien != ' => 6, "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') >=" => urldecode($this->input->get('dari', TRUE)), "DATE_FORMAT(`tgl_masuk`,'%Y-%m-%d') <=" => urldecode($this->input->get('sampai', TRUE)));
+    //         } else $kondisi = " (status_pasien=1 OR status_pasien=3) ";
+    //         $mulai = ($start * $limit) - $limit;
+    //         $ruangid = $this->session->userdata('kdlokasi');
+
+    //         $response = array(
+    //             'status'    => true,
+    //             'message'   => "OK",
+    //             'start'     => $mulai,
+    //             'row_count' => $this->Layanan_model->countData($q, $ruangid, $jenis_layanan, $kondisi),
+    //             'limit'     => $limit,
+    //             'data'      => $this->Layanan_model->getData($limit, $mulai, $q, $ruangid, $jenis_layanan, $kondisi),
+    //         );
+    //     } else {
+    //         $response = array('status' => false, 'message' => 'Session Expired');
+    //     }
+    //     header('Content-Type: application/json');
+    //     echo json_encode($response);
+    // }
 }

@@ -316,6 +316,23 @@ function status_permintaan_penunjang($status) {
     }
 }
 
+function status_permintaan_konsul($status) {
+    switch ($status) {
+        case '1':
+            return "<span class='badge bg-default'>Diajukan</span>";
+            break;
+        case '2':
+            return "<span class='badge bg-yellow'>Diproses</badge>";
+            break;
+        case '3':
+            return "<span class='badge bg-green'>Selesai<badge>";
+            break;
+        default:
+           return "-";
+            break;
+    }
+}
+
 function status_permintaan_resep($status) {
     switch ($status) {
         case '1':

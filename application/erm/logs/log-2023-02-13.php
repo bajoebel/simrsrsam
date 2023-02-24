@@ -1,5 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
+ERROR - 2023-02-13 08:38:15 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:38:38 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:38:43 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:38:48 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:39:49 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:40:37 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:41:11 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-02-13 08:41:30 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+=======
 ERROR - 2023-02-13 01:53:51 --> 404 Page Not Found: Antrian/index
 ERROR - 2023-02-13 01:54:10 --> 404 Page Not Found: Antrian/index
 ERROR - 2023-02-13 01:54:15 --> 404 Page Not Found: Antrian/index
@@ -358,3 +368,4 @@ ERROR - 2023-02-13 08:57:49 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2023-02-13 08:58:23 --> Severity: Notice --> Undefined property: stdClass::$namaDokterJaga C:\laragon\www\simrs_vclaim\application\erm\views\antrian\antrian_index.php 252
 ERROR - 2023-02-13 08:58:23 --> Severity: Notice --> Undefined property: stdClass::$idx_daftar C:\laragon\www\simrs_vclaim\application\erm\views\antrian\antrian_index.php 368
 ERROR - 2023-02-13 08:59:09 --> Severity: Notice --> Undefined property: stdClass::$namaDokterJaga C:\laragon\www\simrs_vclaim\application\erm\views\antrian\antrian_index.php 252
+>>>>>>> ff6f0c07c6af997f574a5fb1e63eac980b8bb734

@@ -2,16 +2,21 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Apiresep_model extends CI_Model
 {
-    public function getPermintaanResep() {
+    public function getPermintaanResep($tglAwal,$tglAkhir) {
         $ci = get_instance();
         $db2 = $ci->load->database('dberm', TRUE);
         // if (!empty($_POST['cari'])) {
         //     $db2->like("a.nama",$_POST['cari']);
         // }
-        return $db2
+        if ($tglAwal!="" and $tglAkhir!="") {
+            $db2->where(["DATE_FORMAT(`created_at`,'%Y-%m-%d') >="=>$tglAwal,"DATE_FORMAT(`created_at`,'%Y-%m-%d') <="=>$tglAkhir]);
+        }
+        
+        $db2
             ->select("*")
-            ->order_by("a.id","desc")
-            ->get("rj_p_resep a")
+            ->order_by("a.id","desc");
+
+        return $db2->get("rj_p_resep a")
             ->result();
     }
 

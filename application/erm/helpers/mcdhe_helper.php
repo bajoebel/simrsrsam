@@ -512,6 +512,14 @@ function getPegawai($arr=[]) {
     return $CI->db->get("tbl01_pegawai");
 }
 
+function getRuang($arr=[]) {
+    $CI = &get_instance();
+    if (sizeof($arr) != 0) {
+        $CI->db->where_in("grid",$arr);
+    }
+    return $CI->db->get("tbl01_ruang");
+}
+
 function getInfoDaftar($idx) {
     $ci = get_instance();
     return $ci->db->select("idx,id_daftar,reg_unit,tgl_masuk,")
@@ -740,6 +748,13 @@ function getPemeriksaan($tipe="") {
     return $db2
         ->select("*")
         ->get("m_pk_detail a")->result();
+}
+
+function getKonsulInternalById($nomr,$idx,$id) {
+    $ci = get_instance();
+    $db2 = $ci->load->database('dberm', TRUE);
+    $db2->where(["nomr"=>$nomr,"idx"=>$idx,"id"=>$id]);
+    return $db2->get("rj_konsul_internal")->row();
 }
 
 

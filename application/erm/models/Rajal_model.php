@@ -367,6 +367,41 @@ class Rajal_model extends CI_Model
             ->row();
     }
 
+    function insertKonsulInternal($data) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $idx = $data['idx'];
+        $nomr = $data['nomr'];
+        $cek = $db2->where(['idx' => $idx, 'nomr' => $nomr])->get("rj_konsul_internal")->num_rows();
+        if ($cek>0) {
+            return $db2->where(['idx' => $idx, 'nomr' => $nomr])->update("rj_konsul_internal", $data);
+        } else {
+            return $db2->insert("rj_konsul_internal", $data);
+        }
+    }
+
+    function getKonsulInternal($nomr, $idx) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->where(["nomr"=>$nomr,"idx"=>$idx]);
+        return $db2->get("rj_konsul_internal");
+    }
+
+    function getKonsulInternalById($nomr, $idx,$id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->where(["nomr"=>$nomr,"idx"=>$idx,"id"=>$id]);
+        return $db2->get("rj_konsul_internal")->row();
+    }
+
+
+    function deleteKonsulInternal($idx,$id)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2
+            ->where(["idx"=>$idx,"id" => $id])
+            ->delete("rj_konsul_internal");
+        return $this->db->affected_rows();
+    }
+
+
     function deleteEdukasiPasienDetail($id)
     {
         $db2 = $this->load->database('dberm', TRUE);
@@ -571,33 +606,54 @@ class Rajal_model extends CI_Model
     public function insertPermintaanPenunjang($data) {  
         $db2 = $this->load->database('dberm', TRUE);
         $db3 = $this->load->database('dbsimrs', TRUE);
-        if (!empty($data['tindakan'])) {
+        if (!empty($data['tindakan']) or !empty($data['tindakan_lain'])) {
             $tindakan = $data['tindakan'];
+            $tindakan_lain = $data['tindakan_lain'];
+            $dataArrTindakan = [];
+            $ringkasan = "";
             // $db2->trans_begin();
             unset($data['tindakan']);
+            unset($data['tindakan_lain']);
             $db2->trans_begin();
             $insert = $db2->insert("rj_p_penunjang",$data);
             $id_rjpp = $db2->insert_id();
-            $dataTindakan = $db3
-            ->select("tarif_layanan.*,tbl_json_tarif_2020.group")
-            ->join("tbl_json_tarif_2020","tbl_json_tarif_2020.kelas2=tarif_layanan.tlId","LEFT")
-            ->where_in('tlId',$tindakan)->get("tarif_layanan");
-            $dataArrTindakan = [];
-            $ringkasan = "";
-            if ($dataTindakan->num_rows()>0) {
-                 foreach ($dataTindakan->result() as $r) {
-                    $dataArrTindakan[] = [
-                        "rj_p_penunjang_id" => $id_rjpp,
-                        "tlId" => $r->tlId,
-                        "tlTitle" => $r->tlTitle,
-                        "jasaSarana" => $r->jasaSarana,
-                        "jasaPelayanan" => $r->jasaPelayanan,
-                        "tarifLayanan" => $r->tarifLayanan,
-                        "group" => $r->group
-                    ];
-                    $ringkasan .= "$r->tlTitle, ";
+
+            if (!empty($tindakan)) {
+                $dataTindakan = $db3
+                ->select("tarif_layanan.*,tbl_json_tarif_2020.group")
+                ->join("tbl_json_tarif_2020","tbl_json_tarif_2020.kelas2=tarif_layanan.tlId","LEFT")
+                ->where_in('tlId',$tindakan)->get("tarif_layanan");
+            
+                if ($dataTindakan->num_rows()>0) {
+                    foreach ($dataTindakan->result() as $r) {
+                        $dataArrTindakan[] = [
+                            "rj_p_penunjang_id" => $id_rjpp,
+                            "tlId" => $r->tlId,
+                            "tlTitle" => $r->tlTitle,
+                            "jasaSarana" => $r->jasaSarana,
+                            "jasaPelayanan" => $r->jasaPelayanan,
+                            "tarifLayanan" => $r->tarifLayanan,
+                            "group" => $r->group
+                        ];
+                        $ringkasan .= "$r->tlTitle, ";
+                    }
                 }
             }
+            if (!empty($tindakan_lain)) {
+                foreach ($tindakan_lain as $tl) {
+                    $dataArrTindakan[] = [
+                        "rj_p_penunjang_id" => $id_rjpp,
+                        "tlId" => "nonlist",
+                        "tlTitle" => $tl,
+                        "jasaSarana" => "-",
+                        "jasaPelayanan" => "-",
+                        "tarifLayanan" => "0",
+                        "group" => "Nonlist"
+                    ];
+                        $ringkasan .= "$tl, ";
+                }
+            }
+          
             $db2->insert_batch('rj_p_penunjang_detail',$dataArrTindakan);
             $db2->where("id",$id_rjpp)->update("rj_p_penunjang",["ringkasan_tindakan"=>rtrim($ringkasan,", ")]);
             if ($db2->trans_status()===FALSE) {
@@ -607,7 +663,6 @@ class Rajal_model extends CI_Model
                  $db2->trans_commit();
                 return true;
             }
-
         } else {
             return false;
         }

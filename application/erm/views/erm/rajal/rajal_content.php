@@ -181,4 +181,28 @@
             </div>
         </div>
     </div>
+    <div class="tab-pane <?= $ta[9] ?>" id="tab_9">
+        <form id='form-data-konsul-internal' method="post" class="form-horizontal">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">Form Konsul Internal</h3>
+                    <div class="box-tools pull-right">
+
+                        <?php if ($detail->status_erm!=1) {?>
+                            <button type="button" class="btn btn-sm btn-success" onclick="tambahKonsulInternal()">Tambah Data</button>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div id="ki_form">
+                    <div class="box-body">
+                        <?php $this->load->view("erm/rajal/konsul_internal/konsul_internal_form") ?>
+                    </div>
+                    <div class="box-footer">
+                        <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary simpan-konsul-internal'>Simpan</button>":"" ?>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

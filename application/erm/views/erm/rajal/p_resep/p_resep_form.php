@@ -37,6 +37,7 @@ if (!$permintaan_resep) { ?>
                         <div class="col-sm-10">
                             <select name="obat_pr" id="obat_pr" class="form-control select-el" style="width:100%;">
                                 <option value="">==Pilih Obat==</option>
+                                <option value="nonlist">Tidak Ada Dalam List</option>
                                 <?php foreach($obat as $o) { ?>
                                     <option value="<?= $o->KDBRG ?>"><?= $o->NMBRG ?></option>
                                 <?php } ?>
@@ -155,27 +156,37 @@ if (!$permintaan_resep) { ?>
         $("#pilihan_obat").hide();
      
         $("#obat_pr").on("change",function(){
-            $.ajax({
-                url: base_url+"rajal/get_resep",
-                data: {
-                    "id" : $(this).val(),
-                    "idx" : $("#idx_pr").val()
-                },
-                method : "POST",
-                dataType: "JSON",
-                success: function (response) {
-                    let data = response.data;
-                    // console.log(response)
-                    // console.log(data)
-                    if (response.status==true) {
-                        $("#pilihan_obat").show();
-                        $("#nama_obat_pr").val(data.NMBRG)
-                        $("#generik_pr").val(data.NMGENERIK)
-                        $("#satuan_pr").val(data.NMSATUAN)
-                        $("#rj_p_resep_pr").val(response.id_resep)
+            let pil = $(this).val();
+            if (pil=='nonlist') {
+                $("#pilihan_obat").show()
+                $("#nama_obat_pr").prop("readonly",false).val("")
+                $("#nama_obat_pr").focus()
+                $("#generik_pr").prop("readonly",false).val("")
+                $("#satuan_pr").prop("readonly",false).val("")
+            } else {
+                $.ajax({
+                    url: base_url+"rajal/get_resep",
+                    data: {
+                        "id" : $(this).val(),
+                        "idx" : $("#idx_pr").val()
+                    },
+                    method : "POST",
+                    dataType: "JSON",
+                    success: function (response) {
+                        let data = response.data;
+                        // console.log(response)
+                        // console.log(data)
+                        if (response.status==true) {
+                            $("#pilihan_obat").show();
+                            $("#nama_obat_pr").prop("readonly",true).val(data.NMBRG)
+                            $("#generik_pr").prop("readonly",true).val(data.NMGENERIK)
+                            $("#satuan_pr").prop("readonly",true).val(data.NMSATUAN)
+                            $("#rj_p_resep_pr").val(response.id_resep)
+                        }
                     }
-                }
-            });
+                });
+            }
+           
         })
 
         $("#permintaan-resep-btn").on("click",function(){

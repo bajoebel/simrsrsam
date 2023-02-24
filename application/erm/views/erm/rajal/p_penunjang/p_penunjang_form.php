@@ -66,30 +66,30 @@
                 <input type="hidden" name="reg_unit_pp"  value="<?=$detail->reg_unit?>">
                 <fieldset>
                     <legend>Informasi Klinis</legend>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Dokter Pengirim:</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label class="col-md-2" for="email">Dokter Pengirim:</label>
+                        <div class="col-md-10">
                             <select name="dpjp_pp" id="dpjp_pp" class="form-control">
                                 <option value="<?=$detail->dokterJaga?>" selected><?= $detail->namaDokterJaga  ?></option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Diagnosa Klinik</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label for="" class="col-md-2">Diagnosa Klinik</label>
+                        <div class="col-md-10">
                             <textarea name="diagnosa_pp" id="diagnosa_pp" class="form-control"></textarea>
                         </div>
                     </div>  
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Keterangan</label>
-                        <div class="col-sm-10">
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 control-label">Keterangan</label>
+                        <div class="col-md-10">
                             <textarea name="keterangan_pp" id="keterangan_pp" class="form-control"></textarea>
                         </div>
                     </div>
-                    <legend>Jenis Pemeriksaan</legend>  
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Jenis Pemeriksaan</label>
-                        <div class="col-sm-10">
+                    <legend>Jenis Pemeriksaan</legend>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 control-label">Jenis Pemeriksaan</label>
+                        <div class="col-md-10">
                             <select name="pemeriksaan_pp" id="pemeriksaan_pp" class="form-control">
                                 <option value="">==Pilih Pemeriksaan==</option>
                                 <option value="GR039">Labor Klinik</option>
@@ -99,24 +99,28 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="col-sm-2 control-label">Pilihan Tindakan</label>
-                        <div class="col-sm-10" style="max-height:400px; overflow-y: scroll; ">
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 control-label">Pilihan Tindakan</label>
+                        <div class="col-md-10" style="max-height:400px; overflow-y: scroll; ">
+                            <select id="tindakan_pp" class="form-control select2" style="width:100%">
+                               
+                            </select>
+                            
                             <table class="table">
                                 <thead>
                                     <th>#</th>
-                                    <th>Title</th>
-                                    <th>Group</th>
-                                    <th>Tarif</th>
+                                    <th>Title - Group - Tarif</th>
                                 </thead>
-                                <tbody id="tindakan_pp"></tbody>
+                                <tbody id="detail_tindakan_pp">
+                                    
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </fieldset>
                 <hr/>
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
                     <button type="submit" class="btn btn-primary"  id="permintaan-penujang-btn"><span id="icon_buatpermintaan" class="fa fa-save"></span> Submit</button>
                     </div>
                 </div>
@@ -160,22 +164,63 @@
                 success: function (response) {
                     let data = response.data;
                     let html = ``;
-                    
+                    html+=`<option value=''>==Pilih==</option>`;
+                    html+=`<option value='nonlist'>Tidak Ada Dalam List</option>`;
                     data.forEach((item,index)=>{
-                        html+=`
-                            <tr><td><input type="checkbox" name="tindakan_pp[]" value="${item.tlId}"></td>
-                            <td>${item.tlTitle}</td>
-                            <td>${group_lab(item.group)}</td>
-                            <td>${item.tarifLayanan}</td>
-                            </tr></div>`;
+                        // html+=`
+                        //     <tr><td><input type="checkbox" name="tindakan_pp[]" value="${item.tlId}"></td>
+                        //     <td>${item.tlTitle}</td>
+                        //     <td>${group_lab(item.group)}</td>
+                        //     <td>${item.tarifLayanan}</td>
+                        //     </tr></div>`;
+                        html+=`<option value='${item.tlId}'>${item.tlTitle} - ${group_lab(item.group)} - ${item.tarifLayanan}</option>`;
                     })
                     $("#tindakan_pp").html(html)
+
                 },
                 error : function (e) {
                     console.log(e);
                 }
             });    
         })
+        $("#tindakan_pp").on("change",function(){
+            let item = $(this).val();
+            let itemText= $("#tindakan_pp :selected").text();
+            let htmlItem = ``;
+            if (item=="") {
+                swal("Silahkan Pilih Tindakan Terlebih Dahulu")
+                return false;
+            }
+
+            if(item=="nonlist") {
+                
+                let p = prompt("Please enter your name");
+                if (p) {
+                    htmlItem+=`
+                    <tr>
+                        <td><input type="checkbox" name="tindakan_lain_pp[]" value="${p}" checked></td>
+                        <td>${p}</td>
+                        <td><button type="button" class="btn btn-xs btn-danger removeItem"><i class='fa fa-trash'></i></button></td>
+                    </tr>`;
+                }
+                
+            } else {
+                htmlItem+=`
+                <tr>
+                    <td><input type="checkbox" name="tindakan_pp[]" value="${item}" checked></td>
+                    <td>${itemText}</td>
+                     <td><button type="button" class="btn btn-xs btn-danger removeItem"><i class='fa fa-trash'></i></button></td>
+                </tr>`;
+            }
+            
+            $("#detail_tindakan_pp").append(htmlItem);
+        })
+
+        $(".removeItem").on("click",function() {
+            $(this).parent().remove();
+        })
+
+
     });
 
     function group_lab(key) {
@@ -223,9 +268,7 @@
                 swal("Permintaan Sudah Diproses bagian penunjang")
             }
         }
-       
     }
-
 </script>
 
 
