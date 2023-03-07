@@ -114,27 +114,27 @@
                 </div>
 
                 <div class="box-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="has-feedback">
-                            <input type="hidden" id="start" name="start" value="1">
-                            <input type="hidden" id="param" name="param" value="1">
-                            <input type="text" class="form-control input-sm" id='q' name="q" onkeyup="getData(1)" placeholder="Cari Berita">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="has-feedback">
+                                <input type="hidden" id="start" name="start" value="1">
+                                <input type="hidden" id="param" name="param" value="1">
+                                <input type="text" class="form-control input-sm" id='q' name="q" onkeyup="getData(1)" placeholder="Cari Berita">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="pull-right">
+                                <select name="limit" id="limit" class='form-control' onchange="getData(1)">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="pull-right">
-                            <select name="limit" id="limit" class='form-control' onchange="getData(1)">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
                     <div class="table-responsive no-padding">
                         <table id="example1" class="table table-bordered table-striped table-hover">
                             <thead>

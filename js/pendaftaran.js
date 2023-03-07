@@ -895,6 +895,10 @@ function ceknikbpjs(pesan = 0) {
 
 	console.log(url);
 	// alert(alert)
+	var bookingjkn=$('#bookingjkn').val();
+	if(bookingjkn==""){
+		cekAntrian('nik')
+	}
 	var nik = $("#no_ktp").val();
 
 	var tgllayanan = $('#sekarang').val();
@@ -903,9 +907,7 @@ function ceknikbpjs(pesan = 0) {
 		url: url,
 		type: "GET",
 		dataType: "json",
-		data: {
-			get_param: 'value'
-		},
+		data: {},
 		success: function (data) {
 			console.log(data);
 			if (data.metaData.code == 200) {
@@ -959,7 +961,8 @@ function ceknikbpjs(pesan = 0) {
 						});
 					}
 				}
-				cekAntrian('nik')
+				
+				
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);
@@ -1003,7 +1006,10 @@ function cekAntrian(param='nik'){
 	});
 }
 function ceknomorbpjs(pesan = 0) {
-	
+	var bookingjkn=$('#bookingjkn').val();
+	if(bookingjkn==""){
+		cekAntrian('nomorkartu')
+	}
 	var nobpjs = $("#no_bpjs").val();
 	var tgllayanan = $('#sekarang').val();
 	var url = url_call_back + "/vclaim/peserta/nokartu/"+nobpjs+"/"+tgllayanan;
@@ -1066,7 +1072,11 @@ function ceknomorbpjs(pesan = 0) {
 						// alert(konf)
 					}
 				}
-				cekAntrian('nomorkartu')
+				// var bookingjkn=$('#bookingjkn').val();
+				// if(bookingjkn==""){
+				// 	cekAntrian('nomorkartu')
+				// }
+				
 			} else {
 				$('#no_bpjs').focus();
 				if (pesan == 1) tampilkanPesan('warning', data.metaData.message);
@@ -2385,8 +2395,34 @@ function setRujukan(encodedString) {
 	periksaRujukan();
 }
 function showFormSEP(){
-	$('.registrasi').removeClass('active');
-	$('.formcreatesep').addClass('active');
+	
+
+	var noKartu = $('#no_bpjs').val();
+	var tglMulai=$('#sekarang').val()
+	var tglSelesai=$('#sekarang').val()
+	if(noKartu.length>=13){
+		var url = url_call_back + "/vclaim/monitoring/historipelayanan/" + noKartu + "/" + tglMulai + "/" + tglSelesai;
+		$.ajax({
+			url: url,
+			type: "GET",
+			dataType: "json",
+			data: {},
+			success: function (data) {
+				if (data.metaData.code == 200) {
+					tampilkanPesan('warning','Sep atas nama '+ data.response.histori[0].namaPeserta +" Sudah terbit untuk hari ini");
+					$('#btnSimpan').prop("disabled",true);
+				} else {
+					$('.registrasi').removeClass('active');
+					$('.formcreatesep').addClass('active');
+					$('#btnSimpan').prop("disabled",false);
+				}
+			}
+		});
+	}else{
+		tampilkanPesan('warning','NoKartu Tidak Valid');
+	}
+	
+
 }
 function viewRujukan(norujukan="",faskes=2) {
 
@@ -4839,7 +4875,18 @@ function priviewEdukasi(idx) {
 			$('#privgc').modal('show');
 			$('#headPriv').html("Catatan Pemberian Informasi Dan Edukasi Pasien Dan Keluarga")
 			$('#priviewdokumen').html(data);
-		}
+		},
+		complete: function() {
+			var code = $('#pemberiSign'+idx).val();
+			// alert(code)
+			var qrcode = new QRCode(document.getElementById("qrcode_epd_"+idx), {
+				text: code,
+				width: 80,
+				height: 80,
+				colorDark : "#000",
+				colorLight : "#fff",
+			});
+		},
 	});
 }
 function cekCeklis(){
@@ -4848,7 +4895,7 @@ function cekCeklis(){
 	var informasiedukasi=$('#informasiedukasi').prop("checked");
 	var pu = (persetujuanumum==true) ? $('#persetujuanumum').val():"";
 	var edu = (informasiedukasi==true) ? $('#informasiedukasi').val():"";
-
+// alert(pu)
 	$('#id_persetujuan').val(pu);
 	$('#id_edukasi').val(edu);
 	if(suratmasukrajal==true || persetujuanumum==true || informasiedukasi==true) $('#btnSignPetugas').prop("disabled",false);
@@ -5274,6 +5321,7 @@ function sign(){
 					colorDark : "#000",
 					colorLight : "#fff",
 				});
+				$('#sign').modal("hide");
 			}else{
 				alert(data.message)
 			}
@@ -5300,7 +5348,8 @@ function simpanEdukasi(){
 		dataType: "JSON",
 		success: function (data) {
 			if(data.status==true){
-				priviewEdukasi()
+				var idx=$('#idx').val()
+				priviewEdukasi(idx)
 			}
 		},
 		error: function (jqXHR, ajaxOption, errorThrown) {

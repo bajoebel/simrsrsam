@@ -20,7 +20,7 @@ function httprequest($data, $url,$token="",$method="POST")
             'X-Token: ' .$token
         ));
     }
-    
+    // echo USERNAME;exit;
     $result = curl_exec($ch);
     // echo $result; exit;
     if (curl_errno($ch)) {

@@ -146,6 +146,8 @@ class registrasi extends CI_Controller
                 // Data detail pasien
                 $y = $cekNum->row_array();
                 // print_r($y); exit;
+                $y["kodedokterjkn"]="";
+                $y['antrian_poly']="";
                 $y["antrian"]=$this->db->where('tanggalperiksa',date('Y-m-d'))->where("nik",$y["no_ktp"])->where("status_kirim",1)->get("jkn_antrean")->row();
                 $y['contentTitle'] = "Registrasi pasien rawat jalan";
                 $y['index_menu'] = 4;
@@ -212,16 +214,16 @@ class registrasi extends CI_Controller
                 // $this->db->limit(1);
                 // $y['pj'] = $this->db->get('tbl01_penanggung_jawab')->row();
                 $kodebooking=$this->input->get('kodebooking');
-                
+                $y["id_cara_bayar"]="";
+                $y["id_rujuk"]="";
                 $y['bookingjkn']=!empty($this->input->get('bookingjkn'))?$this->input->get('bookingjkn'):"";
                 if(!empty($kodebooking)){
                     $y['kodebooking']=$kodebooking;
                     $this->onlineDB = $this->load->database('online', true);
                     $y['booking']=$this->onlineDB->where('kode_booking',$kodebooking)
-                    ->join('m_poli b','a.`grId`=b.`grId`')
-                    ->join('m_dokter c','a.`id_dokter`=c.`id_dokter`')
-                    ->get('t_online a')->row_array();
-
+                        ->join('m_poli b','a.`grId`=b.`grId`')
+                        ->join('m_dokter c','a.`id_dokter`=c.`id_dokter`')
+                        ->get('t_online a')->row_array();
                     if(!empty($y['booking'])){
                         // $id="";
                         $id=getField('idx',array('grid_lama'=>$y['booking']['grId']),'tbl01_ruang');
@@ -237,15 +239,41 @@ class registrasi extends CI_Controller
                             'Fri'=>'Jumat',
                             'Sat'=>'Sabtu'
                         );
-                        $y['dokter'] = $this->db->select("jadwal_dokter_id as NRP, jadwal_dokter_nama as pgwNama")
+                        $y['dokter'] = $this->db->select("jadwal_dokter_id as NRP,dokterjkn, jadwal_dokter_nama as pgwNama")
                         ->where('jadwal_hari',$hari[$day])
                         ->where('jadwal_poly_id',$id)
                         ->get('tbl02_jadwal_dokter')->result();
                     }else $y['dokter']=array();
+
                 }else{
-                    $y['booking']=array();
-                    $y['dokter']=array();
-                    $y['kodebooking']="";
+                    if(!empty($y['bookingjkn'])){
+                        $this->load->model('patch_model');
+                        $data=array(
+                            "kodebooking"=>$y['bookingjkn']
+                        );
+                        $res=httprequest($data, ONLINE_CALL_BACK."jkn/rsud/cekbooking",$token="",$method="POST");
+                        // echo $res; exit;
+                        $arr=json_decode($res);
+                        // print_r($arr); exit;
+                        if($arr->response->jeniskunjungan==1) $idrujuk=2;
+                        else if($arr->response->jeniskunjungan==2) $idrujuk=7;
+                        else if($arr->response->jeniskunjungan==3) $idrujuk=6;
+                        else $idrujuk=3;
+                        $y["id_cara_bayar"]=2;
+                        $y["id_rujuk"]=$idrujuk;
+                        $y["no_bpjs"]=$arr->response->nomorkartu;
+                        $y["kodedokterjkn"]=$arr->response->kodedokter;
+                        $ruang=$this->pendaftaran_model->getPolyByJknKode($arr->response->kodepoli);
+                        $y["id"]=!empty($ruang) ? $ruang->idx : "";
+                        
+                        $y["dokter"]=$this->patch_model->getdokter($y["id"]);
+                        $y['kodebooking']="";
+                        $y['antrian_poly']=$arr->response->angkaantrean;
+                        // print_r($y["id"]); exit;
+                    }else{
+                        $y['booking']=array();
+                        $y['dokter']=array();
+                    }
                 }
                 
                 $x['libjs']=array(
@@ -395,6 +423,7 @@ class registrasi extends CI_Controller
                     $params['tgl_jaminan'] = trim($this->input->post('tgl_jaminan', TRUE));
                     $params['tgl_daftar'] = trim($this->input->post('tgl_daftar', TRUE));
                     $params['status_tracert'] = trim($this->input->post('status_tracert', TRUE));
+                    $params['erm'] = trim($this->input->post('erm', TRUE));
                     $params['user_daftar'] = $this->session->userdata('get_uid');
                     $params['session_id'] = getSessionID();
 
@@ -430,10 +459,12 @@ class registrasi extends CI_Controller
                                                 // Jika Integrasi Antrian JKN Diaktifkan
                                                 $kodebookingonsite=$this->input->post('kodebookingonsite');
                                                 $bookingjkn=$this->input->post('bookingjkn');
-                                                $antrianpoly=$this->patch_model->getAntrianpoly($resData["id_ruang"],$resData["dokterJaga"]);
+                                                $antrianpoly=$this->input->post('antrian_poly');
+                                                if(empty($antrianpoly)) $antrianpoly=$this->patch_model->getAntrianpoly($resData["id_ruang"],$resData["dokterJaga"]);
                                                 if(!empty($kodebookingonsite)) $book=$kodebookingonsite;
                                                 else if(!empty($bookingjkn)) $book=$bookingjkn;
                                                 else $book=$resData["reg_unit"];
+
                                                 $antri = array(
                                                     'id_daftar' => $resData["id_daftar"], 
                                                     'kodebooking'=>$book,
@@ -448,6 +479,7 @@ class registrasi extends CI_Controller
                                                     'labelantrean'=>'',
                                                 );
                                                 $this->db->insert('tbl02_antrian', $antri);
+                                                
                                                 // Kirim Booking Antrian Onsite
                                                 if(empty($kodebookingonsite) && empty($bookingjkn)){
                                                     // jika belum ada booking antrian onsite, lakukan proses booking antrian poli
@@ -473,7 +505,6 @@ class registrasi extends CI_Controller
                                                     else if($params['id_rujuk']==6) $jeniskunjungan=3;
                                                     else if($params['id_rujuk']==7) $jeniskunjungan=2;
                                                     else $jeniskunjungan=2;
-
                                                     // $spm=$this->input->post('spm');
                                                     $estimasitunggu=$antrianpoly*$spm;
                                                     $time = strtotime($jammulai);
@@ -559,7 +590,9 @@ class registrasi extends CI_Controller
                                                         'waktu'=>$sekarang
                                                     );
                                                     $task=jknrequest('antrean/updatewaktu',json_encode($taskid),"POST");
+                                                    // echo $task; exit;
                                                     $taskarr=json_decode($task);
+                                                    // print_r($taskarr);exit;
                                                     if($taskarr->metadata->code != 200) {
                                                         $response["antrianjkn"]=$taskarr->metadata->message;
                                                         $response["antrianrequest"]=$taskarr;
@@ -569,7 +602,7 @@ class registrasi extends CI_Controller
                                                             'moderequest'=>'Update Task',
                                                             'wakturequest'=>date('Y-m-d H:i:s'),
                                                             'bodyrequest'=>json_encode($taskid),
-                                                            'failedmessage'=>$resarr->metadata->message
+                                                            'failedmessage'=>$taskarr->metadata->message
                                                         );
                                                         $this->db->insert('tbl02_jknfailedrequest',$log);
                                                     }
@@ -699,8 +732,6 @@ class registrasi extends CI_Controller
                 $x['header'] = $this->load->view('template/header', '', true);
                 $z = setNav("nav_4");
                 $x['nav_sidebar'] = $this->load->view('template/nav_sidebar', $z, true);
-
-                
                 $this->db->select('`idx`,`id_daftar`,`id_admisi`,`reg_unit`,`nomr`,`no_ktp`,
                 `nama_pasien`,`tempat_lahir`,`tgl_lahir`,`jns_kelamin`,`id_ruang`,`nama_ruang`,
                 `id_cara_bayar`,`cara_bayar`,`no_bpjs`,`no_jaminan`,`id_rujuk`,`rujukan`,alamat,rt,rw,nama_provinsi,nama_kab_kota,nama_kecamatan,nama_kelurahan,
@@ -3129,6 +3160,7 @@ class registrasi extends CI_Controller
             if($cek){
                 $id_persetujuan=$this->input->post('id_persetujuan');
                 // IDENTITAS DOKUMEN
+                // echo $id_persetujuan; exit;
                 if(!empty($id_persetujuan)){
                     $param = [
                         "id" => $id_persetujuan,
@@ -3153,8 +3185,42 @@ class registrasi extends CI_Controller
                     $update=array(
                         'petugasSign'=>$signcode
                     );
+                    // print_r($update);exit;
                     $this->erm->where('id',$id_persetujuan);
                     $this->erm->update('rj_setuju_umum',$update);
+                }
+                $id_edukasi=$this->input->post('id_edukasi');
+                if(!empty($id_edukasi)){
+                    $this->erm = $this->load->database('erm', true);
+                    $data=$this->erm->where('id_rj_iep',$id_edukasi)
+                    ->where("topik_id",1)
+                    ->get("rj_iep_detail")->row();
+                    $param = [
+                        "id" => $data->id,
+                        "tabel" => "id_rj_iep",
+                        "petugas" => $this->session->userdata('get_uid'),
+                        'dokumen' => 'FORM RM 6.3.00 Rev 02'
+                    ];
+                    $code = base64_encode(json_encode($param));
+                    $code_detail = base64_encode(json_encode($data));
+                    $signdata=array(
+                        'kode'=>$code,
+                        'kode_detail'=>$code_detail,
+                        'created_at'=>date('Y-m-d H:i:s'),
+                        'updated_at'=>date('Y-m-d H:i:s')
+                    );
+                    $this->erm->insert('log_assign',$signdata);
+                    $insert_id=$this->erm->insert_id();
+                    $signcode=base64_encode($insert_id);
+                    
+                    $update=array(
+                        'pemberiSign'=>$signcode
+                    );
+
+                    $this->erm->where('id_rj_iep',$id_edukasi)
+                    ->where("topik_id",1)
+                    ->update("rj_iep_detail",$update);
+
                 }
                 $idx_pendaftaran=$this->input->post('idx_pendaftaran');
                 if(!empty($idx_pendaftaran)){
@@ -3316,14 +3382,17 @@ class registrasi extends CI_Controller
             $terbatas_fisik=$this->input->post('terbatas_fisik');
             $hambatan=$this->input->post('hambatan');
             $bahasa=$this->input->post('bahasa');
-            foreach ($bahasa as $b) {
-                if($b=="Daerah") $ba[]=$b."(".$this->input->post('daerahlain').")";
-                else if($b=="bahasalain") $ba[]=$b."(".$this->input->post('bahasalain').")";
-                else $ba[]=$b;
-            }
+            if(!empty($bahasa)){
+                foreach ($bahasa as $b) {
+                    if($b=="Daerah") $ba[]=$b."(".$this->input->post('daerahlain').")";
+                    else if($b=="bahasalain") $ba[]=$b."(".$this->input->post('bahasalain').")";
+                    else $ba[]=$b;
+                }
+            }else $ba=array();
+            
             
             if(!empty($ba)) $bl=implode(";",$ba);else $bl="";
-            $tf=implode(";",$terbatas_fisik);
+            $tf= empty($terbatas_fisik) ? "Tidak Ada":implode(";",$terbatas_fisik);
             if(!empty($hambatan)){
                 foreach ($hambatan as $ha) {
                     if($ha=="Lain-Lain") $ham[]=$ha."(".$this->input->post('hambatanlain').")";
@@ -3333,25 +3402,39 @@ class registrasi extends CI_Controller
             }else $hamb="Tidak Ada";
             
             $rencana_edukasi=$this->input->post('topiklist');
-            $topiklist=implode(";",$rencana_edukasi);
+            $topiklist=!empty($rencana_edukasi)?implode(";",$rencana_edukasi):"Tidak Ada";
             $metode=$this->input->post('metode');
-            foreach ($metode as $me ) {
-                $met[]=($me=1?"1-Diskusi":($me==2 ? "2-Ceramah":"3-Demonstrasi"));
-            }
-            $strmet=implode(';',$met);
+            if(!empty($metode)){
+                foreach ($metode as $me ) {
+                    $met[]=($me=1?"1-Diskusi":($me==2 ? "2-Ceramah":"3-Demonstrasi"));
+                }
+            }else $met=array();
+            
+            $strmet=empty($met)?"Tidak Ada":implode(';',$met);
             $media=$this->input->post('media');
-            foreach ($media as $me ) {
-                $med[]=($me=1?"1-Liflet":($me==2 ? "2-Lembar Balik":($me==3? "3-Audio Visual": "4-Lain-Lain")));
-            }
-            $strmed=implode(';',$med);
+            if(!empty($media)){
+                foreach ($media as $me ) {
+                    $med[]=($me=1?"1-Liflet":($me==2 ? "2-Lembar Balik":($me==3? "3-Audio Visual": "4-Lain-Lain")));
+                }
+                
+            }else $med;
+            $strmed=empty($med)?"Tidak Ada":implode(';',$med);
+            
             $sasaran=$this->input->post('sasaran');
-            foreach ($sasaran as $me ) {
-                $sas[]=($me=1?"1-Pasien": "2-Keluarga Pasien");
-                $hubk=($me=2 ? $this->input->post('hubungan_keluarga') : "");
-                $namasas[]=($me=1? $this->input->post('nama'): $this->input->post('namakeluarga'));
-
+            if(!empty($sasaran)){
+                foreach ($sasaran as $me ) {
+                    $sas[]=($me=1?"1-Pasien": "2-Keluarga Pasien");
+                    $hubk=($me=2 ? $this->input->post('hubungan_keluarga') : "");
+                    $namasas[]=($me=1? $this->input->post('nama'): $this->input->post('namakeluarga'));
+                }
+                
+            }else {
+                $sas=array();
+                $hubk=$this->input->post('hubungan_keluarga');
+                $namasas[]="";
             }
-            $strsas=implode(';',$sas);
+            $strsas=empty($sas)?"Tidak Ada":implode(';',$sas);
+
             $this->erm = $this->load->database('erm', true);
             $insertid=$this->input->post('iepid');
             $data=array(
@@ -3398,8 +3481,8 @@ class registrasi extends CI_Controller
                     'topik_id'=>1,
                     'topik_title'=>'Pendaftaran Admisi',
                     'topik_list'=>$topiklist,
-                    'metode'=>implode(';',$metode),
-                    'media'=>implode(';',$media),
+                    'metode'=>$strmet,
+                    'media'=>$strmed,
                     'sasaran'=>implode(';',$namasas),
                     'evaluasi_awal'=>$this->input->post('evaluasi_awal'),
                     'pemberi_edukasi_id'=>$this->session->userdata('get_uid'),

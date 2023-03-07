@@ -289,6 +289,8 @@ if(empty($iepdetail)){
     </style>
     <div id="kode-form">
         <div>FORM RM 6.3.00 Rev 02</div>
+        
+        
     </div>
     <table width="100%">
         <tr>
@@ -355,6 +357,7 @@ if(empty($iepdetail)){
                 <div class="asesmen">
                     <div class="asesmen1">
                         <b>Pengkajian Umum</b>
+                        <?php //print_r($iep)?>
                         <table class="kajian">
                             <tr>
                                 <td width='20%'>Bahasa Yang Digunakan</td>
@@ -401,7 +404,7 @@ if(empty($iepdetail)){
                                 <td>Kemampuan Membaca</td>
                                 <td>
                                     :
-                                    <span>&#9745; <?= ($iep['kesediaan'] == 1) ? "Baik" : "Kurang" ?>
+                                    <span>&#9745; <?= ($iep['baca'] == 1) ? "Baik" : "Kurang" ?>
                                 </td>
                             </tr>
                             <tr>
@@ -522,6 +525,7 @@ if(empty($iepdetail)){
                     </tr>
                     <?php
                     $list =  $iepdetail;
+                    // print_r($list);
                     foreach ($list as $rl) {
                     ?>
                         <tr>
@@ -547,6 +551,7 @@ if(empty($iepdetail)){
                             <td style="text-align:center">&nbsp;<?= $rl['evaluasi_lanjut'] ?></td>
                         </tr>
                          <!-- qrcode -->
+                         <input type="hidden" name="pemberiSign" id="pemberiSign<?= $rl['id']?>" value="<?= $rl['pemberiSign']?>">
                         <script type="text/javascript">
                             var id = "<?= $rl['id']?>";
                             var code = "<?= $rl['pemberiSign']?>";

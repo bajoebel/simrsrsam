@@ -146,13 +146,14 @@ $date = date("Y-m-d");
             border-collapse:collapse;
             
         }
+        
     </style>
 </head>
 
 <body style="text-align:justify;">
-<div class="row">
+<!-- <div class="row"> -->
     <div class="col-md-12">
-        <div class="container" style="margin-top:20px; border: 1px solid #ccc; border-collapse:collapse;padding:0px;">
+        <!-- <div class="container" style="margin-top:20px; border: 1px solid #ccc; border-collapse:collapse;padding:0px;"> -->
             <ul class="nav nav-tabs nav-pills">
                 <li class="active"><a data-toggle="tab" href="#home">Tanda Tangan</a></li>
                 <li><a data-toggle="tab" href="#menu1">Dokumen Persetujuan Umum (<b><i>general Consent</i></b>)</a></li>
@@ -162,10 +163,11 @@ $date = date("Y-m-d");
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                     <div class="row">
-                        <div class="col-md-12 text-center">
-                            <p style="font-weight:bold;font-size:18pt;"><?= ($selaku=="pasien") ? "Tanda Tangan Pasien" : "Tanda Tangan Keluarga Pasien" ?> </p><br>
-                            <canvas id="signature-pasien" class="signature-pad" width=400 height=200></canvas>
-                            <p style="font-weight:bold;font-size:18pt;"><?= $namattd ?></p>
+                        <div class="col-md-12">
+                            
+                            <canvas id="signature-pasien" class="signature-pad" width=300 height=200></canvas>
+                            <p style="font-weight:bold;font-size:18pt;"><?= ($selaku=="pasien") ? "Pasien" : "Keluarga Pasien" ?> <br>
+                            <?= $namattd ?></p>
                             <input type="hidden" name="id" id="id" value="<?= $id ?>">
                             <input type="hidden" name="nomr_pasien" id="nomr_pasien" value="<?= $nomr ?>">
                             <input type="hidden" name="nama_pasien" id="nama_pasien" value="<?= $nama ?>">
@@ -544,9 +546,9 @@ $date = date("Y-m-d");
                     
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
-</div>
+<!-- </div> -->
 <div id="sign" class="modal fade" role="dialog">
     <div class="modal-dialog">
 

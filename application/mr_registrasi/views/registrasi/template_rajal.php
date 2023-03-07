@@ -325,7 +325,7 @@
                                 <div class="box">
                                     <ul class="nav nav-tabs nav-pills">
                                         <li class="registrasi registrasipasien active"><a data-toggle="tab" href="#registrasipasien">Registrasi Pasien</a></li>
-                                        <li class="registrasi formcreatesep"><a data-toggle="tab" href="#formcreatesep">Create SEP BPJS</a></li>
+                                        <li class="registrasi formcreatesep"><a data-toggle="tab" href="#formcreatesep" onclick="showFormSEP()">Create SEP BPJS</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -363,11 +363,11 @@
                                                     <div class="col-md-12">
                                                         
                                                     <input type="hidden" name="kodebookingonsite" id="kodebookingonsite" value="<?= !empty($antrian)?$antrian->kodebooking:"" ?>">
-                                                    <input type="hidden" name="bookingjkn" id="bookingjkn" value="<?= $bookingjkn ?>">
-                                                    <input type="hidden" name="kodebooking" id="kodebooking" value="<?= $kodebooking ?>">
+                                                    <input type="hidden" name="bookingjkn" id="bookingjkn" value="<?= !empty($bookingjkn)?$bookingjkn:"" ?>">
+                                                    <input type="hidden" name="kodebooking" id="kodebooking" value="<?= !empty($kodebooking)?$kodebooking:"" ?>">
+                                                    <input type="hidden" name="antrian_poly" id="antrian_poly" value="<?= !empty($antrian_poly)?$antrian_poly:"" ?>">
                                                         <fieldset style="display: none;">
                                                             <legend>Data Pasien</legend>
-                                                            
                                                             <input type="hidden" name="provinsi" id="provinsi" value="<?= $nama_provinsi ?>">
                                                             <input type="hidden" name="kabupaten" id="kabupaten" value="<?= $nama_kab_kota ?>">
                                                             <input type="hidden" name="kecamatan" id="kecamatan" value="<?= $nama_kecamatan ?>">
@@ -479,7 +479,7 @@
                                                                         <select class="form-control input-sm select" name="id_cara_bayar" id="id_cara_bayar" onkeydown="enter_carabayar(event)">
                                                                             <option value=""></option>
                                                                             <?php foreach ($getCaraBayar->result_array() as $xCB) : ?>
-                                                                                <option value="<?php echo $xCB['idx'] ?>"><?php echo $xCB['cara_bayar'] ?></option>
+                                                                                <option value="<?php echo $xCB['idx'] ?>" <?= $id_cara_bayar==$xCB['idx'] ? "selected":"" ?>><?php echo $xCB['cara_bayar'] ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                         <input type="hidden" name="jkn" id='jkn' value='0'>
@@ -489,11 +489,11 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="form-group divRegCredit">
+                                                            <div class="form-group divRegCredit" <?php if($id_cara_bayar==2) echo "style='display:block;'"; else  echo "style='display:none;'";?>>
                                                                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">No Peserta (<em>No BPJS</em>)</label>
                                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group">
-                                                                        <input name="no_bpjs" id="no_bpjs" type="text" class="form-control input-sm" value="<?php echo $no_bpjs; ?>" onkeydown="enter_nobpjs(event)">
+                                                                        <input name="no_bpjs" id="no_bpjs" type="text" class="form-control input-sm" value="<?= $no_bpjs; ?>" onkeydown="enter_nobpjs(event)">
                                                                         <input type="hidden" name="status_peserta" id="status_peserta" value="">
                                                                         <span class="input-group-addon">
                                                                             <a id="btnUpdateNoBPJS" href="Javascript:updateNoBPJS()"><i class="fa fa-save"></i> Update</a>
@@ -505,7 +505,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="form-group" style="display: none;">
+                                                            <div class="form-group" <?php if($id_cara_bayar==2) echo "style='display:block;'"; else  echo "style='display:none;'";?>>
                                                                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">Jenis Peserta</label>
                                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group">
@@ -526,15 +526,66 @@
                                                                         <select class="form-control input-sm select" name="id_rujuk" id="id_rujuk">
                                                                             <option value=""></option>
                                                                             <?php foreach ($getRujukan->result_array() as $xR) : ?>
-                                                                                <option value="<?php echo $xR['idx'] ?>"><?php echo $xR['rujukan'] ?></option>
+                                                                                <option value="<?php echo $xR['idx'] ?>" <?= $id_rujuk==$xR['idx'] ?"selected":"" ?>><?php echo $xR['rujukan'] ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                         <!-- <input type="hidden" id="faskes" name='faskes' value="1"> -->
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div id="faskesperujuk"></div>
-                                                            <div class="form-group adarujukan">
+                                                            <div id="faskesperujuk">
+                                                                <?php 
+                                                                if($id_rujuk==8){
+                                                                    ?>
+                                                                    <div class="form-group" style="">
+                                                                    <label class="col-md-3 col-sm-3 col-xs-12 control-label">Faskes Perujuk<br></label>
+                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                        <div class="input-group">
+                                                                            <select class="form-control input-sm" name="faskes" id="faskes">
+                                                                                <option value="1">Faskes Tingkat 1</option>
+                                                                                <option value="2">Faskes Tingkat 2</option>
+                                                                            </select>
+                                                                            <span class="input-group-addon">
+                                                                                <input type="checkbox" value="1" name="jarkomdat" id="jarkomdat" onclick="cekJarkodat()" checked="">Jarkomdat
+                                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php
+                                                                }else if($id_rujuk==2){
+                                                                    ?>
+                                                                    <div class="form-group" style="">
+                                                                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Faskes Perujuk<br></label>
+                                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                            <div class="input-group">
+                                                                                <input type="hidden" name="faskes" id="faskes" value="1">
+                                                                                <input type="text" name="jenis_faskes" id="jenis_faskes" class="form-control input-sm" value="Faskes Tingkat 1" readonly="">
+                                                                                <span class="input-group-addon">
+                                                                                    <input type="checkbox" value="1" name="jarkomdat" id="jarkomdat" onclick="cekJarkodat()" checked="">Jarkomdat
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php
+                                                                }else if($id_rujuk==3){
+                                                                    ?>
+                                                                    <div class="form-group" style="">
+                                                                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Faskes Perujuk<br></label>
+                                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                                            <div class="input-group">
+                                                                                <input type="hidden" name="faskes" id="faskes" value="2">
+                                                                                <input type="text" name="jenis_faskes" id="jenis_faskes" class="form-control input-sm" value="Faskes Tingkat 2" readonly="">
+                                                                                <span class="input-group-addon">
+                                                                                    <input type="checkbox" value="1" name="jarkomdat" id="jarkomdat" onclick="cekJarkodat()" checked="">Jarkomdat
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                            <div class="form-group adarujukan" <?php if($id_rujuk>1) echo "style='display:block'"; else echo "style='display:none'"; ?>>
                                                                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">No Rujukan</label>
                                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group ">
@@ -549,7 +600,7 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div class="form-group kontrolulang">
+                                                            <div class="form-group kontrolulang" <?php if($id_rujuk==6) echo "style='display:block'"; else echo "style='display:none'"; ?>>
                                                                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">No Surat Kontrol</label>
                                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group ">
@@ -596,15 +647,18 @@
                                                                     <div class="input-group">
                                                                         <?php 
                                                                         // print_r($booking); 
-                                                                        if(!empty($booking)){
-                                                                            $id=getField('idx',array('grid_lama'=>$booking['grId']),'tbl01_ruang');
-                                                                            // echo "ID    ".$id;
-                                                                        }else $id="";
+                                                                        
+                                                                        if(empty($id)) {
+                                                                            if(!empty($booking)){
+                                                                                $id=getField('idx',array('grid_lama'=>$booking['grId']),'tbl01_ruang');
+                                                                                // echo "ID    ".$id;
+                                                                            }else $id="";
+                                                                        }
                                                                         ?>
                                                                         <select class="form-control input-sm select" name="id_ruang" id="id_ruang" onkeydown="enter_ruangan(event)" onchange="getDokter()">
                                                                             <option value=""></option>
                                                                             <?php foreach ($getPoli->result_array() as $xP) : ?>
-                                                                                <option value="<?php echo $xP['idx'] ?>" <?php if($xP['idx']==$id) echo "selected" ?>><?php echo $xP['ruang'] ?></option>
+                                                                                <option value="<?php echo $xP['idx'] ?>" <?php if($xP['idx']==$id) echo "selected" ?>><?php echo $xP['ruang']  ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                     </div>
@@ -620,7 +674,7 @@
                                                                             if(!empty($dokter)){
                                                                                 foreach ($dokter as $d ) {
                                                                                     ?>
-                                                                                    <option value="<?= $d->NRP ?>"><?= $d->pgwNama ?></option>
+                                                                                    <option value="<?= $d->NRP ?>" <?= $d->dokterjkn==$kodedokterjkn ? "selected":""?>><?= $d->pgwNama ?></option>
                                                                                     <?php
                                                                                 }
                                                                             }
@@ -693,6 +747,7 @@
                                                                 <input type="checkbox" name="status_tracert" id="status_tracert" value="0"> Sembunyikan Pada Tracert
                                                                 </div>
                                                             </div>
+                                                            <input type="hidden" name="erm" id="erm" value="<?= $erm ?>">
                                                             <!--div class="form-group divRegCredit">
                                                                 <div class="col-md-offset-4 col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group">
@@ -2057,8 +2112,15 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.adarujukan').hide();
-        $('.kontrolulang').hide()
+        var bookingjkn=$('#bookingjkn').val();
+        if(bookingjkn !=""){
+            $('#id_cara_bayar').val(2).trigger('change');
+            cekPeserta();
+        }else{
+            $('.adarujukan').hide();
+            $('.kontrolulang').hide()
+        }
+        
         var date = new Date();
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         var mask = "<?php echo KODERS_VC ?>9999V999999";
@@ -2256,6 +2318,7 @@
                 jammulai: $('#jammulai').val(),
                 jamselesai: $('#jamselesai').val(),
                 resource: $('#resource').val(),
+                erm: $('#erm').val(),
                 spm: $('#spm').val(),
                 nomr: $('#nomr').val(),
                 no_ktp: $('#no_ktp').val(),
@@ -2320,6 +2383,7 @@
                 kodepos_domisili: $('#kodepos_domisili').val(),
                 sdmrs: sdm,
                 icdkode: $('#kodeicd').val(),
+                antrian_poly: $('#antrian_poly').val(),
                 icd:$('#nama_icd').val(),
                 c19:c19,
                 status_tracert:status_tracert,
@@ -3460,6 +3524,13 @@
             }
             return true;
         });
+
+        var bookingjkn=$('#bookingjkn').val();
+        if(bookingjkn!=""){
+            $('#id_cara_bayar').trigger('change');
+            $('#id_rujuk').trigger('change');
+            // alert("Ok")
+        }
     });
 
     function searchRujukan() {

@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="input-group">
-                                <input type="date" class="form-control input-sm" name="tgl" id="tgl" placeholder="Tanggal" onchange="cari_pasien(0)" value="2023-02-24">
+                                <input type="date" class="form-control input-sm" name="tgl" id="tgl" placeholder="Tanggal" onchange="listBooking()" value="<?= date('Y-m-d') ?>">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default btn-sm"> <span class="fa fa-calendar"></span></button>
                                 </span>
