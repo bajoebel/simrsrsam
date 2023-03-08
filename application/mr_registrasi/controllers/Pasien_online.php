@@ -3,6 +3,7 @@ class Pasien_online extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('users_model');
+        $this->load->helper('http');
     }
     
     function index(){
@@ -13,9 +14,15 @@ class Pasien_online extends CI_Controller{
             $x['nav_sidebar'] = $this->load->view('template/nav_sidebar',$z,true);
             $y['contentTitle'] = "Pendaftaran Pasien Online Baru";
             $x['header']= $this->load->view('template/header','',true);
-            $this->onlineDB = $this->load->database('online', true);
-            
-            $y['poly']=$this->onlineDB->get('m_poli')->result();;
+            // $this->onlineDB = $this->load->database('online', true);
+            $url=WSMYRSAM."simrs/referensi/poli";
+            $res=httprequest("",$url,"","GET");
+            // echo $res;
+            // exit;
+            $arr=json_decode($res);
+            $y['poly']=(array) $arr->response;
+            // $y['bookingjkn']="";
+            // $y['poly']=$this->onlineDB->get('m_poli')->result();;
             $x['content'] = $this->load->view('registrasi/v_pendaftaranonline_baru',$y,true);
             $this->load->view('template/theme',$x);  
         }
@@ -79,79 +86,26 @@ class Pasien_online extends CI_Controller{
         $q=urlencode($this->input->get('q'));
         $filter=urlencode($this->input->get('filter'));
         
-        $this->onlineDB = $this->load->database('online', true);
+        // $this->onlineDB = $this->load->database('online', true);
         // $sql_online = "SELECT a.*,b.nama,c.grNama FROM t_online a 
 		// 	LEFT JOIN m_pasien b ON a.`nomr` = b.`nomr`
 		// 	LEFT JOIN m_poli c on a.`grId` = c.`grId`
 		// 	WHERE (DATE(a.`tgl_booking`) = '$tgl')
 		// 	ORDER BY a.`tgl_daftar` ASC";
-        if($filter=="lama"){
-            if(empty($poly)){
-                $data = $this->onlineDB->join('m_pasien b','a.`nomr` = b.`nomr`')
-                ->join('m_poli c','a.`grId` = c.`grId`','LEFT')
-                ->where("DATE(a.`tgl_booking`) >=",$dari)
-                ->where("DATE(a.`tgl_booking`) <=",$sampai)
-                ->group_start()
-                ->like('grNama',$q)
-                ->or_like('a.kode_booking',$q)
-                ->or_like('a.nomr',$q)
-                ->or_like('b.nama',$q)
-                ->group_end()
-                ->order_by('a.tgl_daftar')
-                ->get("t_online a")->result();
-            }else{
-                $data = $this->onlineDB->join('m_pasien b','a.`nomr` = b.`nomr`')
-                ->join('m_poli c','a.`grId` = c.`grId`','LEFT')
-                ->where("DATE(a.`tgl_booking`) >=",$dari)
-                ->where("DATE(a.`tgl_booking`) <=",$sampai)
-                ->where("a.`grId`",$poly)
-                ->group_start()
-                ->like('grNama',$q)
-                ->or_like('a.kode_booking',$q)
-                ->or_like('a.nomr',$q)
-                ->or_like('b.nama',$q)
-                ->group_end()
-                ->order_by('a.tgl_daftar')
-                ->get("t_online a")->result();
-            }
-            
-        }else{
-            // $sql_online = "SELECT a.*,b.grNama FROM m_pasien_baru a 
-			// LEFT JOIN m_poli b ON a.`grId` = b.`grId`
-			// WHERE (DATE(a.`tgl_booking`) = '$tgl')
-			// ORDER BY a.`tgl_daftar` ASC";
-            if(empty($poly)){
-                $data=$this->onlineDB->where("DATE(a.`tgl_booking`) >=",$dari)
-                ->where("DATE(a.`tgl_booking`) <=",$sampai)
-                ->join('m_poli b','a.`grId` = b.`grId`')
-                ->group_start()
-                    ->like('no_ktp',$q)
-                    ->or_like('nama',$q)
-                    ->or_like('tempat_lahir',$q)
-                    ->or_like('tgl_lahir',$q)
-                    ->or_like('pekerjaan',$q)
-                    ->or_like('grNama',$q)
-                ->group_end()
-                ->order_by('a.tgl_daftar')
-                ->get('m_pasien_baru a')->result();
-            }else{
-                $data=$this->onlineDB->where("DATE(a.`tgl_booking`) >=",$dari)
-                ->where("DATE(a.`tgl_booking`) <=",$sampai)
-                ->where("a.`grId`",$poly)
-                ->join('m_poli b','a.`grId` = b.`grId`')
-                ->group_start()
-                    ->like('no_ktp',$q)
-                    ->or_like('nama',$q)
-                    ->or_like('tempat_lahir',$q)
-                    ->or_like('tgl_lahir',$q)
-                    ->or_like('pekerjaan',$q)
-                    ->or_like('grNama',$q)
-                ->group_end()
-                ->order_by('a.tgl_daftar')
-                ->get('m_pasien_baru a')->result();
-            }
-        }
-        
+
+        $req=array(
+            'filter'=>$filter,
+            'dari'=>$dari,
+            'sampai'=>$sampai,
+            'q'=>$q,
+            'poly'=>$poly
+        );
+        $url=WSMYRSAM."simrs/booking";
+        $res=httprequest($req,$url,"","GET");
+        $arr=json_decode($res);
+        if($arr->metadata->code==200) $data=$arr->response;
+        else $data=array();
+
         // $list = $this->onlineDB->query("$sql_online")->result_array();
         header('Content-Type: application/json');
         echo json_encode($data);

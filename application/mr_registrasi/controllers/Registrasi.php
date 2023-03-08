@@ -219,11 +219,17 @@ class registrasi extends CI_Controller
                 $y['bookingjkn']=!empty($this->input->get('bookingjkn'))?$this->input->get('bookingjkn'):"";
                 if(!empty($kodebooking)){
                     $y['kodebooking']=$kodebooking;
-                    $this->onlineDB = $this->load->database('online', true);
-                    $y['booking']=$this->onlineDB->where('kode_booking',$kodebooking)
-                        ->join('m_poli b','a.`grId`=b.`grId`')
-                        ->join('m_dokter c','a.`id_dokter`=c.`id_dokter`')
-                        ->get('t_online a')->row_array();
+                    // $this->onlineDB = $this->load->database('online', true);
+                    // $y['booking']=$this->onlineDB->where('kode_booking',$kodebooking)
+                    //     ->join('m_poli b','a.`grId`=b.`grId`')
+                    //     ->join('m_dokter c','a.`id_dokter`=c.`id_dokter`')
+                    //     ->get('t_online a')->row_array();
+                    $url=WSMYRSAM."simrs/booking/kode/".$kodebooking."/lama";
+                    $res=httprequest("",$url,"","GET");
+                    $arr=json_decode($res);
+                    $y['booking']=(array) $arr->response;
+                    $y['bookingjkn']="";
+                    print_r($y['booking']); exit;
                     if(!empty($y['booking'])){
                         // $id="";
                         $id=getField('idx',array('grid_lama'=>$y['booking']['grId']),'tbl01_ruang');
@@ -630,13 +636,22 @@ class registrasi extends CI_Controller
                                         // Update booking
                                         $kode=$this->input->post('kodebooking');
                                         if(!empty($kode)){
-                                            $this->onlineDB = $this->load->database('online', true);
+                                            // $this->onlineDB = $this->load->database('online', true);
+                                            // $data = array(
+                                            //     'kode_booking' => $kode,
+                                            //     'verifikasi' => '1'
+                                            // );
+                                            // $this->onlineDB->where('kode_booking', $kode);
+                                            // $update = $this->onlineDB->update('t_online', $data);
                                             $data = array(
                                                 'kode_booking' => $kode,
-                                                'verifikasi' => '1'
+                                                'jnspasien'=>'lama',
+                                                'data'=>array(
+                                                    'verifikasi' => '1'
+                                                )
                                             );
-                                            $this->onlineDB->where('kode_booking', $kode);
-                                            $update = $this->onlineDB->update('t_online', $data);
+                                            $url=WSMYRSAM."simrs/booking";
+                                            $res=httprequest($data,$url,"","PUT");
                                         }
                                         
                                         $response['code'] = 200;

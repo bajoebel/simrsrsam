@@ -192,21 +192,16 @@ class pasien_baru extends CI_Controller {
             }else{
                 $kode=$this->input->get('kodebooking');
                 $bookingjkn=$this->input->get('bookingjkn');
-                $this->onlineDB = $this->load->database('online', true);
-                if(!empty($kode)) $y = $this->onlineDB->where('kode_booking',$kode)
-                    ->join('m_agama b','a.id_agama=b.id_agama')
-                    ->join('m_negara c','a.`id_negara`=c.`id_negara`')
-                    ->join('m_provinsi d','a.`id_provinsi`=d.`id_provinsi`')
-                    ->join('m_kab_kota e','a.`id_kab_kota`=e.`id_kab_kota`')
-                    ->join('m_kecamatan f','a.`id_kecamatan` = f.`id_kecamatan`')
-                    ->join('m_kelurahan g','a.`id_kelurahan`=g.`id_kelurahan`')
-                    ->join('m_etnis h','a.`id_etnis`=h.`id_etnis`')
-                    ->join('m_tk_pddkn i','a.`id_tk_pddkn`=i.`id_tk_pddkn`')
-                    ->join('m_bahasa j','a.`id_bahasa`=j.`id_bahasa`')
-                    ->join('m_dokter k','a.`id_dokter`=k.`id_dokter`')
-                    ->join('m_poli l','a.`grId`=l.`grId`')
-                    ->get('m_pasien_baru a')->row_array();
-                else{
+                
+                // $this->onlineDB = $this->load->database('online', true);
+                if(!empty($kode)) {
+                    $url=WSMYRSAM."simrs/booking/kode/".$kode."/baru";
+                    $res=httprequest("",$url,"","GET");
+                    $arr=json_decode($res);
+                    // print_r($arr);exit;
+                    $y=(array) $arr->response;
+                    $y['bookingjkn']="";
+                }else{
                     if(!empty($bookingjkn)){
                         $data=array(
                             "kodebooking"=>$bookingjkn
@@ -731,9 +726,9 @@ class pasien_baru extends CI_Controller {
                                     $cekQuery = $this->db->get(); 
                                     if($cekQuery->num_rows() > 0){
                                         // Insert Ke database pendaftaran online
-                                        $this->onlineDB = $this->load->database('online', true);
+                                        // $this->onlineDB = $this->load->database('online', true);
                                         
-                                        $cek=$this->onlineDB->where('nomr',$params['nomr'])->get('m_pasien')->row();
+                                        // $cek=$this->onlineDB->where('nomr',$params['nomr'])->get('m_pasien')->row();
                                         if(empty($cek)){
                                             $data = array(
                                                 'nomr' => $params['nomr'],
@@ -741,17 +736,24 @@ class pasien_baru extends CI_Controller {
                                                 'tgl_lahir' => $params['tgl_lahir'],
                                                 'alamat' => $params['alamat']
                                             );
-                                            $this->onlineDB->insert('m_pasien', $data);
+                                            $url=WSMYRSAM."simrs/pasien";
+                                            $res=httprequest($data,$url,"","POST");
+                                            // $this->onlineDB->insert('m_pasien', $data);
                                         }
                                         
                                         $kode = $this->input->post('kodebooking');
                                         if(!empty($kode)){
                                             $data = array(
                                                 'kode_booking' => $kode,
-                                                'verifikasi' => '1'
+                                                'jnspasien'=>'baru',
+                                                'data'=>array(
+                                                    'verifikasi' => '1'
+                                                )
                                             );
-                                            $this->onlineDB->where('kode_booking', $kode);
-                                            $update = $this->onlineDB->update('m_pasien_baru', $data);
+                                            $url=WSMYRSAM."simrs/booking";
+                                            $res=httprequest($data,$url,"","PUT");
+                                            // $this->onlineDB->where('kode_booking', $kode);
+                                            // $update = $this->onlineDB->update('m_pasien_baru', $data);
                                         }
                                         $bookingjkn=$this->input->post('bookingjkn');
                                         if(!empty($bookingjkn)){

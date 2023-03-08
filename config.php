@@ -145,7 +145,7 @@ defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
 defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
 defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://localhost/wsjkn/');
 // defined('WSMYRSAM') or define('WSMYRSAM', 'http://192.168.2.223/wsonline/');
-defined('WSMYRSAM') or define('WSMYRSAM', 'http://localhost/wsonline/');
+defined('WSMYRSAM') or define('WSMYRSAM', 'https://rsachmadmochtar.net/wsonline/');
 
 /**
  * Host Antrean Online
