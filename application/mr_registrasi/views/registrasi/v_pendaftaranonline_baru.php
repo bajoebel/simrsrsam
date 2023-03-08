@@ -63,8 +63,12 @@
                         </div>
                         <div class="col-md-2">
                             <div class="input-group">
+                                <label for="">
                                 <input type="radio" name="filter" value="lama" checked onclick="cari_pasien(0)">Pasien Lama
-                                <input type="radio" name="filter" value="baru" onclick="cari_pasien(0)">Pasien Baru
+                                </label>
+                                <label for="">
+                                    <input type="radio" name="filter" value="baru" onclick="cari_pasien(0)">Pasien Baru
+                                </label>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -340,8 +344,10 @@
             url: url,
             type: "GET",
             dataType: "json",
-            data: {
-                get_param: 'value'
+            data: {},
+            beforeSend: function() {
+                // setting a timeout
+                $('#getdata').html('<tr><td colspan=15>Loading...</td></tr>');
             },
             success: function(data) {
                 if(filter=="lama"){

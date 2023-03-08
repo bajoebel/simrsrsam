@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 .DS_Store
 application/erm/logs/*
 !application/erm/logs/index.html
+=======
+application/mr_registrasi/logs/*
+application/erm/logs/*
+.gitignore
+>>>>>>> 5681994ac8a6eab021b9b187d830636a0ab371ff
