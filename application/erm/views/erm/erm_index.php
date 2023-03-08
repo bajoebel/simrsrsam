@@ -603,6 +603,21 @@
                         case "1":
                             return "<span class='badge bg-green'>Aktif</badge>"
                             break;
+                        case "2":
+                            return "<span class='badge bg-green'>Ranap</badge>"
+                            break;
+                        case "3":
+                            return "<span class='badge bg-green'>Permintaan Pindah</badge>"
+                            break;
+                        case "4":
+                            return "<span class='badge bg-green'>Pindah Terconfirmasi</badge>"
+                            break;
+                        case "5":
+                            return "<span class='badge bg-blue'>Pulang</badge>"
+                            break;
+                        case "6":
+                            return "<span class='badge bg-red'>Batal</badge>"
+                            break;
                         default:
                             return "-"
                             break;
@@ -613,8 +628,8 @@
                         case "0":
                             return "<span class='badge bg-warning'>Diproses</span>"
                             break;
-                        case "2":
-                            return "<span class='badge bg-success'>Selesai</badge>"
+                        case "1":
+                            return "<span class='badge bg-green'>Selesai</badge>"
                             break;
                         default:
                             return "-"
@@ -623,7 +638,7 @@
                 }},
                 {"data": "view"}
             ],
-            order: [[3, 'desc']]
+            order: [[1, 'asc']]
         });
 
         $("#psearch").keypress(function(event){

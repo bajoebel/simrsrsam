@@ -71,3 +71,31 @@
     </table>
 <?php }?>
 
+<script>
+    $(document).ready(function () {
+        // insert data persetujuan umum
+        $("#form-data-persetujuan").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_setuju_umum",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $(":submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    $(":submit").attr("disabled", false);
+                    $('#form-data-persetujuan')[0].reset();
+                    getRiwayat(2, <?= $detail->idx ?>);
+                    // console.log(response);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        })
+    });
+</script>
+

@@ -543,6 +543,40 @@
         // tampil_awal();
         tampil_tabel();
 
+        // edukasi pasien
+        $("#form-data-edukasi-pasien").on("submit", function(e) {
+            e.preventDefault();
+            var data_form = $(this).serializeArray();
+            var idx = $("#idx_e").val()
+            // console.log(data_form);
+            // return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_edukasi_pasien",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $("#form-data-edukasi-pasien:submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    console.log(response)
+                    // localStorage.setItem("id_rj_iep_"+idx, response.id);
+                    // $("#id_rj_iep").val(localStorage.getItem("id_rj_iep_"+idx));
+                    // $("#form-data-edukasi-pasien").addClass("hide");
+                    // $("#form-data-edukasi-pasien-detail").removeClass("hide");
+                    swal("Success", "Data Berhasil Di Simpan", "success");
+                    // console.log(response);
+                    // $('#form-data-edukasi-pasien')[0].reset();
+                    // console.log(response);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(6, <?= $detail->idx ?>);
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        })
+
     });
 
     // function tampil_awal() {
@@ -644,6 +678,138 @@
             },
             error: function(e) {
                 // console.log(e.responseText)
+            }
+        });
+    }
+
+    function signEdukasiPasienDetail(id, user) {
+        // $("#modal-psw-e").modal("show")
+        // console.log(user)
+        // return false;
+        var x = prompt("Masukkan Password");
+        if (x != null && x != "") {
+            $.ajax({
+                type: "post",
+                url: base_url + "rajal/cekPin",
+                data: {
+                    x: x,
+                    user: user
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == true) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url + "rajal/sign_edukasi_pasien_detail",
+                            data: {
+                                id: id,
+                                user: user
+                            },
+                            dataType: "JSON",
+                            success: function(response) {
+                                tampil_tabel();
+                                console.log(response)
+                            },
+                            error: function(e) {
+                                console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        }
+    }
+
+    function signEdukasiPasienDetailSasaran(id) {
+
+    }
+
+    function hapusEdukasiPasien(idx, id) {
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_edukasi_pasien/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(6, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                    reloadPage()
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
+    }
+
+    function hapusEdukasiPasienDetail(id) {
+        var x = confirm("Yakin Ingin Hapus Data Detail");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_edukasi_pasien_detail/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        // getRiwayat(6, idx);
+                        tampil_tabel();
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
+    }
+
+    function editEdukasiPasien(idx, id, nomr) {
+        $.ajax({
+            type: "POST",
+            url: base_url + "rajal/edit_edukasi_pasien",
+            data: {
+                idx: idx,
+                id: id,
+                nomr: nomr
+            },
+            dataType: "JSON",
+            success: function(response) {
+                let data = response.data;
+                console.log(data.penerjemah)
+                $("#bahasa_e").val(data.bahasa.split(";")).trigger("change")
+                $("#terbatas_fisik_e").val(data.terbatas_fisik.split(";")).trigger("change")
+                $("#hambatan_e").val(data.hambatan.split(";")).trigger("change")
+                $("#metode_e").val(data.metode.split(";")).trigger("change")
+                $("#media_e").val(data.media.split(";")).trigger("change")
+                $("#kebutuhan_edukasi_e").val(data.kebutuhan_edukasi.split(";")).trigger("change")
+                $("#bahasa_lainnya").val(data.bahasa_lainnya)
+                $(`input[name='penerjemah_e'][value='${data.penerjemah}']`).prop("checked", true)
+                $(`input[name='kesediaan_e'][value='${data.kesediaan}']`).prop("checked", true)
+                $(`input[name='sasaran_edukasi_e'][value='${data.sasaran_edukasi}']`).prop("checked", true)
+                $("#pendidikan_e").val(data.pendidikan)
+                $("#agama_e").val(data.agama)
+                $("#kesediaan_alasan_e").val(data.kesediaan_alasan)
+                $("#kebutuhan_edukasi_lain_e").val(data.kebutuhan_edukasi_lain)
+                $("#keyakinan_e").val(data.keyakinan)
+                $("#hubungan_keluarga_e").val(data.hubungan_keluarga)
+
+            },
+            error: function(e) {
+                console.log(e)
             }
         });
     }

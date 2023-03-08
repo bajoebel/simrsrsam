@@ -80,6 +80,7 @@
                         <?php } else { ?>
 
                         <?php }?>
+                        <a href="#" class="btn btn-sm btn-warning riwayat-form-link" data-pil="riwayat_awal_medis" data-idx="<?=$detail->idx?>" data-nomr="<?=$detail->nomr?>">Gunakan Riwayat Sebelumnya</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -111,7 +112,7 @@
                     <h3 class="box-title">Form Input Perkembangan Pasien Terintegrasi</h3>
                     <div class="box-tools pull-right">
                         <?php if ($detail->status_erm!=1) { if (!$kp){?>
-                            <button type="button" class="btn btn-sm btn-success" onclick="tambahKembangPasien()">Tambah Data</button>
+                            <!-- <button type="button" class="btn btn-sm btn-success" onclick="tambahKembangPasien()">Tambah Data</button> -->
                         <?php } else { ?>
 
                         <?php }?>
@@ -189,14 +190,31 @@
                     <h3 class="box-title">Form Konsul Internal</h3>
                     <div class="box-tools pull-right">
 
-                        <?php if ($detail->status_erm!=1) {?>
-                            <button type="button" class="btn btn-sm btn-success" onclick="tambahKonsulInternal()">Tambah Data</button>
-                        <?php } ?>
                     </div>
                 </div>
                 <div id="ki_form">
                     <div class="box-body">
                         <?php $this->load->view("erm/rajal/konsul_internal/konsul_internal_form") ?>
+                    </div>
+                    <div class="box-footer">
+                        <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary simpan-konsul-internal'>Simpan</button>":"" ?>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="tab-pane <?= $ta[10] ?>" id="tab_10">
+        <form id='form-data-billing-tindakan' method="post" class="form-horizontal">
+            <div class="box box-success">
+                <div class="box-header ui-sortable-handle" style="cursor: move;">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">BIlling Tindakan</h3>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <div id="bt_form">
+                    <div class="box-body">
+                        <?php $this->load->view("erm/rajal/billing_tindakan/billing_tindakan_form") ?>
                     </div>
                     <div class="box-footer">
                         <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary simpan-konsul-internal'>Simpan</button>":"" ?>

@@ -201,7 +201,7 @@ $date = date("Y-m-d");
                                 <span>ANAMNESIS : </span><?=($k->auto==1)?"<span style='margin-left:3mm'>&#9745; Auto</span>":""?></span><?=($k->allo==1)?"<span style='margin-left:3mm'>&#9745; Allo</span>":""?></span><br>
                                 
                                 <?php if ($k->auto==1) { ?><div style="height:20mm">
-                                    Allo detail :<br/> <?=arr_to_list($k->auto_detail)?></br>
+                                    Auto detail :<br/> <?=arr_to_list($k->auto_detail)?></br>
                                 </div>
                                 <?php } ?>
                                 <?php if ($k->allo==1) { ?><div style="height:20mm">
@@ -295,17 +295,41 @@ $date = date("Y-m-d");
                             <td>
                                 <span>THERAPI / TINDAKAN : </span>
                                 <div><?= $k->terapi ?></div>
+                                <?php $tindakan = getPermintaanTindakan($d->idx);
+                                if ($tindakan) {
+                                ?>
+                                <table class="penunjang" >
+                                    <tr>
+                                        <td colspan="2">
+                                            PERMINTAAN TINDAKAN
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nama Tindakan</td>
+                                    </tr>
+                                    <?php 
+                                    $tindakan_detail =  getPermintaanTindakanDetailById($tindakan->id); 
+                                    foreach($tindakan_detail as $td) {
+                                    ?>
+                                    <tr>
+                                        <td><?= $td->tlTitle ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </table> 
+                                <?php } ?>
+                                </br>
                                 <?php $resep = getPermintaanResep($d->idx);
                                 if ($resep) {
                                 ?>
                                 <table class="penunjang" >
                                     <tr>
-                                        <td colspan="2">
+                                        <td colspan="3">
                                             PERMINTAAN RESEP
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Nama Obat</td>
+                                        <td>Jenis Obat</td>
                                         <td>Aturan Pakai</td>
                                     </tr>
                                     <?php 
@@ -314,6 +338,7 @@ $date = date("Y-m-d");
                                     ?>
                                     <tr>
                                         <td><?= $rd->nama_obat ?></td>
+                                        <td><?= $rd->jenis_obat. " - ".$rd->takaran ?></td>
                                         <td><?= $rd->aturan_pakai ?></td>
                                     </tr>
                                     <?php } ?>

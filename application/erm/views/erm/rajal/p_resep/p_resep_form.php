@@ -30,44 +30,67 @@ if (!$permintaan_resep) { ?>
                 <input type="hidden" name="id_ruanglama_pr" value="<?=$detail->id_ruanglama?>">
                 <input type="hidden" name="nama_ruang_pr" value="<?=$detail->nama_ruang?>">
                 <fieldset>
-                    <legend>Jenis Pemeriksaan</legend>  
-                    <div class="form-group" style="margin-bottom:20px !important">
-                        <label for="" class="col-sm-2 control-label">Pilihan Nama Obat</label>
-                            <?php $obat = getListObat()?>
-                        <div class="col-sm-10">
-                            <select name="obat_pr" id="obat_pr" class="form-control select-el" style="width:100%;">
-                                <option value="">==Pilih Obat==</option>
-                                <option value="nonlist">Tidak Ada Dalam List</option>
-                                <?php foreach($obat as $o) { ?>
-                                    <option value="<?= $o->KDBRG ?>"><?= $o->NMBRG ?></option>
-                                <?php } ?>
+                    <div class="form-group row" style="margin-bottom:20px !important">
+                        <label for="" class="col-md-2 control-label">Pilihan Nama Obat</label>
+                        <div class="col-md-10">
+                            <select name="obat_pr" id="obat_pr" class="form-control" style="width:100%;">
+                           
                             </select>
                         </div>
                     </div>
                     <hr>
                     <div id="pilihan_obat">
                         <input type="hidden" id="rj_p_resep_pr" name="rj_p_resep_pr">
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Nama Obat</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row">
+                            <label for="" class="col-md-2 control-label">Nama Obat</label>
+                            <div class="col-md-10">
                             <input type="text" name="nama_obat_pr" id="nama_obat_pr" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Nama Generik</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row">
+                            <label for="" class="col-md-2 control-label">Jenis Obat</label>
+                            <div class="col-md-4">
+                                <select type="text" name="jenis_obat_pr" id="jenis_obat_pr" class="form-control">
+                                    <option value="non racikan">Non Racikan</option>
+                                    <option value="racikan 1">Racikan 1</option>
+                                    <option value="racikan 2">Racikan 2</option>
+                                    <option value="racikan 3">Racikan 3</option>
+                                    <option value="racikan 4">Racikan 4</option>
+                                    <option value="racikan 5">Racikan 5</option>
+                                    <option value="racikan 6">Racikan 6</option>
+                                    <option value="racikan 6">Racikan 6</option>
+                                    <option value="racikan 7">Racikan 7</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select type="text" name="takaran_obat_pr" id="takaran_obat_pr" class="form-control">
+                                    <option value="">Pilih Takaran</option>
+                                    <option value="0.125">1/8 - 0.125</option>
+                                    <option value="0.25">2/8 - 0.25</option>
+                                    <option value="0.375">3/8 - 0.375</option>
+                                    <option value="0.5">4/8 - 0.5</option>
+                                    <option value="0.625">5/8 - 0.625</option>
+                                    <option value="0.75">6/8 - 0.75</option>
+                                    <option value="0.875">7/8 - 0.875</option>
+                                    <option value="1">1 - 1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-2 control-label">Nama Generik</label>
+                            <div class="col-md-10">
                             <input type="text" name="generik_pr" id="generik_pr" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Satuan</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row">
+                            <label for="" class="col-md-2 control-label">Satuan</label>
+                            <div class="col-md-10">
                             <input type="text" name="satuan_pr" id="satuan_pr" class="form-control" readonly>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Aturan Pakai</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row">
+                            <label for="" class="col-md-2 control-label">Aturan Pakai</label>
+                            <div class="col-md-10">
                                 <textarea name="aturan_pr" id="aturan_pr" class="form-control"></textarea>
                             </div>
                         </div>
@@ -93,6 +116,7 @@ if (!$permintaan_resep) { ?>
                     <td>Kode Obat</td>
                     <td>Nama Obat</td>
                     <td>Satuan</td>
+                    <td>Jenis Obat</td>
                     <td>Aturan Pakai</td>
                     <td>#</td>
                 </tr>
@@ -104,6 +128,7 @@ if (!$permintaan_resep) { ?>
                         <td><?= $prd->kode_obat ?></td>
                         <td><?= $prd->nama_obat ?></td>
                         <td><?= $prd->satuan ?></td>
+                        <td><?= $prd->jenis_obat." - ".$prd->takaran ?></td>
                         <td><?= $prd->aturan_pakai ?></td>
                         <td>
                             <?php if (!$permintaan_resep) { ?>
@@ -135,6 +160,7 @@ if (!$permintaan_resep) { ?>
                 <tr>
                     <td colspan="6">
                         <button type="button" class="btn btn-primary" data-idx="<?=$detail->idx?>"  id="permintaan-resep-batal-btn"><span class="fa fa-refresh"></span> Batalkan Pengajuan</button>
+                        <a href="<?= base_url("erm.php/rajal/resep/".$detail->idx)?>" target="_blank" type="button" class="btn btn-default" ><span class="fa fa-print"></span> Cetak Resep</a>
                     </td>
                 </tr>
                
@@ -146,13 +172,26 @@ if (!$permintaan_resep) { ?>
 
 <script>
     $(document).ready(function () {
-        $(".select-el").select2({
-           
-        }).on('select2:open',function(){
-            $('.select2-dropdown--above').attr('id','fix');
-            $('#fix').removeClass('select2-dropdown--above');
-            $('#fix').addClass('select2-dropdown--below');
-        });
+        $("#obat_pr").select2({
+            ajax: { 
+                url: base_url+"rajal/get_pilihan_obat",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        searchTerm: params.term // search term
+                    };
+                },
+                processResults: function (response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            },
+            placeholder : "Pilih Obat"
+        })
         $("#pilihan_obat").hide();
      
         $("#obat_pr").on("change",function(){
@@ -195,6 +234,8 @@ if (!$permintaan_resep) { ?>
             let kode_obat = $("#obat_pr").val();
             let satuan = $("#satuan_pr").val()
             let aturan_pakai = $("#aturan_pr").val()
+            let jenis_obat = $("#jenis_obat_pr").val()
+            let takaran = $("#takaran_obat_pr").val()
             if (nama_obat=="") {
                 swal("Pilih obat terlebih dahulu")
                 return false;
@@ -208,7 +249,9 @@ if (!$permintaan_resep) { ?>
                     nama_obat : nama_obat,
                     kode_obat : kode_obat,
                     satuan : satuan,
-                    aturan_pakai : aturan_pakai
+                    aturan_pakai : aturan_pakai,
+                    jenis_obat : jenis_obat,
+                    takaran : takaran
                 },
                 dataType: "JSON",
                 success: function (response) {
@@ -220,6 +263,7 @@ if (!$permintaan_resep) { ?>
                                 <td>${kode_obat}</td>
                                 <td>${nama_obat}</td>
                                 <td>${satuan}</td>
+                                <td>${jenis_obat} - ${takaran}</td>
                                 <td>${aturan_pakai}</td>
                                 <td><button type="button" class="btn btn-xs btn-danger" onclick="hapusObat('${response.id}')"><i class="fa fa-trash"></i></button></td>
                             </tr>
@@ -281,9 +325,13 @@ if (!$permintaan_resep) { ?>
             },
             dataType: "json",
             success: function (response) {
+                console.log(response)
                 if (response.status) {
                     $("#prd_"+id).hide(500)
                 }
+            },
+            error : function (e) {
+                console.log(e.responseText)
             }
         });
     }

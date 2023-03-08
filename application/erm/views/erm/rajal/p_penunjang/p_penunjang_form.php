@@ -209,15 +209,50 @@
                 <tr>
                     <td><input type="checkbox" name="tindakan_pp[]" value="${item}" checked></td>
                     <td>${itemText}</td>
-                     <td><button type="button" class="btn btn-xs btn-danger removeItem"><i class='fa fa-trash'></i></button></td>
+                    <td><button type="button" class="btn btn-xs btn-danger " onclick="$(this).parent().parent().remove()"><i class='fa fa-trash'></i></button></td>
                 </tr>`;
             }
             
             $("#detail_tindakan_pp").append(htmlItem);
         })
 
-        $(".removeItem").on("click",function() {
-            $(this).parent().remove();
+        // insert permintaan Penunjang
+        $("#form-permintaan-penunjang").on("submit", function(e) {
+            e.preventDefault();
+            let data_form = $(this).serializeArray();
+            var data_push = [{
+                    "name": "dpjp_text_pp",
+                    "value": $("#dpjp_pp :selected").text()
+                },
+                {
+                    "name": "pemeriksaan_text_pp",
+                    "value": $("#pemeriksaan_pp :selected").text()
+                }
+            ]
+            data_form = $.merge(data_form, data_push);
+            // console.log(data_form)
+            // return false;
+            $.ajax({
+                method: "POST",
+                url: base_url + "rajal/insert_permintaan_penunjang",
+                data: data_form,
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        swal({
+                            title: "Success",
+                            text: "Data berhasil ditambahkan",
+                            icon: "success",
+                        },function(){
+                            reloadPage();
+                        });
+                    }
+                 
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
         })
 
 
@@ -267,6 +302,43 @@
             } else {
                 swal("Permintaan Sudah Diproses bagian penunjang")
             }
+        }
+    }
+
+    function signPermintaanPenunjang(id, idx, user) {
+        $("#sign_id").val(id)
+        $("#sign_user").val(user)
+        $("#sign_password").val("");
+        $("#modal-sign-penunjang").modal("show")
+    }
+
+    function signPermintaanPenunjangAction() {
+        let id = $("#sign_id").val();
+        let password = $("#sign_password").val();
+        let user = $("#sign_user").val();
+        if (id) {
+            $.ajax({
+                url: base_url + "rajal/sign_permintaan_penunjang",
+                method: "post",
+                data: {
+                    id: id,
+                    password: password,
+                    user: user
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response)
+                    swal(response.msg)
+                    $("#modal-sign-penunjang").modal("hide")
+                    $("#sign_id").val("")
+                    $("#sign_user").val("")
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        } else {
+            alert("id kosong")
         }
     }
 </script>

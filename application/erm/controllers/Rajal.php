@@ -1038,6 +1038,9 @@ class Rajal extends CI_Controller
         } else if ($pil=="riwayat_awal_rawat") {
             $data["list"] = $this->rajal->getAwalRawatByNomr($nomr);
             $data['idx'] = $idx;
+        } else if ($pil=="riwayat_awal_medis") {
+            $data["list"] = $this->rajal->getAwalMedisByNomr($nomr);
+            $data['idx'] = $idx;
         }
 
         $this->load->view("erm/rajal/rajal_modal",$data);
@@ -1085,6 +1088,31 @@ class Rajal extends CI_Controller
         }
     }
 
+
+    public function resep($idx = "")
+    {
+
+        // form rm 0200 rev.01 surat masuk rawat jalan
+        
+        $p = $this->erm->getPendaftaran($idx);
+
+        if ($idx != "") {
+            $d = $this->erm->getPendaftaran($idx);
+            $p = $this->erm->getPasien($d->nomr);
+            $r = $this->rajal->getPermintaanResepByIdx($idx);
+            $rd = $this->rajal->getPermintaanResepDetailByIdx($idx);
+            $data = [
+                "status" => true,
+                "d" =>$d,
+                "p" => $p,
+                "r" => $r,
+                "rd" => $rd
+            ];
+            $this->load->view($this->folder . "/" . $this->subfolder . "/p_resep/p_resep_cetak", $data);
+        }
+
+    }
+
     public function get_resep() {
         $id = $this->input->post("id");
         $idx = $this->input->post("idx");
@@ -1110,6 +1138,8 @@ class Rajal extends CI_Controller
             "kode_obat" => $this->input->post("kode_obat"),
             "satuan" => $this->input->post("satuan"),
             "aturan_pakai" => $this->input->post("aturan_pakai"),
+            "jenis_obat" => $this->input->post("jenis_obat"),
+            "takaran" => $this->input->post("takaran"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
         ];
@@ -1126,9 +1156,9 @@ class Rajal extends CI_Controller
         $id = $this->input->post("id");
         $delete = $this->rajal->deleteObat($id);
         if ($delete) {
-            echo json_encode(["status"=>true]);
+            echo json_encode(["status"=>true,"id"=>$id]);
         } else {
-            echo json_encode(["status"=>false]);
+            echo json_encode(["status"=>false,"id"=>$id]);
         }
     }
 
@@ -1166,6 +1196,56 @@ class Rajal extends CI_Controller
         } else {
             echo json_encode(["status"=>false]);
         }
+    }
+
+    function insert_billing_tindakan() {
+        $data = [
+            "idx" => $this->input->post("idx_bi"),
+            "nomr" => $this->input->post("nomr_bi"),
+            "nama" => $this->input->post("nama_bi"),
+            "id_daftar" => $this->input->post("id_daftar_bi"),
+            "reg_unit" => $this->input->post("reg_unit_bi"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+        $id_billing = $this->input->post("id_bi");
+        $data_tindakan = $this->input->post("tindakan_bi");
+        if ($id_billing!="") {
+            $insert = $this->rajal->updateBillingTindakan($id_billing,$data_tindakan);
+        } else {
+            $insert = $this->rajal->insertBillingTindakan($data,$data_tindakan);
+        }
+
+        
+        if ($insert) {
+            echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+
+
+    public function get_pilihan_obat() {
+        $searchTerm = $this->input->post('searchTerm');
+        $obat = getListObat($searchTerm);
+        $result = [];
+        $result[] = [
+            "id" => "nonlist",
+            "text" => "Tidak Ada Dalam List"
+        ];
+        foreach ($obat as $o) {
+            $result[] = [
+                "id" => $o->KDBRG,
+                "text" => $o->NMBRG
+            ]; 
+        }
+        echo json_encode($result);
+    }
+
+    public function get_billing_tindakan_detail() {
+        $id = $this->input->post("id");
+        $data = getBillingTindakanId($id);
+        echo json_encode($data);
     }
 
 

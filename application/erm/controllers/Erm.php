@@ -100,6 +100,7 @@ class Erm extends CI_Controller
             $ep = $this->rajal->getEdukasiPasienByIdx($idx);
             $pp = $this->rajal->getPermintaanPenunjangByIdx($idx);
             $pr = $this->rajal->getPermintaanResepDetailByIdx($idx);
+            $bt = $this->rajal->getBillingTindakanByIdx($idx);
             if (!empty($detail)) {
                 if ($detail->jns_layanan == "PJ") $folder = 'penunjang';
                 else if ($detail->jns_layanan == "GD") $folder = 'igd';
@@ -137,7 +138,8 @@ class Erm extends CI_Controller
                 "am" => ($am)?$am->id:"",
                 "kp" => 0,
                 "pp" => $pp,
-                "pr" => $pr
+                "pr" => $pr,
+                "bt" => ($bt)?$bt->id:""
 
             );
 

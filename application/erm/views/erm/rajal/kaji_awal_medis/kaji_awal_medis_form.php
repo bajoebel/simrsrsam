@@ -169,22 +169,22 @@
         <b>Diagnosis Kerja</b>
         <div class="form-group row">
             <div class="col-md-12">
-                <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control"></textarea>
+                <textarea name="diagnosis_kerja_m" id="diagnosis_kerja_m" rows="5" class="form-control">-</textarea>
             </div>
         </div>
         <b>Diagnosis Banding</b>
         <div class="form-group row">
             <div class="col-md-12">
-                <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control"></textarea>
+                <textarea name="diagnosis_banding_m" id="diagnosis_banding_m" rows="5" class="form-control">-</textarea>
             </div>
         </div>
         <b>Pemeriksaan Penunjang</b>
         <div class="form-group row">
             <div class="col-md-12">
-                <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control"></textarea>
+                <textarea name="penunjang_m" id="penunjang_m" rows="5" class="form-control">-</textarea>
             </div>
         </div>
-        <b>Permintaan Pemeriksaan Penunjang</b> <a href="#tab_7" onclick="getRiwayat(7,<?= $d->idx ?>)" data-toggle="tab">Tambah Permintaan</a></br>
+        <b>Permintaan Pemeriksaan Penunjang</b> 
         <div class="form-group row">
             <div class="col-md-12">
                 <?php $penunjang_m = getPermintaanPenunjang($d->idx); 
@@ -221,18 +221,41 @@
                 <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control"></textarea>
             </div>
         </div>
-        <b>Permintaan THERAPI</b> <a href="#tab_8" onclick="getRiwayat(8,<?= $d->idx ?>)" data-toggle="tab">Tambah Permintaan</a></br>
+        <?php $tindakan = getPermintaanTindakan($d->idx);
+        if ($tindakan) {
+        ?>
+        <table class="table" >
+            <tr class="bg-green text-white">
+                <td colspan="2">
+                    PERMINTAAN TINDAKAN
+                </td>
+            </tr>
+            <tr class="bg-green text-white">
+                <td>Nama Tindakan</td>
+            </tr>
+            <?php 
+            $tindakan_detail =  getPermintaanTindakanDetailById($tindakan->id); 
+            foreach($tindakan_detail as $td) {
+            ?>
+            <tr>
+                <td><?= $td->tlTitle ?></td>
+            </tr>
+            <?php } ?>
+        </table> 
+        <?php } ?>
+        </br>
         <?php $resep = getPermintaanResep($d->idx);;
         if ($resep) {
         ?>
         <table class="table" >
             <tr class="bg-green text-white">
-                <td colspan="2">
+                <td colspan="3">
                     PERMINTAAN RESEP
                 </td>
             </tr>
             <tr class="bg-green text-white">
                 <td>Nama Obat</td>
+                <td>Jenis Obat</td>
                 <td>Aturan Pakai</td>
             </tr>
             <?php 
@@ -241,6 +264,7 @@
             ?>
             <tr>
                 <td><?= $rd->nama_obat ?></td>
+                <td><?= $rd->jenis_obat. " - ".$rd->takaran ?></td>
                 <td><?= $rd->aturan_pakai ?></td>
             </tr>
             <?php } ?>
@@ -304,12 +328,15 @@
 </div>
 <script>
     var idx = "<?= $detail->idx ?>";
-    var id_ruang = <?= $detail->id_ruang ?>;
+    var id_ruang = "<?= $detail->id_ruang ?>";
+    var id_table  = "<?= $am ?>";
 </script>
 <script>
     $(document).ready(function() {
         // $("[name='auto_detail_m'],[name='allo_detail_m']").wysihtml5();
         // $("#tgl_m").on("change")
+
+        $("#tampil_awal_medis").show();
 
         CKEDITOR.replace("diagnosis_kerja_m")
         CKEDITOR.replace("diagnosis_banding_m")
@@ -349,11 +376,13 @@
         $("[name='allo_m']").change(function() {
             if ($(this).is(":checked")) {
                 $("#allo_detail_m").select2({
-                    disabled : false
+                    disabled : false,
+                    tags : true
                 });
             } else {
                  $("#allo_detail_m").select2({
-                    disabled : true
+                    disabled : true,
+                    tags : true
                 });
             }
         });
@@ -391,23 +420,24 @@
             "mask": "99"
         });
 
-        $("#panduan_m").change(function (e) { 
+        $("#panduan_m").on("change",function (e) { 
             e.preventDefault();
             let kode = $(this).val();
-            if (kode=="") {
-                swal("Silahkan Pilih Panduan Terlebih Dahulu")
-                $("#tampil_awal_medis").hide();
-                return false;
-            }
-            $.ajax({
-                url: base_url+"rajal/get_panduan_klinik",
-                data: {
-                    kode : kode,
-                    idx : idx
-                },
-                method: "POST",
-                dataType: "json",
-                success: function (response) {
+            // if (kode=="") {
+            //     swal("Silahkan Pilih Panduan Terlebih Dahulu")
+            //     $("#tampil_awal_medis").hide();
+            //     return false;
+            // }
+            if (!id_table) {
+                $.ajax({
+                    url: base_url+"rajal/get_panduan_klinik",
+                    data: {
+                        kode : kode,
+                        idx : idx
+                    },
+                    method: "POST",
+                    dataType: "json",
+                    success: function (response) {
                     // console.log(response)
                     // if (response.status==true) {
                         let utama = response.utama;
@@ -440,11 +470,12 @@
                             $("#napas_m").val(rawat.ttv_rr);
                             $("#suhu_m").val(rawat.ttv_sh);
                         } 
-                        // else {
-                        //     swal("Belum Ada Kajian Keperawatan");
-                        // }
-                      
+                        else {
+                            swal("Belum Ada Kajian Keperawatan");
+                        }
+                    
                         $("#tampil_awal_medis").show();
+
                     // } 
                     // else {
                     //     swal("Referensi Tidak Ditemukan")
@@ -453,18 +484,308 @@
                     //     CKEDITOR.instances['diagnosis_banding_m'].setData("")
                     //     CKEDITOR.instances['penunjang_m'].setData("")
                     //     CKEDITOR.instances['terapi_m'].setData("")
-                    //     $("#fisik_detail_m").html("");
-                    //     $("#auto_detail_m").html("");
-                    //     $("#allo_detail_m").html("");
-                    // }
+                        //     $("#fisik_detail_m").html("");
+                        //     $("#auto_detail_m").html("");
+                        //     $("#allo_detail_m").html("");
+                        // }
+                    },
+                    error : function (e) {
+                        console.log(e)
+                    }
+                });
+            } else {
+                $("#tampil_awal_medis").show();
+            }
+           
+        });
+
+
+        // insert data kaji awal medis
+        $("#form-data-kaji-awal-medis").on("submit", function(e) {
+            e.preventDefault();
+            if ($("#td_m").val() == "") {
+                alert("TD wajib diisi");
+                return false;
+            }
+
+            if ($("#nadi_m").val() == "") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            if ($("#napas_m").val() == "") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            if ($("#suhu_m").val() == "") {
+                alert("Nadi wajib diisi");
+                return false;
+            }
+
+            var diagnosis_kerja = CKEDITOR.instances['diagnosis_kerja_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!diagnosis_kerja) {
+                alert("Diagnosis kerja wajib diisi");
+                return false;
+            }
+
+            var penunjang = CKEDITOR.instances['penunjang_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!penunjang) {
+                alert("Pemeriksaan penunjang wajib diisi");
+                return false;
+            }
+
+            var banding = CKEDITOR.instances['diagnosis_banding_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!banding) {
+                alert("Diagnosis Banding Wajib diisi");
+                return false;
+            }
+
+            var terapi = CKEDITOR.instances['terapi_m'].getData().replace(/<[^>]*>/gi, '').length;
+            if (!terapi) {
+                alert("Terapi dan tindakan wajib diisi");
+                return false;
+            }
+
+            if ($("#dokter_id_m").val() == "") {
+                alert("DPJP wajib diisi");
+                return false;
+            }
+
+            var data_form = $(this).serializeArray();
+            var data_push = [{
+                    name: "dokter_m",
+                    value: $("#dokter_id_m option:selected").text()
                 },
-                error : function (e) {
+                {
+                    name: "kontrol_tujuan_m",
+                    value: $("#kontrol_tujuan_id_m option:selected").text()
+                },
+                {
+                    name: "pj_nama_m",
+                    value: $("#pj_nama_m").val()
+                },
+                {
+                    name: "diagnosis_kerja_mt",
+                    value: CKEDITOR.instances.diagnosis_kerja_m.getData()
+                },
+                {
+                    name: "diagnosis_banding_mt",
+                    value: CKEDITOR.instances.diagnosis_banding_m.getData()
+                },
+                {
+                    name: "penunjang_mt",
+                    value: CKEDITOR.instances.penunjang_m.getData()
+                },
+                {
+                    name: "terapi_mt",
+                    value: CKEDITOR.instances.terapi_m.getData()
+                },
+            ];
+            data_form = $.merge(data_form, data_push)
+            // console.log($("#pj_nama_m").val())
+            // console.log(data_form);
+            // return false;
+            $.ajax({
+                type: "POST",
+                url: base_url + "/rajal/insert_kaji_awal_medis",
+                data: data_form,
+                dataType: "json",
+                beforeSend: function() {
+                    $(":submit").attr("disabled", true);
+                },
+                success: function(response) {
+                    // console.log(response)
+                    // return false;
+                    swal("Success", "Data Berhasil Di Simpan", "success");
+                    // $('#form-data-kaji-awal-medis')[0].reset();
+                    // console.log(response);
+                    $(":submit").attr("disabled", false);
+                    getRiwayat(4, <?= $detail->idx ?>);
+                    reloadPage();
+                },
+                error: function(e) {
                     console.log(e)
                 }
             });
-        });
-
+        })
     });
+
+    function editAwalMedis(idx, id, nomr,stat) {
+        $.ajax({
+            type: "POST",
+            url: base_url + "rajal/edit_awal_medis",
+            data: {
+                idx: idx,
+                id: id,
+                nomr: nomr
+            },
+            dataType: "JSON",
+            success: function(response) {
+                let data = response.data;
+                
+
+                $("#tampil_awal_medis").show()
+                $("#cppt_id_m").val(data.cppt_id)
+                $("#panduan_m").val(data.kode_m_pk).trigger("change");
+
+                if (stat!=1) {
+                    $("[name='hari_m']").val(data.hari)
+                    $("[name='tgl_m']").val(data.tgl)
+                    $("[name='jam_m']").val(data.jam)
+                    $("[name='dokter_id_m']").val(data.dokter_id).trigger("change")
+                }
+
+
+                $("[name='td_m']").val(data.td)
+                $("[name='nadi_m']").val(data.nadi)
+                $("[name='napas_m']").val(data.napas)
+                $("[name='suhu_m']").val(data.suhu)
+                // $("[name='fisik_detail_m']").text(data.fisik_detail)
+                $("[name='fisik_detail_m[]']").val(data.fisik_detail?.split(";")).trigger("change");
+                CKEDITOR.instances['diagnosis_kerja_m'].setData(data.diagnosis_kerja)
+                CKEDITOR.instances['diagnosis_banding_m'].setData(data.diagnosis_banding)
+                CKEDITOR.instances['penunjang_m'].setData(data.penunjang)
+                CKEDITOR.instances['terapi_m'].setData(data.terapi)
+                $("[name='kontrol_m']").val(data.kontrol)
+                $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
+                $("[name='kontrol_jam_m']").val(data.kontrol_jam)
+                $("[name='kontrol_tujuan_id_m']").val(data.kontrol_tujuan_id).trigger("change")
+                $("[name='pj_m']").val(data.pj)
+                $("[name='pj_detail_m']").val(data.pj_detail)
+                $("[name='pj_nama_m']").val(data.pj_nama)
+                if (data.auto) {
+                    let auto_detail = data.auto_detail?.split(";");
+                    if (Array.isArray(auto_detail)) {
+                        auto_detail.forEach((data)=>{
+                            if ($("[name='auto_detail_m[]']").find("option[value='" + data + "']").length) {
+                                $("[name='auto_detail_m[]']").val(data).trigger('change');
+                            } else { 
+                                var newOption = new Option(data, data, true, true);
+                                $("[name='auto_detail_m[]']").append(newOption).trigger('change');
+                            } 
+                        });
+                    }
+                   
+                    $("[name='auto_m']").prop("checked", true).trigger("change")
+                    $("[name='auto_detail_m[]']").val(auto_detail).trigger("change");
+                } else {
+                    $("[name='auto_m']").prop("checked", false).trigger("change")
+                    $("[name='auto_detail_m[]']").val(null).trigger("change");
+                }
+                if (data.allo) {
+                    let allo_detail = data.allo_detail?.split(";");
+                    if (Array.isArray(allo_detail)) {
+                        allo_detail.forEach((data)=>{
+                        // Set the value, creating a new option if necessary
+                            if ($("[name='allo_detail_m[]']").find("option[value='" + data + "']").length) {
+                                $("[name='allo_detail_m[]']").val(data).trigger('change');
+                            } else { 
+                                // Create a DOM Option and pre-select by default
+                                var newOption = new Option(data, data, true, true);
+                                // Append it to the select
+                                $("[name='allo_detail_m[]']").append(newOption).trigger('change');
+                            } 
+                        });
+                    }
+                    $("[name='allo_m']").prop("checked", true).trigger("change")
+                    $("[name='allo_detail_m[]']").val(allo_detail).trigger("change");
+                } else {
+                    $("[name='allo_m']").prop("checked", false).trigger("change")
+                    $("[name='allo_detail_m[]']").val(null).trigger("change");
+                }
+                if (data.kontrol) {
+                    $("[name='kontrol_m']").prop("checked", true).trigger("change")
+                    $("[name='kontrol_tanggal_m']").val(data.kontrol_tgl)
+                    $("[name='kontrol_jam_m']").val(data.kontrol_jam)
+                } else {
+                    $("[name='kontrol_m']").prop("checked", false).trigger("change")
+                }
+
+                swal("Silahkan Edit Data")
+                $("#modal-riwayat-form").modal("hide")
+                $("#am_form").removeClass("hide")
+                $("#am_preview").addClass("hide")
+            },
+            error: function(e) {
+                console.log(e)
+            }
+        });
+    }
+
+    function hapusAwalMedis(idx, id) {
+        var x = confirm("Yakin Ingin Hapus Data");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: base_url + `rajal/delete_kaji_awal_medis/${idx}/${id}`,
+                data: "data",
+                dataType: "json",
+                success: function(response) {
+                    if (response.status) {
+                        getRiwayat(4, idx);
+                        swal("Success", "Data Berhasil Di Hapus", "success");
+                    } else {
+                        swal("Failed", "Something Wrong", "error");
+                    }
+                    reloadPage();
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
+    }
+
+    function signAwalMedis(idx, id, nomr, dokter) {
+        var x = prompt("Masukkan Password");
+        if (x != null && x != "") {
+            $.ajax({
+                type: "post",
+                url: base_url + "rajal/cekPin",
+                data: {
+                    x: x,
+                    user: dokter
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.status == true) {
+                        $.ajax({
+                            type: "POST",
+                            url: base_url + "rajal/sign_awal_medis",
+                            data: {
+                                idx: idx,
+                                id: id,
+                                nomr: nomr,
+                                dokter: dokter
+                            },
+                            dataType: "JSON",
+                            success: function(response) {
+                                // console.log(response)
+                                swal("QRCODE berhasil di generate")
+                                reloadPage()
+                            },
+                            error: function(e) {
+                                console.log(e.responseText)
+                            }
+                        });
+                    } else {
+                        alert("Pin Salah...");
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        }
+
+    }
+
+    function tambahAwalMedis() {
+        $("#am_preview").addClass("hide")
+        $("#am_form").removeClass("hide")
+    }
+
 </script>
 <script>
    
