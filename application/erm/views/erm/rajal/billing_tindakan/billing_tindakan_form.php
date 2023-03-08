@@ -20,7 +20,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group row">
                 <label for="tindakan_dokter_id_bi" class="col-xs-3 control-label text-right">Pilihan Tindakan</label>
                 <div class="col-xs-9 col-md-6">
                     <select name="tindakan_dokter_id_bi" id="tindakan_dokter_id_bi" class="form-control select2" style="width:100%">
@@ -33,6 +33,22 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="tindakan_dokter_id_bi" class="col-xs-3 control-label text-right">Qty</label>
+                <div class="col-xs-9 col-md-1">
+                    <input type="number" step="any" name="qty_bi[]" class="form-control" value="1" min="0">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-1 col-md-offset-3">
+                    <button type="button" class="btn btn-primary" id="permintaan-billing-btn"><span id="icon_buatpermintaan" class="fa fa-save"></span> Simpan</button>
+                </div>
+            </div>
+            <input type="hidden" name="tlid_bi" id="tlid_bi" name="" value="<?= $gt->tlId?>">
+            <input type="hidden" name="title_bi" id="title_bi" name="" value="<?= $gt->tlTitle?>">
+            <input type="hidden" name="sarana_bi" id="sarana_bi" name="" value="<?= $gt->jasaSarana?>">
+            <input type="hidden" name="pelayanan_bi" id="pelayanan_bi" name="" value="<?= $gt->jasaPelayanan?>">
+            <input type="hidden" name="layanan_bi" id="layanan_bi" name="" value="<?= $gt->jasaPelayanan?>">
         </div>
     </div>
     <hr>
@@ -79,7 +95,6 @@
             let url = base_url + "rajal/insert_billing_tindakan";
             let data_form = $(this).serializeArray();
             const response = addBillingBi(data_form,url);
-            console.log(response)
             if (response.status) {
                 console.log(response.msg)
                 swal({
@@ -92,7 +107,7 @@
             }
         });
 
-        $("#tindakan_dokter_id_bi").on("change",function(){
+        $("#tindakan_dokter_id_bi_s").on("change",function(){
             let id = $(this).val();
             let text = $("#tindakan_dokter_id_bi :selected").text();
             let ppa = $("#dokter_id_bi :selected").text();
@@ -138,7 +153,7 @@
                 return JSON.parse(result);
             }
             catch (err) {
-                console.log(err)
+                return JSON.parse(err)
             }
            
         }
