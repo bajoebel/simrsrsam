@@ -1,0 +1,3 @@
+.DS_Store
+application/erm/logs/*
+!application/erm/logs/index.html

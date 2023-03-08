@@ -129,7 +129,6 @@
 </style>
 <section class="content-header">
     <h1><?php echo $contentTitle ?></h1>
-    <?php var_dump($this->session->userdata()); ?>
 </section>
 <?php if (!empty($detail)) { ?>
     <input type="hidden" name="jns_layanan" id="jns_layanan" value="<?= $detail->jns_layanan ?>">

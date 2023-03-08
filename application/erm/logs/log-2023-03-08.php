@@ -71,3 +71,25 @@ ERROR - 2023-03-08 09:28:19 --> Severity: Notice --> Undefined variable: gt C:\l
 ERROR - 2023-03-08 09:28:19 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 50
 ERROR - 2023-03-08 09:28:19 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
 ERROR - 2023-03-08 09:28:19 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 47
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Trying to get property 'tlId' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 47
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 48
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Trying to get property 'tlTitle' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 48
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 49
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Trying to get property 'jasaSarana' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 49
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 50
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 50
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
+ERROR - 2023-03-08 10:06:58 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 47
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Trying to get property 'tlId' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 47
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 48
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Trying to get property 'tlTitle' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 48
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 49
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Trying to get property 'jasaSarana' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 49
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 50
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 50
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Undefined variable: gt C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
+ERROR - 2023-03-08 10:09:20 --> Severity: Notice --> Trying to get property 'jasaPelayanan' of non-object C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\billing_tindakan\billing_tindakan_form.php 51
