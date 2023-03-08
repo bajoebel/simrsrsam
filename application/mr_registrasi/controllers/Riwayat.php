@@ -69,6 +69,25 @@ class riwayat extends CI_Controller
 
         }
     }
+    function dataexcel(){
+        $ses_state = $this->users_model->cek_session_id();
+        if ($ses_state) {
+            $dari=$this->input->get('dari');
+            $sampai=$this->input->get('sampai');
+            $jnslayanan=$this->input->get('jnslayanan');
+            $id_ruang=$this->input->get('id_ruang');
+            $jnspasien=$this->input->get('jnspasien');
+            $data=array(
+                'list'=>$this->Riwayat_model->getRegistrasiAll($dari,$sampai,$jnslayanan,$id_ruang,$jnspasien),
+                
+            );
+            $this->load->view("riwayat/kunjunganexcel",$data);
+            // header('Content-Type: application/json');
+            // echo json_encode($data);
+        }else{
+
+        }
+    }
     function cari_pasien()
     {
         $tglAwal = $_POST['tglAwal'];

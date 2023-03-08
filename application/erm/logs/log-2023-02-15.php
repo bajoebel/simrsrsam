@@ -33,4 +33,11 @@ ERROR - 2023-02-15 11:08:14 --> Severity: Notice --> Array to string conversion 
 =======
 ERROR - 2023-02-15 02:53:43 --> 404 Page Not Found: Antrian/entry_nota
 ERROR - 2023-02-15 02:54:37 --> 404 Page Not Found: Antrian/entry_nota
+<<<<<<< HEAD
+ERROR - 2023-02-15 03:01:36 --> 404 Page Not Found: Antrian/entry_nota
+ERROR - 2023-02-15 03:10:58 --> 404 Page Not Found: Antrian/entry_nota
+ERROR - 2023-02-15 03:28:45 --> 404 Page Not Found: Rsudpadangpanjanggoid/index
+ERROR - 2023-02-15 03:28:59 --> 404 Page Not Found: Rsudpadangpanjanggoid/index
+=======
 >>>>>>> ff6f0c07c6af997f574a5fb1e63eac980b8bb734
+>>>>>>> 0b7db22e2ba791f5b48c207b18fadddbb734c0e8

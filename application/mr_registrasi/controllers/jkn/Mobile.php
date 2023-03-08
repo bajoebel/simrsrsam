@@ -172,7 +172,7 @@ class Mobile extends CI_Controller{
                 //     'waktu'=>$sekarang
                 // );
                 // $this->db->insert('tbl02_task',$localtask);
-
+                    
                 $aktiftask=array('aktiftaskid'=>$this->input->post('taskid'));
                 $this->db->where('kodebooking',$this->input->post('kodebooking'));
                 $this->db->update('tbl02_antrian',$aktiftask);

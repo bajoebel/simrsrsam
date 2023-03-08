@@ -127,4 +127,11 @@ class Vclaim_model extends CI_Model{
         $this->db->where('noSep',$nosep);
         return $this->db->get('tbl02_sep_response')->row();
     }
+    function cekSepTerbit($nokartu){
+        $tgl=date('Y-m-d');
+        return $this->db->where("tglSep",$tgl)
+        ->where('noKartu',$nokartu)
+        ->get("tbl02_sep_response")
+        ->result();
+    }
 }

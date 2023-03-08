@@ -135,7 +135,7 @@
                                     $no++;
                                     ?>
                                     <tr>
-                                        <td></td>
+                                        <td><?= $no ?></td>
                                         <td><?= $p->kdpoli ?></td>
                                         <td><?= $p->nmpoli ?></td>
                                         <td><?= $p->kdsubspesialis ?></td>

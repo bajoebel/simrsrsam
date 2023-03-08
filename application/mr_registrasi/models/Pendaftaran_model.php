@@ -480,6 +480,9 @@ class Pendaftaran_model extends CI_Model
         $res= $this->db->get('tbl02_pendaftaran')->row();
         return $res->jml;
     }
+    function getPolyByJknKode($kodepoli){
+        return $this->db->where("kodejkn",$kodepoli)->get("tbl01_ruang")->row();
+    }
     // function getJadwal(){
 
     // }

@@ -75,138 +75,231 @@
                 <div class="box-header with-border">Pasien Baru</div>
 
                 <div class="box-body">
-
+                    <div id="statusantrian"></div>
                     <form id="form1" class="form-horizontal" role="form" onsubmit="return false">
                         <?php 
                             if(!empty($kode_booking)){
                                 ?>
-                            <div class="col-md-3">
-                                <div class="box box-primary">
-                                    <div class="box-body box-profile">
-                                        <img class="profile-user-img img-responsive img-circle" src="<?= base_url() ?>assets/images/male.png" alt="User profile picture">
-                                    
-                                        <h3 class="profile-username text-center"><?= $nama ?></h3>
+                                <div class="col-md-3">
+                                    <div class="box box-primary">
+                                        <div class="box-body box-profile">
+                                            <img class="profile-user-img img-responsive img-circle" src="<?= base_url() ?>assets/images/male.png" alt="User profile picture">
+                                        
+                                            <h3 class="profile-username text-center"><?= $nama ?></h3>
 
-                                        <p class="text-muted text-center"><?= $no_ktp ?></p>
-                                        <div class="nav-tabs-custom">
-                                            <ul class="nav nav-tabs">
-                                                <li class="active"><a title="Profile Peserta" href="#tab_11" data-toggle="tab" aria-expanded="true"><span class="fa fa-user"></span> Profile</a></li>
-                                                                        </ul>
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="tab_11">
-                                                    <table class="table">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td><b>Kode Booking</b></td>
-                                                            <td><?= $kode_booking ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>NIK</b></td>
-                                                            <td><?= $no_ktp?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>No BPJS</b></td>
-                                                            <td><?= $no_bpjs?></td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <td><b>Nama</b></td>
-                                                            <td><?= $nama ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>TTL</b></td>
-                                                            <td><?= $tempat_lahir ?> / <?= $tgl_lahir ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Agama</b></td>
-                                                            <td><?= $agama ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Suku</b></td>
-                                                            <td><?= $nama_etnis ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Bahasa</b></td>
-                                                            <td><?= $nama_bahasa ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Pendidikan</b></td>
-                                                            <td><?= $nama_tk_pddkn ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Alamat</b></td>
-                                                            <td>
-                                                                <?= $alamat ?>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Kelurahan</b></td>
-                                                            <td>
-                                                                <?= $nama_kelurahan ?>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Kecamatan</b></td>
-                                                            <td>
-                                                                <?= $nama_kecamatan ?>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Kab/ Kota</b></td>
-                                                            <td>
-                                                                <?= $nama_kab_kota ?>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Provinsi</b></td>
-                                                            <td>
-                                                                <?= $nama_provinsi ?>
-                                                            </td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <td><b>No Telp</b></td>
-                                                            <td><?= $no_telpon ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Penanggung Jawab</b></td>
-                                                            <td><?= $penanggung_jawab?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Umur Penanggung Jawab</b></td>
-                                                            <td><?= $umur_pj ?></td>
-                                                        </tr>
+                                            <p class="text-muted text-center"><?= $no_ktp ?></p>
+                                            <div class="nav-tabs-custom">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a title="Profile Peserta" href="#tab_11" data-toggle="tab" aria-expanded="true"><span class="fa fa-user"></span> Profile</a></li>
+                                                                            </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab_11">
+                                                        <table class="table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><b>Kode Booking</b></td>
+                                                                <td><?= $kode_booking ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>NIK</b></td>
+                                                                <td><?= $no_ktp?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>No BPJS</b></td>
+                                                                <td><?= $no_bpjs?></td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td><b>Nama</b></td>
+                                                                <td><?= $nama ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>TTL</b></td>
+                                                                <td><?= $tempat_lahir ?> / <?= $tgl_lahir ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Agama</b></td>
+                                                                <td><?= $agama ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Suku</b></td>
+                                                                <td><?= $nama_etnis ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Bahasa</b></td>
+                                                                <td><?= $nama_bahasa ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Pendidikan</b></td>
+                                                                <td><?= $nama_tk_pddkn ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Alamat</b></td>
+                                                                <td>
+                                                                    <?= $alamat ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kelurahan</b></td>
+                                                                <td>
+                                                                    <?= $nama_kelurahan ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kecamatan</b></td>
+                                                                <td>
+                                                                    <?= $nama_kecamatan ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kab/ Kota</b></td>
+                                                                <td>
+                                                                    <?= $nama_kab_kota ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Provinsi</b></td>
+                                                                <td>
+                                                                    <?= $nama_provinsi ?>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td><b>No Telp</b></td>
+                                                                <td><?= $no_telpon ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Penanggung Jawab</b></td>
+                                                                <td><?= $penanggung_jawab?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Umur Penanggung Jawab</b></td>
+                                                                <td><?= $umur_pj ?></td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <td><b>No Penanggung Jawab</b></td>
-                                                            <td><?= $no_penanggung_jawab ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Hub Keluarga</b></td>
-                                                            <td><?= $hub_keluarga ?></td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td><b>No Penanggung Jawab</b></td>
+                                                                <td><?= $no_penanggung_jawab ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Hub Keluarga</b></td>
+                                                                <td><?= $hub_keluarga ?></td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <td><b>Pekerjaan PJ</b></td>
-                                                            <td><?= $pekerjaan_pj ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Nama Dkter</b></td>
-                                                            <td><?= $nama_dokter ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><b>Ruang</b></td>
-                                                            <td><?= $grNama ?></td>
-                                                        </tr>
-                                                    </tbody></table>
+                                                            <tr>
+                                                                <td><b>Pekerjaan PJ</b></td>
+                                                                <td><?= $pekerjaan_pj ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Nama Dkter</b></td>
+                                                                <td><?= $nama_dokter ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Ruang</b></td>
+                                                                <td><?= $grNama ?></td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </div>
+                                                                                                <!-- /.tab-content -->
                                                 </div>
-                                                                                            <!-- /.tab-content -->
                                             </div>
                                         </div>
+                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
-                            </div>
+                                <?php
+                            }else if(!empty($jkn)){
+                                ?>
+                                <div class="col-md-3">
+                                    <div class="box box-primary">
+                                        <div class="box-body box-profile">
+                                            <img class="profile-user-img img-responsive img-circle" src="<?= base_url() ?>assets/images/male.png" alt="User profile picture">
+                                        
+                                            <h3 class="profile-username text-center"><?= $jkn->nama ?></h3>
+
+                                            <p class="text-muted text-center"><?= $jkn->nik ?></p>
+                                            <div class="nav-tabs-custom">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a title="Profile Peserta" href="#tab_11" data-toggle="tab" aria-expanded="true"><span class="fa fa-user"></span> Profile</a></li>
+                                                                            </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab_11">
+                                                        <table class="table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><b>Kode Booking</b></td>
+                                                                <td><?= $jkn->kodebooking ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>NIK</b></td>
+                                                                <td><?= $jkn->nik?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>No BPJS</b></td>
+                                                                <td><?= $jkn->nomorkartu?></td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td><b>Nama</b></td>
+                                                                <td><?= $jkn->nama ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>TTL</b></td>
+                                                                <td><?= $jkn->tanggallahir ?></td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td><b>Alamat</b></td>
+                                                                <td>
+                                                                    <?= $jkn->alamat ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>RT</b></td>
+                                                                <td>
+                                                                    <?= $jkn->rt ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>RW</b></td>
+                                                                <td>
+                                                                    <?= $jkn->rw ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kelurahan</b></td>
+                                                                <td>
+                                                                    <?= $jkn->namakel ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kecamatan</b></td>
+                                                                <td>
+                                                                    <?= $jkn->namakec ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Kab/ Kota</b></td>
+                                                                <td>
+                                                                    <?= $jkn->namadati2 ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Provinsi</b></td>
+                                                                <td>
+                                                                    <?= $jkn->namaprop ?>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody></table>
+                                                    </div>
+                                                                                                <!-- /.tab-content -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div>
                                 <?php
                             }
                             ?>
@@ -229,13 +322,14 @@
                                             <input type="text" class="form-control input-sm" name="no_ktp" id="no_ktp" value="<?php echo $no_ktp ?>" onkeydown="enter_noktp(event)">
                                             <input type="hidden" name="sekarang" id="sekarang" value="<?= date('Y-m-d') ?>">
                                             <input type="hidden" name="booking" id="booking" value="">
+                                            <input type="hidden" name="bookingjkn" id="bookingjkn" value="<?= $bookingjkn ?>">
                                                 <!-- <div class="input-group-btn">
                                                     <button type="button" id="pesertajkn" class="btn btn-primary" onclick="ceknikbpjs(1)">
                                                         <i class="fa fa-search"></i> Cari Peserta JKN
                                                     </button>
                                                 </div> -->
                                                 <span class="input-group-addon statusjkn" id="status">
-                                                <a id="cekStatus" href="Javascript:ceknikbpjs(1)"><i class="fa fa-search" id="iconCekStatus"></i> Cek</a>
+                                                <a id="cekStatus" href="Javascript:ceknikbpjs(1);"><i class="fa fa-search" id="iconCekStatus"></i> Cek</a>
                                                 </span>
                                         </div>
                                     </div>
@@ -304,8 +398,8 @@
                                             <option value="">Pilih Jenis Kelamin</option>
                                             <!-- <option value="4" <?=  ($jns_kelamin == "4") ? "checked='checked'" : "" ?>>Tidak Mengisi</option>
                                             <option value="0" <?=  ($jns_kelamin == "0") ? "checked='checked'" : "" ?>>Tidak Diketahui</option> -->
-                                            <option value="1" <?= ($jns_kelamin == "L" || $jns_kelamin == "1") ? "checked='checked'" : ""; ?>>Laki-Laki</option>
-                                            <option value="2" <?= ($jns_kelamin == "P" || $jns_kelamin == "2") ? "checked='checked'" : "" ?>>Perempuan</option>
+                                            <option value="1" <?= ($jns_kelamin == "L" || $jns_kelamin == "1") ? "selected" : ""; ?>>Laki-Laki</option>
+                                            <option value="2" <?= ($jns_kelamin == "P" || $jns_kelamin == "2") ? "selected" : "" ?>>Perempuan</option>
                                             <!-- <option value="3" <?=  ($jns_kelamin == "3") ? "checked='checked'" : "" ?>>Tidak Dapat Ditentukan</option> -->
                                         </select>
                                         <div class="text-error" id="err_jekel"></div>
@@ -688,6 +782,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-sm-3">&nbsp; </label>
+                                    <div class="col-sm-9">
+                                        <?php if(empty($erm)) $erm=0; ?>
+                                        <input type="checkbox" name="erm" id="erm" value="1" <?= $erm==1?"checked":"" ?>> <b>Menggunakan Rekam Medis Elektronik</b> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-sm-3">&nbsp;</label>
                                     <div class="col-sm-9">
                                     <div class="input-group">
@@ -858,10 +959,13 @@
         var jns_kelamin=$("#jns_kelamin").val();
         var hambatan_bahasa=$('#keterbatasanbahasa').prop('checked');
         if(hambatan_bahasa==true) hambatan_bahasa=1; else hambatan_bahasa=0;
+        var erm=$('#erm').prop('checked');
+        if(erm==true) erm=1; else erm=0;
         var formdata = {
             idx: $('#idx').val(),
             nomr: $('#nomr').val(),
             booking: $('#booking').val(),
+            bookingjkn: $('#bookingjkn').val(),
             kodebooking: $('#kodebooking').val(),
             no_ktp: $('#no_ktp').val(),
             no_bpjs: $('#no_bpjs').val(),
@@ -889,6 +993,7 @@
             no_telpon: $('#no_telpon').val(),
             no_hp: $('#no_hp').val(),
             nama_ibu_kandung: $('#nama_ibu_kandung').val(),
+            erm: erm,
             kewarganegaraan: kewarganegaraan,
             id_provinsi: id_provinsi,
             nama_provinsi: provinsi,
@@ -946,7 +1051,9 @@
                         tampilkanPesan('Peringatan',data.message,'info');
                         if (data.code == 200) {
                             var jns_layanan = "<?= $jns_layanan ?>";
-                            if (jns_layanan == 'rj') var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/daftar_rawat_jalan/' ?>' + data.nomr;
+                            var bookingjkn=$('#bookingjkn').val();
+                            if(bookingjkn!='') var hasbooking="?bookingjkn="+bookingjkn;else var hasbooking="";
+                            if (jns_layanan == 'rj') var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/daftar_rawat_jalan/' ?>' + data.nomr+hasbooking;
                             else if (jns_layanan == 'gd') var url = '<?php echo base_url() . 'mr_registrasi.php/registrasi/daftar_igd/' ?>' + data.nomr;
                             else var url = '<?php echo base_url() . 'mr_registrasi.php/pasien_baru/lihatDetail/' ?>' + data.nomr;
                             window.location.href = url;

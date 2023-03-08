@@ -159,6 +159,7 @@ function getDokter(){
 	});
 }
 
+
 function openJadwal(no,kodepoli){
     $('.baris').hide();
     $('#baris'+no).show();
@@ -291,6 +292,7 @@ function batalkanAntrean(){
 		}
 	});
 }
+
 function batalkanAntreanv2(){
 	var formData = {
 		kodebooking : $('#kodebookingv2').val(),

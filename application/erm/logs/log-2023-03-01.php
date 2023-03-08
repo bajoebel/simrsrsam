@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
+<<<<<<< HEAD
 ERROR - 2023-03-01 07:40:11 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-03-01 07:42:33 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-03-01 07:44:50 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
@@ -200,3 +201,12 @@ ERROR - 2023-03-01 15:30:15 --> Severity: Notice --> Array to string conversion 
 ERROR - 2023-03-01 15:30:58 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-03-01 15:32:10 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
 ERROR - 2023-03-01 15:47:38 --> Severity: Notice --> Array to string conversion C:\laragon\www\simrs_vclaim\application\erm\views\erm\rajal\kaji_awal_medis\kaji_awal_medis_form.php 113
+=======
+ERROR - 2023-03-01 11:15:37 --> Query error: Table 'simrs_erm.rj_konsul_internal' doesn't exist - Invalid query: SELECT `id`, `idx`, `id_daftar`, `reg_unit`, `created_at`, `nomr`, `nama`, `konsul_harap`, `unit_minta`, `dpjp_minta`, `status_form`
+FROM `rj_konsul_internal`
+WHERE DATE_FORMAT(`created_at`,'%Y-%m-%d') >= '2023-03-01'
+AND DATE_FORMAT(`created_at`,'%Y-%m-%d') <= '2023-03-01'
+AND `unit_diminta_id` = '3'
+ORDER BY `created_at` DESC
+ LIMIT 10
+>>>>>>> 2350da5a1b720f2fb33d141cbfb8961524dfafd5

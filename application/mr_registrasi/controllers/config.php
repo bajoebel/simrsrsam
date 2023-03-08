@@ -25,7 +25,7 @@ defined('LOGO')					or define('LOGO', $site_url . '/assets/images/logo.png');
 defined('REPORT_ADDRESS_1')     or define('REPORT_ADDRESS_1', 'Jl. Dr. A.Rivai No.1 Bukittinggi');
 defined('REPORT_ADDRESS_2')     or define('REPORT_ADDRESS_2', 'Telp : 0752-21720');
 defined('FAX')     				or define('FAX', 'Telp : 0752-21321');
-defined('FOOTER_APP')     		or define('FOOTER_APP', 'IT Developer &copy;' . date('Y'));
+defined('FOOTER_APP')     		or define('FOOTER_APP', 'IT Developer &copy; 2018');
 defined('FOOTER_RS')     		or define('FOOTER_RS', 'RSUD Dr. Achmad Mochtar');
 defined('VERSION_APP')     		or define('VERSION_APP', 'Version 1.0.1');
 defined('ALMT_SURAT')     		or define('ALMT_SURAT', 'Bukittinggi');
@@ -57,7 +57,7 @@ switch (ENVIRONMENT) {
 		// defined('SECREET_ID_VC')   	or define('SECREET_ID_VC', '5iO913C770');
 		// defined('KEY_VC')   		or define('KEY_VC', '56d8b4f7ac72b41102ac5800d73fe0fd');
 		// defined('STATUS_VC')   		or define('STATUS_VC', '1');
-
+		
 		// API BPJS Vclam 2.0 Production
 		defined('HOST_VC')     		or define('HOST_VC', 'https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/');
 		defined('CONS_ID_VC')   	or define('CONS_ID_VC', '20419');
@@ -70,8 +70,8 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3');
-		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3_prod');
+		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3_prod');	
 		break;
 	case 'production':
 		// API BPJS Vclam 2.0 DEVELOPMENT
@@ -88,7 +88,8 @@ switch (ENVIRONMENT) {
 		defined('PORT_HOST')   		or define('PORT_HOST', 3306);
 		defined('DB_USER')   		or define('DB_USER', 'root');
 		defined('DB_PASS')   		or define('DB_PASS', '');
-		defined('DB_NAME')   		or define('DB_NAME', 'rsam_dev');
+		defined('DB_NAME')   		or define('DB_NAME', 'rsam_mr_registrasi_v3_prod');
+		defined('DB_NAME_DEV')   	or define('DB_NAME_DEV', 'rsam_mr_registrasi_v3_prod');	
 		break;
 	default:
 		exit(1); // EXIT_ERROR
@@ -135,28 +136,8 @@ defined('PASW_SISRUTE') 		or define('PASW_SISRUTE', '');
 Nilai R Farmasi
 */
 define('NILAI_R',		'300');
-defined('SMART_STATUS')   	or define('SMART_STATUS', '0');
-defined('SMART_ID')   		or define('SMART_ID', '00001');
-defined('SMART_KEY')   		or define('SMART_KEY', 'RF3XS15QY15TPK91');
-defined('SMART_CALL_BACK')  or define('SMART_CALL_BACK', 'http://localhost/webservice/');
-
-defined('ONLINE_ID')   		or define('ONLINE_ID', '00001');
-defined('ONLINE_STATUS')   	or define('ONLINE_STATUS', '1');
-defined('ONLINE_KEY')   	or define('ONLINE_KEY', 'RF3XS15QY15TPK91');
-defined('ONLINE_CALL_BACK') or define('ONLINE_CALL_BACK', 'http://localhost/wsjkn/');
-// defined('WSMYRSAM') or define('WSMYRSAM', 'http://192.168.2.223/wsonline/');
-defined('WSMYRSAM') or define('WSMYRSAM', 'http://localhost/wsonline/');
-
-/**
- * Host Antrean Online
- */
-defined('HOST_JKN')     	or define('HOST_JKN', 'https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/');
-defined('CONS_ID_JKN')   	or define('CONS_ID_JKN', '16095');
-defined('SECREET_ID_JKN')   or define('SECREET_ID_JKN', '5iO913C770');
-defined('KEY_JKN')   		or define('KEY_JKN', '382ef0547906193cacb957f2b2e3e9d7');
-defined('STATUS_JKN')   	or define('STATUS_JKN', '1');
 defined('PRINT_TRACERT')   	or define('PRINT_TRACERT', '');
-
+defined('SMART_STATUS')   	or define('SMART_STATUS', '0');
 /*
 Database Elektronik Rekam Medis
 */
@@ -175,6 +156,12 @@ defined('DB_USER_SIMRSV2')   		or define('DB_USER_SIMRSV2', 'root');
 defined('DB_PASS_SIMRSV2')   		or define('DB_PASS_SIMRSV2', '');
 defined('DB_NAME_SIMRSV2')   		or define('DB_NAME_SIMRSV2', 'rsam_v2');
 
+defined('HOST_JKN')     	or define('HOST_JKN', 'https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev/');
+defined('CONS_ID_JKN')   	or define('CONS_ID_JKN', '16095');
+defined('SECREET_ID_JKN')   or define('SECREET_ID_JKN', '5iO913C770');
+defined('KEY_JKN')   		or define('KEY_JKN', '382ef0547906193cacb957f2b2e3e9d7');
+defined('STATUS_JKN')   	or define('STATUS_JKN', '0');
+defined('PRINT_TRACERT')   	or define('PRINT_TRACERT', '');
 /*
 Database FARMASI
 */
@@ -182,7 +169,7 @@ defined('DB_HOST_FARMASI')   		or define('DB_HOST_FARMASI', 'localhost');
 defined('PORT_HOST_FARMASI')   		or define('PORT_HOST_FARMASI', 3306);
 defined('DB_USER_FARMASI')   		or define('DB_USER_FARMASI', 'root');
 defined('DB_PASS_FARMASI')   		or define('DB_PASS_FARMASI', '');
-defined('DB_NAME_FARMASI')   		or define('DB_NAME_FARMASI', 'db_farmasi');
+defined('DB_NAME_FARMASI')   		or define('DB_NAME_FARMASI', 'db_farmasi_v20210104001');
 
 /*
 REST API ERM

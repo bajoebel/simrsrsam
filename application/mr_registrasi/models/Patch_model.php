@@ -92,7 +92,7 @@ class Patch_model extends CI_Model
             'Fri'=>'Jumat',
             'Sat'=>'Sabtu'
         );
-        return $this->db->select("jadwal_dokter_id as NRP, jadwal_dokter_nama as pgwNama")
+        return $this->db->select("jadwal_dokter_id as NRP,dokterjkn, jadwal_dokter_nama as pgwNama")
         ->where('jadwal_hari',$hari[$day])
         ->where('jadwal_poly_id',$idruang)
         ->get('tbl02_jadwal_dokter')->result();
@@ -172,7 +172,7 @@ class Patch_model extends CI_Model
         } else {
             $antrian_lokal = 0;
         }
-        //Bandingkan antrian online dengan antrian lokal
+        // Bandingkan antrian online dengan antrian lokal
         $antrian_baru = $antrian_lokal + 1;
         return $antrian_baru;
     }

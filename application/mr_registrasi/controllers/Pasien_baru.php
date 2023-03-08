@@ -10,6 +10,7 @@ class pasien_baru extends CI_Controller {
         $this->load->library('ajax_page');
         $this->load->model('users_model');
         $this->load->model('Smart_model');
+        $this->load->helper('http');
     }
 
     public function index(){      
@@ -187,24 +188,99 @@ class pasien_baru extends CI_Controller {
                 $y['jns_layanan'] = $this->input->get('jns');
                 $y['booking']=array();
                 $y['kodebooking']="";
+                $y['bookingjkn']="";
             }else{
                 $kode=$this->input->get('kodebooking');
+                $bookingjkn=$this->input->get('bookingjkn');
                 $this->onlineDB = $this->load->database('online', true);
                 if(!empty($kode)) $y = $this->onlineDB->where('kode_booking',$kode)
-                ->join('m_agama b','a.id_agama=b.id_agama')
-                ->join('m_negara c','a.`id_negara`=c.`id_negara`')
-                ->join('m_provinsi d','a.`id_provinsi`=d.`id_provinsi`')
-                ->join('m_kab_kota e','a.`id_kab_kota`=e.`id_kab_kota`')
-                ->join('m_kecamatan f','a.`id_kecamatan` = f.`id_kecamatan`')
-                ->join('m_kelurahan g','a.`id_kelurahan`=g.`id_kelurahan`')
-                ->join('m_etnis h','a.`id_etnis`=h.`id_etnis`')
-                ->join('m_tk_pddkn i','a.`id_tk_pddkn`=i.`id_tk_pddkn`')
-                ->join('m_bahasa j','a.`id_bahasa`=j.`id_bahasa`')
-                ->join('m_dokter k','a.`id_dokter`=k.`id_dokter`')
-                ->join('m_poli l','a.`grId`=l.`grId`')
-                ->get('m_pasien_baru a')->row_array();
+                    ->join('m_agama b','a.id_agama=b.id_agama')
+                    ->join('m_negara c','a.`id_negara`=c.`id_negara`')
+                    ->join('m_provinsi d','a.`id_provinsi`=d.`id_provinsi`')
+                    ->join('m_kab_kota e','a.`id_kab_kota`=e.`id_kab_kota`')
+                    ->join('m_kecamatan f','a.`id_kecamatan` = f.`id_kecamatan`')
+                    ->join('m_kelurahan g','a.`id_kelurahan`=g.`id_kelurahan`')
+                    ->join('m_etnis h','a.`id_etnis`=h.`id_etnis`')
+                    ->join('m_tk_pddkn i','a.`id_tk_pddkn`=i.`id_tk_pddkn`')
+                    ->join('m_bahasa j','a.`id_bahasa`=j.`id_bahasa`')
+                    ->join('m_dokter k','a.`id_dokter`=k.`id_dokter`')
+                    ->join('m_poli l','a.`grId`=l.`grId`')
+                    ->get('m_pasien_baru a')->row_array();
+                else{
+                    if(!empty($bookingjkn)){
+                        $data=array(
+                            "kodebooking"=>$bookingjkn
+                        );
+                        $res=httprequest($data, ONLINE_CALL_BACK."jkn/rsud/pasienbaru",$token="",$method="POST");
+                        // echo $res;exit;
+                        $arr=json_decode($res);
+                        if($arr->metadata->code==200){
+                            $sekarang=strtotime(date('Y-m-d H:i:s'))*1000;
+                            $req=array(
+                                'kodebooking'=>$bookingjkn,
+                                'taskid'=>1,
+                                'waktu'=>$sekarang
+                            );
+                            // print_r($req);exit;
+                            $response=jknrequest("antrean/updatewaktu",json_encode($req),"POST");
+                            // echo $response; exit;
+                            $y['jkn'] = $arr->response;
+                            $y['idx'] = "";
+                            $y['nomr'] = "";
+                            $y['bookingjkn'] = $bookingjkn;
+                            $y['nomr_lama'] = "";
+                            $y['no_ktp'] = $arr->response->nik;
+                            $y['nama'] = $arr->response->nama;
+                            $y['tempat_lahir'] = "";
+                            $y['tgl_lahir'] = $arr->response->tanggallahir;
+                            $y['jns_kelamin'] = ($arr->response->jeniskelamin=="L"?1:2);
+                            $y['pekerjaan'] = "";
+                            $y['agama'] = "";
+                            $y['suku'] = "";
+                            $y['bahasa'] = "";
+                            $y['no_telpon'] = "";
+                            $y['kewarganegaraan'] = "";
+                            $y['nama_negara'] = "";
+                            $y['nama_provinsi'] = "";
+                            $y['nama_kab_kota'] = "";
+                            $y['nama_kecamatan'] = "";
+                            $y['nama_kelurahan'] = "";
+                            $y['alamat'] = $arr->response->alamat;
+                            $y['status_kawin'] = "";
+                            $y['penanggung_jawab'] = "";
+                            $y['no_penanggung_jawab'] = "";
+                            $y['no_bpjs'] = $arr->response->nomorkartu;
+                            $y['rt'] = $arr->response->rt;
+                            $y['rw'] = $arr->response->rw;
+                            $y['status_kawin'] = "";
+                            $y['id_jenis_peserta'] = '';
+                            $y['jenis_peserta'] = '';
+                            $y['kodeppk'] = '';
+                            $y['namappk'] = '';
+                            $y['id_provinsi'] = "";
+                            $y['id_kab_kota'] = '';
+                            $y['id_kecamatan'] = '';
+                            $y['id_kelurahan'] = '';
+                            $y['id_tk_pddkn'] = '';
+                            $y['id_etnis'] = '';
+                            $y['id_bahasa'] = '';
+                            $y['hambatan_bahasa'] = '';
+                            $y['umur_pj'] = '';
+                            $y['pekerjaan_pj'] = '';
+                            $y['alamat_pj'] = '';
+                            $y['hub_keluarga'] = '';
+                            $y['tujuan_daftar'] = '';
+                            $y['kodebooking'] = '';
+                            $y['jns_layanan'] = $this->input->get('jns');
+                        }
+                        // header('Content-Type: application/json');
+                        // echo $res; exit;
+                    }
+                    
+                }
                 if(empty($y)){
                     $y['idx'] = "";
+                    $y['bookingjkn'] ="";
                     $y['nomr'] = "";
                     $y['nomr_lama'] = "";
                     $y['no_ktp'] = "";
@@ -276,7 +352,6 @@ class pasien_baru extends CI_Controller {
                     $y['kel'] = $query->result();
                     // print_r($y);exit;
                 }
-
                 $y['contentTitle'] = "Entry Pasien Baru";  
                 
 
@@ -308,7 +383,40 @@ class pasien_baru extends CI_Controller {
             window.location.href = '$url_login';</script>";
         }        
     }
-    
+    function cekantrian($param,$value){
+        $ses_state = $this->users_model->cek_session_id();
+        $idx = $this->uri->segment(3);
+        if($ses_state){
+            $antrian=$this->db->where($param,$value)->where('status_kirim',1)->where('tanggalperiksa',date('Y-m-d'))->get("jkn_antrean")->row();
+            // print_r($antrian); exit;
+            if(!empty($antrian)){
+                $sekarang=strtotime(date('Y-m-d H:i:s'))*1000;
+                $req=array(
+                    'kodebooking'=>$antrian->kodebooking,
+                    'taskid'=>2,
+                    'waktu'=>$sekarang
+                );
+                // print_r($req);exit;
+                $response=jknrequest("antrean/updatewaktu",json_encode($req),"POST");
+            }else{
+                $response=json_encode(array(
+                    'metadata'=>array(
+                        'code'=>201,
+                        'message'=>"Antrian yang dibooking tidak ditemukan"
+                    )
+                ));
+            }
+        }else{
+            $response=json_encode(array(
+                'metadata'=>array(
+                    'code'=>201,
+                    'message'=>"Session Expired"
+                )
+            ));
+        }
+        header('Content-Type: application/json');
+        echo $response;
+    }
     function simpan(){
         $ses_state = $this->users_model->cek_session_id();
         $this->load->model('patch_model');
@@ -601,6 +709,7 @@ class pasien_baru extends CI_Controller {
                         $params['jenis_peserta'] = trim($this->input->post('jenis_peserta',TRUE));
                         $params['kodeppk'] = trim($this->input->post('kodeppk',TRUE));
                         $params['namappk'] = trim($this->input->post('namappk',TRUE));
+                        $params['erm'] = trim($this->input->post('erm',TRUE));
                         $params['status_lengkap']=1;
                         $params['user_created'] = $this->session->userdata('get_uid');
                         $params['session_id'] = getSessionID();
@@ -632,23 +741,35 @@ class pasien_baru extends CI_Controller {
                                                 'tgl_lahir' => $params['tgl_lahir'],
                                                 'alamat' => $params['alamat']
                                             );
-                                            
                                             $this->onlineDB->insert('m_pasien', $data);
                                         }
                                         
                                         $kode = $this->input->post('kodebooking');
-                                            if(!empty($kode)){
-                                                $data = array(
-                                                    'kode_booking' => $kode,
-                                                    'verifikasi' => '1'
-                                                );
-                                                $this->onlineDB->where('kode_booking', $kode);
-                                                $update = $this->onlineDB->update('m_pasien_baru', $data);
-                                            }
+                                        if(!empty($kode)){
+                                            $data = array(
+                                                'kode_booking' => $kode,
+                                                'verifikasi' => '1'
+                                            );
+                                            $this->onlineDB->where('kode_booking', $kode);
+                                            $update = $this->onlineDB->update('m_pasien_baru', $data);
+                                        }
+                                        $bookingjkn=$this->input->post('bookingjkn');
+                                        if(!empty($bookingjkn)){
+                                            $sekarang=strtotime(date('Y-m-d H:i:s'))*1000;
+                                            $req=array(
+                                                'kodebooking'=>$bookingjkn,
+                                                'taskid'=>2,
+                                                'waktu'=>$sekarang
+                                            );
+                                            // print_r($req);exit;
+                                            $res=jknrequest("antrean/updatewaktu",json_encode($req),"POST");
+                                        }
+                                        
                                         $resPasien = $cekQuery->row_array();
                                         $response['code'] = 200;
                                         $response['message'] = "Simpan data sukses";
                                         $response['nomr'] = $resPasien['nomr']; 
+                                        $response['bookingjkn'] = $bookingjkn; 
                                     }else{
                                         $response['code'] = 202;
                                         $response['message'] = "Simpan data sukses namun cookies telah dihapus. Silahkan cari dan pilih pasien";

@@ -189,107 +189,119 @@ class Sep extends CI_Controller{
                 )
             )
         );
-        // headhuwtul;znnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-        date_default_timezone_set('UTC');
-        $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'))-SELISIH_WAKTU;
-        // Create Signature
-        $signature = hash_hmac('sha256', CONS_ID_VC."&".$tStamp, SECREET_ID_VC, true);
-        $encodedSignature = base64_encode($signature);
-        if(empty($tgl)) $tgl=date('Y-m-d');
-        $contentType = "application/x-www-form-urlencoded";
-        // Generate Header
-        $header = "";
-        $header .= "Content-Type: " . $contentType . "\r\n";
-        $header .= "X-cons-id: " . CONS_ID_VC . "\r\n";
-        $header .= "X-timestamp: " . $tStamp . "\r\n";
-        $header .= "X-signature: " . $encodedSignature ."\r\n";
-        $header .= "user_key: ".KEY_VC;
-        $res=$this->vclaim_model->postData('SEP/2.0/insert',$header,json_encode($req));
-        // echo $res; exit;
-        $arr=json_decode($res);
-        if($arr->metaData->code==200){
-            $lz=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$arr->response);
-            $data=json_decode(hasil($lz));
-            $localsep=array(
-                'catatan'=>$data->sep->catatan,
-                'diagnosa'=>$data->sep->diagnosa,
-                'jnsPelayanan'=>$data->sep->jnsPelayanan,
-                'kelasRawat'=>$data->sep->kelasRawat,
-                'noSep'=>$data->sep->noSep,
-                'penjamin'=>$data->sep->penjamin,
-                'asuransi'=>$data->sep->peserta->asuransi,
-                'hakKelas'=>$data->sep->peserta->hakKelas,
-                'jnsPeserta'=>$data->sep->peserta->jnsPeserta,
-                'kelamin'=>$data->sep->peserta->kelamin,
-                'nama'=>$data->sep->peserta->nama,
-                'noKartu'=>$data->sep->peserta->noKartu,
-                'noMr'=>$data->sep->peserta->noMr,
-                'tglLahir'=>$data->sep->peserta->tglLahir,
-                'Dinsos'=>$data->sep->informasi->dinsos,
-                'prolanisPRB'=>$data->sep->informasi->prolanisPRB,
-                'noSKTM'=>$data->sep->informasi->noSKTM,
-                'poli'=>$data->sep->poli,
-                'poliEksekutif'=>$data->sep->poliEksekutif,
-                'tglSep'=>$data->sep->tglSep,
-                'ppkPelayanan'=>$this->input->post('ppkPelayanan'),
-                'klsRawatHak'=>$this->input->post('klsRawatHak'),
-                'klsRawatNaik'=>$this->input->post('klsRawatNaik'),
-                'pembiayaan'=>$this->input->post('pembiayaan'),
-                'penanggungJawab'=>$this->input->post('penanggungjawab'),
-                'asalRujukan'=>$this->input->post('asalRujukan'),
-                'tglRujukan'=>$this->input->post('tglRujukan'),
-                'noRujukan'=>$this->input->post('noRujukan'),
-                'ppkRujukan'=>$this->input->post('ppkRujukan'),
-                'namaPpkRujukan'=>$this->input->post('namaPpkRujukan'),
-                'tujuan'=>$this->input->post('tujuan'),
-                'namaTujuan'=>$this->input->post('namaTujuan'),
-                'eksekutif'=>$eksekutif,
-                'cob'=>$cob,
-                'katarak'=>$katarak,
-                'lakaLantas'=>$laklantas,
-                'tglKejadian'=>$tglKejadian,
-                'keterangan'=>$keterangan,
-                'suplesi'=>$suplesi,
-                'noSepSuplesi'=>$noSepSuplesi,
-                'kdPropinsi'=>$kdPropinsi,
-                'kdKabupaten'=>$kdKabupaten,
-                'kdKecamatan'=>$kdKecamatan,
-                'tujuanKunj'=>$this->input->post('tujuanKunj'),
-                'flagProcedure'=>$this->input->post('flagProcedure'),
-                'kdPenunjang'=>$this->input->post('kdPenunjang'),
-                'assesmentPel'=>$this->input->post('assesmentPel'),
-                'noSurat'=>$this->input->post('noSurat'),
-                'kodeDPJP'=>$this->input->post('kodeDPJP'),
-                'namaDPJP'=>$this->input->post('namaDPJP'),
-                'dpjpLayan'=>$this->input->post('dpjpLayan'),
-                'namaDpjpLayan'=>$this->input->post('namaDpjpLayan'),
-                'noTelp'=>$this->input->post('noTelp'),
-                'user'=>$this->session->userdata('get_uid')
-            );
-            $this->db->insert('tbl02_sep_response',$localsep);
-            // Jika SEP DIbuat Setelah Pendaftaranmaka update no_jaminan pad tblpendaftaran
-            $idx=$this->input->post('idx');
-            if(!empty($idx)){
-                $update = array(
-                    'id_cara_bayar' => 2,
-                    'no_jaminan' => $data->sep->noSep,
-                    'no_rujuk'  => $this->input->post('noRujukan'),
+        $ceksepterbit=$this->vclaim_model->cekSepTerbit($this->input->post('noKartu'));
+        if(empty($ceksepterbit)){
+            date_default_timezone_set('UTC');
+            $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'))-SELISIH_WAKTU;
+            // Create Signature
+            $signature = hash_hmac('sha256', CONS_ID_VC."&".$tStamp, SECREET_ID_VC, true);
+            $encodedSignature = base64_encode($signature);
+            if(empty($tgl)) $tgl=date('Y-m-d');
+            $contentType = "application/x-www-form-urlencoded";
+            // Generate Header
+            $header = "";
+            $header .= "Content-Type: " . $contentType . "\r\n";
+            $header .= "X-cons-id: " . CONS_ID_VC . "\r\n";
+            $header .= "X-timestamp: " . $tStamp . "\r\n";
+            $header .= "X-signature: " . $encodedSignature ."\r\n";
+            $header .= "user_key: ".KEY_VC;
+            $res=$this->vclaim_model->postData('SEP/2.0/insert',$header,json_encode($req));
+            // echo $res; exit;
+            $arr=json_decode($res);
+            if($arr->metaData->code==200){
+                $lz=$this->vclaim_model->stringDecrypt(CONS_ID_VC.SECREET_ID_VC.$tStamp,$arr->response);
+                $data=json_decode(hasil($lz));
+                $localsep=array(
+                    'catatan'=>$data->sep->catatan,
+                    'diagnosa'=>$data->sep->diagnosa,
+                    'jnsPelayanan'=>$data->sep->jnsPelayanan,
+                    'kelasRawat'=>$data->sep->kelasRawat,
+                    'noSep'=>$data->sep->noSep,
+                    'penjamin'=>$data->sep->penjamin,
+                    'asuransi'=>$data->sep->peserta->asuransi,
+                    'hakKelas'=>$data->sep->peserta->hakKelas,
+                    'jnsPeserta'=>$data->sep->peserta->jnsPeserta,
+                    'kelamin'=>$data->sep->peserta->kelamin,
+                    'nama'=>$data->sep->peserta->nama,
+                    'noKartu'=>$data->sep->peserta->noKartu,
+                    'noMr'=>$data->sep->peserta->noMr,
+                    'tglLahir'=>$data->sep->peserta->tglLahir,
+                    'Dinsos'=>$data->sep->informasi->dinsos,
+                    'prolanisPRB'=>$data->sep->informasi->prolanisPRB,
+                    'noSKTM'=>$data->sep->informasi->noSKTM,
+                    'poli'=>$data->sep->poli,
+                    'poliEksekutif'=>$data->sep->poliEksekutif,
+                    'tglSep'=>$data->sep->tglSep,
+                    'ppkPelayanan'=>$this->input->post('ppkPelayanan'),
+                    'klsRawatHak'=>$this->input->post('klsRawatHak'),
+                    'klsRawatNaik'=>$this->input->post('klsRawatNaik'),
+                    'pembiayaan'=>$this->input->post('pembiayaan'),
+                    'penanggungJawab'=>$this->input->post('penanggungjawab'),
+                    'asalRujukan'=>$this->input->post('asalRujukan'),
+                    'tglRujukan'=>$this->input->post('tglRujukan'),
+                    'noRujukan'=>$this->input->post('noRujukan'),
+                    'ppkRujukan'=>$this->input->post('ppkRujukan'),
+                    'namaPpkRujukan'=>$this->input->post('namaPpkRujukan'),
+                    'tujuan'=>$this->input->post('tujuan'),
+                    'namaTujuan'=>$this->input->post('namaTujuan'),
+                    'eksekutif'=>$eksekutif,
+                    'cob'=>$cob,
+                    'katarak'=>$katarak,
+                    'lakaLantas'=>$laklantas,
+                    'tglKejadian'=>$tglKejadian,
+                    'keterangan'=>$keterangan,
+                    'suplesi'=>$suplesi,
+                    'noSepSuplesi'=>$noSepSuplesi,
+                    'kdPropinsi'=>$kdPropinsi,
+                    'kdKabupaten'=>$kdKabupaten,
+                    'kdKecamatan'=>$kdKecamatan,
+                    'tujuanKunj'=>$this->input->post('tujuanKunj'),
+                    'flagProcedure'=>$this->input->post('flagProcedure'),
+                    'kdPenunjang'=>$this->input->post('kdPenunjang'),
+                    'assesmentPel'=>$this->input->post('assesmentPel'),
+                    'noSurat'=>$this->input->post('noSurat'),
+                    'kodeDPJP'=>$this->input->post('kodeDPJP'),
+                    'namaDPJP'=>$this->input->post('namaDPJP'),
+                    'dpjpLayan'=>$this->input->post('dpjpLayan'),
+                    'namaDpjpLayan'=>$this->input->post('namaDpjpLayan'),
+                    'noTelp'=>$this->input->post('noTelp'),
+                    'user'=>$this->session->userdata('get_uid')
                 );
-                $this->db->where('idx', $idx);
-                $this->db->update('tbl02_pendaftaran', $update);
+                $this->db->insert('tbl02_sep_response',$localsep);
+                // Jika SEP DIbuat Setelah Pendaftaranmaka update no_jaminan pad tblpendaftaran
+                $idx=$this->input->post('idx');
+                if(!empty($idx)){
+                    $update = array(
+                        'id_cara_bayar' => 2,
+                        'no_jaminan' => $data->sep->noSep,
+                        'no_rujuk'  => $this->input->post('noRujukan'),
+                    );
+                    $this->db->where('idx', $idx);
+                    $this->db->update('tbl02_pendaftaran', $update);
+                }
+                
+                $res=json_encode(array('metaData'=>$arr->metaData,'response'=>$data));
+            }else{
+                $response=array(
+                    'metaData'=>array(
+                        'code'=>$arr->metaData->code,
+                        'message'=>$arr->metaData->message
+                    ),
+                    'request'=>$req,
+                );
+                $res=json_encode($response);
             }
-            
-            $res=json_encode(array('metaData'=>$arr->metaData,'response'=>$data));
         }else{
-            $response=array(
-                'metaData'=>array(
-                    'code'=>$arr->metaData->code,
-                    'message'=>$arr->metaData->message
-                ),
-                'request'=>$req,
+            $res=json_encode(
+                array(
+                    'metaData'=>array(
+                        'code'=>201,
+                        'message'=>"Sudah ada Sep Yang Terbit Hari ini" 
+                    )
+                )
             );
-            $res=json_encode($response);
         }
+        
         header('Content-Type: application/json');
         echo $res;
         // header('Content-Type: application/json');

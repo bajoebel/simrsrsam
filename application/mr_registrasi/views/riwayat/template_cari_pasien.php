@@ -38,6 +38,9 @@
             <div class="box box-success">
                 <div class="box-header with-border">
                     Filter
+                    <div class="box-tools">
+                        <button class="btn btn-success btn-sm" type="button" onclick="downloadExcel()">Download</button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <form id="form1" class="form-horizontal" onsubmit="return false" method="POST">
@@ -129,7 +132,6 @@
                                             <th style="width: 60px">No MR</th>
                                             <th>Nama Pasien</th>
                                             <th style="width: 80px">No Reg RS</th>
-                                            <!-- <th style="width: 120px">No Reg Unit</th> -->
                                             <th style="width: 100px">Tgl Registrasi</th>
                                             <th>Tujuan</th>
                                             <th>DPJP</th>
@@ -285,6 +287,16 @@ $(document).ready(function () {
         //}
     }); 
 });  
+
+function downloadExcel(){
+    var dari = $('#tglAwal').val();
+    var sampai = $('#tglAkhir').val();
+    var jnslayanan = $('#jns_layanan').val();
+    var id_ruang = $('#id_ruang').val();
+    var jnspasien = $('#jns_pasien').val();
+    var url="<?php echo base_url().'mr_registrasi.php/riwayat/dataexcel?dari=' ?>"+dari+"&sampai="+sampai+"&jnslayanan="+jnslayanan+"&id_ruang="+id_ruang+"&jnspasien="+jnspasien
+    window.open(url);
+}
 function getPasien(page="1"){
     var param={
         limit : $('#limit').val(),

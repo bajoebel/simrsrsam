@@ -332,8 +332,7 @@
                         </div>
                         <div id="menu1" class="tab-pane fade">
                             <?php 
-                            $dokumenpasien=cekPersetujuan($idx);
-                            $edukasi=cekEdukasi($idx);
+                            
                             if(empty($rujukanonline)){
                                 ?>
                                 <br>
@@ -797,6 +796,11 @@
                         </div>
                         <div id="menu3" class="tab-pane fade in" >
                             <br>
+                            <?php 
+                            $dokumenpasien=cekPersetujuan($idx);
+                            $edukasi=cekEdukasi($idx);
+                            // print_r($edukasi);
+                            ?>
                             <div class="sorcutdokumen">
                                 <div class="col-md-3 text-center">
                                     <a href="#" onclick="priviewSuratMasukRajal('<?= $idx ?>')">
@@ -832,7 +836,7 @@
                             <div class="">
                             <hr>
                                 <div class="col-md-6 text-center">
-                                    <button class="btn btn-primary btn-block" id="btnSignPetugas" type="button" onclick="signPetugas()" disabled>Sign</button>
+                                    <button class="btn btn-primary btn-block" id="btnSignPetugas" type="button" disabled onclick="signPetugas()">Sign</button>
                                 </div>
                                 <div class="col-md-6 text-center"  id="cetakgc">
                                 <a href="<?= base_url() ."mr_registrasi.php/registrasi/persetujuan_umum/".$idx?>" class="btn btn-warning btn-block btn-sm" target="_blank"><span class="fa fa-print"></span> Tanda Tangan Pasien</a>
@@ -2062,6 +2066,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="input-group">
+                        <!-- $dokumenpasien=cekPersetujuan($idx);
+                            $edukasi=cekEdukasi($idx); -->
                             <input type="hidden" name="idx_pendaftaran" id="idx_pendaftaran" value="<?= $idx ?>">
                             <input type="hidden" name="id_persetujuan" id="id_persetujuan" value="">
                             <input type="hidden" name="id_edukasi" id="id_edukasi" value="">
