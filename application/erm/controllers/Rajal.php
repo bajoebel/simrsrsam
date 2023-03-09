@@ -263,7 +263,7 @@ class Rajal extends CI_Controller
             "perawat_id" => $this->input->post("perawat_id_ka"),
             "perawat" => $this->input->post("perawat_ka"),
             "status" => 0,
-            "cppt_id" => $this->input->post("cppt_id_m"),
+            "cppt_id" => $this->input->post("cppt_id_ka"),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s"),
             "user_daftar" => $this->input->post("user_daftar_ka")
@@ -673,6 +673,21 @@ class Rajal extends CI_Controller
         }
     }
 
+    public function kembang_pasien_all($idx, $nomr) {
+         // data pendaftaran
+         $d = $this->erm->getPendaftaran($idx);
+         // data pasien
+         $p = $this->erm->getPasien($nomr);
+         // kaji awal data
+         $k = $this->rajal->getKembangPasienAll($nomr, $idx);
+         $data = [
+             "d" => $d,
+             "p" => $p,
+             "k" => $k
+         ];
+         $this->load->view($this->folder . "/" . $this->subfolder . "/kembang_pasien/kembang_pasien_cetak", $data);
+    }
+
     public function insert_kembang_pasien()
     {
 
@@ -902,6 +917,9 @@ class Rajal extends CI_Controller
             "updated_at" => date("Y-m-d h:i:s"),
         ];
         $insert = $this->rajal->insertPermintaanPenunjang($data);
+        if ($insert) {
+            $this->rajal->updateCpptMedis($data['idx']);
+        }
         echo json_encode(["status"=>$insert,"post"=>$data]);
     }
 
@@ -910,6 +928,7 @@ class Rajal extends CI_Controller
         $idx = $this->input->post("idx");
         $delete = $this->rajal->deletePermintaanPenunjang($idx, $id);
         if ($delete) {
+            $this->rajal->updateCpptMedis($idx);
             echo json_encode(["status" => true]);
         } else {
             echo json_encode(["status" => false]);
@@ -1181,6 +1200,7 @@ class Rajal extends CI_Controller
         $update = $this->rajal->ajukanPermintaanResep($data);
         
         if ($update) {
+            $this->rajal->updateCpptMedis($data["idx"]);
             echo json_encode(["status"=>true,"data"=>$update]);
         } else {
             echo json_encode(["status"=>false]);
@@ -1197,33 +1217,6 @@ class Rajal extends CI_Controller
             echo json_encode(["status"=>false]);
         }
     }
-
-    function insert_billing_tindakan() {
-        $data = [
-            "idx" => $this->input->post("idx_bi"),
-            "nomr" => $this->input->post("nomr_bi"),
-            "nama" => $this->input->post("nama_bi"),
-            "id_daftar" => $this->input->post("id_daftar_bi"),
-            "reg_unit" => $this->input->post("reg_unit_bi"),
-            "created_at" => date("Y-m-d h:i:s"),
-            "updated_at" => date("Y-m-d h:i:s"),
-        ];
-        $id_billing = $this->input->post("id_bi");
-        $data_tindakan = $this->input->post("tindakan_bi");
-        if ($id_billing!="") {
-            $insert = $this->rajal->updateBillingTindakan($id_billing,$data_tindakan);
-        } else {
-            $insert = $this->rajal->insertBillingTindakan($data,$data_tindakan);
-        }
-
-        
-        if ($insert) {
-            echo json_encode(["status"=>true]);
-        } else {
-            echo json_encode(["status"=>false]);
-        }
-    }
-
 
     public function get_pilihan_obat() {
         $searchTerm = $this->input->post('searchTerm');
@@ -1248,5 +1241,52 @@ class Rajal extends CI_Controller
         echo json_encode($data);
     }
 
+    public function insert_billing_tindakan_detail() {
+        $id_billing = $this->input->post("id");
+        $data = [
+            "reg_unit" => $this->input->post("reg_unit"),
+            "id_daftar" => $this->input->post("id_daftar"),
+            "nomr" => $this->input->post("nomr"),
+            "nama" => $this->input->post("nama"),
+            "idx" => $this->input->post("idx"),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+        $data_tindakan = [
+            "idx" => $this->input->post("idx"),
+            "tlId" => $this->input->post("tlId"),
+            "tlTitle" => $this->input->post("tlTitle"),
+            "jasaSarana" => $this->input->post("jasaSarana"),
+            "jasaPelayanan" => $this->input->post("jasaPelayanan"),
+            "tarifLayanan" => $this->input->post("tarifLayanan"),
+            "qty" => $this->input->post("qty"),
+            "grNama" => $this->input->post("grNama"),
+            "ppa_id" => $this->input->post("ppa_id"),
+            "ppa_name" => $this->input->post("ppa_name"),
+        ];
+        if ($id_billing!="") {
+            $insert = $this->rajal->updateBillingTindakan($id_billing,$data_tindakan);
+        } else {
+            $insert = $this->rajal->insertBillingTindakan($data,$data_tindakan);
+        }
+
+        
+        if ($insert) {
+            $this->rajal->updateCpptMedis($data_tindakan['idx']);
+            echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
+    
+    public function delete_billing_tindakan_detail() {
+        $id = $this->input->post("id");
+        $delete = $this->rajal->deleteBillingTindakanDetail($id); 
+        if ($delete) {
+            echo json_encode(["status"=>true]);
+        } else {
+            echo json_encode(["status"=>false]);
+        }
+    }
 
 }

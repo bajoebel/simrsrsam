@@ -111,6 +111,7 @@
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Form Input Perkembangan Pasien Terintegrasi</h3>
                     <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-sm btn-warning" data-idx="<?=$detail->idx?>" data-nomr="<?=$detail->nomr?>" onclick="tampilKembangPasienAll(this.getAttribute('data-idx'),this.getAttribute('data-nomr'))">Tampil CPPT Keseluruhan</button>
                         <?php if ($detail->status_erm!=1) { if (!$kp){?>
                             <!-- <button type="button" class="btn btn-sm btn-success" onclick="tambahKembangPasien()">Tambah Data</button> -->
                         <?php } else { ?>
@@ -131,7 +132,7 @@
                 <div id="kp_preview">
                     <div class="box-body">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="<?=base_url('erm.php/rajal/kembang_pasien/'.$kp.'/'.$detail->idx.'/'.$detail->nomr)?>"></iframe>
+                            <iframe class="embed-responsive-item" id="kp_preview_frame" src="<?=base_url('erm.php/rajal/kembang_pasien/'.$kp.'/'.$detail->idx.'/'.$detail->nomr)?>"></iframe>
                         </div>
                     </div>
                 </div>
@@ -217,7 +218,7 @@
                         <?php $this->load->view("erm/rajal/billing_tindakan/billing_tindakan_form") ?>
                     </div>
                     <div class="box-footer">
-                        <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary simpan-konsul-internal'>Simpan</button>":"" ?>
+                        <!-- <?= ($detail->status_erm!=1)?" <button type='submit' class='btn btn-primary simpan-konsul-internal'>Proses To Billing</button>":"" ?> -->
                     </div>
                 </div>
             </div>

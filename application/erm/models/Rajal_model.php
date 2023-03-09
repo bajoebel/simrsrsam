@@ -67,8 +67,12 @@ class Rajal_model extends CI_Model
             "jenis_tenaga_medis" => "Perawat Terampil",
             "tenaga_medis_id" => $data['perawat_id'],
             "tenaga_medis" => $data['perawat'],
+            "subyektif" => tampilRawatByIdxv2("s",$data),
+            "obyektif" => tampilRawatByIdxv2("o",$data),
+            "assesment" => tampilRawatByIdxv2("a",$data),
+            "planning" => tampilRawatByIdxv2("p",$data),
             "updated_at" => date("Y-m-d h:i:s"),
-            "created_at" => date("Y-m-d h:i:s")
+            "created_at" => date("Y-m-d h:i:s"),
         ];
         if ($cek > 0) {
             unset($data["idx"]);
@@ -234,6 +238,13 @@ class Rajal_model extends CI_Model
     {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->where(['idx' => $idx, "nomr" => $nomr])
+            ->order_by("id desc")
+            ->get("rj_ppt");
+    }
+    function getKembangPasienAll($nomr, $idx)
+    {
+        $db2 = $this->load->database('dberm', TRUE);
+        return $db2->where(["nomr" => $nomr])
             ->order_by("id desc")
             ->get("rj_ppt");
     }
@@ -812,75 +823,63 @@ class Rajal_model extends CI_Model
 
     public function insertBillingTindakan($data,$data_tindakan) {
         $db2 = $this->load->database('dberm', TRUE);
-        $db3 = $this->load->database('dbsimrs', TRUE);
-        if (!empty($data_tindakan)) {
-            $db2->trans_begin();
-            $insert = $db2->insert("rj_billing",$data);
-            $id_billing = $db2->insert_id();
-            $qt = $db3->select("*")->where_in("tlId",$data_tindakan)->get("tarif_layanan");
-            $rt = [];
-            if ($qt->num_rows()>0) {
-                foreach ($qt->result() as $r) {
-                    $rt[] = [
-                        "rj_billing_id" => $id_billing ,
-                        "tlId" => $r->tlId,
-                        "tlTitle" => $r->tlTitle,
-                        "jasaSarana" => $r->jasaSarana,
-                        "jasaPelayanan" => $r->jasaPelayanan,
-                        "tarifLayanan" => $r->tarifLayanan,
-                    ];
-                }
-            }
-            $db2->insert_batch('rj_billing_detail',$rt);
-            if ($db2->trans_status()===FALSE) {
-                $db2->trans_rollback();
-                return false;
-            } else {
-                 $db2->trans_commit();
-                return true;
-            }
-        } else {
+        $db2->trans_begin();
+        $db2->insert("rj_billing",$data);
+        $insert_id = $db2->insert_id();
+        $data_tindakan['rj_billing_id']= $insert_id;
+        $db2->insert("rj_billing_detail",$data_tindakan);
+        if ($db2->trans_status()===FALSE) {
+            $db2->trans_rollback();
             return false;
+        } else {
+            $db2->trans_commit();
+            return true;
         }
-        return $db2->insert("rj_billing",$data);
     }
 
     public function updateBillingTindakan($id_billing,$data_tindakan) {
         $db2 = $this->load->database('dberm', TRUE);
-        $db3 = $this->load->database('dbsimrs', TRUE);
-        if (!empty($data_tindakan)) {
-            $db2->trans_begin();
-            $qt = $db3->select("*")->where_in("tlId",$data_tindakan)->get("tarif_layanan");
-            $rt = [];
-            if ($qt->num_rows()>0) {
-                foreach ($qt->result() as $r) {
-                    $rt[] = [
-                        "rj_billing_id" => $id_billing ,
-                        "tlId" => $r->tlId,
-                        "tlTitle" => $r->tlTitle,
-                        "jasaSarana" => $r->jasaSarana,
-                        "jasaPelayanan" => $r->jasaPelayanan,
-                        "tarifLayanan" => $r->tarifLayanan,
-                    ];
-                }
-            }
-            $delete = $db2->where("rj_billing_id",$id_billing)->delete('rj_billing_detail');
-            $insert_batch = $db2->insert_batch('rj_billing_detail',$rt);
-            if ($db2->trans_status()===FALSE) {
-                $db2->trans_rollback();
-                return false;
-            } else {
-                 $db2->trans_commit();
-                return true;
-            }
-        } else {
+        $db2->trans_begin();
+        $data_tindakan['rj_billing_id'] = $id_billing;
+        $db2->insert("rj_billing_detail",$data_tindakan);
+        if ($db2->trans_status()===FALSE) {
+            $db2->trans_rollback();
             return false;
+        } else {
+            $db2->trans_commit();
+            return true;
         }
-        return $db2->insert("rj_billing",$data);
     }
 
     public function getBillingTindakanByIdx($idx) {
         $db2 = $this->load->database('dberm', TRUE);
         return $db2->select("*")->where("idx",$idx)->get("rj_billing")->row();
+    }
+
+    public function deleteBillingTindakanDetail($id) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $db2->where("id",$id)->delete("rj_billing_detail");
+        return $db2->affected_rows();
+    }
+
+    public function updateCpptMedis($idx) {
+        $db2 = $this->load->database('dberm', TRUE);
+        $awal_medis = $db2->where("idx",$idx)->get("rj_awal_medis")->row();
+        if ($awal_medis) {
+            $id_cppt = $awal_medis->cppt_id; 
+            $d = [
+                "idx" => $idx
+            ];
+            $html = tampilMedisByIdx("p",$d);
+            $data = [
+                "planning" => $html
+            ];
+            $db2->where("id",$id_cppt)
+            ->update("rj_ppt",$data);
+            return $db2->affected_rows();
+        } else {
+            return false;
+        }
+       
     }
 }

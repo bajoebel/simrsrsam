@@ -447,4 +447,10 @@
         $("[name='tenaga_medis_id_k']").val("");
         $("[name='tenaga_medis_id_k']").val("");
     }
+
+    function tampilKembangPasienAll(idx,nomr) {
+        var url = base_url + `/rajal/kembang_pasien_all/${idx}/${nomr}`;
+        $("#kp_preview_frame").attr("src",url)
+        // window.open(url, "_blank");
+    }
 </script>

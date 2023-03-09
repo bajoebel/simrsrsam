@@ -218,31 +218,35 @@
         <b>THERAPI/TINDAKAN</b>
         <div class="form-group row">
             <div class="col-md-12">
-                <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control"></textarea>
+                <textarea name="terapi_m" id="terapi_m" rows="5" class="form-control">-</textarea>
             </div>
         </div>
-        <?php $tindakan = getPermintaanTindakan($d->idx);
-        if ($tindakan) {
-        ?>
-        <table class="table" >
-            <tr class="bg-green text-white">
-                <td colspan="2">
-                    PERMINTAAN TINDAKAN
-                </td>
-            </tr>
-            <tr class="bg-green text-white">
-                <td>Nama Tindakan</td>
-            </tr>
-            <?php 
-            $tindakan_detail =  getPermintaanTindakanDetailById($tindakan->id); 
-            foreach($tindakan_detail as $td) {
+        <div id="tindakan_ka_bi">
+            <?php $tindakan = getPermintaanTindakan($d->idx);
+            if ($tindakan) {
             ?>
-            <tr>
-                <td><?= $td->tlTitle ?></td>
-            </tr>
+            <table class="table" >
+                <tr class="bg-green text-white">
+                    <td colspan="2">
+                        PERMINTAAN TINDAKAN
+                    </td>
+                </tr>
+                <tr class="bg-green text-white">
+                    <td>Nama Tindakan</td>
+                    <td>Qty</td>
+                </tr>
+                <?php 
+                $tindakan_detail =  getPermintaanTindakanDetailById($tindakan->id); 
+                foreach($tindakan_detail as $td) {
+                ?>
+                <tr>
+                    <td><?= $td->tlTitle ?></td>
+                    <td><?= $td->qty ?></td>
+                </tr>
+                <?php } ?>
+            </table> 
             <?php } ?>
-        </table> 
-        <?php } ?>
+        </div>
         </br>
         <?php $resep = getPermintaanResep($d->idx);;
         if ($resep) {

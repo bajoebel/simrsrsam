@@ -513,171 +513,171 @@
         });
     }
 
-    function responseAwalRawat(data, stat) {
-        $("[name='cppt_id_ka']").val(data.cppt_id);
-        $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
-        if (stat != 1) {
-            $("[name='poli_ka']").val(data.poli).trigger("change");
-            $("[name='dpjp_id_ka']").val(data.dpjp_id).trigger("change");
-            $("[name='tanggal_ka']").val(data.tanggal);
-            $("[name='jam_ka']").val(data.jam);
-        }
+    // function responseAwalRawat(data, stat) {
+    //     $("[name='cppt_id_ka']").val(data.cppt_id);
+    //     $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
+    //     if (stat != 1) {
+    //         $("[name='poli_ka']").val(data.poli).trigger("change");
+    //         $("[name='dpjp_id_ka']").val(data.dpjp_id).trigger("change");
+    //         $("[name='tanggal_ka']").val(data.tanggal);
+    //         $("[name='jam_ka']").val(data.jam);
+    //     }
 
-        $(`[name='tiba_ka'][value='${data.tiba}']`).prop("checked", true)
-        $(`[name='rujukan_ka'][value='${data.rujukan}']`).prop("checked", true)
-        $("[name='rujukan_lainnya_ka']").val(data.rujukan_lainnya);
-        $("[name='keluhan_ka']").val(data.keluhan);
-        $("[name='dirawat_ka']").val(data.dirawat);
-        $("[name='kapan_dirawat_ka']").val(data.kapan_dirawat);
-        $("[name='dimana_dirawat_ka']").val(data.dimana_dirawat);
-        $("[name='diagnosis_ka']").val(data.diagnosis);
-        if (data.implant) {
-            $("[name='implant_ka']").prop("checked", true)
-            $("[name='implant_detail_ka']").prop("readonly", false)
-        } else {
-            $("[name='implant_ka']").prop("checked", false)
-            $("[name='implant_detail_ka']").prop("readonly", true)
-        }
-        $("[name='implant_detail_ka']").val(data.implant_detail);
-        if (data.riwayat_operasi_cek) {
-            $("[name='riwayat_operasi_cek_ka']").prop("checked", true)
-            $("[name='riwayat_operasi_ka']").prop("readonly", false)
-            $("[name='riwayat_operasi_tahun_ka']").prop("disabled", false)
-        } else {
-            $("[name='riwayat_operasi_cek_ka']").prop("checked", false)
-            $("[name='riwayat_operasi_ka']").prop("readonly", true)
-            $("[name='riwayat_operasi_tahun_ka']").prop("disabled", true)
-        }
-        $("[name='riwayat_operasi_ka']").val(data.riwayat_operasi)
-        $("[name='riwayat_operasi_tahun_ka']").val(data.riwayat_operasi_tahun)
+    //     $(`[name='tiba_ka'][value='${data.tiba}']`).prop("checked", true)
+    //     $(`[name='rujukan_ka'][value='${data.rujukan}']`).prop("checked", true)
+    //     $("[name='rujukan_lainnya_ka']").val(data.rujukan_lainnya);
+    //     $("[name='keluhan_ka']").val(data.keluhan);
+    //     $("[name='dirawat_ka']").val(data.dirawat);
+    //     $("[name='kapan_dirawat_ka']").val(data.kapan_dirawat);
+    //     $("[name='dimana_dirawat_ka']").val(data.dimana_dirawat);
+    //     $("[name='diagnosis_ka']").val(data.diagnosis);
+    //     if (data.implant) {
+    //         $("[name='implant_ka']").prop("checked", true)
+    //         $("[name='implant_detail_ka']").prop("readonly", false)
+    //     } else {
+    //         $("[name='implant_ka']").prop("checked", false)
+    //         $("[name='implant_detail_ka']").prop("readonly", true)
+    //     }
+    //     $("[name='implant_detail_ka']").val(data.implant_detail);
+    //     if (data.riwayat_operasi_cek) {
+    //         $("[name='riwayat_operasi_cek_ka']").prop("checked", true)
+    //         $("[name='riwayat_operasi_ka']").prop("readonly", false)
+    //         $("[name='riwayat_operasi_tahun_ka']").prop("disabled", false)
+    //     } else {
+    //         $("[name='riwayat_operasi_cek_ka']").prop("checked", false)
+    //         $("[name='riwayat_operasi_ka']").prop("readonly", true)
+    //         $("[name='riwayat_operasi_tahun_ka']").prop("disabled", true)
+    //     }
+    //     $("[name='riwayat_operasi_ka']").val(data.riwayat_operasi)
+    //     $("[name='riwayat_operasi_tahun_ka']").val(data.riwayat_operasi_tahun)
 
-        $("[name='riwayat_sakit_ka[]']").val(data.riwayat_sakit?.split(";")).trigger("change");
-        $("[name='riwayat_sakit_keluarga_ka[]']").val(data.riwayat_sakit_keluarga?.split(";")).trigger("change");
-        $("[name='riwayat_psikologis_ka[]']").val(data.riwayat_psikologis?.split(";")).trigger("change");
-        (data.status_mental_sadar) ? $("[name='status_mental_sadar_ka']").prop("checked", true): "";
-        (data.status_mental_prilaku) ? $("[name='status_mental_prilaku_ka']").prop("checked", true): "";
-        (data.status_mental_keras) ? $("[name='status_mental_keras_ka']").prop("checked", true): "";
-        $("[name='status_mental_prilaku_detail_ka']").val(data.status_mental_prilaku_detail)
-        $("[name='status_mental_keras_detail_ka']").val(data.status_mental_keras_detail)
-        $(`[name='kultural_ka'][value='${data.kultural}']`).prop("checked", true)
-        $("[name='kultural_nama_ka']").val(data.kultural_nama);
-        $("[name='kultural_hubungan_ka']").val(data.kultural_hubungan);
-        $("[name='kultural_phone_ka']").val(data.kultural_phone);
-        $("[name='nilai_kepercayaan_ka']").val(data.nilai_kepercayaan);
-        $("[name='status_ekonomi_ka[]']").val(data.status_ekonomi?.split(";")).trigger("change");
-        $("[name='spiritual_biasa_ka']").val(data.spiritual_biasa);
-        $(`[name='obat_ka'][value='${data.obat}']`).prop("checked", true)
-        $(`[name='makanan_ka'][value='${data.makanan}']`).prop("checked", true)
-        $("[name='riwayat_lain_ka']").val(data.riwayat_lain);
-        // strong kids
-        var strong_kids = data.strong_kids?.split(";")
-        if (strong_kids) {
-            strong_kids.forEach((value, index) => {
-                $(`[name='strong_kids_ka[]'][value='${value}']`).prop("checked", true)
-            })
-        }
+    //     $("[name='riwayat_sakit_ka[]']").val(data.riwayat_sakit?.split(";")).trigger("change");
+    //     $("[name='riwayat_sakit_keluarga_ka[]']").val(data.riwayat_sakit_keluarga?.split(";")).trigger("change");
+    //     $("[name='riwayat_psikologis_ka[]']").val(data.riwayat_psikologis?.split(";")).trigger("change");
+    //     (data.status_mental_sadar) ? $("[name='status_mental_sadar_ka']").prop("checked", true): "";
+    //     (data.status_mental_prilaku) ? $("[name='status_mental_prilaku_ka']").prop("checked", true): "";
+    //     (data.status_mental_keras) ? $("[name='status_mental_keras_ka']").prop("checked", true): "";
+    //     $("[name='status_mental_prilaku_detail_ka']").val(data.status_mental_prilaku_detail)
+    //     $("[name='status_mental_keras_detail_ka']").val(data.status_mental_keras_detail)
+    //     $(`[name='kultural_ka'][value='${data.kultural}']`).prop("checked", true)
+    //     $("[name='kultural_nama_ka']").val(data.kultural_nama);
+    //     $("[name='kultural_hubungan_ka']").val(data.kultural_hubungan);
+    //     $("[name='kultural_phone_ka']").val(data.kultural_phone);
+    //     $("[name='nilai_kepercayaan_ka']").val(data.nilai_kepercayaan);
+    //     $("[name='status_ekonomi_ka[]']").val(data.status_ekonomi?.split(";")).trigger("change");
+    //     $("[name='spiritual_biasa_ka']").val(data.spiritual_biasa);
+    //     $(`[name='obat_ka'][value='${data.obat}']`).prop("checked", true)
+    //     $(`[name='makanan_ka'][value='${data.makanan}']`).prop("checked", true)
+    //     $("[name='riwayat_lain_ka']").val(data.riwayat_lain);
+    //     // strong kids
+    //     var strong_kids = data.strong_kids?.split(";")
+    //     if (strong_kids) {
+    //         strong_kids.forEach((value, index) => {
+    //             $(`[name='strong_kids_ka[]'][value='${value}']`).prop("checked", true)
+    //         })
+    //     }
 
-        $(`[name='aktivitas_ka'][value='${data.aktivitas}']`).prop("checked", true)
-        $("[name='akftivitas_detail_ka']").val(data.aktivitas_detail);
-        $(`[name='aktivitas_info_ka'][value='${data.aktivitas_info}']`).prop("checked", true)
-        $("[name='aktivitas_info_detail_ka']").val(data.aktivitas_info_detail);
-        $(`[name='jatuh_ka'][value='${data.jatuh}']`).prop("checked", true)
-        $(`[name='gelang_resiko_ka'][value='${data.gelang_resiko}']`).prop("checked", true)
-        $(`[name='risiko_info_ka'][value='${data.risiko_info}']`).prop("checked", true)
-        $("[name='risiko_info_detail_ka']").val(data.risiko_info_detail);
-        $("[name='keadaan_umum_ka']").val(data.keadaan_umum);
-        $("[name='kesadaran_umum_ka']").val(data.kesadaran_umum);
-        $("[name='gcs_e_ka']").val(data.gcs_e);
-        $("[name='gcs_m_ka']").val(data.gcs_m);
-        $("[name='gcs_v_ka']").val(data.gcs_v);
-        $("[name='ttv_sh_ka']").val(data.ttv_sh);
-        $("[name='ttv_nd_ka']").val(data.ttv_nd);
-        $("[name='ttv_rr_ka']").val(data.ttv_rr);
-        $("[name='ttv_spo2_ka']").val(data.ttv_spo2);
-        $("[name='ttv_td_ka']").val(data.ttv_td);
-        $("[name='ttv_ds_ka']").val(data.ttv_ds);
-        $("[name='status_generalis_ka']").val(data.status_generalis);
-        $(`[name='penunjang_rad_ka'][value='${data.penunjang_rad}']`).prop("checked", true)
-        $("[name='penunjang_rad_detail_ka']").val(data.penunjang_rad_detail);
-        $(`[name='penunjang_lab_ka'][value='${data.penunjang_lab}']`).prop("checked", true)
-        $("[name='penunjang_lab_detail_ka']").val(data.penunjang_lab_detail);
-        $(`[name='penunjang_lain_ka'][value='${data.penunjang_lain}']`).prop("checked", true)
-        $("[name='penunjang_lain_detail_ka']").val(data.penunjang_lain_detail);
-        // kebutuhan edukasi
-        var kebutuhan_edukasi = data.kebutuhan_edukasi?.split(";")
-        if (kebutuhan_edukasi) {
-            kebutuhan_edukasi.forEach((value, index) => {
-                $(`[name='kebutuhan_edukasi_ka[]'][value='${value}']`).prop("checked", true)
-            })
-        }
-        $("[name='kebutuhan_edukasi_tindakan_ka']").val(data.kebutuhan_edukasi_tindakan);
-        $("[name='kebutuhan_edukasi_lain_ka']").val(data.kebutuhan_edukasi_lain);
-        // CKEDITOR.instances['diagnosa_keperawatan_ka'].setData(data.diagnosa_keperawatan)
-        // CKEDITOR.instances['tindakan_keperawatan_ka'].setData(data.tindakan_keperawatan)
-        $("[name='diagnosa_keperawatan_ka[]']").val(data.diagnosa_keperawatan?.split(";")).trigger("change");
-        $("[name='tindakan_keperawatan_ka[]']").val(data.tindakan_keperawatan?.split(";")).trigger("change");
-        $("[name='apd_ka[]']").val(data.apd?.split(";")).trigger("change");
-        $("[name='bmhp_ka[]']").val(data.bmhp?.split(";")).trigger("change");
-        $(`[name='dijelaskan_ka'][value='${data.dijelaskan}']`).prop("checked", true);
-        $("[name='dijelaskan_hubungan_ka']").val(data.dijelaskan_hubungan);
-        $("[name='dijelaskan_nama_ka']").val(data.dijelaskan_nama);
-        $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
-        $("[name='komunikasi_penerjemah_ka']").val(data.komunikasi_penerjemah)
+    //     $(`[name='aktivitas_ka'][value='${data.aktivitas}']`).prop("checked", true)
+    //     $("[name='akftivitas_detail_ka']").val(data.aktivitas_detail);
+    //     $(`[name='aktivitas_info_ka'][value='${data.aktivitas_info}']`).prop("checked", true)
+    //     $("[name='aktivitas_info_detail_ka']").val(data.aktivitas_info_detail);
+    //     $(`[name='jatuh_ka'][value='${data.jatuh}']`).prop("checked", true)
+    //     $(`[name='gelang_resiko_ka'][value='${data.gelang_resiko}']`).prop("checked", true)
+    //     $(`[name='risiko_info_ka'][value='${data.risiko_info}']`).prop("checked", true)
+    //     $("[name='risiko_info_detail_ka']").val(data.risiko_info_detail);
+    //     $("[name='keadaan_umum_ka']").val(data.keadaan_umum);
+    //     $("[name='kesadaran_umum_ka']").val(data.kesadaran_umum);
+    //     $("[name='gcs_e_ka']").val(data.gcs_e);
+    //     $("[name='gcs_m_ka']").val(data.gcs_m);
+    //     $("[name='gcs_v_ka']").val(data.gcs_v);
+    //     $("[name='ttv_sh_ka']").val(data.ttv_sh);
+    //     $("[name='ttv_nd_ka']").val(data.ttv_nd);
+    //     $("[name='ttv_rr_ka']").val(data.ttv_rr);
+    //     $("[name='ttv_spo2_ka']").val(data.ttv_spo2);
+    //     $("[name='ttv_td_ka']").val(data.ttv_td);
+    //     $("[name='ttv_ds_ka']").val(data.ttv_ds);
+    //     $("[name='status_generalis_ka']").val(data.status_generalis);
+    //     $(`[name='penunjang_rad_ka'][value='${data.penunjang_rad}']`).prop("checked", true)
+    //     $("[name='penunjang_rad_detail_ka']").val(data.penunjang_rad_detail);
+    //     $(`[name='penunjang_lab_ka'][value='${data.penunjang_lab}']`).prop("checked", true)
+    //     $("[name='penunjang_lab_detail_ka']").val(data.penunjang_lab_detail);
+    //     $(`[name='penunjang_lain_ka'][value='${data.penunjang_lain}']`).prop("checked", true)
+    //     $("[name='penunjang_lain_detail_ka']").val(data.penunjang_lain_detail);
+    //     // kebutuhan edukasi
+    //     var kebutuhan_edukasi = data.kebutuhan_edukasi?.split(";")
+    //     if (kebutuhan_edukasi) {
+    //         kebutuhan_edukasi.forEach((value, index) => {
+    //             $(`[name='kebutuhan_edukasi_ka[]'][value='${value}']`).prop("checked", true)
+    //         })
+    //     }
+    //     $("[name='kebutuhan_edukasi_tindakan_ka']").val(data.kebutuhan_edukasi_tindakan);
+    //     $("[name='kebutuhan_edukasi_lain_ka']").val(data.kebutuhan_edukasi_lain);
+    //     // CKEDITOR.instances['diagnosa_keperawatan_ka'].setData(data.diagnosa_keperawatan)
+    //     // CKEDITOR.instances['tindakan_keperawatan_ka'].setData(data.tindakan_keperawatan)
+    //     $("[name='diagnosa_keperawatan_ka[]']").val(data.diagnosa_keperawatan?.split(";")).trigger("change");
+    //     $("[name='tindakan_keperawatan_ka[]']").val(data.tindakan_keperawatan?.split(";")).trigger("change");
+    //     $("[name='apd_ka[]']").val(data.apd?.split(";")).trigger("change");
+    //     $("[name='bmhp_ka[]']").val(data.bmhp?.split(";")).trigger("change");
+    //     $(`[name='dijelaskan_ka'][value='${data.dijelaskan}']`).prop("checked", true);
+    //     $("[name='dijelaskan_hubungan_ka']").val(data.dijelaskan_hubungan);
+    //     $("[name='dijelaskan_nama_ka']").val(data.dijelaskan_nama);
+    //     $("[name='perawat_id_ka']").val(data.perawat_id).trigger("change");
+    //     $("[name='komunikasi_penerjemah_ka']").val(data.komunikasi_penerjemah)
 
-        // skrining nyeri
-        var nyeri = data.nyeri;
-        $(`[name='nyeri_ka'][value='${nyeri}']`).prop("checked", true)
-        if (nyeri != "tidak ada nyeri") {
-            $(".skrining_nyeri").prop("hidden", false)
-            $("[name='profokatif_ka']").val(data.profokatif);
-            $("[name='quality_ka']").val(data.quality);
-            $("[name='region_ka']").val(data.region);
-            $("[name='skala_ka']").val(data.skala);
-            $("[name='timing_ka']").val(data.timing);
-            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", true)
-            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", true)
-            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", true)
+    //     // skrining nyeri
+    //     var nyeri = data.nyeri;
+    //     $(`[name='nyeri_ka'][value='${nyeri}']`).prop("checked", true)
+    //     if (nyeri != "tidak ada nyeri") {
+    //         $(".skrining_nyeri").prop("hidden", false)
+    //         $("[name='profokatif_ka']").val(data.profokatif);
+    //         $("[name='quality_ka']").val(data.quality);
+    //         $("[name='region_ka']").val(data.region);
+    //         $("[name='skala_ka']").val(data.skala);
+    //         $("[name='timing_ka']").val(data.timing);
+    //         $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", true)
+    //         $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", true)
+    //         $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", true)
 
-            var metode = data.metode;
-            $(`[name='metode_ka'][value='${metode}']`).prop("checked", true)
-            if (metode == 1) {
-                $("#vas_pilih").removeClass("hide")
-                $("#wbfs_pilih").addClass("hide")
-                $("#flacc_pilih").addClass("hide")
-                $("[name='skala_vas_ka']").val(data.skala_vas);
-            } else if (metode == 2) {
-                $("#vas_pilih").addClass("hide")
-                $("#wbfs_pilih").removeClass("hide")
-                $("#flacc_pilih").addClass("hide")
-                $("[name='skala_wbfs_ka']").val(data.skala_wbfs);
-            } else if (metode == 3) {
-                $("#vas_pilih").addClass("hide")
-                $("#wbfs_pilih").addClass("hide")
-                $("#flacc_pilih").removeClass("hide")
-                $("[name='wajah_ka']").val(data.wajah);
-                $("[name='leg_ka']").val(data.leg);
-                $("[name='gerakan_ka']").val(data.gerakan);
-                $("[name='kemampuan_ka']").val(data.kemampuan);
-                $("#skor_flacc").text(data.flacc_skor)
-            }
-        } else {
-            $(".skrining_nyeri").prop("hidden", true)
-            $("[name='profokatif_ka']").val("tidak ada");
-            $("[name='quality_ka']").val("tidak ada");
-            $("[name='region_ka']").val("tidak ada");
-            $("[name='skala_ka']").val("tidak ada");
-            $("[name='timing_ka']").val("tidak ada");
-            $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", false)
-            $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", false)
-            $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", false)
+    //         var metode = data.metode;
+    //         $(`[name='metode_ka'][value='${metode}']`).prop("checked", true)
+    //         if (metode == 1) {
+    //             $("#vas_pilih").removeClass("hide")
+    //             $("#wbfs_pilih").addClass("hide")
+    //             $("#flacc_pilih").addClass("hide")
+    //             $("[name='skala_vas_ka']").val(data.skala_vas);
+    //         } else if (metode == 2) {
+    //             $("#vas_pilih").addClass("hide")
+    //             $("#wbfs_pilih").removeClass("hide")
+    //             $("#flacc_pilih").addClass("hide")
+    //             $("[name='skala_wbfs_ka']").val(data.skala_wbfs);
+    //         } else if (metode == 3) {
+    //             $("#vas_pilih").addClass("hide")
+    //             $("#wbfs_pilih").addClass("hide")
+    //             $("#flacc_pilih").removeClass("hide")
+    //             $("[name='wajah_ka']").val(data.wajah);
+    //             $("[name='leg_ka']").val(data.leg);
+    //             $("[name='gerakan_ka']").val(data.gerakan);
+    //             $("[name='kemampuan_ka']").val(data.kemampuan);
+    //             $("#skor_flacc").text(data.flacc_skor)
+    //         }
+    //     } else {
+    //         $(".skrining_nyeri").prop("hidden", true)
+    //         $("[name='profokatif_ka']").val("tidak ada");
+    //         $("[name='quality_ka']").val("tidak ada");
+    //         $("[name='region_ka']").val("tidak ada");
+    //         $("[name='skala_ka']").val("tidak ada");
+    //         $("[name='timing_ka']").val("tidak ada");
+    //         $(`[name='tidur_malam_ka'][value='${data.tidur_malam}']`).prop("checked", false)
+    //         $(`[name='halangan_aktivitas_ka'][value='${data.halangan_aktivitas}']`).prop("checked", false)
+    //         $(`[name='nyeri_sakit_ka'][value='${data.nyeri_sakit}']`).prop("checked", false)
 
-        }
+    //     }
 
-        // gizi
-        $("[name='gizi_ka']").val(data.gizi).trigger("change")
-        $("[name='gizi_makan_ka']").val(data.gizi_makan).trigger("change")
-        $("#skor_gizi").text(data.skor_gizi)
-    }
+    //     // gizi
+    //     $("[name='gizi_ka']").val(data.gizi).trigger("change")
+    //     $("[name='gizi_makan_ka']").val(data.gizi_makan).trigger("change")
+    //     $("#skor_gizi").text(data.skor_gizi)
+    // }
 
     function editEdukasiPasien(idx, id, nomr) {
         $.ajax({
