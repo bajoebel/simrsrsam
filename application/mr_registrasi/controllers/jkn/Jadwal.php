@@ -31,7 +31,7 @@ class Jadwal extends CI_Controller{
             'header'=>$this->load->view('template/header', '', true),
             'nav_sidebar'=>$this->load->view('template/nav_sidebar', $z, true),
             'content'=>$this->load->view('jkn/jadwal', $data, true),
-            'index_menu'=>7,
+            'index_menu'=>5,
             'libjs'=>array(
                 'js/jadwal.js'
             )
@@ -152,9 +152,13 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
-                        'jadwal_dokter_nama'=>$nama_dokter,
-                        'jadwal_poly_nama'=>$polynama,
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Senin',
                         'jadwal_jam_mulai'=>$this->input->post('seninbuka'),
                         'jadwal_jam_selesai'=>$this->input->post('senintutup'),
@@ -209,10 +213,14 @@ class Jadwal extends CI_Controller{
                 // Jika Belum Ada Jadwal Senin
                 if($selasaaktif==2){
                     // Insert Jadwal Simrs
-                    
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Selasa',
@@ -271,7 +279,12 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_hari'=>'Rabu',
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
@@ -331,7 +344,12 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Kamis',
@@ -390,7 +408,12 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Jumat',
@@ -402,7 +425,7 @@ class Jadwal extends CI_Controller{
                         'kuotajkn'=>$kuotajkn,
                         'kuotanonjkn'=>$kuotanonjkn,
                         'jadwal_status'=>'Aktif',
-                        'updated_at'=>date('Y-m-d H:i:s'),
+                        'create_at'=>date('Y-m-d H:i:s'),
                         'updated_at'=>date('Y-m-d H:i:s')
                     );
                     $this->db->insert('tbl02_jadwal_dokter',$jadwalsim);
@@ -449,7 +472,12 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Sabtu',
@@ -508,7 +536,12 @@ class Jadwal extends CI_Controller{
                     // Insert Jadwal Simrs
                     $jadwalsim=array(
                         'jadwal_dokter_id'=>$this->input->post('kodedokterrs'),
+                        'jadwal_dokter_id1'=>getField('iddokter',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //Dokter id Simrslama
+                        'dokterjkn'=>getField('iddokterjkn',array('NRP'=>$this->input->post('kodedokterrs')),'tbl01_pegawai'), //kode dokter bpjs
                         'jadwal_poly_id'=>$this->input->post('kodepolirs'),
+                        'jadwal_poly_id1'=>getField('koderuanglama',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),//Kode poli SIMRS,
+                        'jadwal_kodepolijkn'=>getField('kodepolijkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
+                        'jadwal_subspesialis_jkn'=>getField('kodejkn',array('idx'=>$this->input->post('kodepolirs')),'tbl01_ruang'),
                         'jadwal_dokter_nama'=>$nama_dokter,
                         'jadwal_poly_nama'=>$polynama,
                         'jadwal_hari'=>'Minggu',

@@ -483,6 +483,56 @@ class Pendaftaran_model extends CI_Model
     function getPolyByJknKode($kodepoli){
         return $this->db->where("kodejkn",$kodepoli)->get("tbl01_ruang")->row();
     }
+    function createNota($nota,$tlid,$notaId=""){
+        $this->rsam = $this->load->database('rsam2', true);
+        $tarif = $this->rsam->where('tlId',$tlid)->get('tarif_layanan')->row();
+        // $this->rsam = $this->load->database('rsam2', true);
+        if($notaId==""){
+            $this->rsam->insert("tr_nota",$nota);
+            $n = $this->rsam->where("noReg",$nota["noReg"])->get("tr_nota")->row();
+            $notaId=$n->notaId;
+        }
+        // Detail
+        $det=array(
+            'tglLayanan'=>date('Y-m-d'),
+            'notaId'=>$notaId,
+            'tlId'=>$tarif->tlId,
+            'jasaSarana'=>$tarif->jasaSarana,
+            'jasaPelayanan'=>$tarif->jasaPelayanan,
+            'tarifLayanan'=>$tarif->tarifLayanan,
+            'cyto'=>0,
+            'tarifLayananCito'=>0,
+            'jml'=>1,
+            'subTotalTarif'=>$tarif->tarifLayanan,
+            'dokterId'=>$nota['dokter'],
+            'userExec'=>$nota['nrp']
+        );
+        $this->rsam->insert("tr_nota_detail",$det);
+        $insertid=$this->rsam->insert_id();
+        // Pelaksana
+        $pelaksana=array(
+            'idx'=>$insertid,
+            'pelaksana'=>$nota["dokter"]
+        );
+        $this->rsam->insert("tr_nota_pelaksana",$pelaksana);
+        return $notaId;
+    }
+
+    function insertAntrian($data){
+        $cek=$this->db->where("kodebooking",$data["kodebooking"])
+        ->get("tbl02_antrian")->row();
+        if(empty($cek)){
+            $this->db->insert("tbl02_antrian",$data);
+        }else{
+            $iddaftar=array(
+                'id_daftar'=>$data["id_daftar"],
+                'jnsantrean'=>1,
+                'status_panggil'=>0
+            );
+            $this->db->where("kodebooking",$data["kodebooking"]);
+            $this->db->update("tbl02_antrian",$iddaftar);
+        }
+    }
     // function getJadwal(){
 
     // }

@@ -53,33 +53,57 @@ class pasien_baru extends CI_Controller {
                 $this->session->unset_userdata('keytgllahir');
             endif;
         }
+        $rme=0;
         
-        
+        // echo $rme; exit;
         if(isset($_POST['page'])):
             $offset = $this->input->post('page');
+            $rme = $this->session->userdata('rme');
+            // echo "PAGE " .$rme; exit;
             $this->session->set_userdata('sPage',$offset);
         else:
+            // $rme = 0;
+            if(!empty($this->input->post('rme'))){
+                // echo "POST ".$rme; exit;
+                $rme = $this->input->post('rme',true); 
+                if(empty($rme)) $rme=0;   
+                $this->session->set_userdata('rme',$rme);
+            }else {
+                $rme=0;
+                $this->session->unset_userdata('rme');
+            }
             $offset = ($this->session->userdata('sPage')) ? $this->session->userdata('sPage') : 0;
         endif;
-
+        // echo "RME ".$rme; exit;
         $limit = $this->perPage;
 
-        $condition = "";
+        
+        // echo $rme; exit;
+        
+        if($rme==1) {
+            $condition="WHERE erm=1 "; 
+        }else {
+            $condition="";
+        }
+        // echo "RME ".$rme;exit;
+        // $condition = "";
         if($method == "Inquery"){
             $nama=$this->session->userdata('keynama');
             $tgl_lahir=$this->session->userdata('keytgllahir');
-            $condition .= "WHERE nama LIKE '%$nama%' AND tgl_lahir='$tgl_lahir'";
+            if($condition=="") $condition .= "WHERE (nama LIKE '%$nama%' AND tgl_lahir='$tgl_lahir')";
+            else $condition.="AND (nama LIKE '%$nama%' AND tgl_lahir='$tgl_lahir')";
         }else{
             if(isset($_POST['sLike'])){
                 $offset = 0;
                 $sLike = $this->db->escape_str($this->input->post('sLike',true));
-                $condition .= "WHERE nomr LIKE '%$sLike%' OR  nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%'";
+                if($condition=="") $condition .= "WHERE (nomr LIKE '%$sLike%' OR  nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%')";
+                else $condition .= "AND (nomr LIKE '%$sLike%' OR  nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%')";
                 $this->session->set_userdata('sLike',$sLike);
-
             }else{
                 if($this->session->userdata('sLike')){
                     $sLike = $this->session->userdata('sLike');
-                    $condition .= "WHERE nomr LIKE '%$sLike%' OR nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%'";
+                    if($condition=="") $condition .= "WHERE (nomr LIKE '%$sLike%' OR nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%')";
+                    else $condition .= "AND (nomr LIKE '%$sLike%' OR nama LIKE '%$sLike%' OR no_ktp LIKE '%$sLike%')";
                 }
             }            
         }
@@ -442,154 +466,173 @@ class pasien_baru extends CI_Controller {
                     $this->load->library('form_validation');
                     $kwn=$this->input->post('kewarganegaraan');
                     if($kwn=="WNI") $wilayah='required'; else $wilayah='trim';
-                    $config = array(
+                    $takdikenal=$this->input->post('takdikenal');
+                    if($takdikenal==1){
+                        $config = array(
                         
-                        array(
-                            'field' => 'nama',
-                            'label' => 'Nama Pasien',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'tempat_lahir',
-                            'label' => 'Tempat Lahir',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'tgl_lahir',
-                            'label' => 'Tanggal Lahir',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'no_hp',
-                            'label' => 'No HP',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'nama_ibu_kandung',
-                            'label' => 'Nama Ibu Kandung',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'kewarganegaraan',
-                            'label' => 'Kewarga negaraan',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'id_provinsi',
-                            'label' => 'Provinsi',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'id_kab_kota',
-                            'label' => 'Kab / Kota',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'id_kecamatan',
-                            'label' => 'Kecamatan',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'id_kelurahan',
-                            'label' => 'Kelurahan',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'alamat',
-                            'label' => 'Alamat',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'rt',
-                            'label' => 'RT',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'rw',
-                            'label' => 'RW',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'kodepos',
-                            'label' => 'Kode Pos',
-                            'rules' => $wilayah
-                        ),
-                        array(
-                            'field' => 'id_provinsi_domisili',
-                            'label' => 'Provinsi Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'id_kab_kota_domisili',
-                            'label' => 'Kab / Kota Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'id_kecamatan_domisili',
-                            'label' => 'Kecamatan Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'id_kelurahan_domisili',
-                            'label' => 'Kelurahan Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'alamat_domisili',
-                            'label' => 'Alamat Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'rt_domisili',
-                            'label' => 'RT Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'rw_domisili',
-                            'label' => 'RW Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'kodepos_domisili',
-                            'label' => 'Kode Pos Domisili',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'penanggung_jawab',
-                            'label' => 'Penanggung Jawab ',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'umur_pj',
-                            'label' => 'Umur Penanggung jawab Jawab',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'pekerjaan_pj',
-                            'label' => 'Pekerjaan Penanggung Jawab',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'alamat_pj',
-                            'label' => 'Alamat Penanggung Jawab',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'no_penanggung_jawab',
-                            'label' => 'Nomor Penanggung Jawab',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'hub_keluarga',
-                            'label' => 'hubungan keluarga',
-                            'rules' => 'required'
-                        ),
-                        array(
-                            'field' => 'jns_kelamin',
-                            'label' => 'Jenis Kelamin',
-                            'rules' => 'required'
-                        ),
-                    );
+                            array(
+                                'field' => 'nama',
+                                'label' => 'Nama Pasien',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'jns_kelamin',
+                                'label' => 'Jenis Kelamin',
+                                'rules' => 'required'
+                            ),
+                        );
+                    }else{
+                        $config = array(
+                            array(
+                                'field' => 'nama',
+                                'label' => 'Nama Pasien',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'tempat_lahir',
+                                'label' => 'Tempat Lahir',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'tgl_lahir',
+                                'label' => 'Tanggal Lahir',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'no_hp',
+                                'label' => 'No HP',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'nama_ibu_kandung',
+                                'label' => 'Nama Ibu Kandung',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'kewarganegaraan',
+                                'label' => 'Kewarga negaraan',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'id_provinsi',
+                                'label' => 'Provinsi',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'id_kab_kota',
+                                'label' => 'Kab / Kota',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'id_kecamatan',
+                                'label' => 'Kecamatan',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'id_kelurahan',
+                                'label' => 'Kelurahan',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'alamat',
+                                'label' => 'Alamat',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'rt',
+                                'label' => 'RT',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'rw',
+                                'label' => 'RW',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'kodepos',
+                                'label' => 'Kode Pos',
+                                'rules' => $wilayah
+                            ),
+                            array(
+                                'field' => 'id_provinsi_domisili',
+                                'label' => 'Provinsi Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'id_kab_kota_domisili',
+                                'label' => 'Kab / Kota Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'id_kecamatan_domisili',
+                                'label' => 'Kecamatan Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'id_kelurahan_domisili',
+                                'label' => 'Kelurahan Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'alamat_domisili',
+                                'label' => 'Alamat Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'rt_domisili',
+                                'label' => 'RT Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'rw_domisili',
+                                'label' => 'RW Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'kodepos_domisili',
+                                'label' => 'Kode Pos Domisili',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'penanggung_jawab',
+                                'label' => 'Penanggung Jawab ',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'umur_pj',
+                                'label' => 'Umur Penanggung jawab Jawab',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'pekerjaan_pj',
+                                'label' => 'Pekerjaan Penanggung Jawab',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'alamat_pj',
+                                'label' => 'Alamat Penanggung Jawab',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'no_penanggung_jawab',
+                                'label' => 'Nomor Penanggung Jawab',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'hub_keluarga',
+                                'label' => 'hubungan keluarga',
+                                'rules' => 'required'
+                            ),
+                            array(
+                                'field' => 'jns_kelamin',
+                                'label' => 'Jenis Kelamin',
+                                'rules' => 'required'
+                            ),
+                        );
+                    }
+                    
+                    
+
                     $this->form_validation->set_rules($config);
                     $this->form_validation->set_message('required', '%s Tidak Boleh Kosong');
                     if ($this->form_validation->run() == FALSE)
@@ -634,7 +677,8 @@ class pasien_baru extends CI_Controller {
                         $params['no_ktp'] = trim($this->input->post('no_ktp',TRUE));
                         $params['nama'] = trim($this->input->post('nama',TRUE));
                         $params['tempat_lahir'] = trim($this->input->post('tempat_lahir',TRUE));
-                        $params['tgl_lahir'] = setDateEng($this->input->post('tgl_lahir',TRUE));
+                        if(empty($this->input->post('tgl_lahir',TRUE))) $params["tgl_lahir"]=null;
+                        else $params['tgl_lahir'] = setDateEng($this->input->post('tgl_lahir',TRUE));
                         $params['jns_kelamin'] = trim($this->input->post('jns_kelamin',TRUE));
                         $whereagama=array('id_agama',$this->input->post('id_agama',TRUE));
                         $params['id_agama_lama']=getField('idlama',$whereagama,'tbl01_agama');

@@ -31,6 +31,7 @@
         <p class="login-box-msg">Aplikasi ini menggunakan cookies. Pastikan cookies browser anda dalam keadaan aktif. Setiap Cookies browser anda berubah, anda harus login ulang.</p>
 
         <form id="form1" method="post" onSubmit="return false">
+            <div id="statusimport"></div>
             <div class="form-group has-feedback">
                 <input name="userID" type="text" class="form-control" placeholder="Enter User ID"/>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -46,8 +47,8 @@
                         <span class="fa fa-building"></span> Halaman Utama</button>
                 </div>
                 <div class="col-xs-6">    
-                    <button type="button" onclick="toLogin()" class="btn btn-danger btn-block btn-flat">
-                        <span class="fa fa-key"></span> Sign In</button>
+                    <button type="button" onclick="toLogin()" id="btnLogin" class="btn btn-danger btn-block btn-flat">
+                        <span class="fa fa-key" id="iconBtnLogin"></span> Sign In</button>
                 </div>
             </div>
         </form>
@@ -58,6 +59,10 @@
 <script src="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function () {
+	importantrian();
+});
+
 function toBeranda(){
     window.location.href = '<?php echo base_url() ?>';
 }
@@ -74,6 +79,42 @@ function toLogin(){
                 alert(data.message);                  
             }
         }
+    });
+}
+
+function importantrian(){
+    $.ajax({
+        type    : "GET",
+        url     : "<?php echo base_url().'mr_registrasi.php/login/importantrian' ?>",
+        data    : {}, 
+        dataType: "JSON",
+        beforeSend: function() {
+            // setting a timeout
+            $('#btnLogin').prop("disabled",true);
+            $('#iconBtnLogin').removeClass("fa fa-key")
+            $('#iconBtnLogin').addClass("fa fa-spinner fa-spin")
+            var pesan=`<div class="callout callout-success">Proses Pengambilan Antrian</div>`;
+            $("#statusimport").html(pesan);
+        },
+        success : function(data){
+            if(data.status==true){
+                var pesan=`<div class="callout callout-success">`+data.message+`</div>`;
+                $('#statusimport').html(pesan);
+            }else{
+                var pesan=`<div class="callout callout-danger">`+data.message+`</div>`;
+                $('#statusimport').html(pesan);
+            }
+        },
+        error: function(xhr) { // if error occured
+            $('#btnLogin').prop("disabled",false);
+            $('#iconBtnLogin').removeClass("fa fa-spinner fa-spin")
+            $('#iconBtnLogin').addClass("fa fa-key")
+        },
+        complete: function() {
+            $('#btnLogin').prop("disabled",false);
+            $('#iconBtnLogin').removeClass("fa fa-spinner fa-spin")
+            $('#iconBtnLogin').addClass("fa fa-key")
+        },
     });
 }
 </script>

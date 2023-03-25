@@ -123,7 +123,19 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-3">
+                            <select name="poli" id="poli" class="form-control" onchange="listBooking()">
+                                <option value="">Poliklinik</option>
+                                <?php 
+                                foreach ($poliklinik as $p ) {
+                                    ?>
+                                    <option value="<?= $p->kodejkn ?>"><?= $p->ruang ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <div class="input-group input-group-sm">
                                 <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Masukkan Keyword"/>
                                 <div class="input-group-btn">
@@ -148,6 +160,8 @@
                                     <th>Dokter</th>
                                     <th>Nomor Antrean</th>
                                     <th>Status Checkin</th>
+                                    <th>Terdaftar</th>
+                                    <th>Resource</th>
                                     <th style="width: 150px;">#</th>
                                     </tr>
                                     

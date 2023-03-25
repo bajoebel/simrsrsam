@@ -30,7 +30,7 @@ function getWilayah(start) {
 					var jmlData = wilayah.length;
 					var limit = data["limit"]
 					var tabel = "";
-					//Create Tabel
+					// Create Tabel
 					for (var i = 0; i < jmlData; i++) {
 						start++;
 						tabel += "<tr>";

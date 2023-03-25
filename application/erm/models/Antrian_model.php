@@ -28,7 +28,7 @@ class Antrian_model extends CI_Model
     }
     function getLastAntrean($poly,$dokter,$jenisantrean=1,$curent=""){
         $this->db->select("a.*,b.idx AS idx_daftar,b.reg_unit,b.tgl_masuk,b.nomr,b.no_ktp,b.nama_pasien,aktiftaskid AS taskid,jnsantrean,labelantrean");
-        $this->db->join('tbl02_pendaftaran b','a.id_daftar=b.id_daftar');
+        $this->db->join('tbl02_pendaftaran b','a.id_daftar=b.id_daftar','LEFT');
         $this->db->where("tanggal",date('Y-m-d'));
         $this->db->where('antriandokter',$dokter);
         $this->db->where('antrianruang',$poly);
@@ -41,7 +41,7 @@ class Antrian_model extends CI_Model
     }
     function getListAntrean($poly,$dokter,$jenisantrean=1){
         $this->db->select("a.*,b.idx AS idx_daftar,b.reg_unit,b.tgl_masuk,b.nomr,b.no_ktp,b.nama_pasien,aktiftaskid AS taskid,jnsantrean,labelantrean");
-        $this->db->join('tbl02_pendaftaran b','a.id_daftar=b.id_daftar');
+        $this->db->join('tbl02_pendaftaran b','a.id_daftar=b.id_daftar','LEFT');
         $this->db->where("tanggal",date('Y-m-d'));
         $this->db->where('antriandokter',$dokter);
         $this->db->where('antrianruang',$poly);

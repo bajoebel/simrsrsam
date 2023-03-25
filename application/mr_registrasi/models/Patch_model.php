@@ -94,6 +94,7 @@ class Patch_model extends CI_Model
         );
         return $this->db->select("jadwal_dokter_id as NRP,dokterjkn, jadwal_dokter_nama as pgwNama")
         ->where('jadwal_hari',$hari[$day])
+        ->where('jadwal_status','Aktif')
         ->where('jadwal_poly_id',$idruang)
         ->get('tbl02_jadwal_dokter')->result();
     }
@@ -158,15 +159,15 @@ class Patch_model extends CI_Model
             ->where('id_ruang', $tujuan)->get();
     }
 
-    function getAntrianpoly($id_ruang)
+    function getAntrianpoly($id_ruang,$dokterJaga="")
     {
         $this->db->select('no_antrian_poly');
-        $this->db->where('id_ruang', $id_ruang);
-        $this->db->where("DATE_FORMAT(tgl_masuk,'%Y-%m-%d')", date('Y-m-d'));
-        $this->db->join('tbl02_antrian', 'tbl02_pendaftaran.id_daftar=tbl02_antrian.id_daftar', 'LEFT');
+        $this->db->where('antrianruang', $id_ruang);
+        if(!empty($dokterJaga)) $this->db->where('antriandokter', $dokterJaga);
+        $this->db->where("tanggal", date('Y-m-d'));
         $this->db->order_by('no_antrian_poly', 'DESC');
         $this->db->limit(1);
-        $antrian_poly = $this->db->get('tbl02_pendaftaran')->row();
+        $antrian_poly = $this->db->get('tbl02_antrian')->row();
         if (!empty($antrian_poly)) {
             $antrian_lokal = $antrian_poly->no_antrian_poly;
         } else {

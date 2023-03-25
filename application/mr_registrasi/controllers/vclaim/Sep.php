@@ -189,7 +189,8 @@ class Sep extends CI_Controller{
                 )
             )
         );
-        $ceksepterbit=$this->vclaim_model->cekSepTerbit($this->input->post('noKartu'));
+        if($jnsPelayanan==2) $ceksepterbit=$this->vclaim_model->cekSepTerbit($this->input->post('noKartu'));
+        else $ceksepterbit=array();
         if(empty($ceksepterbit)){
             date_default_timezone_set('UTC');
             $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'))-SELISIH_WAKTU;

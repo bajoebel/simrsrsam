@@ -50,12 +50,12 @@
                             eksekutif = data.seponline.poliEksekutif;
                             dokter = data.response.namaDpjpLayan;
                             faskesperujuk = data.response.namaPpkRujukan;
-                            dxawal = data.response.diagnosa;
-                            catatan = data.response.catatan;
-                            katarak = data.response.katarak;
+                            dxawal = data.seponline.diagnosa;
+                            catatan = data.seponline.catatan;
+                            katarak = data.seponline.katarak;
                             prolanis = data.response.prolanisPRB;
                             jnspst = data.response.jnsPeserta;
-                            cob = data.response.cob;
+                            cob = data.seponline.cob;
                             jnsrawat = data.response.jnsPelayanan;
                             kunjungan = data.response.tujuanKunj;
                             berkelanjutan = data.response.flagProcedure;

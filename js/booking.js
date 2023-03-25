@@ -10,7 +10,8 @@ function listBooking(){
 		dataType: "json",
 		data    : {
 			keyword : $('#keyword').val(),
-			tgl : $('#tgl').val()
+			tgl : $('#tgl').val(),
+			poli : $('#poli').val()
 		},
         beforeSend: function() {
             // setting a timeout
@@ -40,12 +41,15 @@ function listBooking(){
 					<td>`+e.namadokter+`</td>
 					<td>`+e.nomorantrean+`</td>
 					<td>`+(e.checkin=="0"?"<span class='btn btn-danger btn-xs'>Belum Checkin</span>":"<span class='btn btn-success btn-xs'>Sudah Checkin</span>")+`</td>
+					<td>`+(e.terdaftar=="0"?"<span class='btn btn-danger btn-xs'>Belum Daftar</span>":"<span class='btn btn-success btn-xs'>Sudah Daftar</span>")+`</td>
+					<td>`+(e.source=="ONSITE"?"<span class='btn btn-info btn-xs'>"+e.source+"</span>":"<span class='btn btn-success btn-xs'>"+e.source+"</span>")+`</td>
 					<td style="width: 150px;">
 					<div class="btn-group">
-					<button class="btn btn-success btn-sm" onclick="aprovePasien('`+e.kodebooking+`','`+e.norm+`')" `+(e.tanggalperiksa!=tgl ||e.checkin=="0" ? "disabled" : "")+`><span class="fa fa-check"></span>Aprove</button>
-					<button class="btn btn-danger btn-sm" onclick="batalPasien('`+e.kodebooking+`','`+e.norm+`')"><span class="fa fa-remove"></span>Batal</button>
+					<button class="btn btn-success btn-xs" onclick="aprovePasien('`+e.kodebooking+`','`+e.norm+`')" `+(e.tanggalperiksa!=tgl ||e.checkin=="0" || e.source=="ONSITE" ? "disabled" : "")+`><span class="fa fa-check"></span>Aprove</button>
+					<button class="btn btn-danger btn-xs" onclick="batalPasien('`+e.kodebooking+`','`+e.norm+`')"><span class="fa fa-remove"></span>Batal</button>
 					</div>
 					</td>
+					
 					</tr>`
 				}
 		        

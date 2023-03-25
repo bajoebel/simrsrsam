@@ -39,11 +39,15 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">
                         <a href="#" id="btnRefresh" class="btn btn-default">
-                            <i class="glyphicon glyphicon-refresh"></i> Refresh</a>
+                            <i class="glyphicon glyphicon-refresh"></i> Refresh
+                        </a>
                     </h3>
 
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 250px;">
+                        <div class="input-group" style="width: 250px;">
+                            <span class="input-group-addon">
+                            <label><input type="checkbox" id="rme" name="rme" value="1"> ERM</label>
+                            </span>
                             <input type="text" id="keyword" name="keyword" class="form-control pull-right" placeholder="Enter No MR / No KTP / Nama Pasien Baru" style="width: 250px"/>
                             <div class="input-group-btn">
                                 <button type="button" id="btnKeyword" class="btn btn-primary">
@@ -176,6 +180,7 @@ $(document).ready(function () {
     $('#btnSearchInquery').click(function(){
         var a = $('#Inq_nama').val(); 
         var b = $('#Inq_dob').val();
+        
         $.ajax({
             url         : "<?php echo base_url().'mr_registrasi.php/pasien_baru/getView' ?>",
             type        : "POST",
@@ -216,10 +221,12 @@ $(document).ready(function () {
                 alert('Keyword tidak boleh kosong');
                 $(this).focus();
             }else{
+                var c = $('#rme').prop('checked');
+                var rme=c==true?1:0;
                 $.ajax({
                     url         : "<?php echo base_url().'mr_registrasi.php/pasien_baru/getView' ?>",
                     type        : "POST",
-                    data        : {sLike:$(this).val()},
+                    data        : {sLike:$(this).val(),rme:rme},
                     beforeSend  : function(){
                         $('tbody#getdata').html("<tr><td colspan=3>Loading... Please wait</td></tr>");
                     },
@@ -235,6 +242,9 @@ $(document).ready(function () {
     });
     $('#btnKeyword').click(function(){
         var x = $('#keyword').val();
+        var c = $('#rme').prop('checked');
+        var rme=c==true?1:0;
+        var x = $('#keyword').val();
         if(x == ''){
             alert('Keyword tidak boleh kosong');
             $(this).focus();
@@ -242,7 +252,7 @@ $(document).ready(function () {
             $.ajax({
                 url         : "<?php echo base_url().'mr_registrasi.php/pasien_baru/getView' ?>",
                 type        : "POST",
-                data        : {sLike:x},
+                data        : {sLike:x,rme:rme},
                 beforeSend  : function(){
                     $('tbody#getdata').html("<tr><td colspan=3>Loading... Please wait</td></tr>");
                 },
@@ -255,13 +265,39 @@ $(document).ready(function () {
             });                        
         }
     });
+    $('#rme').click(function(){
+        var c = $('#rme').prop('checked');
+        var rme=c==true?1:0;
+        // alert(rme);
+        var x = $('#keyword').val();
+        $.ajax({
+            url         : "<?php echo base_url().'mr_registrasi.php/pasien_baru/getView' ?>",
+            type        : "POST",
+            data        : {sLike:x,rme:rme},
+            beforeSend  : function(){
+                $('tbody#getdata').html("<tr><td colspan=3>Loading... Please wait</td></tr>");
+            },
+            success : function(data){
+                $('tbody#getdata').html(data);
+            },
+            error : function(jqXHR,ajaxOption,errorThrown){
+                console.log(jqXHR.responseText);
+            }
+        });    
+    });
     
 });
 getTable();
 
 function getTable(){
+    var c = $('#rme').prop('checked');
+    var rme=c==true?1:0;
+    // alert(rme);
+    var x = $('#keyword').val();
     $.ajax({
         url : "<?php echo base_url().'mr_registrasi.php/pasien_baru/getView' ?>",
+        type        : "POST",
+        data        : {sLike:x,rme:rme},
         beforeSend  : function(){
             $('tbody#getdata').html("<tr><td colspan=9>Loading... Please wait</td></tr>");
         },

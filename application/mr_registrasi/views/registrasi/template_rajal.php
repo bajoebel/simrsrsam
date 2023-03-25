@@ -589,7 +589,7 @@
                                                                 <label class="col-md-3 col-sm-3 col-xs-12 control-label">No Rujukan</label>
                                                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                                                     <div class="input-group ">
-                                                                        <input type="text" id="txtNorujuk" name="txtNorujuk" class="form-control input-sm" placeholder="Enter Nomor Rujukan" onkeyup="enter_norujukan(event)">
+                                                                        <input type="text" id="txtNorujuk" name="txtNorujuk" class="form-control input-sm" placeholder="Enter Nomor Rujukan" value="<?= !empty($no_rujuk) ? $no_rujuk :"" ?>" onkeyup="enter_norujukan(event)">
                                                                         <input type="hidden" name="encryptdata" id='encryptdata' value=''>
                                                                         <div class="input-group-btn" id="aksirujukan">
                                                                             <button type="button" id="cariRujukan" class="btn btn-default btn-sm" <?php if (STATUS_VC == "0") echo "disabled";
@@ -2114,8 +2114,11 @@
     $(document).ready(function() {
         var bookingjkn=$('#bookingjkn').val();
         if(bookingjkn !=""){
-            $('#id_cara_bayar').val(2).trigger('change');
             cekPeserta();
+            $('#id_cara_bayar').val(2).trigger('change');
+            // $('#txtNorujuk').trigger('change');
+            
+            $('.divRegCredit').show();
         }else{
             $('.adarujukan').hide();
             $('.kontrolulang').hide()
@@ -2322,6 +2325,7 @@
                 spm: $('#spm').val(),
                 nomr: $('#nomr').val(),
                 no_ktp: $('#no_ktp').val(),
+                nohp: $('#e-no_hp').val(),
                 nama_pasien: $('#nama').val(),
                 tempat_lahir: $('#tempat_lahir').val(),
                 tgl_lahir: $('#tgl_lahir').val(),

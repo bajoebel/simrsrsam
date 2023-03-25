@@ -374,8 +374,12 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-3" >Nama Pasien <span style="color: red"> * </span></label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)">
-                                    <div class="text-error" id="err_nama"></div>    
+                                        <div class="input-group">
+                                            <input type="text" class="form-control input-sm" name="nama" id="nama" value="<?php echo $nama ?>" onkeydown="enter_nama(event)">
+                                            <span class="input-group-addon"><input type="checkbox" name="pasientakdikenal" id="pasientakdikenal" value="1">Pasien Tidak Dikenal</span>
+                                        </div>
+                                        <div class="text-error" id="err_nama">
+                                    </div>    
                                 </div>
                                 </div>
                                 <div class="form-group">
@@ -400,7 +404,7 @@
                                             <option value="0" <?=  ($jns_kelamin == "0") ? "checked='checked'" : "" ?>>Tidak Diketahui</option> -->
                                             <option value="1" <?= ($jns_kelamin == "L" || $jns_kelamin == "1") ? "selected" : ""; ?>>Laki-Laki</option>
                                             <option value="2" <?= ($jns_kelamin == "P" || $jns_kelamin == "2") ? "selected" : "" ?>>Perempuan</option>
-                                            <!-- <option value="3" <?=  ($jns_kelamin == "3") ? "checked='checked'" : "" ?>>Tidak Dapat Ditentukan</option> -->
+                                            <option value="3" <?=  ($jns_kelamin == "3") ? "checked='checked'" : "" ?>>Tidak Dapat Ditentukan</option>
                                         </select>
                                         <div class="text-error" id="err_jekel"></div>
                                     </div>
@@ -961,6 +965,8 @@
         if(hambatan_bahasa==true) hambatan_bahasa=1; else hambatan_bahasa=0;
         var erm=$('#erm').prop('checked');
         if(erm==true) erm=1; else erm=0;
+        var takdikenal=$('#pasientakdikenal').prop('checked');
+        if(takdikenal==true) takdikenal=1; else takdikenal=0;
         var formdata = {
             idx: $('#idx').val(),
             nomr: $('#nomr').val(),
@@ -994,6 +1000,7 @@
             no_hp: $('#no_hp').val(),
             nama_ibu_kandung: $('#nama_ibu_kandung').val(),
             erm: erm,
+            takdikenal: takdikenal,
             kewarganegaraan: kewarganegaraan,
             id_provinsi: id_provinsi,
             nama_provinsi: provinsi,

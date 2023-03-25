@@ -12,14 +12,14 @@ function httprequest($data, $url,$token="",$method="POST")
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
-            'X-Username: ' .USERNAME,
-            'X-Password: ' .USERPASS
+            'x-username: ' .USERNAME,
+            'x-password: ' .USERPASS
         ));
     }else{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
-            'X-Token: ' .$token
+            'x-token: ' .$token
         ));
     }
     // echo USERNAME;exit;

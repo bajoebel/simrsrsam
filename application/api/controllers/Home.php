@@ -4,7 +4,8 @@ class Home extends CI_Controller{
         parent::__construct();
     }
     function index(){
-        $this->load->view('login');
+        // $this->load->view('login');
+        
     }
 }
 ?>

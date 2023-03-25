@@ -22,14 +22,16 @@ class Booking extends CI_Controller{
     }
     function index(){
         $z = setNav("nav_6");
+        $poli=$this->db->where('grid',1)->get("tbl01_ruang")->result();
         $data=array(
             'contentTitle'=>'List Booking JKN Mobile',
+            'poliklinik'=>$poli
         );
         $view=array(
             'header'=>$this->load->view('template/header', '', true),
             'nav_sidebar'=>$this->load->view('template/nav_sidebar', $z, true),
             'content'=>$this->load->view('jkn/booking', $data, true),
-            'index_menu'=>5,
+            'index_menu'=>11,
             'libjs'=>array(
                 'js/jkn.js',
                 'js/booking.js'
@@ -40,10 +42,12 @@ class Booking extends CI_Controller{
     function listbooking(){
         $keyword=$this->input->get('keyword');
         $tgl=$this->input->get('tgl');
+        $poli=$this->input->get('poli');
         $tanggal=empty($tgl)?date('Y-m-d'):$tgl;
         $request=array(
             'tanggal'=>$tanggal,
-            'keyword'=>$keyword
+            'keyword'=>$keyword,
+            'poli'=>$poli
         );
         $response=httprequest($request,ONLINE_CALL_BACK."jkn/rsud/listbooking");
         header('Content-Type: application/json');
